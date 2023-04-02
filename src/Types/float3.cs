@@ -151,8 +151,8 @@ namespace DCFApixels.DataMath
         #region Convert operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(float v) => new float3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator float3(bool3 v) => new float3(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static explicit operator float3(float3 v) => new float3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(int v) => new float3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -165,6 +165,68 @@ namespace DCFApixels.DataMath
         public static explicit operator float3(double v) => new float3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float3(double3 v) => new float3(v);
+        #endregion
+
+        #region Arithmetic operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator *(float3 a, float3 b) => new float3(a.x * b.x, a.y * b.y, a.z * b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator *(float3 a, float b) => new float3(a.x * b, a.y * b, a.z * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator *(float a, float3 b) => new float3(a * b.x, a * b.y, a * b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator +(float3 a, float3 b) => new float3(a.x + b.x, a.y + b.y, a.z + b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator +(float3 a, float b) => new float3(a.x + b, a.y + b, a.z + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator +(float a, float3 b) => new float3(a + b.x, a + b.y, a + b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator -(float3 a, float3 b) => new float3(a.x - b.x, a.y - b.y, a.z - b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator -(float3 a, float b) => new float3(a.x - b, a.y - b, a.z - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator -(float a, float3 b) => new float3(a - b.x, a - b.y, a - b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator /(float3 a, float3 b) => new float3(a.x / b.x, a.y / b.y, a.z / b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator /(float3 a, float b) => new float3(a.x / b, a.y / b, a.z / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator /(float a, float3 b) => new float3(a / b.x, a / b.y, a / b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator %(float3 a, float3 b) => new float3(a.x % b.x, a.y % b.y, a.z % b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator %(float3 a, float b) => new float3(a.x % b, a.y % b, a.z % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator %(float a, float3 b) => new float3(a % b.x, a % b.y, a % b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator ++(float3 a) => new float3(++a.x, ++a.y, ++a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator --(float3 a) => new float3(--a.x, --a.y, --a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator -(float3 a) => new float3(-a.x, -a.y, -a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float3 operator +(float3 a) => new float3(+a.x, +a.y, +a.z);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float3 a, float3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float3 a, float b) => a.x == b && a.y == b && a.z == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float a, float3 b) => a == b.x && a == b.y && a == b.z;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float3 a, float3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float3 a, float b) => a.x != b || a.y != b || a.z != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float a, float3 b) => a != b.x || a != b.y || a != b.z;
         #endregion
 
         #region Swap2
@@ -882,7 +944,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is float3 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"float3({x}, {y}, {z})";
         #endregion
@@ -936,12 +998,6 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(float3 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 one_minus(float3 v) => 1f - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

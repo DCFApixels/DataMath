@@ -138,8 +138,8 @@ namespace DCFApixels.DataMath
         #region Convert operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2(float v) => new float2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator float2(bool2 v) => new float2(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static explicit operator float2(float2 v) => new float2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2(int v) => new float2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -152,6 +152,68 @@ namespace DCFApixels.DataMath
         public static explicit operator float2(double v) => new float2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2(double2 v) => new float2(v);
+        #endregion
+
+        #region Arithmetic operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator *(float2 a, float2 b) => new float2(a.x * b.x, a.y * b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator *(float2 a, float b) => new float2(a.x * b, a.y * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator *(float a, float2 b) => new float2(a * b.x, a * b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator +(float2 a, float2 b) => new float2(a.x + b.x, a.y + b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator +(float2 a, float b) => new float2(a.x + b, a.y + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator +(float a, float2 b) => new float2(a + b.x, a + b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator -(float2 a, float2 b) => new float2(a.x - b.x, a.y - b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator -(float2 a, float b) => new float2(a.x - b, a.y - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator -(float a, float2 b) => new float2(a - b.x, a - b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator /(float2 a, float2 b) => new float2(a.x / b.x, a.y / b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator /(float2 a, float b) => new float2(a.x / b, a.y / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator /(float a, float2 b) => new float2(a / b.x, a / b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator %(float2 a, float2 b) => new float2(a.x % b.x, a.y % b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator %(float2 a, float b) => new float2(a.x % b, a.y % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator %(float a, float2 b) => new float2(a % b.x, a % b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator ++(float2 a) => new float2(++a.x, ++a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator --(float2 a) => new float2(--a.x, --a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 operator -(float2 a) => new float2(-a.x, -a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]                                                               
+        public static float2 operator +(float2 a) => new float2(+a.x, +a.y);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float2 a, float2 b) => a.x == b.x && a.y == b.y;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float2 a, float b) => a.x == b && a.y == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float a, float2 b) => a == b.x && a == b.y;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float2 a, float2 b) => a.x != b.x || a.y != b.y;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float2 a, float b) => a.x != b || a.y != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float a, float2 b) => a != b.x || a != b.y;
         #endregion
 
         #region Swap2
@@ -335,7 +397,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is float2 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"float2({x}, {y})";
         #endregion
@@ -387,12 +449,6 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(float2 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2 one_minus(float2 v) => 1f - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

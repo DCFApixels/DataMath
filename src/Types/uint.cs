@@ -7,11 +7,6 @@ namespace DCFApixels.DataMath
     public static partial class math
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint uhash(uint v) => v;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int hash(uint v) => unchecked((int)v);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint one_minus(uint v) => 1u - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint abs(uint v) => v;

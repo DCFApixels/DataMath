@@ -137,21 +137,113 @@ namespace DCFApixels.DataMath
 
         #region Convert operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint2(float v) => new uint2(v);
+        public static explicit operator uint2(float v) => new uint2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator uint2(bool2 v) => new uint2(v);
+        public static explicit operator uint2(float2 v) => new uint2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint2(int v) => new uint2(v);
+        public static explicit operator uint2(int v) => new uint2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint2(int2 v) => new uint2(v);
+        public static explicit operator uint2(int2 v) => new uint2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator uint2(uint v) => new uint2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint2(uint2 v) => new uint2(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static implicit operator uint2(uint2 v) => new uint2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(double v) => new uint2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(double2 v) => new uint2(v);
+        #endregion
+
+        #region Arithmetic operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator *(uint2 a, uint2 b) => new uint2(a.x * b.x, a.y * b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator *(uint2 a, uint b) => new uint2(a.x * b, a.y * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator *(uint a, uint2 b) => new uint2(a * b.x, a * b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator +(uint2 a, uint2 b) => new uint2(a.x + b.x, a.y + b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator +(uint2 a, uint b) => new uint2(a.x + b, a.y + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator +(uint a, uint2 b) => new uint2(a + b.x, a + b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator -(uint2 a, uint2 b) => new uint2(a.x - b.x, a.y - b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator -(uint2 a, uint b) => new uint2(a.x - b, a.y - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator -(uint a, uint2 b) => new uint2(a - b.x, a - b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator /(uint2 a, uint2 b) => new uint2(a.x / b.x, a.y / b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator /(uint2 a, uint b) => new uint2(a.x / b, a.y / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator /(uint a, uint2 b) => new uint2(a / b.x, a / b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator %(uint2 a, uint2 b) => new uint2(a.x % b.x, a.y % b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator %(uint2 a, uint b) => new uint2(a.x % b, a.y % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator %(uint a, uint2 b) => new uint2(a % b.x, a % b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator ++(uint2 a) => new uint2(++a.x, ++a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator --(uint2 a) => new uint2(--a.x, --a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator -(uint2 a) => new uint2(-a.x, -a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]                                                               
+        public static uint2 operator +(uint2 a) => new uint2(+a.x, +a.y);
+        #endregion
+
+        #region Bit operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator ~(uint2 a) => new uint2(~a.x, ~a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator <<(uint2 a, int n) => new uint2(a.x << n, a.y << n);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator >>(uint2 a, int n) => new uint2(a.x >> n, a.y >> n);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator |(uint2 a, uint2 b) => new uint2(a.x | b.x, a.y | b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator |(uint2 a, uint b) => new uint2(a.x | b, a.y | b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator |(uint a, uint2 b) => new uint2(a | b.x, a | b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator &(uint2 a, uint2 b) => new uint2(a.x & b.x, a.y & b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator &(uint2 a, uint b) => new uint2(a.x & b, a.y & b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator &(uint a, uint2 b) => new uint2(a & b.x, a & b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator ^(uint2 a, uint2 b) => new uint2(a.x ^ b.x, a.y ^ b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator ^(uint2 a, uint b) => new uint2(a.x ^ b, a.y ^ b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint2 operator ^(uint a, uint2 b) => new uint2(a ^ b.x, a ^ b.y);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(uint2 a, uint2 b) => a.x == b.x && a.y == b.y;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(uint2 a, uint b) => a.x == b && a.y == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(uint a, uint2 b) => a == b.x && a == b.y;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(uint2 a, uint2 b) => a.x != b.x || a.y != b.y;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(uint2 a, uint b) => a.x != b || a.y != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(uint a, uint2 b) => a != b.x || a != b.y;
         #endregion
 
         #region Swap2
@@ -335,7 +427,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is uint2 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"uint2({x}, {y})";
         #endregion
@@ -387,12 +479,6 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(uint2 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 one_minus(uint2 v) => 1u - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

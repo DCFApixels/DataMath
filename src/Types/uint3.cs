@@ -150,21 +150,113 @@ namespace DCFApixels.DataMath
 
         #region Convert operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint3(float v) => new uint3(v);
+        public static explicit operator uint3(float v) => new uint3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator uint3(bool3 v) => new uint3(v);
+        public static explicit operator uint3(float3 v) => new uint3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint3(int v) => new uint3(v);
+        public static explicit operator uint3(int v) => new uint3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint3(int3 v) => new uint3(v);
+        public static explicit operator uint3(int3 v) => new uint3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator uint3(uint v) => new uint3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator uint3(uint3 v) => new uint3(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static implicit operator uint3(uint3 v) => new uint3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(double v) => new uint3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(double3 v) => new uint3(v);
+        #endregion
+
+        #region Arithmetic operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator *(uint3 a, uint3 b) => new uint3(a.x * b.x, a.y * b.y, a.z * b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator *(uint3 a, uint b) => new uint3(a.x * b, a.y * b, a.z * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator *(uint a, uint3 b) => new uint3(a * b.x, a * b.y, a * b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator +(uint3 a, uint3 b) => new uint3(a.x + b.x, a.y + b.y, a.z + b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator +(uint3 a, uint b) => new uint3(a.x + b, a.y + b, a.z + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator +(uint a, uint3 b) => new uint3(a + b.x, a + b.y, a + b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator -(uint3 a, uint3 b) => new uint3(a.x - b.x, a.y - b.y, a.z - b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator -(uint3 a, uint b) => new uint3(a.x - b, a.y - b, a.z - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator -(uint a, uint3 b) => new uint3(a - b.x, a - b.y, a - b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator /(uint3 a, uint3 b) => new uint3(a.x / b.x, a.y / b.y, a.z / b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator /(uint3 a, uint b) => new uint3(a.x / b, a.y / b, a.z / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator /(uint a, uint3 b) => new uint3(a / b.x, a / b.y, a / b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator %(uint3 a, uint3 b) => new uint3(a.x % b.x, a.y % b.y, a.z % b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator %(uint3 a, uint b) => new uint3(a.x % b, a.y % b, a.z % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator %(uint a, uint3 b) => new uint3(a % b.x, a % b.y, a % b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator ++(uint3 a) => new uint3(++a.x, ++a.y, ++a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator --(uint3 a) => new uint3(--a.x, --a.y, --a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator -(uint3 a) => new uint3(-a.x, -a.y, -a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator +(uint3 a) => new uint3(+a.x, +a.y, +a.z);
+        #endregion
+
+        #region Bit operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator ~(uint3 a) => new uint3(~a.x, ~a.y, ~a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator <<(uint3 a, int n) => new uint3(a.x << n, a.y << n, a.z << n);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator >>(uint3 a, int n) => new uint3(a.x >> n, a.y >> n, a.z >> n);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator |(uint3 a, uint3 b) => new uint3(a.x | b.x, a.y | b.y, a.z | b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator |(uint3 a, uint b) => new uint3(a.x | b, a.y | b, a.z | b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator |(uint a, uint3 b) => new uint3(a | b.x, a | b.y, a | b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator &(uint3 a, uint3 b) => new uint3(a.x & b.x, a.y & b.y, a.z & b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator &(uint3 a, uint b) => new uint3(a.x & b, a.y & b, a.z & b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator &(uint a, uint3 b) => new uint3(a & b.x, a & b.y, a & b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator ^(uint3 a, uint3 b) => new uint3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator ^(uint3 a, uint b) => new uint3(a.x ^ b, a.y ^ b, a.z ^ b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint3 operator ^(uint a, uint3 b) => new uint3(a ^ b.x, a ^ b.y, a ^ b.z);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(uint3 a, uint3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(uint3 a, uint b) => a.x == b && a.y == b && a.z == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(uint a, uint3 b) => a == b.x && a == b.y && a == b.z;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(uint3 a, uint3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(uint3 a, uint b) => a.x != b || a.y != b || a.z != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(uint a, uint3 b) => a != b.x || a != b.y || a != b.z;
         #endregion
 
         #region Swap2
@@ -882,7 +974,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is uint3 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"uint3({x}, {y}, {z})";
         #endregion
@@ -936,12 +1028,6 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(uint3 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 one_minus(uint3 v) => 1u - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

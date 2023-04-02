@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using SMath = System.Math;
-using SMathF = System.MathF;
 
 namespace DCFApixels.DataMath
 {
@@ -152,7 +151,7 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(float v) => new double3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double3(bool3 v) => new double3(v);
+        public static implicit operator double3(float3 v) => new double3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(int v) => new double3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -162,9 +161,71 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(uint3 v) => new double3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double3(double v) => new double3(v);
+        public static implicit operator double3(double v) => new double3(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static explicit operator double3(double3 v) => new double3(v);
+        #endregion
+
+        #region Arithmetic operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double3(double3 v) => new double3(v);
+        public static double3 operator *(double3 a, double3 b) => new double3(a.x * b.x, a.y * b.y, a.z * b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator *(double3 a, double b) => new double3(a.x * b, a.y * b, a.z * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator *(double a, double3 b) => new double3(a * b.x, a * b.y, a * b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator +(double3 a, double3 b) => new double3(a.x + b.x, a.y + b.y, a.z + b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator +(double3 a, double b) => new double3(a.x + b, a.y + b, a.z + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator +(double a, double3 b) => new double3(a + b.x, a + b.y, a + b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator -(double3 a, double3 b) => new double3(a.x - b.x, a.y - b.y, a.z - b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator -(double3 a, double b) => new double3(a.x - b, a.y - b, a.z - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator -(double a, double3 b) => new double3(a - b.x, a - b.y, a - b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator /(double3 a, double3 b) => new double3(a.x / b.x, a.y / b.y, a.z / b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator /(double3 a, double b) => new double3(a.x / b, a.y / b, a.z / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator /(double a, double3 b) => new double3(a / b.x, a / b.y, a / b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator %(double3 a, double3 b) => new double3(a.x % b.x, a.y % b.y, a.z % b.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator %(double3 a, double b) => new double3(a.x % b, a.y % b, a.z % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator %(double a, double3 b) => new double3(a % b.x, a % b.y, a % b.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator ++(double3 a) => new double3(++a.x, ++a.y, ++a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator --(double3 a) => new double3(--a.x, --a.y, --a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator -(double3 a) => new double3(-a.x, -a.y, -a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double3 operator +(double3 a) => new double3(+a.x, +a.y, +a.z);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double3 a, double3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double3 a, double b) => a.x == b && a.y == b && a.z == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double a, double3 b) => a == b.x && a == b.y && a == b.z;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double3 a, double3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double3 a, double b) => a.x != b || a.y != b || a.z != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double a, double3 b) => a != b.x || a != b.y || a != b.z;
         #endregion
 
         #region Swap2
@@ -882,7 +943,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is double3 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"double3({x}, {y}, {z})";
         #endregion
@@ -937,17 +998,11 @@ namespace DCFApixels.DataMath
     public static partial class math
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(double3 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 one_minus(double3 v) => 1d - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 abs(double3 v)
         {
-            return new double3(SMathF.Abs(v.x), SMathF.Abs(v.y), SMathF.Abs(v.z));
+            return new double3(SMath.Abs(v.x), SMath.Abs(v.y), SMath.Abs(v.z));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int3 sign(double3 v)
@@ -958,32 +1013,32 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 round(double3 v)
         {
-            return new double3(SMathF.Round(v.x), SMathF.Round(v.y), SMathF.Round(v.z));
+            return new double3(SMath.Round(v.x), SMath.Round(v.y), SMath.Round(v.z));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int3 round2int(double3 v)
         {
-            return new int3((int)SMathF.Round(v.x), (int)SMathF.Round(v.y), (int)SMathF.Round(v.z));
+            return new int3((int)SMath.Round(v.x), (int)SMath.Round(v.y), (int)SMath.Round(v.z));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 floor(double3 v)
         {
-            return new double3(SMathF.Floor(v.x), SMathF.Floor(v.y), SMathF.Floor(v.z));
+            return new double3(SMath.Floor(v.x), SMath.Floor(v.y), SMath.Floor(v.z));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int3 floor2int(double3 v)
         {
-            return new int3((int)SMathF.Floor(v.x), (int)SMathF.Floor(v.y), (int)SMathF.Floor(v.z));
+            return new int3((int)SMath.Floor(v.x), (int)SMath.Floor(v.y), (int)SMath.Floor(v.z));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 ceil(double3 v)
         {
-            return new double3(SMathF.Ceiling(v.x), SMathF.Ceiling(v.y), SMathF.Ceiling(v.z));
+            return new double3(SMath.Ceiling(v.x), SMath.Ceiling(v.y), SMath.Ceiling(v.z));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int3 ceil2int(double3 v)
         {
-            return new int3((int)SMathF.Ceiling(v.x), (int)SMathF.Ceiling(v.y), (int)SMathF.Ceiling(v.z));
+            return new int3((int)SMath.Ceiling(v.x), (int)SMath.Ceiling(v.y), (int)SMath.Ceiling(v.z));
         }
         
     }

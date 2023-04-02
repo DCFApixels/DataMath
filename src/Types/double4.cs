@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using SMath = System.Math;
-using SMathF = System.MathF;
 
 namespace DCFApixels.DataMath
 {
@@ -177,7 +176,7 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(float v) => new double4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double4(bool4 v) => new double4(v);
+        public static implicit operator double4(float4 v) => new double4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(int v) => new double4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -187,9 +186,71 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(uint4 v) => new double4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double4(double v) => new double4(v);
+        public static implicit operator double4(double v) => new double4(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static explicit operator double4(double4 v) => new double4(v);
+        #endregion
+
+        #region Arithmetic operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double4(double4 v) => new double4(v);
+        public static double4 operator *(double4 a, double4 b) => new double4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator *(double4 a, double b) => new double4(a.x * b, a.y * b, a.z * b, a.w * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator *(double a, double4 b) => new double4(a * b.x, a * b.y, a * b.z, a * b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator +(double4 a, double4 b) => new double4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator +(double4 a, double b) => new double4(a.x + b, a.y + b, a.z + b, a.w + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator +(double a, double4 b) => new double4(a + b.x, a + b.y, a + b.z, a + b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator -(double4 a, double4 b) => new double4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator -(double4 a, double b) => new double4(a.x - b, a.y - b, a.z - b, a.w - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator -(double a, double4 b) => new double4(a - b.x, a - b.y, a - b.z, a - b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator /(double4 a, double4 b) => new double4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator /(double4 a, double b) => new double4(a.x / b, a.y / b, a.z / b, a.w / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator /(double a, double4 b) => new double4(a / b.x, a / b.y, a / b.z, a / b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator %(double4 a, double4 b) => new double4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator %(double4 a, double b) => new double4(a.x % b, a.y % b, a.z % b, a.w % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator %(double a, double4 b) => new double4(a % b.x, a % b.y, a % b.z, a % b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator ++(double4 a) => new double4(++a.x, ++a.y, ++a.z, ++a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator --(double4 a) => new double4(--a.x, --a.y, --a.z, --a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator -(double4 a) => new double4(-a.x, -a.y, -a.z, -a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double4 operator +(double4 a) => new double4(+a.x, +a.y, +a.z, +a.w);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double4 a, double4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double4 a, double b) => a.x == b && a.y == b && a.z == b && a.w == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double a, double4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double4 a, double4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double4 a, double b) => a.x != b || a.y != b || a.z != b || a.w != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double a, double4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
 
         #region Swap2
@@ -2221,7 +2282,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is double4 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"double4({x}, {y}, {z}, {w})";
         #endregion
@@ -2278,17 +2339,11 @@ namespace DCFApixels.DataMath
     public static partial class math
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(double4 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 one_minus(double4 v) => 1d - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 abs(double4 v)
         {
-            return new double4(SMathF.Abs(v.x), SMathF.Abs(v.y), SMathF.Abs(v.z), SMathF.Abs(v.w));
+            return new double4(SMath.Abs(v.x), SMath.Abs(v.y), SMath.Abs(v.z), SMath.Abs(v.w));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int4 sign(double4 v)
@@ -2299,32 +2354,32 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 round(double4 v)
         {
-            return new double4(SMathF.Round(v.x), SMathF.Round(v.y), SMathF.Round(v.z), SMathF.Round(v.w));
+            return new double4(SMath.Round(v.x), SMath.Round(v.y), SMath.Round(v.z), SMath.Round(v.w));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int4 round2int(double4 v)
         {
-            return new int4((int)SMathF.Round(v.x), (int)SMathF.Round(v.y), (int)SMathF.Round(v.z), (int)SMathF.Round(v.w));
+            return new int4((int)SMath.Round(v.x), (int)SMath.Round(v.y), (int)SMath.Round(v.z), (int)SMath.Round(v.w));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 floor(double4 v)
         {
-            return new double4(SMathF.Floor(v.x), SMathF.Floor(v.y), SMathF.Floor(v.z), SMathF.Floor(v.w));
+            return new double4(SMath.Floor(v.x), SMath.Floor(v.y), SMath.Floor(v.z), SMath.Floor(v.w));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int4 floor2int(double4 v)
         {
-            return new int4((int)SMathF.Floor(v.x), (int)SMathF.Floor(v.y), (int)SMathF.Floor(v.z), (int)SMathF.Floor(v.w));
+            return new int4((int)SMath.Floor(v.x), (int)SMath.Floor(v.y), (int)SMath.Floor(v.z), (int)SMath.Floor(v.w));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 ceil(double4 v)
         {
-            return new double4(SMathF.Ceiling(v.x), SMathF.Ceiling(v.y), SMathF.Ceiling(v.z), SMathF.Ceiling(v.w));
+            return new double4(SMath.Ceiling(v.x), SMath.Ceiling(v.y), SMath.Ceiling(v.z), SMath.Ceiling(v.w));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int4 ceil2int(double4 v)
         {
-            return new int4((int)SMathF.Ceiling(v.x), (int)SMathF.Ceiling(v.y), (int)SMathF.Ceiling(v.z), (int)SMathF.Ceiling(v.w));
+            return new int4((int)SMath.Ceiling(v.x), (int)SMath.Ceiling(v.y), (int)SMath.Ceiling(v.z), (int)SMath.Ceiling(v.w));
         }
         
     }

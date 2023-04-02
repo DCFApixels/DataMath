@@ -175,21 +175,113 @@ namespace DCFApixels.DataMath
 
         #region Convert operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator int4(float v) => new int4(v);
+        public static explicit operator int4(float v) => new int4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int4(bool4 v) => new int4(v);
+        public static explicit operator int4(float4 v) => new int4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator int4(int v) => new int4(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static implicit operator int4(int4 v) => new int4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator int4(int4 v) => new int4(v);
+        public static explicit operator int4(uint v) => new int4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator int4(uint v) => new int4(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator int4(uint4 v) => new int4(v);
+        public static explicit operator int4(uint4 v) => new int4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int4(double v) => new int4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int4(double4 v) => new int4(v);
+        #endregion
+
+        #region Arithmetic operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator *(int4 a, int4 b) => new int4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator *(int4 a, int b) => new int4(a.x * b, a.y * b, a.z * b, a.w * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator *(int a, int4 b) => new int4(a * b.x, a * b.y, a * b.z, a * b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator +(int4 a, int4 b) => new int4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator +(int4 a, int b) => new int4(a.x + b, a.y + b, a.z + b, a.w + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator +(int a, int4 b) => new int4(a + b.x, a + b.y, a + b.z, a + b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator -(int4 a, int4 b) => new int4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator -(int4 a, int b) => new int4(a.x - b, a.y - b, a.z - b, a.w - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator -(int a, int4 b) => new int4(a - b.x, a - b.y, a - b.z, a - b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator /(int4 a, int4 b) => new int4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator /(int4 a, int b) => new int4(a.x / b, a.y / b, a.z / b, a.w / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator /(int a, int4 b) => new int4(a / b.x, a / b.y, a / b.z, a / b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator %(int4 a, int4 b) => new int4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator %(int4 a, int b) => new int4(a.x % b, a.y % b, a.z % b, a.w % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator %(int a, int4 b) => new int4(a % b.x, a % b.y, a % b.z, a % b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator ++(int4 a) => new int4(++a.x, ++a.y, ++a.z, ++a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator --(int4 a) => new int4(--a.x, --a.y, --a.z, --a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator -(int4 a) => new int4(-a.x, -a.y, -a.z, -a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator +(int4 a) => new int4(+a.x, +a.y, +a.z, +a.w);
+        #endregion
+
+        #region Bit operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator ~(int4 a) => new int4(~a.x, ~a.y, ~a.z, ~a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator <<(int4 a, int n) => new int4(a.x << n, a.y << n, a.z << n, a.w << n);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator >>(int4 a, int n) => new int4(a.x >> n, a.y >> n, a.z >> n, a.w >> n);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator |(int4 a, int4 b) => new int4(a.x | b.x, a.y | b.y, a.z | b.z, a.w | b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator |(int4 a, int b) => new int4(a.x | b, a.y | b, a.z | b, a.w | b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator |(int a, int4 b) => new int4(a | b.x, a | b.y, a | b.z, a | b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator &(int4 a, int4 b) => new int4(a.x & b.x, a.y & b.y, a.z & b.z, a.w & b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator &(int4 a, int b) => new int4(a.x & b, a.y & b, a.z & b, a.w & b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator &(int a, int4 b) => new int4(a & b.x, a & b.y, a & b.z, a & b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator ^(int4 a, int4 b) => new int4(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator ^(int4 a, int b) => new int4(a.x ^ b, a.y ^ b, a.z ^ b, a.w ^ b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int4 operator ^(int a, int4 b) => new int4(a ^ b.x, a ^ b.y, a ^ b.z, a ^ b.w);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(int4 a, int4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(int4 a, int b) => a.x == b && a.y == b && a.z == b && a.w == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(int a, int4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(int4 a, int4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(int4 a, int b) => a.x != b || a.y != b || a.z != b || a.w != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(int a, int4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
 
         #region Swap2
@@ -2221,7 +2313,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is int4 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"int4({x}, {y}, {z}, {w})";
         #endregion
@@ -2277,12 +2369,6 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(int4 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int4 one_minus(int4 v) => 1 - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using SMath = System.Math;
-using SMathF = System.MathF;
 
 namespace DCFApixels.DataMath
 {
@@ -139,7 +138,7 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2(float v) => new double2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double2(bool2 v) => new double2(v);
+        public static implicit operator double2(float2 v) => new double2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2(int v) => new double2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -149,9 +148,71 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2(uint2 v) => new double2(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double2(double v) => new double2(v);
+        public static implicit operator double2(double v) => new double2(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static explicit operator double2(double2 v) => new double2(v);
+        #endregion
+
+        #region Arithmetic operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator double2(double2 v) => new double2(v);
+        public static double2 operator *(double2 a, double2 b) => new double2(a.x * b.x, a.y * b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator *(double2 a, double b) => new double2(a.x * b, a.y * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator *(double a, double2 b) => new double2(a * b.x, a * b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator +(double2 a, double2 b) => new double2(a.x + b.x, a.y + b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator +(double2 a, double b) => new double2(a.x + b, a.y + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator +(double a, double2 b) => new double2(a + b.x, a + b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator -(double2 a, double2 b) => new double2(a.x - b.x, a.y - b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator -(double2 a, double b) => new double2(a.x - b, a.y - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator -(double a, double2 b) => new double2(a - b.x, a - b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator /(double2 a, double2 b) => new double2(a.x / b.x, a.y / b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator /(double2 a, double b) => new double2(a.x / b, a.y / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator /(double a, double2 b) => new double2(a / b.x, a / b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator %(double2 a, double2 b) => new double2(a.x % b.x, a.y % b.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator %(double2 a, double b) => new double2(a.x % b, a.y % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator %(double a, double2 b) => new double2(a % b.x, a % b.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator ++(double2 a) => new double2(++a.x, ++a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator --(double2 a) => new double2(--a.x, --a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double2 operator -(double2 a) => new double2(-a.x, -a.y);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]                                                               
+        public static double2 operator +(double2 a) => new double2(+a.x, +a.y);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double2 a, double2 b) => a.x == b.x && a.y == b.y;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double2 a, double b) => a.x == b && a.y == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(double a, double2 b) => a == b.x && a == b.y;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double2 a, double2 b) => a.x != b.x || a.y != b.y;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double2 a, double b) => a.x != b || a.y != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(double a, double2 b) => a != b.x || a != b.y;
         #endregion
 
         #region Swap2
@@ -335,7 +396,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is double2 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"double2({x}, {y})";
         #endregion
@@ -388,17 +449,11 @@ namespace DCFApixels.DataMath
     public static partial class math
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(double2 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2 one_minus(double2 v) => 1d - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2 abs(double2 v)
         {
-            return new double2(SMathF.Abs(v.x), SMathF.Abs(v.y));
+            return new double2(SMath.Abs(v.x), SMath.Abs(v.y));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2 sign(double2 v)
@@ -409,32 +464,32 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2 round(double2 v)
         {
-            return new double2(SMathF.Round(v.x), SMathF.Round(v.y));
+            return new double2(SMath.Round(v.x), SMath.Round(v.y));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2 round2int(double2 v)
         {
-            return new int2((int)SMathF.Round(v.x), (int)SMathF.Round(v.y));
+            return new int2((int)SMath.Round(v.x), (int)SMath.Round(v.y));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2 floor(double2 v)
         {
-            return new double2(SMathF.Floor(v.x), SMathF.Floor(v.y));
+            return new double2(SMath.Floor(v.x), SMath.Floor(v.y));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2 floor2int(double2 v)
         {
-            return new int2((int)SMathF.Floor(v.x), (int)SMathF.Floor(v.y));
+            return new int2((int)SMath.Floor(v.x), (int)SMath.Floor(v.y));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2 ceil(double2 v)
         {
-            return new double2(SMathF.Ceiling(v.x), SMathF.Ceiling(v.y));
+            return new double2(SMath.Ceiling(v.x), SMath.Ceiling(v.y));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2 ceil2int(double2 v)
         {
-            return new int2((int)SMathF.Ceiling(v.x), (int)SMathF.Ceiling(v.y));
+            return new int2((int)SMath.Ceiling(v.x), (int)SMath.Ceiling(v.y));
         }
         
     }

@@ -176,8 +176,8 @@ namespace DCFApixels.DataMath
         #region Convert operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(float v) => new float4(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator float4(bool4 v) => new float4(v);
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static explicit operator float4(float4 v) => new float4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(int v) => new float4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -190,6 +190,68 @@ namespace DCFApixels.DataMath
         public static explicit operator float4(double v) => new float4(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float4(double4 v) => new float4(v);
+        #endregion
+
+        #region Arithmetic operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator *(float4 a, float4 b) => new float4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator *(float4 a, float b) => new float4(a.x * b, a.y * b, a.z * b, a.w * b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator *(float a, float4 b) => new float4(a * b.x, a * b.y, a * b.z, a * b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator +(float4 a, float4 b) => new float4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator +(float4 a, float b) => new float4(a.x + b, a.y + b, a.z + b, a.w + b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator +(float a, float4 b) => new float4(a + b.x, a + b.y, a + b.z, a + b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator -(float4 a, float4 b) => new float4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator -(float4 a, float b) => new float4(a.x - b, a.y - b, a.z - b, a.w - b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator -(float a, float4 b) => new float4(a - b.x, a - b.y, a - b.z, a - b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator /(float4 a, float4 b) => new float4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator /(float4 a, float b) => new float4(a.x / b, a.y / b, a.z / b, a.w / b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator /(float a, float4 b) => new float4(a / b.x, a / b.y, a / b.z, a / b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator %(float4 a, float4 b) => new float4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator %(float4 a, float b) => new float4(a.x % b, a.y % b, a.z % b, a.w % b);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator %(float a, float4 b) => new float4(a % b.x, a % b.y, a % b.z, a % b.w);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator ++(float4 a) => new float4(++a.x, ++a.y, ++a.z, ++a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator --(float4 a) => new float4(--a.x, --a.y, --a.z, --a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator -(float4 a) => new float4(-a.x, -a.y, -a.z, -a.w);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 operator +(float4 a) => new float4(+a.x, +a.y, +a.z, +a.w);
+        #endregion
+
+        #region Boolean operators
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float4 a, float4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float4 a, float b) => a.x == b && a.y == b && a.z == b && a.w == b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(float a, float4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float4 a, float4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float4 a, float b) => a.x != b || a.y != b || a.z != b || a.w != b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(float a, float4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
 
         #region Swap2
@@ -2221,7 +2283,7 @@ namespace DCFApixels.DataMath
         #region Object
         public override bool Equals(object o) => o is float4 target && Equals(target); 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => unchecked((int)math.hash(this));
+        public override int GetHashCode() => math.hash(this);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"float4({x}, {y}, {z}, {w})";
         #endregion
@@ -2277,12 +2339,6 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint hash(float4 v)
-        {
-            return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 one_minus(float4 v) => 1f - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

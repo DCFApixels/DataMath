@@ -7,21 +7,6 @@ namespace DCFApixels.DataMath
     public static partial class math
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint uhash(float v) => unchecked((uint)hash(v));
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int hash(float v)
-        {
-            int bits = *(int*)&v;
-            // Optimized check for IsNan() || IsZero()
-            if (((bits - 1) & 0x7FFFFFFF) >= 0x7F800000)
-            {
-                // Ensure that all NaNs and both zeros have the same hash code
-                bits &= 0x7F800000;
-            }
-            return bits;
-        } 
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float one_minus(float v) => 1f - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float abs(float v) => SMathF.Abs(v);
