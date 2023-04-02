@@ -18,6 +18,20 @@ namespace DCFApixels.DataMath
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Vector4(double3 a) => new Vector4((float)a.x, (float)a.y, (float)a.z, 0f);
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator double3(Vector2 a) => new double3(a.x, a.y, 0d);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator double3(Vector2Int a) => new double3(a.x, a.y, 0d);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator double3(Vector3 a) => new double3(a.x, a.y, a.z);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator double3(Vector3Int a) => new double3(a.x, a.y, a.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator double3(Vector4 a) => new double3(a.x, a.y, a.z);
     }
 
     public static partial class math
