@@ -9,3 +9,6 @@
 This library is inspired by shader programming languages. Several similar types are implemented, `float4`, `float3` etc. Supports converting to Unity base types, such as `float3` to `Vector3`. But can be applied outside of Unity. Also provides a set of mathematical functions ~~and random number generators~~.
 
 **Developed as an extension to DragonECS project, to simplify writing engine-independent systems.**
+
+implemented types
+`double2`, `double3`, `double4`, `float2`, `float3`, `float4`, `int2`, `int3`, `int4`, `uint2`, `uint3`, `uint4`, etc.
