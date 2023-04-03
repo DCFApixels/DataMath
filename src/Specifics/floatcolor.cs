@@ -2,37 +2,38 @@
 
 namespace DCFApixels.DataMath
 {
-    public struct color : IColor, IValue4<float>
+    //TODO придумать получше имя, color не подохоидт изза конфликта с неймингом переменных, floatcolor получше отражает смысл, но слишком длинное
+    public struct floatcolor : IColor, IValue4<float>
     {
         #region Consts
         public static int length = 4;
 
         /// <summary> rgba(1, 0, 0, 1) </summary>
-        public readonly static color red = new color(1f, 0f, 0f);
+        public readonly static floatcolor red = new floatcolor(1f, 0f, 0f);
         /// <summary> rgba(0, 1, 0, 1) </summary>
-        public readonly static color green = new color(0f, 1f, 0f);
+        public readonly static floatcolor green = new floatcolor(0f, 1f, 0f);
         /// <summary> rgba(0, 0, 1, 1) </summary>
-        public readonly static color blue = new color(0f, 0f, 0f);
+        public readonly static floatcolor blue = new floatcolor(0f, 0f, 0f);
         /// <summary> rgba(0, 0, 0, 0) </summary>
-        public readonly static color clean = new color(0f, 0f, 0f, 0f);
+        public readonly static floatcolor clean = new floatcolor(0f, 0f, 0f, 0f);
 
         /// <summary> rgba(1, 1, 1, 1) </summary>
-        public readonly static color white = new color(1f, 1f, 1f);
+        public readonly static floatcolor white = new floatcolor(1f, 1f, 1f);
         /// <summary> rgba(0.5, 0.5, 0.5, 1) </summary>
-        public readonly static color gray = new color(0.5f, 0.5f, 0.5f);
+        public readonly static floatcolor gray = new floatcolor(0.5f, 0.5f, 0.5f);
         /// <summary> rgba(0.5, 0.5, 0.5, 1) </summary>
-        public readonly static color grey = gray;
+        public readonly static floatcolor grey = gray;
         /// <summary> rgba(0, 0, 0, 1) </summary>
-        public readonly static color black = new color(0f, 0f, 0f);
+        public readonly static floatcolor black = new floatcolor(0f, 0f, 0f);
 
         /// <summary> rgba(1, 1, 0, 1) </summary>
-        public readonly static color yellow = new color(1f, 1f, 0f);    
+        public readonly static floatcolor yellow = new floatcolor(1f, 1f, 0f);    
         /// <summary> rgba(1, 0.5, 0, 1) </summary>
-        public readonly static color orange = new color(1f, 0.5f, 0f);
+        public readonly static floatcolor orange = new floatcolor(1f, 0.5f, 0f);
         /// <summary> rgba(0, 1, 1, 1) </summary>
-        public readonly static color cyan = new color(0f, 1f, 1f);
+        public readonly static floatcolor cyan = new floatcolor(0f, 1f, 1f);
         /// <summary> rgba(1, 0, 1, 1) </summary>
-        public readonly static color magenta = new color(1f, 0f, 1f);
+        public readonly static floatcolor magenta = new floatcolor(1f, 0f, 1f);
         #endregion
 
         public float r;
@@ -41,18 +42,18 @@ namespace DCFApixels.DataMath
         public float a;
 
         #region Constructors
-        public color(float r, float g, float b)
+        public floatcolor(float r, float g, float b)
         {
             this.r = r; this.g = g;
             this.b = b; this.a = 1f;
         }
-        public color(float r, float g, float b, float a)
+        public floatcolor(float r, float g, float b, float a)
         {
             this.r = r; this.g = g;
             this.b = b; this.a = a;
         }
         /// <summary>accepting color code constructor</summary>
-        public color(ColorCodeUnion colorcode)
+        public floatcolor(ColorCodeUnion colorcode)
         {
             r = colorcode.r;
             g = colorcode.g;
@@ -82,13 +83,13 @@ namespace DCFApixels.DataMath
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
                 if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
 #endif
-                fixed (color* array = &this) { return ref ((float*)array)[index]; }
+                fixed (floatcolor* array = &this) { return ref ((float*)array)[index]; }
             }
         }
         public int Length => length;
         #endregion
 
-        public static implicit operator color(int colorcode) => new color(colorcode);
-        public static implicit operator color(uint colorcode) => new color(colorcode);
+        public static implicit operator floatcolor(int colorcode) => new floatcolor(colorcode);
+        public static implicit operator floatcolor(uint colorcode) => new floatcolor(colorcode);
     }
 }
