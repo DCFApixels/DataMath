@@ -1,8 +1,8 @@
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.ComponentModel;
 
 namespace DCFApixels.DataMath
 {
@@ -74,7 +74,7 @@ namespace DCFApixels.DataMath
 
         #region IValueN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int X 
+        int IValue2<int>.x 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => x; 
@@ -82,7 +82,7 @@ namespace DCFApixels.DataMath
             set => x = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Y 
+        int IValue2<int>.y
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => y; 
@@ -90,7 +90,7 @@ namespace DCFApixels.DataMath
             set => y = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Z 
+        int IValue3<int>.z 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => z;
