@@ -5,9 +5,12 @@
         public int Length { get; }
         public ref T this[int index] { get; }
     }
-    public interface IValue2<T> : IValueN<T> where T : struct
+    public interface IValue1<T> : IValueN<T> where T : struct
     {
         public T x { get; set; }
+    }
+    public interface IValue2<T> : IValue1<T> where T : struct
+    {
         public T y { get; set; }
     }
 

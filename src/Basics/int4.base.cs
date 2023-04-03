@@ -79,7 +79,7 @@ namespace DCFApixels.DataMath
 
         #region IValueN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IValue2<int>.x 
+        int IValue1<int>.x 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => x; 
