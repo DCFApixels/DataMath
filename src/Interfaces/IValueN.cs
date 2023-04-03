@@ -13,7 +13,6 @@
     {
         public T y { get; set; }
     }
-
     public interface IValue3<T> : IValue2<T> where T : struct
     {
         public T z { get; set; }

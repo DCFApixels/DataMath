@@ -440,7 +440,7 @@ namespace DCFApixels.DataMath
             public void Dispose() { }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < _value.Length;
+            public bool MoveNext() => ++_pointer < length;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }

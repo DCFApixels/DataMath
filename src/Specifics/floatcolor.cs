@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace DCFApixels.DataMath
 {
-
     //TODO придумать получше имя, color не подохоидт изза конфликта с неймингом переменных, floatcolor получше отражает смысл, но слишком длинное
+    //вроде есть еще ваиранты floatclr, colorinfo, colordata но они все все еще не идеальны
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
@@ -67,7 +66,6 @@ namespace DCFApixels.DataMath
             b = colorcode.b;
             a = colorcode.a;
         }
-
         #endregion
 
         #region IColor
