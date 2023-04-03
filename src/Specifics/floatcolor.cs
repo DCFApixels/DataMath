@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace DCFApixels.DataMath
 {
+
     //TODO придумать получше имя, color не подохоидт изза конфликта с неймингом переменных, floatcolor получше отражает смысл, но слишком длинное
+    [DebuggerTypeProxy(typeof(DebuggerProxy))]
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
     public struct floatcolor : IColor, IValue4<float>
     {
         #region Consts
@@ -91,5 +98,22 @@ namespace DCFApixels.DataMath
 
         public static implicit operator floatcolor(int colorcode) => new floatcolor(colorcode);
         public static implicit operator floatcolor(uint colorcode) => new floatcolor(colorcode);
+
+        #region Utils
+        internal class DebuggerProxy
+        {
+            public float r;
+            public float g;
+            public float b;
+            public float a;
+            public DebuggerProxy(floatcolor v)
+            {
+                r = v.r;
+                g = v.g;
+                b = v.b;
+                a = v.a;
+            }
+        }
+        #endregion
     }
 }
