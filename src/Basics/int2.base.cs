@@ -11,7 +11,11 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 8)]
-    public partial struct int2 : IEquatable<int2>, IFormattable, IValue2<int>
+    public partial struct int2 : 
+        IEquatable<int2>, 
+        IFormattable, 
+        IValue2<int>, 
+        IColor
     {
         #region Consts
         public const int length = 2;
@@ -33,6 +37,37 @@ namespace DCFApixels.DataMath
 
         public int x;
         public int y;
+
+        #region IColor
+        public float r 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => (float)x;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => x = (int)value;
+        }
+        public float g 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => (float)y;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => y = (int)value;
+        }
+        public float b 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => 0f;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set {}
+        }
+        public float a 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => 0f;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set {}
+        }
+        #endregion
 
         #region IValueN
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -133,25 +168,6 @@ namespace DCFApixels.DataMath
             x = (int)v.x; y = (int)v.y;
         }
 
-        #endregion
-
-        #region Convert operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int2(float v) => new int2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int2(float2 v) => new int2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator int2(int v) => new int2(v);
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static implicit operator int2(int2 v) => new int2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int2(uint v) => new int2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int2(uint2 v) => new int2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int2(double v) => new int2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int2(double2 v) => new int2(v);
         #endregion
 
         #region Arithmetic operators
@@ -475,22 +491,5 @@ namespace DCFApixels.DataMath
             }
         }
         #endregion
-    }
-
-    public static partial class math
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 one_minus(int2 v) => 1 - v;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 abs(int2 v)
-        {
-            return new int2(SMathF.Abs(v.x), SMathF.Abs(v.y));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 sign(int2 v)
-        {
-            return new int2(SMath.Sign(v.x), SMath.Sign(v.y));
-        }
-        
     }
 }

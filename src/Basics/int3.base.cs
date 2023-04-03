@@ -11,7 +11,11 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 12)]
-    public partial struct int3 : IEquatable<int3>, IFormattable, IValue3<int>
+    public partial struct int3 : 
+        IEquatable<int3>, 
+        IFormattable, 
+        IValue3<int>, 
+        IColor
     {
         #region Consts
         public const int length = 3;
@@ -38,6 +42,37 @@ namespace DCFApixels.DataMath
         public int x;
         public int y;
         public int z;
+
+        #region IColor
+        public float r 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => (float)x;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => x = (int)value;
+        }
+        public float g 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => (float)y;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => y = (int)value;
+        }
+        public float b 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => (float)z;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => z = (int)value;
+        }
+        public float a 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => 0f;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set {}
+        }
+        #endregion
 
         #region IValueN
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -146,25 +181,6 @@ namespace DCFApixels.DataMath
             x = (int)v.x; y = (int)v.y; z = (int)v.z;
         }
 
-        #endregion
-
-        #region Convert operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int3(float v) => new int3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int3(float3 v) => new int3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator int3(int v) => new int3(v);
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static implicit operator int3(int3 v) => new int3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int3(uint v) => new int3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int3(uint3 v) => new int3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int3(double v) => new int3(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator int3(double3 v) => new int3(v);
         #endregion
 
         #region Arithmetic operators
@@ -1024,22 +1040,5 @@ namespace DCFApixels.DataMath
             }
         }
         #endregion
-    }
-
-    public static partial class math
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int3 one_minus(int3 v) => 1 - v;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int3 abs(int3 v)
-        {
-            return new int3(SMathF.Abs(v.x), SMathF.Abs(v.y), SMathF.Abs(v.z));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int3 sign(int3 v)
-        {
-            return new int3(SMath.Sign(v.x), SMath.Sign(v.y), SMath.Sign(v.z));
-        }
-        
     }
 }

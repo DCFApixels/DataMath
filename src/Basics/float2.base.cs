@@ -11,7 +11,11 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 8)]
-    public partial struct float2 : IEquatable<float2>, IFormattable, IValue2<float>
+    public partial struct float2 : 
+        IEquatable<float2>, 
+        IFormattable, 
+        IValue2<float>, 
+        IColor
     {
         #region Consts
         public const int length = 2;
@@ -33,6 +37,37 @@ namespace DCFApixels.DataMath
 
         public float x;
         public float y;
+
+        #region IColor
+        public float r 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => (float)x;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => x = (float)value;
+        }
+        public float g 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => (float)y;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => y = (float)value;
+        }
+        public float b 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => 0f;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set {}
+        }
+        public float a 
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => 0f;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set {}
+        }
+        #endregion
 
         #region IValueN
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -133,25 +168,6 @@ namespace DCFApixels.DataMath
             x = (float)v.x; y = (float)v.y;
         }
 
-        #endregion
-
-        #region Convert operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator float2(float v) => new float2(v);
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static explicit operator float2(float2 v) => new float2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator float2(int v) => new float2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator float2(int2 v) => new float2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator float2(uint v) => new float2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator float2(uint2 v) => new float2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator float2(double v) => new float2(v);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator float2(double2 v) => new float2(v);
         #endregion
 
         #region Arithmetic operators
@@ -445,53 +461,5 @@ namespace DCFApixels.DataMath
             }
         }
         #endregion
-    }
-
-    public static partial class math
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float2 one_minus(float2 v) => 1f - v;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float2 abs(float2 v)
-        {
-            return new float2(SMathF.Abs(v.x), SMathF.Abs(v.y));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 sign(float2 v)
-        {
-            return new int2(SMath.Sign(v.x), SMath.Sign(v.y));
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float2 round(float2 v)
-        {
-            return new float2(SMathF.Round(v.x), SMathF.Round(v.y));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 round2int(float2 v)
-        {
-            return new int2((int)SMathF.Round(v.x), (int)SMathF.Round(v.y));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float2 floor(float2 v)
-        {
-            return new float2(SMathF.Floor(v.x), SMathF.Floor(v.y));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 floor2int(float2 v)
-        {
-            return new int2((int)SMathF.Floor(v.x), (int)SMathF.Floor(v.y));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float2 ceil(float2 v)
-        {
-            return new float2(SMathF.Ceiling(v.x), SMathF.Ceiling(v.y));
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 ceil2int(float2 v)
-        {
-            return new int2((int)SMathF.Ceiling(v.x), (int)SMathF.Ceiling(v.y));
-        }
-        
     }
 }

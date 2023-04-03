@@ -1,11 +1,10 @@
-﻿namespace DCFApixels.DataMath.TODO
+﻿namespace DCFApixels.DataMath
 {
-    /// <summary>Not Implemented</summary>
     public interface IColor
     {
-        public float r { get; }
-        public float g { get; }
-        public float b { get; }
-        public float a { get; }
+        public float r { get; set; }
+        public float g { get; set; }
+        public float b { get; set; }
+        public float a { get; set; }
     }
 }
