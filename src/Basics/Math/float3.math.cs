@@ -94,6 +94,9 @@ namespace DCFApixels.DataMath
         #region vector
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 normalize(float3 v) { v.Normalize(); return v; }
+        /// <summary>alias for magnitude(a, b)</summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float magn(in float3 v) => v.Magnitude;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float magnitude(in float3 v) => v.Magnitude;
         #endregion
@@ -125,6 +128,14 @@ namespace DCFApixels.DataMath
                 a.z + (b.z - a.z) * t
             );
         }
+        #endregion
+
+        #region distance
+        /// <summary>alias for distance(a, b)</summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float dist(in float3 a, in float3 b) => magnitude(b - a);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float distance(in float3 a, in float3 b) => magnitude(b - a);
         #endregion
     }
 }

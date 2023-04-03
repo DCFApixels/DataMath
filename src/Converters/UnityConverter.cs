@@ -22,7 +22,7 @@ namespace UnityEngine
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion ToUnityQuaternion<T>(this ref T self) where T : struct, IQuaternion<float>
         {
-            return new Quaternion(self.X, self.Y, self.Z, self.W);
+            return new Quaternion(self.x, self.y, self.z, self.w);
         }
     }
 }
