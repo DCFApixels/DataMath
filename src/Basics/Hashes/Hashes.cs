@@ -151,11 +151,5 @@ namespace DCFApixels.DataMath
             throw new NotImplementedException();
         }
         #endregion
-
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static uint hash(int2 v)
-        //{
-        //    return csum(asuint(v) * uint2(0xFA3A3285u, 0xAD55999Du)) + 0xDCDD5341u;
-        //}
     }
 }
