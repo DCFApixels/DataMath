@@ -4,13 +4,13 @@
     public interface IRayBase<T>
         where T : struct
     {
-        public T originX { get; set; }
-        public T originY { get; set; }
-        public T originZ { get; set; }
+        public T OriginX { get; set; }
+        public T OriginY { get; set; }
+        public T OriginZ { get; set; }
 
-        public T directionX { get; set; }
-        public T directionY { get; set; }
-        public T directionZ { get; set; }
+        public T DirectionX { get; set; }
+        public T DirectionY { get; set; }
+        public T DirectionZ { get; set; }
     }
 
     /// <summary>Not Implemented</summary>
@@ -18,7 +18,7 @@
         where T : struct
         where TN : IValue3<T>
     {
-        public TN origin { get; set; }
-        public TN direction { get; set; }
+        public TN Origin { get; set; }
+        public TN Direction { get; set; }
     }
 }
