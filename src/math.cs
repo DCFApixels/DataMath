@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
-using UnityEngine.XR;
-
-namespace DCFApixels.DataMath
+﻿namespace DCFApixels.DataMath
 {
     public static partial class math
     {
