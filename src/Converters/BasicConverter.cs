@@ -1,7 +1,6 @@
-﻿using DCFApixels.DataMath;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
-namespace DataMath.src.Basics.Converts
+namespace DCFApixels.DataMath
 {
     public static partial class DoubleConverter
     {

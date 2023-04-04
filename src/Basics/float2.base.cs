@@ -244,6 +244,12 @@ namespace DCFApixels.DataMath
              get => new float2(x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public float2 x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float2(x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public float2 yx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -254,6 +260,24 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new float2(y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float2 y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float2(y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float2 _x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float2(0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float2 _y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float2(0f, y);
          }
         #endregion
 
@@ -271,6 +295,12 @@ namespace DCFApixels.DataMath
              get => new float3(x, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 xx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(x, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public float3 xyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -281,6 +311,30 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new float3(x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 xy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(x, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 x_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(x, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 x_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(x, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 x__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(x, 0f, 0f);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public float3 yxx
@@ -295,6 +349,12 @@ namespace DCFApixels.DataMath
              get => new float3(y, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 yx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(y, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public float3 yyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -305,6 +365,78 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new float3(y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 yy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(y, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 y_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(y, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 y_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(y, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 y__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(y, 0f, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 _xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 _xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 _x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 _yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 _yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 _y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 __x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float3 __y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float3(0f, 0f, y);
          }
         #endregion
 
@@ -322,6 +454,12 @@ namespace DCFApixels.DataMath
              get => new float4(x, x, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, x, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public float4 xxyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -332,6 +470,30 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new float4(x, x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, x, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xx_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, x, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xx_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, x, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xx__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, x, 0f, 0f);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public float4 xyxx
@@ -346,6 +508,12 @@ namespace DCFApixels.DataMath
              get => new float4(x, y, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, y, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public float4 xyyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -356,6 +524,84 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new float4(x, y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, y, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xy_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, y, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xy_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, y, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xy__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, y, 0f, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x_xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x_xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x_x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x_yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x_yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x_y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x__x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x__y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 x___
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(x, 0f, 0f, 0f);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public float4 yxxx
@@ -370,6 +616,12 @@ namespace DCFApixels.DataMath
              get => new float4(y, x, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, x, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public float4 yxyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -380,6 +632,30 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new float4(y, x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, x, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yx_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, x, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yx_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, x, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yx__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, x, 0f, 0f);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public float4 yyxx
@@ -394,6 +670,12 @@ namespace DCFApixels.DataMath
              get => new float4(y, y, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, y, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public float4 yyyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -404,6 +686,240 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new float4(y, y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, y, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yy_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, y, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yy_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, y, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yy__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, y, 0f, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y_xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y_xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y_x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y_yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y_yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y_y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y__x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y__y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 y___
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(y, 0f, 0f, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _xxx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _xxy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _xx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _xyx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _xyy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _xy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _x_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _x_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _x__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, x, 0f, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _yxx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _yxy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _yx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _yyx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _yyy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _yy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _y_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _y_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, 0f, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 _y__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, y, 0f, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 __xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 __xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 __x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, x, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 __yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 __yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 __y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, y, 0f);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ___x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, 0f, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ___y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new float4(0f, 0f, 0f, y);
          }
         #endregion
 
