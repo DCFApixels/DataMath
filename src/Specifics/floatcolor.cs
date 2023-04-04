@@ -75,11 +75,11 @@ namespace DCFApixels.DataMath
         float IColor.a { get => a; set => a = value; }
         #endregion
 
-        #region IValueN
-        float IVector1<float>.x { get => r; set => r = value; }
-        float IVector2<float>.y { get => g; set => g = value; }
-        float IVector3<float>.z { get => b; set => b = value; }
-        float IVector4<float>.w { get => a; set => a = value; }
+        #region IVectorN
+        public float x { get => r; set => r = value; }
+        public float y { get => g; set => g = value; }
+        public float z { get => b; set => b = value; }
+        public float w { get => a; set => a = value; }
 
         public unsafe ref float this[int index]
         {
