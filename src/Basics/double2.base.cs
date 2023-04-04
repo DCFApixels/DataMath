@@ -12,11 +12,11 @@ namespace DCFApixels.DataMath
     public partial struct double2 : 
         IEquatable<double2>, 
         IFormattable, 
-        IValue2<double>, 
+        IVector2<double>, 
         IColor
     {
         #region Consts
-        public const int length = 2;
+        public const int LENGTH = 2;
 
         ///<summary>(0, 0)</summary>
         public static readonly double2 zero = new double2(0d, 0d);
@@ -67,9 +67,9 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region IValueN
+        #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IValue1<double>.x 
+        double IVector1<double>.x 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => x; 
@@ -77,7 +77,7 @@ namespace DCFApixels.DataMath
             set => x = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IValue2<double>.y
+        double IVector2<double>.y
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => y; 
@@ -85,10 +85,10 @@ namespace DCFApixels.DataMath
             set => y = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Length
+        public int length
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => length;
+            get => LENGTH;
         }
 
         public unsafe ref double this[int index]
@@ -97,7 +97,7 @@ namespace DCFApixels.DataMath
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
 #endif
                 fixed (double2* array = &this) { return ref ((double*)array)[index]; }
             }
@@ -440,7 +440,7 @@ namespace DCFApixels.DataMath
             public void Dispose() { }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < length;
+            public bool MoveNext() => ++_pointer < LENGTH;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }

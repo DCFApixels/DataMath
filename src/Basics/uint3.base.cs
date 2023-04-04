@@ -12,11 +12,11 @@ namespace DCFApixels.DataMath
     public partial struct uint3 : 
         IEquatable<uint3>, 
         IFormattable, 
-        IValue3<uint>, 
+        IVector3<uint>, 
         IColor
     {
         #region Consts
-        public const int length = 3;
+        public const int LENGTH = 3;
 
         ///<summary>(0, 0, 0)</summary>
         public static readonly uint3 zero = new uint3(0u, 0u, 0u);
@@ -72,9 +72,9 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region IValueN
+        #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        uint IValue1<uint>.x 
+        uint IVector1<uint>.x 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => x; 
@@ -82,7 +82,7 @@ namespace DCFApixels.DataMath
             set => x = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        uint IValue2<uint>.y
+        uint IVector2<uint>.y
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => y; 
@@ -90,7 +90,7 @@ namespace DCFApixels.DataMath
             set => y = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        uint IValue3<uint>.z 
+        uint IVector3<uint>.z 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => z;
@@ -98,10 +98,10 @@ namespace DCFApixels.DataMath
             set => z = value;
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Length
+        public int length
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => length;
+            get => LENGTH;
         }
 
         public unsafe ref uint this[int index]
@@ -110,7 +110,7 @@ namespace DCFApixels.DataMath
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
 #endif
                 fixed (uint3* array = &this) { return ref ((uint*)array)[index]; }
             }
@@ -1017,7 +1017,7 @@ namespace DCFApixels.DataMath
             public void Dispose() { }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < length;
+            public bool MoveNext() => ++_pointer < LENGTH;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }

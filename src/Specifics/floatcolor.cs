@@ -9,10 +9,10 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
-    public struct floatcolor : IColor, IValue4<float>
+    public struct floatcolor : IColor, IVector4<float>
     {
         #region Consts
-        public static int length = 4;
+        public static int LENGTH = 4;
 
         /// <summary> rgba(1, 0, 0, 1) </summary>
         public readonly static floatcolor red = new floatcolor(1f, 0f, 0f);
@@ -76,22 +76,22 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region IValueN
-        float IValue1<float>.x { get => r; set => r = value; }
-        float IValue2<float>.y { get => g; set => g = value; }
-        float IValue3<float>.z { get => b; set => b = value; }
-        float IValue4<float>.w { get => a; set => a = value; }
+        float IVector1<float>.x { get => r; set => r = value; }
+        float IVector2<float>.y { get => g; set => g = value; }
+        float IVector3<float>.z { get => b; set => b = value; }
+        float IVector4<float>.w { get => a; set => a = value; }
 
         public unsafe ref float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
 #endif
                 fixed (floatcolor* array = &this) { return ref ((float*)array)[index]; }
             }
         }
-        public int Length => length;
+        public int length => LENGTH;
         #endregion
 
         public static implicit operator floatcolor(int colorcode) => new floatcolor(colorcode);

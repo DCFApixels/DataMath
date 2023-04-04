@@ -1,9 +1,9 @@
 ﻿namespace DCFApixels.DataMath.TODO
 {
     /// <summary>Not Implemented</summary>
-    public interface IRect<T, TN> : IValue4<T>
+    public interface IRect<T, TN> : IVector4<T>
         where T : struct 
-        where TN : struct, IValue2<T>
+        where TN : struct, IVector2<T>
     {
         public T Height { get; }
         public T Width { get; }
