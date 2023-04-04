@@ -15,6 +15,6 @@
         public bool IsPositive { get; }
 
         public T Center { get; }
-        //public T Direction { get; }
+        //public T direction { get; }
     }
 }

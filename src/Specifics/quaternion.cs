@@ -20,7 +20,6 @@ namespace DCFApixels.DataMath.TODO
         float IVector2<float>.y { get => y; set => y = value; }
         float IVector3<float>.z { get => z; set => z = value; }
         float IVector4<float>.w { get => w; set => w = value; }
-
         public unsafe ref float this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -32,8 +31,11 @@ namespace DCFApixels.DataMath.TODO
                 fixed (quaternion* array = &this) { return ref ((float*)array)[index]; }
             }
         }
-
-        public int length => LENGTH;
+        public int length
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => LENGTH;
+        }
         #endregion
 
         #region IVectorEnumerable
