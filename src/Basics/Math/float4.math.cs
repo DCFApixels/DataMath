@@ -1,19 +1,52 @@
-using System;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
 using SMath = System.Math;
+#if NETCORE || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
+#else
+using SMathF = DCFApixels.DataMath.Internal.MathF;
+#endif
 
 namespace DCFApixels.DataMath
 {
     public partial struct float4
     {
+        public const float vectorEpsilon = 0.00001f;
 
+
+        #region vector
+        public float Magnitude
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => SMathF.Sqrt(x * x + y * y + z * z + w * w);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Normalize()
+        {
+            float mag = Magnitude;
+            if (mag > vectorEpsilon)
+                this = this / mag;
+            else
+                this = zero;
+        }
+        #endregion
     }
     public static partial class math
     {
+
+
+        #region vector
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float4 normalize(float4 v) { v.Normalize(); return v; }
+        /// <summary>alias for magnitude(a, b)</summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float magn(in float4 v) => v.Magnitude;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float magnitude(in float4 v) => v.Magnitude;
+        #endregion
+
+
+
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 one_minus(float4 v) => 1f - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

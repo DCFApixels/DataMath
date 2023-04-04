@@ -1,6 +1,9 @@
 using System.Runtime.CompilerServices;
+#if NETCORE || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
-using static DCFApixels.DataMath.math;
+#else
+using SMathF = DCFApixels.DataMath.Internal.MathF;
+#endif
 
 namespace DCFApixels.DataMath
 {
