@@ -14,7 +14,7 @@ namespace UnityEngine
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Ray ToUnityRay<T>(this ref T self) where T : struct, IRayBase<float>
+        public static Ray ToUnityRay<T>(this ref T self) where T : struct, IRay3Base<float>
         {
             return new Ray(new Vector3(self.OriginX, self.OriginY, self.OriginZ), new Vector3(self.DirectionX, self.DirectionY, self.DirectionZ));
         }
