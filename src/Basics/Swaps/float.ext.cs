@@ -9,8 +9,6 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2 ToX_(this double self) => new double2(self, 0d);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double2 ToXX(this double self) => new double2(self, self);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 To__X(this double self) => new double3(0d, 0d, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 To_X_(this double self) => new double3(0d, self, 0d);
@@ -22,8 +20,6 @@ namespace DCFApixels.DataMath
         public static double3 ToX_X(this double self) => new double3(self, 0d, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 ToXX_(this double self) => new double3(self, self, 0d);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double3 ToXXX(this double self) => new double3(self, self, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 To___X(this double self) => new double4(0d, 0d, 0d, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,8 +48,5 @@ namespace DCFApixels.DataMath
         public static double4 ToXX_X(this double self) => new double4(self, self, 0d, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 ToXXX_(this double self) => new double4(self, self, self, 0d);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double4 ToXXXX(this double self) => new double4(self, self, self, self);
-
     }
 }

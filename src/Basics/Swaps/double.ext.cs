@@ -9,8 +9,6 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2 ToX_(this float self) => new float2(self, 0f);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float2 ToXX(this float self) => new float2(self, self);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 To__X(this float self) => new float3(0f, 0f, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 To_X_(this float self) => new float3(0f, self, 0f);
@@ -22,8 +20,6 @@ namespace DCFApixels.DataMath
         public static float3 ToX_X(this float self) => new float3(self, 0f, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 ToXX_(this float self) => new float3(self, self, 0f);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float3 ToXXX(this float self) => new float3(self, self, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 To___X(this float self) => new float4(0f, 0f, 0f, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,8 +48,5 @@ namespace DCFApixels.DataMath
         public static float4 ToXX_X(this float self) => new float4(self, self, 0f, self);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 ToXXX_(this float self) => new float4(self, self, self, 0f);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float4 ToXXXX(this float self) => new float4(self, self, self, self);
-
     }
 }
