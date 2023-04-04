@@ -1,6 +1,13 @@
 ﻿namespace DCFApixels.DataMath.TODO
 {
     /// <summary>Not Implemented</summary>
+    public interface IRayN<T, TVector>
+        where T : struct
+        where TVector : IVector2<T>
+    {
+        public TVector GetPoint(float distance);
+    }
+    /// <summary>Not Implemented</summary>
     public interface IRay1Base<T>
         where T : struct
     {
@@ -26,24 +33,24 @@
     }
 
     /// <summary>Not Implemented</summary>
-    public interface IRay2<T, TN> : IRay2Base<T>
+    public interface IRay2<T, TVector> : IRay2Base<T>
         where T : struct
-        where TN : IVector2<T>
+        where TVector : IVector2<T>
     {
-        public TN origin { get; set; }
-        public TN direction { get; set; }
+        public TVector origin { get; set; }
+        public TVector direction { get; set; }
     }
     /// <summary>Not Implemented</summary>
-    public interface IRay3Base<TVector>
-        where TVector : struct
+    public interface IRay3Base<T>
+        where T : struct
     {
-        public TVector OriginX { get; set; }
-        public TVector OriginY { get; set; }
-        public TVector OriginZ { get; set; }
+        public T OriginX { get; set; }
+        public T OriginY { get; set; }
+        public T OriginZ { get; set; }
 
-        public TVector DirectionX { get; set; }
-        public TVector DirectionY { get; set; }
-        public TVector DirectionZ { get; set; }
+        public T DirectionX { get; set; }
+        public T DirectionY { get; set; }
+        public T DirectionZ { get; set; }
     }
 
     /// <summary>Not Implemented</summary>
