@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace DCFApixels.DataMath
 {
@@ -13,7 +15,8 @@ namespace DCFApixels.DataMath
         IEquatable<int2>, 
         IFormattable, 
         IVector2<int>, 
-        IColor
+        IColor,
+        IEnumerableVector<int, int2>
     {
         #region Consts
         public const int LENGTH = 2;
@@ -973,21 +976,28 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Enumerator
+        VectorEnumerator<int, int2> IEnumerableVector<int, int2>.GetEnumerator() => new VectorEnumerator<int, int2>(this);
+        IEnumerator<int> IEnumerable<int>.GetEnumerator() => new VectorEnumerator<int, int2>(this);
+        IEnumerator IEnumerable.GetEnumerator() => new VectorEnumerator<int, int2>(this);
         public Enumerator GetEnumerator() => new Enumerator(this);
-        public ref struct Enumerator
+        public unsafe ref struct Enumerator
         {
-            private readonly int2 _value;
-            private sbyte _pointer;
+            private readonly int* _pointer;
+            private sbyte _index;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator(int2 value) { _value = value; _pointer = -1; }
-            public int Current => _value[_pointer];
-
+            public Enumerator(in int2 value)
+            {
+                fixed (int2* array = &value)
+                {
+                    _pointer = (int*)array;
+                    _index = -1;
+                }
+            }
+            public int Current => _pointer[_index];
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Dispose() { }
-
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < LENGTH;
-
+            public bool MoveNext() => ++_index < LENGTH;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }
         }

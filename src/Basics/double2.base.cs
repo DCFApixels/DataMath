@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace DCFApixels.DataMath
 {
@@ -13,7 +15,8 @@ namespace DCFApixels.DataMath
         IEquatable<double2>, 
         IFormattable, 
         IVector2<double>, 
-        IColor
+        IColor,
+        IEnumerableVector<double, double2>
     {
         #region Consts
         public const int LENGTH = 2;
@@ -943,21 +946,28 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Enumerator
+        VectorEnumerator<double, double2> IEnumerableVector<double, double2>.GetEnumerator() => new VectorEnumerator<double, double2>(this);
+        IEnumerator<double> IEnumerable<double>.GetEnumerator() => new VectorEnumerator<double, double2>(this);
+        IEnumerator IEnumerable.GetEnumerator() => new VectorEnumerator<double, double2>(this);
         public Enumerator GetEnumerator() => new Enumerator(this);
-        public ref struct Enumerator
+        public unsafe ref struct Enumerator
         {
-            private readonly double2 _value;
-            private sbyte _pointer;
+            private readonly double* _pointer;
+            private sbyte _index;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator(double2 value) { _value = value; _pointer = -1; }
-            public double Current => _value[_pointer];
-
+            public Enumerator(in double2 value)
+            {
+                fixed (double2* array = &value)
+                {
+                    _pointer = (double*)array;
+                    _index = -1;
+                }
+            }
+            public double Current => _pointer[_index];
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Dispose() { }
-
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < LENGTH;
-
+            public bool MoveNext() => ++_index < LENGTH;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }
         }
