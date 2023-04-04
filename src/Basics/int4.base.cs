@@ -116,6 +116,7 @@ namespace DCFApixels.DataMath
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => length;
         }
+
         public unsafe ref int this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2346,9 +2347,9 @@ namespace DCFApixels.DataMath
         public ref struct Enumerator
         {
             private readonly int4 _value;
-            private byte _pointer;
+            private sbyte _pointer;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator(int4 value) { _value = value; _pointer = 0; }
+            public Enumerator(int4 value) { _value = value; _pointer = -1; }
             public int Current => _value[_pointer];
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

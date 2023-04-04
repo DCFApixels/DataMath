@@ -978,9 +978,9 @@ namespace DCFApixels.DataMath
         public ref struct Enumerator
         {
             private readonly float3 _value;
-            private byte _pointer;
+            private sbyte _pointer;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator(float3 value) { _value = value; _pointer = 0; }
+            public Enumerator(float3 value) { _value = value; _pointer = -1; }
             public float Current => _value[_pointer];
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
