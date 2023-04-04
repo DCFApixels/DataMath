@@ -1,18 +1,18 @@
 ﻿namespace DCFApixels.DataMath.TODO
 {
     /// <summary>Not Implemented</summary>
-    public partial struct ray : IRay<float, float3>
+    public partial struct ray : IRay3<float, float3>
     {
         public float3 origin;
         public float3 direction;
 
         #region Properties
-        float3 IRay<float, float3>.Origin
+        float3 IRay3<float, float3>.Origin
         {
             get => origin;
             set => origin = value;
         }
-        float3 IRay<float, float3>.Direction
+        float3 IRay3<float, float3>.Direction
         {
             get => direction;
             set => direction = value;

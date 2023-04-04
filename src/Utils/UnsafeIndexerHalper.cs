@@ -7,14 +7,14 @@
 //    public static class UnsafeIndexerHalper
 //    {
 //        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//        public static unsafe ref T GetRef<T, TN>(ref TN target, int index) 
-//            where T : struct
-//            where TN : struct, IVectorN<T>
+//        public static unsafe ref TVector GetRef<TVector, TVector>(ref TVector target, int index) 
+//            where TVector : struct
+//            where TVector : struct, IVectorN<TVector>
 //        {
 //#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
 //            if (index > target.length) throw new IndexOutOfRangeException($"index must be between[0...{(target.length - 1)}]");
 //#endif
-//            fixed (TN* array = &target) { return ref ((T*)array)[index]; }
+//            fixed (TVector* array = &target) { return ref ((TVector*)array)[index]; }
 //        }
 //    }
 //}
