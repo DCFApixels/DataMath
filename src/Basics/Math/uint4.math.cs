@@ -1,10 +1,10 @@
-using System;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
 using SMath = System.Math;
+#if NETCORE || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
+#else
+using SMathF = DCFApixels.DataMath.Internal.MathF;
+#endif
 
 namespace DCFApixels.DataMath
 {

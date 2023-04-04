@@ -12,11 +12,11 @@ namespace DCFApixels.DataMath
     public partial struct int4 : 
         IEquatable<int4>, 
         IFormattable, 
-        IValue4<int>, 
+        IVector4<int>, 
         IColor
     {
         #region Consts
-        public const int length = 4;
+        public const int LENGTH = 4;
 
         ///<summary>(0, 0, 0, 0)</summary>
         public static readonly int4 zero = new int4(0, 0, 0, 0);
@@ -77,9 +77,9 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region IValueN
+        #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IValue1<int>.x 
+        int IVector1<int>.x 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => x; 
@@ -87,7 +87,7 @@ namespace DCFApixels.DataMath
             set => x = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IValue2<int>.y 
+        int IVector2<int>.y 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => y; 
@@ -95,7 +95,7 @@ namespace DCFApixels.DataMath
             set => y = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IValue3<int>.z 
+        int IVector3<int>.z 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => z;
@@ -103,7 +103,7 @@ namespace DCFApixels.DataMath
             set => z = value;
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IValue4<int>.w 
+        int IVector4<int>.w 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => w;
@@ -111,18 +111,19 @@ namespace DCFApixels.DataMath
             set => w = value;
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Length
+        public int length
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => length;
+            get => LENGTH;
         }
+
         public unsafe ref int this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
 #endif
                 fixed (int4* array = &this) { return ref ((int*)array)[index]; }
             }
@@ -2346,16 +2347,16 @@ namespace DCFApixels.DataMath
         public ref struct Enumerator
         {
             private readonly int4 _value;
-            private byte _pointer;
+            private sbyte _pointer;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator(int4 value) { _value = value; _pointer = 0; }
+            public Enumerator(int4 value) { _value = value; _pointer = -1; }
             public int Current => _value[_pointer];
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Dispose() { }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < length;
+            public bool MoveNext() => ++_pointer < LENGTH;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }

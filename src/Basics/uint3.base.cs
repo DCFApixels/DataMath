@@ -12,11 +12,11 @@ namespace DCFApixels.DataMath
     public partial struct uint3 : 
         IEquatable<uint3>, 
         IFormattable, 
-        IValue3<uint>, 
+        IVector3<uint>, 
         IColor
     {
         #region Consts
-        public const int length = 3;
+        public const int LENGTH = 3;
 
         ///<summary>(0, 0, 0)</summary>
         public static readonly uint3 zero = new uint3(0u, 0u, 0u);
@@ -72,9 +72,9 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region IValueN
+        #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        uint IValue1<uint>.x 
+        uint IVector1<uint>.x 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => x; 
@@ -82,7 +82,7 @@ namespace DCFApixels.DataMath
             set => x = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        uint IValue2<uint>.y
+        uint IVector2<uint>.y
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => y; 
@@ -90,7 +90,7 @@ namespace DCFApixels.DataMath
             set => y = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        uint IValue3<uint>.z 
+        uint IVector3<uint>.z 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => z;
@@ -98,10 +98,10 @@ namespace DCFApixels.DataMath
             set => z = value;
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Length
+        public int length
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => length;
+            get => LENGTH;
         }
 
         public unsafe ref uint this[int index]
@@ -110,7 +110,7 @@ namespace DCFApixels.DataMath
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
 #endif
                 fixed (uint3* array = &this) { return ref ((uint*)array)[index]; }
             }
@@ -293,6 +293,12 @@ namespace DCFApixels.DataMath
              get => new uint2(x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint2 x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint2(x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint2 yx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -311,6 +317,12 @@ namespace DCFApixels.DataMath
              get => new uint2(y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint2 y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint2(y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint2 zx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -327,6 +339,30 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint2(z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint2 z_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint2(z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint2 _x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint2(0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint2 _y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint2(0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint2 _z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint2(0u, z);
          }
         #endregion
 
@@ -350,6 +386,12 @@ namespace DCFApixels.DataMath
              get => new uint3(x, x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 xx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(x, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 xyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -366,6 +408,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint3(x, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 xy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(x, y, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 xzx
@@ -386,6 +434,36 @@ namespace DCFApixels.DataMath
              get => new uint3(x, z, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 xz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(x, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 x_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(x, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 x_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(x, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 x_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(x, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 x__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(x, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 yxx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -402,6 +480,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint3(y, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 yx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(y, x, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 yyx
@@ -422,6 +506,12 @@ namespace DCFApixels.DataMath
              get => new uint3(y, y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 yy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(y, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 yzx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -438,6 +528,36 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint3(y, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 yz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(y, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 y_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(y, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 y_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(y, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 y_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(y, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 y__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(y, 0u, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 zxx
@@ -458,6 +578,12 @@ namespace DCFApixels.DataMath
              get => new uint3(z, x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 zx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(z, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 zyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -476,6 +602,12 @@ namespace DCFApixels.DataMath
              get => new uint3(z, y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 zy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(z, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint3 zzx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -492,6 +624,126 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint3(z, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 zz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(z, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 z_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(z, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 z_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(z, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 z_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(z, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 z__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(z, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _xz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _yz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _zx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _zy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _zz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 _z_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 __x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 __y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint3 __z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint3(0u, 0u, z);
          }
         #endregion
 
@@ -515,6 +767,12 @@ namespace DCFApixels.DataMath
              get => new uint4(x, x, x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xxx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, x, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xxyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -531,6 +789,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(x, x, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xxy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, x, y, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xxzx
@@ -551,6 +815,36 @@ namespace DCFApixels.DataMath
              get => new uint4(x, x, z, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xxz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, x, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xx_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, x, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xx_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, x, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xx_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, x, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xx__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, x, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xyxx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -567,6 +861,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(x, y, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xyx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, y, x, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xyyx
@@ -587,6 +887,12 @@ namespace DCFApixels.DataMath
              get => new uint4(x, y, y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xyy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, y, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xyzx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -603,6 +909,36 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(x, y, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xyz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, y, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xy_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, y, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xy_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, y, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xy_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, y, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xy__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, y, 0u, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xzxx
@@ -623,6 +959,12 @@ namespace DCFApixels.DataMath
              get => new uint4(x, z, x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xzx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, z, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xzyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -639,6 +981,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(x, z, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xzy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, z, y, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 xzzx
@@ -659,6 +1007,132 @@ namespace DCFApixels.DataMath
              get => new uint4(x, z, z, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xzz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, z, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xz_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, z, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xz_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, z, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xz_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, z, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 xz__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, z, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_xz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_yz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_zx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_zy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_zz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x_z_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x__x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x__y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x__z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 x___
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(x, 0u, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yxxx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -675,6 +1149,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(y, x, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yxx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, x, x, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yxyx
@@ -695,6 +1175,12 @@ namespace DCFApixels.DataMath
              get => new uint4(y, x, y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yxy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, x, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yxzx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -711,6 +1197,36 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(y, x, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yxz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, x, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yx_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, x, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yx_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, x, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yx_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, x, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yx__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, x, 0u, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yyxx
@@ -731,6 +1247,12 @@ namespace DCFApixels.DataMath
              get => new uint4(y, y, x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yyx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, y, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yyyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -747,6 +1269,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(y, y, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yyy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, y, y, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yyzx
@@ -767,6 +1295,36 @@ namespace DCFApixels.DataMath
              get => new uint4(y, y, z, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yyz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, y, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yy_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, y, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yy_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, y, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yy_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, y, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yy__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, y, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yzxx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -783,6 +1341,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(y, z, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yzx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, z, x, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yzyx
@@ -803,6 +1367,12 @@ namespace DCFApixels.DataMath
              get => new uint4(y, z, y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yzy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, z, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 yzzx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -819,6 +1389,132 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(y, z, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yzz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, z, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yz_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, z, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yz_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, z, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yz_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, z, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 yz__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, z, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_xz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_yz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_zx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_zy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_zz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y_z_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y__x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y__y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y__z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 y___
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(y, 0u, 0u, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zxxx
@@ -839,6 +1535,12 @@ namespace DCFApixels.DataMath
              get => new uint4(z, x, x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zxx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, x, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zxyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -855,6 +1557,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(z, x, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zxy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, x, y, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zxzx
@@ -875,6 +1583,36 @@ namespace DCFApixels.DataMath
              get => new uint4(z, x, z, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zxz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, x, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zx_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, x, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zx_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, x, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zx_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, x, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zx__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, x, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zyxx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -891,6 +1629,12 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(z, y, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zyx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, y, x, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zyyx
@@ -911,6 +1655,12 @@ namespace DCFApixels.DataMath
              get => new uint4(z, y, y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zyy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, y, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zyzx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -927,6 +1677,36 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(z, y, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zyz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, y, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zy_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, y, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zy_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, y, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zy_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, y, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zy__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, y, 0u, 0u);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zzxx
@@ -947,6 +1727,12 @@ namespace DCFApixels.DataMath
              get => new uint4(z, z, x, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zzx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, z, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zzyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -965,6 +1751,12 @@ namespace DCFApixels.DataMath
              get => new uint4(z, z, y, z);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zzy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, z, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public uint4 zzzx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -981,6 +1773,510 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new uint4(z, z, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zzz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, z, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zz_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, z, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zz_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, z, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zz_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, z, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 zz__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, z, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_xz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_yz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_zx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_zy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_zz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z_z_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z__x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z__y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z__z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 z___
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(z, 0u, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xxx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xxy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xxz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xyx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xyy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xyz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xzx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xzy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xzz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _xz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _x_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _x_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _x_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _x__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, x, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yxx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yxy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yxz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yyx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yyy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yyz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yzx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yzy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yzz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _yz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _y_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _y_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _y_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _y__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, y, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zxx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zxy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zxz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zyx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zyy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zyz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zzx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zzy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zzz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _zz_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _z_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _z_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _z_z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, 0u, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 _z__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, z, 0u, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __xz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, x, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, x, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __yz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, y, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, y, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __zx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, z, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __zy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, z, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __zz
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, z, z);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 __z_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, z, 0u);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 ___x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, 0u, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 ___y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, 0u, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public uint4 ___z
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new uint4(0u, 0u, 0u, z);
          }
         #endregion
 
@@ -1008,16 +2304,16 @@ namespace DCFApixels.DataMath
         public ref struct Enumerator
         {
             private readonly uint3 _value;
-            private byte _pointer;
+            private sbyte _pointer;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator(uint3 value) { _value = value; _pointer = 0; }
+            public Enumerator(uint3 value) { _value = value; _pointer = -1; }
             public uint Current => _value[_pointer];
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Dispose() { }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < length;
+            public bool MoveNext() => ++_pointer < LENGTH;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }

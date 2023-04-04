@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using static DCFApixels.DataMath.float2;
-using static DCFApixels.DataMath.math;
+﻿using System.Runtime.CompilerServices;
 using SMath = System.Math;
+#if NETCORE || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
+#else
+using SMathF = DCFApixels.DataMath.Internal.MathF;
+#endif
 
 namespace DCFApixels.DataMath
 {

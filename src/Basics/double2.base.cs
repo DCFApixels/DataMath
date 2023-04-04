@@ -12,11 +12,11 @@ namespace DCFApixels.DataMath
     public partial struct double2 : 
         IEquatable<double2>, 
         IFormattable, 
-        IValue2<double>, 
+        IVector2<double>, 
         IColor
     {
         #region Consts
-        public const int length = 2;
+        public const int LENGTH = 2;
 
         ///<summary>(0, 0)</summary>
         public static readonly double2 zero = new double2(0d, 0d);
@@ -67,9 +67,9 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region IValueN
+        #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IValue1<double>.x 
+        double IVector1<double>.x 
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => x; 
@@ -77,7 +77,7 @@ namespace DCFApixels.DataMath
             set => x = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IValue2<double>.y
+        double IVector2<double>.y
         { 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => y; 
@@ -85,10 +85,10 @@ namespace DCFApixels.DataMath
             set => y = value; 
         }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Length
+        public int length
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => length;
+            get => LENGTH;
         }
 
         public unsafe ref double this[int index]
@@ -97,7 +97,7 @@ namespace DCFApixels.DataMath
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
 #endif
                 fixed (double2* array = &this) { return ref ((double*)array)[index]; }
             }
@@ -244,6 +244,12 @@ namespace DCFApixels.DataMath
              get => new double2(x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public double2 x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double2(x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public double2 yx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -254,6 +260,24 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new double2(y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double2 y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double2(y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double2 _x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double2(0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double2 _y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double2(0d, y);
          }
         #endregion
 
@@ -271,6 +295,12 @@ namespace DCFApixels.DataMath
              get => new double3(x, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 xx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(x, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public double3 xyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -281,6 +311,30 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new double3(x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 xy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(x, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 x_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(x, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 x_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(x, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 x__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(x, 0d, 0d);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public double3 yxx
@@ -295,6 +349,12 @@ namespace DCFApixels.DataMath
              get => new double3(y, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 yx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(y, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public double3 yyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -305,6 +365,78 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new double3(y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 yy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(y, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 y_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(y, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 y_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(y, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 y__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(y, 0d, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 _xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 _xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 _x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 _yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 _yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 _y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 __x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double3 __y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double3(0d, 0d, y);
          }
         #endregion
 
@@ -322,6 +454,12 @@ namespace DCFApixels.DataMath
              get => new double4(x, x, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, x, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public double4 xxyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -332,6 +470,30 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new double4(x, x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, x, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xx_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, x, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xx_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, x, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xx__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, x, 0d, 0d);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public double4 xyxx
@@ -346,6 +508,12 @@ namespace DCFApixels.DataMath
              get => new double4(x, y, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, y, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public double4 xyyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -356,6 +524,84 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new double4(x, y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, y, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xy_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, y, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xy_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, y, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xy__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, y, 0d, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x_xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x_xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x_x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x_yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x_yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x_y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x__x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x__y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 x___
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(x, 0d, 0d, 0d);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public double4 yxxx
@@ -370,6 +616,12 @@ namespace DCFApixels.DataMath
              get => new double4(y, x, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, x, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public double4 yxyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -380,6 +632,30 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new double4(y, x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, x, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yx_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, x, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yx_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, x, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yx__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, x, 0d, 0d);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
          public double4 yyxx
@@ -394,6 +670,12 @@ namespace DCFApixels.DataMath
              get => new double4(y, y, x, y);
          }
          [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, y, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public double4 yyyx
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -404,6 +686,240 @@ namespace DCFApixels.DataMath
          {
              [MethodImpl(MethodImplOptions.AggressiveInlining)]
              get => new double4(y, y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, y, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yy_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, y, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yy_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, y, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yy__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, y, 0d, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y_xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y_xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y_x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y_yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y_yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y_y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y__x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y__y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 y___
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(y, 0d, 0d, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _xxx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _xxy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _xx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _xyx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _xyy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _xy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _x_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _x_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _x__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, x, 0d, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _yxx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _yxy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _yx_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _yyx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _yyy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _yy_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _y_x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _y_y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, 0d, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 _y__
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, y, 0d, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 __xx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, x, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 __xy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, x, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 __x_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, x, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 __yx
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, y, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 __yy
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, y, y);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 __y_
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, y, 0d);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ___x
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, 0d, x);
+         }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ___y
+         {
+             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+             get => new double4(0d, 0d, 0d, y);
          }
         #endregion
 
@@ -431,16 +947,16 @@ namespace DCFApixels.DataMath
         public ref struct Enumerator
         {
             private readonly double2 _value;
-            private byte _pointer;
+            private sbyte _pointer;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator(double2 value) { _value = value; _pointer = 0; }
+            public Enumerator(double2 value) { _value = value; _pointer = -1; }
             public double Current => _value[_pointer];
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Dispose() { }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++_pointer < length;
+            public bool MoveNext() => ++_pointer < LENGTH;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Reset() { }

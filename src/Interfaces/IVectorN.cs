@@ -1,0 +1,24 @@
+﻿namespace DCFApixels.DataMath
+{
+    public interface IVectorN<T> where T : struct
+    {
+        public int length { get; }
+        public ref T this[int index] { get; }
+    }
+    public interface IVector1<T> : IVectorN<T> where T : struct
+    {
+        public T x { get; set; }
+    }
+    public interface IVector2<T> : IVector1<T> where T : struct
+    {
+        public T y { get; set; }
+    }
+    public interface IVector3<T> : IVector2<T> where T : struct
+    {
+        public T z { get; set; }
+    }
+    public interface IVector4<T> : IVector3<T> where T : struct
+    {
+        public T w { get; set; }
+    }
+}

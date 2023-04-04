@@ -8,9 +8,9 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 4)]
-    public partial struct color32 : IColor32, IValue4<byte>
+    public partial struct color32 : IColor32, IVector4<byte>
     {
-        public const int length = 4;
+        public const int LENGTH = 4;
         [MarshalAs(UnmanagedType.I1)]
         public byte r8;
         [MarshalAs(UnmanagedType.I1)]
@@ -54,14 +54,14 @@ namespace DCFApixels.DataMath
         public byte y { get => b8; set => b8 = value; }
         public byte x { get => a8; set => a8 = value; }
 
-        public int Length => length;
+        public int length => LENGTH;
         public unsafe ref byte this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > length) throw new IndexOutOfRangeException($"index must be between[0...{(length - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
 #endif
                 fixed (color32* array = &this) { return ref ((byte*)array)[index]; }
             }
