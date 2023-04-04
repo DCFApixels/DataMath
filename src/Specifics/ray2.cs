@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace DCFApixels.DataMath.TODO
 {
     /// <summary>Not Implemented</summary>
+    [DebuggerTypeProxy(typeof(DebuggerProxy))]
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 8, Size = 16)]
     public partial struct ray2 : IRay2<float, float2>
     {
         public float2 origin;
         public float2 direction;
 
-        #region Properties
+        #region IRayN
         float2 IRay2<float, float2>.origin
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -53,6 +59,19 @@ namespace DCFApixels.DataMath.TODO
             get => direction.y;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set => direction.y = value;
+        }
+        #endregion
+
+        #region Utils
+        internal class DebuggerProxy
+        {
+            public float2 origin;
+            public float2 direction;
+            public DebuggerProxy(ray2 v)
+            {
+                origin = v.origin;
+                direction = v.direction;
+            }
         }
         #endregion
     }
