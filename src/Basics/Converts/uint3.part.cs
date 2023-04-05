@@ -6,6 +6,9 @@ namespace DCFApixels.DataMath
     {
         #region Convert operators
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator uint3((uint, uint, uint) v) => new uint3(v.Item1, v.Item2, v.Item3);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(float v) => new uint3(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(float3 v) => new uint3(v);
