@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace DataMath.src.Utils
 {
@@ -8,24 +7,24 @@ namespace DataMath.src.Utils
         private const char DEFAULT_SEPARATOR = '_';
         private const int BYTE_BITS = 8;
 
-        public static string ToBitsString<T>(T value, bool withSeparator) where T : struct
+        public static string ToBitsString<T>(T value, bool withSeparator) where T : unmanaged
         {
             return ToBitsStringInaternal(value, withSeparator ? BYTE_BITS : 0, DEFAULT_SEPARATOR);
         }
-        public static string ToBitsString<T>(T value, int separateRange) where T : struct
+        public static string ToBitsString<T>(T value, int separateRange) where T : unmanaged
         {
             return ToBitsStringInaternal(value, separateRange, DEFAULT_SEPARATOR);
         }
-        public static string ToBitsString<T>(T value, char separator = DEFAULT_SEPARATOR, int separateRange = BYTE_BITS) where T : struct
+        public static string ToBitsString<T>(T value, char separator = DEFAULT_SEPARATOR, int separateRange = BYTE_BITS) where T : unmanaged
         {
             return ToBitsStringInaternal(value, separateRange, separator);
         }
 
 
-        private static string ToBitsStringInaternal<T>(T value, int separateRange, char separator) where T : struct
+        private static unsafe string ToBitsStringInaternal<T>(T value, int separateRange, char separator) where T : unmanaged
         {
 
-            int size = Marshal.SizeOf(value);
+            int size = sizeof(T);
             int length = size * BYTE_BITS;
 
             //byte* bytes = stackalloc byte[size / BYTE_BITS];
@@ -46,15 +45,16 @@ namespace DataMath.src.Utils
 
         public static ulong ToULong(string bitsString)
         {
+            const int BIT_SIZE = 64;
             ulong result = 0;
             int stringMouse = 0;
-            for (int i = 0; i < 64 && stringMouse < bitsString.Length; i++, stringMouse++)
+            for (int i = 0; i < BIT_SIZE && stringMouse < bitsString.Length; i++, stringMouse++)
             {
                 char chr = bitsString[stringMouse];
 
                 if (chr == '1')
                 {
-                    result |= (ulong)1 << (64 - i - 1);
+                    result |= (ulong)1 << (BIT_SIZE - i - 1);
                     continue;
                 }
 
@@ -66,5 +66,86 @@ namespace DataMath.src.Utils
             }
             return result;
         }
+
+        public static uint ToUInt(string bitsString)
+        {
+            const int BIT_SIZE = 32;
+            uint result = 0;
+            int stringMouse = 0;
+            for (int i = 0; i < BIT_SIZE && stringMouse < bitsString.Length; i++, stringMouse++)
+            {
+                char chr = bitsString[stringMouse];
+
+                if (chr == '1')
+                {
+                    result |= (uint)1 << (BIT_SIZE - i - 1);
+                    continue;
+                }
+
+                if (chr != '0')
+                {
+                    i--;
+                    continue;
+                }
+            }
+            return result;
+        }
+
+        public static ushort ToUShort(string bitsString)
+        {
+            const int BIT_SIZE = 16;
+            ushort result = 0;
+            int stringMouse = 0;
+            for (int i = 0; i < BIT_SIZE && stringMouse < bitsString.Length; i++, stringMouse++)
+            {
+                char chr = bitsString[stringMouse];
+
+                if (chr == '1')
+                {
+                    result |= (ushort)(1 << (BIT_SIZE - i - 1));
+                    continue;
+                }
+
+                if (chr != '0')
+                {
+                    i--;
+                    continue;
+                }
+            }
+            return result;
+        }
+
+        public static byte ToByte(string bitsString)
+        {
+            const int BIT_SIZE = 8;
+            byte result = 0;
+            int stringMouse = 0;
+            for (int i = 0; i < BIT_SIZE && stringMouse < bitsString.Length; i++, stringMouse++)
+            {
+                char chr = bitsString[stringMouse];
+
+                if (chr == '1')
+                {
+                    result |= (byte)(1 << (BIT_SIZE - i - 1));
+                    continue;
+                }
+
+                if (chr != '0')
+                {
+                    i--;
+                    continue;
+                }
+            }
+            return result;
+        }
+
+        public static bool ToBool(string bitsString)
+        {
+            byte result = ToByte(bitsString);
+            return *(bool*)&result;
+        }
+        public static short ToShort(string bitsString) => (short)ToUShort(bitsString);
+        public static int ToInt(string bitsString) => (int)ToUInt(bitsString);
+        public static long ToLong(string bitsString) => (long)ToULong(bitsString);
     }
 }
