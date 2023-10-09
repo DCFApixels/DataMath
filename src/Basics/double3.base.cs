@@ -82,130 +82,63 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)]
-        public double3(float x, float y, float z)
-        {
-            this.x = (double)x; this.y = (double)y; this.z = (double)z;
-        }
-        [IN(LINE)]
-        public double3(float v)
-        {
-            x = (double)v; y = (double)v; z = (double)v;
-        }
-        [IN(LINE)]
-        public double3(float3 v)
-        {
-            x = (double)v.x; y = (double)v.y; z = (double)v.z;
-        }
-        [IN(LINE)]
-        public double3(double x, double y, double z)
-        {
-            this.x = x; this.y = y; this.z = z;
-        }
-        [IN(LINE)]
-        public double3(double v)
-        {
-            x = v; y = v; z = v;
-        }
-        [IN(LINE)]
-        public double3(double3 v)
-        {
-            x = v.x; y = v.y; z = v.z;
-        }
-        [IN(LINE)]
-        public double3(int x, int y, int z)
-        {
-            this.x = (double)x; this.y = (double)y; this.z = (double)z;
-        }
-        [IN(LINE)]
-        public double3(int v)
-        {
-            x = (double)v; y = (double)v; z = (double)v;
-        }
-        [IN(LINE)]
-        public double3(int3 v)
-        {
-            x = (double)v.x; y = (double)v.y; z = (double)v.z;
-        }
-        [IN(LINE)]
-        public double3(uint x, uint y, uint z)
-        {
-            this.x = (double)x; this.y = (double)y; this.z = (double)z;
-        }
-        [IN(LINE)]
-        public double3(uint v)
-        {
-            x = (double)v; y = (double)v; z = (double)v;
-        }
-        [IN(LINE)]
-        public double3(uint3 v)
-        {
-            x = (double)v.x; y = (double)v.y; z = (double)v.z;
-        }
+        [IN(LINE)] public double3(float x, float y, float z) { this.x = (double)x; this.y = (double)y; this.z = (double)z; }
+        [IN(LINE)] public double3(float v) { x = (double)v; y = (double)v; z = (double)v; }
+        [IN(LINE)] public double3(float3 v) { x = (double)v.x; y = (double)v.y; z = (double)v.z; }
+        [IN(LINE)] public double3(double x, double y, double z) { this.x = x; this.y = y; this.z = z; }
+        [IN(LINE)] public double3(double v) { x = v; y = v; z = v; }
+        [IN(LINE)] public double3(double3 v) { x = v.x; y = v.y; z = v.z; }
+        [IN(LINE)] public double3(int x, int y, int z) { this.x = (double)x; this.y = (double)y; this.z = (double)z; }
+        [IN(LINE)] public double3(int v) { x = (double)v; y = (double)v; z = (double)v; }
+        [IN(LINE)] public double3(int3 v) { x = (double)v.x; y = (double)v.y; z = (double)v.z; }
+        [IN(LINE)] public double3(uint x, uint y, uint z) { this.x = (double)x; this.y = (double)y; this.z = (double)z; }
+        [IN(LINE)] public double3(uint v) { x = (double)v; y = (double)v; z = (double)v; }
+        [IN(LINE)] public double3(uint3 v) { x = (double)v.x; y = (double)v.y; z = (double)v.z; }
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static double3 operator *(double3 a, double3 b) => new double3(a.x * b.x, a.y * b.y, a.z * b.z);
-        [IN(LINE)]
-        public static double3 operator *(double3 a, double b) => new double3(a.x * b, a.y * b, a.z * b);
-        [IN(LINE)]
-        public static double3 operator *(double a, double3 b) => new double3(a * b.x, a * b.y, a * b.z);
+        #region operators
 
-        [IN(LINE)]
-        public static double3 operator +(double3 a, double3 b) => new double3(a.x + b.x, a.y + b.y, a.z + b.z);
-        [IN(LINE)]
-        public static double3 operator +(double3 a, double b) => new double3(a.x + b, a.y + b, a.z + b);
-        [IN(LINE)]
-        public static double3 operator +(double a, double3 b) => new double3(a + b.x, a + b.y, a + b.z);
+        #region Arithmetic
+        [IN(LINE)] public static double3 operator *(double3 a, double3 b) => new double3(a.x * b.x, a.y * b.y, a.z * b.z);
+        [IN(LINE)] public static double3 operator *(double3 a, double b) => new double3(a.x * b, a.y * b, a.z * b);
+        [IN(LINE)] public static double3 operator *(double a, double3 b) => new double3(a * b.x, a * b.y, a * b.z);
 
-        [IN(LINE)]
-        public static double3 operator -(double3 a, double3 b) => new double3(a.x - b.x, a.y - b.y, a.z - b.z);
-        [IN(LINE)]
-        public static double3 operator -(double3 a, double b) => new double3(a.x - b, a.y - b, a.z - b);
-        [IN(LINE)]
-        public static double3 operator -(double a, double3 b) => new double3(a - b.x, a - b.y, a - b.z);
+        [IN(LINE)] public static double3 operator +(double3 a, double3 b) => new double3(a.x + b.x, a.y + b.y, a.z + b.z);
+        [IN(LINE)] public static double3 operator +(double3 a, double b) => new double3(a.x + b, a.y + b, a.z + b);
+        [IN(LINE)] public static double3 operator +(double a, double3 b) => new double3(a + b.x, a + b.y, a + b.z);
 
-        [IN(LINE)]
-        public static double3 operator /(double3 a, double3 b) => new double3(a.x / b.x, a.y / b.y, a.z / b.z);
-        [IN(LINE)]
-        public static double3 operator /(double3 a, double b) => new double3(a.x / b, a.y / b, a.z / b);
-        [IN(LINE)]
-        public static double3 operator /(double a, double3 b) => new double3(a / b.x, a / b.y, a / b.z);
+        [IN(LINE)] public static double3 operator -(double3 a, double3 b) => new double3(a.x - b.x, a.y - b.y, a.z - b.z);
+        [IN(LINE)] public static double3 operator -(double3 a, double b) => new double3(a.x - b, a.y - b, a.z - b);
+        [IN(LINE)] public static double3 operator -(double a, double3 b) => new double3(a - b.x, a - b.y, a - b.z);
 
-        [IN(LINE)]
-        public static double3 operator %(double3 a, double3 b) => new double3(a.x % b.x, a.y % b.y, a.z % b.z);
-        [IN(LINE)]
-        public static double3 operator %(double3 a, double b) => new double3(a.x % b, a.y % b, a.z % b);
-        [IN(LINE)]
-        public static double3 operator %(double a, double3 b) => new double3(a % b.x, a % b.y, a % b.z);
+        [IN(LINE)] public static double3 operator /(double3 a, double3 b) => new double3(a.x / b.x, a.y / b.y, a.z / b.z);
+        [IN(LINE)] public static double3 operator /(double3 a, double b) => new double3(a.x / b, a.y / b, a.z / b);
+        [IN(LINE)] public static double3 operator /(double a, double3 b) => new double3(a / b.x, a / b.y, a / b.z);
 
-        [IN(LINE)]
-        public static double3 operator ++(double3 a) => new double3(++a.x, ++a.y, ++a.z);
-        [IN(LINE)]
-        public static double3 operator --(double3 a) => new double3(--a.x, --a.y, --a.z);
-        [IN(LINE)]
-        public static double3 operator -(double3 a) => new double3(-a.x, -a.y, -a.z);
-        [IN(LINE)]
-        public static double3 operator +(double3 a) => new double3(+a.x, +a.y, +a.z);
+        [IN(LINE)] public static double3 operator %(double3 a, double3 b) => new double3(a.x % b.x, a.y % b.y, a.z % b.z);
+        [IN(LINE)] public static double3 operator %(double3 a, double b) => new double3(a.x % b, a.y % b, a.z % b);
+        [IN(LINE)] public static double3 operator %(double a, double3 b) => new double3(a % b.x, a % b.y, a % b.z);
+
+        [IN(LINE)] public static double3 operator ++(double3 a) => new double3(++a.x, ++a.y, ++a.z);
+        [IN(LINE)] public static double3 operator --(double3 a) => new double3(--a.x, --a.y, --a.z);
+        [IN(LINE)] public static double3 operator -(double3 a) => new double3(-a.x, -a.y, -a.z);
+        [IN(LINE)] public static double3 operator +(double3 a) => new double3(+a.x, +a.y, +a.z);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(double3 a, double3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
-        [IN(LINE)]
-        public static bool operator ==(double3 a, double b) => a.x == b && a.y == b && a.z == b;
-        [IN(LINE)]
-        public static bool operator ==(double a, double3 b) => a == b.x && a == b.y && a == b.z;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(double3 a, double3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
+        [IN(LINE)] public static bool operator ==(double3 a, double b) => a.x == b && a.y == b && a.z == b;
+        [IN(LINE)] public static bool operator ==(double a, double3 b) => a == b.x && a == b.y && a == b.z;
 
-        [IN(LINE)]
-        public static bool operator !=(double3 a, double3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
-        [IN(LINE)]
-        public static bool operator !=(double3 a, double b) => a.x != b || a.y != b || a.z != b;
-        [IN(LINE)]
-        public static bool operator !=(double a, double3 b) => a != b.x || a != b.y || a != b.z;
+        [IN(LINE)] public static bool operator !=(double3 a, double3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
+        [IN(LINE)] public static bool operator !=(double3 a, double b) => a.x != b || a.y != b || a.z != b;
+        [IN(LINE)] public static bool operator !=(double a, double3 b) => a != b.x || a != b.y || a != b.z;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -882,20 +815,24 @@ namespace DCFApixels.DataMath
          public double4 ___z { [IN(LINE)] get => new double4(0d, 0d, 0d, z); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is double3 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(double3 a) => x == a.x && y == a.y && z == a.z; 
-        [IN(LINE)]
-        public override string ToString() => $"double3({x}, {y}, {z})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is double3 target && Equals(target); 
+        [IN(LINE)] public bool Equals(double3 a) => x == a.x && y == a.y && z == a.z; 
+        [IN(LINE)] public override string ToString() => $"double3({x}, {y}, {z})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"double3({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public double x, y, z;
+            public DebuggerProxy(double3 v) { x = v.x; y = v.y; z = v.z; }
         }
         #endregion
 
@@ -917,19 +854,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public double Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public double x, y, z;
-            public DebuggerProxy(double3 v) { x = v.x; y = v.y; z = v.z; }
+            public double Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }

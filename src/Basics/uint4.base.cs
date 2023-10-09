@@ -164,97 +164,66 @@ namespace DCFApixels.DataMath
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static uint4 operator *(uint4 a, uint4 b) => new uint4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
-        [IN(LINE)]
-        public static uint4 operator *(uint4 a, uint b) => new uint4(a.x * b, a.y * b, a.z * b, a.w * b);
-        [IN(LINE)]
-        public static uint4 operator *(uint a, uint4 b) => new uint4(a * b.x, a * b.y, a * b.z, a * b.w);
+        #region operators
 
-        [IN(LINE)]
-        public static uint4 operator +(uint4 a, uint4 b) => new uint4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        [IN(LINE)]
-        public static uint4 operator +(uint4 a, uint b) => new uint4(a.x + b, a.y + b, a.z + b, a.w + b);
-        [IN(LINE)]
-        public static uint4 operator +(uint a, uint4 b) => new uint4(a + b.x, a + b.y, a + b.z, a + b.w);
+        #region Arithmetic
+        [IN(LINE)] public static uint4 operator *(uint4 a, uint4 b) => new uint4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+        [IN(LINE)] public static uint4 operator *(uint4 a, uint b) => new uint4(a.x * b, a.y * b, a.z * b, a.w * b);
+        [IN(LINE)] public static uint4 operator *(uint a, uint4 b) => new uint4(a * b.x, a * b.y, a * b.z, a * b.w);
 
-        [IN(LINE)]
-        public static uint4 operator -(uint4 a, uint4 b) => new uint4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-        [IN(LINE)]
-        public static uint4 operator -(uint4 a, uint b) => new uint4(a.x - b, a.y - b, a.z - b, a.w - b);
-        [IN(LINE)]
-        public static uint4 operator -(uint a, uint4 b) => new uint4(a - b.x, a - b.y, a - b.z, a - b.w);
+        [IN(LINE)] public static uint4 operator +(uint4 a, uint4 b) => new uint4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        [IN(LINE)] public static uint4 operator +(uint4 a, uint b) => new uint4(a.x + b, a.y + b, a.z + b, a.w + b);
+        [IN(LINE)] public static uint4 operator +(uint a, uint4 b) => new uint4(a + b.x, a + b.y, a + b.z, a + b.w);
 
-        [IN(LINE)]
-        public static uint4 operator /(uint4 a, uint4 b) => new uint4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
-        [IN(LINE)]
-        public static uint4 operator /(uint4 a, uint b) => new uint4(a.x / b, a.y / b, a.z / b, a.w / b);
-        [IN(LINE)]
-        public static uint4 operator /(uint a, uint4 b) => new uint4(a / b.x, a / b.y, a / b.z, a / b.w);
+        [IN(LINE)] public static uint4 operator -(uint4 a, uint4 b) => new uint4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        [IN(LINE)] public static uint4 operator -(uint4 a, uint b) => new uint4(a.x - b, a.y - b, a.z - b, a.w - b);
+        [IN(LINE)] public static uint4 operator -(uint a, uint4 b) => new uint4(a - b.x, a - b.y, a - b.z, a - b.w);
 
-        [IN(LINE)]
-        public static uint4 operator %(uint4 a, uint4 b) => new uint4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
-        [IN(LINE)]
-        public static uint4 operator %(uint4 a, uint b) => new uint4(a.x % b, a.y % b, a.z % b, a.w % b);
-        [IN(LINE)]
-        public static uint4 operator %(uint a, uint4 b) => new uint4(a % b.x, a % b.y, a % b.z, a % b.w);
+        [IN(LINE)] public static uint4 operator /(uint4 a, uint4 b) => new uint4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
+        [IN(LINE)] public static uint4 operator /(uint4 a, uint b) => new uint4(a.x / b, a.y / b, a.z / b, a.w / b);
+        [IN(LINE)] public static uint4 operator /(uint a, uint4 b) => new uint4(a / b.x, a / b.y, a / b.z, a / b.w);
 
-        [IN(LINE)]
-        public static uint4 operator ++(uint4 a) => new uint4(++a.x, ++a.y, ++a.z, ++a.w);
-        [IN(LINE)]
-        public static uint4 operator --(uint4 a) => new uint4(--a.x, --a.y, --a.z, --a.w);
-        [IN(LINE)]
-        public static uint4 operator -(uint4 a) => new uint4(-a.x, -a.y, -a.z, -a.w);
-        [IN(LINE)]
-        public static uint4 operator +(uint4 a) => new uint4(+a.x, +a.y, +a.z, +a.w);
+        [IN(LINE)] public static uint4 operator %(uint4 a, uint4 b) => new uint4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
+        [IN(LINE)] public static uint4 operator %(uint4 a, uint b) => new uint4(a.x % b, a.y % b, a.z % b, a.w % b);
+        [IN(LINE)] public static uint4 operator %(uint a, uint4 b) => new uint4(a % b.x, a % b.y, a % b.z, a % b.w);
+
+        [IN(LINE)] public static uint4 operator ++(uint4 a) => new uint4(++a.x, ++a.y, ++a.z, ++a.w);
+        [IN(LINE)] public static uint4 operator --(uint4 a) => new uint4(--a.x, --a.y, --a.z, --a.w);
+        [IN(LINE)] public static uint4 operator -(uint4 a) => new uint4(-a.x, -a.y, -a.z, -a.w);
+        [IN(LINE)] public static uint4 operator +(uint4 a) => new uint4(+a.x, +a.y, +a.z, +a.w);
         #endregion
 
-        #region Bit operators
-        [IN(LINE)]
-        public static uint4 operator ~(uint4 a) => new uint4(~a.x, ~a.y, ~a.z, ~a.w);
-        [IN(LINE)]
-        public static uint4 operator <<(uint4 a, int n) => new uint4(a.x << n, a.y << n, a.z << n, a.w << n);
-        [IN(LINE)]
-        public static uint4 operator >>(uint4 a, int n) => new uint4(a.x >> n, a.y >> n, a.z >> n, a.w >> n);
+        #region Bits
+        [IN(LINE)] public static uint4 operator ~(uint4 a) => new uint4(~a.x, ~a.y, ~a.z, ~a.w);
+        [IN(LINE)] public static uint4 operator <<(uint4 a, int n) => new uint4(a.x << n, a.y << n, a.z << n, a.w << n);
+        [IN(LINE)] public static uint4 operator >>(uint4 a, int n) => new uint4(a.x >> n, a.y >> n, a.z >> n, a.w >> n);
 
-        [IN(LINE)]
-        public static uint4 operator |(uint4 a, uint4 b) => new uint4(a.x | b.x, a.y | b.y, a.z | b.z, a.w | b.w);
-        [IN(LINE)]
-        public static uint4 operator |(uint4 a, uint b) => new uint4(a.x | b, a.y | b, a.z | b, a.w | b);
-        [IN(LINE)]
-        public static uint4 operator |(uint a, uint4 b) => new uint4(a | b.x, a | b.y, a | b.z, a | b.w);
+        [IN(LINE)] public static uint4 operator |(uint4 a, uint4 b) => new uint4(a.x | b.x, a.y | b.y, a.z | b.z, a.w | b.w);
+        [IN(LINE)] public static uint4 operator |(uint4 a, uint b) => new uint4(a.x | b, a.y | b, a.z | b, a.w | b);
+        [IN(LINE)] public static uint4 operator |(uint a, uint4 b) => new uint4(a | b.x, a | b.y, a | b.z, a | b.w);
 
-        [IN(LINE)]
-        public static uint4 operator &(uint4 a, uint4 b) => new uint4(a.x & b.x, a.y & b.y, a.z & b.z, a.w & b.w);
-        [IN(LINE)]
-        public static uint4 operator &(uint4 a, uint b) => new uint4(a.x & b, a.y & b, a.z & b, a.w & b);
-        [IN(LINE)]
-        public static uint4 operator &(uint a, uint4 b) => new uint4(a & b.x, a & b.y, a & b.z, a & b.w);
+        [IN(LINE)] public static uint4 operator &(uint4 a, uint4 b) => new uint4(a.x & b.x, a.y & b.y, a.z & b.z, a.w & b.w);
+        [IN(LINE)] public static uint4 operator &(uint4 a, uint b) => new uint4(a.x & b, a.y & b, a.z & b, a.w & b);
+        [IN(LINE)] public static uint4 operator &(uint a, uint4 b) => new uint4(a & b.x, a & b.y, a & b.z, a & b.w);
 
-        [IN(LINE)]
-        public static uint4 operator ^(uint4 a, uint4 b) => new uint4(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w);
-        [IN(LINE)]
-        public static uint4 operator ^(uint4 a, uint b) => new uint4(a.x ^ b, a.y ^ b, a.z ^ b, a.w ^ b);
-        [IN(LINE)]
-        public static uint4 operator ^(uint a, uint4 b) => new uint4(a ^ b.x, a ^ b.y, a ^ b.z, a ^ b.w);
+        [IN(LINE)] public static uint4 operator ^(uint4 a, uint4 b) => new uint4(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w);
+        [IN(LINE)] public static uint4 operator ^(uint4 a, uint b) => new uint4(a.x ^ b, a.y ^ b, a.z ^ b, a.w ^ b);
+        [IN(LINE)] public static uint4 operator ^(uint a, uint4 b) => new uint4(a ^ b.x, a ^ b.y, a ^ b.z, a ^ b.w);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(uint4 a, uint4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-        [IN(LINE)]
-        public static bool operator ==(uint4 a, uint b) => a.x == b && a.y == b && a.z == b && a.w == b;
-        [IN(LINE)]
-        public static bool operator ==(uint a, uint4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(uint4 a, uint4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+        [IN(LINE)] public static bool operator ==(uint4 a, uint b) => a.x == b && a.y == b && a.z == b && a.w == b;
+        [IN(LINE)] public static bool operator ==(uint a, uint4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
 
-        [IN(LINE)]
-        public static bool operator !=(uint4 a, uint4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
-        [IN(LINE)]
-        public static bool operator !=(uint4 a, uint b) => a.x != b || a.y != b || a.z != b || a.w != b;
-        [IN(LINE)]
-        public static bool operator !=(uint a, uint4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
+        [IN(LINE)] public static bool operator !=(uint4 a, uint4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
+        [IN(LINE)] public static bool operator !=(uint4 a, uint b) => a.x != b || a.y != b || a.z != b || a.w != b;
+        [IN(LINE)] public static bool operator !=(uint a, uint4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -937,20 +906,24 @@ namespace DCFApixels.DataMath
          public uint4 wwww { [IN(LINE)] get => new uint4(w, w, w, w); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is uint4 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(uint4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
-        [IN(LINE)]
-        public override string ToString() => $"uint4({x}, {y}, {z}, {w})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is uint4 target && Equals(target); 
+        [IN(LINE)] public bool Equals(uint4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
+        [IN(LINE)] public override string ToString() => $"uint4({x}, {y}, {z}, {w})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"uint4({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public uint x, y, z, w;
+            public DebuggerProxy(uint4 v) { x = v.x; y = v.y; z = v.z; w = v.w; }
         }
         #endregion
 
@@ -972,19 +945,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public uint Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public uint x, y, z, w;
-            public DebuggerProxy(uint4 v) { x = v.x; y = v.y; z = v.z; w = v.w; }
+            public uint Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }

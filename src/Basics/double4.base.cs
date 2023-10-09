@@ -164,67 +164,48 @@ namespace DCFApixels.DataMath
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static double4 operator *(double4 a, double4 b) => new double4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
-        [IN(LINE)]
-        public static double4 operator *(double4 a, double b) => new double4(a.x * b, a.y * b, a.z * b, a.w * b);
-        [IN(LINE)]
-        public static double4 operator *(double a, double4 b) => new double4(a * b.x, a * b.y, a * b.z, a * b.w);
+        #region operators
 
-        [IN(LINE)]
-        public static double4 operator +(double4 a, double4 b) => new double4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        [IN(LINE)]
-        public static double4 operator +(double4 a, double b) => new double4(a.x + b, a.y + b, a.z + b, a.w + b);
-        [IN(LINE)]
-        public static double4 operator +(double a, double4 b) => new double4(a + b.x, a + b.y, a + b.z, a + b.w);
+        #region Arithmetic
+        [IN(LINE)] public static double4 operator *(double4 a, double4 b) => new double4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+        [IN(LINE)] public static double4 operator *(double4 a, double b) => new double4(a.x * b, a.y * b, a.z * b, a.w * b);
+        [IN(LINE)] public static double4 operator *(double a, double4 b) => new double4(a * b.x, a * b.y, a * b.z, a * b.w);
 
-        [IN(LINE)]
-        public static double4 operator -(double4 a, double4 b) => new double4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-        [IN(LINE)]
-        public static double4 operator -(double4 a, double b) => new double4(a.x - b, a.y - b, a.z - b, a.w - b);
-        [IN(LINE)]
-        public static double4 operator -(double a, double4 b) => new double4(a - b.x, a - b.y, a - b.z, a - b.w);
+        [IN(LINE)] public static double4 operator +(double4 a, double4 b) => new double4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        [IN(LINE)] public static double4 operator +(double4 a, double b) => new double4(a.x + b, a.y + b, a.z + b, a.w + b);
+        [IN(LINE)] public static double4 operator +(double a, double4 b) => new double4(a + b.x, a + b.y, a + b.z, a + b.w);
 
-        [IN(LINE)]
-        public static double4 operator /(double4 a, double4 b) => new double4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
-        [IN(LINE)]
-        public static double4 operator /(double4 a, double b) => new double4(a.x / b, a.y / b, a.z / b, a.w / b);
-        [IN(LINE)]
-        public static double4 operator /(double a, double4 b) => new double4(a / b.x, a / b.y, a / b.z, a / b.w);
+        [IN(LINE)] public static double4 operator -(double4 a, double4 b) => new double4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        [IN(LINE)] public static double4 operator -(double4 a, double b) => new double4(a.x - b, a.y - b, a.z - b, a.w - b);
+        [IN(LINE)] public static double4 operator -(double a, double4 b) => new double4(a - b.x, a - b.y, a - b.z, a - b.w);
 
-        [IN(LINE)]
-        public static double4 operator %(double4 a, double4 b) => new double4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
-        [IN(LINE)]
-        public static double4 operator %(double4 a, double b) => new double4(a.x % b, a.y % b, a.z % b, a.w % b);
-        [IN(LINE)]
-        public static double4 operator %(double a, double4 b) => new double4(a % b.x, a % b.y, a % b.z, a % b.w);
+        [IN(LINE)] public static double4 operator /(double4 a, double4 b) => new double4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
+        [IN(LINE)] public static double4 operator /(double4 a, double b) => new double4(a.x / b, a.y / b, a.z / b, a.w / b);
+        [IN(LINE)] public static double4 operator /(double a, double4 b) => new double4(a / b.x, a / b.y, a / b.z, a / b.w);
 
-        [IN(LINE)]
-        public static double4 operator ++(double4 a) => new double4(++a.x, ++a.y, ++a.z, ++a.w);
-        [IN(LINE)]
-        public static double4 operator --(double4 a) => new double4(--a.x, --a.y, --a.z, --a.w);
-        [IN(LINE)]
-        public static double4 operator -(double4 a) => new double4(-a.x, -a.y, -a.z, -a.w);
-        [IN(LINE)]
-        public static double4 operator +(double4 a) => new double4(+a.x, +a.y, +a.z, +a.w);
+        [IN(LINE)] public static double4 operator %(double4 a, double4 b) => new double4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
+        [IN(LINE)] public static double4 operator %(double4 a, double b) => new double4(a.x % b, a.y % b, a.z % b, a.w % b);
+        [IN(LINE)] public static double4 operator %(double a, double4 b) => new double4(a % b.x, a % b.y, a % b.z, a % b.w);
+
+        [IN(LINE)] public static double4 operator ++(double4 a) => new double4(++a.x, ++a.y, ++a.z, ++a.w);
+        [IN(LINE)] public static double4 operator --(double4 a) => new double4(--a.x, --a.y, --a.z, --a.w);
+        [IN(LINE)] public static double4 operator -(double4 a) => new double4(-a.x, -a.y, -a.z, -a.w);
+        [IN(LINE)] public static double4 operator +(double4 a) => new double4(+a.x, +a.y, +a.z, +a.w);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(double4 a, double4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-        [IN(LINE)]
-        public static bool operator ==(double4 a, double b) => a.x == b && a.y == b && a.z == b && a.w == b;
-        [IN(LINE)]
-        public static bool operator ==(double a, double4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(double4 a, double4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+        [IN(LINE)] public static bool operator ==(double4 a, double b) => a.x == b && a.y == b && a.z == b && a.w == b;
+        [IN(LINE)] public static bool operator ==(double a, double4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
 
-        [IN(LINE)]
-        public static bool operator !=(double4 a, double4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
-        [IN(LINE)]
-        public static bool operator !=(double4 a, double b) => a.x != b || a.y != b || a.z != b || a.w != b;
-        [IN(LINE)]
-        public static bool operator !=(double a, double4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
+        [IN(LINE)] public static bool operator !=(double4 a, double4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
+        [IN(LINE)] public static bool operator !=(double4 a, double b) => a.x != b || a.y != b || a.z != b || a.w != b;
+        [IN(LINE)] public static bool operator !=(double a, double4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -907,20 +888,24 @@ namespace DCFApixels.DataMath
          public double4 wwww { [IN(LINE)] get => new double4(w, w, w, w); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is double4 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(double4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
-        [IN(LINE)]
-        public override string ToString() => $"double4({x}, {y}, {z}, {w})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is double4 target && Equals(target); 
+        [IN(LINE)] public bool Equals(double4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
+        [IN(LINE)] public override string ToString() => $"double4({x}, {y}, {z}, {w})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"double4({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public double x, y, z, w;
+            public DebuggerProxy(double4 v) { x = v.x; y = v.y; z = v.z; w = v.w; }
         }
         #endregion
 
@@ -942,19 +927,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public double Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public double x, y, z, w;
-            public DebuggerProxy(double4 v) { x = v.x; y = v.y; z = v.z; w = v.w; }
+            public double Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }

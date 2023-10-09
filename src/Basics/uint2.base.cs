@@ -75,160 +75,81 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)]
-        public uint2(float x, float y)
-        {
-            this.x = (uint)x; this.y = (uint)y;
-        }
-        [IN(LINE)]
-        public uint2(float v)
-        {
-            x = (uint)v; y = (uint)v;
-        }
-        [IN(LINE)]
-        public uint2(float2 v)
-        {
-            x = (uint)v.x; y = (uint)v.y;
-        }
-        [IN(LINE)]
-        public uint2(double x, double y)
-        {
-            this.x = (uint)x; this.y = (uint)y;
-        }
-        [IN(LINE)]
-        public uint2(double v)
-        {
-            x = (uint)v; y = (uint)v;
-        }
-        [IN(LINE)]
-        public uint2(double2 v)
-        {
-            x = (uint)v.x; y = (uint)v.y;
-        }
-        [IN(LINE)]
-        public uint2(int x, int y)
-        {
-            this.x = (uint)x; this.y = (uint)y;
-        }
-        [IN(LINE)]
-        public uint2(int v)
-        {
-            x = (uint)v; y = (uint)v;
-        }
-        [IN(LINE)]
-        public uint2(int2 v)
-        {
-            x = (uint)v.x; y = (uint)v.y;
-        }
-        [IN(LINE)]
-        public uint2(uint x, uint y)
-        {
-            this.x = x; this.y = y;
-        }
-        [IN(LINE)]
-        public uint2(uint v)
-        {
-            x = v; y = v;
-        }
-        [IN(LINE)]
-        public uint2(uint2 v)
-        {
-            x = v.x; y = v.y;
-        }
+        [IN(LINE)] public uint2(float x, float y) { this.x = (uint)x; this.y = (uint)y; }
+        [IN(LINE)] public uint2(float v) { x = (uint)v; y = (uint)v; }
+        [IN(LINE)] public uint2(float2 v) { x = (uint)v.x; y = (uint)v.y; }
+        [IN(LINE)] public uint2(double x, double y) { this.x = (uint)x; this.y = (uint)y; }
+        [IN(LINE)] public uint2(double v) { x = (uint)v; y = (uint)v; }
+        [IN(LINE)] public uint2(double2 v) { x = (uint)v.x; y = (uint)v.y; }
+        [IN(LINE)] public uint2(int x, int y) { this.x = (uint)x; this.y = (uint)y; }
+        [IN(LINE)] public uint2(int v) { x = (uint)v; y = (uint)v; }
+        [IN(LINE)] public uint2(int2 v) { x = (uint)v.x; y = (uint)v.y; }
+        [IN(LINE)] public uint2(uint x, uint y) { this.x = x; this.y = y; }
+        [IN(LINE)] public uint2(uint v) { x = v; y = v; }
+        [IN(LINE)] public uint2(uint2 v) { x = v.x; y = v.y; }
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static uint2 operator *(uint2 a, uint2 b) => new uint2(a.x * b.x, a.y * b.y);
-        [IN(LINE)]
-        public static uint2 operator *(uint2 a, uint b) => new uint2(a.x * b, a.y * b);
-        [IN(LINE)]
-        public static uint2 operator *(uint a, uint2 b) => new uint2(a * b.x, a * b.y);
+        #region operators
 
-        [IN(LINE)]
-        public static uint2 operator +(uint2 a, uint2 b) => new uint2(a.x + b.x, a.y + b.y);
-        [IN(LINE)]
-        public static uint2 operator +(uint2 a, uint b) => new uint2(a.x + b, a.y + b);
-        [IN(LINE)]
-        public static uint2 operator +(uint a, uint2 b) => new uint2(a + b.x, a + b.y);
+        #region Arithmetic
+        [IN(LINE)] public static uint2 operator *(uint2 a, uint2 b) => new uint2(a.x * b.x, a.y * b.y);
+        [IN(LINE)] public static uint2 operator *(uint2 a, uint b) => new uint2(a.x * b, a.y * b);
+        [IN(LINE)] public static uint2 operator *(uint a, uint2 b) => new uint2(a * b.x, a * b.y);
 
-        [IN(LINE)]
-        public static uint2 operator -(uint2 a, uint2 b) => new uint2(a.x - b.x, a.y - b.y);
-        [IN(LINE)]
-        public static uint2 operator -(uint2 a, uint b) => new uint2(a.x - b, a.y - b);
-        [IN(LINE)]
-        public static uint2 operator -(uint a, uint2 b) => new uint2(a - b.x, a - b.y);
+        [IN(LINE)] public static uint2 operator +(uint2 a, uint2 b) => new uint2(a.x + b.x, a.y + b.y);
+        [IN(LINE)] public static uint2 operator +(uint2 a, uint b) => new uint2(a.x + b, a.y + b);
+        [IN(LINE)] public static uint2 operator +(uint a, uint2 b) => new uint2(a + b.x, a + b.y);
 
-        [IN(LINE)]
-        public static uint2 operator /(uint2 a, uint2 b) => new uint2(a.x / b.x, a.y / b.y);
-        [IN(LINE)]
-        public static uint2 operator /(uint2 a, uint b) => new uint2(a.x / b, a.y / b);
-        [IN(LINE)]
-        public static uint2 operator /(uint a, uint2 b) => new uint2(a / b.x, a / b.y);
+        [IN(LINE)] public static uint2 operator -(uint2 a, uint2 b) => new uint2(a.x - b.x, a.y - b.y);
+        [IN(LINE)] public static uint2 operator -(uint2 a, uint b) => new uint2(a.x - b, a.y - b);
+        [IN(LINE)] public static uint2 operator -(uint a, uint2 b) => new uint2(a - b.x, a - b.y);
 
-        [IN(LINE)]
-        public static uint2 operator %(uint2 a, uint2 b) => new uint2(a.x % b.x, a.y % b.y);
-        [IN(LINE)]
-        public static uint2 operator %(uint2 a, uint b) => new uint2(a.x % b, a.y % b);
-        [IN(LINE)]
-        public static uint2 operator %(uint a, uint2 b) => new uint2(a % b.x, a % b.y);
+        [IN(LINE)] public static uint2 operator /(uint2 a, uint2 b) => new uint2(a.x / b.x, a.y / b.y);
+        [IN(LINE)] public static uint2 operator /(uint2 a, uint b) => new uint2(a.x / b, a.y / b);
+        [IN(LINE)] public static uint2 operator /(uint a, uint2 b) => new uint2(a / b.x, a / b.y);
 
-        [IN(LINE)]
-        public static uint2 operator ++(uint2 a) => new uint2(++a.x, ++a.y);
-        [IN(LINE)]
-        public static uint2 operator --(uint2 a) => new uint2(--a.x, --a.y);
-        [IN(LINE)]
-        public static uint2 operator -(uint2 a) => new uint2(-a.x, -a.y);
-        [IN(LINE)]                                                               
-        public static uint2 operator +(uint2 a) => new uint2(+a.x, +a.y);
+        [IN(LINE)] public static uint2 operator %(uint2 a, uint2 b) => new uint2(a.x % b.x, a.y % b.y);
+        [IN(LINE)] public static uint2 operator %(uint2 a, uint b) => new uint2(a.x % b, a.y % b);
+        [IN(LINE)] public static uint2 operator %(uint a, uint2 b) => new uint2(a % b.x, a % b.y);
+
+        [IN(LINE)] public static uint2 operator ++(uint2 a) => new uint2(++a.x, ++a.y);
+        [IN(LINE)] public static uint2 operator --(uint2 a) => new uint2(--a.x, --a.y);
+        [IN(LINE)] public static uint2 operator -(uint2 a) => new uint2(-a.x, -a.y);
+        [IN(LINE)] public static uint2 operator +(uint2 a) => new uint2(+a.x, +a.y);
         #endregion
 
-        #region Bit operators
-        [IN(LINE)]
-        public static uint2 operator ~(uint2 a) => new uint2(~a.x, ~a.y);
-        [IN(LINE)]
-        public static uint2 operator <<(uint2 a, int n) => new uint2(a.x << n, a.y << n);
-        [IN(LINE)]
-        public static uint2 operator >>(uint2 a, int n) => new uint2(a.x >> n, a.y >> n);
+        #region Bits
+        [IN(LINE)] public static uint2 operator ~(uint2 a) => new uint2(~a.x, ~a.y);
+        [IN(LINE)] public static uint2 operator <<(uint2 a, int n) => new uint2(a.x << n, a.y << n);
+        [IN(LINE)] public static uint2 operator >>(uint2 a, int n) => new uint2(a.x >> n, a.y >> n);
 
-        [IN(LINE)]
-        public static uint2 operator |(uint2 a, uint2 b) => new uint2(a.x | b.x, a.y | b.y);
-        [IN(LINE)]
-        public static uint2 operator |(uint2 a, uint b) => new uint2(a.x | b, a.y | b);
-        [IN(LINE)]
-        public static uint2 operator |(uint a, uint2 b) => new uint2(a | b.x, a | b.y);
+        [IN(LINE)] public static uint2 operator |(uint2 a, uint2 b) => new uint2(a.x | b.x, a.y | b.y);
+        [IN(LINE)] public static uint2 operator |(uint2 a, uint b) => new uint2(a.x | b, a.y | b);
+        [IN(LINE)] public static uint2 operator |(uint a, uint2 b) => new uint2(a | b.x, a | b.y);
 
-        [IN(LINE)]
-        public static uint2 operator &(uint2 a, uint2 b) => new uint2(a.x & b.x, a.y & b.y);
-        [IN(LINE)]
-        public static uint2 operator &(uint2 a, uint b) => new uint2(a.x & b, a.y & b);
-        [IN(LINE)]
-        public static uint2 operator &(uint a, uint2 b) => new uint2(a & b.x, a & b.y);
+        [IN(LINE)] public static uint2 operator &(uint2 a, uint2 b) => new uint2(a.x & b.x, a.y & b.y);
+        [IN(LINE)] public static uint2 operator &(uint2 a, uint b) => new uint2(a.x & b, a.y & b);
+        [IN(LINE)] public static uint2 operator &(uint a, uint2 b) => new uint2(a & b.x, a & b.y);
 
-        [IN(LINE)]
-        public static uint2 operator ^(uint2 a, uint2 b) => new uint2(a.x ^ b.x, a.y ^ b.y);
-        [IN(LINE)]
-        public static uint2 operator ^(uint2 a, uint b) => new uint2(a.x ^ b, a.y ^ b);
-        [IN(LINE)]
-        public static uint2 operator ^(uint a, uint2 b) => new uint2(a ^ b.x, a ^ b.y);
+        [IN(LINE)] public static uint2 operator ^(uint2 a, uint2 b) => new uint2(a.x ^ b.x, a.y ^ b.y);
+        [IN(LINE)] public static uint2 operator ^(uint2 a, uint b) => new uint2(a.x ^ b, a.y ^ b);
+        [IN(LINE)] public static uint2 operator ^(uint a, uint2 b) => new uint2(a ^ b.x, a ^ b.y);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(uint2 a, uint2 b) => a.x == b.x && a.y == b.y;
-        [IN(LINE)]
-        public static bool operator ==(uint2 a, uint b) => a.x == b && a.y == b;
-        [IN(LINE)]
-        public static bool operator ==(uint a, uint2 b) => a == b.x && a == b.y;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(uint2 a, uint2 b) => a.x == b.x && a.y == b.y;
+        [IN(LINE)] public static bool operator ==(uint2 a, uint b) => a.x == b && a.y == b;
+        [IN(LINE)] public static bool operator ==(uint a, uint2 b) => a == b.x && a == b.y;
 
-        [IN(LINE)]
-        public static bool operator !=(uint2 a, uint2 b) => a.x != b.x || a.y != b.y;
-        [IN(LINE)]
-        public static bool operator !=(uint2 a, uint b) => a.x != b || a.y != b;
-        [IN(LINE)]
-        public static bool operator !=(uint a, uint2 b) => a != b.x || a != b.y;
+        [IN(LINE)] public static bool operator !=(uint2 a, uint2 b) => a.x != b.x || a.y != b.y;
+        [IN(LINE)] public static bool operator !=(uint2 a, uint b) => a.x != b || a.y != b;
+        [IN(LINE)] public static bool operator !=(uint a, uint2 b) => a != b.x || a != b.y;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -467,20 +388,24 @@ namespace DCFApixels.DataMath
          public uint4 ___y { [IN(LINE)] get => new uint4(0u, 0u, 0u, y); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is uint2 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(uint2 a) => x == a.x && y == a.y; 
-        [IN(LINE)]
-        public override string ToString() => $"uint2({x}, {y})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is uint2 target && Equals(target); 
+        [IN(LINE)] public bool Equals(uint2 a) => x == a.x && y == a.y; 
+        [IN(LINE)] public override string ToString() => $"uint2({x}, {y})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"uint2({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public uint x, y;
+            public DebuggerProxy(uint2 v) { x = v.x; y = v.y; }
         }
         #endregion
 
@@ -502,19 +427,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public uint Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public uint x, y;
-            public DebuggerProxy(uint2 v) { x = v.x; y = v.y; }
+            public uint Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }

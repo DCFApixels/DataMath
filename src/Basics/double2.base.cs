@@ -75,130 +75,63 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)]
-        public double2(float x, float y)
-        {
-            this.x = (double)x; this.y = (double)y;
-        }
-        [IN(LINE)]
-        public double2(float v)
-        {
-            x = (double)v; y = (double)v;
-        }
-        [IN(LINE)]
-        public double2(float2 v)
-        {
-            x = (double)v.x; y = (double)v.y;
-        }
-        [IN(LINE)]
-        public double2(double x, double y)
-        {
-            this.x = x; this.y = y;
-        }
-        [IN(LINE)]
-        public double2(double v)
-        {
-            x = v; y = v;
-        }
-        [IN(LINE)]
-        public double2(double2 v)
-        {
-            x = v.x; y = v.y;
-        }
-        [IN(LINE)]
-        public double2(int x, int y)
-        {
-            this.x = (double)x; this.y = (double)y;
-        }
-        [IN(LINE)]
-        public double2(int v)
-        {
-            x = (double)v; y = (double)v;
-        }
-        [IN(LINE)]
-        public double2(int2 v)
-        {
-            x = (double)v.x; y = (double)v.y;
-        }
-        [IN(LINE)]
-        public double2(uint x, uint y)
-        {
-            this.x = (double)x; this.y = (double)y;
-        }
-        [IN(LINE)]
-        public double2(uint v)
-        {
-            x = (double)v; y = (double)v;
-        }
-        [IN(LINE)]
-        public double2(uint2 v)
-        {
-            x = (double)v.x; y = (double)v.y;
-        }
+        [IN(LINE)] public double2(float x, float y) { this.x = (double)x; this.y = (double)y; }
+        [IN(LINE)] public double2(float v) { x = (double)v; y = (double)v; }
+        [IN(LINE)] public double2(float2 v) { x = (double)v.x; y = (double)v.y; }
+        [IN(LINE)] public double2(double x, double y) { this.x = x; this.y = y; }
+        [IN(LINE)] public double2(double v) { x = v; y = v; }
+        [IN(LINE)] public double2(double2 v) { x = v.x; y = v.y; }
+        [IN(LINE)] public double2(int x, int y) { this.x = (double)x; this.y = (double)y; }
+        [IN(LINE)] public double2(int v) { x = (double)v; y = (double)v; }
+        [IN(LINE)] public double2(int2 v) { x = (double)v.x; y = (double)v.y; }
+        [IN(LINE)] public double2(uint x, uint y) { this.x = (double)x; this.y = (double)y; }
+        [IN(LINE)] public double2(uint v) { x = (double)v; y = (double)v; }
+        [IN(LINE)] public double2(uint2 v) { x = (double)v.x; y = (double)v.y; }
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static double2 operator *(double2 a, double2 b) => new double2(a.x * b.x, a.y * b.y);
-        [IN(LINE)]
-        public static double2 operator *(double2 a, double b) => new double2(a.x * b, a.y * b);
-        [IN(LINE)]
-        public static double2 operator *(double a, double2 b) => new double2(a * b.x, a * b.y);
+        #region operators
 
-        [IN(LINE)]
-        public static double2 operator +(double2 a, double2 b) => new double2(a.x + b.x, a.y + b.y);
-        [IN(LINE)]
-        public static double2 operator +(double2 a, double b) => new double2(a.x + b, a.y + b);
-        [IN(LINE)]
-        public static double2 operator +(double a, double2 b) => new double2(a + b.x, a + b.y);
+        #region Arithmetic
+        [IN(LINE)] public static double2 operator *(double2 a, double2 b) => new double2(a.x * b.x, a.y * b.y);
+        [IN(LINE)] public static double2 operator *(double2 a, double b) => new double2(a.x * b, a.y * b);
+        [IN(LINE)] public static double2 operator *(double a, double2 b) => new double2(a * b.x, a * b.y);
 
-        [IN(LINE)]
-        public static double2 operator -(double2 a, double2 b) => new double2(a.x - b.x, a.y - b.y);
-        [IN(LINE)]
-        public static double2 operator -(double2 a, double b) => new double2(a.x - b, a.y - b);
-        [IN(LINE)]
-        public static double2 operator -(double a, double2 b) => new double2(a - b.x, a - b.y);
+        [IN(LINE)] public static double2 operator +(double2 a, double2 b) => new double2(a.x + b.x, a.y + b.y);
+        [IN(LINE)] public static double2 operator +(double2 a, double b) => new double2(a.x + b, a.y + b);
+        [IN(LINE)] public static double2 operator +(double a, double2 b) => new double2(a + b.x, a + b.y);
 
-        [IN(LINE)]
-        public static double2 operator /(double2 a, double2 b) => new double2(a.x / b.x, a.y / b.y);
-        [IN(LINE)]
-        public static double2 operator /(double2 a, double b) => new double2(a.x / b, a.y / b);
-        [IN(LINE)]
-        public static double2 operator /(double a, double2 b) => new double2(a / b.x, a / b.y);
+        [IN(LINE)] public static double2 operator -(double2 a, double2 b) => new double2(a.x - b.x, a.y - b.y);
+        [IN(LINE)] public static double2 operator -(double2 a, double b) => new double2(a.x - b, a.y - b);
+        [IN(LINE)] public static double2 operator -(double a, double2 b) => new double2(a - b.x, a - b.y);
 
-        [IN(LINE)]
-        public static double2 operator %(double2 a, double2 b) => new double2(a.x % b.x, a.y % b.y);
-        [IN(LINE)]
-        public static double2 operator %(double2 a, double b) => new double2(a.x % b, a.y % b);
-        [IN(LINE)]
-        public static double2 operator %(double a, double2 b) => new double2(a % b.x, a % b.y);
+        [IN(LINE)] public static double2 operator /(double2 a, double2 b) => new double2(a.x / b.x, a.y / b.y);
+        [IN(LINE)] public static double2 operator /(double2 a, double b) => new double2(a.x / b, a.y / b);
+        [IN(LINE)] public static double2 operator /(double a, double2 b) => new double2(a / b.x, a / b.y);
 
-        [IN(LINE)]
-        public static double2 operator ++(double2 a) => new double2(++a.x, ++a.y);
-        [IN(LINE)]
-        public static double2 operator --(double2 a) => new double2(--a.x, --a.y);
-        [IN(LINE)]
-        public static double2 operator -(double2 a) => new double2(-a.x, -a.y);
-        [IN(LINE)]                                                               
-        public static double2 operator +(double2 a) => new double2(+a.x, +a.y);
+        [IN(LINE)] public static double2 operator %(double2 a, double2 b) => new double2(a.x % b.x, a.y % b.y);
+        [IN(LINE)] public static double2 operator %(double2 a, double b) => new double2(a.x % b, a.y % b);
+        [IN(LINE)] public static double2 operator %(double a, double2 b) => new double2(a % b.x, a % b.y);
+
+        [IN(LINE)] public static double2 operator ++(double2 a) => new double2(++a.x, ++a.y);
+        [IN(LINE)] public static double2 operator --(double2 a) => new double2(--a.x, --a.y);
+        [IN(LINE)] public static double2 operator -(double2 a) => new double2(-a.x, -a.y);
+        [IN(LINE)] public static double2 operator +(double2 a) => new double2(+a.x, +a.y);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(double2 a, double2 b) => a.x == b.x && a.y == b.y;
-        [IN(LINE)]
-        public static bool operator ==(double2 a, double b) => a.x == b && a.y == b;
-        [IN(LINE)]
-        public static bool operator ==(double a, double2 b) => a == b.x && a == b.y;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(double2 a, double2 b) => a.x == b.x && a.y == b.y;
+        [IN(LINE)] public static bool operator ==(double2 a, double b) => a.x == b && a.y == b;
+        [IN(LINE)] public static bool operator ==(double a, double2 b) => a == b.x && a == b.y;
 
-        [IN(LINE)]
-        public static bool operator !=(double2 a, double2 b) => a.x != b.x || a.y != b.y;
-        [IN(LINE)]
-        public static bool operator !=(double2 a, double b) => a.x != b || a.y != b;
-        [IN(LINE)]
-        public static bool operator !=(double a, double2 b) => a != b.x || a != b.y;
+        [IN(LINE)] public static bool operator !=(double2 a, double2 b) => a.x != b.x || a.y != b.y;
+        [IN(LINE)] public static bool operator !=(double2 a, double b) => a.x != b || a.y != b;
+        [IN(LINE)] public static bool operator !=(double a, double2 b) => a != b.x || a != b.y;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -437,20 +370,24 @@ namespace DCFApixels.DataMath
          public double4 ___y { [IN(LINE)] get => new double4(0d, 0d, 0d, y); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is double2 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(double2 a) => x == a.x && y == a.y; 
-        [IN(LINE)]
-        public override string ToString() => $"double2({x}, {y})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is double2 target && Equals(target); 
+        [IN(LINE)] public bool Equals(double2 a) => x == a.x && y == a.y; 
+        [IN(LINE)] public override string ToString() => $"double2({x}, {y})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"double2({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public double x, y;
+            public DebuggerProxy(double2 v) { x = v.x; y = v.y; }
         }
         #endregion
 
@@ -472,19 +409,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public double Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public double x, y;
-            public DebuggerProxy(double2 v) { x = v.x; y = v.y; }
+            public double Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }

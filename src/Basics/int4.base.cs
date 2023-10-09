@@ -164,97 +164,66 @@ namespace DCFApixels.DataMath
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static int4 operator *(int4 a, int4 b) => new int4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
-        [IN(LINE)]
-        public static int4 operator *(int4 a, int b) => new int4(a.x * b, a.y * b, a.z * b, a.w * b);
-        [IN(LINE)]
-        public static int4 operator *(int a, int4 b) => new int4(a * b.x, a * b.y, a * b.z, a * b.w);
+        #region operators
 
-        [IN(LINE)]
-        public static int4 operator +(int4 a, int4 b) => new int4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        [IN(LINE)]
-        public static int4 operator +(int4 a, int b) => new int4(a.x + b, a.y + b, a.z + b, a.w + b);
-        [IN(LINE)]
-        public static int4 operator +(int a, int4 b) => new int4(a + b.x, a + b.y, a + b.z, a + b.w);
+        #region Arithmetic
+        [IN(LINE)] public static int4 operator *(int4 a, int4 b) => new int4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+        [IN(LINE)] public static int4 operator *(int4 a, int b) => new int4(a.x * b, a.y * b, a.z * b, a.w * b);
+        [IN(LINE)] public static int4 operator *(int a, int4 b) => new int4(a * b.x, a * b.y, a * b.z, a * b.w);
 
-        [IN(LINE)]
-        public static int4 operator -(int4 a, int4 b) => new int4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-        [IN(LINE)]
-        public static int4 operator -(int4 a, int b) => new int4(a.x - b, a.y - b, a.z - b, a.w - b);
-        [IN(LINE)]
-        public static int4 operator -(int a, int4 b) => new int4(a - b.x, a - b.y, a - b.z, a - b.w);
+        [IN(LINE)] public static int4 operator +(int4 a, int4 b) => new int4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        [IN(LINE)] public static int4 operator +(int4 a, int b) => new int4(a.x + b, a.y + b, a.z + b, a.w + b);
+        [IN(LINE)] public static int4 operator +(int a, int4 b) => new int4(a + b.x, a + b.y, a + b.z, a + b.w);
 
-        [IN(LINE)]
-        public static int4 operator /(int4 a, int4 b) => new int4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
-        [IN(LINE)]
-        public static int4 operator /(int4 a, int b) => new int4(a.x / b, a.y / b, a.z / b, a.w / b);
-        [IN(LINE)]
-        public static int4 operator /(int a, int4 b) => new int4(a / b.x, a / b.y, a / b.z, a / b.w);
+        [IN(LINE)] public static int4 operator -(int4 a, int4 b) => new int4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        [IN(LINE)] public static int4 operator -(int4 a, int b) => new int4(a.x - b, a.y - b, a.z - b, a.w - b);
+        [IN(LINE)] public static int4 operator -(int a, int4 b) => new int4(a - b.x, a - b.y, a - b.z, a - b.w);
 
-        [IN(LINE)]
-        public static int4 operator %(int4 a, int4 b) => new int4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
-        [IN(LINE)]
-        public static int4 operator %(int4 a, int b) => new int4(a.x % b, a.y % b, a.z % b, a.w % b);
-        [IN(LINE)]
-        public static int4 operator %(int a, int4 b) => new int4(a % b.x, a % b.y, a % b.z, a % b.w);
+        [IN(LINE)] public static int4 operator /(int4 a, int4 b) => new int4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
+        [IN(LINE)] public static int4 operator /(int4 a, int b) => new int4(a.x / b, a.y / b, a.z / b, a.w / b);
+        [IN(LINE)] public static int4 operator /(int a, int4 b) => new int4(a / b.x, a / b.y, a / b.z, a / b.w);
 
-        [IN(LINE)]
-        public static int4 operator ++(int4 a) => new int4(++a.x, ++a.y, ++a.z, ++a.w);
-        [IN(LINE)]
-        public static int4 operator --(int4 a) => new int4(--a.x, --a.y, --a.z, --a.w);
-        [IN(LINE)]
-        public static int4 operator -(int4 a) => new int4(-a.x, -a.y, -a.z, -a.w);
-        [IN(LINE)]
-        public static int4 operator +(int4 a) => new int4(+a.x, +a.y, +a.z, +a.w);
+        [IN(LINE)] public static int4 operator %(int4 a, int4 b) => new int4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
+        [IN(LINE)] public static int4 operator %(int4 a, int b) => new int4(a.x % b, a.y % b, a.z % b, a.w % b);
+        [IN(LINE)] public static int4 operator %(int a, int4 b) => new int4(a % b.x, a % b.y, a % b.z, a % b.w);
+
+        [IN(LINE)] public static int4 operator ++(int4 a) => new int4(++a.x, ++a.y, ++a.z, ++a.w);
+        [IN(LINE)] public static int4 operator --(int4 a) => new int4(--a.x, --a.y, --a.z, --a.w);
+        [IN(LINE)] public static int4 operator -(int4 a) => new int4(-a.x, -a.y, -a.z, -a.w);
+        [IN(LINE)] public static int4 operator +(int4 a) => new int4(+a.x, +a.y, +a.z, +a.w);
         #endregion
 
-        #region Bit operators
-        [IN(LINE)]
-        public static int4 operator ~(int4 a) => new int4(~a.x, ~a.y, ~a.z, ~a.w);
-        [IN(LINE)]
-        public static int4 operator <<(int4 a, int n) => new int4(a.x << n, a.y << n, a.z << n, a.w << n);
-        [IN(LINE)]
-        public static int4 operator >>(int4 a, int n) => new int4(a.x >> n, a.y >> n, a.z >> n, a.w >> n);
+        #region Bits
+        [IN(LINE)] public static int4 operator ~(int4 a) => new int4(~a.x, ~a.y, ~a.z, ~a.w);
+        [IN(LINE)] public static int4 operator <<(int4 a, int n) => new int4(a.x << n, a.y << n, a.z << n, a.w << n);
+        [IN(LINE)] public static int4 operator >>(int4 a, int n) => new int4(a.x >> n, a.y >> n, a.z >> n, a.w >> n);
 
-        [IN(LINE)]
-        public static int4 operator |(int4 a, int4 b) => new int4(a.x | b.x, a.y | b.y, a.z | b.z, a.w | b.w);
-        [IN(LINE)]
-        public static int4 operator |(int4 a, int b) => new int4(a.x | b, a.y | b, a.z | b, a.w | b);
-        [IN(LINE)]
-        public static int4 operator |(int a, int4 b) => new int4(a | b.x, a | b.y, a | b.z, a | b.w);
+        [IN(LINE)] public static int4 operator |(int4 a, int4 b) => new int4(a.x | b.x, a.y | b.y, a.z | b.z, a.w | b.w);
+        [IN(LINE)] public static int4 operator |(int4 a, int b) => new int4(a.x | b, a.y | b, a.z | b, a.w | b);
+        [IN(LINE)] public static int4 operator |(int a, int4 b) => new int4(a | b.x, a | b.y, a | b.z, a | b.w);
 
-        [IN(LINE)]
-        public static int4 operator &(int4 a, int4 b) => new int4(a.x & b.x, a.y & b.y, a.z & b.z, a.w & b.w);
-        [IN(LINE)]
-        public static int4 operator &(int4 a, int b) => new int4(a.x & b, a.y & b, a.z & b, a.w & b);
-        [IN(LINE)]
-        public static int4 operator &(int a, int4 b) => new int4(a & b.x, a & b.y, a & b.z, a & b.w);
+        [IN(LINE)] public static int4 operator &(int4 a, int4 b) => new int4(a.x & b.x, a.y & b.y, a.z & b.z, a.w & b.w);
+        [IN(LINE)] public static int4 operator &(int4 a, int b) => new int4(a.x & b, a.y & b, a.z & b, a.w & b);
+        [IN(LINE)] public static int4 operator &(int a, int4 b) => new int4(a & b.x, a & b.y, a & b.z, a & b.w);
 
-        [IN(LINE)]
-        public static int4 operator ^(int4 a, int4 b) => new int4(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w);
-        [IN(LINE)]
-        public static int4 operator ^(int4 a, int b) => new int4(a.x ^ b, a.y ^ b, a.z ^ b, a.w ^ b);
-        [IN(LINE)]
-        public static int4 operator ^(int a, int4 b) => new int4(a ^ b.x, a ^ b.y, a ^ b.z, a ^ b.w);
+        [IN(LINE)] public static int4 operator ^(int4 a, int4 b) => new int4(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w);
+        [IN(LINE)] public static int4 operator ^(int4 a, int b) => new int4(a.x ^ b, a.y ^ b, a.z ^ b, a.w ^ b);
+        [IN(LINE)] public static int4 operator ^(int a, int4 b) => new int4(a ^ b.x, a ^ b.y, a ^ b.z, a ^ b.w);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(int4 a, int4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-        [IN(LINE)]
-        public static bool operator ==(int4 a, int b) => a.x == b && a.y == b && a.z == b && a.w == b;
-        [IN(LINE)]
-        public static bool operator ==(int a, int4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(int4 a, int4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+        [IN(LINE)] public static bool operator ==(int4 a, int b) => a.x == b && a.y == b && a.z == b && a.w == b;
+        [IN(LINE)] public static bool operator ==(int a, int4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
 
-        [IN(LINE)]
-        public static bool operator !=(int4 a, int4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
-        [IN(LINE)]
-        public static bool operator !=(int4 a, int b) => a.x != b || a.y != b || a.z != b || a.w != b;
-        [IN(LINE)]
-        public static bool operator !=(int a, int4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
+        [IN(LINE)] public static bool operator !=(int4 a, int4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
+        [IN(LINE)] public static bool operator !=(int4 a, int b) => a.x != b || a.y != b || a.z != b || a.w != b;
+        [IN(LINE)] public static bool operator !=(int a, int4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -937,20 +906,24 @@ namespace DCFApixels.DataMath
          public int4 wwww { [IN(LINE)] get => new int4(w, w, w, w); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is int4 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(int4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
-        [IN(LINE)]
-        public override string ToString() => $"int4({x}, {y}, {z}, {w})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is int4 target && Equals(target); 
+        [IN(LINE)] public bool Equals(int4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
+        [IN(LINE)] public override string ToString() => $"int4({x}, {y}, {z}, {w})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"int4({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public int x, y, z, w;
+            public DebuggerProxy(int4 v) { x = v.x; y = v.y; z = v.z; w = v.w; }
         }
         #endregion
 
@@ -972,19 +945,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public int Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public int x, y, z, w;
-            public DebuggerProxy(int4 v) { x = v.x; y = v.y; z = v.z; w = v.w; }
+            public int Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }

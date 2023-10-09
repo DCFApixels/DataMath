@@ -75,130 +75,63 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)]
-        public float2(float x, float y)
-        {
-            this.x = x; this.y = y;
-        }
-        [IN(LINE)]
-        public float2(float v)
-        {
-            x = v; y = v;
-        }
-        [IN(LINE)]
-        public float2(float2 v)
-        {
-            x = v.x; y = v.y;
-        }
-        [IN(LINE)]
-        public float2(double x, double y)
-        {
-            this.x = (float)x; this.y = (float)y;
-        }
-        [IN(LINE)]
-        public float2(double v)
-        {
-            x = (float)v; y = (float)v;
-        }
-        [IN(LINE)]
-        public float2(double2 v)
-        {
-            x = (float)v.x; y = (float)v.y;
-        }
-        [IN(LINE)]
-        public float2(int x, int y)
-        {
-            this.x = (float)x; this.y = (float)y;
-        }
-        [IN(LINE)]
-        public float2(int v)
-        {
-            x = (float)v; y = (float)v;
-        }
-        [IN(LINE)]
-        public float2(int2 v)
-        {
-            x = (float)v.x; y = (float)v.y;
-        }
-        [IN(LINE)]
-        public float2(uint x, uint y)
-        {
-            this.x = (float)x; this.y = (float)y;
-        }
-        [IN(LINE)]
-        public float2(uint v)
-        {
-            x = (float)v; y = (float)v;
-        }
-        [IN(LINE)]
-        public float2(uint2 v)
-        {
-            x = (float)v.x; y = (float)v.y;
-        }
+        [IN(LINE)] public float2(float x, float y) { this.x = x; this.y = y; }
+        [IN(LINE)] public float2(float v) { x = v; y = v; }
+        [IN(LINE)] public float2(float2 v) { x = v.x; y = v.y; }
+        [IN(LINE)] public float2(double x, double y) { this.x = (float)x; this.y = (float)y; }
+        [IN(LINE)] public float2(double v) { x = (float)v; y = (float)v; }
+        [IN(LINE)] public float2(double2 v) { x = (float)v.x; y = (float)v.y; }
+        [IN(LINE)] public float2(int x, int y) { this.x = (float)x; this.y = (float)y; }
+        [IN(LINE)] public float2(int v) { x = (float)v; y = (float)v; }
+        [IN(LINE)] public float2(int2 v) { x = (float)v.x; y = (float)v.y; }
+        [IN(LINE)] public float2(uint x, uint y) { this.x = (float)x; this.y = (float)y; }
+        [IN(LINE)] public float2(uint v) { x = (float)v; y = (float)v; }
+        [IN(LINE)] public float2(uint2 v) { x = (float)v.x; y = (float)v.y; }
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static float2 operator *(float2 a, float2 b) => new float2(a.x * b.x, a.y * b.y);
-        [IN(LINE)]
-        public static float2 operator *(float2 a, float b) => new float2(a.x * b, a.y * b);
-        [IN(LINE)]
-        public static float2 operator *(float a, float2 b) => new float2(a * b.x, a * b.y);
+        #region operators
 
-        [IN(LINE)]
-        public static float2 operator +(float2 a, float2 b) => new float2(a.x + b.x, a.y + b.y);
-        [IN(LINE)]
-        public static float2 operator +(float2 a, float b) => new float2(a.x + b, a.y + b);
-        [IN(LINE)]
-        public static float2 operator +(float a, float2 b) => new float2(a + b.x, a + b.y);
+        #region Arithmetic
+        [IN(LINE)] public static float2 operator *(float2 a, float2 b) => new float2(a.x * b.x, a.y * b.y);
+        [IN(LINE)] public static float2 operator *(float2 a, float b) => new float2(a.x * b, a.y * b);
+        [IN(LINE)] public static float2 operator *(float a, float2 b) => new float2(a * b.x, a * b.y);
 
-        [IN(LINE)]
-        public static float2 operator -(float2 a, float2 b) => new float2(a.x - b.x, a.y - b.y);
-        [IN(LINE)]
-        public static float2 operator -(float2 a, float b) => new float2(a.x - b, a.y - b);
-        [IN(LINE)]
-        public static float2 operator -(float a, float2 b) => new float2(a - b.x, a - b.y);
+        [IN(LINE)] public static float2 operator +(float2 a, float2 b) => new float2(a.x + b.x, a.y + b.y);
+        [IN(LINE)] public static float2 operator +(float2 a, float b) => new float2(a.x + b, a.y + b);
+        [IN(LINE)] public static float2 operator +(float a, float2 b) => new float2(a + b.x, a + b.y);
 
-        [IN(LINE)]
-        public static float2 operator /(float2 a, float2 b) => new float2(a.x / b.x, a.y / b.y);
-        [IN(LINE)]
-        public static float2 operator /(float2 a, float b) => new float2(a.x / b, a.y / b);
-        [IN(LINE)]
-        public static float2 operator /(float a, float2 b) => new float2(a / b.x, a / b.y);
+        [IN(LINE)] public static float2 operator -(float2 a, float2 b) => new float2(a.x - b.x, a.y - b.y);
+        [IN(LINE)] public static float2 operator -(float2 a, float b) => new float2(a.x - b, a.y - b);
+        [IN(LINE)] public static float2 operator -(float a, float2 b) => new float2(a - b.x, a - b.y);
 
-        [IN(LINE)]
-        public static float2 operator %(float2 a, float2 b) => new float2(a.x % b.x, a.y % b.y);
-        [IN(LINE)]
-        public static float2 operator %(float2 a, float b) => new float2(a.x % b, a.y % b);
-        [IN(LINE)]
-        public static float2 operator %(float a, float2 b) => new float2(a % b.x, a % b.y);
+        [IN(LINE)] public static float2 operator /(float2 a, float2 b) => new float2(a.x / b.x, a.y / b.y);
+        [IN(LINE)] public static float2 operator /(float2 a, float b) => new float2(a.x / b, a.y / b);
+        [IN(LINE)] public static float2 operator /(float a, float2 b) => new float2(a / b.x, a / b.y);
 
-        [IN(LINE)]
-        public static float2 operator ++(float2 a) => new float2(++a.x, ++a.y);
-        [IN(LINE)]
-        public static float2 operator --(float2 a) => new float2(--a.x, --a.y);
-        [IN(LINE)]
-        public static float2 operator -(float2 a) => new float2(-a.x, -a.y);
-        [IN(LINE)]                                                               
-        public static float2 operator +(float2 a) => new float2(+a.x, +a.y);
+        [IN(LINE)] public static float2 operator %(float2 a, float2 b) => new float2(a.x % b.x, a.y % b.y);
+        [IN(LINE)] public static float2 operator %(float2 a, float b) => new float2(a.x % b, a.y % b);
+        [IN(LINE)] public static float2 operator %(float a, float2 b) => new float2(a % b.x, a % b.y);
+
+        [IN(LINE)] public static float2 operator ++(float2 a) => new float2(++a.x, ++a.y);
+        [IN(LINE)] public static float2 operator --(float2 a) => new float2(--a.x, --a.y);
+        [IN(LINE)] public static float2 operator -(float2 a) => new float2(-a.x, -a.y);
+        [IN(LINE)] public static float2 operator +(float2 a) => new float2(+a.x, +a.y);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(float2 a, float2 b) => a.x == b.x && a.y == b.y;
-        [IN(LINE)]
-        public static bool operator ==(float2 a, float b) => a.x == b && a.y == b;
-        [IN(LINE)]
-        public static bool operator ==(float a, float2 b) => a == b.x && a == b.y;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(float2 a, float2 b) => a.x == b.x && a.y == b.y;
+        [IN(LINE)] public static bool operator ==(float2 a, float b) => a.x == b && a.y == b;
+        [IN(LINE)] public static bool operator ==(float a, float2 b) => a == b.x && a == b.y;
 
-        [IN(LINE)]
-        public static bool operator !=(float2 a, float2 b) => a.x != b.x || a.y != b.y;
-        [IN(LINE)]
-        public static bool operator !=(float2 a, float b) => a.x != b || a.y != b;
-        [IN(LINE)]
-        public static bool operator !=(float a, float2 b) => a != b.x || a != b.y;
+        [IN(LINE)] public static bool operator !=(float2 a, float2 b) => a.x != b.x || a.y != b.y;
+        [IN(LINE)] public static bool operator !=(float2 a, float b) => a.x != b || a.y != b;
+        [IN(LINE)] public static bool operator !=(float a, float2 b) => a != b.x || a != b.y;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -437,20 +370,24 @@ namespace DCFApixels.DataMath
          public float4 ___y { [IN(LINE)] get => new float4(0f, 0f, 0f, y); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is float2 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(float2 a) => x == a.x && y == a.y; 
-        [IN(LINE)]
-        public override string ToString() => $"float2({x}, {y})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is float2 target && Equals(target); 
+        [IN(LINE)] public bool Equals(float2 a) => x == a.x && y == a.y; 
+        [IN(LINE)] public override string ToString() => $"float2({x}, {y})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"float2({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public float x, y;
+            public DebuggerProxy(float2 v) { x = v.x; y = v.y; }
         }
         #endregion
 
@@ -472,19 +409,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public float Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public float x, y;
-            public DebuggerProxy(float2 v) { x = v.x; y = v.y; }
+            public float Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }

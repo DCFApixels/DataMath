@@ -82,130 +82,63 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)]
-        public float3(float x, float y, float z)
-        {
-            this.x = x; this.y = y; this.z = z;
-        }
-        [IN(LINE)]
-        public float3(float v)
-        {
-            x = v; y = v; z = v;
-        }
-        [IN(LINE)]
-        public float3(float3 v)
-        {
-            x = v.x; y = v.y; z = v.z;
-        }
-        [IN(LINE)]
-        public float3(double x, double y, double z)
-        {
-            this.x = (float)x; this.y = (float)y; this.z = (float)z;
-        }
-        [IN(LINE)]
-        public float3(double v)
-        {
-            x = (float)v; y = (float)v; z = (float)v;
-        }
-        [IN(LINE)]
-        public float3(double3 v)
-        {
-            x = (float)v.x; y = (float)v.y; z = (float)v.z;
-        }
-        [IN(LINE)]
-        public float3(int x, int y, int z)
-        {
-            this.x = (float)x; this.y = (float)y; this.z = (float)z;
-        }
-        [IN(LINE)]
-        public float3(int v)
-        {
-            x = (float)v; y = (float)v; z = (float)v;
-        }
-        [IN(LINE)]
-        public float3(int3 v)
-        {
-            x = (float)v.x; y = (float)v.y; z = (float)v.z;
-        }
-        [IN(LINE)]
-        public float3(uint x, uint y, uint z)
-        {
-            this.x = (float)x; this.y = (float)y; this.z = (float)z;
-        }
-        [IN(LINE)]
-        public float3(uint v)
-        {
-            x = (float)v; y = (float)v; z = (float)v;
-        }
-        [IN(LINE)]
-        public float3(uint3 v)
-        {
-            x = (float)v.x; y = (float)v.y; z = (float)v.z;
-        }
+        [IN(LINE)] public float3(float x, float y, float z) { this.x = x; this.y = y; this.z = z; }
+        [IN(LINE)] public float3(float v) { x = v; y = v; z = v; }
+        [IN(LINE)] public float3(float3 v) { x = v.x; y = v.y; z = v.z; }
+        [IN(LINE)] public float3(double x, double y, double z) { this.x = (float)x; this.y = (float)y; this.z = (float)z; }
+        [IN(LINE)] public float3(double v) { x = (float)v; y = (float)v; z = (float)v; }
+        [IN(LINE)] public float3(double3 v) { x = (float)v.x; y = (float)v.y; z = (float)v.z; }
+        [IN(LINE)] public float3(int x, int y, int z) { this.x = (float)x; this.y = (float)y; this.z = (float)z; }
+        [IN(LINE)] public float3(int v) { x = (float)v; y = (float)v; z = (float)v; }
+        [IN(LINE)] public float3(int3 v) { x = (float)v.x; y = (float)v.y; z = (float)v.z; }
+        [IN(LINE)] public float3(uint x, uint y, uint z) { this.x = (float)x; this.y = (float)y; this.z = (float)z; }
+        [IN(LINE)] public float3(uint v) { x = (float)v; y = (float)v; z = (float)v; }
+        [IN(LINE)] public float3(uint3 v) { x = (float)v.x; y = (float)v.y; z = (float)v.z; }
 
         #endregion
 
-        #region Arithmetic operators
-        [IN(LINE)]
-        public static float3 operator *(float3 a, float3 b) => new float3(a.x * b.x, a.y * b.y, a.z * b.z);
-        [IN(LINE)]
-        public static float3 operator *(float3 a, float b) => new float3(a.x * b, a.y * b, a.z * b);
-        [IN(LINE)]
-        public static float3 operator *(float a, float3 b) => new float3(a * b.x, a * b.y, a * b.z);
+        #region operators
 
-        [IN(LINE)]
-        public static float3 operator +(float3 a, float3 b) => new float3(a.x + b.x, a.y + b.y, a.z + b.z);
-        [IN(LINE)]
-        public static float3 operator +(float3 a, float b) => new float3(a.x + b, a.y + b, a.z + b);
-        [IN(LINE)]
-        public static float3 operator +(float a, float3 b) => new float3(a + b.x, a + b.y, a + b.z);
+        #region Arithmetic
+        [IN(LINE)] public static float3 operator *(float3 a, float3 b) => new float3(a.x * b.x, a.y * b.y, a.z * b.z);
+        [IN(LINE)] public static float3 operator *(float3 a, float b) => new float3(a.x * b, a.y * b, a.z * b);
+        [IN(LINE)] public static float3 operator *(float a, float3 b) => new float3(a * b.x, a * b.y, a * b.z);
 
-        [IN(LINE)]
-        public static float3 operator -(float3 a, float3 b) => new float3(a.x - b.x, a.y - b.y, a.z - b.z);
-        [IN(LINE)]
-        public static float3 operator -(float3 a, float b) => new float3(a.x - b, a.y - b, a.z - b);
-        [IN(LINE)]
-        public static float3 operator -(float a, float3 b) => new float3(a - b.x, a - b.y, a - b.z);
+        [IN(LINE)] public static float3 operator +(float3 a, float3 b) => new float3(a.x + b.x, a.y + b.y, a.z + b.z);
+        [IN(LINE)] public static float3 operator +(float3 a, float b) => new float3(a.x + b, a.y + b, a.z + b);
+        [IN(LINE)] public static float3 operator +(float a, float3 b) => new float3(a + b.x, a + b.y, a + b.z);
 
-        [IN(LINE)]
-        public static float3 operator /(float3 a, float3 b) => new float3(a.x / b.x, a.y / b.y, a.z / b.z);
-        [IN(LINE)]
-        public static float3 operator /(float3 a, float b) => new float3(a.x / b, a.y / b, a.z / b);
-        [IN(LINE)]
-        public static float3 operator /(float a, float3 b) => new float3(a / b.x, a / b.y, a / b.z);
+        [IN(LINE)] public static float3 operator -(float3 a, float3 b) => new float3(a.x - b.x, a.y - b.y, a.z - b.z);
+        [IN(LINE)] public static float3 operator -(float3 a, float b) => new float3(a.x - b, a.y - b, a.z - b);
+        [IN(LINE)] public static float3 operator -(float a, float3 b) => new float3(a - b.x, a - b.y, a - b.z);
 
-        [IN(LINE)]
-        public static float3 operator %(float3 a, float3 b) => new float3(a.x % b.x, a.y % b.y, a.z % b.z);
-        [IN(LINE)]
-        public static float3 operator %(float3 a, float b) => new float3(a.x % b, a.y % b, a.z % b);
-        [IN(LINE)]
-        public static float3 operator %(float a, float3 b) => new float3(a % b.x, a % b.y, a % b.z);
+        [IN(LINE)] public static float3 operator /(float3 a, float3 b) => new float3(a.x / b.x, a.y / b.y, a.z / b.z);
+        [IN(LINE)] public static float3 operator /(float3 a, float b) => new float3(a.x / b, a.y / b, a.z / b);
+        [IN(LINE)] public static float3 operator /(float a, float3 b) => new float3(a / b.x, a / b.y, a / b.z);
 
-        [IN(LINE)]
-        public static float3 operator ++(float3 a) => new float3(++a.x, ++a.y, ++a.z);
-        [IN(LINE)]
-        public static float3 operator --(float3 a) => new float3(--a.x, --a.y, --a.z);
-        [IN(LINE)]
-        public static float3 operator -(float3 a) => new float3(-a.x, -a.y, -a.z);
-        [IN(LINE)]
-        public static float3 operator +(float3 a) => new float3(+a.x, +a.y, +a.z);
+        [IN(LINE)] public static float3 operator %(float3 a, float3 b) => new float3(a.x % b.x, a.y % b.y, a.z % b.z);
+        [IN(LINE)] public static float3 operator %(float3 a, float b) => new float3(a.x % b, a.y % b, a.z % b);
+        [IN(LINE)] public static float3 operator %(float a, float3 b) => new float3(a % b.x, a % b.y, a % b.z);
+
+        [IN(LINE)] public static float3 operator ++(float3 a) => new float3(++a.x, ++a.y, ++a.z);
+        [IN(LINE)] public static float3 operator --(float3 a) => new float3(--a.x, --a.y, --a.z);
+        [IN(LINE)] public static float3 operator -(float3 a) => new float3(-a.x, -a.y, -a.z);
+        [IN(LINE)] public static float3 operator +(float3 a) => new float3(+a.x, +a.y, +a.z);
         #endregion
 
-        #region Boolean operators
-        [IN(LINE)]
-        public static bool operator ==(float3 a, float3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
-        [IN(LINE)]
-        public static bool operator ==(float3 a, float b) => a.x == b && a.y == b && a.z == b;
-        [IN(LINE)]
-        public static bool operator ==(float a, float3 b) => a == b.x && a == b.y && a == b.z;
+        #region Boolean
+        [IN(LINE)] public static bool operator ==(float3 a, float3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
+        [IN(LINE)] public static bool operator ==(float3 a, float b) => a.x == b && a.y == b && a.z == b;
+        [IN(LINE)] public static bool operator ==(float a, float3 b) => a == b.x && a == b.y && a == b.z;
 
-        [IN(LINE)]
-        public static bool operator !=(float3 a, float3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
-        [IN(LINE)]
-        public static bool operator !=(float3 a, float b) => a.x != b || a.y != b || a.z != b;
-        [IN(LINE)]
-        public static bool operator !=(float a, float3 b) => a != b.x || a != b.y || a != b.z;
+        [IN(LINE)] public static bool operator !=(float3 a, float3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
+        [IN(LINE)] public static bool operator !=(float3 a, float b) => a.x != b || a.y != b || a.z != b;
+        [IN(LINE)] public static bool operator !=(float a, float3 b) => a != b.x || a != b.y || a != b.z;
         #endregion
+
+        #endregion
+
+        #region Swaps
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
@@ -882,20 +815,24 @@ namespace DCFApixels.DataMath
          public float4 ___z { [IN(LINE)] get => new float4(0f, 0f, 0f, z); }
         #endregion
 
+        #endregion
+
 
         #region Other 
-        [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
-        [IN(LINE)]
-        public override bool Equals(object o) => o is float3 target && Equals(target); 
-        [IN(LINE)]
-        public bool Equals(float3 a) => x == a.x && y == a.y && z == a.z; 
-        [IN(LINE)]
-        public override string ToString() => $"float3({x}, {y}, {z})";
+        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override bool Equals(object o) => o is float3 target && Equals(target); 
+        [IN(LINE)] public bool Equals(float3 a) => x == a.x && y == a.y && z == a.z; 
+        [IN(LINE)] public override string ToString() => $"float3({x}, {y}, {z})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"float3({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)})";
+        }
+
+        internal class DebuggerProxy
+        {
+            public float x, y, z;
+            public DebuggerProxy(float3 v) { x = v.x; y = v.y; z = v.z; }
         }
         #endregion
 
@@ -917,19 +854,10 @@ namespace DCFApixels.DataMath
                     _index = -1;
                 }
             }
-            public float Current => _pointer[_index];
-            [IN(LINE)]
-            public void Dispose() { }
-            [IN(LINE)]
-            public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)]
-            public void Reset() { }
-        }
-
-        internal class DebuggerProxy
-        {
-            public float x, y, z;
-            public DebuggerProxy(float3 v) { x = v.x; y = v.y; z = v.z; }
+            public float Current { [IN(LINE)] get => _pointer[_index]; }
+            [IN(LINE)] public void Dispose() { }
+            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
+            [IN(LINE)] public void Reset() { }
         }
         #endregion
     }
