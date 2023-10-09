@@ -1,10 +1,11 @@
 using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
@@ -40,130 +41,96 @@ namespace DCFApixels.DataMath
         public int y;
 
         #region IColor
-        public float r 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)x;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => x = (int)value;
-        }
-        public float g 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)y;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => y = (int)value;
-        }
-        public float b 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => 0f;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set {}
-        }
-        public float a 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => 0f;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set {}
-        }
+        public float r { [IN(LINE)] get => (float)x; [IN(LINE)] set => x = (int)value; }
+        public float g { [IN(LINE)] get => (float)y; [IN(LINE)] set => y = (int)value; }
+        public float b { [IN(LINE)] get => 0f; [IN(LINE)] set {} }
+        public float a { [IN(LINE)] get => 1f; [IN(LINE)] set {} }
         #endregion
 
         #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector1<int>.x 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => x; 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => x = value; 
-        }
+        int IVector1<int>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector2<int>.y
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => y; 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => y = value; 
-        }
+        int IVector2<int>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int length
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => LENGTH;
-        }
+        public int length { [IN(LINE)] get => LENGTH; }
 
-        public unsafe ref int this[int index]
+        public unsafe int this[int index]
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
-                fixed (int2* array = &this) { return ref ((int*)array)[index]; }
+                fixed (int2* array = &this) { return ((int*)array)[index]; }
+            }
+            set
+            {
+#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+#endif
+                fixed (int* array = &x) { array[index] = value; }
             }
         }
         #endregion
 
         #region Constructors
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(float x, float y)
         {
             this.x = (int)x; this.y = (int)y;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(float v)
         {
             x = (int)v; y = (int)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(float2 v)
         {
             x = (int)v.x; y = (int)v.y;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(double x, double y)
         {
             this.x = (int)x; this.y = (int)y;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(double v)
         {
             x = (int)v; y = (int)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(double2 v)
         {
             x = (int)v.x; y = (int)v.y;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(int x, int y)
         {
             this.x = x; this.y = y;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(int v)
         {
             x = v; y = v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(int2 v)
         {
             x = v.x; y = v.y;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(uint x, uint y)
         {
             this.x = (int)x; this.y = (int)y;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(uint v)
         {
             x = (int)v; y = (int)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public int2(uint2 v)
         {
             x = (int)v.x; y = (int)v.y;
@@ -172,803 +139,345 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Arithmetic operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator *(int2 a, int2 b) => new int2(a.x * b.x, a.y * b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator *(int2 a, int b) => new int2(a.x * b, a.y * b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator *(int a, int2 b) => new int2(a * b.x, a * b.y);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator +(int2 a, int2 b) => new int2(a.x + b.x, a.y + b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator +(int2 a, int b) => new int2(a.x + b, a.y + b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator +(int a, int2 b) => new int2(a + b.x, a + b.y);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator -(int2 a, int2 b) => new int2(a.x - b.x, a.y - b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator -(int2 a, int b) => new int2(a.x - b, a.y - b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator -(int a, int2 b) => new int2(a - b.x, a - b.y);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator /(int2 a, int2 b) => new int2(a.x / b.x, a.y / b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator /(int2 a, int b) => new int2(a.x / b, a.y / b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator /(int a, int2 b) => new int2(a / b.x, a / b.y);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator %(int2 a, int2 b) => new int2(a.x % b.x, a.y % b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator %(int2 a, int b) => new int2(a.x % b, a.y % b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator %(int a, int2 b) => new int2(a % b.x, a % b.y);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator ++(int2 a) => new int2(++a.x, ++a.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator --(int2 a) => new int2(--a.x, --a.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator -(int2 a) => new int2(-a.x, -a.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]                                                               
+        [IN(LINE)]                                                               
         public static int2 operator +(int2 a) => new int2(+a.x, +a.y);
         #endregion
 
         #region Bit operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator ~(int2 a) => new int2(~a.x, ~a.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator <<(int2 a, int n) => new int2(a.x << n, a.y << n);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator >>(int2 a, int n) => new int2(a.x >> n, a.y >> n);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator |(int2 a, int2 b) => new int2(a.x | b.x, a.y | b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator |(int2 a, int b) => new int2(a.x | b, a.y | b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator |(int a, int2 b) => new int2(a | b.x, a | b.y);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator &(int2 a, int2 b) => new int2(a.x & b.x, a.y & b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator &(int2 a, int b) => new int2(a.x & b, a.y & b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator &(int a, int2 b) => new int2(a & b.x, a & b.y);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator ^(int2 a, int2 b) => new int2(a.x ^ b.x, a.y ^ b.y);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator ^(int2 a, int b) => new int2(a.x ^ b, a.y ^ b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static int2 operator ^(int a, int2 b) => new int2(a ^ b.x, a ^ b.y);
         #endregion
 
         #region Boolean operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(int2 a, int2 b) => a.x == b.x && a.y == b.y;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(int2 a, int b) => a.x == b && a.y == b;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(int a, int2 b) => a == b.x && a == b.y;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(int2 a, int2 b) => a.x != b.x || a.y != b.y;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(int2 a, int b) => a.x != b || a.y != b;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(int a, int2 b) => a != b.x || a != b.y;
         #endregion
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 xx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(x, x);
-         }
+         public int2 xx { [IN(LINE)] get => new int2(x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 xy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(x, y);
-         }
+         public int2 xy { [IN(LINE)] get => new int2(x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 x_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(x, 0);
-         }
+         public int2 x_ { [IN(LINE)] get => new int2(x, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 yx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(y, x);
-         }
+         public int2 yx { [IN(LINE)] get => new int2(y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 yy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(y, y);
-         }
+         public int2 yy { [IN(LINE)] get => new int2(y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 y_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(y, 0);
-         }
+         public int2 y_ { [IN(LINE)] get => new int2(y, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 _x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(0, x);
-         }
+         public int2 _x { [IN(LINE)] get => new int2(0, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int2 _y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int2(0, y);
-         }
+         public int2 _y { [IN(LINE)] get => new int2(0, y); }
         #endregion
 
         #region Swap3
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 xxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, x, x);
-         }
+         public int3 xxx { [IN(LINE)] get => new int3(x, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 xxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, x, y);
-         }
+         public int3 xxy { [IN(LINE)] get => new int3(x, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 xx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, x, 0);
-         }
+         public int3 xx_ { [IN(LINE)] get => new int3(x, x, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 xyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, y, x);
-         }
+         public int3 xyx { [IN(LINE)] get => new int3(x, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 xyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, y, y);
-         }
+         public int3 xyy { [IN(LINE)] get => new int3(x, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 xy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, y, 0);
-         }
+         public int3 xy_ { [IN(LINE)] get => new int3(x, y, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 x_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, 0, x);
-         }
+         public int3 x_x { [IN(LINE)] get => new int3(x, 0, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 x_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, 0, y);
-         }
+         public int3 x_y { [IN(LINE)] get => new int3(x, 0, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 x__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(x, 0, 0);
-         }
+         public int3 x__ { [IN(LINE)] get => new int3(x, 0, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 yxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, x, x);
-         }
+         public int3 yxx { [IN(LINE)] get => new int3(y, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 yxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, x, y);
-         }
+         public int3 yxy { [IN(LINE)] get => new int3(y, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 yx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, x, 0);
-         }
+         public int3 yx_ { [IN(LINE)] get => new int3(y, x, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 yyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, y, x);
-         }
+         public int3 yyx { [IN(LINE)] get => new int3(y, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 yyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, y, y);
-         }
+         public int3 yyy { [IN(LINE)] get => new int3(y, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 yy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, y, 0);
-         }
+         public int3 yy_ { [IN(LINE)] get => new int3(y, y, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 y_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, 0, x);
-         }
+         public int3 y_x { [IN(LINE)] get => new int3(y, 0, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 y_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, 0, y);
-         }
+         public int3 y_y { [IN(LINE)] get => new int3(y, 0, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 y__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(y, 0, 0);
-         }
+         public int3 y__ { [IN(LINE)] get => new int3(y, 0, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 _xx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, x, x);
-         }
+         public int3 _xx { [IN(LINE)] get => new int3(0, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 _xy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, x, y);
-         }
+         public int3 _xy { [IN(LINE)] get => new int3(0, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 _x_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, x, 0);
-         }
+         public int3 _x_ { [IN(LINE)] get => new int3(0, x, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 _yx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, y, x);
-         }
+         public int3 _yx { [IN(LINE)] get => new int3(0, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 _yy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, y, y);
-         }
+         public int3 _yy { [IN(LINE)] get => new int3(0, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 _y_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, y, 0);
-         }
+         public int3 _y_ { [IN(LINE)] get => new int3(0, y, 0); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 __x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, 0, x);
-         }
+         public int3 __x { [IN(LINE)] get => new int3(0, 0, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int3 __y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int3(0, 0, y);
-         }
+         public int3 __y { [IN(LINE)] get => new int3(0, 0, y); }
         #endregion
 
         #region Swap4
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xxx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xxy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xx_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xx_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xx__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, x, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xyx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xyy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xy_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xy_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 xy__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, y, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x_xx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x_xy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x_x_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x_yx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x_yy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x_y_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x__x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x__y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 x___
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(x, 0, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yxx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yxy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yx_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yx_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yx__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, x, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yyx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yyy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yy_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yy_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 yy__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, y, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y_xx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y_xy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y_x_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y_yx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y_yy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y_y_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y__x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y__y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 y___
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(y, 0, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _xxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _xxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _xx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _xyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _xyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _xy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _x_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _x_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _x__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, x, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _yxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _yxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _yx_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _yyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _yyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _yy_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _y_x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _y_y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, 0, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 _y__
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, y, 0, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 __xx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 __xy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 __x_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, x, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 __yx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 __yy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 __y_
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, y, 0);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 ___x
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, 0, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public int4 ___y
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new int4(0, 0, 0, y);
-         }
+         public int4 xxxx { [IN(LINE)] get => new int4(x, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xxxy { [IN(LINE)] get => new int4(x, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xxx_ { [IN(LINE)] get => new int4(x, x, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xxyx { [IN(LINE)] get => new int4(x, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xxyy { [IN(LINE)] get => new int4(x, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xxy_ { [IN(LINE)] get => new int4(x, x, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xx_x { [IN(LINE)] get => new int4(x, x, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xx_y { [IN(LINE)] get => new int4(x, x, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xx__ { [IN(LINE)] get => new int4(x, x, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xyxx { [IN(LINE)] get => new int4(x, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xyxy { [IN(LINE)] get => new int4(x, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xyx_ { [IN(LINE)] get => new int4(x, y, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xyyx { [IN(LINE)] get => new int4(x, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xyyy { [IN(LINE)] get => new int4(x, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xyy_ { [IN(LINE)] get => new int4(x, y, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xy_x { [IN(LINE)] get => new int4(x, y, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xy_y { [IN(LINE)] get => new int4(x, y, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 xy__ { [IN(LINE)] get => new int4(x, y, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x_xx { [IN(LINE)] get => new int4(x, 0, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x_xy { [IN(LINE)] get => new int4(x, 0, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x_x_ { [IN(LINE)] get => new int4(x, 0, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x_yx { [IN(LINE)] get => new int4(x, 0, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x_yy { [IN(LINE)] get => new int4(x, 0, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x_y_ { [IN(LINE)] get => new int4(x, 0, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x__x { [IN(LINE)] get => new int4(x, 0, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x__y { [IN(LINE)] get => new int4(x, 0, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 x___ { [IN(LINE)] get => new int4(x, 0, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yxxx { [IN(LINE)] get => new int4(y, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yxxy { [IN(LINE)] get => new int4(y, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yxx_ { [IN(LINE)] get => new int4(y, x, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yxyx { [IN(LINE)] get => new int4(y, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yxyy { [IN(LINE)] get => new int4(y, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yxy_ { [IN(LINE)] get => new int4(y, x, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yx_x { [IN(LINE)] get => new int4(y, x, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yx_y { [IN(LINE)] get => new int4(y, x, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yx__ { [IN(LINE)] get => new int4(y, x, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yyxx { [IN(LINE)] get => new int4(y, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yyxy { [IN(LINE)] get => new int4(y, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yyx_ { [IN(LINE)] get => new int4(y, y, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yyyx { [IN(LINE)] get => new int4(y, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yyyy { [IN(LINE)] get => new int4(y, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yyy_ { [IN(LINE)] get => new int4(y, y, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yy_x { [IN(LINE)] get => new int4(y, y, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yy_y { [IN(LINE)] get => new int4(y, y, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 yy__ { [IN(LINE)] get => new int4(y, y, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y_xx { [IN(LINE)] get => new int4(y, 0, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y_xy { [IN(LINE)] get => new int4(y, 0, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y_x_ { [IN(LINE)] get => new int4(y, 0, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y_yx { [IN(LINE)] get => new int4(y, 0, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y_yy { [IN(LINE)] get => new int4(y, 0, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y_y_ { [IN(LINE)] get => new int4(y, 0, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y__x { [IN(LINE)] get => new int4(y, 0, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y__y { [IN(LINE)] get => new int4(y, 0, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 y___ { [IN(LINE)] get => new int4(y, 0, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _xxx { [IN(LINE)] get => new int4(0, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _xxy { [IN(LINE)] get => new int4(0, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _xx_ { [IN(LINE)] get => new int4(0, x, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _xyx { [IN(LINE)] get => new int4(0, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _xyy { [IN(LINE)] get => new int4(0, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _xy_ { [IN(LINE)] get => new int4(0, x, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _x_x { [IN(LINE)] get => new int4(0, x, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _x_y { [IN(LINE)] get => new int4(0, x, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _x__ { [IN(LINE)] get => new int4(0, x, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _yxx { [IN(LINE)] get => new int4(0, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _yxy { [IN(LINE)] get => new int4(0, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _yx_ { [IN(LINE)] get => new int4(0, y, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _yyx { [IN(LINE)] get => new int4(0, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _yyy { [IN(LINE)] get => new int4(0, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _yy_ { [IN(LINE)] get => new int4(0, y, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _y_x { [IN(LINE)] get => new int4(0, y, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _y_y { [IN(LINE)] get => new int4(0, y, 0, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 _y__ { [IN(LINE)] get => new int4(0, y, 0, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 __xx { [IN(LINE)] get => new int4(0, 0, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 __xy { [IN(LINE)] get => new int4(0, 0, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 __x_ { [IN(LINE)] get => new int4(0, 0, x, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 __yx { [IN(LINE)] get => new int4(0, 0, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 __yy { [IN(LINE)] get => new int4(0, 0, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 __y_ { [IN(LINE)] get => new int4(0, 0, y, 0); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 ___x { [IN(LINE)] get => new int4(0, 0, 0, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public int4 ___y { [IN(LINE)] get => new int4(0, 0, 0, y); }
         #endregion
 
 
-        #region Object
-        public override bool Equals(object o) => o is int2 target && Equals(target); 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        #region Other 
+        [IN(LINE)]
         public override int GetHashCode() => math.hash(this);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override string ToString() => $"int2({x}, {y})";
-        #endregion
-
-        #region IEquatable/IFormattable
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
+        public override bool Equals(object o) => o is int2 target && Equals(target); 
+        [IN(LINE)]
         public bool Equals(int2 a) => x == a.x && y == a.y; 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
+        public override string ToString() => $"int2({x}, {y})";
+        [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"int2({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)})";
@@ -984,7 +493,7 @@ namespace DCFApixels.DataMath
         {
             private readonly int* _pointer;
             private sbyte _index;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public Enumerator(in int2 value)
             {
                 fixed (int2* array = &value)
@@ -994,11 +503,11 @@ namespace DCFApixels.DataMath
                 }
             }
             public int Current => _pointer[_index];
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public void Dispose() { }
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public bool MoveNext() => ++_index < LENGTH;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public void Reset() { }
         }
         #endregion

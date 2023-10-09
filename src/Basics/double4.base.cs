@@ -1,10 +1,11 @@
 using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
@@ -50,157 +51,111 @@ namespace DCFApixels.DataMath
         public double w;
 
         #region IColor
-        public float r 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)x;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => x = (double)value;
-        }
-        public float g 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)y;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => y = (double)value;
-        }
-        public float b 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)z;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => z = (double)value;
-        }
-        public float a 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)w;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => w = (double)value;
-        }
+        public float r { [IN(LINE)] get => (float)x; [IN(LINE)] set => x = (double)value; }
+        public float g { [IN(LINE)] get => (float)y; [IN(LINE)] set => y = (double)value; }
+        public float b { [IN(LINE)] get => (float)z; [IN(LINE)] set => z = (double)value; }
+        public float a { [IN(LINE)] get => (float)w; [IN(LINE)] set => w = (double)value; }
         #endregion
 
         #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector1<double>.x 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => x; 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => x = value; 
-        }
+        double IVector1<double>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector2<double>.y 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => y; 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => y = value; 
-        }
+        double IVector2<double>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector3<double>.z 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => z;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => z = value;
-        }
+        double IVector3<double>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector4<double>.w 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => w;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => w = value;
-        }
+        double IVector4<double>.w { [IN(LINE)] get => w; [IN(LINE)] set => w = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int length
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => LENGTH;
-        }
+        public int length { [IN(LINE)] get => LENGTH; }
 
-        public unsafe ref double this[int index]
+        public unsafe double this[int index]
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
-                fixed (double4* array = &this) { return ref ((double*)array)[index]; }
+                fixed (double4* array = &this) { return ((double*)array)[index]; }
+            }
+            set
+            {
+#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+#endif
+                fixed (double* array = &x) { array[index] = value; }
             }
         }
         #endregion
 
         #region Constructors
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(float x, float y, float z, float w)
         {
             this.x = (double)x; this.y = (double)y;
             this.z = (double)z; this.w = (double)w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(float v)
         {
             x = (double)v; y = (double)v;
             z = (double)v; w = (double)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(float4 v)
         {
             x = (double)v.x; y = (double)v.y;
             z = (double)v.z; w = (double)v.w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(double x, double y, double z, double w)
         {
             this.x = x; this.y = y;
             this.z = z; this.w = w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(double v)
         {
             x = v; y = v;
             z = v; w = v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(double4 v)
         {
             x = v.x; y = v.y;
             z = v.z; w = v.w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(int x, int y, int z, int w)
         {
             this.x = (double)x; this.y = (double)y;
             this.z = (double)z; this.w = (double)w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(int v)
         {
             x = (double)v; y = (double)v;
             z = (double)v; w = (double)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(int4 v)
         {
             x = (double)v.x; y = (double)v.y;
             z = (double)v.z; w = (double)v.w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(uint x, uint y, uint z, uint w)
         {
             this.x = (double)x; this.y = (double)y;
             this.z = (double)z; this.w = (double)w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(uint v)
         {
             x = (double)v; y = (double)v;
             z = (double)v; w = (double)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public double4(uint4 v)
         {
             x = (double)v.x; y = (double)v.y;
@@ -210,2105 +165,759 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Arithmetic operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator *(double4 a, double4 b) => new double4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator *(double4 a, double b) => new double4(a.x * b, a.y * b, a.z * b, a.w * b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator *(double a, double4 b) => new double4(a * b.x, a * b.y, a * b.z, a * b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator +(double4 a, double4 b) => new double4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator +(double4 a, double b) => new double4(a.x + b, a.y + b, a.z + b, a.w + b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator +(double a, double4 b) => new double4(a + b.x, a + b.y, a + b.z, a + b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator -(double4 a, double4 b) => new double4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator -(double4 a, double b) => new double4(a.x - b, a.y - b, a.z - b, a.w - b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator -(double a, double4 b) => new double4(a - b.x, a - b.y, a - b.z, a - b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator /(double4 a, double4 b) => new double4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator /(double4 a, double b) => new double4(a.x / b, a.y / b, a.z / b, a.w / b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator /(double a, double4 b) => new double4(a / b.x, a / b.y, a / b.z, a / b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator %(double4 a, double4 b) => new double4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator %(double4 a, double b) => new double4(a.x % b, a.y % b, a.z % b, a.w % b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator %(double a, double4 b) => new double4(a % b.x, a % b.y, a % b.z, a % b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator ++(double4 a) => new double4(++a.x, ++a.y, ++a.z, ++a.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator --(double4 a) => new double4(--a.x, --a.y, --a.z, --a.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator -(double4 a) => new double4(-a.x, -a.y, -a.z, -a.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static double4 operator +(double4 a) => new double4(+a.x, +a.y, +a.z, +a.w);
         #endregion
 
         #region Boolean operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(double4 a, double4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(double4 a, double b) => a.x == b && a.y == b && a.z == b && a.w == b;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(double a, double4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(double4 a, double4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(double4 a, double b) => a.x != b || a.y != b || a.z != b || a.w != b;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(double a, double4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 xx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(x, x);
-         }
+         public double2 xx { [IN(LINE)] get => new double2(x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 xy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(x, y);
-         }
+         public double2 xy { [IN(LINE)] get => new double2(x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 xz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(x, z);
-         }
+         public double2 xz { [IN(LINE)] get => new double2(x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 xw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(x, w);
-         }
+         public double2 xw { [IN(LINE)] get => new double2(x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 yx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(y, x);
-         }
+         public double2 yx { [IN(LINE)] get => new double2(y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 yy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(y, y);
-         }
+         public double2 yy { [IN(LINE)] get => new double2(y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 yz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(y, z);
-         }
+         public double2 yz { [IN(LINE)] get => new double2(y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 yw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(y, w);
-         }
+         public double2 yw { [IN(LINE)] get => new double2(y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 zx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(z, x);
-         }
+         public double2 zx { [IN(LINE)] get => new double2(z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 zy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(z, y);
-         }
+         public double2 zy { [IN(LINE)] get => new double2(z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 zz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(z, z);
-         }
+         public double2 zz { [IN(LINE)] get => new double2(z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 zw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(z, w);
-         }
+         public double2 zw { [IN(LINE)] get => new double2(z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 wx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(w, x);
-         }
+         public double2 wx { [IN(LINE)] get => new double2(w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 wy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(w, y);
-         }
+         public double2 wy { [IN(LINE)] get => new double2(w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 wz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(w, z);
-         }
+         public double2 wz { [IN(LINE)] get => new double2(w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 ww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double2(w, w);
-         }
+         public double2 ww { [IN(LINE)] get => new double2(w, w); }
         #endregion
 
         #region Swap3
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, x, x);
-         }
+         public double3 xxx { [IN(LINE)] get => new double3(x, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, x, y);
-         }
+         public double3 xxy { [IN(LINE)] get => new double3(x, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, x, z);
-         }
+         public double3 xxz { [IN(LINE)] get => new double3(x, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, x, w);
-         }
+         public double3 xxw { [IN(LINE)] get => new double3(x, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, y, x);
-         }
+         public double3 xyx { [IN(LINE)] get => new double3(x, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, y, y);
-         }
+         public double3 xyy { [IN(LINE)] get => new double3(x, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, y, z);
-         }
+         public double3 xyz { [IN(LINE)] get => new double3(x, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, y, w);
-         }
+         public double3 xyw { [IN(LINE)] get => new double3(x, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, z, x);
-         }
+         public double3 xzx { [IN(LINE)] get => new double3(x, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, z, y);
-         }
+         public double3 xzy { [IN(LINE)] get => new double3(x, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, z, z);
-         }
+         public double3 xzz { [IN(LINE)] get => new double3(x, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, z, w);
-         }
+         public double3 xzw { [IN(LINE)] get => new double3(x, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, w, x);
-         }
+         public double3 xwx { [IN(LINE)] get => new double3(x, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, w, y);
-         }
+         public double3 xwy { [IN(LINE)] get => new double3(x, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, w, z);
-         }
+         public double3 xwz { [IN(LINE)] get => new double3(x, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(x, w, w);
-         }
+         public double3 xww { [IN(LINE)] get => new double3(x, w, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, x, x);
-         }
+         public double3 yxx { [IN(LINE)] get => new double3(y, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, x, y);
-         }
+         public double3 yxy { [IN(LINE)] get => new double3(y, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, x, z);
-         }
+         public double3 yxz { [IN(LINE)] get => new double3(y, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, x, w);
-         }
+         public double3 yxw { [IN(LINE)] get => new double3(y, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, y, x);
-         }
+         public double3 yyx { [IN(LINE)] get => new double3(y, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, y, y);
-         }
+         public double3 yyy { [IN(LINE)] get => new double3(y, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, y, z);
-         }
+         public double3 yyz { [IN(LINE)] get => new double3(y, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, y, w);
-         }
+         public double3 yyw { [IN(LINE)] get => new double3(y, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, z, x);
-         }
+         public double3 yzx { [IN(LINE)] get => new double3(y, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, z, y);
-         }
+         public double3 yzy { [IN(LINE)] get => new double3(y, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, z, z);
-         }
+         public double3 yzz { [IN(LINE)] get => new double3(y, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, z, w);
-         }
+         public double3 yzw { [IN(LINE)] get => new double3(y, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 ywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, w, x);
-         }
+         public double3 ywx { [IN(LINE)] get => new double3(y, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 ywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, w, y);
-         }
+         public double3 ywy { [IN(LINE)] get => new double3(y, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 ywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, w, z);
-         }
+         public double3 ywz { [IN(LINE)] get => new double3(y, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(y, w, w);
-         }
+         public double3 yww { [IN(LINE)] get => new double3(y, w, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, x, x);
-         }
+         public double3 zxx { [IN(LINE)] get => new double3(z, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, x, y);
-         }
+         public double3 zxy { [IN(LINE)] get => new double3(z, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, x, z);
-         }
+         public double3 zxz { [IN(LINE)] get => new double3(z, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, x, w);
-         }
+         public double3 zxw { [IN(LINE)] get => new double3(z, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, y, x);
-         }
+         public double3 zyx { [IN(LINE)] get => new double3(z, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, y, y);
-         }
+         public double3 zyy { [IN(LINE)] get => new double3(z, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, y, z);
-         }
+         public double3 zyz { [IN(LINE)] get => new double3(z, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, y, w);
-         }
+         public double3 zyw { [IN(LINE)] get => new double3(z, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, z, x);
-         }
+         public double3 zzx { [IN(LINE)] get => new double3(z, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, z, y);
-         }
+         public double3 zzy { [IN(LINE)] get => new double3(z, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, z, z);
-         }
+         public double3 zzz { [IN(LINE)] get => new double3(z, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, z, w);
-         }
+         public double3 zzw { [IN(LINE)] get => new double3(z, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, w, x);
-         }
+         public double3 zwx { [IN(LINE)] get => new double3(z, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, w, y);
-         }
+         public double3 zwy { [IN(LINE)] get => new double3(z, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, w, z);
-         }
+         public double3 zwz { [IN(LINE)] get => new double3(z, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 zww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(z, w, w);
-         }
+         public double3 zww { [IN(LINE)] get => new double3(z, w, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, x, x);
-         }
+         public double3 wxx { [IN(LINE)] get => new double3(w, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, x, y);
-         }
+         public double3 wxy { [IN(LINE)] get => new double3(w, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, x, z);
-         }
+         public double3 wxz { [IN(LINE)] get => new double3(w, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, x, w);
-         }
+         public double3 wxw { [IN(LINE)] get => new double3(w, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, y, x);
-         }
+         public double3 wyx { [IN(LINE)] get => new double3(w, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, y, y);
-         }
+         public double3 wyy { [IN(LINE)] get => new double3(w, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, y, z);
-         }
+         public double3 wyz { [IN(LINE)] get => new double3(w, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, y, w);
-         }
+         public double3 wyw { [IN(LINE)] get => new double3(w, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, z, x);
-         }
+         public double3 wzx { [IN(LINE)] get => new double3(w, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, z, y);
-         }
+         public double3 wzy { [IN(LINE)] get => new double3(w, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, z, z);
-         }
+         public double3 wzz { [IN(LINE)] get => new double3(w, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, z, w);
-         }
+         public double3 wzw { [IN(LINE)] get => new double3(w, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, w, x);
-         }
+         public double3 wwx { [IN(LINE)] get => new double3(w, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, w, y);
-         }
+         public double3 wwy { [IN(LINE)] get => new double3(w, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 wwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, w, z);
-         }
+         public double3 wwz { [IN(LINE)] get => new double3(w, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 www
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double3(w, w, w);
-         }
+         public double3 www { [IN(LINE)] get => new double3(w, w, w); }
         #endregion
 
         #region Swap4
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xwww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(x, w, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ywww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(y, w, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 zwww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(z, w, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 wwww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new double4(w, w, w, w);
-         }
+         public double4 xxxx { [IN(LINE)] get => new double4(x, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxxy { [IN(LINE)] get => new double4(x, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxxz { [IN(LINE)] get => new double4(x, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxxw { [IN(LINE)] get => new double4(x, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxyx { [IN(LINE)] get => new double4(x, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxyy { [IN(LINE)] get => new double4(x, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxyz { [IN(LINE)] get => new double4(x, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxyw { [IN(LINE)] get => new double4(x, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxzx { [IN(LINE)] get => new double4(x, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxzy { [IN(LINE)] get => new double4(x, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxzz { [IN(LINE)] get => new double4(x, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxzw { [IN(LINE)] get => new double4(x, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxwx { [IN(LINE)] get => new double4(x, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxwy { [IN(LINE)] get => new double4(x, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxwz { [IN(LINE)] get => new double4(x, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xxww { [IN(LINE)] get => new double4(x, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyxx { [IN(LINE)] get => new double4(x, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyxy { [IN(LINE)] get => new double4(x, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyxz { [IN(LINE)] get => new double4(x, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyxw { [IN(LINE)] get => new double4(x, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyyx { [IN(LINE)] get => new double4(x, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyyy { [IN(LINE)] get => new double4(x, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyyz { [IN(LINE)] get => new double4(x, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyyw { [IN(LINE)] get => new double4(x, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyzx { [IN(LINE)] get => new double4(x, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyzy { [IN(LINE)] get => new double4(x, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyzz { [IN(LINE)] get => new double4(x, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyzw { [IN(LINE)] get => new double4(x, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xywx { [IN(LINE)] get => new double4(x, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xywy { [IN(LINE)] get => new double4(x, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xywz { [IN(LINE)] get => new double4(x, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xyww { [IN(LINE)] get => new double4(x, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzxx { [IN(LINE)] get => new double4(x, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzxy { [IN(LINE)] get => new double4(x, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzxz { [IN(LINE)] get => new double4(x, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzxw { [IN(LINE)] get => new double4(x, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzyx { [IN(LINE)] get => new double4(x, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzyy { [IN(LINE)] get => new double4(x, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzyz { [IN(LINE)] get => new double4(x, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzyw { [IN(LINE)] get => new double4(x, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzzx { [IN(LINE)] get => new double4(x, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzzy { [IN(LINE)] get => new double4(x, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzzz { [IN(LINE)] get => new double4(x, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzzw { [IN(LINE)] get => new double4(x, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzwx { [IN(LINE)] get => new double4(x, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzwy { [IN(LINE)] get => new double4(x, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzwz { [IN(LINE)] get => new double4(x, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xzww { [IN(LINE)] get => new double4(x, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwxx { [IN(LINE)] get => new double4(x, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwxy { [IN(LINE)] get => new double4(x, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwxz { [IN(LINE)] get => new double4(x, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwxw { [IN(LINE)] get => new double4(x, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwyx { [IN(LINE)] get => new double4(x, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwyy { [IN(LINE)] get => new double4(x, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwyz { [IN(LINE)] get => new double4(x, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwyw { [IN(LINE)] get => new double4(x, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwzx { [IN(LINE)] get => new double4(x, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwzy { [IN(LINE)] get => new double4(x, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwzz { [IN(LINE)] get => new double4(x, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwzw { [IN(LINE)] get => new double4(x, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwwx { [IN(LINE)] get => new double4(x, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwwy { [IN(LINE)] get => new double4(x, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwwz { [IN(LINE)] get => new double4(x, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 xwww { [IN(LINE)] get => new double4(x, w, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxxx { [IN(LINE)] get => new double4(y, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxxy { [IN(LINE)] get => new double4(y, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxxz { [IN(LINE)] get => new double4(y, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxxw { [IN(LINE)] get => new double4(y, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxyx { [IN(LINE)] get => new double4(y, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxyy { [IN(LINE)] get => new double4(y, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxyz { [IN(LINE)] get => new double4(y, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxyw { [IN(LINE)] get => new double4(y, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxzx { [IN(LINE)] get => new double4(y, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxzy { [IN(LINE)] get => new double4(y, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxzz { [IN(LINE)] get => new double4(y, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxzw { [IN(LINE)] get => new double4(y, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxwx { [IN(LINE)] get => new double4(y, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxwy { [IN(LINE)] get => new double4(y, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxwz { [IN(LINE)] get => new double4(y, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yxww { [IN(LINE)] get => new double4(y, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyxx { [IN(LINE)] get => new double4(y, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyxy { [IN(LINE)] get => new double4(y, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyxz { [IN(LINE)] get => new double4(y, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyxw { [IN(LINE)] get => new double4(y, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyyx { [IN(LINE)] get => new double4(y, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyyy { [IN(LINE)] get => new double4(y, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyyz { [IN(LINE)] get => new double4(y, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyyw { [IN(LINE)] get => new double4(y, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyzx { [IN(LINE)] get => new double4(y, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyzy { [IN(LINE)] get => new double4(y, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyzz { [IN(LINE)] get => new double4(y, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyzw { [IN(LINE)] get => new double4(y, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yywx { [IN(LINE)] get => new double4(y, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yywy { [IN(LINE)] get => new double4(y, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yywz { [IN(LINE)] get => new double4(y, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yyww { [IN(LINE)] get => new double4(y, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzxx { [IN(LINE)] get => new double4(y, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzxy { [IN(LINE)] get => new double4(y, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzxz { [IN(LINE)] get => new double4(y, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzxw { [IN(LINE)] get => new double4(y, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzyx { [IN(LINE)] get => new double4(y, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzyy { [IN(LINE)] get => new double4(y, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzyz { [IN(LINE)] get => new double4(y, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzyw { [IN(LINE)] get => new double4(y, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzzx { [IN(LINE)] get => new double4(y, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzzy { [IN(LINE)] get => new double4(y, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzzz { [IN(LINE)] get => new double4(y, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzzw { [IN(LINE)] get => new double4(y, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzwx { [IN(LINE)] get => new double4(y, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzwy { [IN(LINE)] get => new double4(y, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzwz { [IN(LINE)] get => new double4(y, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 yzww { [IN(LINE)] get => new double4(y, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywxx { [IN(LINE)] get => new double4(y, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywxy { [IN(LINE)] get => new double4(y, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywxz { [IN(LINE)] get => new double4(y, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywxw { [IN(LINE)] get => new double4(y, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywyx { [IN(LINE)] get => new double4(y, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywyy { [IN(LINE)] get => new double4(y, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywyz { [IN(LINE)] get => new double4(y, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywyw { [IN(LINE)] get => new double4(y, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywzx { [IN(LINE)] get => new double4(y, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywzy { [IN(LINE)] get => new double4(y, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywzz { [IN(LINE)] get => new double4(y, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywzw { [IN(LINE)] get => new double4(y, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywwx { [IN(LINE)] get => new double4(y, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywwy { [IN(LINE)] get => new double4(y, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywwz { [IN(LINE)] get => new double4(y, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 ywww { [IN(LINE)] get => new double4(y, w, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxxx { [IN(LINE)] get => new double4(z, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxxy { [IN(LINE)] get => new double4(z, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxxz { [IN(LINE)] get => new double4(z, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxxw { [IN(LINE)] get => new double4(z, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxyx { [IN(LINE)] get => new double4(z, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxyy { [IN(LINE)] get => new double4(z, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxyz { [IN(LINE)] get => new double4(z, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxyw { [IN(LINE)] get => new double4(z, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxzx { [IN(LINE)] get => new double4(z, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxzy { [IN(LINE)] get => new double4(z, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxzz { [IN(LINE)] get => new double4(z, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxzw { [IN(LINE)] get => new double4(z, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxwx { [IN(LINE)] get => new double4(z, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxwy { [IN(LINE)] get => new double4(z, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxwz { [IN(LINE)] get => new double4(z, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zxww { [IN(LINE)] get => new double4(z, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyxx { [IN(LINE)] get => new double4(z, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyxy { [IN(LINE)] get => new double4(z, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyxz { [IN(LINE)] get => new double4(z, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyxw { [IN(LINE)] get => new double4(z, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyyx { [IN(LINE)] get => new double4(z, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyyy { [IN(LINE)] get => new double4(z, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyyz { [IN(LINE)] get => new double4(z, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyyw { [IN(LINE)] get => new double4(z, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyzx { [IN(LINE)] get => new double4(z, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyzy { [IN(LINE)] get => new double4(z, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyzz { [IN(LINE)] get => new double4(z, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyzw { [IN(LINE)] get => new double4(z, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zywx { [IN(LINE)] get => new double4(z, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zywy { [IN(LINE)] get => new double4(z, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zywz { [IN(LINE)] get => new double4(z, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zyww { [IN(LINE)] get => new double4(z, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzxx { [IN(LINE)] get => new double4(z, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzxy { [IN(LINE)] get => new double4(z, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzxz { [IN(LINE)] get => new double4(z, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzxw { [IN(LINE)] get => new double4(z, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzyx { [IN(LINE)] get => new double4(z, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzyy { [IN(LINE)] get => new double4(z, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzyz { [IN(LINE)] get => new double4(z, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzyw { [IN(LINE)] get => new double4(z, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzzx { [IN(LINE)] get => new double4(z, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzzy { [IN(LINE)] get => new double4(z, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzzz { [IN(LINE)] get => new double4(z, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzzw { [IN(LINE)] get => new double4(z, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzwx { [IN(LINE)] get => new double4(z, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzwy { [IN(LINE)] get => new double4(z, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzwz { [IN(LINE)] get => new double4(z, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zzww { [IN(LINE)] get => new double4(z, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwxx { [IN(LINE)] get => new double4(z, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwxy { [IN(LINE)] get => new double4(z, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwxz { [IN(LINE)] get => new double4(z, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwxw { [IN(LINE)] get => new double4(z, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwyx { [IN(LINE)] get => new double4(z, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwyy { [IN(LINE)] get => new double4(z, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwyz { [IN(LINE)] get => new double4(z, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwyw { [IN(LINE)] get => new double4(z, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwzx { [IN(LINE)] get => new double4(z, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwzy { [IN(LINE)] get => new double4(z, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwzz { [IN(LINE)] get => new double4(z, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwzw { [IN(LINE)] get => new double4(z, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwwx { [IN(LINE)] get => new double4(z, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwwy { [IN(LINE)] get => new double4(z, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwwz { [IN(LINE)] get => new double4(z, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 zwww { [IN(LINE)] get => new double4(z, w, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxxx { [IN(LINE)] get => new double4(w, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxxy { [IN(LINE)] get => new double4(w, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxxz { [IN(LINE)] get => new double4(w, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxxw { [IN(LINE)] get => new double4(w, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxyx { [IN(LINE)] get => new double4(w, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxyy { [IN(LINE)] get => new double4(w, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxyz { [IN(LINE)] get => new double4(w, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxyw { [IN(LINE)] get => new double4(w, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxzx { [IN(LINE)] get => new double4(w, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxzy { [IN(LINE)] get => new double4(w, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxzz { [IN(LINE)] get => new double4(w, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxzw { [IN(LINE)] get => new double4(w, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxwx { [IN(LINE)] get => new double4(w, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxwy { [IN(LINE)] get => new double4(w, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxwz { [IN(LINE)] get => new double4(w, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wxww { [IN(LINE)] get => new double4(w, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyxx { [IN(LINE)] get => new double4(w, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyxy { [IN(LINE)] get => new double4(w, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyxz { [IN(LINE)] get => new double4(w, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyxw { [IN(LINE)] get => new double4(w, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyyx { [IN(LINE)] get => new double4(w, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyyy { [IN(LINE)] get => new double4(w, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyyz { [IN(LINE)] get => new double4(w, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyyw { [IN(LINE)] get => new double4(w, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyzx { [IN(LINE)] get => new double4(w, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyzy { [IN(LINE)] get => new double4(w, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyzz { [IN(LINE)] get => new double4(w, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyzw { [IN(LINE)] get => new double4(w, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wywx { [IN(LINE)] get => new double4(w, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wywy { [IN(LINE)] get => new double4(w, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wywz { [IN(LINE)] get => new double4(w, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wyww { [IN(LINE)] get => new double4(w, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzxx { [IN(LINE)] get => new double4(w, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzxy { [IN(LINE)] get => new double4(w, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzxz { [IN(LINE)] get => new double4(w, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzxw { [IN(LINE)] get => new double4(w, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzyx { [IN(LINE)] get => new double4(w, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzyy { [IN(LINE)] get => new double4(w, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzyz { [IN(LINE)] get => new double4(w, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzyw { [IN(LINE)] get => new double4(w, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzzx { [IN(LINE)] get => new double4(w, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzzy { [IN(LINE)] get => new double4(w, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzzz { [IN(LINE)] get => new double4(w, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzzw { [IN(LINE)] get => new double4(w, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzwx { [IN(LINE)] get => new double4(w, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzwy { [IN(LINE)] get => new double4(w, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzwz { [IN(LINE)] get => new double4(w, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wzww { [IN(LINE)] get => new double4(w, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwxx { [IN(LINE)] get => new double4(w, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwxy { [IN(LINE)] get => new double4(w, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwxz { [IN(LINE)] get => new double4(w, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwxw { [IN(LINE)] get => new double4(w, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwyx { [IN(LINE)] get => new double4(w, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwyy { [IN(LINE)] get => new double4(w, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwyz { [IN(LINE)] get => new double4(w, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwyw { [IN(LINE)] get => new double4(w, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwzx { [IN(LINE)] get => new double4(w, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwzy { [IN(LINE)] get => new double4(w, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwzz { [IN(LINE)] get => new double4(w, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwzw { [IN(LINE)] get => new double4(w, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwwx { [IN(LINE)] get => new double4(w, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwwy { [IN(LINE)] get => new double4(w, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwwz { [IN(LINE)] get => new double4(w, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public double4 wwww { [IN(LINE)] get => new double4(w, w, w, w); }
         #endregion
 
 
-        #region Object
-        public override bool Equals(object o) => o is double4 target && Equals(target); 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        #region Other 
+        [IN(LINE)]
         public override int GetHashCode() => math.hash(this);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override string ToString() => $"double4({x}, {y}, {z}, {w})";
-        #endregion
-
-        #region IEquatable/IFormattable
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
+        public override bool Equals(object o) => o is double4 target && Equals(target); 
+        [IN(LINE)]
         public bool Equals(double4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
+        public override string ToString() => $"double4({x}, {y}, {z}, {w})";
+        [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"double4({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";
@@ -2324,7 +933,7 @@ namespace DCFApixels.DataMath
         {
             private readonly double* _pointer;
             private sbyte _index;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public Enumerator(in double4 value)
             {
                 fixed (double4* array = &value)
@@ -2334,11 +943,11 @@ namespace DCFApixels.DataMath
                 }
             }
             public double Current => _pointer[_index];
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public void Dispose() { }
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public bool MoveNext() => ++_index < LENGTH;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public void Reset() { }
         }
         #endregion

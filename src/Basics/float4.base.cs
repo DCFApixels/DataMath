@@ -1,10 +1,11 @@
 using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
@@ -50,157 +51,111 @@ namespace DCFApixels.DataMath
         public float w;
 
         #region IColor
-        public float r 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)x;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => x = (float)value;
-        }
-        public float g 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)y;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => y = (float)value;
-        }
-        public float b 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)z;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => z = (float)value;
-        }
-        public float a 
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (float)w;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => w = (float)value;
-        }
+        public float r { [IN(LINE)] get => (float)x; [IN(LINE)] set => x = (float)value; }
+        public float g { [IN(LINE)] get => (float)y; [IN(LINE)] set => y = (float)value; }
+        public float b { [IN(LINE)] get => (float)z; [IN(LINE)] set => z = (float)value; }
+        public float a { [IN(LINE)] get => (float)w; [IN(LINE)] set => w = (float)value; }
         #endregion
 
         #region IVectorN
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector1<float>.x 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => x; 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => x = value; 
-        }
+        float IVector1<float>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector2<float>.y 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => y; 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => y = value; 
-        }
+        float IVector2<float>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector3<float>.z 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => z;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => z = value;
-        }
+        float IVector3<float>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector4<float>.w 
-        { 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => w;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => w = value;
-        }
+        float IVector4<float>.w { [IN(LINE)] get => w; [IN(LINE)] set => w = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int length
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => LENGTH;
-        }
+        public int length { [IN(LINE)] get => LENGTH; }
 
-        public unsafe ref float this[int index]
+        public unsafe float this[int index]
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
-                fixed (float4* array = &this) { return ref ((float*)array)[index]; }
+                fixed (float4* array = &this) { return ((float*)array)[index]; }
+            }
+            set
+            {
+#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+#endif
+                fixed (float* array = &x) { array[index] = value; }
             }
         }
         #endregion
 
         #region Constructors
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(float x, float y, float z, float w)
         {
             this.x = x; this.y = y;
             this.z = z; this.w = w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(float v)
         {
             x = v; y = v;
             z = v; w = v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(float4 v)
         {
             x = v.x; y = v.y;
             z = v.z; w = v.w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(double x, double y, double z, double w)
         {
             this.x = (float)x; this.y = (float)y;
             this.z = (float)z; this.w = (float)w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(double v)
         {
             x = (float)v; y = (float)v;
             z = (float)v; w = (float)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(double4 v)
         {
             x = (float)v.x; y = (float)v.y;
             z = (float)v.z; w = (float)v.w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(int x, int y, int z, int w)
         {
             this.x = (float)x; this.y = (float)y;
             this.z = (float)z; this.w = (float)w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(int v)
         {
             x = (float)v; y = (float)v;
             z = (float)v; w = (float)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(int4 v)
         {
             x = (float)v.x; y = (float)v.y;
             z = (float)v.z; w = (float)v.w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(uint x, uint y, uint z, uint w)
         {
             this.x = (float)x; this.y = (float)y;
             this.z = (float)z; this.w = (float)w;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(uint v)
         {
             x = (float)v; y = (float)v;
             z = (float)v; w = (float)v;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public float4(uint4 v)
         {
             x = (float)v.x; y = (float)v.y;
@@ -210,2105 +165,759 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Arithmetic operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator *(float4 a, float4 b) => new float4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator *(float4 a, float b) => new float4(a.x * b, a.y * b, a.z * b, a.w * b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator *(float a, float4 b) => new float4(a * b.x, a * b.y, a * b.z, a * b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator +(float4 a, float4 b) => new float4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator +(float4 a, float b) => new float4(a.x + b, a.y + b, a.z + b, a.w + b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator +(float a, float4 b) => new float4(a + b.x, a + b.y, a + b.z, a + b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator -(float4 a, float4 b) => new float4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator -(float4 a, float b) => new float4(a.x - b, a.y - b, a.z - b, a.w - b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator -(float a, float4 b) => new float4(a - b.x, a - b.y, a - b.z, a - b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator /(float4 a, float4 b) => new float4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator /(float4 a, float b) => new float4(a.x / b, a.y / b, a.z / b, a.w / b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator /(float a, float4 b) => new float4(a / b.x, a / b.y, a / b.z, a / b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator %(float4 a, float4 b) => new float4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator %(float4 a, float b) => new float4(a.x % b, a.y % b, a.z % b, a.w % b);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator %(float a, float4 b) => new float4(a % b.x, a % b.y, a % b.z, a % b.w);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator ++(float4 a) => new float4(++a.x, ++a.y, ++a.z, ++a.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator --(float4 a) => new float4(--a.x, --a.y, --a.z, --a.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator -(float4 a) => new float4(-a.x, -a.y, -a.z, -a.w);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static float4 operator +(float4 a) => new float4(+a.x, +a.y, +a.z, +a.w);
         #endregion
 
         #region Boolean operators
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(float4 a, float4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(float4 a, float b) => a.x == b && a.y == b && a.z == b && a.w == b;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator ==(float a, float4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(float4 a, float4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(float4 a, float b) => a.x != b || a.y != b || a.z != b || a.w != b;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
         public static bool operator !=(float a, float4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
         #endregion
 
         #region Swap2
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 xx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(x, x);
-         }
+         public float2 xx { [IN(LINE)] get => new float2(x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 xy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(x, y);
-         }
+         public float2 xy { [IN(LINE)] get => new float2(x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 xz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(x, z);
-         }
+         public float2 xz { [IN(LINE)] get => new float2(x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 xw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(x, w);
-         }
+         public float2 xw { [IN(LINE)] get => new float2(x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 yx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(y, x);
-         }
+         public float2 yx { [IN(LINE)] get => new float2(y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 yy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(y, y);
-         }
+         public float2 yy { [IN(LINE)] get => new float2(y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 yz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(y, z);
-         }
+         public float2 yz { [IN(LINE)] get => new float2(y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 yw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(y, w);
-         }
+         public float2 yw { [IN(LINE)] get => new float2(y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 zx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(z, x);
-         }
+         public float2 zx { [IN(LINE)] get => new float2(z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 zy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(z, y);
-         }
+         public float2 zy { [IN(LINE)] get => new float2(z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 zz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(z, z);
-         }
+         public float2 zz { [IN(LINE)] get => new float2(z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 zw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(z, w);
-         }
+         public float2 zw { [IN(LINE)] get => new float2(z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 wx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(w, x);
-         }
+         public float2 wx { [IN(LINE)] get => new float2(w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 wy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(w, y);
-         }
+         public float2 wy { [IN(LINE)] get => new float2(w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 wz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(w, z);
-         }
+         public float2 wz { [IN(LINE)] get => new float2(w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float2 ww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float2(w, w);
-         }
+         public float2 ww { [IN(LINE)] get => new float2(w, w); }
         #endregion
 
         #region Swap3
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, x, x);
-         }
+         public float3 xxx { [IN(LINE)] get => new float3(x, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, x, y);
-         }
+         public float3 xxy { [IN(LINE)] get => new float3(x, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, x, z);
-         }
+         public float3 xxz { [IN(LINE)] get => new float3(x, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, x, w);
-         }
+         public float3 xxw { [IN(LINE)] get => new float3(x, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, y, x);
-         }
+         public float3 xyx { [IN(LINE)] get => new float3(x, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, y, y);
-         }
+         public float3 xyy { [IN(LINE)] get => new float3(x, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, y, z);
-         }
+         public float3 xyz { [IN(LINE)] get => new float3(x, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, y, w);
-         }
+         public float3 xyw { [IN(LINE)] get => new float3(x, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, z, x);
-         }
+         public float3 xzx { [IN(LINE)] get => new float3(x, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, z, y);
-         }
+         public float3 xzy { [IN(LINE)] get => new float3(x, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, z, z);
-         }
+         public float3 xzz { [IN(LINE)] get => new float3(x, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, z, w);
-         }
+         public float3 xzw { [IN(LINE)] get => new float3(x, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, w, x);
-         }
+         public float3 xwx { [IN(LINE)] get => new float3(x, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, w, y);
-         }
+         public float3 xwy { [IN(LINE)] get => new float3(x, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, w, z);
-         }
+         public float3 xwz { [IN(LINE)] get => new float3(x, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 xww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(x, w, w);
-         }
+         public float3 xww { [IN(LINE)] get => new float3(x, w, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, x, x);
-         }
+         public float3 yxx { [IN(LINE)] get => new float3(y, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, x, y);
-         }
+         public float3 yxy { [IN(LINE)] get => new float3(y, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, x, z);
-         }
+         public float3 yxz { [IN(LINE)] get => new float3(y, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, x, w);
-         }
+         public float3 yxw { [IN(LINE)] get => new float3(y, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, y, x);
-         }
+         public float3 yyx { [IN(LINE)] get => new float3(y, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, y, y);
-         }
+         public float3 yyy { [IN(LINE)] get => new float3(y, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, y, z);
-         }
+         public float3 yyz { [IN(LINE)] get => new float3(y, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, y, w);
-         }
+         public float3 yyw { [IN(LINE)] get => new float3(y, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, z, x);
-         }
+         public float3 yzx { [IN(LINE)] get => new float3(y, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, z, y);
-         }
+         public float3 yzy { [IN(LINE)] get => new float3(y, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, z, z);
-         }
+         public float3 yzz { [IN(LINE)] get => new float3(y, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, z, w);
-         }
+         public float3 yzw { [IN(LINE)] get => new float3(y, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 ywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, w, x);
-         }
+         public float3 ywx { [IN(LINE)] get => new float3(y, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 ywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, w, y);
-         }
+         public float3 ywy { [IN(LINE)] get => new float3(y, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 ywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, w, z);
-         }
+         public float3 ywz { [IN(LINE)] get => new float3(y, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 yww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(y, w, w);
-         }
+         public float3 yww { [IN(LINE)] get => new float3(y, w, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, x, x);
-         }
+         public float3 zxx { [IN(LINE)] get => new float3(z, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, x, y);
-         }
+         public float3 zxy { [IN(LINE)] get => new float3(z, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, x, z);
-         }
+         public float3 zxz { [IN(LINE)] get => new float3(z, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, x, w);
-         }
+         public float3 zxw { [IN(LINE)] get => new float3(z, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, y, x);
-         }
+         public float3 zyx { [IN(LINE)] get => new float3(z, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, y, y);
-         }
+         public float3 zyy { [IN(LINE)] get => new float3(z, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, y, z);
-         }
+         public float3 zyz { [IN(LINE)] get => new float3(z, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, y, w);
-         }
+         public float3 zyw { [IN(LINE)] get => new float3(z, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, z, x);
-         }
+         public float3 zzx { [IN(LINE)] get => new float3(z, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, z, y);
-         }
+         public float3 zzy { [IN(LINE)] get => new float3(z, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, z, z);
-         }
+         public float3 zzz { [IN(LINE)] get => new float3(z, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, z, w);
-         }
+         public float3 zzw { [IN(LINE)] get => new float3(z, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, w, x);
-         }
+         public float3 zwx { [IN(LINE)] get => new float3(z, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, w, y);
-         }
+         public float3 zwy { [IN(LINE)] get => new float3(z, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, w, z);
-         }
+         public float3 zwz { [IN(LINE)] get => new float3(z, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 zww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(z, w, w);
-         }
+         public float3 zww { [IN(LINE)] get => new float3(z, w, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, x, x);
-         }
+         public float3 wxx { [IN(LINE)] get => new float3(w, x, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, x, y);
-         }
+         public float3 wxy { [IN(LINE)] get => new float3(w, x, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, x, z);
-         }
+         public float3 wxz { [IN(LINE)] get => new float3(w, x, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, x, w);
-         }
+         public float3 wxw { [IN(LINE)] get => new float3(w, x, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, y, x);
-         }
+         public float3 wyx { [IN(LINE)] get => new float3(w, y, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, y, y);
-         }
+         public float3 wyy { [IN(LINE)] get => new float3(w, y, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, y, z);
-         }
+         public float3 wyz { [IN(LINE)] get => new float3(w, y, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, y, w);
-         }
+         public float3 wyw { [IN(LINE)] get => new float3(w, y, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, z, x);
-         }
+         public float3 wzx { [IN(LINE)] get => new float3(w, z, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, z, y);
-         }
+         public float3 wzy { [IN(LINE)] get => new float3(w, z, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, z, z);
-         }
+         public float3 wzz { [IN(LINE)] get => new float3(w, z, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, z, w);
-         }
+         public float3 wzw { [IN(LINE)] get => new float3(w, z, w); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, w, x);
-         }
+         public float3 wwx { [IN(LINE)] get => new float3(w, w, x); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, w, y);
-         }
+         public float3 wwy { [IN(LINE)] get => new float3(w, w, y); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 wwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, w, z);
-         }
+         public float3 wwz { [IN(LINE)] get => new float3(w, w, z); }
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float3 www
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float3(w, w, w);
-         }
+         public float3 www { [IN(LINE)] get => new float3(w, w, w); }
         #endregion
 
         #region Swap4
          [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 xwww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(x, w, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 yzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 ywww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(y, w, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 zwww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(z, w, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wxww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, x, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wywx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wywy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wywz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wyww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, y, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wzww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, z, w, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwxx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, x, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwxy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, x, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwxz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, x, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwxw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, x, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwyx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, y, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwyy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, y, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwyz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, y, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwyw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, y, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwzx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, z, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwzy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, z, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwzz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, z, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwzw
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, z, w);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwwx
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, w, x);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwwy
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, w, y);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwwz
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, w, z);
-         }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public float4 wwww
-         {
-             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-             get => new float4(w, w, w, w);
-         }
+         public float4 xxxx { [IN(LINE)] get => new float4(x, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxxy { [IN(LINE)] get => new float4(x, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxxz { [IN(LINE)] get => new float4(x, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxxw { [IN(LINE)] get => new float4(x, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxyx { [IN(LINE)] get => new float4(x, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxyy { [IN(LINE)] get => new float4(x, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxyz { [IN(LINE)] get => new float4(x, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxyw { [IN(LINE)] get => new float4(x, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxzx { [IN(LINE)] get => new float4(x, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxzy { [IN(LINE)] get => new float4(x, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxzz { [IN(LINE)] get => new float4(x, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxzw { [IN(LINE)] get => new float4(x, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxwx { [IN(LINE)] get => new float4(x, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxwy { [IN(LINE)] get => new float4(x, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxwz { [IN(LINE)] get => new float4(x, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xxww { [IN(LINE)] get => new float4(x, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyxx { [IN(LINE)] get => new float4(x, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyxy { [IN(LINE)] get => new float4(x, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyxz { [IN(LINE)] get => new float4(x, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyxw { [IN(LINE)] get => new float4(x, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyyx { [IN(LINE)] get => new float4(x, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyyy { [IN(LINE)] get => new float4(x, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyyz { [IN(LINE)] get => new float4(x, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyyw { [IN(LINE)] get => new float4(x, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyzx { [IN(LINE)] get => new float4(x, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyzy { [IN(LINE)] get => new float4(x, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyzz { [IN(LINE)] get => new float4(x, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyzw { [IN(LINE)] get => new float4(x, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xywx { [IN(LINE)] get => new float4(x, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xywy { [IN(LINE)] get => new float4(x, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xywz { [IN(LINE)] get => new float4(x, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xyww { [IN(LINE)] get => new float4(x, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzxx { [IN(LINE)] get => new float4(x, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzxy { [IN(LINE)] get => new float4(x, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzxz { [IN(LINE)] get => new float4(x, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzxw { [IN(LINE)] get => new float4(x, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzyx { [IN(LINE)] get => new float4(x, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzyy { [IN(LINE)] get => new float4(x, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzyz { [IN(LINE)] get => new float4(x, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzyw { [IN(LINE)] get => new float4(x, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzzx { [IN(LINE)] get => new float4(x, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzzy { [IN(LINE)] get => new float4(x, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzzz { [IN(LINE)] get => new float4(x, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzzw { [IN(LINE)] get => new float4(x, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzwx { [IN(LINE)] get => new float4(x, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzwy { [IN(LINE)] get => new float4(x, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzwz { [IN(LINE)] get => new float4(x, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xzww { [IN(LINE)] get => new float4(x, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwxx { [IN(LINE)] get => new float4(x, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwxy { [IN(LINE)] get => new float4(x, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwxz { [IN(LINE)] get => new float4(x, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwxw { [IN(LINE)] get => new float4(x, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwyx { [IN(LINE)] get => new float4(x, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwyy { [IN(LINE)] get => new float4(x, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwyz { [IN(LINE)] get => new float4(x, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwyw { [IN(LINE)] get => new float4(x, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwzx { [IN(LINE)] get => new float4(x, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwzy { [IN(LINE)] get => new float4(x, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwzz { [IN(LINE)] get => new float4(x, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwzw { [IN(LINE)] get => new float4(x, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwwx { [IN(LINE)] get => new float4(x, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwwy { [IN(LINE)] get => new float4(x, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwwz { [IN(LINE)] get => new float4(x, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 xwww { [IN(LINE)] get => new float4(x, w, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxxx { [IN(LINE)] get => new float4(y, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxxy { [IN(LINE)] get => new float4(y, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxxz { [IN(LINE)] get => new float4(y, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxxw { [IN(LINE)] get => new float4(y, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxyx { [IN(LINE)] get => new float4(y, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxyy { [IN(LINE)] get => new float4(y, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxyz { [IN(LINE)] get => new float4(y, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxyw { [IN(LINE)] get => new float4(y, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxzx { [IN(LINE)] get => new float4(y, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxzy { [IN(LINE)] get => new float4(y, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxzz { [IN(LINE)] get => new float4(y, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxzw { [IN(LINE)] get => new float4(y, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxwx { [IN(LINE)] get => new float4(y, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxwy { [IN(LINE)] get => new float4(y, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxwz { [IN(LINE)] get => new float4(y, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yxww { [IN(LINE)] get => new float4(y, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyxx { [IN(LINE)] get => new float4(y, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyxy { [IN(LINE)] get => new float4(y, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyxz { [IN(LINE)] get => new float4(y, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyxw { [IN(LINE)] get => new float4(y, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyyx { [IN(LINE)] get => new float4(y, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyyy { [IN(LINE)] get => new float4(y, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyyz { [IN(LINE)] get => new float4(y, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyyw { [IN(LINE)] get => new float4(y, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyzx { [IN(LINE)] get => new float4(y, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyzy { [IN(LINE)] get => new float4(y, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyzz { [IN(LINE)] get => new float4(y, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyzw { [IN(LINE)] get => new float4(y, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yywx { [IN(LINE)] get => new float4(y, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yywy { [IN(LINE)] get => new float4(y, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yywz { [IN(LINE)] get => new float4(y, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yyww { [IN(LINE)] get => new float4(y, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzxx { [IN(LINE)] get => new float4(y, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzxy { [IN(LINE)] get => new float4(y, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzxz { [IN(LINE)] get => new float4(y, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzxw { [IN(LINE)] get => new float4(y, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzyx { [IN(LINE)] get => new float4(y, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzyy { [IN(LINE)] get => new float4(y, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzyz { [IN(LINE)] get => new float4(y, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzyw { [IN(LINE)] get => new float4(y, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzzx { [IN(LINE)] get => new float4(y, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzzy { [IN(LINE)] get => new float4(y, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzzz { [IN(LINE)] get => new float4(y, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzzw { [IN(LINE)] get => new float4(y, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzwx { [IN(LINE)] get => new float4(y, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzwy { [IN(LINE)] get => new float4(y, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzwz { [IN(LINE)] get => new float4(y, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 yzww { [IN(LINE)] get => new float4(y, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywxx { [IN(LINE)] get => new float4(y, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywxy { [IN(LINE)] get => new float4(y, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywxz { [IN(LINE)] get => new float4(y, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywxw { [IN(LINE)] get => new float4(y, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywyx { [IN(LINE)] get => new float4(y, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywyy { [IN(LINE)] get => new float4(y, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywyz { [IN(LINE)] get => new float4(y, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywyw { [IN(LINE)] get => new float4(y, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywzx { [IN(LINE)] get => new float4(y, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywzy { [IN(LINE)] get => new float4(y, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywzz { [IN(LINE)] get => new float4(y, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywzw { [IN(LINE)] get => new float4(y, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywwx { [IN(LINE)] get => new float4(y, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywwy { [IN(LINE)] get => new float4(y, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywwz { [IN(LINE)] get => new float4(y, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 ywww { [IN(LINE)] get => new float4(y, w, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxxx { [IN(LINE)] get => new float4(z, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxxy { [IN(LINE)] get => new float4(z, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxxz { [IN(LINE)] get => new float4(z, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxxw { [IN(LINE)] get => new float4(z, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxyx { [IN(LINE)] get => new float4(z, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxyy { [IN(LINE)] get => new float4(z, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxyz { [IN(LINE)] get => new float4(z, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxyw { [IN(LINE)] get => new float4(z, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxzx { [IN(LINE)] get => new float4(z, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxzy { [IN(LINE)] get => new float4(z, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxzz { [IN(LINE)] get => new float4(z, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxzw { [IN(LINE)] get => new float4(z, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxwx { [IN(LINE)] get => new float4(z, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxwy { [IN(LINE)] get => new float4(z, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxwz { [IN(LINE)] get => new float4(z, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zxww { [IN(LINE)] get => new float4(z, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyxx { [IN(LINE)] get => new float4(z, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyxy { [IN(LINE)] get => new float4(z, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyxz { [IN(LINE)] get => new float4(z, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyxw { [IN(LINE)] get => new float4(z, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyyx { [IN(LINE)] get => new float4(z, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyyy { [IN(LINE)] get => new float4(z, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyyz { [IN(LINE)] get => new float4(z, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyyw { [IN(LINE)] get => new float4(z, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyzx { [IN(LINE)] get => new float4(z, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyzy { [IN(LINE)] get => new float4(z, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyzz { [IN(LINE)] get => new float4(z, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyzw { [IN(LINE)] get => new float4(z, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zywx { [IN(LINE)] get => new float4(z, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zywy { [IN(LINE)] get => new float4(z, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zywz { [IN(LINE)] get => new float4(z, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zyww { [IN(LINE)] get => new float4(z, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzxx { [IN(LINE)] get => new float4(z, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzxy { [IN(LINE)] get => new float4(z, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzxz { [IN(LINE)] get => new float4(z, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzxw { [IN(LINE)] get => new float4(z, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzyx { [IN(LINE)] get => new float4(z, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzyy { [IN(LINE)] get => new float4(z, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzyz { [IN(LINE)] get => new float4(z, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzyw { [IN(LINE)] get => new float4(z, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzzx { [IN(LINE)] get => new float4(z, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzzy { [IN(LINE)] get => new float4(z, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzzz { [IN(LINE)] get => new float4(z, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzzw { [IN(LINE)] get => new float4(z, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzwx { [IN(LINE)] get => new float4(z, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzwy { [IN(LINE)] get => new float4(z, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzwz { [IN(LINE)] get => new float4(z, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zzww { [IN(LINE)] get => new float4(z, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwxx { [IN(LINE)] get => new float4(z, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwxy { [IN(LINE)] get => new float4(z, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwxz { [IN(LINE)] get => new float4(z, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwxw { [IN(LINE)] get => new float4(z, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwyx { [IN(LINE)] get => new float4(z, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwyy { [IN(LINE)] get => new float4(z, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwyz { [IN(LINE)] get => new float4(z, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwyw { [IN(LINE)] get => new float4(z, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwzx { [IN(LINE)] get => new float4(z, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwzy { [IN(LINE)] get => new float4(z, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwzz { [IN(LINE)] get => new float4(z, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwzw { [IN(LINE)] get => new float4(z, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwwx { [IN(LINE)] get => new float4(z, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwwy { [IN(LINE)] get => new float4(z, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwwz { [IN(LINE)] get => new float4(z, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 zwww { [IN(LINE)] get => new float4(z, w, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxxx { [IN(LINE)] get => new float4(w, x, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxxy { [IN(LINE)] get => new float4(w, x, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxxz { [IN(LINE)] get => new float4(w, x, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxxw { [IN(LINE)] get => new float4(w, x, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxyx { [IN(LINE)] get => new float4(w, x, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxyy { [IN(LINE)] get => new float4(w, x, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxyz { [IN(LINE)] get => new float4(w, x, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxyw { [IN(LINE)] get => new float4(w, x, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxzx { [IN(LINE)] get => new float4(w, x, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxzy { [IN(LINE)] get => new float4(w, x, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxzz { [IN(LINE)] get => new float4(w, x, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxzw { [IN(LINE)] get => new float4(w, x, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxwx { [IN(LINE)] get => new float4(w, x, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxwy { [IN(LINE)] get => new float4(w, x, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxwz { [IN(LINE)] get => new float4(w, x, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wxww { [IN(LINE)] get => new float4(w, x, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyxx { [IN(LINE)] get => new float4(w, y, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyxy { [IN(LINE)] get => new float4(w, y, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyxz { [IN(LINE)] get => new float4(w, y, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyxw { [IN(LINE)] get => new float4(w, y, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyyx { [IN(LINE)] get => new float4(w, y, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyyy { [IN(LINE)] get => new float4(w, y, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyyz { [IN(LINE)] get => new float4(w, y, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyyw { [IN(LINE)] get => new float4(w, y, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyzx { [IN(LINE)] get => new float4(w, y, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyzy { [IN(LINE)] get => new float4(w, y, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyzz { [IN(LINE)] get => new float4(w, y, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyzw { [IN(LINE)] get => new float4(w, y, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wywx { [IN(LINE)] get => new float4(w, y, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wywy { [IN(LINE)] get => new float4(w, y, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wywz { [IN(LINE)] get => new float4(w, y, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wyww { [IN(LINE)] get => new float4(w, y, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzxx { [IN(LINE)] get => new float4(w, z, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzxy { [IN(LINE)] get => new float4(w, z, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzxz { [IN(LINE)] get => new float4(w, z, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzxw { [IN(LINE)] get => new float4(w, z, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzyx { [IN(LINE)] get => new float4(w, z, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzyy { [IN(LINE)] get => new float4(w, z, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzyz { [IN(LINE)] get => new float4(w, z, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzyw { [IN(LINE)] get => new float4(w, z, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzzx { [IN(LINE)] get => new float4(w, z, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzzy { [IN(LINE)] get => new float4(w, z, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzzz { [IN(LINE)] get => new float4(w, z, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzzw { [IN(LINE)] get => new float4(w, z, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzwx { [IN(LINE)] get => new float4(w, z, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzwy { [IN(LINE)] get => new float4(w, z, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzwz { [IN(LINE)] get => new float4(w, z, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wzww { [IN(LINE)] get => new float4(w, z, w, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwxx { [IN(LINE)] get => new float4(w, w, x, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwxy { [IN(LINE)] get => new float4(w, w, x, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwxz { [IN(LINE)] get => new float4(w, w, x, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwxw { [IN(LINE)] get => new float4(w, w, x, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwyx { [IN(LINE)] get => new float4(w, w, y, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwyy { [IN(LINE)] get => new float4(w, w, y, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwyz { [IN(LINE)] get => new float4(w, w, y, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwyw { [IN(LINE)] get => new float4(w, w, y, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwzx { [IN(LINE)] get => new float4(w, w, z, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwzy { [IN(LINE)] get => new float4(w, w, z, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwzz { [IN(LINE)] get => new float4(w, w, z, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwzw { [IN(LINE)] get => new float4(w, w, z, w); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwwx { [IN(LINE)] get => new float4(w, w, w, x); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwwy { [IN(LINE)] get => new float4(w, w, w, y); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwwz { [IN(LINE)] get => new float4(w, w, w, z); }
+         [EditorBrowsable(EditorBrowsableState.Never)]
+         public float4 wwww { [IN(LINE)] get => new float4(w, w, w, w); }
         #endregion
 
 
-        #region Object
-        public override bool Equals(object o) => o is float4 target && Equals(target); 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        #region Other 
+        [IN(LINE)]
         public override int GetHashCode() => math.hash(this);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override string ToString() => $"float4({x}, {y}, {z}, {w})";
-        #endregion
-
-        #region IEquatable/IFormattable
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
+        public override bool Equals(object o) => o is float4 target && Equals(target); 
+        [IN(LINE)]
         public bool Equals(float4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [IN(LINE)]
+        public override string ToString() => $"float4({x}, {y}, {z}, {w})";
+        [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"float4({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";
@@ -2324,7 +933,7 @@ namespace DCFApixels.DataMath
         {
             private readonly float* _pointer;
             private sbyte _index;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public Enumerator(in float4 value)
             {
                 fixed (float4* array = &value)
@@ -2334,11 +943,11 @@ namespace DCFApixels.DataMath
                 }
             }
             public float Current => _pointer[_index];
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public void Dispose() { }
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public bool MoveNext() => ++_index < LENGTH;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [IN(LINE)]
             public void Reset() { }
         }
         #endregion

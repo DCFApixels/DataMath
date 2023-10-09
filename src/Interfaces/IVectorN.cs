@@ -3,7 +3,7 @@
     public interface IVectorN<T> where T : struct
     {
         public int length { get; }
-        public ref T this[int index] { get; }
+        public T this[int index] { get; set; }
     }
     public interface IVector1<T> : IVectorN<T> where T : struct
     {
