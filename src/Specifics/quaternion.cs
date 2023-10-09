@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath.TODO
 {
@@ -22,25 +22,28 @@ namespace DCFApixels.DataMath.TODO
         public float w;
 
         #region IVectorN
-        float IVector1<float>.x { get => x; set => x = value; }
-        float IVector2<float>.y { get => y; set => y = value; }
-        float IVector3<float>.z { get => z; set => z = value; }
-        float IVector4<float>.w { get => w; set => w = value; }
-        public unsafe ref float this[int index]
+        float IVector1<float>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
+        float IVector2<float>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
+        float IVector3<float>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
+        float IVector4<float>.w { [IN(LINE)] get => w; [IN(LINE)] set => w = value; }
+        public int length { [IN(LINE)] get => LENGTH; }
+
+        public unsafe float this[int index]
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
-                fixed (quaternion* array = &this) { return ref ((float*)array)[index]; }
+                fixed (quaternion* array = &this) { return ((float*)array)[index]; }
             }
-        }
-        public int length
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => LENGTH;
+            set
+            {
+#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+#endif
+                fixed (float* array = &x) { array[index] = value; }
+            }
         }
         #endregion
 
