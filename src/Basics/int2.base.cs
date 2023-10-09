@@ -510,18 +510,11 @@ namespace DCFApixels.DataMath
             [IN(LINE)]
             public void Reset() { }
         }
-        #endregion
 
-        #region Utils
         internal class DebuggerProxy
         {
-            public int x;
-            public int y;
-            public DebuggerProxy(int2 v)
-            {
-                x = v.x;
-                y = v.y;
-            }
+            public int x, y;
+            public DebuggerProxy(int2 v) { x = v.x; y = v.y; }
         }
         #endregion
     }
