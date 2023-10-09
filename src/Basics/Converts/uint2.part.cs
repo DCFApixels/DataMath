@@ -21,7 +21,7 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static uint2 uint2((uint, uint, uint) v) => new uint2(v);
+        [IN(LINE)] public static uint2 uint2((uint, uint) v) => new uint2(v);
 
         [IN(LINE)] public static uint2 uint2(float v) => new uint2(v);
         [IN(LINE)] public static uint2 uint2(float2 v) => new uint2(v);
