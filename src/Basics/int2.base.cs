@@ -393,10 +393,9 @@ namespace DCFApixels.DataMath
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() => math.hash(this);
-        [IN(LINE)] public override bool Equals(object o) => o is int2 target && Equals(target); 
+        public override bool Equals(object o) => o is int2 target && Equals(target); 
         [IN(LINE)] public bool Equals(int2 a) => x == a.x && y == a.y; 
-        [IN(LINE)] public override string ToString() => $"int2({x}, {y})";
-        [IN(LINE)]
+        public override string ToString() => $"int2({x}, {y})";
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"int2({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)})";

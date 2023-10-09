@@ -893,10 +893,9 @@ namespace DCFApixels.DataMath
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() => math.hash(this);
-        [IN(LINE)] public override bool Equals(object o) => o is float4 target && Equals(target); 
+        public override bool Equals(object o) => o is float4 target && Equals(target); 
         [IN(LINE)] public bool Equals(float4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
-        [IN(LINE)] public override string ToString() => $"float4({x}, {y}, {z}, {w})";
-        [IN(LINE)]
+        public override string ToString() => $"float4({x}, {y}, {z}, {w})";
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"float4({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";

@@ -838,10 +838,9 @@ namespace DCFApixels.DataMath
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() => math.hash(this);
-        [IN(LINE)] public override bool Equals(object o) => o is uint3 target && Equals(target); 
+        public override bool Equals(object o) => o is uint3 target && Equals(target); 
         [IN(LINE)] public bool Equals(uint3 a) => x == a.x && y == a.y && z == a.z; 
-        [IN(LINE)] public override string ToString() => $"uint3({x}, {y}, {z})";
-        [IN(LINE)]
+        public override string ToString() => $"uint3({x}, {y}, {z})";
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"uint3({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)})";
