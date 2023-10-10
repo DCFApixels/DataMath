@@ -1,12 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace DCFApixels.DataMath
 {
     public static partial class math
     {
+        #region Bool
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public unsafe static uint uhash(bool v) => *(uint*)&v & 0x0000_00FF;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int hash(bool v) => unchecked((int)uhash(v));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public unsafe static uint uhash(bool2 v) => *(uint*)&v & 0x0000_FFFF;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int hash(bool2 v) => unchecked((int)uhash(v));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public unsafe static uint uhash(bool3 v) => (*(uint*)&v) & 0x00FF_FFFF;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int hash(bool3 v) => unchecked((int)uhash(v));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public unsafe static uint uhash(bool4 v) => *(uint*)&v;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int hash(bool4 v) => unchecked((int)uhash(v));
+        #endregion
+
         #region Double
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint uhash(double v) => unchecked((uint)hash(v));
