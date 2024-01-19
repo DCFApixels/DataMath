@@ -54,7 +54,7 @@ namespace DCFApixels.DataMath
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
                 if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
-                fixed (float* array = &x) { array[index] = value; }
+                fixed (float* array = &this.value.x) { array[index] = value; }
             }
         }
         #endregion
@@ -169,7 +169,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static quat Lerp(quat a, quat b, float t)
         {
-            return Normalize(a.value + t * (chgsign(b.value, Dot(a, b)) - a.value));
+            return new quat(
+                Normalize(a.value + t * (ChangeSign(b.value, Dot(a, b)) - a.value))
+                );
         }
 
         [IN(LINE)]

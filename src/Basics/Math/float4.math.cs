@@ -35,7 +35,7 @@ namespace DCFApixels.DataMath
     {
         #region vector
         [IN(LINE)]
-        public static float4 Normalize(float4 v) { return 1f / Sqrt(Dot(x, x)) * x; }
+        public static float4 Normalize(float4 v) { return 1f / Sqrt(Dot(v, v)) * v; }
         /// <summary>alias for magnitude(a, b)</summary>
         [IN(LINE)]
         public static float magn(in float4 v) => v.Magnitude;
