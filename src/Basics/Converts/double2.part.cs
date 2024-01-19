@@ -8,14 +8,34 @@ namespace DCFApixels.DataMath
         #region Convert operators
         [IN(LINE)] public static implicit operator double2((double, double) v) => new double2(v.Item1, v.Item2);
 
-        [IN(LINE)] public static implicit operator double2(float v) => new double2(v);
-        [IN(LINE)] public static implicit operator double2(float2 v) => new double2(v);
+        [IN(LINE)] public static explicit operator double2(bool v) => new double2(v);
+        [IN(LINE)] public static explicit operator double2(bool2 v) => new double2(v);
         [IN(LINE)] public static implicit operator double2(int v) => new double2(v);
         [IN(LINE)] public static implicit operator double2(int2 v) => new double2(v);
         [IN(LINE)] public static implicit operator double2(uint v) => new double2(v);
         [IN(LINE)] public static implicit operator double2(uint2 v) => new double2(v);
+        [IN(LINE)] public static implicit operator double2(float v) => new double2(v);
+        [IN(LINE)] public static implicit operator double2(float2 v) => new double2(v);
         [IN(LINE)] public static implicit operator double2(double v) => new double2(v);
         //[IN(LINE)] public static explicit operator double2(double2 v) => new double2(v);
+        #endregion
+
+        #region Bool constructors
+        [IN(LINE)]
+        public double2(bool x, bool y)
+        {
+            this.x = x ? 1d : 0d; this.y = y ? 1d : 0d;
+        }
+        [IN(LINE)]
+        public double2(bool v)
+        {
+            x = v ? 1d : 0d; y = v ? 1d : 0d;
+        }
+        [IN(LINE)]
+        public double2(bool2 v)
+        {
+            x = v.x ? 1d : 0d; y = v.y ? 1d : 0d;
+        }
         #endregion
     }
 
@@ -23,12 +43,14 @@ namespace DCFApixels.DataMath
     {
         [IN(LINE)] public static double2 double2((double, double) v) => new double2(v);
 
-        [IN(LINE)] public static double2 double2(float v) => new double2(v);
-        [IN(LINE)] public static double2 double2(float2 v) => new double2(v);
+        [IN(LINE)] public static double2 double2(bool v) => new double2(v);
+        [IN(LINE)] public static double2 double2(bool2 v) => new double2(v);
         [IN(LINE)] public static double2 double2(int v) => new double2(v);
         [IN(LINE)] public static double2 double2(int2 v) => new double2(v);
         [IN(LINE)] public static double2 double2(uint v) => new double2(v);
         [IN(LINE)] public static double2 double2(uint2 v) => new double2(v);
+        [IN(LINE)] public static double2 double2(float v) => new double2(v);
+        [IN(LINE)] public static double2 double2(float2 v) => new double2(v);
         [IN(LINE)] public static double2 double2(double v) => new double2(v);
         [IN(LINE)] public static double2 double2(double2 v) => new double2(v);
     }

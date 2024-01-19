@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
@@ -16,26 +17,11 @@ namespace DCFApixels.DataMath
     {
         private readonly TVector _value;
         private sbyte _pointer;
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public VectorEnumerator(TVector value) { _value = value; _pointer = -1; }
-        public T Current
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => _value[_pointer];
-        }
-        object IEnumerator.Current
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => _value[_pointer];
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Dispose() { }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool MoveNext() => ++_pointer < _value.length;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Reset() { }
+        [IN(LINE)] public VectorEnumerator(TVector value) { _value = value; _pointer = -1; }
+        public T Current { [IN(LINE)] get => _value[_pointer]; }
+        object IEnumerator.Current { [IN(LINE)] get => _value[_pointer]; }
+        [IN(LINE)] public void Dispose() { }
+        [IN(LINE)] public bool MoveNext() => ++_pointer < _value.length;
+        [IN(LINE)] public void Reset() { }
     }
 }

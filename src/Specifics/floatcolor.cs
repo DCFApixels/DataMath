@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace DCFApixels.DataMath
+namespace DCFApixels.DataMath.TODO
 {
     //TODO придумать получше имя, color не подохоидт изза конфликта с неймингом переменных, floatcolor получше отражает смысл, но слишком длинное
     //вроде есть еще ваиранты floatclr, colorinfo, colordata но они все все еще не идеальны
@@ -81,14 +81,21 @@ namespace DCFApixels.DataMath
         public float z { get => b; set => b = value; }
         public float w { get => a; set => a = value; }
 
-        public unsafe ref float this[int index]
+        public unsafe float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
-                fixed (floatcolor* array = &this) { return ref ((float*)array)[index]; }
+                fixed (floatcolor* array = &this) { return ((float*)array)[index]; }
+            }
+            set
+            {
+#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+#endif
+                fixed (float* array = &r) { array[index] = value; }
             }
         }
         public int length => LENGTH;

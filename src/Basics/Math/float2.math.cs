@@ -11,13 +11,20 @@ namespace DCFApixels.DataMath
     public partial struct float2
     {
         public const float vectorEpsilon = 0.00001f;
-       
+
+
+
         #region vector
         public float Magnitude
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => SMathF.Sqrt(x * x + y * y);
         }
+        public float2 Normalized
+        {
+            get => new float2();
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Normalize()
         {

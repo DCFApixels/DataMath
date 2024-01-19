@@ -21,4 +21,10 @@
     {
         public T w { get; set; }
     }
+
+    public interface IBoolVector
+    {
+        public bool all { get; set; }
+        public bool any { get; }
+    }
 }

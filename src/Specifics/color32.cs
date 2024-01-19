@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
@@ -49,21 +50,27 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region IValueN
-        public byte w { get => r8; set => r8 = value; }
-        public byte z { get => g8; set => g8 = value; }
-        public byte y { get => b8; set => b8 = value; }
-        public byte x { get => a8; set => a8 = value; }
+        public byte x { [IN(LINE)] get => r8; [IN(LINE)] set => r8 = value; }
+        public byte y { [IN(LINE)] get => g8; [IN(LINE)] set => g8 = value; }
+        public byte z { [IN(LINE)] get => b8; [IN(LINE)] set => b8 = value; }
+        public byte w { [IN(LINE)] get => a8; [IN(LINE)] set => a8 = value; }
+        public int length { [IN(LINE)] get => LENGTH; }
 
-        public int length => LENGTH;
-        public unsafe ref byte this[int index]
+        public unsafe byte this[int index]
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"index must be between[0...{(LENGTH - 1)}]");
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
-                fixed (color32* array = &this) { return ref ((byte*)array)[index]; }
+                fixed (color32* array = &this) { return ((byte*)array)[index]; }
+            }
+            set
+            {
+#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+#endif
+                fixed (byte* array = &r8) { array[index] = value; }
             }
         }
         #endregion

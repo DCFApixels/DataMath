@@ -1,20 +1,21 @@
-﻿namespace DCFApixels.DataMath.TODO
+﻿namespace DCFApixels.DataMath
 {
-    /// <summary>Not Implemented</summary>
-    public interface IRange<T> : IVector2<T>, IRay1<T>
+    public interface IRange<T>
         where T : struct
     {
-        public T distance { get; set; }
+        /// <summary>The start of this range</summary>
+        public T start { get; set; }
+        /// <summary>The length of this range</summary>
+        public T extent { get; set; }
 
-        public T AbsDistance { get; }
-        public T Min { get; }
-        public T Max { get; }
+        public T AbsExtent { get; }
+        public T Min { get; set; }
+        public T Max { get; set; }
         public T AbsMin { get; }
         public T AbsMax { get; }
         public bool IsNegative { get; }
         public bool IsPositive { get; }
 
         public T Center { get; }
-        //public T direction { get; }
     }
 }

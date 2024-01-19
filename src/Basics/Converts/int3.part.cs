@@ -8,14 +8,37 @@ namespace DCFApixels.DataMath
         #region Convert operators
         [IN(LINE)] public static implicit operator int3((int, int, int) v) => new int3(v.Item1, v.Item2, v.Item3);
 
-        [IN(LINE)] public static explicit operator int3(float v) => new int3(v);
-        [IN(LINE)] public static explicit operator int3(float3 v) => new int3(v);
+        [IN(LINE)] public static explicit operator int3(bool v) => new int3(v);
+        [IN(LINE)] public static explicit operator int3(bool3 v) => new int3(v);
         [IN(LINE)] public static implicit operator int3(int v) => new int3(v);
         //[IN(LINE)] public static implicit operator int3(int3 v) => new int3(v);
         [IN(LINE)] public static explicit operator int3(uint v) => new int3(v);
         [IN(LINE)] public static explicit operator int3(uint3 v) => new int3(v);
+        [IN(LINE)] public static explicit operator int3(float v) => new int3(v);
+        [IN(LINE)] public static explicit operator int3(float3 v) => new int3(v);
         [IN(LINE)] public static explicit operator int3(double v) => new int3(v);
         [IN(LINE)] public static explicit operator int3(double3 v) => new int3(v);
+        #endregion
+
+        #region Bool constructors
+        [IN(LINE)]
+        public int3(bool x, bool y, bool z)
+        {
+            this.x = x ? 1 : 0; this.y = y ? 1 : 0;
+            this.z = z ? 1 : 0;
+        }
+        [IN(LINE)]
+        public int3(bool v)
+        {
+            x = v ? 1 : 0; y = v ? 1 : 0;
+            z = v ? 1 : 0;
+        }
+        [IN(LINE)]
+        public int3(bool3 v)
+        {
+            x = v.x ? 1 : 0; y = v.y ? 1 : 0;
+            z = v.z ? 1 : 0;
+        }
         #endregion
     }
 
@@ -23,12 +46,14 @@ namespace DCFApixels.DataMath
     {
         [IN(LINE)] public static int3 int3((int, int, int) v) => new int3(v);
 
-        [IN(LINE)] public static int3 int3(float v) => new int3(v);
-        [IN(LINE)] public static int3 int3(float3 v) => new int3(v);
+        [IN(LINE)] public static int3 int3(bool v) => new int3(v);
+        [IN(LINE)] public static int3 int3(bool3 v) => new int3(v);
         [IN(LINE)] public static int3 int3(int v) => new int3(v);
         [IN(LINE)] public static int3 int3(int3 v) => new int3(v);
         [IN(LINE)] public static int3 int3(uint v) => new int3(v);
         [IN(LINE)] public static int3 int3(uint3 v) => new int3(v);
+        [IN(LINE)] public static int3 int3(float v) => new int3(v);
+        [IN(LINE)] public static int3 int3(float3 v) => new int3(v);
         [IN(LINE)] public static int3 int3(double v) => new int3(v);
         [IN(LINE)] public static int3 int3(double3 v) => new int3(v);
     }

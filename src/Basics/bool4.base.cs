@@ -15,6 +15,7 @@ namespace DCFApixels.DataMath
     public partial struct bool4 : 
         IEquatable<bool4>, 
         IVector4<bool>, 
+        IBoolVector,
         IColor,
         IEnumerableVector<bool, bool4>
     {
@@ -48,6 +49,11 @@ namespace DCFApixels.DataMath
         public bool y;
         public bool z;
         public bool w;
+
+        #region IBoolVector
+        public bool all { [IN(LINE)] get => x & y & z & w; [IN(LINE)] set { x = value; y = value; z = value; w = value; } }
+        public bool any { [IN(LINE)] get => x | y | z | w; }
+        #endregion
 
         #region IColor
         public float r { [IN(LINE)] get => x ? 1f : 0f; [IN(LINE)] set => x = value > 0f; }
