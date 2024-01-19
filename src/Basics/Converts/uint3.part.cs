@@ -44,17 +44,22 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static uint3 uint3((uint, uint, uint) v) => new uint3(v);
-
-        [IN(LINE)] public static uint3 uint3(bool v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(bool3 v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(int v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(int3 v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(uint v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(uint3 v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(float v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(float3 v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(double v) => new uint3(v);
-        [IN(LINE)] public static uint3 uint3(double3 v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3((uint, uint, uint) v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3<T>(T v) where T : IVector3<uint> => new uint3(v.x, v.y, v.z);
+        [IN(LINE)] public static uint3 UInt3(bool v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(bool x, bool y, bool z) => new uint3(x, y, z);
+        [IN(LINE)] public static uint3 UInt3(bool3 v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(int v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(int x, int y, int z) => new uint3(x, y, z);
+        [IN(LINE)] public static uint3 UInt3(int3 v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(uint v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(uint x, uint y, uint z) => new uint3(x, y, z);
+        [IN(LINE)] public static uint3 UInt3(uint3 v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(float v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(float x, float y, float z) => new uint3(x, y, z);
+        [IN(LINE)] public static uint3 UInt3(float3 v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(double v) => new uint3(v);
+        [IN(LINE)] public static uint3 UInt3(double x, double y, double z) => new uint3(x, y, z);
+        [IN(LINE)] public static uint3 UInt3(double3 v) => new uint3(v);
     }
 }

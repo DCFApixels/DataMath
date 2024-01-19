@@ -392,7 +392,7 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override int GetHashCode() => math.Hash(this);
         public override bool Equals(object o) => o is uint2 target && Equals(target); 
         [IN(LINE)] public bool Equals(uint2 a) => x == a.x && y == a.y; 
         public override string ToString() => $"uint2({x}, {y})";

@@ -6,13 +6,13 @@ namespace DCFApixels.DataMath
     {
         #region asfloat from int/uint
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe static float asfloat(int value) => *(float*)&value;
+        public unsafe static float AsFloat(int value) => *(float*)&value;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe static float2 asfloat2(int2 value) => *(float2*)&value;
+        public unsafe static float2 AsFloat2(int2 value) => *(float2*)&value;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe static float3 asfloat3(int3 value) => *(float3*)&value;
+        public unsafe static float3 AsFloat3(int3 value) => *(float3*)&value;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe static float4 asfloat4(int4 value) => *(float4*)&value;
+        public unsafe static float4 AsFloat4(int4 value) => *(float4*)&value;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe static float asfloat(uint value) => *(float*)&value;

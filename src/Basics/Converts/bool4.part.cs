@@ -23,17 +23,16 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static bool4 bool4((bool, bool, bool, bool) v) => new bool4(v);
-
-        [IN(LINE)] public static bool4 bool4(bool v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(bool4 v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(int v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(int4 v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(uint v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(uint4 v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(float v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(float4 v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(double v) => new bool4(v);
-        [IN(LINE)] public static bool4 bool4(double4 v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4((bool, bool, bool, bool) v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(bool v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(bool4 v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(int v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(int4 v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(uint v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(uint4 v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(float v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(float4 v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(double v) => new bool4(v);
+        [IN(LINE)] public static bool4 Bool4(double4 v) => new bool4(v);
     }
 }

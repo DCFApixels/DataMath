@@ -44,17 +44,17 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static double4 double4((double, double, double, double) v) => new double4(v);
-
-        [IN(LINE)] public static double4 double4(bool v) => new double4(v);
-        [IN(LINE)] public static double4 double4(bool4 v) => new double4(v);
-        [IN(LINE)] public static double4 double4(int v) => new double4(v);
-        [IN(LINE)] public static double4 double4(int4 v) => new double4(v);
-        [IN(LINE)] public static double4 double4(uint v) => new double4(v);
-        [IN(LINE)] public static double4 double4(uint4 v) => new double4(v);
-        [IN(LINE)] public static double4 double4(float v) => new double4(v);
-        [IN(LINE)] public static double4 double4(float4 v) => new double4(v);
-        [IN(LINE)] public static double4 double4(double v) => new double4(v);
-        [IN(LINE)] public static double4 double4(double4 v) => new double4(v);
+        [IN(LINE)] public static double4 Double4((double, double, double, double) v) => new double4(v);
+        [IN(LINE)] public static double4 Double4<T>(T v) where T : IVector4<double> => new double4(v.x, v.y, v.z, v.w);
+        [IN(LINE)] public static double4 Double4(bool v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(bool4 v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(int v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(int4 v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(uint v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(uint4 v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(float v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(float4 v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(double v) => new double4(v);
+        [IN(LINE)] public static double4 Double4(double4 v) => new double4(v);
     }
 }

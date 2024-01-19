@@ -199,7 +199,7 @@ namespace DCFApixels.DataMath.TODO
 
         #region Other
         [IN(LINE)]
-        public override int GetHashCode() => math.hash(this);
+        public override int GetHashCode() => math_TODO.hash(this);
         [IN(LINE)]
         public override bool Equals(object o) => o is float2 target && Equals(target);
         [IN(LINE)]

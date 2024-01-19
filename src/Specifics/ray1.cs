@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace DCFApixels.DataMath.TODO
+namespace DCFApixels.DataMath
 {
     /// <summary>Not Implemented</summary>
     [DebuggerTypeProxy(typeof(DebuggerProxy))]

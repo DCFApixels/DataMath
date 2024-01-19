@@ -1,4 +1,4 @@
-﻿namespace DCFApixels.DataMath.TODO
+﻿namespace DCFApixels.DataMath
 {
     /// <summary>Not Implemented</summary>
     public interface IRayN<T, TVector>

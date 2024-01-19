@@ -1,4 +1,13 @@
-﻿namespace DCFApixels.DataMath
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
+
+namespace DCFApixels.DataMath
 {
     public interface IVectorN<T> where T : struct
     {

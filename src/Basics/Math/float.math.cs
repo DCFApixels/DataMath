@@ -1,3 +1,4 @@
+using DCFApixels.DataMath.Internal;
 using System.Runtime.CompilerServices;
 #if NETCORE || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
@@ -45,36 +46,36 @@ namespace DCFApixels.DataMath
     {
         #region simple
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float one_minus(float v) => 1f - v;
+        public static float OneMinus(float v) => 1f - v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float abs(float v) => SMathF.Abs(v);
+        public static float Abs(float v) => SMathF.Abs(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int sign(float v) => SMathF.Sign(v);
+        public static int Sign(float v) => SMathF.Sign(v);
         #endregion
 
         #region round/floor/ceil
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float round(float v) => SMathF.Round(v);
+        public static float Round(float v) => SMathF.Round(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int round2int(float v) => (int)SMathF.Round(v);
+        public static int Round2Int(float v) => (int)SMathF.Round(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float floor(float v) => SMathF.Floor(v);
+        public static float Floor(float v) => SMathF.Floor(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int floor2int(float v) => (int)SMathF.Floor(v);
+        public static int Floor2Int(float v) => (int)SMathF.Floor(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float ceil(float v) => SMathF.Ceiling(v);
+        public static float Ceil(float v) => SMathF.Ceiling(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int ceil2int(float v) => (int)SMathF.Ceiling(v);
+        public static int Ceil2Int(float v) => (int)SMathF.Ceiling(v);
         #endregion
 
         #region clamp/clamp01
-        public static float clamp(float value, float min, float max)
+        public static float Clamp(float value, float min, float max)
         {
             if (value < min) return min; 
             if (value > max) return max;
             return value;
         }
-        public static float clamp01(float value)
+        public static float Clamp01(float value)
         {
             if (value < 0f) return 0f;
             if (value > 1f) return 1f;
@@ -84,11 +85,34 @@ namespace DCFApixels.DataMath
 
         #region lerp
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float lerp(in float a, in float b, float t) => a + (b - a) * t;
+        public static float Lerp(in float a, in float b, float t) => a + (b - a) * t;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float lerp_clamp(in float a, in float b, float t) => a + (b - a) * clamp01(t);
+        public static float LerpClamp(in float a, in float b, float t) => a + (b - a) * Clamp01(t);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float lerp_loop(in float a, in float b, float t) => a + (b - a) * (t % 1f);
+        public static float LerpLoop(in float a, in float b, float t) => a + (b - a) * (t % 1f);
         #endregion
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(float a, float b) => a > b ? a : b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float AbsMax(float a, float b) => Abs(a) > Abs(b) ? a : b;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(float a, float b) => a < b ? a : b;
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Cos(float x) { return SMathF.Cos(x); }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]  
+        public static float Sin(float x) { return SMathF.Sin(x); }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Atan2(float a, float b) { return SMathF.Atan2(a, b); }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Asin(float x) { return SMathF.Asin(x); }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Acos(float x) { return SMathF.Acos(x); }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sqrt(float x) { return SMathF.Sqrt(x); }
     }
 }

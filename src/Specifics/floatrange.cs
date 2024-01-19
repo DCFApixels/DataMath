@@ -27,7 +27,7 @@ namespace DCFApixels.DataMath
         float IRange<float>.start { [IN(LINE)] get => start; [IN(LINE)] set => start = value; }
         float IRange<float>.extent { [IN(LINE)] get => extent; [IN(LINE)] set => extent = value; }
 
-        public float AbsExtent { [IN(LINE)] get => math.abs(extent); }
+        public float AbsExtent { [IN(LINE)] get => math.Abs(extent); }
         public float Min
         {
             [IN(LINE)]
@@ -50,8 +50,8 @@ namespace DCFApixels.DataMath
                 extent -= a;
             }
         }
-        public float AbsMin => math.abs(Min);
-        public float AbsMax => math.abs(Max);
+        public float AbsMin => math.Abs(Min);
+        public float AbsMax => math.Abs(Max);
         public bool IsNegative { [IN(LINE)] get => extent < 0; }
         public bool IsPositive { [IN(LINE)] get => extent >= 0; }
         public float Center { [IN(LINE)] get => start + extent / 2f; }

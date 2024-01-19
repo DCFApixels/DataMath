@@ -129,5 +129,34 @@ namespace DCFApixels.DataMath
             );
         }
         #endregion
+
+        #region Clamp/Clamp01
+        public static float2 Clamp(float2 value, float min, float max) => new float2(
+            Clamp(value.x, min, max),
+            Clamp(value.y, min, max));
+        public static float2 Clamp(float2 value, float2 min, float2 max) => new float2(
+            Clamp(value.x, min.x, max.x), 
+            Clamp(value.y, min.y, max.y));
+        public static float2 Clamp01(float2 value) => new float2(
+            Clamp01(value.x), 
+            Clamp01(value.y));
+        #endregion
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 Max(float2 a, float2 b) => new float2(Max(a.x, b.x), Max(a.y, b.y));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 Min(float2 a, float2 b) => new float2(Min(a.x, b.x), Min(a.y, b.y));
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 Cos(float2 x) => new float2(Cos(x.x), Cos(x.y));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 Sin(float2 x) => new float2(Sin(x.x), Sin(x.y));
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Csum(float2 x) => x.x + x.y; 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 Asin(float2 x) => new float2(Asin(x.x), Asin(x.y)); 
     }
 }

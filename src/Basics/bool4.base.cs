@@ -903,7 +903,7 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => math.hash(this);
+        [IN(LINE)] public override int GetHashCode() => math.Hash(this);
         public override bool Equals(object o) => o is bool4 target && Equals(target); 
         [IN(LINE)] public bool Equals(bool4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
         public override string ToString() => $"bool4({x}, {y}, {z}, {w})";

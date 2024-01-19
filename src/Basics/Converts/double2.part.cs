@@ -41,17 +41,17 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static double2 double2((double, double) v) => new double2(v);
-
-        [IN(LINE)] public static double2 double2(bool v) => new double2(v);
-        [IN(LINE)] public static double2 double2(bool2 v) => new double2(v);
-        [IN(LINE)] public static double2 double2(int v) => new double2(v);
-        [IN(LINE)] public static double2 double2(int2 v) => new double2(v);
-        [IN(LINE)] public static double2 double2(uint v) => new double2(v);
-        [IN(LINE)] public static double2 double2(uint2 v) => new double2(v);
-        [IN(LINE)] public static double2 double2(float v) => new double2(v);
-        [IN(LINE)] public static double2 double2(float2 v) => new double2(v);
-        [IN(LINE)] public static double2 double2(double v) => new double2(v);
-        [IN(LINE)] public static double2 double2(double2 v) => new double2(v);
+        [IN(LINE)] public static double2 Double2((double, double) v) => new double2(v);
+        [IN(LINE)] public static double2 Double2<T>(T v) where T : IVector2<double> => new double2(v.x, v.y);
+        [IN(LINE)] public static double2 Double2(bool v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(bool2 v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(int v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(int2 v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(uint v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(uint2 v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(float v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(float2 v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(double v) => new double2(v);
+        [IN(LINE)] public static double2 Double2(double2 v) => new double2(v);
     }
 }

@@ -41,17 +41,22 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static int2 int2((int, int) v) => new int2(v);
-
-        [IN(LINE)] public static int2 int2(bool v) => new int2(v);
-        [IN(LINE)] public static int2 int2(bool2 v) => new int2(v);
-        [IN(LINE)] public static int2 int2(int v) => new int2(v);
-        [IN(LINE)] public static int2 int2(int2 v) => new int2(v);
-        [IN(LINE)] public static int2 int2(uint v) => new int2(v);
-        [IN(LINE)] public static int2 int2(uint2 v) => new int2(v);
-        [IN(LINE)] public static int2 int2(float v) => new int2(v);
-        [IN(LINE)] public static int2 int2(float2 v) => new int2(v);
-        [IN(LINE)] public static int2 int2(double v) => new int2(v);
-        [IN(LINE)] public static int2 int2(double2 v) => new int2(v);
+        [IN(LINE)] public static int2 Int2((int, int) v) => new int2(v);
+        [IN(LINE)] public static int2 Int2<T>(T v) where T : IVector2<int> => new int2(v.x, v.y);
+        [IN(LINE)] public static int2 Int2(bool v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(bool x, bool y) => new int2(x, y);
+        [IN(LINE)] public static int2 Int2(bool2 v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(int v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(int x, int y) => new int2(x, y);
+        [IN(LINE)] public static int2 Int2(int2 v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(uint v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(uint x, uint y) => new int2(x, y);
+        [IN(LINE)] public static int2 Int2(uint2 v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(float v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(float x, float y) => new int2(x, y);
+        [IN(LINE)] public static int2 Int2(float2 v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(double v) => new int2(v);
+        [IN(LINE)] public static int2 Int2(double x, double y) => new int2(x, y);
+        [IN(LINE)] public static int2 Int2(double2 v) => new int2(v);
     }
 }

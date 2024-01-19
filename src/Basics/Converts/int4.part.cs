@@ -44,17 +44,22 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static int4 int4((int, int, int, int) v) => new int4(v);
-
-        [IN(LINE)] public static int4 int4(bool v) => new int4(v);
-        [IN(LINE)] public static int4 int4(bool4 v) => new int4(v);
-        [IN(LINE)] public static int4 int4(int v) => new int4(v);
-        [IN(LINE)] public static int4 int4(int4 v) => new int4(v);
-        [IN(LINE)] public static int4 int4(uint v) => new int4(v);
-        [IN(LINE)] public static int4 int4(uint4 v) => new int4(v);
-        [IN(LINE)] public static int4 int4(float v) => new int4(v);
-        [IN(LINE)] public static int4 int4(float4 v) => new int4(v);
-        [IN(LINE)] public static int4 int4(double v) => new int4(v);
-        [IN(LINE)] public static int4 int4(double4 v) => new int4(v);
+        [IN(LINE)] public static int4 Int4((int, int, int, int) v) => new int4(v);
+        [IN(LINE)] public static int4 Int4<T>(T v) where T : IVector4<int> => new int4(v.x, v.y, v.z, v.w);
+        [IN(LINE)] public static int4 Int4(bool v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(bool x, bool y, bool z, bool w) => new int4(x, y, z, w);
+        [IN(LINE)] public static int4 Int4(bool4 v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(int v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(int x, int y, int z, int w) => new int4(x, y, z, w);
+        [IN(LINE)] public static int4 Int4(int4 v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(uint v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(uint x, uint y, uint z, uint w) => new int4(x, y, z, w);
+        [IN(LINE)] public static int4 Int4(uint4 v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(float v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(float x, float y, float z, float w) => new int4(x, y, z, w);
+        [IN(LINE)] public static int4 Int4(float4 v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(double v) => new int4(v);
+        [IN(LINE)] public static int4 Int4(double x, double y, double z, double w) => new int4(x, y, z, w);
+        [IN(LINE)] public static int4 Int4(double4 v) => new int4(v);
     }
 }

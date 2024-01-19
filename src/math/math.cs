@@ -1,4 +1,6 @@
-﻿namespace DCFApixels.DataMath
+﻿using UnityEngineInternal;
+
+namespace DCFApixels.DataMath
 {
     public static partial class math
     {
@@ -23,6 +25,13 @@
         public const float Deg2Rad = TAU / 360f;
         /// <summary>Multiply an angle in radians by this, to convert it to degrees</summary>
         public const float Rad2Deg = 360f / TAU;
+
+
+        private const float FloatMinNormal = 1.17549435E-38f;
+        private const float FloatMinDenormal = float.Epsilon;
+        private const bool IsFlushToZeroEnabled = FloatMinDenormal == 0f;
+
+        public const float Epsilon = (IsFlushToZeroEnabled ? FloatMinNormal : FloatMinDenormal);
         #endregion
 
     }

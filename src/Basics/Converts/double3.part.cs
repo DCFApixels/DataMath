@@ -44,17 +44,17 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static double3 double3((double, double, double) v) => new double3(v);
-
-        [IN(LINE)] public static double3 double3(bool v) => new double3(v);
-        [IN(LINE)] public static double3 double3(bool3 v) => new double3(v);
-        [IN(LINE)] public static double3 double3(int v) => new double3(v);
-        [IN(LINE)] public static double3 double3(int3 v) => new double3(v);
-        [IN(LINE)] public static double3 double3(uint v) => new double3(v);
-        [IN(LINE)] public static double3 double3(uint3 v) => new double3(v);
-        [IN(LINE)] public static double3 double3(float v) => new double3(v);
-        [IN(LINE)] public static double3 double3(float3 v) => new double3(v);
-        [IN(LINE)] public static double3 double3(double v) => new double3(v);
-        [IN(LINE)] public static double3 double3(double3 v) => new double3(v);
+        [IN(LINE)] public static double3 Double3((double, double, double) v) => new double3(v);
+        [IN(LINE)] public static double3 Double3<T>(T v) where T : IVector3<double> => new double3(v.x, v.y, v.z);
+        [IN(LINE)] public static double3 Double3(bool v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(bool3 v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(int v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(int3 v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(uint v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(uint3 v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(float v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(float3 v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(double v) => new double3(v);
+        [IN(LINE)] public static double3 Double3(double3 v) => new double3(v);
     }
 }

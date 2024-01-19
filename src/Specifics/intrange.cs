@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.math;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -94,10 +95,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static intrange operator +(intrange range, int v) => new intrange(range.start + v, range.extent + v);
         [IN(LINE)] public static intrange operator /(intrange range, int v) => new intrange(range.start / v, range.extent / v);
         [IN(LINE)] public static intrange operator *(intrange range, int v) => new intrange(range.start * v, range.extent * v);
-        [IN(LINE)] public static intrange operator -(intrange range, float v) => new intrange(math.int1(range.start - v), math.int1(range.extent - v));
-        [IN(LINE)] public static intrange operator +(intrange range, float v) => new intrange(math.int1(range.start + v), math.int1(range.extent + v));
-        [IN(LINE)] public static intrange operator /(intrange range, float v) => new intrange(math.int1(range.start / v), math.int1(range.extent / v));
-        [IN(LINE)] public static intrange operator *(intrange range, float v) => new intrange(math.int1(range.start * v), math.int1(range.extent * v));
+        [IN(LINE)] public static intrange operator -(intrange range, float v) => new intrange(Int1(range.start - v), Int1(range.extent - v));
+        [IN(LINE)] public static intrange operator +(intrange range, float v) => new intrange(Int1(range.start + v), Int1(range.extent + v));
+        [IN(LINE)] public static intrange operator /(intrange range, float v) => new intrange(Int1(range.start / v), Int1(range.extent / v));
+        [IN(LINE)] public static intrange operator *(intrange range, float v) => new intrange(Int1(range.start * v), Int1(range.extent * v));
         #endregion
 
         #region Other

@@ -44,17 +44,22 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static float4 float4((float, float, float, float) v) => new float4(v);
-
-        [IN(LINE)] public static float4 float4(bool v) => new float4(v);
-        [IN(LINE)] public static float4 float4(bool4 v) => new float4(v);
-        [IN(LINE)] public static float4 float4(int v) => new float4(v);
-        [IN(LINE)] public static float4 float4(int4 v) => new float4(v);
-        [IN(LINE)] public static float4 float4(uint v) => new float4(v);
-        [IN(LINE)] public static float4 float4(uint4 v) => new float4(v);
-        [IN(LINE)] public static float4 float4(float v) => new float4(v);
-        [IN(LINE)] public static float4 float4(float4 v) => new float4(v);
-        [IN(LINE)] public static float4 float4(double v) => new float4(v);
-        [IN(LINE)] public static float4 float4(double4 v) => new float4(v);
+        [IN(LINE)] public static float4 Float4((float, float, float, float) v) => new float4(v);
+        [IN(LINE)] public static float4 Float4<T>(T v) where T : IVector4<float> => new float4(v.x, v.y, v.z, v.w);
+        [IN(LINE)] public static float4 Float4(bool v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(bool x, bool y, bool z, bool w) => new float4(x, y, z, w);
+        [IN(LINE)] public static float4 Float4(bool4 v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(int v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(int x, int y, int z, int w) => new float4(x, y, z, w);
+        [IN(LINE)] public static float4 Float4(int4 v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(uint v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(uint x, uint y, uint z, uint w) => new float4(x, y, z, w);
+        [IN(LINE)] public static float4 Float4(uint4 v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(float v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(float x, float y, float z, float w) => new float4(x, y, z, w);
+        [IN(LINE)] public static float4 Float4(float4 v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(double v) => new float4(v);
+        [IN(LINE)] public static float4 Float4(double x, double y, double z, double w) => new float4(x, y, z, w);
+        [IN(LINE)] public static float4 Float4(double4 v) => new float4(v);
     }
 }

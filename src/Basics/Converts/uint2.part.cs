@@ -41,17 +41,22 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        [IN(LINE)] public static uint2 uint2((uint, uint) v) => new uint2(v);
-
-        [IN(LINE)] public static uint2 uint2(bool v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(bool2 v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(int v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(int2 v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(uint v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(uint2 v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(float v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(float2 v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(double v) => new uint2(v);
-        [IN(LINE)] public static uint2 uint2(double2 v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2((uint, uint) v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2<T>(T v) where T : IVector2<uint> => new uint2(v.x, v.y);
+        [IN(LINE)] public static uint2 UInt2(bool v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(bool x, bool y) => new uint2(x, y);
+        [IN(LINE)] public static uint2 UInt2(bool2 v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(int v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(int x, int y) => new uint2(x, y);
+        [IN(LINE)] public static uint2 UInt2(int2 v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(uint v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(uint x, uint y) => new uint2(x, y);
+        [IN(LINE)] public static uint2 UInt2(uint2 v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(float v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(float x, float y) => new uint2(x, y);
+        [IN(LINE)] public static uint2 UInt2(float2 v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(double v) => new uint2(v);
+        [IN(LINE)] public static uint2 UInt2(double x, double y) => new uint2(x, y);
+        [IN(LINE)] public static uint2 UInt2(double2 v) => new uint2(v);
     }
 }

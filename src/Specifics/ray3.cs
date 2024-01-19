@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
-namespace DCFApixels.DataMath.TODO
+namespace DCFApixels.DataMath
 {
-    /// <summary>Not Implemented</summary>
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 8, Size = 24)]
-    public partial struct ray3 : IRay3<float, float3>
+    public partial struct ray3 :
+        IEquatable<ray3>,
+        IFormattable,
+        IRay3<float, float3>
     {
         public float3 origin;
         public float3 direction;
@@ -20,67 +20,78 @@ namespace DCFApixels.DataMath.TODO
         #region IRayN
         float3 IRay3<float, float3>.origin
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => origin;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => origin = value;
+            [IN(LINE)] get => origin;
+            [IN(LINE)] set => origin = value;
         }
         float3 IRay3<float, float3>.direction
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => direction;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => direction = value;
+            [IN(LINE)] get => direction;
+            [IN(LINE)] set => direction = value;
         }
         public float OriginX
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => origin.x;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => origin.x = value;
+            [IN(LINE)] get => origin.x;
+            [IN(LINE)] set => origin.x = value;
         }
         public float OriginY
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => origin.y;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => origin.y = value;
+            [IN(LINE)] get => origin.y;
+            [IN(LINE)] set => origin.y = value;
         }
         public float OriginZ
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => origin.z;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => origin.z = value;
+            [IN(LINE)] get => origin.z;
+            [IN(LINE)] set => origin.z = value;
         }
         public float DirectionX
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => direction.x;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => direction.x = value;
+            [IN(LINE)] get => direction.x;
+            [IN(LINE)] set => direction.x = value;
         }
         public float DirectionY
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => direction.y;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => direction.y = value;
+            [IN(LINE)] get => direction.y;
+            [IN(LINE)] set => direction.y = value;
         }
         public float DirectionZ
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => direction.z;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => direction.z = value;
+            [IN(LINE)] get => direction.z;
+            [IN(LINE)] set => direction.z = value;
         }
         #endregion
 
-        #region Utils
+        #region Constructors
+        [IN(LINE)]
+        public ray3(float3 origin, float3 direction)
+        {
+            this.origin = origin;
+            this.direction = direction;
+        }
+        [IN(LINE)]
+        public ray3(float3 direction) : this(float3.zero, direction) { }
+        #endregion
+
+        #region operators
+        [IN(LINE)] public static ray3 operator -(ray3 a) => new ray3(a.origin, -a.direction);
+        [IN(LINE)] public static ray3 operator +(ray3 a) => new ray3(a.origin, +a.direction);
+
+        [IN(LINE)] public static bool operator ==(ray3 a, ray3 b) => a.origin == b.origin && a.direction == b.direction;
+        [IN(LINE)] public static bool operator !=(ray3 a, ray3 b) => a.origin != b.origin && a.direction != b.direction;
+        #endregion
+
+        #region Other 
+        [IN(LINE)] public override int GetHashCode() => math.Hash(this);
+        public override bool Equals(object o) => o is ray3 target && Equals(target);
+        [IN(LINE)] public bool Equals(ray3 a) => origin == a.origin && direction == a.direction;
+        public override string ToString() => $"{nameof(ray3)}({origin}, {direction})";
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return $"{nameof(ray3)}({origin.ToString(format, formatProvider)}, {direction.ToString(format, formatProvider)})";
+        }
+
         internal class DebuggerProxy
         {
-            public float3 origin;
-            public float3 direction;
+            public float3 origin, direction;
             public DebuggerProxy(ray3 v)
             {
                 origin = v.origin;
@@ -88,5 +99,23 @@ namespace DCFApixels.DataMath.TODO
             }
         }
         #endregion
+    }
+
+    public static partial class math
+    {
+        [IN(LINE)] public static ray3 Move(ray3 ray, float distance) => new ray3(ray.origin, ray.origin + ray.direction * distance);
+        [IN(LINE)] public static float3 GetPoint(ray3 ray, float distance) => ray.origin + ray.direction * distance;
+    }
+
+    public static partial class math
+    {
+        [IN(LINE)] public static int Hash(ray3 a) => Hash(a.origin) ^ Hash(a.direction);
+        [IN(LINE)] public static uint UHash(ray3 a) => unchecked((uint)Hash(a));
+    }
+
+    public static partial class math
+    {
+        [IN(LINE)] public static ray3 Ray3(float3 origin, float3 direction) => new ray3(origin, direction);
+        [IN(LINE)] public static ray3 Ray3(float3 direction) => new ray3(direction);
     }
 }
