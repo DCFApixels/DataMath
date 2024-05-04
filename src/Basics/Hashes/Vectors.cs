@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace DCFApixels.DataMath
 {
-    public static partial class math
+    public static partial class math // vector hashes
     {
         #region Bool
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

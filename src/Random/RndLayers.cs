@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DCFApixels.DataMath
+﻿namespace DCFApixels.DataMath
 {
     //public static class Rnd
     //{

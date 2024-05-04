@@ -358,11 +358,11 @@ namespace DCFApixels.DataMath.Internal
                 throw new ArgumentOutOfRangeException("throw new ArgumentOutOfRangeException(nameof(digits), SR.ArgumentOutOfRange_RoundingDigits_MathF);");
             }
 
-        //    if (mode < MidpointRounding.ToEven || mode > MidpointRounding.ToPositiveInfinity)
-        //    {
-        //       // throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
-        //        throw new ArgumentOutOfRangeException("throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));");
-        //    }
+            //    if (mode < MidpointRounding.ToEven || mode > MidpointRounding.ToPositiveInfinity)
+            //    {
+            //       // throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
+            //        throw new ArgumentOutOfRangeException("throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));");
+            //    }
 
             if (Abs(x) < singleRoundLimit)
             {
@@ -387,24 +387,24 @@ namespace DCFApixels.DataMath.Internal
                             x = Truncate_2(x + CopySign(0.49999997f, x));
                             break;
                         }
-                //   // Directed rounding: Round to the nearest value, toward to zero
-                //   case MidpointRounding.ToZero:
-                //       {
-                //           x = Truncate_2(x);
-                //           break;
-                //       }
-                //   // Directed Rounding: Round down to the next value, toward negative infinity
-                //   case MidpointRounding.ToNegativeInfinity:
-                //       {
-                //           x = Floor(x);
-                //           break;
-                //       }
-                //   // Directed rounding: Round up to the next value, toward positive infinity
-                //   case MidpointRounding.ToPositiveInfinity:
-                //       {
-                //           x = Ceiling(x);
-                //           break;
-                //       }
+                    //   // Directed rounding: Round to the nearest value, toward to zero
+                    //   case MidpointRounding.ToZero:
+                    //       {
+                    //           x = Truncate_2(x);
+                    //           break;
+                    //       }
+                    //   // Directed Rounding: Round down to the next value, toward negative infinity
+                    //   case MidpointRounding.ToNegativeInfinity:
+                    //       {
+                    //           x = Floor(x);
+                    //           break;
+                    //       }
+                    //   // Directed rounding: Round up to the next value, toward positive infinity
+                    //   case MidpointRounding.ToPositiveInfinity:
+                    //       {
+                    //           x = Ceiling(x);
+                    //           break;
+                    //       }
                     default:
                         {
                             //throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
@@ -419,7 +419,7 @@ namespace DCFApixels.DataMath.Internal
         }
 
 
-        
+
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

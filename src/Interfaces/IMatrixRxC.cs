@@ -4,7 +4,7 @@
     //Fields mRC: m00, m21
 
     /// <summary>Not Implemented</summary>
-    public  interface IMatrix<T> : IVectorN<T> where T :struct
+    public interface IMatrix<T> : IVectorN<T> where T : struct
     {
         /// <summary>rows count / y length</summary>
         public int rows { get; }
@@ -154,7 +154,7 @@
         public TVector1 c3 { get; set; }
     }
 
-    
+
     /// <summary>Not Implemented</summary>
     public interface IMatrix2x1<T, TVector2> : IMatrix2x1Cells<T>
         where T : struct
@@ -180,7 +180,7 @@
         public TVector2 c2 { get; set; }
     }
     /// <summary>Not Implemented</summary>
-    public interface IMatrix2x4<T, TVector2> : IMatrix2x3<T, TVector2>, IMatrix2x4Cells<T> 
+    public interface IMatrix2x4<T, TVector2> : IMatrix2x3<T, TVector2>, IMatrix2x4Cells<T>
         where T : struct
         where TVector2 : struct, IVector2<T>
     {

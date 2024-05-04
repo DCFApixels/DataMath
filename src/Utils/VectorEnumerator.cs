@@ -12,7 +12,7 @@ namespace DCFApixels.DataMath
         public new VectorEnumerator<T, TVector> GetEnumerator();
     }
     public struct VectorEnumerator<T, TVector> : IEnumerator<T>
-        where T : struct 
+        where T : struct
         where TVector : struct, IVectorN<T>
     {
         private readonly TVector _value;

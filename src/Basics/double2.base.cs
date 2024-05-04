@@ -12,10 +12,10 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 8, Size = 16)]
-    public partial struct double2 : 
-        IEquatable<double2>, 
-        IFormattable, 
-        IVector2<double>, 
+    public partial struct double2 :
+        IEquatable<double2>,
+        IFormattable,
+        IVector2<double>,
         IColor,
         IEnumerableVector<double, double2>
     {
@@ -43,8 +43,8 @@ namespace DCFApixels.DataMath
         #region IColor
         public float r { [IN(LINE)] get => (float)x; [IN(LINE)] set => x = (double)value; }
         public float g { [IN(LINE)] get => (float)y; [IN(LINE)] set => y = (double)value; }
-        public float b { [IN(LINE)] get => 0f; [IN(LINE)] set {} }
-        public float a { [IN(LINE)] get => 1f; [IN(LINE)] set {} }
+        public float b { [IN(LINE)] get => 0f; [IN(LINE)] set { } }
+        public float a { [IN(LINE)] get => 1f; [IN(LINE)] set { } }
         #endregion
 
         #region IVectorN
@@ -134,240 +134,240 @@ namespace DCFApixels.DataMath
         #region Swaps
 
         #region Swap2
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 xx { [IN(LINE)] get => new double2(x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 xy { [IN(LINE)] get => new double2(x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 x_ { [IN(LINE)] get => new double2(x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 yx { [IN(LINE)] get => new double2(y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 yy { [IN(LINE)] get => new double2(y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 y_ { [IN(LINE)] get => new double2(y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 _x { [IN(LINE)] get => new double2(0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double2 _y { [IN(LINE)] get => new double2(0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 xx { [IN(LINE)] get => new double2(x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 xy { [IN(LINE)] get => new double2(x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 x_ { [IN(LINE)] get => new double2(x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 yx { [IN(LINE)] get => new double2(y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 yy { [IN(LINE)] get => new double2(y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 y_ { [IN(LINE)] get => new double2(y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 _x { [IN(LINE)] get => new double2(0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double2 _y { [IN(LINE)] get => new double2(0d, y); }
         #endregion
 
         #region Swap3
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xxx { [IN(LINE)] get => new double3(x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xxy { [IN(LINE)] get => new double3(x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xx_ { [IN(LINE)] get => new double3(x, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xyx { [IN(LINE)] get => new double3(x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xyy { [IN(LINE)] get => new double3(x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 xy_ { [IN(LINE)] get => new double3(x, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 x_x { [IN(LINE)] get => new double3(x, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 x_y { [IN(LINE)] get => new double3(x, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 x__ { [IN(LINE)] get => new double3(x, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yxx { [IN(LINE)] get => new double3(y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yxy { [IN(LINE)] get => new double3(y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yx_ { [IN(LINE)] get => new double3(y, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yyx { [IN(LINE)] get => new double3(y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yyy { [IN(LINE)] get => new double3(y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 yy_ { [IN(LINE)] get => new double3(y, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 y_x { [IN(LINE)] get => new double3(y, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 y_y { [IN(LINE)] get => new double3(y, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 y__ { [IN(LINE)] get => new double3(y, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 _xx { [IN(LINE)] get => new double3(0d, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 _xy { [IN(LINE)] get => new double3(0d, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 _x_ { [IN(LINE)] get => new double3(0d, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 _yx { [IN(LINE)] get => new double3(0d, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 _yy { [IN(LINE)] get => new double3(0d, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 _y_ { [IN(LINE)] get => new double3(0d, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 __x { [IN(LINE)] get => new double3(0d, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double3 __y { [IN(LINE)] get => new double3(0d, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 xxx { [IN(LINE)] get => new double3(x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 xxy { [IN(LINE)] get => new double3(x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 xx_ { [IN(LINE)] get => new double3(x, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 xyx { [IN(LINE)] get => new double3(x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 xyy { [IN(LINE)] get => new double3(x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 xy_ { [IN(LINE)] get => new double3(x, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 x_x { [IN(LINE)] get => new double3(x, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 x_y { [IN(LINE)] get => new double3(x, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 x__ { [IN(LINE)] get => new double3(x, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 yxx { [IN(LINE)] get => new double3(y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 yxy { [IN(LINE)] get => new double3(y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 yx_ { [IN(LINE)] get => new double3(y, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 yyx { [IN(LINE)] get => new double3(y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 yyy { [IN(LINE)] get => new double3(y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 yy_ { [IN(LINE)] get => new double3(y, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 y_x { [IN(LINE)] get => new double3(y, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 y_y { [IN(LINE)] get => new double3(y, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 y__ { [IN(LINE)] get => new double3(y, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 _xx { [IN(LINE)] get => new double3(0d, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 _xy { [IN(LINE)] get => new double3(0d, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 _x_ { [IN(LINE)] get => new double3(0d, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 _yx { [IN(LINE)] get => new double3(0d, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 _yy { [IN(LINE)] get => new double3(0d, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 _y_ { [IN(LINE)] get => new double3(0d, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 __x { [IN(LINE)] get => new double3(0d, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double3 __y { [IN(LINE)] get => new double3(0d, 0d, y); }
         #endregion
 
         #region Swap4
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxxx { [IN(LINE)] get => new double4(x, x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxxy { [IN(LINE)] get => new double4(x, x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxx_ { [IN(LINE)] get => new double4(x, x, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxyx { [IN(LINE)] get => new double4(x, x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxyy { [IN(LINE)] get => new double4(x, x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xxy_ { [IN(LINE)] get => new double4(x, x, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xx_x { [IN(LINE)] get => new double4(x, x, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xx_y { [IN(LINE)] get => new double4(x, x, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xx__ { [IN(LINE)] get => new double4(x, x, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyxx { [IN(LINE)] get => new double4(x, y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyxy { [IN(LINE)] get => new double4(x, y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyx_ { [IN(LINE)] get => new double4(x, y, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyyx { [IN(LINE)] get => new double4(x, y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyyy { [IN(LINE)] get => new double4(x, y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xyy_ { [IN(LINE)] get => new double4(x, y, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xy_x { [IN(LINE)] get => new double4(x, y, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xy_y { [IN(LINE)] get => new double4(x, y, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 xy__ { [IN(LINE)] get => new double4(x, y, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x_xx { [IN(LINE)] get => new double4(x, 0d, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x_xy { [IN(LINE)] get => new double4(x, 0d, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x_x_ { [IN(LINE)] get => new double4(x, 0d, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x_yx { [IN(LINE)] get => new double4(x, 0d, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x_yy { [IN(LINE)] get => new double4(x, 0d, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x_y_ { [IN(LINE)] get => new double4(x, 0d, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x__x { [IN(LINE)] get => new double4(x, 0d, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x__y { [IN(LINE)] get => new double4(x, 0d, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 x___ { [IN(LINE)] get => new double4(x, 0d, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxxx { [IN(LINE)] get => new double4(y, x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxxy { [IN(LINE)] get => new double4(y, x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxx_ { [IN(LINE)] get => new double4(y, x, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxyx { [IN(LINE)] get => new double4(y, x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxyy { [IN(LINE)] get => new double4(y, x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yxy_ { [IN(LINE)] get => new double4(y, x, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yx_x { [IN(LINE)] get => new double4(y, x, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yx_y { [IN(LINE)] get => new double4(y, x, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yx__ { [IN(LINE)] get => new double4(y, x, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyxx { [IN(LINE)] get => new double4(y, y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyxy { [IN(LINE)] get => new double4(y, y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyx_ { [IN(LINE)] get => new double4(y, y, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyyx { [IN(LINE)] get => new double4(y, y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyyy { [IN(LINE)] get => new double4(y, y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yyy_ { [IN(LINE)] get => new double4(y, y, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yy_x { [IN(LINE)] get => new double4(y, y, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yy_y { [IN(LINE)] get => new double4(y, y, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 yy__ { [IN(LINE)] get => new double4(y, y, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y_xx { [IN(LINE)] get => new double4(y, 0d, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y_xy { [IN(LINE)] get => new double4(y, 0d, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y_x_ { [IN(LINE)] get => new double4(y, 0d, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y_yx { [IN(LINE)] get => new double4(y, 0d, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y_yy { [IN(LINE)] get => new double4(y, 0d, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y_y_ { [IN(LINE)] get => new double4(y, 0d, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y__x { [IN(LINE)] get => new double4(y, 0d, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y__y { [IN(LINE)] get => new double4(y, 0d, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 y___ { [IN(LINE)] get => new double4(y, 0d, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _xxx { [IN(LINE)] get => new double4(0d, x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _xxy { [IN(LINE)] get => new double4(0d, x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _xx_ { [IN(LINE)] get => new double4(0d, x, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _xyx { [IN(LINE)] get => new double4(0d, x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _xyy { [IN(LINE)] get => new double4(0d, x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _xy_ { [IN(LINE)] get => new double4(0d, x, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _x_x { [IN(LINE)] get => new double4(0d, x, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _x_y { [IN(LINE)] get => new double4(0d, x, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _x__ { [IN(LINE)] get => new double4(0d, x, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _yxx { [IN(LINE)] get => new double4(0d, y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _yxy { [IN(LINE)] get => new double4(0d, y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _yx_ { [IN(LINE)] get => new double4(0d, y, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _yyx { [IN(LINE)] get => new double4(0d, y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _yyy { [IN(LINE)] get => new double4(0d, y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _yy_ { [IN(LINE)] get => new double4(0d, y, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _y_x { [IN(LINE)] get => new double4(0d, y, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _y_y { [IN(LINE)] get => new double4(0d, y, 0d, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 _y__ { [IN(LINE)] get => new double4(0d, y, 0d, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 __xx { [IN(LINE)] get => new double4(0d, 0d, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 __xy { [IN(LINE)] get => new double4(0d, 0d, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 __x_ { [IN(LINE)] get => new double4(0d, 0d, x, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 __yx { [IN(LINE)] get => new double4(0d, 0d, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 __yy { [IN(LINE)] get => new double4(0d, 0d, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 __y_ { [IN(LINE)] get => new double4(0d, 0d, y, 0d); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ___x { [IN(LINE)] get => new double4(0d, 0d, 0d, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public double4 ___y { [IN(LINE)] get => new double4(0d, 0d, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xxxx { [IN(LINE)] get => new double4(x, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xxxy { [IN(LINE)] get => new double4(x, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xxx_ { [IN(LINE)] get => new double4(x, x, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xxyx { [IN(LINE)] get => new double4(x, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xxyy { [IN(LINE)] get => new double4(x, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xxy_ { [IN(LINE)] get => new double4(x, x, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xx_x { [IN(LINE)] get => new double4(x, x, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xx_y { [IN(LINE)] get => new double4(x, x, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xx__ { [IN(LINE)] get => new double4(x, x, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xyxx { [IN(LINE)] get => new double4(x, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xyxy { [IN(LINE)] get => new double4(x, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xyx_ { [IN(LINE)] get => new double4(x, y, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xyyx { [IN(LINE)] get => new double4(x, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xyyy { [IN(LINE)] get => new double4(x, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xyy_ { [IN(LINE)] get => new double4(x, y, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xy_x { [IN(LINE)] get => new double4(x, y, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xy_y { [IN(LINE)] get => new double4(x, y, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 xy__ { [IN(LINE)] get => new double4(x, y, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x_xx { [IN(LINE)] get => new double4(x, 0d, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x_xy { [IN(LINE)] get => new double4(x, 0d, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x_x_ { [IN(LINE)] get => new double4(x, 0d, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x_yx { [IN(LINE)] get => new double4(x, 0d, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x_yy { [IN(LINE)] get => new double4(x, 0d, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x_y_ { [IN(LINE)] get => new double4(x, 0d, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x__x { [IN(LINE)] get => new double4(x, 0d, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x__y { [IN(LINE)] get => new double4(x, 0d, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 x___ { [IN(LINE)] get => new double4(x, 0d, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yxxx { [IN(LINE)] get => new double4(y, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yxxy { [IN(LINE)] get => new double4(y, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yxx_ { [IN(LINE)] get => new double4(y, x, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yxyx { [IN(LINE)] get => new double4(y, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yxyy { [IN(LINE)] get => new double4(y, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yxy_ { [IN(LINE)] get => new double4(y, x, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yx_x { [IN(LINE)] get => new double4(y, x, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yx_y { [IN(LINE)] get => new double4(y, x, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yx__ { [IN(LINE)] get => new double4(y, x, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yyxx { [IN(LINE)] get => new double4(y, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yyxy { [IN(LINE)] get => new double4(y, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yyx_ { [IN(LINE)] get => new double4(y, y, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yyyx { [IN(LINE)] get => new double4(y, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yyyy { [IN(LINE)] get => new double4(y, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yyy_ { [IN(LINE)] get => new double4(y, y, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yy_x { [IN(LINE)] get => new double4(y, y, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yy_y { [IN(LINE)] get => new double4(y, y, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 yy__ { [IN(LINE)] get => new double4(y, y, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y_xx { [IN(LINE)] get => new double4(y, 0d, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y_xy { [IN(LINE)] get => new double4(y, 0d, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y_x_ { [IN(LINE)] get => new double4(y, 0d, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y_yx { [IN(LINE)] get => new double4(y, 0d, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y_yy { [IN(LINE)] get => new double4(y, 0d, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y_y_ { [IN(LINE)] get => new double4(y, 0d, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y__x { [IN(LINE)] get => new double4(y, 0d, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y__y { [IN(LINE)] get => new double4(y, 0d, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 y___ { [IN(LINE)] get => new double4(y, 0d, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _xxx { [IN(LINE)] get => new double4(0d, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _xxy { [IN(LINE)] get => new double4(0d, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _xx_ { [IN(LINE)] get => new double4(0d, x, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _xyx { [IN(LINE)] get => new double4(0d, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _xyy { [IN(LINE)] get => new double4(0d, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _xy_ { [IN(LINE)] get => new double4(0d, x, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _x_x { [IN(LINE)] get => new double4(0d, x, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _x_y { [IN(LINE)] get => new double4(0d, x, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _x__ { [IN(LINE)] get => new double4(0d, x, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _yxx { [IN(LINE)] get => new double4(0d, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _yxy { [IN(LINE)] get => new double4(0d, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _yx_ { [IN(LINE)] get => new double4(0d, y, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _yyx { [IN(LINE)] get => new double4(0d, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _yyy { [IN(LINE)] get => new double4(0d, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _yy_ { [IN(LINE)] get => new double4(0d, y, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _y_x { [IN(LINE)] get => new double4(0d, y, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _y_y { [IN(LINE)] get => new double4(0d, y, 0d, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 _y__ { [IN(LINE)] get => new double4(0d, y, 0d, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 __xx { [IN(LINE)] get => new double4(0d, 0d, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 __xy { [IN(LINE)] get => new double4(0d, 0d, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 __x_ { [IN(LINE)] get => new double4(0d, 0d, x, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 __yx { [IN(LINE)] get => new double4(0d, 0d, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 __yy { [IN(LINE)] get => new double4(0d, 0d, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 __y_ { [IN(LINE)] get => new double4(0d, 0d, y, 0d); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 ___x { [IN(LINE)] get => new double4(0d, 0d, 0d, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public double4 ___y { [IN(LINE)] get => new double4(0d, 0d, 0d, y); }
         #endregion
 
         #endregion
@@ -375,8 +375,8 @@ namespace DCFApixels.DataMath
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() => math.Hash(this);
-        public override bool Equals(object o) => o is double2 target && Equals(target); 
-        [IN(LINE)] public bool Equals(double2 a) => x == a.x && y == a.y; 
+        public override bool Equals(object o) => o is double2 target && Equals(target);
+        [IN(LINE)] public bool Equals(double2 a) => x == a.x && y == a.y;
         public override string ToString() => $"double2({x}, {y})";
         public string ToString(string format, IFormatProvider formatProvider)
         {

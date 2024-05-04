@@ -1,8 +1,4 @@
-using System;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
 using SMath = System.Math;
 
 namespace DCFApixels.DataMath
@@ -25,7 +21,7 @@ namespace DCFApixels.DataMath
         {
             return new int4(SMath.Sign(v.x), SMath.Sign(v.y), SMath.Sign(v.z), SMath.Sign(v.w));
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 round(double4 v)
         {
@@ -56,6 +52,6 @@ namespace DCFApixels.DataMath
         {
             return new int4((int)SMath.Ceiling(v.x), (int)SMath.Ceiling(v.y), (int)SMath.Ceiling(v.z), (int)SMath.Ceiling(v.w));
         }
-        
+
     }
 }

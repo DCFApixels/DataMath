@@ -36,7 +36,7 @@ namespace DCFApixels.DataMath
 
     public static partial class math
     {
-        
+
     }
 }
 #endif

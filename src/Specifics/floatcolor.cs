@@ -33,7 +33,7 @@ namespace DCFApixels.DataMath.TODO
         public readonly static floatcolor black = new floatcolor(0f, 0f, 0f);
 
         /// <summary> rgba(1, 1, 0, 1) </summary>
-        public readonly static floatcolor yellow = new floatcolor(1f, 1f, 0f);    
+        public readonly static floatcolor yellow = new floatcolor(1f, 1f, 0f);
         /// <summary> rgba(1, 0.5, 0, 1) </summary>
         public readonly static floatcolor orange = new floatcolor(1f, 0.5f, 0f);
         /// <summary> rgba(0, 1, 1, 1) </summary>

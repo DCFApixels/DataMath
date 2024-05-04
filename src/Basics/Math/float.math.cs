@@ -1,4 +1,3 @@
-using DCFApixels.DataMath.Internal;
 using System.Runtime.CompilerServices;
 #if NETCORE || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
@@ -69,12 +68,24 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region clamp/clamp01
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Clamp(float value, float min, float max)
         {
-            if (value < min) return min; 
+            if (value < min) return min;
             if (value > max) return max;
             return value;
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Loop(float value, float length)
+        {
+            return value % length;
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Loop(float value, float min, float max)
+        {
+            return Loop(value - min, max - min) + min;
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Clamp01(float value)
         {
             if (value < 0f) return 0f;
@@ -85,11 +96,27 @@ namespace DCFApixels.DataMath
 
         #region lerp
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Lerp(in float a, in float b, float t) => a + (b - a) * t;
+        public static float Lerp(float start, float end, float t)
+        {
+            return start + t * (end - start);
+        }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float LerpClamp(in float a, in float b, float t) => a + (b - a) * Clamp01(t);
+        public static float LerpClamp(float start, float end, float t)
+        {
+            t = Clamp01(t);
+            return start + t * (end - start);
+        }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float LerpLoop(in float a, in float b, float t) => a + (b - a) * (t % 1f);
+        public static float LerpLoop(float start, float end, float t)
+        {
+            t %= 1f;
+            return start + t * (end - start);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float UnLerp(float start, float end, float v)
+        {
+            return (v - start) / (end - start);
+        }
         #endregion
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -101,18 +128,31 @@ namespace DCFApixels.DataMath
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Cos(float x) { return SMathF.Cos(x); }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]  
-        public static float Sin(float x) { return SMathF.Sin(x); }
+        public static float Cos(float v) { return SMathF.Cos(v); }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sin(float v) { return SMathF.Sin(v); }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Atan2(float a, float b) { return SMathF.Atan2(a, b); }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Asin(float x) { return SMathF.Asin(x); }
+        public static float Asin(float v) { return SMathF.Asin(v); }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Acos(float x) { return SMathF.Acos(x); }
+        public static float Acos(float v) { return SMathF.Acos(v); }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Sqrt(float x) { return SMathF.Sqrt(x); }
+        public static float Sqrt(float v) { return SMathF.Sqrt(v); }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sqr(float v) { return v * v; }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Pow(float a, float b) { return SMathF.Pow(a, b); }
+
+
+        public static float SmoothStep(float from, float to, float t)
+        {
+            t = Clamp01(t);
+            t = -2f * t * t * t + 3f * t * t;
+            return to * t + from * (1f - t);
+        }
     }
 }

@@ -4,8 +4,8 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public struct color : 
-        IVector4<float>, 
+    public struct color :
+        IVector4<float>,
         IColor,
         IEquatable<color>,
         IFormattable
@@ -142,7 +142,7 @@ namespace DCFApixels.DataMath
         public static color operator %(float a, color b) => new color(a % b.r, a % b.g, a % b.b, a % b.a);
         [IN(LINE)]
         public static color operator %(color a, float4 b) => new color(a.r % b.z, a.g % b.y, a.b % b.z, a.a % b.w);
-        [IN(LINE)] 
+        [IN(LINE)]
         public static color operator %(float4 a, color b) => new color(a.z % b.r, a.y % b.g, a.z % b.b, a.w % b.a);
 
         [IN(LINE)]

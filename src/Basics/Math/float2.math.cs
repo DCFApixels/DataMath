@@ -22,23 +22,25 @@ namespace DCFApixels.DataMath
         }
         public float2 Normalized
         {
-            get => new float2();
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get
+            {
+                float mag = Magnitude;
+                return mag > vectorEpsilon ? this / mag : zero;
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Normalize()
         {
             float mag = Magnitude;
-            if (mag > vectorEpsilon)
-                this = this / mag;
-            else
-                this = zero;
+            this = mag > vectorEpsilon ? this / mag : zero;
         }
         #endregion
 
         #region simple
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void OneMinus() 
+        public void OneMinus()
         { x = 1f - x; y = 1f - y; }
         public void Abs()
         { x = SMathF.Abs(x); y = SMathF.Abs(y); }
@@ -58,7 +60,7 @@ namespace DCFApixels.DataMath
             return new float2(SMathF.Abs(v.x), SMathF.Abs(v.y));
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int2 sign(float2 v)
+        public static int2 Sign(float2 v)
         {
             return new int2(SMath.Sign(v.x), SMath.Sign(v.y));
         }
@@ -105,28 +107,27 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region lerp
-        public static float2 lerp(in float2 a, in float2 b, float t)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 Lerp(float2 start, float2 end, float t)
         {
-            return new float2(
-                a.x + (b.x - a.x) * t,
-                a.y + (b.y - a.y) * t
-            );
+            return start + t * (end - start);
         }
-        public static float2 lerp_clamp(in float2 a, in float2 b, float t)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 LerpClamp(float2 start, float2 end, float t)
         {
-            t.Clamp01();
-            return new float2(
-                a.x + (b.x - a.x) * t,
-                a.y + (b.y - a.y) * t
-            );
+            t = Clamp01(t);
+            return start + t * (end - start);
         }
-        public static float2 lerp_loop(in float2 a, in float2 b, float t)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 LerpLoop(float2 start, float2 end, float t)
         {
-            t = t % 1f;
-            return new float2(
-                a.x + (b.x - a.x) * t,
-                a.y + (b.y - a.y) * t
-            );
+            t %= 1f;
+            return start + t * (end - start);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float2 UnLerp(float2 start, float2 end, float2 v)
+        {
+            return (v - start) / (end - start);
         }
         #endregion
 
@@ -135,10 +136,10 @@ namespace DCFApixels.DataMath
             Clamp(value.x, min, max),
             Clamp(value.y, min, max));
         public static float2 Clamp(float2 value, float2 min, float2 max) => new float2(
-            Clamp(value.x, min.x, max.x), 
+            Clamp(value.x, min.x, max.x),
             Clamp(value.y, min.y, max.y));
         public static float2 Clamp01(float2 value) => new float2(
-            Clamp01(value.x), 
+            Clamp01(value.x),
             Clamp01(value.y));
         #endregion
 
@@ -155,8 +156,8 @@ namespace DCFApixels.DataMath
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Csum(float2 x) => x.x + x.y; 
+        public static float Csum(float2 x) => x.x + x.y;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float2 Asin(float2 x) => new float2(Asin(x.x), Asin(x.y)); 
+        public static float2 Asin(float2 x) => new float2(Asin(x.x), Asin(x.y));
     }
 }

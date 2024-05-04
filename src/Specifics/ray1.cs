@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -16,7 +13,7 @@ namespace DCFApixels.DataMath
     {
         public float origin;
         public float direction;
-        
+
         #region IRayN
         float IRay1<float>.origin
         {
@@ -47,7 +44,7 @@ namespace DCFApixels.DataMath
             set => direction = value;
         }
         #endregion
-        
+
         #region Utils
         internal class DebuggerProxy
         {

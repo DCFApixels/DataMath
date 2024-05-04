@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 #if NETCORE || UNITY_5_3_OR_NEWER
-using SMathF = System.MathF;
 #else
 using SMathF = DCFApixels.DataMath.Internal.MathF;
 #endif
@@ -16,6 +15,6 @@ namespace DCFApixels.DataMath
         public static uint abs(uint v) => v;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int sign(uint v) => v > 0 ? 1 : 0;
-        
+
     }
 }

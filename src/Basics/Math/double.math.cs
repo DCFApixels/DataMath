@@ -12,7 +12,7 @@ namespace DCFApixels.DataMath
         public static double abs(double v) => SMath.Abs(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int sign(double v) => SMath.Sign(v);
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double round(double v) => SMath.Round(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -25,6 +25,6 @@ namespace DCFApixels.DataMath
         public static double ceil(double v) => SMath.Ceiling(v);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ceil2int(double v) => (int)SMath.Ceiling(v);
-        
+
     }
 }

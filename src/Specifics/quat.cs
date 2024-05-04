@@ -21,6 +21,8 @@ namespace DCFApixels.DataMath
         public float4 value;
 
 
+        public static readonly quat Identity = new quat(0f, 0f, 0f, 1f);
+
 
         [IN(LINE)]
         public quat(float x, float y, float z, float w)
@@ -31,6 +33,32 @@ namespace DCFApixels.DataMath
         public quat(float4 a)
         {
             value = new float4(a.x, a.y, a.z, a.w);
+        }
+
+        public quat(float3 c0, float3 c1, float3 c2)
+        {
+            float3 u = c0;
+            float3 v = c1;
+            float3 w = c2;
+
+            uint u_sign = (asuint(u.x) & 0x80000000);
+            float t = v.y + asfloat(asuint(w.z) ^ u_sign);
+            uint4 u_mask = new uint4((int)u_sign >> 31);
+            uint4 t_mask = new uint4(asint(t) >> 31);
+
+            float tr = 1.0f + Abs(u.x);
+
+            uint4 sign_flips = new uint4(
+                0x00000000, 0x80000000, 0x80000000, 0x80000000) ^
+                (u_mask & new uint4(0x00000000, 0x80000000, 0x00000000, 0x80000000)) ^
+                (t_mask & new uint4(0x80000000, 0x80000000, 0x80000000, 0x00000000));
+
+            value = new float4(tr, u.y, w.x, v.z) +
+                asfloat4(asuint4(new float4(t, v.x, u.z, w.y)) ^ sign_flips);   // +---, +++-, ++-+, +-++
+
+            value = asfloat4((asuint4(value) & ~u_mask) | (asuint4(value.zwxy) & u_mask));
+            value = asfloat4((asuint4(value.wzyx) & ~t_mask) | (asuint4(value) & t_mask));
+            value = Normalize(value);
         }
 
         #region IVectorN
@@ -110,7 +138,7 @@ namespace DCFApixels.DataMath
                 q1x * q2w + q2x * q1w + cx,
                 q1y * q2w + q2y * q1w + cy,
                 q1z * q2w + q2z * q1w + cz,
-                q1w * q2w - dot );
+                q1w * q2w - dot);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -158,8 +186,20 @@ namespace DCFApixels.DataMath
         //[IN(LINE)] public static quat operator *(quat a, float b) => new quat(a.x * b, a.y * b, a.z * b, a.w * b);
     }
 
-    public partial class math
+    public static partial class math // quat
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static quat LookRotation(float3 forward)
+        {
+            return LookRotation(forward, float3.up);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static quat LookRotation(float3 forward, float3 up)
+        {
+            float3 t = Normalize(Cross(up, forward));
+            return new quat(t, Cross(forward, t), forward);
+        }
+
 
         private static float4 ChangeSign(float4 a, float4 b)
         {
@@ -273,5 +313,11 @@ namespace DCFApixels.DataMath
                 s.z * c.x * c.y - s.x * s.y * c.z,
                 c.x * c.y * c.z + s.y * s.z * s.x);
         }
+
+        //[IN(LINE)]
+        //public static float Dot(quat a, quat b)
+        //{
+        //    return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+        //}
     }
 }

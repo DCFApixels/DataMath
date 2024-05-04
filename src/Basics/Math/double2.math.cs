@@ -1,8 +1,4 @@
-using System;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
 using SMath = System.Math;
 
 namespace DCFApixels.DataMath
@@ -25,7 +21,7 @@ namespace DCFApixels.DataMath
         {
             return new int2(SMath.Sign(v.x), SMath.Sign(v.y));
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2 round(double2 v)
         {
@@ -56,6 +52,6 @@ namespace DCFApixels.DataMath
         {
             return new int2((int)SMath.Ceiling(v.x), (int)SMath.Ceiling(v.y));
         }
-        
+
     }
 }

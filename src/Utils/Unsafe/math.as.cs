@@ -2,7 +2,7 @@
 
 namespace DCFApixels.DataMath
 {
-    public static partial class math
+    public static partial class math // as
     {
         #region asfloat from int/uint
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

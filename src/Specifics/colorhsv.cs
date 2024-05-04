@@ -4,7 +4,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public struct colorhsv : 
+    public struct colorhsv :
         IVector4<float>,
         IEquatable<colorhsv>,
         IFormattable

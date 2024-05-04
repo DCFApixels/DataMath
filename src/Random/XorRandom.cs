@@ -7,7 +7,7 @@ namespace DCFApixels.DataMath
 {
     [Serializable]
     public struct XorRandom :
-        IEquatable<XorRandom>, 
+        IEquatable<XorRandom>,
         IFormattable
     {
         private uint _state;
@@ -359,7 +359,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public double NextDouble()
         {
-            return (0x3ff0000000000000 | ( ((ulong)NextUInt() << 20) ^ NextUInt()) ) - 1d;
+            return (0x3ff0000000000000 | (((ulong)NextUInt() << 20) ^ NextUInt())) - 1d;
         }
         public double2 NextDouble2()
         {
@@ -390,7 +390,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public override bool Equals(object o) => o is XorRandom target && Equals(target);
         [IN(LINE)] public bool Equals(XorRandom a) => a._state == _state;
         [IN(LINE)] public override string ToString() => $"{nameof(XorRandom)}({_state})";
-        [IN(LINE)] 
+        [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"{nameof(XorRandom)}({_state.ToString(format, formatProvider)})";

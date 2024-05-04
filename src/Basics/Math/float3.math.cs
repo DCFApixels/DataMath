@@ -12,7 +12,7 @@ namespace DCFApixels.DataMath
     public partial struct float3
     {
         public const float vectorEpsilon = 0.00001f;
-       
+
         #region vector
         public float Magnitude
         {
@@ -43,7 +43,7 @@ namespace DCFApixels.DataMath
 
         #region simple
         [IN(LINE)]
-        public void OneMinus() 
+        public void OneMinus()
         { x = 1f - x; y = 1f - y; z = 1f - z; }
         public void Abs()
         { x = SMathF.Abs(x); y = SMathF.Abs(y); z = SMathF.Abs(z); }
@@ -107,38 +107,91 @@ namespace DCFApixels.DataMath
         public static float3 Normalize(float3 v) { v.Normalize(); return v; }
         [IN(LINE)]
         public static float Magnitude(float3 v) => v.Magnitude;
+        [IN(LINE)]
+        public static float PowMagnitude(float3 v) => v.PowMagnitude;
         #endregion
 
-        #region lerp
-        public static float3 Lerp(float3 a, float3 b, float t)
+        #region Lerp
+        [IN(LINE)]
+        public static float3 Lerp(float3 start, float3 end, float t)
         {
-            return new float3(
-                a.x + (b.x - a.x) * t,
-                a.y + (b.y - a.y) * t,
-                a.z + (b.z - a.z) * t
-            );
+            return start + t * (end - start);
         }
-        public static float3 LerpClamp(float3 a, float3 b, float t)
+        [IN(LINE)]
+        public static float3 Lerp(float3 start, float3 end, float3 t)
         {
-            t.Clamp01();
-            return new float3(
-                a.x + (b.x - a.x) * t,
-                a.y + (b.y - a.y) * t,
-                a.z + (b.z - a.z) * t
-            );
+            return start + t * (end - start);
         }
-        public static float3 LerpLoop(float3 a, float3 b, float t)
+        [IN(LINE)]
+        public static float3 LerpClamp(float3 start, float3 end, float t)
         {
-            t = t % 1f;
-            return new float3(
-                a.x + (b.x - a.x) * t,
-                a.y + (b.y - a.y) * t,
-                a.z + (b.z - a.z) * t
-            );
+            t = Clamp01(t);
+            return start + t * (end - start);
+        }
+        [IN(LINE)]
+        public static float3 LerpClamp(float3 start, float3 end, float3 t)
+        {
+            t = Clamp01(t);
+            return start + t * (end - start);
+        }
+        [IN(LINE)]
+        public static float3 LerpLoop(float3 start, float3 end, float t)
+        {
+            t %= 1f;
+            return start + t * (end - start);
+        }
+        [IN(LINE)]
+        public static float3 LerpLoop(float3 start, float3 end, float3 t)
+        {
+            t %= 1f;
+            return start + t * (end - start);
+        }
+        [IN(LINE)]
+        public static float3 UnLerp(float3 start, float3 end, float3 v)
+        {
+            return (v - start) / (end - start);
         }
         #endregion
 
-        #region Clamp/Clamp01
+        #region Move
+        [IN(LINE)]
+        public static float3 Move(float3 from, float3 to, float distance)
+        {
+            float3 dif = to - from;
+            float difpowmag = dif.PowMagnitude;
+            if (difpowmag == 0f || (distance >= 0f && difpowmag <= distance * distance))
+            {
+                return to;
+            }
+            float difmag = Sqrt(difpowmag);
+            return new float3(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance, from.z + dif.z / difmag * distance);
+        }
+        [IN(LINE)]
+        public static float3 Move(float3 from, float3 to, float distance, out float excess)
+        {
+            if (distance == 0)
+            {
+                excess = 0;
+                return from;
+            }
+            float3 dif = to - from;
+            float difpowmag = dif.PowMagnitude;
+            if (difpowmag == 0f)
+            {
+                excess = distance;
+                return to;
+            }
+            float difmag = Sqrt(difpowmag);
+            excess = distance - difmag;
+            if (excess > -float.Epsilon)
+            {
+                return to;
+            }
+            return new float3(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance, from.z + dif.z / difmag * distance);
+        }
+        #endregion
+
+        #region Clamp/Clamp01/Min/Max
         public static float3 Clamp(float3 value, float min, float max) => new float3(
             Clamp(value.x, min, max),
             Clamp(value.y, min, max),
@@ -151,7 +204,6 @@ namespace DCFApixels.DataMath
             Clamp01(value.x),
             Clamp01(value.y),
             Clamp01(value.z));
-        #endregion
 
         [IN(LINE)]
         public static float3 Max(float3 a, float3 b) => new float3(Max(a.x, b.x), Max(a.y, b.y), Max(a.z, b.z));
@@ -160,6 +212,8 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)]
         public static float3 Min(float3 a, float3 b) => new float3(Min(a.x, b.x), Min(a.y, b.y), Min(a.z, b.z));
+
+        #endregion
 
         [IN(LINE)]
         public static float3 Cos(float3 x) => new float3(Cos(x.x), Cos(x.y), Cos(x.z));
@@ -170,11 +224,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CSum(float3 x) => x.x + x.y + x.z;
         [IN(LINE)]
+        public static float PowDistance(float3 a, float3 b) => PowMagnitude(b - a);
+        [IN(LINE)]
         public static float Distance(float3 a, float3 b) => Magnitude(b - a);
         [IN(LINE)]
         public static float Dot(float3 a, float3 b) => a.x * b.x + a.y * b.y + a.z * b.z;
         [IN(LINE)]
-        public static float3 Atan2(float3 a, float3 b) => new float3(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z)); 
+        public static float3 Atan2(float3 a, float3 b) => new float3(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z));
         [IN(LINE)]
         public static float3 Asin(float3 x) => new float3(Asin(x.x), Asin(x.y), Asin(x.z));
 
@@ -193,5 +249,8 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)]
         public static float3 Cross(float3 a, float3 b) => (a * b.yzx - a.yzx * b).yzx;
+
+
+
     }
 }

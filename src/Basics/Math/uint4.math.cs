@@ -26,6 +26,6 @@ namespace DCFApixels.DataMath
         {
             return new int4(SMath.Sign(v.x), SMath.Sign(v.y), SMath.Sign(v.z), SMath.Sign(v.w));
         }
-        
+
     }
 }

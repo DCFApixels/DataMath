@@ -1,8 +1,6 @@
-﻿using UnityEngineInternal;
-
-namespace DCFApixels.DataMath
+﻿namespace DCFApixels.DataMath
 {
-    public static partial class math
+    public static partial class math //consts
     {
         #region Constants
         /// <summary>The circle constant. Defined as the circumference of a circle divided by its radius. Equivalent to 2*pi</summary>

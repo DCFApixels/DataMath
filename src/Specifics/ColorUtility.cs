@@ -1,11 +1,4 @@
-﻿using DCFApixels.DataMath.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using SharpColor = System.Drawing.Color;
+﻿using SharpColor = System.Drawing.Color;
 
 namespace DCFApixels.DataMath
 {
@@ -28,7 +21,7 @@ namespace DCFApixels.DataMath
                 ((int)(color.g * 255)) & int.MaxValue % 256,
                 ((int)(color.b * 255)) & int.MaxValue % 256);
         }
-        public static SharpColor ToSharpColor(colorhsv hsvColor) 
+        public static SharpColor ToSharpColor(colorhsv hsvColor)
         {
             return ToSharpColor(HSVToRGB(hsvColor));
         }

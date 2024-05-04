@@ -10,7 +10,7 @@ namespace DCFApixels.DataMath
     /// <summary> Quasi Random. Use R sequence </summary>
     [Serializable]
     public struct QuasiRandom :
-        IEquatable<QuasiRandom>, 
+        IEquatable<QuasiRandom>,
         IFormattable
     {
         #region Consts
@@ -464,7 +464,7 @@ namespace DCFApixels.DataMath
         }
         public long NextLong(long max)
         {
-            return  long.MaxValue / (((long)GetX1_Q64(++_state))  / max);
+            return long.MaxValue / (((long)GetX1_Q64(++_state)) / max);
         }
         #endregion
 

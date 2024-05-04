@@ -3,7 +3,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public partial struct double4 
+    public partial struct double4
     {
         #region Convert operators
         [IN(LINE)] public static implicit operator double4((double, double, double, double) v) => new double4(v.Item1, v.Item2, v.Item3, v.Item4);
@@ -21,7 +21,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Bool constructors
-        [IN(LINE)] 
+        [IN(LINE)]
         public double4(bool x, bool y, bool z, bool w)
         {
             this.x = x ? 1d : 0d; this.y = y ? 1d : 0d;

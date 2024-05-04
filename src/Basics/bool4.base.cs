@@ -12,9 +12,9 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 4)]
-    public partial struct bool4 : 
-        IEquatable<bool4>, 
-        IVector4<bool>, 
+    public partial struct bool4 :
+        IEquatable<bool4>,
+        IVector4<bool>,
         IBoolVector,
         IColor,
         IEnumerableVector<bool, bool4>
@@ -219,684 +219,684 @@ namespace DCFApixels.DataMath
         #region Swaps
 
         #region Swap2
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 xx { [IN(LINE)] get => new bool2(x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 xy { [IN(LINE)] get => new bool2(x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 xz { [IN(LINE)] get => new bool2(x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 xw { [IN(LINE)] get => new bool2(x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 yx { [IN(LINE)] get => new bool2(y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 yy { [IN(LINE)] get => new bool2(y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 yz { [IN(LINE)] get => new bool2(y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 yw { [IN(LINE)] get => new bool2(y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 zx { [IN(LINE)] get => new bool2(z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 zy { [IN(LINE)] get => new bool2(z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 zz { [IN(LINE)] get => new bool2(z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 zw { [IN(LINE)] get => new bool2(z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 wx { [IN(LINE)] get => new bool2(w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 wy { [IN(LINE)] get => new bool2(w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 wz { [IN(LINE)] get => new bool2(w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool2 ww { [IN(LINE)] get => new bool2(w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 xx { [IN(LINE)] get => new bool2(x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 xy { [IN(LINE)] get => new bool2(x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 xz { [IN(LINE)] get => new bool2(x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 xw { [IN(LINE)] get => new bool2(x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 yx { [IN(LINE)] get => new bool2(y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 yy { [IN(LINE)] get => new bool2(y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 yz { [IN(LINE)] get => new bool2(y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 yw { [IN(LINE)] get => new bool2(y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 zx { [IN(LINE)] get => new bool2(z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 zy { [IN(LINE)] get => new bool2(z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 zz { [IN(LINE)] get => new bool2(z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 zw { [IN(LINE)] get => new bool2(z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 wx { [IN(LINE)] get => new bool2(w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 wy { [IN(LINE)] get => new bool2(w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 wz { [IN(LINE)] get => new bool2(w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool2 ww { [IN(LINE)] get => new bool2(w, w); }
         #endregion
 
         #region Swap3
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xxx { [IN(LINE)] get => new bool3(x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xxy { [IN(LINE)] get => new bool3(x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xxz { [IN(LINE)] get => new bool3(x, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xxw { [IN(LINE)] get => new bool3(x, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xyx { [IN(LINE)] get => new bool3(x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xyy { [IN(LINE)] get => new bool3(x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xyz { [IN(LINE)] get => new bool3(x, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xyw { [IN(LINE)] get => new bool3(x, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xzx { [IN(LINE)] get => new bool3(x, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xzy { [IN(LINE)] get => new bool3(x, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xzz { [IN(LINE)] get => new bool3(x, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xzw { [IN(LINE)] get => new bool3(x, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xwx { [IN(LINE)] get => new bool3(x, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xwy { [IN(LINE)] get => new bool3(x, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xwz { [IN(LINE)] get => new bool3(x, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 xww { [IN(LINE)] get => new bool3(x, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yxx { [IN(LINE)] get => new bool3(y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yxy { [IN(LINE)] get => new bool3(y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yxz { [IN(LINE)] get => new bool3(y, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yxw { [IN(LINE)] get => new bool3(y, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yyx { [IN(LINE)] get => new bool3(y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yyy { [IN(LINE)] get => new bool3(y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yyz { [IN(LINE)] get => new bool3(y, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yyw { [IN(LINE)] get => new bool3(y, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yzx { [IN(LINE)] get => new bool3(y, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yzy { [IN(LINE)] get => new bool3(y, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yzz { [IN(LINE)] get => new bool3(y, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yzw { [IN(LINE)] get => new bool3(y, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 ywx { [IN(LINE)] get => new bool3(y, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 ywy { [IN(LINE)] get => new bool3(y, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 ywz { [IN(LINE)] get => new bool3(y, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 yww { [IN(LINE)] get => new bool3(y, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zxx { [IN(LINE)] get => new bool3(z, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zxy { [IN(LINE)] get => new bool3(z, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zxz { [IN(LINE)] get => new bool3(z, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zxw { [IN(LINE)] get => new bool3(z, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zyx { [IN(LINE)] get => new bool3(z, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zyy { [IN(LINE)] get => new bool3(z, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zyz { [IN(LINE)] get => new bool3(z, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zyw { [IN(LINE)] get => new bool3(z, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zzx { [IN(LINE)] get => new bool3(z, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zzy { [IN(LINE)] get => new bool3(z, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zzz { [IN(LINE)] get => new bool3(z, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zzw { [IN(LINE)] get => new bool3(z, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zwx { [IN(LINE)] get => new bool3(z, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zwy { [IN(LINE)] get => new bool3(z, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zwz { [IN(LINE)] get => new bool3(z, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 zww { [IN(LINE)] get => new bool3(z, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wxx { [IN(LINE)] get => new bool3(w, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wxy { [IN(LINE)] get => new bool3(w, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wxz { [IN(LINE)] get => new bool3(w, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wxw { [IN(LINE)] get => new bool3(w, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wyx { [IN(LINE)] get => new bool3(w, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wyy { [IN(LINE)] get => new bool3(w, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wyz { [IN(LINE)] get => new bool3(w, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wyw { [IN(LINE)] get => new bool3(w, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wzx { [IN(LINE)] get => new bool3(w, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wzy { [IN(LINE)] get => new bool3(w, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wzz { [IN(LINE)] get => new bool3(w, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wzw { [IN(LINE)] get => new bool3(w, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wwx { [IN(LINE)] get => new bool3(w, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wwy { [IN(LINE)] get => new bool3(w, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 wwz { [IN(LINE)] get => new bool3(w, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool3 www { [IN(LINE)] get => new bool3(w, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xxx { [IN(LINE)] get => new bool3(x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xxy { [IN(LINE)] get => new bool3(x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xxz { [IN(LINE)] get => new bool3(x, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xxw { [IN(LINE)] get => new bool3(x, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xyx { [IN(LINE)] get => new bool3(x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xyy { [IN(LINE)] get => new bool3(x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xyz { [IN(LINE)] get => new bool3(x, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xyw { [IN(LINE)] get => new bool3(x, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xzx { [IN(LINE)] get => new bool3(x, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xzy { [IN(LINE)] get => new bool3(x, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xzz { [IN(LINE)] get => new bool3(x, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xzw { [IN(LINE)] get => new bool3(x, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xwx { [IN(LINE)] get => new bool3(x, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xwy { [IN(LINE)] get => new bool3(x, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xwz { [IN(LINE)] get => new bool3(x, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 xww { [IN(LINE)] get => new bool3(x, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yxx { [IN(LINE)] get => new bool3(y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yxy { [IN(LINE)] get => new bool3(y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yxz { [IN(LINE)] get => new bool3(y, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yxw { [IN(LINE)] get => new bool3(y, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yyx { [IN(LINE)] get => new bool3(y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yyy { [IN(LINE)] get => new bool3(y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yyz { [IN(LINE)] get => new bool3(y, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yyw { [IN(LINE)] get => new bool3(y, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yzx { [IN(LINE)] get => new bool3(y, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yzy { [IN(LINE)] get => new bool3(y, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yzz { [IN(LINE)] get => new bool3(y, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yzw { [IN(LINE)] get => new bool3(y, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 ywx { [IN(LINE)] get => new bool3(y, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 ywy { [IN(LINE)] get => new bool3(y, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 ywz { [IN(LINE)] get => new bool3(y, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 yww { [IN(LINE)] get => new bool3(y, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zxx { [IN(LINE)] get => new bool3(z, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zxy { [IN(LINE)] get => new bool3(z, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zxz { [IN(LINE)] get => new bool3(z, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zxw { [IN(LINE)] get => new bool3(z, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zyx { [IN(LINE)] get => new bool3(z, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zyy { [IN(LINE)] get => new bool3(z, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zyz { [IN(LINE)] get => new bool3(z, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zyw { [IN(LINE)] get => new bool3(z, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zzx { [IN(LINE)] get => new bool3(z, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zzy { [IN(LINE)] get => new bool3(z, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zzz { [IN(LINE)] get => new bool3(z, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zzw { [IN(LINE)] get => new bool3(z, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zwx { [IN(LINE)] get => new bool3(z, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zwy { [IN(LINE)] get => new bool3(z, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zwz { [IN(LINE)] get => new bool3(z, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 zww { [IN(LINE)] get => new bool3(z, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wxx { [IN(LINE)] get => new bool3(w, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wxy { [IN(LINE)] get => new bool3(w, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wxz { [IN(LINE)] get => new bool3(w, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wxw { [IN(LINE)] get => new bool3(w, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wyx { [IN(LINE)] get => new bool3(w, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wyy { [IN(LINE)] get => new bool3(w, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wyz { [IN(LINE)] get => new bool3(w, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wyw { [IN(LINE)] get => new bool3(w, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wzx { [IN(LINE)] get => new bool3(w, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wzy { [IN(LINE)] get => new bool3(w, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wzz { [IN(LINE)] get => new bool3(w, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wzw { [IN(LINE)] get => new bool3(w, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wwx { [IN(LINE)] get => new bool3(w, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wwy { [IN(LINE)] get => new bool3(w, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 wwz { [IN(LINE)] get => new bool3(w, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool3 www { [IN(LINE)] get => new bool3(w, w, w); }
         #endregion
 
         #region Swap4
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxxx { [IN(LINE)] get => new bool4(x, x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxxy { [IN(LINE)] get => new bool4(x, x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxxz { [IN(LINE)] get => new bool4(x, x, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxxw { [IN(LINE)] get => new bool4(x, x, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxyx { [IN(LINE)] get => new bool4(x, x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxyy { [IN(LINE)] get => new bool4(x, x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxyz { [IN(LINE)] get => new bool4(x, x, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxyw { [IN(LINE)] get => new bool4(x, x, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxzx { [IN(LINE)] get => new bool4(x, x, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxzy { [IN(LINE)] get => new bool4(x, x, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxzz { [IN(LINE)] get => new bool4(x, x, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxzw { [IN(LINE)] get => new bool4(x, x, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxwx { [IN(LINE)] get => new bool4(x, x, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxwy { [IN(LINE)] get => new bool4(x, x, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxwz { [IN(LINE)] get => new bool4(x, x, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xxww { [IN(LINE)] get => new bool4(x, x, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyxx { [IN(LINE)] get => new bool4(x, y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyxy { [IN(LINE)] get => new bool4(x, y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyxz { [IN(LINE)] get => new bool4(x, y, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyxw { [IN(LINE)] get => new bool4(x, y, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyyx { [IN(LINE)] get => new bool4(x, y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyyy { [IN(LINE)] get => new bool4(x, y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyyz { [IN(LINE)] get => new bool4(x, y, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyyw { [IN(LINE)] get => new bool4(x, y, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyzx { [IN(LINE)] get => new bool4(x, y, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyzy { [IN(LINE)] get => new bool4(x, y, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyzz { [IN(LINE)] get => new bool4(x, y, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyzw { [IN(LINE)] get => new bool4(x, y, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xywx { [IN(LINE)] get => new bool4(x, y, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xywy { [IN(LINE)] get => new bool4(x, y, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xywz { [IN(LINE)] get => new bool4(x, y, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xyww { [IN(LINE)] get => new bool4(x, y, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzxx { [IN(LINE)] get => new bool4(x, z, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzxy { [IN(LINE)] get => new bool4(x, z, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzxz { [IN(LINE)] get => new bool4(x, z, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzxw { [IN(LINE)] get => new bool4(x, z, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzyx { [IN(LINE)] get => new bool4(x, z, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzyy { [IN(LINE)] get => new bool4(x, z, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzyz { [IN(LINE)] get => new bool4(x, z, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzyw { [IN(LINE)] get => new bool4(x, z, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzzx { [IN(LINE)] get => new bool4(x, z, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzzy { [IN(LINE)] get => new bool4(x, z, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzzz { [IN(LINE)] get => new bool4(x, z, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzzw { [IN(LINE)] get => new bool4(x, z, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzwx { [IN(LINE)] get => new bool4(x, z, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzwy { [IN(LINE)] get => new bool4(x, z, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzwz { [IN(LINE)] get => new bool4(x, z, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xzww { [IN(LINE)] get => new bool4(x, z, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwxx { [IN(LINE)] get => new bool4(x, w, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwxy { [IN(LINE)] get => new bool4(x, w, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwxz { [IN(LINE)] get => new bool4(x, w, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwxw { [IN(LINE)] get => new bool4(x, w, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwyx { [IN(LINE)] get => new bool4(x, w, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwyy { [IN(LINE)] get => new bool4(x, w, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwyz { [IN(LINE)] get => new bool4(x, w, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwyw { [IN(LINE)] get => new bool4(x, w, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwzx { [IN(LINE)] get => new bool4(x, w, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwzy { [IN(LINE)] get => new bool4(x, w, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwzz { [IN(LINE)] get => new bool4(x, w, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwzw { [IN(LINE)] get => new bool4(x, w, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwwx { [IN(LINE)] get => new bool4(x, w, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwwy { [IN(LINE)] get => new bool4(x, w, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwwz { [IN(LINE)] get => new bool4(x, w, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 xwww { [IN(LINE)] get => new bool4(x, w, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxxx { [IN(LINE)] get => new bool4(y, x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxxy { [IN(LINE)] get => new bool4(y, x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxxz { [IN(LINE)] get => new bool4(y, x, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxxw { [IN(LINE)] get => new bool4(y, x, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxyx { [IN(LINE)] get => new bool4(y, x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxyy { [IN(LINE)] get => new bool4(y, x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxyz { [IN(LINE)] get => new bool4(y, x, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxyw { [IN(LINE)] get => new bool4(y, x, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxzx { [IN(LINE)] get => new bool4(y, x, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxzy { [IN(LINE)] get => new bool4(y, x, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxzz { [IN(LINE)] get => new bool4(y, x, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxzw { [IN(LINE)] get => new bool4(y, x, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxwx { [IN(LINE)] get => new bool4(y, x, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxwy { [IN(LINE)] get => new bool4(y, x, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxwz { [IN(LINE)] get => new bool4(y, x, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yxww { [IN(LINE)] get => new bool4(y, x, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyxx { [IN(LINE)] get => new bool4(y, y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyxy { [IN(LINE)] get => new bool4(y, y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyxz { [IN(LINE)] get => new bool4(y, y, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyxw { [IN(LINE)] get => new bool4(y, y, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyyx { [IN(LINE)] get => new bool4(y, y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyyy { [IN(LINE)] get => new bool4(y, y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyyz { [IN(LINE)] get => new bool4(y, y, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyyw { [IN(LINE)] get => new bool4(y, y, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyzx { [IN(LINE)] get => new bool4(y, y, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyzy { [IN(LINE)] get => new bool4(y, y, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyzz { [IN(LINE)] get => new bool4(y, y, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyzw { [IN(LINE)] get => new bool4(y, y, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yywx { [IN(LINE)] get => new bool4(y, y, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yywy { [IN(LINE)] get => new bool4(y, y, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yywz { [IN(LINE)] get => new bool4(y, y, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yyww { [IN(LINE)] get => new bool4(y, y, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzxx { [IN(LINE)] get => new bool4(y, z, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzxy { [IN(LINE)] get => new bool4(y, z, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzxz { [IN(LINE)] get => new bool4(y, z, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzxw { [IN(LINE)] get => new bool4(y, z, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzyx { [IN(LINE)] get => new bool4(y, z, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzyy { [IN(LINE)] get => new bool4(y, z, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzyz { [IN(LINE)] get => new bool4(y, z, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzyw { [IN(LINE)] get => new bool4(y, z, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzzx { [IN(LINE)] get => new bool4(y, z, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzzy { [IN(LINE)] get => new bool4(y, z, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzzz { [IN(LINE)] get => new bool4(y, z, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzzw { [IN(LINE)] get => new bool4(y, z, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzwx { [IN(LINE)] get => new bool4(y, z, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzwy { [IN(LINE)] get => new bool4(y, z, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzwz { [IN(LINE)] get => new bool4(y, z, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 yzww { [IN(LINE)] get => new bool4(y, z, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywxx { [IN(LINE)] get => new bool4(y, w, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywxy { [IN(LINE)] get => new bool4(y, w, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywxz { [IN(LINE)] get => new bool4(y, w, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywxw { [IN(LINE)] get => new bool4(y, w, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywyx { [IN(LINE)] get => new bool4(y, w, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywyy { [IN(LINE)] get => new bool4(y, w, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywyz { [IN(LINE)] get => new bool4(y, w, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywyw { [IN(LINE)] get => new bool4(y, w, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywzx { [IN(LINE)] get => new bool4(y, w, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywzy { [IN(LINE)] get => new bool4(y, w, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywzz { [IN(LINE)] get => new bool4(y, w, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywzw { [IN(LINE)] get => new bool4(y, w, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywwx { [IN(LINE)] get => new bool4(y, w, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywwy { [IN(LINE)] get => new bool4(y, w, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywwz { [IN(LINE)] get => new bool4(y, w, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 ywww { [IN(LINE)] get => new bool4(y, w, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxxx { [IN(LINE)] get => new bool4(z, x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxxy { [IN(LINE)] get => new bool4(z, x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxxz { [IN(LINE)] get => new bool4(z, x, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxxw { [IN(LINE)] get => new bool4(z, x, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxyx { [IN(LINE)] get => new bool4(z, x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxyy { [IN(LINE)] get => new bool4(z, x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxyz { [IN(LINE)] get => new bool4(z, x, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxyw { [IN(LINE)] get => new bool4(z, x, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxzx { [IN(LINE)] get => new bool4(z, x, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxzy { [IN(LINE)] get => new bool4(z, x, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxzz { [IN(LINE)] get => new bool4(z, x, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxzw { [IN(LINE)] get => new bool4(z, x, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxwx { [IN(LINE)] get => new bool4(z, x, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxwy { [IN(LINE)] get => new bool4(z, x, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxwz { [IN(LINE)] get => new bool4(z, x, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zxww { [IN(LINE)] get => new bool4(z, x, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyxx { [IN(LINE)] get => new bool4(z, y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyxy { [IN(LINE)] get => new bool4(z, y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyxz { [IN(LINE)] get => new bool4(z, y, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyxw { [IN(LINE)] get => new bool4(z, y, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyyx { [IN(LINE)] get => new bool4(z, y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyyy { [IN(LINE)] get => new bool4(z, y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyyz { [IN(LINE)] get => new bool4(z, y, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyyw { [IN(LINE)] get => new bool4(z, y, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyzx { [IN(LINE)] get => new bool4(z, y, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyzy { [IN(LINE)] get => new bool4(z, y, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyzz { [IN(LINE)] get => new bool4(z, y, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyzw { [IN(LINE)] get => new bool4(z, y, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zywx { [IN(LINE)] get => new bool4(z, y, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zywy { [IN(LINE)] get => new bool4(z, y, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zywz { [IN(LINE)] get => new bool4(z, y, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zyww { [IN(LINE)] get => new bool4(z, y, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzxx { [IN(LINE)] get => new bool4(z, z, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzxy { [IN(LINE)] get => new bool4(z, z, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzxz { [IN(LINE)] get => new bool4(z, z, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzxw { [IN(LINE)] get => new bool4(z, z, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzyx { [IN(LINE)] get => new bool4(z, z, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzyy { [IN(LINE)] get => new bool4(z, z, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzyz { [IN(LINE)] get => new bool4(z, z, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzyw { [IN(LINE)] get => new bool4(z, z, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzzx { [IN(LINE)] get => new bool4(z, z, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzzy { [IN(LINE)] get => new bool4(z, z, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzzz { [IN(LINE)] get => new bool4(z, z, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzzw { [IN(LINE)] get => new bool4(z, z, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzwx { [IN(LINE)] get => new bool4(z, z, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzwy { [IN(LINE)] get => new bool4(z, z, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzwz { [IN(LINE)] get => new bool4(z, z, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zzww { [IN(LINE)] get => new bool4(z, z, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwxx { [IN(LINE)] get => new bool4(z, w, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwxy { [IN(LINE)] get => new bool4(z, w, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwxz { [IN(LINE)] get => new bool4(z, w, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwxw { [IN(LINE)] get => new bool4(z, w, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwyx { [IN(LINE)] get => new bool4(z, w, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwyy { [IN(LINE)] get => new bool4(z, w, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwyz { [IN(LINE)] get => new bool4(z, w, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwyw { [IN(LINE)] get => new bool4(z, w, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwzx { [IN(LINE)] get => new bool4(z, w, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwzy { [IN(LINE)] get => new bool4(z, w, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwzz { [IN(LINE)] get => new bool4(z, w, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwzw { [IN(LINE)] get => new bool4(z, w, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwwx { [IN(LINE)] get => new bool4(z, w, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwwy { [IN(LINE)] get => new bool4(z, w, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwwz { [IN(LINE)] get => new bool4(z, w, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 zwww { [IN(LINE)] get => new bool4(z, w, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxxx { [IN(LINE)] get => new bool4(w, x, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxxy { [IN(LINE)] get => new bool4(w, x, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxxz { [IN(LINE)] get => new bool4(w, x, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxxw { [IN(LINE)] get => new bool4(w, x, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxyx { [IN(LINE)] get => new bool4(w, x, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxyy { [IN(LINE)] get => new bool4(w, x, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxyz { [IN(LINE)] get => new bool4(w, x, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxyw { [IN(LINE)] get => new bool4(w, x, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxzx { [IN(LINE)] get => new bool4(w, x, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxzy { [IN(LINE)] get => new bool4(w, x, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxzz { [IN(LINE)] get => new bool4(w, x, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxzw { [IN(LINE)] get => new bool4(w, x, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxwx { [IN(LINE)] get => new bool4(w, x, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxwy { [IN(LINE)] get => new bool4(w, x, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxwz { [IN(LINE)] get => new bool4(w, x, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wxww { [IN(LINE)] get => new bool4(w, x, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyxx { [IN(LINE)] get => new bool4(w, y, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyxy { [IN(LINE)] get => new bool4(w, y, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyxz { [IN(LINE)] get => new bool4(w, y, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyxw { [IN(LINE)] get => new bool4(w, y, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyyx { [IN(LINE)] get => new bool4(w, y, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyyy { [IN(LINE)] get => new bool4(w, y, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyyz { [IN(LINE)] get => new bool4(w, y, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyyw { [IN(LINE)] get => new bool4(w, y, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyzx { [IN(LINE)] get => new bool4(w, y, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyzy { [IN(LINE)] get => new bool4(w, y, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyzz { [IN(LINE)] get => new bool4(w, y, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyzw { [IN(LINE)] get => new bool4(w, y, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wywx { [IN(LINE)] get => new bool4(w, y, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wywy { [IN(LINE)] get => new bool4(w, y, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wywz { [IN(LINE)] get => new bool4(w, y, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wyww { [IN(LINE)] get => new bool4(w, y, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzxx { [IN(LINE)] get => new bool4(w, z, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzxy { [IN(LINE)] get => new bool4(w, z, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzxz { [IN(LINE)] get => new bool4(w, z, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzxw { [IN(LINE)] get => new bool4(w, z, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzyx { [IN(LINE)] get => new bool4(w, z, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzyy { [IN(LINE)] get => new bool4(w, z, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzyz { [IN(LINE)] get => new bool4(w, z, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzyw { [IN(LINE)] get => new bool4(w, z, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzzx { [IN(LINE)] get => new bool4(w, z, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzzy { [IN(LINE)] get => new bool4(w, z, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzzz { [IN(LINE)] get => new bool4(w, z, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzzw { [IN(LINE)] get => new bool4(w, z, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzwx { [IN(LINE)] get => new bool4(w, z, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzwy { [IN(LINE)] get => new bool4(w, z, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzwz { [IN(LINE)] get => new bool4(w, z, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wzww { [IN(LINE)] get => new bool4(w, z, w, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwxx { [IN(LINE)] get => new bool4(w, w, x, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwxy { [IN(LINE)] get => new bool4(w, w, x, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwxz { [IN(LINE)] get => new bool4(w, w, x, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwxw { [IN(LINE)] get => new bool4(w, w, x, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwyx { [IN(LINE)] get => new bool4(w, w, y, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwyy { [IN(LINE)] get => new bool4(w, w, y, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwyz { [IN(LINE)] get => new bool4(w, w, y, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwyw { [IN(LINE)] get => new bool4(w, w, y, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwzx { [IN(LINE)] get => new bool4(w, w, z, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwzy { [IN(LINE)] get => new bool4(w, w, z, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwzz { [IN(LINE)] get => new bool4(w, w, z, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwzw { [IN(LINE)] get => new bool4(w, w, z, w); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwwx { [IN(LINE)] get => new bool4(w, w, w, x); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwwy { [IN(LINE)] get => new bool4(w, w, w, y); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwwz { [IN(LINE)] get => new bool4(w, w, w, z); }
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public bool4 wwww { [IN(LINE)] get => new bool4(w, w, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxxx { [IN(LINE)] get => new bool4(x, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxxy { [IN(LINE)] get => new bool4(x, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxxz { [IN(LINE)] get => new bool4(x, x, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxxw { [IN(LINE)] get => new bool4(x, x, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxyx { [IN(LINE)] get => new bool4(x, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxyy { [IN(LINE)] get => new bool4(x, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxyz { [IN(LINE)] get => new bool4(x, x, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxyw { [IN(LINE)] get => new bool4(x, x, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxzx { [IN(LINE)] get => new bool4(x, x, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxzy { [IN(LINE)] get => new bool4(x, x, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxzz { [IN(LINE)] get => new bool4(x, x, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxzw { [IN(LINE)] get => new bool4(x, x, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxwx { [IN(LINE)] get => new bool4(x, x, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxwy { [IN(LINE)] get => new bool4(x, x, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxwz { [IN(LINE)] get => new bool4(x, x, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xxww { [IN(LINE)] get => new bool4(x, x, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyxx { [IN(LINE)] get => new bool4(x, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyxy { [IN(LINE)] get => new bool4(x, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyxz { [IN(LINE)] get => new bool4(x, y, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyxw { [IN(LINE)] get => new bool4(x, y, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyyx { [IN(LINE)] get => new bool4(x, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyyy { [IN(LINE)] get => new bool4(x, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyyz { [IN(LINE)] get => new bool4(x, y, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyyw { [IN(LINE)] get => new bool4(x, y, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyzx { [IN(LINE)] get => new bool4(x, y, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyzy { [IN(LINE)] get => new bool4(x, y, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyzz { [IN(LINE)] get => new bool4(x, y, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyzw { [IN(LINE)] get => new bool4(x, y, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xywx { [IN(LINE)] get => new bool4(x, y, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xywy { [IN(LINE)] get => new bool4(x, y, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xywz { [IN(LINE)] get => new bool4(x, y, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xyww { [IN(LINE)] get => new bool4(x, y, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzxx { [IN(LINE)] get => new bool4(x, z, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzxy { [IN(LINE)] get => new bool4(x, z, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzxz { [IN(LINE)] get => new bool4(x, z, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzxw { [IN(LINE)] get => new bool4(x, z, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzyx { [IN(LINE)] get => new bool4(x, z, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzyy { [IN(LINE)] get => new bool4(x, z, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzyz { [IN(LINE)] get => new bool4(x, z, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzyw { [IN(LINE)] get => new bool4(x, z, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzzx { [IN(LINE)] get => new bool4(x, z, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzzy { [IN(LINE)] get => new bool4(x, z, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzzz { [IN(LINE)] get => new bool4(x, z, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzzw { [IN(LINE)] get => new bool4(x, z, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzwx { [IN(LINE)] get => new bool4(x, z, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzwy { [IN(LINE)] get => new bool4(x, z, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzwz { [IN(LINE)] get => new bool4(x, z, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xzww { [IN(LINE)] get => new bool4(x, z, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwxx { [IN(LINE)] get => new bool4(x, w, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwxy { [IN(LINE)] get => new bool4(x, w, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwxz { [IN(LINE)] get => new bool4(x, w, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwxw { [IN(LINE)] get => new bool4(x, w, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwyx { [IN(LINE)] get => new bool4(x, w, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwyy { [IN(LINE)] get => new bool4(x, w, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwyz { [IN(LINE)] get => new bool4(x, w, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwyw { [IN(LINE)] get => new bool4(x, w, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwzx { [IN(LINE)] get => new bool4(x, w, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwzy { [IN(LINE)] get => new bool4(x, w, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwzz { [IN(LINE)] get => new bool4(x, w, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwzw { [IN(LINE)] get => new bool4(x, w, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwwx { [IN(LINE)] get => new bool4(x, w, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwwy { [IN(LINE)] get => new bool4(x, w, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwwz { [IN(LINE)] get => new bool4(x, w, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 xwww { [IN(LINE)] get => new bool4(x, w, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxxx { [IN(LINE)] get => new bool4(y, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxxy { [IN(LINE)] get => new bool4(y, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxxz { [IN(LINE)] get => new bool4(y, x, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxxw { [IN(LINE)] get => new bool4(y, x, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxyx { [IN(LINE)] get => new bool4(y, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxyy { [IN(LINE)] get => new bool4(y, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxyz { [IN(LINE)] get => new bool4(y, x, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxyw { [IN(LINE)] get => new bool4(y, x, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxzx { [IN(LINE)] get => new bool4(y, x, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxzy { [IN(LINE)] get => new bool4(y, x, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxzz { [IN(LINE)] get => new bool4(y, x, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxzw { [IN(LINE)] get => new bool4(y, x, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxwx { [IN(LINE)] get => new bool4(y, x, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxwy { [IN(LINE)] get => new bool4(y, x, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxwz { [IN(LINE)] get => new bool4(y, x, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yxww { [IN(LINE)] get => new bool4(y, x, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyxx { [IN(LINE)] get => new bool4(y, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyxy { [IN(LINE)] get => new bool4(y, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyxz { [IN(LINE)] get => new bool4(y, y, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyxw { [IN(LINE)] get => new bool4(y, y, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyyx { [IN(LINE)] get => new bool4(y, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyyy { [IN(LINE)] get => new bool4(y, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyyz { [IN(LINE)] get => new bool4(y, y, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyyw { [IN(LINE)] get => new bool4(y, y, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyzx { [IN(LINE)] get => new bool4(y, y, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyzy { [IN(LINE)] get => new bool4(y, y, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyzz { [IN(LINE)] get => new bool4(y, y, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyzw { [IN(LINE)] get => new bool4(y, y, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yywx { [IN(LINE)] get => new bool4(y, y, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yywy { [IN(LINE)] get => new bool4(y, y, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yywz { [IN(LINE)] get => new bool4(y, y, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yyww { [IN(LINE)] get => new bool4(y, y, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzxx { [IN(LINE)] get => new bool4(y, z, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzxy { [IN(LINE)] get => new bool4(y, z, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzxz { [IN(LINE)] get => new bool4(y, z, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzxw { [IN(LINE)] get => new bool4(y, z, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzyx { [IN(LINE)] get => new bool4(y, z, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzyy { [IN(LINE)] get => new bool4(y, z, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzyz { [IN(LINE)] get => new bool4(y, z, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzyw { [IN(LINE)] get => new bool4(y, z, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzzx { [IN(LINE)] get => new bool4(y, z, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzzy { [IN(LINE)] get => new bool4(y, z, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzzz { [IN(LINE)] get => new bool4(y, z, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzzw { [IN(LINE)] get => new bool4(y, z, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzwx { [IN(LINE)] get => new bool4(y, z, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzwy { [IN(LINE)] get => new bool4(y, z, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzwz { [IN(LINE)] get => new bool4(y, z, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 yzww { [IN(LINE)] get => new bool4(y, z, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywxx { [IN(LINE)] get => new bool4(y, w, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywxy { [IN(LINE)] get => new bool4(y, w, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywxz { [IN(LINE)] get => new bool4(y, w, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywxw { [IN(LINE)] get => new bool4(y, w, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywyx { [IN(LINE)] get => new bool4(y, w, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywyy { [IN(LINE)] get => new bool4(y, w, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywyz { [IN(LINE)] get => new bool4(y, w, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywyw { [IN(LINE)] get => new bool4(y, w, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywzx { [IN(LINE)] get => new bool4(y, w, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywzy { [IN(LINE)] get => new bool4(y, w, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywzz { [IN(LINE)] get => new bool4(y, w, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywzw { [IN(LINE)] get => new bool4(y, w, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywwx { [IN(LINE)] get => new bool4(y, w, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywwy { [IN(LINE)] get => new bool4(y, w, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywwz { [IN(LINE)] get => new bool4(y, w, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 ywww { [IN(LINE)] get => new bool4(y, w, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxxx { [IN(LINE)] get => new bool4(z, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxxy { [IN(LINE)] get => new bool4(z, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxxz { [IN(LINE)] get => new bool4(z, x, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxxw { [IN(LINE)] get => new bool4(z, x, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxyx { [IN(LINE)] get => new bool4(z, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxyy { [IN(LINE)] get => new bool4(z, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxyz { [IN(LINE)] get => new bool4(z, x, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxyw { [IN(LINE)] get => new bool4(z, x, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxzx { [IN(LINE)] get => new bool4(z, x, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxzy { [IN(LINE)] get => new bool4(z, x, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxzz { [IN(LINE)] get => new bool4(z, x, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxzw { [IN(LINE)] get => new bool4(z, x, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxwx { [IN(LINE)] get => new bool4(z, x, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxwy { [IN(LINE)] get => new bool4(z, x, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxwz { [IN(LINE)] get => new bool4(z, x, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zxww { [IN(LINE)] get => new bool4(z, x, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyxx { [IN(LINE)] get => new bool4(z, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyxy { [IN(LINE)] get => new bool4(z, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyxz { [IN(LINE)] get => new bool4(z, y, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyxw { [IN(LINE)] get => new bool4(z, y, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyyx { [IN(LINE)] get => new bool4(z, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyyy { [IN(LINE)] get => new bool4(z, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyyz { [IN(LINE)] get => new bool4(z, y, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyyw { [IN(LINE)] get => new bool4(z, y, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyzx { [IN(LINE)] get => new bool4(z, y, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyzy { [IN(LINE)] get => new bool4(z, y, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyzz { [IN(LINE)] get => new bool4(z, y, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyzw { [IN(LINE)] get => new bool4(z, y, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zywx { [IN(LINE)] get => new bool4(z, y, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zywy { [IN(LINE)] get => new bool4(z, y, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zywz { [IN(LINE)] get => new bool4(z, y, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zyww { [IN(LINE)] get => new bool4(z, y, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzxx { [IN(LINE)] get => new bool4(z, z, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzxy { [IN(LINE)] get => new bool4(z, z, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzxz { [IN(LINE)] get => new bool4(z, z, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzxw { [IN(LINE)] get => new bool4(z, z, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzyx { [IN(LINE)] get => new bool4(z, z, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzyy { [IN(LINE)] get => new bool4(z, z, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzyz { [IN(LINE)] get => new bool4(z, z, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzyw { [IN(LINE)] get => new bool4(z, z, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzzx { [IN(LINE)] get => new bool4(z, z, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzzy { [IN(LINE)] get => new bool4(z, z, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzzz { [IN(LINE)] get => new bool4(z, z, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzzw { [IN(LINE)] get => new bool4(z, z, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzwx { [IN(LINE)] get => new bool4(z, z, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzwy { [IN(LINE)] get => new bool4(z, z, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzwz { [IN(LINE)] get => new bool4(z, z, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zzww { [IN(LINE)] get => new bool4(z, z, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwxx { [IN(LINE)] get => new bool4(z, w, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwxy { [IN(LINE)] get => new bool4(z, w, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwxz { [IN(LINE)] get => new bool4(z, w, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwxw { [IN(LINE)] get => new bool4(z, w, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwyx { [IN(LINE)] get => new bool4(z, w, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwyy { [IN(LINE)] get => new bool4(z, w, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwyz { [IN(LINE)] get => new bool4(z, w, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwyw { [IN(LINE)] get => new bool4(z, w, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwzx { [IN(LINE)] get => new bool4(z, w, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwzy { [IN(LINE)] get => new bool4(z, w, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwzz { [IN(LINE)] get => new bool4(z, w, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwzw { [IN(LINE)] get => new bool4(z, w, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwwx { [IN(LINE)] get => new bool4(z, w, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwwy { [IN(LINE)] get => new bool4(z, w, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwwz { [IN(LINE)] get => new bool4(z, w, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 zwww { [IN(LINE)] get => new bool4(z, w, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxxx { [IN(LINE)] get => new bool4(w, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxxy { [IN(LINE)] get => new bool4(w, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxxz { [IN(LINE)] get => new bool4(w, x, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxxw { [IN(LINE)] get => new bool4(w, x, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxyx { [IN(LINE)] get => new bool4(w, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxyy { [IN(LINE)] get => new bool4(w, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxyz { [IN(LINE)] get => new bool4(w, x, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxyw { [IN(LINE)] get => new bool4(w, x, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxzx { [IN(LINE)] get => new bool4(w, x, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxzy { [IN(LINE)] get => new bool4(w, x, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxzz { [IN(LINE)] get => new bool4(w, x, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxzw { [IN(LINE)] get => new bool4(w, x, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxwx { [IN(LINE)] get => new bool4(w, x, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxwy { [IN(LINE)] get => new bool4(w, x, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxwz { [IN(LINE)] get => new bool4(w, x, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wxww { [IN(LINE)] get => new bool4(w, x, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyxx { [IN(LINE)] get => new bool4(w, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyxy { [IN(LINE)] get => new bool4(w, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyxz { [IN(LINE)] get => new bool4(w, y, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyxw { [IN(LINE)] get => new bool4(w, y, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyyx { [IN(LINE)] get => new bool4(w, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyyy { [IN(LINE)] get => new bool4(w, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyyz { [IN(LINE)] get => new bool4(w, y, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyyw { [IN(LINE)] get => new bool4(w, y, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyzx { [IN(LINE)] get => new bool4(w, y, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyzy { [IN(LINE)] get => new bool4(w, y, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyzz { [IN(LINE)] get => new bool4(w, y, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyzw { [IN(LINE)] get => new bool4(w, y, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wywx { [IN(LINE)] get => new bool4(w, y, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wywy { [IN(LINE)] get => new bool4(w, y, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wywz { [IN(LINE)] get => new bool4(w, y, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wyww { [IN(LINE)] get => new bool4(w, y, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzxx { [IN(LINE)] get => new bool4(w, z, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzxy { [IN(LINE)] get => new bool4(w, z, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzxz { [IN(LINE)] get => new bool4(w, z, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzxw { [IN(LINE)] get => new bool4(w, z, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzyx { [IN(LINE)] get => new bool4(w, z, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzyy { [IN(LINE)] get => new bool4(w, z, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzyz { [IN(LINE)] get => new bool4(w, z, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzyw { [IN(LINE)] get => new bool4(w, z, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzzx { [IN(LINE)] get => new bool4(w, z, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzzy { [IN(LINE)] get => new bool4(w, z, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzzz { [IN(LINE)] get => new bool4(w, z, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzzw { [IN(LINE)] get => new bool4(w, z, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzwx { [IN(LINE)] get => new bool4(w, z, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzwy { [IN(LINE)] get => new bool4(w, z, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzwz { [IN(LINE)] get => new bool4(w, z, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wzww { [IN(LINE)] get => new bool4(w, z, w, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwxx { [IN(LINE)] get => new bool4(w, w, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwxy { [IN(LINE)] get => new bool4(w, w, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwxz { [IN(LINE)] get => new bool4(w, w, x, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwxw { [IN(LINE)] get => new bool4(w, w, x, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwyx { [IN(LINE)] get => new bool4(w, w, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwyy { [IN(LINE)] get => new bool4(w, w, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwyz { [IN(LINE)] get => new bool4(w, w, y, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwyw { [IN(LINE)] get => new bool4(w, w, y, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwzx { [IN(LINE)] get => new bool4(w, w, z, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwzy { [IN(LINE)] get => new bool4(w, w, z, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwzz { [IN(LINE)] get => new bool4(w, w, z, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwzw { [IN(LINE)] get => new bool4(w, w, z, w); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwwx { [IN(LINE)] get => new bool4(w, w, w, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwwy { [IN(LINE)] get => new bool4(w, w, w, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwwz { [IN(LINE)] get => new bool4(w, w, w, z); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool4 wwww { [IN(LINE)] get => new bool4(w, w, w, w); }
         #endregion
 
         #endregion
@@ -904,8 +904,8 @@ namespace DCFApixels.DataMath
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() => math.Hash(this);
-        public override bool Equals(object o) => o is bool4 target && Equals(target); 
-        [IN(LINE)] public bool Equals(bool4 a) => x == a.x && y == a.y && z == a.z && w == a.w; 
+        public override bool Equals(object o) => o is bool4 target && Equals(target);
+        [IN(LINE)] public bool Equals(bool4 a) => x == a.x && y == a.y && z == a.z && w == a.w;
         public override string ToString() => $"bool4({x}, {y}, {z}, {w})";
 
         internal class DebuggerProxy

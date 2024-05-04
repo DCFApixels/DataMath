@@ -10,7 +10,7 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 8, Size = 16)]
-    public partial struct ray2 : 
+    public partial struct ray2 :
         IEquatable<ray2>,
         IFormattable,
         IRay2<float, float2>
@@ -21,33 +21,45 @@ namespace DCFApixels.DataMath
         #region IRayN
         float2 IRay2<float, float2>.origin
         {
-            [IN(LINE)] get => origin;
-            [IN(LINE)] set => origin = value;
+            [IN(LINE)]
+            get => origin;
+            [IN(LINE)]
+            set => origin = value;
         }
         float2 IRay2<float, float2>.direction
         {
-            [IN(LINE)] get => direction;
-            [IN(LINE)] set => direction = value;
+            [IN(LINE)]
+            get => direction;
+            [IN(LINE)]
+            set => direction = value;
         }
         public float OriginX
         {
-            [IN(LINE)] get => origin.x;
-            [IN(LINE)] set => origin.x = value;
+            [IN(LINE)]
+            get => origin.x;
+            [IN(LINE)]
+            set => origin.x = value;
         }
         public float OriginY
         {
-            [IN(LINE)] get => origin.y;
-            [IN(LINE)] set => origin.y = value;
+            [IN(LINE)]
+            get => origin.y;
+            [IN(LINE)]
+            set => origin.y = value;
         }
         public float DirectionX
         {
-            [IN(LINE)] get => direction.x;
-            [IN(LINE)] set => direction.x = value;
+            [IN(LINE)]
+            get => direction.x;
+            [IN(LINE)]
+            set => direction.x = value;
         }
         public float DirectionY
         {
-            [IN(LINE)] get => direction.y;
-            [IN(LINE)] set => direction.y = value;
+            [IN(LINE)]
+            get => direction.y;
+            [IN(LINE)]
+            set => direction.y = value;
         }
         #endregion
 
