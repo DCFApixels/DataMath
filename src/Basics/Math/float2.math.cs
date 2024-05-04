@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using SMath = System.Math;
-#if NETCORE || UNITY_5_3_OR_NEWER
+#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
 #else
 using SMathF = DCFApixels.DataMath.Internal.MathF;

@@ -1,5 +1,5 @@
 using System.Runtime.CompilerServices;
-#if NETCORE || UNITY_5_3_OR_NEWER
+#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 #else
 using SMathF = DCFApixels.DataMath.Internal.MathF;
 #endif

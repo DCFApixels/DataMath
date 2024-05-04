@@ -539,5 +539,69 @@ namespace DCFApixels.DataMath.Internal
         {
             return (float)Math.Log(x);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Cos(float x)
+        {
+            return (float)Math.Cos(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Cosh(float x)
+        {
+            return (float)Math.Cosh(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Acos(float x)
+        {
+            return (float)Math.Acos(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sin(float x)
+        {
+            return (float)Math.Sin(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sinh(float x)
+        {
+            return (float)Math.Sinh(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Asin(float x)
+        {
+            return (float)Math.Asin(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Tan(float x)
+        {
+            return (float)Math.Tan(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Tanh(float x)
+        {
+            return (float)Math.Tanh(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Atan(float x)
+        {
+            return (float)Math.Atan(x);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Atan2(float x, float y)
+        {
+            return (float)Math.Atan2(x, y);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Pow(float x, float y)
+        {
+            return (float)Math.Pow(x, y);
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Truncate(float x)
+        {
+            return (float)Math.Truncate(x);
+        }
     }
 }
