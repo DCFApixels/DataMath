@@ -3,7 +3,7 @@ using SMath = System.Math;
 #if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
 #else
-using SMathF = DCFApixels.DataMath.Internal.MathF;
+using SMathF = DCFApixels.DataMath.Internal.MathDM;
 #endif
 
 namespace DCFApixels.DataMath

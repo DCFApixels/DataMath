@@ -1,13 +1,9 @@
-using DCFApixels.DataMath.;
-using DCFApixels.DataMath.Internal;
-using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.Consts;
-using static DCFApixels.DataMath.Internal.DataMathUtility;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 #if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
 #else
-using SMathF = DCFApixels.DataMath.Internal.MathF;
+using SMathF = DCFApixels.DataMath.Internal.MathDM;
 #endif
 
 namespace DCFApixels.DataMath
@@ -20,8 +16,7 @@ namespace DCFApixels.DataMath
     public static partial class math
     {
         #region Abs/Sign
-        //[IN(LINE)] public static float Abs(float a) { return SMathF.Abs(a); }
-        [IN(LINE)] public static float Abs(float a) { return AsFloat(AsUInteger(a) & 0x7FFFFFFF); }
+        [IN(LINE)] public static float Abs(float a) { return SMathF.Abs(a);  }
         [IN(LINE)] public static float Sign(float a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
         [IN(LINE)] public static int Sign2Int(float a) { return (a > 0f ? 1 : 0) - (a < 0f ? 1 : 0); }
         #endregion
@@ -115,12 +110,9 @@ namespace DCFApixels.DataMath
         #endregion
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Degrees(float x) { return x * Rad2Deg; }
-
+        [IN(LINE)]  public static float Degrees(float a) { return a * Rad2Deg; }
         /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Radians(float x) { return x * Deg2Rad; }
+        [IN(LINE)]  public static float Radians(float a) { return a * Deg2Rad; }
 
         [IN(LINE)] public static float Cos(float a) { return SMathF.Cos(a); }
         [IN(LINE)] public static float Cosh(float a) { return SMathF.Cosh(a); }
@@ -132,7 +124,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Atan(float a) { return SMathF.Atan(a); }
         [IN(LINE)] public static float Atan2(float a, float b) { return SMathF.Atan2(a, b); }
 
-        [IN(LINE)] public static float Sqr(float v) { return v * v; }
+        [IN(LINE)] public static float Sqr(float a) { return a * a; }
         [IN(LINE)] public static float Pow(float a, float b) { return SMathF.Pow(a, b); }
         [IN(LINE)] public static float Sqrt(float a) { return SMathF.Sqrt(a); }
 
