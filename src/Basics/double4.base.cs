@@ -1,3 +1,6 @@
+#if DISABLE_DEBUG
+#undef DEBUG
+#endif
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,14 +76,14 @@ namespace DCFApixels.DataMath
         {
             get
             {
-#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
                 if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
                 fixed (double4* array = &this) { return ((double*)array)[index]; }
             }
             set
             {
-#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
                 if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
                 fixed (double* array = &x) { array[index] = value; }
@@ -89,6 +92,24 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
+        [IN(LINE)]
+        public double4(bool x, bool y, bool z, bool w)
+        {
+            this.x = (double)x; this.y = (double)y;
+            this.z = (double)z; this.w = (double)w;
+        }
+        [IN(LINE)]
+        public double4(bool v)
+        {
+            x = (double)v; y = (double)v;
+            z = (double)v; w = (double)v;
+        }
+        [IN(LINE)]
+        public double4(bool4 v)
+        {
+            x = (double)v.x; y = (double)v.y;
+            z = (double)v.z; w = (double)v.w;
+        }
         [IN(LINE)]
         public double4(float x, float y, float z, float w)
         {

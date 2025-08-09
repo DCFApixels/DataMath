@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 #if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 #else
-using SMathF = DCFApixels.DataMath.Internal.MathF;
 #endif
 
 namespace DCFApixels.DataMath

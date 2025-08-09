@@ -1,3 +1,6 @@
+#if DISABLE_DEBUG
+#undef DEBUG
+#endif
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,14 +62,14 @@ namespace DCFApixels.DataMath
         {
             get
             {
-#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
                 if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
                 fixed (uint2* array = &this) { return ((uint*)array)[index]; }
             }
             set
             {
-#if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
                 if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
 #endif
                 fixed (uint* array = &x) { array[index] = value; }
@@ -75,6 +78,9 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
+        [IN(LINE)] public uint2(bool x, bool y) { this.x = (uint)x; this.y = (uint)y; }
+        [IN(LINE)] public uint2(bool v) { x = (uint)v; y = (uint)v; }
+        [IN(LINE)] public uint2(bool2 v) { x = (uint)v.x; y = (uint)v.y; }
         [IN(LINE)] public uint2(float x, float y) { this.x = (uint)x; this.y = (uint)y; }
         [IN(LINE)] public uint2(float v) { x = (uint)v; y = (uint)v; }
         [IN(LINE)] public uint2(float2 v) { x = (uint)v.x; y = (uint)v.y; }

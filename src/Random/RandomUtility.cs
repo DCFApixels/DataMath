@@ -45,12 +45,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static int NextXorShiftState(int state)
         {
-            unchecked { return (state << 13) ^ (state >> 17) ^ (state << 5); };
+            unchecked { return (state << 13) ^ (state >> 17) ^ (state << 5); }
         }
         [IN(LINE)]
         public static uint NextXorShiftState(uint state)
         {
-            unchecked { return (state << 13) ^ (state >> 17) ^ (state << 5); };
+            unchecked { return (state << 13) ^ (state >> 17) ^ (state << 5); }
         }
     }
 }
