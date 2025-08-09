@@ -41,10 +41,10 @@ namespace DCFApixels.DataMath
             float3 v = c1;
             float3 w = c2;
 
-            uint u_sign = (asuint(u.x) & 0x80000000);
-            float t = v.y + asfloat(asuint(w.z) ^ u_sign);
+            uint u_sign = (AsUInt(u.x) & 0x80000000);
+            float t = v.y + AsFloat(AsUInt(w.z) ^ u_sign);
             uint4 u_mask = new uint4((int)u_sign >> 31);
-            uint4 t_mask = new uint4(asint(t) >> 31);
+            uint4 t_mask = new uint4(AsInt(t) >> 31);
 
             float tr = 1.0f + Abs(u.x);
 
@@ -54,10 +54,10 @@ namespace DCFApixels.DataMath
                 (t_mask & new uint4(0x80000000, 0x80000000, 0x80000000, 0x00000000));
 
             value = new float4(tr, u.y, w.x, v.z) +
-                asfloat4(asuint4(new float4(t, v.x, u.z, w.y)) ^ sign_flips);   // +---, +++-, ++-+, +-++
+                AsFloat4(AsUInt4(new float4(t, v.x, u.z, w.y)) ^ sign_flips);   // +---, +++-, ++-+, +-++
 
-            value = asfloat4((asuint4(value) & ~u_mask) | (asuint4(value.zwxy) & u_mask));
-            value = asfloat4((asuint4(value.wzyx) & ~t_mask) | (asuint4(value) & t_mask));
+            value = AsFloat4((AsUInt4(value) & ~u_mask) | (AsUInt4(value.zwxy) & u_mask));
+            value = AsFloat4((AsUInt4(value.wzyx) & ~t_mask) | (AsUInt4(value) & t_mask));
             value = Normalize(value);
         }
 
@@ -204,7 +204,7 @@ namespace DCFApixels.DataMath
         private static float4 ChangeSign(float4 a, float4 b)
         {
             const uint SING_MASK = 0x80000000;
-            return asfloat4(asuint4(a) ^ (asuint4(b) & SING_MASK));
+            return AsFloat4(AsUInt4(a) ^ (AsUInt4(b) & SING_MASK));
         }
         [IN(LINE)]
         public static quat Lerp(quat a, quat b, float t)

@@ -102,7 +102,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Other
-        [IN(LINE)] public override int GetHashCode() => math.asint(start) ^ math.asint(extent);
+        [IN(LINE)] public override int GetHashCode() => math.AsInt(start) ^ math.AsInt(extent);
         [IN(LINE)] public override bool Equals(object o) => o is intrange target && Equals(target);
         [IN(LINE)] public bool Equals(intrange a) => start == a.start && extent == a.extent;
         [IN(LINE)] public override string ToString() => $"{nameof(intrange)}({start}, {extent})";

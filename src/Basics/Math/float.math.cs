@@ -1,5 +1,8 @@
+using DCFApixels.DataMath.;
+using DCFApixels.DataMath.Internal;
 using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.Internal.DataMathUtility;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 #if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
@@ -17,7 +20,8 @@ namespace DCFApixels.DataMath
     public static partial class math
     {
         #region Abs/Sign
-        [IN(LINE)] public static float Abs(float a) { return SMathF.Abs(a); }
+        //[IN(LINE)] public static float Abs(float a) { return SMathF.Abs(a); }
+        [IN(LINE)] public static float Abs(float a) { return AsFloat(AsUInteger(a) & 0x7FFFFFFF); }
         [IN(LINE)] public static float Sign(float a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
         [IN(LINE)] public static int Sign2Int(float a) { return (a > 0f ? 1 : 0) - (a < 0f ? 1 : 0); }
         #endregion

@@ -34,10 +34,6 @@ namespace DCFApixels.DataMath.Internal
 
         private const int ILogB_Zero = (-1 - 0x7fffffff);
 
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Abs(float x) => Math.Abs(x);
-
         public static float BitDecrement(float x)
         {
             int bits = new FloatIntUnion(x).intValue;
@@ -516,9 +512,13 @@ namespace DCFApixels.DataMath.Internal
             return bits & TrailingSignificandMask;
         }
 
-
-
         //TODO протестировать скорость и возможно переработать
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Abs(float x)
+        {
+            return Math.Abs(x);
+        }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Ceiling(float x)
         {
