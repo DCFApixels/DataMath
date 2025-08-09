@@ -39,5 +39,8 @@
         public const float Epsilon = (IsFlushToZeroEnabled ? FloatMinNormal : FloatMinDenormal);
         #endregion
 
+        //    public const double TODEGREES_DBL = 57.29577951308232;
+        //
+        //    public const double TORADIANS_DBL = 0.017453292519943296;
     }
 }

@@ -99,19 +99,24 @@ namespace DCFApixels.DataMath
         {
             float dif = to - from;
             excess = Abs(dif);
-            if (excess <= distance) 
+            if (excess <= distance)
             {
-                return to; 
+                return to;
             }
             excess = 0f;
             return from + Sign(dif) * distance;
         }
+        [IN(LINE)]
+        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v) { return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v)); }
         #endregion
 
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Degrees(float x) { return x * Rad2Deg; }
+        public static float Degrees(float x) { return x * Rad2Deg; }
+
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Radians(float x) { return x * Rad2Deg; }
+        public static float Radians(float x) { return x * Deg2Rad; }
 
         [IN(LINE)] public static float Cos(float a) { return SMathF.Cos(a); }
         [IN(LINE)] public static float Cosh(float a) { return SMathF.Cosh(a); }
@@ -131,7 +136,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Tanh(float a) { return SMathF.Tanh(a); }
 
         [IN(LINE)] public static float Truncate(float a) { return SMathF.Truncate(a); }
-        
+
 
         [IN(LINE)]
         public static float SmoothStep(float from, float to, float t)

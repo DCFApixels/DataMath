@@ -1,6 +1,5 @@
 ﻿using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-using SMath = System.Math;
 #if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 using SMathF = System.MathF;
 #else
@@ -42,16 +41,16 @@ namespace DCFApixels.DataMath
         public static float3 Abs(float3 v)
         {
             return new float3(
-                Abs(v.x), 
-                Abs(v.y), 
+                Abs(v.x),
+                Abs(v.y),
                 Abs(v.z));
         }
         [IN(LINE)]
         public static float3 Sign(float3 v)
         {
             return new float3(
-                Sign(v.x), 
-                Sign(v.y), 
+                Sign(v.x),
+                Sign(v.y),
                 Sign(v.z));
         }
         [IN(LINE)]
@@ -69,7 +68,7 @@ namespace DCFApixels.DataMath
         public static float3 Round(float3 v)
         {
             return new float3(
-                SMathF.Round(v.x), 
+                SMathF.Round(v.x),
                 SMathF.Round(v.y),
                 SMathF.Round(v.z));
         }
@@ -77,40 +76,40 @@ namespace DCFApixels.DataMath
         public static int3 Round2Int(float3 v)
         {
             return new int3(
-                (int)SMathF.Round(v.x), 
-                (int)SMathF.Round(v.y), 
+                (int)SMathF.Round(v.x),
+                (int)SMathF.Round(v.y),
                 (int)SMathF.Round(v.z));
         }
         [IN(LINE)]
         public static float3 Floor(float3 v)
         {
             return new float3(
-                SMathF.Floor(v.x), 
-                SMathF.Floor(v.y), 
+                SMathF.Floor(v.x),
+                SMathF.Floor(v.y),
                 SMathF.Floor(v.z));
         }
         [IN(LINE)]
         public static int3 Floor2Int(float3 v)
         {
             return new int3(
-                (int)SMathF.Floor(v.x), 
-                (int)SMathF.Floor(v.y), 
+                (int)SMathF.Floor(v.x),
+                (int)SMathF.Floor(v.y),
                 (int)SMathF.Floor(v.z));
         }
         [IN(LINE)]
         public static float3 Ceil(float3 v)
         {
             return new float3(
-                SMathF.Ceiling(v.x), 
-                SMathF.Ceiling(v.y), 
+                SMathF.Ceiling(v.x),
+                SMathF.Ceiling(v.y),
                 SMathF.Ceiling(v.z));
         }
         [IN(LINE)]
         public static int3 Ceil2Int(float3 v)
         {
             return new int3(
-                (int)SMathF.Ceiling(v.x), 
-                (int)SMathF.Ceiling(v.y), 
+                (int)SMathF.Ceiling(v.x),
+                (int)SMathF.Ceiling(v.y),
                 (int)SMathF.Ceiling(v.z));
         }
         #endregion
@@ -278,24 +277,24 @@ namespace DCFApixels.DataMath
         public static float3 Cos(float3 x)
         {
             return new float3(
-                Cos(x.x), 
-                Cos(x.y), 
+                Cos(x.x),
+                Cos(x.y),
                 Cos(x.z));
         }
         [IN(LINE)]
         public static float3 Sin(float3 x)
         {
             return new float3(
-                Sin(x.x), 
-                Sin(x.y), 
+                Sin(x.x),
+                Sin(x.y),
                 Sin(x.z));
         }
         [IN(LINE)]
-        public static float3 Tan(float3 x) 
-        { 
+        public static float3 Tan(float3 x)
+        {
             return new float3(
-                Tan(x.x), 
-                Tan(x.y), 
+                Tan(x.x),
+                Tan(x.y),
                 Tan(x.z));
         }
         [IN(LINE)]
@@ -310,16 +309,16 @@ namespace DCFApixels.DataMath
         public static float3 Atan2(float3 a, float3 b)
         {
             return new float3(
-                Atan2(a.x, b.x), 
-                Atan2(a.y, b.y), 
+                Atan2(a.x, b.x),
+                Atan2(a.y, b.y),
                 Atan2(a.z, b.z));
         }
         [IN(LINE)]
         public static float3 Asin(float3 x)
         {
             return new float3(
-                Asin(x.x), 
-                Asin(x.y), 
+                Asin(x.x),
+                Asin(x.y),
                 Asin(x.z));
         }
         #endregion
