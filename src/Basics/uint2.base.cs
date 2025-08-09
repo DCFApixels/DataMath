@@ -78,9 +78,6 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)] public uint2(bool x, bool y) { this.x = (uint)x; this.y = (uint)y; }
-        [IN(LINE)] public uint2(bool v) { x = (uint)v; y = (uint)v; }
-        [IN(LINE)] public uint2(bool2 v) { x = (uint)v.x; y = (uint)v.y; }
         [IN(LINE)] public uint2(float x, float y) { this.x = (uint)x; this.y = (uint)y; }
         [IN(LINE)] public uint2(float v) { x = (uint)v; y = (uint)v; }
         [IN(LINE)] public uint2(float2 v) { x = (uint)v.x; y = (uint)v.y; }

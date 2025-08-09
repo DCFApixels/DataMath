@@ -93,24 +93,6 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)]
-        public int4(bool x, bool y, bool z, bool w)
-        {
-            this.x = (int)x; this.y = (int)y;
-            this.z = (int)z; this.w = (int)w;
-        }
-        [IN(LINE)]
-        public int4(bool v)
-        {
-            x = (int)v; y = (int)v;
-            z = (int)v; w = (int)v;
-        }
-        [IN(LINE)]
-        public int4(bool4 v)
-        {
-            x = (int)v.x; y = (int)v.y;
-            z = (int)v.z; w = (int)v.w;
-        }
-        [IN(LINE)]
         public int4(float x, float y, float z, float w)
         {
             this.x = (int)x; this.y = (int)y;
