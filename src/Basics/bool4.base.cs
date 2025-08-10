@@ -14,6 +14,7 @@ namespace DCFApixels.DataMath
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 4)]
     public partial struct bool4 :
+        IBoolVector,
         IEquatable<bool4>,
         IVector4<bool>,
         IColor,

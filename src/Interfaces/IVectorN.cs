@@ -3,8 +3,6 @@
     public interface IVectorN<T> : IEnumerable<T> where T : unmanaged
     {
         public int length { get; }
-        public bool all { get; }
-        public bool any { get; }
         public T this[int index] { get; set; }
     }
     public interface IVector1<T> : IVectorN<T> where T : unmanaged
@@ -22,5 +20,10 @@
     public interface IVector4<T> : IVector3<T> where T : unmanaged
     {
         public T w { get; set; }
+    }
+    public interface IBoolVector
+    {
+        public bool all { get; }
+        public bool any { get; }
     }
 }

@@ -62,10 +62,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float SmoothStep01(float a) { return SmoothStep(a, 0f, 1f); }
         /// <summary> Clamps the value between -1 and 1. </summary>
         [IN(LINE)] public static float SmoothStepMirror1(float a) { return SmoothStep(a, -1f, 1f); }
-
-
-
-
         #endregion
 
         #region Min/Max
@@ -113,7 +109,7 @@ namespace DCFApixels.DataMath
         {
             switch (a.length)
             {
-                case 0: throw new ArgumentException();
+                case 0: Throw.Argument(); break;
                 case 1: return a[0];
                 case 2: return Max(a[0], a[1]);
                 case 3: return Max(a[0], a[1], a[2]);
@@ -126,13 +122,14 @@ namespace DCFApixels.DataMath
                     }
                     return result;
             }
+            return default;
         }
         [IN(LINE)]
         public static float AbsMax<T>(T a) where T : IVectorN<float>
         {
             switch (a.length)
             {
-                case 0: throw new ArgumentException();
+                case 0: Throw.Argument(); break;
                 case 1: return a[0];
                 case 2: return AbsMax(a[0], a[1]);
                 case 3: return AbsMax(a[0], a[1], a[2]);
@@ -145,13 +142,14 @@ namespace DCFApixels.DataMath
                     }
                     return result;
             }
+            return default;
         }
         [IN(LINE)]
         public static float Min<T>(T a) where T : IVectorN<float>
         {
             switch (a.length)
             {
-                case 0: throw new ArgumentException();
+                case 0: Throw.Argument(); break;
                 case 1: return a[0];
                 case 2: return Min(a[0], a[1]);
                 case 3: return Min(a[0], a[1], a[2]);
@@ -164,13 +162,14 @@ namespace DCFApixels.DataMath
                     }
                     return result;
             }
+            return default;
         }
         [IN(LINE)]
         public static float AbsMin<T>(T a) where T : IVectorN<float>
         {
             switch (a.length)
             {
-                case 0: throw new ArgumentException();
+                case 0: Throw.Argument(); break;
                 case 1: return a[0];
                 case 2: return AbsMin(a[0], a[1]);
                 case 3: return AbsMin(a[0], a[1], a[2]);
@@ -183,6 +182,7 @@ namespace DCFApixels.DataMath
                     }
                     return result;
             }
+            return default;
         }
         #endregion
 
@@ -210,6 +210,7 @@ namespace DCFApixels.DataMath
             excess = Abs(dif);
             if (excess <= distance)
             {
+                excess = distance - excess;
                 return to;
             }
             excess = 0f;
@@ -253,9 +254,21 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
+        [IN(LINE)] public static bool IsFinite(float a) { return float.IsFinite(a); }
+        [IN(LINE)] public static bool IsNaN(float a) { return float.IsNaN(a); }
+        [IN(LINE)] public static bool IsInfinity(float a) { return float.IsInfinity(a); }
 
+        [IN(LINE)] public static float Select(float falseValue, float trueValue, bool test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static float Step(float threshold, float a) { return Select(0.0f, 1.0f, a >= threshold); }
+        [IN(LINE)] public static float Reflect(float v, float n) { return v - 2f * n * Dot(v, n); }
+        [IN(LINE)] public static float Project(float a, float ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
+        [IN(LINE)] 
+        public static float ProjectSafe(float a, float ontoB, float defaultValue = 0)
+        {
+            var proj = Project(a, ontoB);
+            return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
+        }
         [IN(LINE)] public static float Dot(float a, float b) { return a * b; }
-
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
         [IN(LINE)] public static float Degrees(float a) { return a * Rad2Deg; }
@@ -293,12 +306,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float LinearToGammaSpace(float value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
 
         [IN(LINE)]
-        public static bool Approximately(float a, float b)
-        {
-            return Abs(b - a) < Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f);
-        }
+        public static bool Approximately(float a, float b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)]
+        public static bool Approximately(float a, float b, float tolerance) { return Abs(b - a) < tolerance; }
 
-        //public static int NextPow2(int value)
+        //public static int CeilPow2(int value)
         //{
         //    value--;
         //    value |= value >> 16;
@@ -308,13 +320,17 @@ namespace DCFApixels.DataMath
         //    value |= value >> 1;
         //    return value + 1;
         //}
-        //public static int ClosestPow2(int value)
+        //public static int FloorPow2(int value)
         //{
-        //    value = NextPow2(value);
-        //    int result = value >> 1;
-        //    if (value - result < value - value)
+        //    return CeilPow2(value) >> 1;
+        //}
+        //public static int RoundPow2(int value)
+        //{
+        //    value = CeilPow2(value);
+        //    int floor = value >> 1;
+        //    if (value - floor < value - value)
         //    {
-        //        return result;
+        //        return floor;
         //    }
         //    return value;
         //}

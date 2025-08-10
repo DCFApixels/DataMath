@@ -4,10 +4,10 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public partial struct float3
+    public partial struct float3 : IBoolVector
     {
-        public bool all { [IN(LINE)] get => x != 0 & y != 0 & z != 0; }
-        public bool any { [IN(LINE)] get => x != 0 | y != 0 | z != 0; }
+        public bool all { [IN(LINE)] get { return x != 0 & y != 0 & z != 0; } }
+        public bool any { [IN(LINE)] get { return x != 0 | y != 0 | z != 0; } }
 
         public const float vectorEpsilon = 0.00001f;
 

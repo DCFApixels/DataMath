@@ -9,10 +9,10 @@ using SMathF = DCFApixels.DataMath.Internal.MathDM;
 
 namespace DCFApixels.DataMath
 {
-    public partial struct uint4
+    public partial struct uint4 : IBoolVector
     {
-        public bool all { [IN(LINE)] get => x != 0 & y != 0 & z != 0 & w != 0; }
-        public bool any { [IN(LINE)] get => x != 0 | y != 0 | z != 0 | w != 0; }
+        public bool all { [IN(LINE)] get { return x != 0 & y != 0 & z != 0 & w != 0; } }
+        public bool any { [IN(LINE)] get { return x != 0 | y != 0 | z != 0 | w != 0; } }
     }
     public static partial class DM
     {

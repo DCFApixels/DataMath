@@ -1,4 +1,5 @@
-﻿using static DCFApixels.DataMath.Consts;
+﻿using System.Collections;
+using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -54,6 +55,10 @@ namespace DCFApixels.DataMath
         float IColor.g { [IN(LINE)] get => g; [IN(LINE)] set => g = value; }
         float IColor.b { [IN(LINE)] get => b; [IN(LINE)] set => b = value; }
         float IColor.a { [IN(LINE)] get => a; [IN(LINE)] set => a = value; }
+        float IVector4<float>.w { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        float IVector3<float>.z { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        float IVector2<float>.y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        float IVector1<float>.x { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public int length { [IN(LINE)] get => LENGTH; }
 
         public unsafe float this[int index]
@@ -163,6 +168,18 @@ namespace DCFApixels.DataMath
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"{nameof(color)}({r.ToString(format, formatProvider)}, {g.ToString(format, formatProvider)}, {b.ToString(format, formatProvider)}, {a.ToString(format, formatProvider)})";
+        }
+        #endregion
+
+        #region GetEnumerator
+        IEnumerator<float> IEnumerable<float>.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
