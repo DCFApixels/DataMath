@@ -120,6 +120,16 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool operator !=(bool2 a, bool2 b) => a.x != b.x || a.y != b.y;
         [IN(LINE)] public static bool operator !=(bool2 a, bool b) => a.x != b || a.y != b;
         [IN(LINE)] public static bool operator !=(bool a, bool2 b) => a != b.x || a != b.y;
+
+        [IN(LINE)] public static bool operator ==(bool2 a, DM.AllCheckMode b) { return a.all; }
+        [IN(LINE)] public static bool operator !=(bool2 a, DM.AllCheckMode b) { return !a.all; }
+        [IN(LINE)] public static bool operator ==(DM.AllCheckMode b, bool2 a) { return a.all; }
+        [IN(LINE)] public static bool operator !=(DM.AllCheckMode b, bool2 a) { return !a.all; }
+
+        [IN(LINE)] public static bool operator ==(bool2 a, DM.AnyCheckMode b) { return a.any; }
+        [IN(LINE)] public static bool operator !=(bool2 a, DM.AnyCheckMode b) { return !a.any; }
+        [IN(LINE)] public static bool operator ==(DM.AnyCheckMode b, bool2 a) { return a.any; }
+        [IN(LINE)] public static bool operator !=(DM.AnyCheckMode b, bool2 a) { return !a.any; }
         #endregion
 
         #endregion
@@ -380,28 +390,10 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Enumerator
-        VectorEnumerator<bool, bool2> IEnumerableVector<bool, bool2>.GetEnumerator() => new VectorEnumerator<bool, bool2>(this);
-        IEnumerator<bool> IEnumerable<bool>.GetEnumerator() => new VectorEnumerator<bool, bool2>(this);
-        IEnumerator IEnumerable.GetEnumerator() => new VectorEnumerator<bool, bool2>(this);
-        public Enumerator GetEnumerator() => new Enumerator(this);
-        public unsafe ref struct Enumerator
-        {
-            private readonly bool* _pointer;
-            private sbyte _index;
-            [IN(LINE)]
-            public Enumerator(in bool2 value)
-            {
-                fixed (bool2* array = &value)
-                {
-                    _pointer = (bool*)array;
-                    _index = -1;
-                }
-            }
-            public bool Current { [IN(LINE)] get => _pointer[_index]; }
-            [IN(LINE)] public void Dispose() { }
-            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)] public void Reset() { }
-        }
+        VectorEnumerator<bool, bool2> GetEnumerator() { return new VectorEnumerator<bool, bool2>(this); }
+        VectorEnumerator<bool, bool2> IEnumerableVector<bool, bool2>.GetEnumerator() { return new VectorEnumerator<bool, bool2>(this); }
+        IEnumerator<bool> IEnumerable<bool>.GetEnumerator() { return new VectorEnumerator<bool, bool2>(this); }
+        IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<bool, bool2>(this); }
         #endregion
     }
 }

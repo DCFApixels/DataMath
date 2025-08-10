@@ -62,6 +62,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float SmoothStep01(float a) { return SmoothStep(a, 0f, 1f); }
         /// <summary> Clamps the value between -1 and 1. </summary>
         [IN(LINE)] public static float SmoothStepMirror1(float a) { return SmoothStep(a, -1f, 1f); }
+
+
+
+
         #endregion
 
         #region Min/Max
@@ -211,9 +215,47 @@ namespace DCFApixels.DataMath
             excess = 0f;
             return from + Sign(dif) * distance;
         }
+
         [IN(LINE)]
-        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v) { return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v)); }
+        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v) 
+        { 
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v)); 
+        }
+
+
+
+
+        [IN(LINE)]
+        public static float LerpAngle(float start, float end, float t)
+        {
+            float angle = Repeat(end - start, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return start + angle * Clamp01(t);
+        }
+        [IN(LINE)]
+        public static float DeltaAngle(float current, float target)
+        {
+            float angle = Repeat(target - current, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return angle;
+        }
+        [IN(LINE)]
+        public static float MoveTowardsAngle(float current, float target, float maxDelta)
+        {
+            float delta = DeltaAngle(current, target);
+            if (0f - maxDelta < delta && delta < maxDelta)
+            {
+                return target;
+            }
+            return MoveTowards(current, current + delta, maxDelta);
+        }
         #endregion
+
+
+        [IN(LINE)] public static float Dot(float a, float b) { return a * b; }
+
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
         [IN(LINE)] public static float Degrees(float a) { return a * Rad2Deg; }
@@ -232,6 +274,13 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float Sqr(float a) { return a * a; }
         [IN(LINE)] public static float Pow(float a, float b) { return InternalMath.Pow(a, b); }
+        [IN(LINE)] public static float Exp(float pow) { return InternalMath.Exp(pow); }
+        [IN(LINE)] public static float Exp2(float pow) { return InternalMath.Exp2(pow); }
+        [IN(LINE)] public static float Exp10(float pow) { return InternalMath.Exp10(pow); }
+        [IN(LINE)] public static float Log(float f, float p) { return InternalMath.Log(f, p); }
+        [IN(LINE)] public static float Log(float f) { return InternalMath.Log(f); }
+        [IN(LINE)] public static float Log2(float f) { return InternalMath.Log2(f); }
+        [IN(LINE)] public static float Log10(float f) { return InternalMath.Log10(f); }
         [IN(LINE)] public static float Sqrt(float a) { return InternalMath.Sqrt(a); }
 
         [IN(LINE)] public static float Tan(float a) { return InternalMath.Tan(a); }
@@ -240,6 +289,35 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Truncate(float a) { return InternalMath.Truncate(a); }
 
 
-        //[IN(LINE)] public static bool IsPow(int value { return (value & (value - 1)) == 0; }
+        [IN(LINE)] public static float GammaToLinearSpace(float value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
+        [IN(LINE)] public static float LinearToGammaSpace(float value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+
+        [IN(LINE)]
+        public static bool Approximately(float a, float b)
+        {
+            return Abs(b - a) < Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f);
+        }
+
+        //public static int NextPow2(int value)
+        //{
+        //    value--;
+        //    value |= value >> 16;
+        //    value |= value >> 8;
+        //    value |= value >> 4;
+        //    value |= value >> 2;
+        //    value |= value >> 1;
+        //    return value + 1;
+        //}
+        //public static int ClosestPow2(int value)
+        //{
+        //    value = NextPow2(value);
+        //    int result = value >> 1;
+        //    if (value - result < value - value)
+        //    {
+        //        return result;
+        //    }
+        //    return value;
+        //}
+        //[IN(LINE)] public static bool IsPow2(int value { return (value & (value - 1)) == 0; }
     }
 }

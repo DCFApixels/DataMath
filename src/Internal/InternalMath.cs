@@ -578,6 +578,16 @@ namespace DCFApixels.DataMath.Internal
         {
             return (float)Math.Log(x);
         }
+        [IN(LINE)]
+        public static float Log2(float x)
+        {
+            return Log(x, 2f);
+        }
+        [IN(LINE)]
+        public static float Log10(float x)
+        {
+            return (float)Math.Log10(x);
+        }
 
         [IN(LINE)]
         public static float Cos(float x)
@@ -635,8 +645,21 @@ namespace DCFApixels.DataMath.Internal
         {
             return (float)Math.Pow(x, y);
         }
-
-
+        [IN(LINE)]
+        public static float Exp(float pow)
+        {
+            return (float)Math.Exp(pow);
+        }
+        [IN(LINE)]
+        public static float Exp2(float pow)
+        {
+            return (float)Math.Exp(pow) * 0.69314718f;
+        }
+        [IN(LINE)]
+        public static float Exp10(float pow)
+        {
+            return (float)Math.Exp(pow) * 2.30258509f;
+        }
         [IN(LINE)]
         public static float Truncate(float x)
         {

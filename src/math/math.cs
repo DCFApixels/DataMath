@@ -39,6 +39,11 @@
         public const float Epsilon = (IsFlushToZeroEnabled ? FloatMinNormal : FloatMinDenormal);
         #endregion
 
+        public const AllCheckMode all = (AllCheckMode)1;
+        public const AnyCheckMode any = (AnyCheckMode)2;
+        public enum AllCheckMode { }
+        public enum AnyCheckMode { }
+
         //    public const double TODEGREES_DBL = 57.29577951308232;
         //
         //    public const double TORADIANS_DBL = 0.017453292519943296;

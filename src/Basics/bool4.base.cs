@@ -209,6 +209,16 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool operator !=(bool4 a, bool4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
         [IN(LINE)] public static bool operator !=(bool4 a, bool b) => a.x != b || a.y != b || a.z != b || a.w != b;
         [IN(LINE)] public static bool operator !=(bool a, bool4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
+
+        [IN(LINE)] public static bool operator ==(bool4 a, DM.AllCheckMode b) { return a.all; }
+        [IN(LINE)] public static bool operator !=(bool4 a, DM.AllCheckMode b) { return !a.all; }
+        [IN(LINE)] public static bool operator ==(DM.AllCheckMode b, bool4 a) { return a.all; }
+        [IN(LINE)] public static bool operator !=(DM.AllCheckMode b, bool4 a) { return !a.all; }
+
+        [IN(LINE)] public static bool operator ==(bool4 a, DM.AnyCheckMode b) { return a.any; }
+        [IN(LINE)] public static bool operator !=(bool4 a, DM.AnyCheckMode b) { return !a.any; }
+        [IN(LINE)] public static bool operator ==(DM.AnyCheckMode b, bool4 a) { return a.any; }
+        [IN(LINE)] public static bool operator !=(DM.AnyCheckMode b, bool4 a) { return !a.any; }
         #endregion
 
         #endregion
