@@ -1,5 +1,4 @@
-﻿using DCFApixels.DataMath.Internal;
-using static DCFApixels.DataMath.Consts;
+﻿using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 using SMath = System.Math;
 #if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER

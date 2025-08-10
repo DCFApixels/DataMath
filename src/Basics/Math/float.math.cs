@@ -135,14 +135,15 @@ namespace DCFApixels.DataMath
                 case 4: return AbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.length; i++) 
-                    { 
-                        result = AbsMax(result, a[i]); 
+                    for (int i = 1; i < a.length; i++)
+                    {
+                        result = AbsMax(result, a[i]);
                     }
                     return result;
             }
         }
-        [IN(LINE)] public static float Min<T>(T a) where T : IVectorN<float>
+        [IN(LINE)]
+        public static float Min<T>(T a) where T : IVectorN<float>
         {
             switch (a.length)
             {
@@ -160,7 +161,8 @@ namespace DCFApixels.DataMath
                     return result;
             }
         }
-        [IN(LINE)] public static float AbsMin<T>(T a) where T : IVectorN<float>
+        [IN(LINE)]
+        public static float AbsMin<T>(T a) where T : IVectorN<float>
         {
             switch (a.length)
             {

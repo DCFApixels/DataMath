@@ -837,28 +837,9 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Enumerator
-        VectorEnumerator<double, double3> IEnumerableVector<double, double3>.GetEnumerator() => new VectorEnumerator<double, double3>(this);
+        VectorEnumerator<double, double3> GetEnumerator() => new VectorEnumerator<double, double3>(this);
         IEnumerator<double> IEnumerable<double>.GetEnumerator() => new VectorEnumerator<double, double3>(this);
         IEnumerator IEnumerable.GetEnumerator() => new VectorEnumerator<double, double3>(this);
-        public Enumerator GetEnumerator() => new Enumerator(this);
-        public unsafe ref struct Enumerator
-        {
-            private readonly double* _pointer;
-            private sbyte _index;
-            [IN(LINE)]
-            public Enumerator(in double3 value)
-            {
-                fixed (double3* array = &value)
-                {
-                    _pointer = (double*)array;
-                    _index = -1;
-                }
-            }
-            public double Current { [IN(LINE)] get => _pointer[_index]; }
-            [IN(LINE)] public void Dispose() { }
-            [IN(LINE)] public bool MoveNext() => ++_index < LENGTH;
-            [IN(LINE)] public void Reset() { }
-        }
         #endregion
     }
 }
