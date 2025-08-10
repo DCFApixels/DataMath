@@ -392,9 +392,10 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Enumerator
-        VectorEnumerator<float, float2> GetEnumerator() => new VectorEnumerator<float, float2>(this);
-        IEnumerator<float> IEnumerable<float>.GetEnumerator() => new VectorEnumerator<float, float2>(this);
-        IEnumerator IEnumerable.GetEnumerator() => new VectorEnumerator<float, float2>(this);
+        VectorEnumerator<float, float2> GetEnumerator() { return new VectorEnumerator<float, float2>(this); }
+        VectorEnumerator<float, float2> IEnumerableVector<float, float2>.GetEnumerator() { return new VectorEnumerator<float, float2>(this); }
+        IEnumerator<float> IEnumerable<float>.GetEnumerator() { return new VectorEnumerator<float, float2>(this); }
+        IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<float, float2>(this); }
         #endregion
     }
 }

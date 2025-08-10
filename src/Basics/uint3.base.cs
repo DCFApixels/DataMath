@@ -855,9 +855,10 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Enumerator
-        VectorEnumerator<uint, uint3> GetEnumerator() => new VectorEnumerator<uint, uint3>(this);
-        IEnumerator<uint> IEnumerable<uint>.GetEnumerator() => new VectorEnumerator<uint, uint3>(this);
-        IEnumerator IEnumerable.GetEnumerator() => new VectorEnumerator<uint, uint3>(this);
+        VectorEnumerator<uint, uint3> GetEnumerator() { return new VectorEnumerator<uint, uint3>(this); }
+        VectorEnumerator<uint, uint3> IEnumerableVector<uint, uint3>.GetEnumerator() { return new VectorEnumerator<uint, uint3>(this); }
+        IEnumerator<uint> IEnumerable<uint>.GetEnumerator() { return new VectorEnumerator<uint, uint3>(this); }
+        IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<uint, uint3>(this); }
         #endregion
     }
 }
