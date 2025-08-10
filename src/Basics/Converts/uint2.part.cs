@@ -39,7 +39,7 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static uint2 UInt2((uint, uint) v) => new uint2(v);
         [IN(LINE)] public static uint2 UInt2<T>(T v) where T : IVector2<uint> => new uint2(v.x, v.y);

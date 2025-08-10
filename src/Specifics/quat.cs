@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
-using static DCFApixels.DataMath.math;
+using static DCFApixels.DataMath.DM;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -186,7 +184,7 @@ namespace DCFApixels.DataMath
         //[IN(LINE)] public static quat operator *(quat a, float b) => new quat(a.x * b, a.y * b, a.z * b, a.w * b);
     }
 
-    public static partial class math // quat
+    public static partial class DM // quat
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static quat LookRotation(float3 forward)

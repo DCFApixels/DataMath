@@ -31,7 +31,7 @@ namespace DCFApixels.DataMath
         }
         #endregion
     }
-    public static partial class math
+    public static partial class DM
     {
         #region vector
         [IN(LINE)]

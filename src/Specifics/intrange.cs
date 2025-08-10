@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
-using static DCFApixels.DataMath.math;
+using static DCFApixels.DataMath.DM;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -28,7 +27,7 @@ namespace DCFApixels.DataMath
         int IRange<int>.start { [IN(LINE)] get => start; [IN(LINE)] set => start = value; }
         int IRange<int>.extent { [IN(LINE)] get => extent; [IN(LINE)] set => extent = value; }
 
-        public int AbsExtent { [IN(LINE)] get => math.abs(extent); }
+        public int AbsExtent { [IN(LINE)] get => DM.abs(extent); }
         public int Min
         {
             [IN(LINE)]
@@ -51,8 +50,8 @@ namespace DCFApixels.DataMath
                 extent -= a;
             }
         }
-        public int AbsMin => math.abs(Min);
-        public int AbsMax => math.abs(Max);
+        public int AbsMin => DM.abs(Min);
+        public int AbsMax => DM.abs(Max);
         public bool IsNegative { [IN(LINE)] get => extent < 0; }
         public bool IsPositive { [IN(LINE)] get => extent >= 0; }
         public int Center { [IN(LINE)] get => start + extent / 2; }
@@ -102,7 +101,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Other
-        [IN(LINE)] public override int GetHashCode() => math.AsInt(start) ^ math.AsInt(extent);
+        [IN(LINE)] public override int GetHashCode() => DM.AsInt(start) ^ DM.AsInt(extent);
         [IN(LINE)] public override bool Equals(object o) => o is intrange target && Equals(target);
         [IN(LINE)] public bool Equals(intrange a) => start == a.start && extent == a.extent;
         [IN(LINE)] public override string ToString() => $"{nameof(intrange)}({start}, {extent})";

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -83,7 +82,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => math.Hash(this);
+        [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
         public override bool Equals(object o) => o is ray2 target && Equals(target);
         [IN(LINE)] public bool Equals(ray2 a) => origin == a.origin && direction == a.direction;
         public override string ToString() => $"{nameof(ray2)}({origin}, {direction})";
@@ -104,19 +103,19 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static ray2 Move(ray2 ray, float distance) => new ray2(ray.origin, ray.origin + ray.direction * distance);
         [IN(LINE)] public static float2 GetPoint(ray2 ray, float distance) => ray.origin + ray.direction * distance;
     }
 
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static int Hash(ray2 a) => Hash(a.origin) ^ Hash(a.direction);
         [IN(LINE)] public static uint UHash(ray2 a) => unchecked((uint)Hash(a));
     }
 
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static ray2 Ray2(float2 origin, float2 direction) => new ray2(origin, direction);
         [IN(LINE)] public static ray2 Ray2(float2 direction) => new ray2(direction);

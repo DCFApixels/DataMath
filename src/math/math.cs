@@ -1,6 +1,6 @@
 ﻿namespace DCFApixels.DataMath
 {
-    public static partial class math //consts
+    public static partial class DM //consts
     {
         #region Constants
         /// <summary> The circle constant. Defined as the circumference of a circle divided by its radius. Equivalent to 2*pi. </summary>

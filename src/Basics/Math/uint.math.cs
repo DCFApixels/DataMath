@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace DCFApixels.DataMath
 {
     //uint
-    public static partial class math
+    public static partial class DM
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint one_minus(uint v) => 1u - v;

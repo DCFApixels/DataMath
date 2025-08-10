@@ -107,7 +107,7 @@ namespace DCFApixels.DataMath
                 t_V = v;
                 h_to_floor = h * 6.0f;
 
-                int temp = (int)math.Floor(h_to_floor);
+                int temp = (int)DM.Floor(h_to_floor);
                 float t = h_to_floor - temp;
                 float var_1 = (t_V) * (1 - t_S);
                 float var_2 = t_V * (1 - t_S * t);
@@ -166,9 +166,9 @@ namespace DCFApixels.DataMath
 
                 if (!hdr)
                 {
-                    retval.r = math.Clamp(retval.r, 0.0f, 1.0f);
-                    retval.g = math.Clamp(retval.g, 0.0f, 1.0f);
-                    retval.b = math.Clamp(retval.b, 0.0f, 1.0f);
+                    retval.r = DM.Clamp(retval.r, 0.0f, 1.0f);
+                    retval.g = DM.Clamp(retval.g, 0.0f, 1.0f);
+                    retval.b = DM.Clamp(retval.b, 0.0f, 1.0f);
                 }
             }
             return retval;

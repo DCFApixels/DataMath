@@ -21,7 +21,7 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static bool4 Bool4((bool, bool, bool, bool) v) => new bool4(v);
         [IN(LINE)] public static bool4 Bool4(bool v) => new bool4(v);

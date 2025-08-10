@@ -3,7 +3,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public static partial class math // as
+    public static partial class DM // as
     {
         #region asfloat from int/uint
         [IN(LINE)] public unsafe static float AsFloat(int value) { return *(float*)&value; }

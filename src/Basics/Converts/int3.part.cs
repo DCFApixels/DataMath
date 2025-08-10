@@ -42,7 +42,7 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static int3 Int3((int, int, int) v) => new int3(v);
         [IN(LINE)] public static int3 Int3<T>(T v) where T : IVector3<int> => new int3(v.x, v.y, v.z);

@@ -49,7 +49,7 @@ namespace DCFApixels.DataMath
         { x = SMathF.Sign(x); y = SMathF.Sign(y); }
         #endregion
     }
-    public static partial class math
+    public static partial class DM
     {
         #region simple
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

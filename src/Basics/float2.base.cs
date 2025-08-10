@@ -1,9 +1,7 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -377,7 +375,7 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => math.Hash(this);
+        [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
         public override bool Equals(object o) => o is float2 target && Equals(target);
         [IN(LINE)] public bool Equals(float2 a) => x == a.x && y == a.y;
         public override string ToString() => $"float2({x}, {y})";

@@ -12,7 +12,7 @@ namespace DCFApixels.DataMath
     {
 
     }
-    public static partial class math
+    public static partial class DM
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 one_minus(uint4 v) => 1u - v;

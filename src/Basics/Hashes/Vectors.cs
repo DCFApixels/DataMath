@@ -1,9 +1,8 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace DCFApixels.DataMath
 {
-    public static partial class math // vector hashes
+    public static partial class DM // vector hashes
     {
         #region Bool
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

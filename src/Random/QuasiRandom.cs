@@ -1,5 +1,4 @@
-﻿using System;
-using static DCFApixels.DataMath.Consts;
+﻿using static DCFApixels.DataMath.Consts;
 using static DCFApixels.DataMath.RandomUtility;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 using q32 = System.UInt32;

@@ -1,10 +1,6 @@
-﻿using static DCFApixels.DataMath.Consts;
+﻿using DCFApixels.DataMath.Internal;
+using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
-using SMathF = System.MathF;
-#else
-using SMathF = DCFApixels.DataMath.Internal.MathDM;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -16,9 +12,9 @@ namespace DCFApixels.DataMath
         public float Magnitude
         {
             [IN(LINE)]
-            get { return SMathF.Sqrt(x * x + y * y + z * z); }
+            get { return InternalMath.Sqrt(x * x + y * y + z * z); }
         }
-        public float PowMagnitude
+        public float MagnitudeSqr
         {
             [IN(LINE)]
             get { return x * x + y * y + z * z; }
@@ -34,32 +30,32 @@ namespace DCFApixels.DataMath
         }
         #endregion
     }
-    public static partial class math
+    public static partial class DM
     {
         #region Abs/Sign
         [IN(LINE)]
         public static float3 Abs(float3 v)
         {
             return new float3(
-                Abs(v.x),
-                Abs(v.y),
-                Abs(v.z));
+                InternalMath.Abs(v.x),
+                InternalMath.Abs(v.y),
+                InternalMath.Abs(v.z));
         }
         [IN(LINE)]
         public static float3 Sign(float3 v)
         {
             return new float3(
-                Sign(v.x),
-                Sign(v.y),
-                Sign(v.z));
+                InternalMath.Sign(v.x),
+                InternalMath.Sign(v.y),
+                InternalMath.Sign(v.z));
         }
         [IN(LINE)]
         public static float3 Sign2Int(float3 v)
         {
             return new float3(
-                Sign2Int(v.x),
-                Sign2Int(v.y),
-                Sign2Int(v.z));
+                InternalMath.Sign2Int(v.x),
+                InternalMath.Sign2Int(v.y),
+                InternalMath.Sign2Int(v.z));
         }
         #endregion
 
@@ -68,63 +64,63 @@ namespace DCFApixels.DataMath
         public static float3 Round(float3 v)
         {
             return new float3(
-                SMathF.Round(v.x),
-                SMathF.Round(v.y),
-                SMathF.Round(v.z));
+                InternalMath.Round(v.x),
+                InternalMath.Round(v.y),
+                InternalMath.Round(v.z));
         }
         [IN(LINE)]
         public static int3 Round2Int(float3 v)
         {
             return new int3(
-                (int)SMathF.Round(v.x),
-                (int)SMathF.Round(v.y),
-                (int)SMathF.Round(v.z));
+                (int)InternalMath.Round(v.x),
+                (int)InternalMath.Round(v.y),
+                (int)InternalMath.Round(v.z));
         }
         [IN(LINE)]
         public static float3 Floor(float3 v)
         {
             return new float3(
-                SMathF.Floor(v.x),
-                SMathF.Floor(v.y),
-                SMathF.Floor(v.z));
+                InternalMath.Floor(v.x),
+                InternalMath.Floor(v.y),
+                InternalMath.Floor(v.z));
         }
         [IN(LINE)]
         public static int3 Floor2Int(float3 v)
         {
             return new int3(
-                (int)SMathF.Floor(v.x),
-                (int)SMathF.Floor(v.y),
-                (int)SMathF.Floor(v.z));
+                (int)InternalMath.Floor(v.x),
+                (int)InternalMath.Floor(v.y),
+                (int)InternalMath.Floor(v.z));
         }
         [IN(LINE)]
         public static float3 Ceil(float3 v)
         {
             return new float3(
-                SMathF.Ceiling(v.x),
-                SMathF.Ceiling(v.y),
-                SMathF.Ceiling(v.z));
+                InternalMath.Ceiling(v.x),
+                InternalMath.Ceiling(v.y),
+                InternalMath.Ceiling(v.z));
         }
         [IN(LINE)]
         public static int3 Ceil2Int(float3 v)
         {
             return new int3(
-                (int)SMathF.Ceiling(v.x),
-                (int)SMathF.Ceiling(v.y),
-                (int)SMathF.Ceiling(v.z));
+                (int)InternalMath.Ceiling(v.x),
+                (int)InternalMath.Ceiling(v.y),
+                (int)InternalMath.Ceiling(v.z));
         }
         #endregion
 
         #region Magnitude/Distance/Normalize
         [IN(LINE)]
-        public static float Magnitude(float3 v) { return v.Magnitude; }
+        public static float Magnitude(float3 a) { return Sqrt(Dot(a, a)); }
         [IN(LINE)]
-        public static float PowMagnitude(float3 v) { return v.PowMagnitude; }
+        public static float MagnitudeSqr(float3 a) { return Dot(a, a); }
         [IN(LINE)]
         public static float Distance(float3 a, float3 b) { return Magnitude(b - a); }
         [IN(LINE)]
-        public static float PowDistance(float3 a, float3 b) { return PowMagnitude(b - a); }
+        public static float DistanceSqr(float3 a, float3 b) { return MagnitudeSqr(b - a); }
         [IN(LINE)]
-        public static float3 Normalize(float3 v) { return v.Normalized; }
+        public static float3 Normalize(float3 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
         #endregion
 
         #region Lerp/Move
@@ -172,7 +168,7 @@ namespace DCFApixels.DataMath
         public static float3 Move(float3 from, float3 to, float distance)
         {
             float3 dif = to - from;
-            float difpowmag = dif.PowMagnitude;
+            float difpowmag = dif.MagnitudeSqr;
             if (difpowmag == 0f || (distance >= 0f && difpowmag <= distance * distance))
             {
                 return to;
@@ -189,7 +185,7 @@ namespace DCFApixels.DataMath
                 return from;
             }
             float3 dif = to - from;
-            float difpowmag = dif.PowMagnitude;
+            float difpowmag = dif.MagnitudeSqr;
             if (difpowmag == 0f)
             {
                 excess = distance;

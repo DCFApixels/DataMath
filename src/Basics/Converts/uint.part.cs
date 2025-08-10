@@ -3,7 +3,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static uint UInt1(bool v) => v ? 1u : 0u;
         [IN(LINE)] public static uint UInt1(int v) => (uint)v;

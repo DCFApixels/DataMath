@@ -4,14 +4,18 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using System;
 using System.Diagnostics;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
+//#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
+//using SMathF = System.MathF;
+//#else
+//using SMathF = DCFApixels.DataMath.Internal.MathDM;
+//#endif
 
 namespace DCFApixels.DataMath.Internal
 {
-    internal static partial class MathDM
+    internal static partial class InternalMath
     {
         public const float E = 2.71828183f;
 
@@ -80,7 +84,7 @@ namespace DCFApixels.DataMath.Internal
             return new FloatIntUnion(bits).intValue;
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float CopySign(float x, float y)
         {
             const int signMask = 1 << 31;
@@ -184,7 +188,7 @@ namespace DCFApixels.DataMath.Internal
             return Log(x) / Log(y);
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Max_Standart(float x, float y)
         {
             // This matches the IEEE 754:2019 `maximum` function
@@ -200,7 +204,7 @@ namespace DCFApixels.DataMath.Internal
             }
             return IsNegative_2(y) ? x : y;
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Max(float x, float y) => x > y ? x : y;
 
         public static float MaxMagnitude(float x, float y)
@@ -221,7 +225,7 @@ namespace DCFApixels.DataMath.Internal
             return y;
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Min_Standart(float x, float y)
         {
             if (x != y)
@@ -233,7 +237,7 @@ namespace DCFApixels.DataMath.Internal
             }
             return IsNegative_2(x) ? x : y;
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Min(float x, float y) => x < y ? x : y;
 
         public static float MinMagnitude(float x, float y)
@@ -257,7 +261,7 @@ namespace DCFApixels.DataMath.Internal
         /// <summary>Returns an estimate of the reciprocal of a specified number.</summary>
         /// <param name="x">The number whose reciprocal is to be estimated.</param>
         /// <returns>An estimate of the reciprocal of <paramref name="x" />.</returns
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float ReciprocalEstimate(float x)
         {
             return 1.0f / x;
@@ -266,7 +270,7 @@ namespace DCFApixels.DataMath.Internal
         /// <summary>Returns an estimate of the reciprocal square root of a specified number.</summary>
         /// <param name="x">The number whose reciprocal square root is to be estimated.</param>
         /// <returns>An estimate of the reciprocal square root <paramref name="x" />.</returns>
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float ReciprocalSqrtEstimate(float x)
         {
             return 1.0f / Sqrt(x);
@@ -329,13 +333,13 @@ namespace DCFApixels.DataMath.Internal
             return new FloatIntUnion(bits).intValue;
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Round(float x, int digits)
         {
             return Round(x, digits, MidpointRounding.ToEven);
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Round(float x, MidpointRounding mode)
         {
             if (mode == MidpointRounding.ToEven)
@@ -422,11 +426,6 @@ namespace DCFApixels.DataMath.Internal
 
 
 
-        [IN(LINE)] 
-        public static int Sign(float x)
-        {
-            return Math.Sign(x);
-        }
 
 
         public static unsafe float Truncate_1(float x)
@@ -481,19 +480,19 @@ namespace DCFApixels.DataMath.Internal
             return y * u;
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static bool IsNegativeZero(this float v)
         {
             return 1f / v == float.NegativeInfinity;
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static bool IsNegative_2(this float v)
         {
             return float.PositiveInfinity * v == float.NegativeInfinity;
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static unsafe bool IsNegative_1(float f)
         {
             return new FloatIntUnion(f).intValue < 0;
@@ -504,106 +503,141 @@ namespace DCFApixels.DataMath.Internal
         internal const byte ShiftedBiasedExponentMask = (byte)(BiasedExponentMask >> BiasedExponentShift);
         internal const uint TrailingSignificandMask = 0x007F_FFFF;
 
-        [IN(LINE)] 
+        [IN(LINE)]
         internal static byte ExtractBiasedExponentFromBits(uint bits)
         {
             return (byte)((bits >> BiasedExponentShift) & ShiftedBiasedExponentMask);
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         internal static uint ExtractTrailingSignificandFromBits(uint bits)
         {
             return bits & TrailingSignificandMask;
         }
 
+
+
+
+
+
+
+
+
+
         //TODO протестировать скорость и возможно переработать
 
-        [IN(LINE)] 
+        [IN(LINE)]
+        public static int Sign(int a)
+        {
+            return (a > 0 ? 1 : 0) - (a < 0 ? 1 : 0);
+        }
+        [IN(LINE)]
+        public static float Sign(float a)
+        {
+            return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f);
+        }
+        [IN(LINE)]
+        public static double Sign(double a)
+        {
+            return (a > 0d ? 1d : 0d) - (a < 0d ? 1d : 0d);
+        }
+        [IN(LINE)]
+        public static int Sign2Int(float a)
+        {
+            return (a > 0f ? 1 : 0) - (a < 0f ? 1 : 0);
+        }
+        [IN(LINE)]
+        public static int Sign2Int(double a)
+        {
+            return (a > 0d ? 1 : 0) - (a < 0d ? 1 : 0);
+        }
+
+
+        [IN(LINE)]
         public static float Abs(float x)
         {
-            return math.AsFloat(math.AsUInt(x) & 0x7FFFFFFF);
-            //return Math.Abs(x);
+            return DM.AsFloat(DM.AsUInt(x) & 0x7FFFFFFF);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Ceiling(float x)
         {
             return (float)Math.Ceiling(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Floor(float x)
         {
-            return (float)Math.Ceiling(x);
+            return (float)Math.Floor(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Sqrt(float x)
         {
             return (float)Math.Sqrt(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Log(float x)
         {
             return (float)Math.Log(x);
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Cos(float x)
         {
             return (float)Math.Cos(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Cosh(float x)
         {
             return (float)Math.Cosh(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Acos(float x)
         {
             return (float)Math.Acos(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Sin(float x)
         {
             return (float)Math.Sin(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Sinh(float x)
         {
             return (float)Math.Sinh(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Asin(float x)
         {
             return (float)Math.Asin(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Tan(float x)
         {
             return (float)Math.Tan(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Tanh(float x)
         {
             return (float)Math.Tanh(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Atan(float x)
         {
             return (float)Math.Atan(x);
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Atan2(float x, float y)
         {
             return (float)Math.Atan2(x, y);
         }
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Pow(float x, float y)
         {
             return (float)Math.Pow(x, y);
         }
 
 
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float Truncate(float x)
         {
             return (float)Math.Truncate(x);

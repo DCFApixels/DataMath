@@ -4,7 +4,7 @@ using SMath = System.Math;
 namespace DCFApixels.DataMath
 {
     //double
-    public static partial class math
+    public static partial class DM
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double one_minus(double v) => 1d - v;

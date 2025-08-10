@@ -8,7 +8,7 @@ using SMathF = DCFApixels.DataMath.Internal.MathDM;
 namespace DCFApixels.DataMath
 {
     //int
-    public static partial class math //self
+    public static partial class DM //self
     {
         #region simple
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -32,7 +32,7 @@ namespace DCFApixels.DataMath
         }
         #endregion
     }
-    public static partial class math
+    public static partial class DM
     {
         #region simple
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

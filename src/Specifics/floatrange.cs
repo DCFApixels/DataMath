@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
@@ -28,7 +27,7 @@ namespace DCFApixels.DataMath
         float IRange<float>.start { [IN(LINE)] get => start; [IN(LINE)] set => start = value; }
         float IRange<float>.extent { [IN(LINE)] get => extent; [IN(LINE)] set => extent = value; }
 
-        public float AbsExtent { [IN(LINE)] get => math.Abs(extent); }
+        public float AbsExtent { [IN(LINE)] get => DM.Abs(extent); }
         public float Min
         {
             [IN(LINE)]
@@ -50,8 +49,8 @@ namespace DCFApixels.DataMath
                 extent -= (Max - value);
             }
         }
-        public float AbsMin => math.Abs(Min);
-        public float AbsMax => math.Abs(Max);
+        public float AbsMin => DM.Abs(Min);
+        public float AbsMax => DM.Abs(Max);
         public bool IsNegative { [IN(LINE)] get => extent < 0; }
         public bool IsPositive { [IN(LINE)] get => extent >= 0; }
         public float Center { [IN(LINE)] get => start + extent / 2f; }
@@ -97,7 +96,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Other
-        [IN(LINE)] public override int GetHashCode() => math.AsInt(start) ^ math.AsInt(extent);
+        [IN(LINE)] public override int GetHashCode() => DM.AsInt(start) ^ DM.AsInt(extent);
         [IN(LINE)] public override bool Equals(object o) => o is floatrange target && Equals(target);
         [IN(LINE)] public bool Equals(floatrange a) => start == a.start && extent == a.extent;
         [IN(LINE)] public override string ToString() => $"{nameof(floatrange)}({start}, {extent})";
@@ -133,7 +132,7 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
-    public static partial class math // floatrange
+    public static partial class DM // floatrange
     {
         #region clamp/clamp01
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

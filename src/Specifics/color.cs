@@ -1,5 +1,4 @@
-﻿using System;
-using static DCFApixels.DataMath.Consts;
+﻿using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -156,7 +155,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Other
-        [IN(LINE)] public override int GetHashCode() => math.AsInt(r) ^ math.AsInt(g) ^ math.AsInt(b) ^ math.AsInt(a);
+        [IN(LINE)] public override int GetHashCode() => DM.AsInt(r) ^ DM.AsInt(g) ^ DM.AsInt(b) ^ DM.AsInt(a);
         [IN(LINE)] public override bool Equals(object o) => o is color target && Equals(target);
         [IN(LINE)] public bool Equals(color a) => r == a.r && g == a.g && b == a.b && this.a == a.a;
         [IN(LINE)] public override string ToString() => $"{nameof(color)}({r}, {g}, {b}, {a})";

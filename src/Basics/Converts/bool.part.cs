@@ -3,7 +3,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public static partial class math
+    public static partial class DM
     {
         [IN(LINE)] public static bool Bool1(bool v) => v;
         [IN(LINE)] public static bool Bool1(int v) => v > 1;
