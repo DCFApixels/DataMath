@@ -25,7 +25,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int Ceil2Int(float a) { return (int)InternalMath.Ceiling(a); }
         #endregion
 
-        #region Clamp/Loop
+        #region Clamp/Repeat/PingPong
         /// <summary> Clamps the value between min and max. </summary>
         [IN(LINE)]
         public static float Clamp(float a, float min, float max)
@@ -39,13 +39,15 @@ namespace DCFApixels.DataMath
         /// <summary> Clamps the value between -1 and 1. </summary>
         [IN(LINE)] public static float ClampMirror1(float a) { return Clamp(a, -1f, 1f); }
 
-        [IN(LINE)]
-        public static float Loop(float a, float min, float max)
-        {
-            return (a - min) % (max - min) + min;
-        }
-        [IN(LINE)] public static float Loop01(float a) { return Loop(a, 0f, 1f); }
-        [IN(LINE)] public static float LoopMirror1(float a) { return Loop(a, -1f, 1f); }
+        [IN(LINE)] public static float Repeat(float a, float length) { return Clamp(a - Floor(a / length) * length, 0f, length); }
+        [IN(LINE)] public static float Repeat(float a, float min, float max) { return Repeat(a, max - min) + min; }
+        [IN(LINE)] public static float Repeat01(float a) { return Repeat(a, 1f); }
+        [IN(LINE)] public static float RepeatMirror1(float a) { return Repeat(a, -1f, 1f); }
+
+        [IN(LINE)] public static float PingPong(float a, float length) { return length - Abs(Repeat(a, length * 2f) - length); }
+        [IN(LINE)] public static float PingPong(float a, float min, float max) { return PingPong(a, max - min) + min; }
+        [IN(LINE)] public static float PingPong01(float a) { return PingPong(a, 0f, 1f); }
+        [IN(LINE)] public static float PingPongMirror1(float a) { return PingPong(a, -1f, 1f); }
         #endregion
 
         #region SmoothStep
@@ -101,57 +103,91 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f, float g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
         [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
 
-        // overloads (vector args)
+        // overloads (vectorN args)
         [IN(LINE)]
         public static float Max<T>(T a) where T : IVectorN<float>
         {
-            var result = float.MinValue;
-            for (int i = 0; i < a.length; i++)
+            switch (a.length)
             {
-                if (a[i] > result) { result = a[i]; }
+                case 0: throw new ArgumentException();
+                case 1: return a[0];
+                case 2: return Max(a[0], a[1]);
+                case 3: return Max(a[0], a[1], a[2]);
+                case 4: return Max(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.length; i++)
+                    {
+                        result = Max(result, a[i]);
+                    }
+                    return result;
             }
-            return result;
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float AbsMax<T>(T a) where T : IVectorN<float>
         {
-            var result = float.MinValue;
-            for (int i = 0; i < a.length; i++)
+            switch (a.length)
             {
-                if (InternalMath.Abs(a[i]) > InternalMath.Abs(result)) { result = a[i]; }
+                case 0: throw new ArgumentException();
+                case 1: return a[0];
+                case 2: return AbsMax(a[0], a[1]);
+                case 3: return AbsMax(a[0], a[1], a[2]);
+                case 4: return AbsMax(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.length; i++) 
+                    { 
+                        result = AbsMax(result, a[i]); 
+                    }
+                    return result;
             }
-            return result;
         }
         [IN(LINE)] public static float Min<T>(T a) where T : IVectorN<float>
         {
-            var result = float.MinValue;
-            for (int i = 0; i < a.length; i++)
+            switch (a.length)
             {
-                if (a[i] < result) { result = a[i]; }
+                case 0: throw new ArgumentException();
+                case 1: return a[0];
+                case 2: return Min(a[0], a[1]);
+                case 3: return Min(a[0], a[1], a[2]);
+                case 4: return Min(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.length; i++)
+                    {
+                        result = Min(result, a[i]);
+                    }
+                    return result;
             }
-            return result;
         }
         [IN(LINE)] public static float AbsMin<T>(T a) where T : IVectorN<float>
         {
-            var result = float.MinValue;
-            for (int i = 0; i < a.length; i++)
+            switch (a.length)
             {
-                if (InternalMath.Abs(a[i]) < InternalMath.Abs(result)) { result = a[i]; }
+                case 0: throw new ArgumentException();
+                case 1: return a[0];
+                case 2: return AbsMin(a[0], a[1]);
+                case 3: return AbsMin(a[0], a[1], a[2]);
+                case 4: return AbsMin(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.length; i++)
+                    {
+                        result = AbsMin(result, a[i]);
+                    }
+                    return result;
             }
-            return result;
         }
         #endregion
 
         #region Lerp
-        [IN(LINE)]
-        public static float Lerp(float start, float end, float t)
-        {
-            return start + t * (end - start);
-        }
+        [IN(LINE)] public static float Lerp(float start, float end, float t) { return start + t * (end - start); }
         [IN(LINE)] public static float LerpClamp(float start, float end, float t) { return Lerp(start, end, Clamp01(t)); }
-        [IN(LINE)] public static float LerpLoop(float start, float end, float t) { return Lerp(start, end, t % 1f); }
+        [IN(LINE)] public static float LerpRepeat(float start, float end, float t) { return Lerp(start, end, Repeat01(t)); }
 
         [IN(LINE)] public static float UnLerp(float start, float end, float a) { return (a - start) / (end - start); }
+        [IN(LINE)] public static float UnLerpClamp(float start, float end, float a) { return Clamp01(UnLerp(start, end, a)); }
+        [IN(LINE)] public static float UnLerpRepeat(float start, float end, float a) { return Repeat01(UnLerp(start, end, a)); }
 
 
         [IN(LINE)]

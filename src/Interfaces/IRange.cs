@@ -1,7 +1,7 @@
 ﻿namespace DCFApixels.DataMath
 {
     public interface IRange<T>
-        where T : struct
+        where T : unmanaged
     {
         /// <summary>The start of this range</summary>
         public T start { get; set; }
