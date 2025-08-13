@@ -64,7 +64,7 @@ namespace DCFApixels.DataMath
         public float y { [IN(LINE)] get => value.y; [IN(LINE)] set => this.value.y = value; }
         public float z { [IN(LINE)] get => value.z; [IN(LINE)] set => this.value.z = value; }
         public float w { [IN(LINE)] get => value.w; [IN(LINE)] set => this.value.w = value; }
-        public int length { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => LENGTH; }
 
         public unsafe float this[int index]
         {

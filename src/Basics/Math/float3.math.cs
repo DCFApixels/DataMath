@@ -113,19 +113,6 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Magnitude/Distance/Normalize
-        [IN(LINE)]
-        public static float Magnitude(float3 a) { return Sqrt(Dot(a, a)); }
-        [IN(LINE)]
-        public static float MagnitudeSqr(float3 a) { return Dot(a, a); }
-        [IN(LINE)]
-        public static float Distance(float3 a, float3 b) { return Magnitude(b - a); }
-        [IN(LINE)]
-        public static float DistanceSqr(float3 a, float3 b) { return MagnitudeSqr(b - a); }
-        [IN(LINE)]
-        public static float3 Normalize(float3 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
-        #endregion
-
         #region Lerp/Move
         [IN(LINE)]
         public static float3 Lerp(float3 start, float3 end, float t)
@@ -322,6 +309,23 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
+
+
+
+
+        #region Magnitude/Distance/Normalize
+        [IN(LINE)]
+        public static float Magnitude(float3 a) { return Sqrt(Dot(a, a)); }
+        [IN(LINE)]
+        public static float MagnitudeSqr(float3 a) { return Dot(a, a); }
+        [IN(LINE)]
+        public static float Distance(float3 a, float3 b) { return Magnitude(b - a); }
+        [IN(LINE)]
+        public static float DistanceSqr(float3 a, float3 b) { return MagnitudeSqr(b - a); }
+        [IN(LINE)]
+        public static float3 Normalize(float3 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
+        #endregion
+
         #region Dot/Project/Cross
         [IN(LINE)]
         public static float Dot(float3 a, float3 b)
@@ -346,12 +350,11 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Component
-        [IN(LINE)] public static float CMin(float3 x) { return Min(Min(x.x, x.y), x.z); }
-        [IN(LINE)] public static float CMax(float3 x) { return Max(Max(x.x, x.y), x.z); }
-        [IN(LINE)] public static float CSum(float3 x) { return x.x + x.y + x.z; }
-        #endregion
-
+        //#region Component
+        //[IN(LINE)] public static float CMin(float3 x) { return Min(x.x, x.y, x.z); }
+        //[IN(LINE)] public static float CMax(float3 x) { return Max(x.x, x.y, x.z); }
+        //[IN(LINE)] public static float CSum(float3 x) { return x.x + x.y + x.z; }
+        //#endregion
 
         //[IN(LINE)]
         //public static bool3 IsFinite(float3 x) { return Abs(x) < float.PositiveInfinity; }

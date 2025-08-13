@@ -21,7 +21,7 @@ namespace DCFApixels.DataMath
         IEnumerableVector<bool, bool3>
     {
         #region Consts
-        public const int LENGTH = 3;
+        public const int Count = 3;
 
         ///<summary>(0, 0, 0)</summary>
         public static readonly bool3 zero = new bool3(0, 0, 0);
@@ -61,7 +61,7 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)]
         bool IVector3<bool>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int length { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => Count; }
         public bool all { [IN(LINE)] get => x & y & z; [IN(LINE)] set { x = value; y = value; z = value; } }
         public bool any { [IN(LINE)] get => x | y | z; }
 
@@ -70,14 +70,14 @@ namespace DCFApixels.DataMath
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (bool3* array = &this) { return ((bool*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (bool* array = &x) { array[index] = value; }
             }

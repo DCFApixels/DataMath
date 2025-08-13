@@ -54,7 +54,7 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)]
         int IVector2<int>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int length { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => LENGTH; }
 
         public unsafe int this[int index]
         {

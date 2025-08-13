@@ -20,7 +20,7 @@ namespace DCFApixels.DataMath
         public T Current { [IN(LINE)] get => _value[_index]; }
         object IEnumerator.Current { [IN(LINE)] get => _value[_index]; }
         [IN(LINE)] public void Dispose() { }
-        [IN(LINE)] public bool MoveNext() => ++_index < _value.length;
+        [IN(LINE)] public bool MoveNext() => ++_index < _value.count;
         [IN(LINE)] public void Reset() { }
     }
 }

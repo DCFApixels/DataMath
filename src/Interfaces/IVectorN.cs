@@ -2,7 +2,7 @@
 {
     public interface IVectorN<T> : IEnumerable<T> where T : unmanaged
     {
-        public int length { get; }
+        public int count { get; }
         public T this[int index] { get; set; }
     }
     public interface IVector1<T> : IVectorN<T> where T : unmanaged

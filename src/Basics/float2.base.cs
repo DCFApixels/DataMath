@@ -21,7 +21,7 @@ namespace DCFApixels.DataMath
         IEnumerableVector<float, float2>
     {
         #region Consts
-        public const int LENGTH = 2;
+        public const int COUNT = 2;
 
         ///<summary>(0, 0)</summary>
         public static readonly float2 zero = new float2(0f, 0f);
@@ -54,21 +54,21 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)]
         float IVector2<float>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int length { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => COUNT; }
 
         public unsafe float this[int index]
         {
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > COUNT) throw new IndexOutOfRangeException($"Index must be between[0..{(COUNT - 1)}].");
 #endif
                 fixed (float2* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > COUNT) throw new IndexOutOfRangeException($"Index must be between[0..{(COUNT - 1)}].");
 #endif
                 fixed (float* array = &x) { array[index] = value; }
             }

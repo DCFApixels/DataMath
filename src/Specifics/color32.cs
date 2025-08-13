@@ -53,7 +53,7 @@ namespace DCFApixels.DataMath
         public byte y { [IN(LINE)] get => g8; [IN(LINE)] set => g8 = value; }
         public byte z { [IN(LINE)] get => b8; [IN(LINE)] set => b8 = value; }
         public byte w { [IN(LINE)] get => a8; [IN(LINE)] set => a8 = value; }
-        public int length { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => LENGTH; }
 
         public unsafe byte this[int index]
         {

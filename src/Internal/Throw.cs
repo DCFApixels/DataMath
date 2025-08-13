@@ -10,9 +10,13 @@ namespace DCFApixels.DataMath.Internal
             throw new Exception(message);
         }
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void Argument()
+        public static void ZeroLengthArgument(string argumentName = null)
         {
-            throw new ArgumentException();
+            if (string.IsNullOrEmpty(argumentName))
+            {
+                argumentName = "value";
+            }
+            throw new ArgumentException($"{argumentName}.length == 0");
         }
     }
 }

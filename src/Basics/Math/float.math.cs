@@ -70,120 +70,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float AbsMax(float a, float b) { return InternalMath.Abs(a) > InternalMath.Abs(b) ? a : b; }
         [IN(LINE)] public static float Min(float a, float b) { return a < b ? a : b; }
         [IN(LINE)] public static float AbsMin(float a, float b) { return InternalMath.Abs(a) < InternalMath.Abs(b) ? a : b; }
-
-        // Max overloads (3-8 args)
-        [IN(LINE)] public static float Max(float a, float b, float c) { return Max(Max(a, b), c); }
-        [IN(LINE)] public static float Max(float a, float b, float c, float d) { return Max(Max(a, b, c), d); }
-        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e) { return Max(Max(a, b, c, d), e); }
-        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e, float f) { return Max(Max(a, b, c, d, e), f); }
-        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e, float f, float g) { return Max(Max(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e, float f, float g, float h) { return Max(Max(a, b, c, d, e, f, g), h); }
-
-        // AbsMax overloads (3-8 args)
-        [IN(LINE)] public static float AbsMax(float a, float b, float c) { return AbsMax(AbsMax(a, b), c); }
-        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d) { return AbsMax(AbsMax(a, b, c), d); }
-        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e) { return AbsMax(AbsMax(a, b, c, d), e); }
-        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e, float f) { return AbsMax(AbsMax(a, b, c, d, e), f); }
-        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e, float f, float g) { return AbsMax(AbsMax(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMax(AbsMax(a, b, c, d, e, f, g), h); }
-
-        // Min overloads (3-8 args)
-        [IN(LINE)] public static float Min(float a, float b, float c) { return Min(Min(a, b), c); }
-        [IN(LINE)] public static float Min(float a, float b, float c, float d) { return Min(Min(a, b, c), d); }
-        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e) { return Min(Min(a, b, c, d), e); }
-        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e, float f) { return Min(Min(a, b, c, d, e), f); }
-        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e, float f, float g) { return Min(Min(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e, float f, float g, float h) { return Min(Min(a, b, c, d, e, f, g), h); }
-
-        // AbsMin overloads (3-8 args)
-        [IN(LINE)] public static float AbsMin(float a, float b, float c) { return AbsMin(AbsMin(a, b), c); }
-        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d) { return AbsMin(AbsMin(a, b, c), d); }
-        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e) { return AbsMin(AbsMin(a, b, c, d), e); }
-        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f) { return AbsMin(AbsMin(a, b, c, d, e), f); }
-        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f, float g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
-
-        // overloads (vectorN args)
-        [IN(LINE)]
-        public static float Max<T>(T a) where T : IVectorN<float>
-        {
-            switch (a.length)
-            {
-                case 0: Throw.Argument(); break;
-                case 1: return a[0];
-                case 2: return Max(a[0], a[1]);
-                case 3: return Max(a[0], a[1], a[2]);
-                case 4: return Max(a[0], a[1], a[2], a[3]);
-                default:
-                    var result = a[0];
-                    for (int i = 1; i < a.length; i++)
-                    {
-                        result = Max(result, a[i]);
-                    }
-                    return result;
-            }
-            return default;
-        }
-        [IN(LINE)]
-        public static float AbsMax<T>(T a) where T : IVectorN<float>
-        {
-            switch (a.length)
-            {
-                case 0: Throw.Argument(); break;
-                case 1: return a[0];
-                case 2: return AbsMax(a[0], a[1]);
-                case 3: return AbsMax(a[0], a[1], a[2]);
-                case 4: return AbsMax(a[0], a[1], a[2], a[3]);
-                default:
-                    var result = a[0];
-                    for (int i = 1; i < a.length; i++)
-                    {
-                        result = AbsMax(result, a[i]);
-                    }
-                    return result;
-            }
-            return default;
-        }
-        [IN(LINE)]
-        public static float Min<T>(T a) where T : IVectorN<float>
-        {
-            switch (a.length)
-            {
-                case 0: Throw.Argument(); break;
-                case 1: return a[0];
-                case 2: return Min(a[0], a[1]);
-                case 3: return Min(a[0], a[1], a[2]);
-                case 4: return Min(a[0], a[1], a[2], a[3]);
-                default:
-                    var result = a[0];
-                    for (int i = 1; i < a.length; i++)
-                    {
-                        result = Min(result, a[i]);
-                    }
-                    return result;
-            }
-            return default;
-        }
-        [IN(LINE)]
-        public static float AbsMin<T>(T a) where T : IVectorN<float>
-        {
-            switch (a.length)
-            {
-                case 0: Throw.Argument(); break;
-                case 1: return a[0];
-                case 2: return AbsMin(a[0], a[1]);
-                case 3: return AbsMin(a[0], a[1], a[2]);
-                case 4: return AbsMin(a[0], a[1], a[2], a[3]);
-                default:
-                    var result = a[0];
-                    for (int i = 1; i < a.length; i++)
-                    {
-                        result = AbsMin(result, a[i]);
-                    }
-                    return result;
-            }
-            return default;
-        }
         #endregion
 
         #region Lerp
@@ -254,10 +140,16 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
+        #region Float State Checks
+        [IN(LINE)] public static bool IsNormalFloat(float a) { return float.IsNormal(a); }
         [IN(LINE)] public static bool IsFinite(float a) { return float.IsFinite(a); }
         [IN(LINE)] public static bool IsNaN(float a) { return float.IsNaN(a); }
         [IN(LINE)] public static bool IsInfinity(float a) { return float.IsInfinity(a); }
+        [IN(LINE)] public static bool IsNegativeInfinity(float a) { return float.IsNegativeInfinity(a); }
+        [IN(LINE)] public static bool IsPositiveInfinity(float a) { return float.IsPositiveInfinity(a); }
+        #endregion
 
+        #region Other
         [IN(LINE)] public static float Select(float falseValue, float trueValue, bool test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static float Step(float threshold, float a) { return Select(0.0f, 1.0f, a >= threshold); }
         [IN(LINE)] public static float Reflect(float v, float n) { return v - 2f * n * Dot(v, n); }
@@ -300,15 +192,156 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Tanh(float a) { return InternalMath.Tanh(a); }
 
         [IN(LINE)] public static float Truncate(float a) { return InternalMath.Truncate(a); }
+        #endregion
 
-
+        #region Color
         [IN(LINE)] public static float GammaToLinearSpace(float value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
         [IN(LINE)] public static float LinearToGammaSpace(float value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        #endregion
 
+        #region Approximately
         [IN(LINE)]
         public static bool Approximately(float a, float b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
         [IN(LINE)]
         public static bool Approximately(float a, float b, float tolerance) { return Abs(b - a) < tolerance; }
+        #endregion
+
+
+
+        #region Component iteration operations
+        // Max overloads (3-8 args)
+        [IN(LINE)] public static float Max(float a, float b, float c) { return Max(Max(a, b), c); }
+        [IN(LINE)] public static float Max(float a, float b, float c, float d) { return Max(Max(a, b, c), d); }
+        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e) { return Max(Max(a, b, c, d), e); }
+        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e, float f) { return Max(Max(a, b, c, d, e), f); }
+        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e, float f, float g) { return Max(Max(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static float Max(float a, float b, float c, float d, float e, float f, float g, float h) { return Max(Max(a, b, c, d, e, f, g), h); }
+
+        // AbsMax overloads (3-8 args)
+        [IN(LINE)] public static float AbsMax(float a, float b, float c) { return AbsMax(AbsMax(a, b), c); }
+        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d) { return AbsMax(AbsMax(a, b, c), d); }
+        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e) { return AbsMax(AbsMax(a, b, c, d), e); }
+        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e, float f) { return AbsMax(AbsMax(a, b, c, d, e), f); }
+        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e, float f, float g) { return AbsMax(AbsMax(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static float AbsMax(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMax(AbsMax(a, b, c, d, e, f, g), h); }
+
+        // Min overloads (3-8 args)
+        [IN(LINE)] public static float Min(float a, float b, float c) { return Min(Min(a, b), c); }
+        [IN(LINE)] public static float Min(float a, float b, float c, float d) { return Min(Min(a, b, c), d); }
+        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e) { return Min(Min(a, b, c, d), e); }
+        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e, float f) { return Min(Min(a, b, c, d, e), f); }
+        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e, float f, float g) { return Min(Min(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static float Min(float a, float b, float c, float d, float e, float f, float g, float h) { return Min(Min(a, b, c, d, e, f, g), h); }
+
+        // AbsMin overloads (3-8 args)
+        [IN(LINE)] public static float AbsMin(float a, float b, float c) { return AbsMin(AbsMin(a, b), c); }
+        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d) { return AbsMin(AbsMin(a, b, c), d); }
+        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e) { return AbsMin(AbsMin(a, b, c, d), e); }
+        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f) { return AbsMin(AbsMin(a, b, c, d, e), f); }
+        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f, float g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static float AbsMin(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
+
+        // overloads (vectorN args)
+        [IN(LINE)]
+        public static float Max<T>(T a) where T : IVectorN<float>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return Max(a[0], a[1]);
+                case 3: return Max(a[0], a[1], a[2]);
+                case 4: return Max(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = Max(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+        [IN(LINE)]
+        public static float AbsMax<T>(T a) where T : IVectorN<float>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return AbsMax(a[0], a[1]);
+                case 3: return AbsMax(a[0], a[1], a[2]);
+                case 4: return AbsMax(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = AbsMax(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+        [IN(LINE)]
+        public static float Min<T>(T a) where T : IVectorN<float>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return Min(a[0], a[1]);
+                case 3: return Min(a[0], a[1], a[2]);
+                case 4: return Min(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = Min(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+        [IN(LINE)]
+        public static float AbsMin<T>(T a) where T : IVectorN<float>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return AbsMin(a[0], a[1]);
+                case 3: return AbsMin(a[0], a[1], a[2]);
+                case 4: return AbsMin(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = AbsMin(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+        [IN(LINE)]
+        public static float Sum<T>(T a) where T : IVectorN<float>
+        {
+            switch (a.count)
+            {
+                case 0: return 0;
+                case 1: return a[0];
+                case 2: return a[0] + a[1];
+                case 3: return a[0] + a[1] + a[2];
+                case 4: return a[0] + a[1] + a[2] + a[3];
+                default:
+                    var result = a[0] + a[1] + a[2] + a[3];
+                    for (int i = 4; i < a.count; i++)
+                    {
+                        result += a[i];
+                    }
+                    return result;
+            }
+        }
+        #endregion
 
         //public static int CeilPow2(int value)
         //{
@@ -322,7 +355,8 @@ namespace DCFApixels.DataMath
         //}
         //public static int FloorPow2(int value)
         //{
-        //    return CeilPow2(value) >> 1;
+        //    var result = CeilPow2(value);
+        //    return result == value ? value : result >> 1;
         //}
         //public static int RoundPow2(int value)
         //{

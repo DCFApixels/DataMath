@@ -8,7 +8,12 @@ namespace DCFApixels.DataMath.TODO
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
-    public struct floatcolor : IColor, IVector4<float>
+    public struct floatcolor :
+        IEquatable<float4>,
+        IFormattable,
+        IVector4<float>,
+        IColor,
+        IEnumerableVector<float, float4>
     {
         #region Consts
         public static int LENGTH = 4;
@@ -97,7 +102,7 @@ namespace DCFApixels.DataMath.TODO
                 fixed (float* array = &r) { array[index] = value; }
             }
         }
-        public int length => LENGTH;
+        public int count => LENGTH;
         #endregion
 
         public static implicit operator floatcolor(int colorcode) => new floatcolor(colorcode);

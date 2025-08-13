@@ -23,7 +23,7 @@ namespace DCFApixels.DataMath
         public float z { get => s; set => s = value; }
         public float y { get => v; set => v = value; }
         public float x { get => a; set => a = value; }
-        public int length => LENGTH;
+        public int count => LENGTH;
 
         public unsafe float this[int index]
         {

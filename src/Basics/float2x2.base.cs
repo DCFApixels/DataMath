@@ -80,7 +80,7 @@ namespace DCFApixels.DataMath.TODO
         #region IMatrixRxC
         public int rows { [IN(LINE)] get => ROWS; }
         public int columns { [IN(LINE)] get => COLUMNS; }
-        public int length { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => LENGTH; }
 
         public float this[int index]
         {

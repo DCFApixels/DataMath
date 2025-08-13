@@ -59,7 +59,7 @@ namespace DCFApixels.DataMath
         float IVector3<float>.z { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         float IVector2<float>.y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         float IVector1<float>.x { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int length { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => LENGTH; }
 
         public unsafe float this[int index]
         {
