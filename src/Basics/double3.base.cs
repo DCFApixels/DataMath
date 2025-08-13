@@ -142,7 +142,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static bool3 operator >=(double3 a, double3 b) { return new bool3(a.x >= b.x, a.y >= b.y, a.z >= b.z); }
         [IN(LINE)] public static bool3 operator >=(double3 a, double b) { return new bool3(a.x >= b, a.y >= b, a.z >= b); }
-        [IN(LINE)] public static bool3 operator ==(double a, double3 b) { return new bool3(a == b.x, a == b.y, a == b.z); }
+        [IN(LINE)] public static bool3 operator >=(double a, double3 b) { return new bool3(a >= b.x, a >= b.y, a >= b.z); }
 
         [IN(LINE)] public static bool3 operator ==(double3 a, double3 b) { return new bool3(a.x == b.x, a.y == b.y, a.z == b.z); }
         [IN(LINE)] public static bool3 operator ==(double3 a, double b) { return new bool3(a.x == b, a.y == b, a.z == b); }
