@@ -1,17 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
+    [Serializable]
+    [DebuggerTypeProxy(typeof(DebuggerProxy))]
+    [StructLayout(LayoutKind.Sequential, Pack = sizeof(float), Size = 4 * Count)]
     public struct color :
+        IEquatable<color>,
+        IFormattable,
         IVector4<float>,
         IColor,
-        IEquatable<color>,
-        IFormattable
+        IEnumerableVector<float, color>
     {
         #region Consts
-        public const int LENGTH = 4;
+        public const int Count = 4;
 
         /// <summary> rgba(1, 0, 0, 1) </summary>
         public readonly static color red = new color(1f, 0f, 0f);
@@ -47,33 +55,29 @@ namespace DCFApixels.DataMath
         public float a;
 
         #region Properties
-        public float w { [IN(LINE)] get => r; [IN(LINE)] set => r = value; }
-        public float z { [IN(LINE)] get => g; [IN(LINE)] set => g = value; }
-        public float y { [IN(LINE)] get => b; [IN(LINE)] set => b = value; }
-        public float x { [IN(LINE)] get => a; [IN(LINE)] set => a = value; }
-        float IColor.r { [IN(LINE)] get => r; [IN(LINE)] set => r = value; }
-        float IColor.g { [IN(LINE)] get => g; [IN(LINE)] set => g = value; }
-        float IColor.b { [IN(LINE)] get => b; [IN(LINE)] set => b = value; }
-        float IColor.a { [IN(LINE)] get => a; [IN(LINE)] set => a = value; }
-        float IVector4<float>.w { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        float IVector3<float>.z { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        float IVector2<float>.y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        float IVector1<float>.x { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int count { [IN(LINE)] get => LENGTH; }
+        public float w { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
+        public float z { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
+        public float y { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
+        public float x { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        float IColor.r { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
+        float IColor.g { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
+        float IColor.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
+        float IColor.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        public int count { [IN(LINE)] get => Count; }
 
         public unsafe float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (color* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (float* array = &r) { array[index] = value; }
             }
@@ -94,93 +98,65 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Arithmetic operators
-        [IN(LINE)]
-        public static color operator *(color a, color b) => new color(a.r * b.r, a.g * b.g, a.b * b.b, a.a * b.a);
-        [IN(LINE)]
-        public static color operator *(color a, float b) => new color(a.r * b, a.g * b, a.b * b, a.a * b);
-        [IN(LINE)]
-        public static color operator *(float a, color b) => new color(a * b.r, a * b.g, a * b.b, a * b.a);
-        [IN(LINE)]
-        public static color operator *(color a, float4 b) => new color(a.r * b.x, a.g * b.y, a.b * b.z, a.a * b.w);
-        [IN(LINE)]
-        public static color operator *(float4 a, color b) => new color(a.x * b.r, a.y * b.g, a.z * b.b, a.w * b.a);
+        [IN(LINE)] public static color operator *(color a, color b) => new color(a.r * b.r, a.g * b.g, a.b * b.b, a.a * b.a);
+        [IN(LINE)] public static color operator *(color a, float b) => new color(a.r * b, a.g * b, a.b * b, a.a * b);
+        [IN(LINE)] public static color operator *(float a, color b) => new color(a * b.r, a * b.g, a * b.b, a * b.a);
+        [IN(LINE)] public static color operator *(color a, float4 b) => new color(a.r * b.x, a.g * b.y, a.b * b.z, a.a * b.w);
+        [IN(LINE)] public static color operator *(float4 a, color b) => new color(a.x * b.r, a.y * b.g, a.z * b.b, a.w * b.a);
 
-        [IN(LINE)]
-        public static color operator +(color a, color b) => new color(a.r + b.r, a.g + b.g, a.b + b.b, a.a + b.a);
-        [IN(LINE)]
-        public static color operator +(color a, float b) => new color(a.r + b, a.g + b, a.b + b, a.a + b);
-        [IN(LINE)]
-        public static color operator +(float a, color b) => new color(a + b.r, a + b.g, a + b.b, a + b.a);
-        [IN(LINE)]
-        public static color operator +(color a, float4 b) => new color(a.r + b.x, a.g + b.y, a.b + b.z, a.a + b.w);
-        [IN(LINE)]
-        public static color operator +(float4 a, color b) => new color(a.x + b.r, a.y + b.g, a.z + b.b, a.w + b.a);
+        [IN(LINE)] public static color operator +(color a, color b) => new color(a.r + b.r, a.g + b.g, a.b + b.b, a.a + b.a);
+        [IN(LINE)] public static color operator +(color a, float b) => new color(a.r + b, a.g + b, a.b + b, a.a + b);
+        [IN(LINE)] public static color operator +(float a, color b) => new color(a + b.r, a + b.g, a + b.b, a + b.a);
+        [IN(LINE)] public static color operator +(color a, float4 b) => new color(a.r + b.x, a.g + b.y, a.b + b.z, a.a + b.w);
+        [IN(LINE)] public static color operator +(float4 a, color b) => new color(a.x + b.r, a.y + b.g, a.z + b.b, a.w + b.a);
 
-        [IN(LINE)]
-        public static color operator -(color a, color b) => new color(a.r - b.r, a.g - b.g, a.b - b.b, a.a - b.a);
-        [IN(LINE)]
-        public static color operator -(color a, float b) => new color(a.r - b, a.g - b, a.b - b, a.a - b);
-        [IN(LINE)]
-        public static color operator -(float a, color b) => new color(a - b.r, a - b.g, a - b.b, a - b.a);
-        [IN(LINE)]
-        public static color operator -(color a, float4 b) => new color(a.r - b.x, a.g - b.y, a.b - b.z, a.a - b.w);
-        [IN(LINE)]
-        public static color operator -(float4 a, color b) => new color(a.x - b.r, a.y - b.g, a.z - b.b, a.w - b.a);
+        [IN(LINE)] public static color operator -(color a, color b) => new color(a.r - b.r, a.g - b.g, a.b - b.b, a.a - b.a);
+        [IN(LINE)] public static color operator -(color a, float b) => new color(a.r - b, a.g - b, a.b - b, a.a - b);
+        [IN(LINE)] public static color operator -(float a, color b) => new color(a - b.r, a - b.g, a - b.b, a - b.a);
+        [IN(LINE)] public static color operator -(color a, float4 b) => new color(a.r - b.x, a.g - b.y, a.b - b.z, a.a - b.w);
+        [IN(LINE)] public static color operator -(float4 a, color b) => new color(a.x - b.r, a.y - b.g, a.z - b.b, a.w - b.a);
 
-        [IN(LINE)]
-        public static color operator /(color a, color b) => new color(a.r / b.r, a.g / b.g, a.b / b.b, a.a / b.a);
-        [IN(LINE)]
-        public static color operator /(color a, float b) => new color(a.r / b, a.g / b, a.b / b, a.a / b);
-        [IN(LINE)]
-        public static color operator /(float a, color b) => new color(a / b.r, a / b.g, a / b.b, a / b.a);
-        [IN(LINE)]
-        public static color operator /(color a, float4 b) => new color(a.r / b.x, a.g / b.y, a.b / b.z, a.a / b.w);
-        [IN(LINE)]
-        public static color operator /(float4 a, color b) => new color(a.x / b.r, a.y / b.g, a.z / b.b, a.w / b.a);
+        [IN(LINE)] public static color operator /(color a, color b) => new color(a.r / b.r, a.g / b.g, a.b / b.b, a.a / b.a);
+        [IN(LINE)] public static color operator /(color a, float b) => new color(a.r / b, a.g / b, a.b / b, a.a / b);
+        [IN(LINE)] public static color operator /(float a, color b) => new color(a / b.r, a / b.g, a / b.b, a / b.a);
+        [IN(LINE)] public static color operator /(color a, float4 b) => new color(a.r / b.x, a.g / b.y, a.b / b.z, a.a / b.w);
+        [IN(LINE)] public static color operator /(float4 a, color b) => new color(a.x / b.r, a.y / b.g, a.z / b.b, a.w / b.a);
 
-        [IN(LINE)]
-        public static color operator %(color a, color b) => new color(a.r % b.r, a.g % b.g, a.b % b.b, a.a % b.a);
-        [IN(LINE)]
-        public static color operator %(color a, float b) => new color(a.r % b, a.g % b, a.b % b, a.a % b);
-        [IN(LINE)]
-        public static color operator %(float a, color b) => new color(a % b.r, a % b.g, a % b.b, a % b.a);
-        [IN(LINE)]
-        public static color operator %(color a, float4 b) => new color(a.r % b.z, a.g % b.y, a.b % b.z, a.a % b.w);
-        [IN(LINE)]
-        public static color operator %(float4 a, color b) => new color(a.z % b.r, a.y % b.g, a.z % b.b, a.w % b.a);
+        [IN(LINE)] public static color operator %(color a, color b) => new color(a.r % b.r, a.g % b.g, a.b % b.b, a.a % b.a);
+        [IN(LINE)] public static color operator %(color a, float b) => new color(a.r % b, a.g % b, a.b % b, a.a % b);
+        [IN(LINE)] public static color operator %(float a, color b) => new color(a % b.r, a % b.g, a % b.b, a % b.a);
+        [IN(LINE)] public static color operator %(color a, float4 b) => new color(a.r % b.z, a.g % b.y, a.b % b.z, a.a % b.w);
+        [IN(LINE)] public static color operator %(float4 a, color b) => new color(a.z % b.r, a.y % b.g, a.z % b.b, a.w % b.a);
 
-        [IN(LINE)]
-        public static color operator ++(color a) => new color(++a.r, ++a.g, ++a.b, ++a.a);
-        [IN(LINE)]
-        public static color operator --(color a) => new color(--a.r, --a.g, --a.b, --a.a);
-        [IN(LINE)]
-        public static color operator -(color a) => new color(-a.r, -a.g, -a.b, -a.a);
-        [IN(LINE)]
-        public static color operator +(color a) => new color(+a.r, +a.g, +a.b, +a.a);
+        [IN(LINE)] public static color operator ++(color a) => new color(++a.r, ++a.g, ++a.b, ++a.a);
+        [IN(LINE)] public static color operator --(color a) => new color(--a.r, --a.g, --a.b, --a.a);
+        [IN(LINE)] public static color operator -(color a) => new color(-a.r, -a.g, -a.b, -a.a);
+        [IN(LINE)] public static color operator +(color a) => new color(+a.r, +a.g, +a.b, +a.a);
         #endregion
 
+
         #region Other
-        [IN(LINE)] public override int GetHashCode() => DM.AsInt(r) ^ DM.AsInt(g) ^ DM.AsInt(b) ^ DM.AsInt(a);
-        [IN(LINE)] public override bool Equals(object o) => o is color target && Equals(target);
-        [IN(LINE)] public bool Equals(color a) => r == a.r && g == a.g && b == a.b && this.a == a.a;
-        [IN(LINE)] public override string ToString() => $"{nameof(color)}({r}, {g}, {b}, {a})";
-        [IN(LINE)]
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is color target && Equals(target); }
+        [IN(LINE)] public bool Equals(color a) { return r == a.r && g == a.g && b == a.b && this.a == a.a; }
+        public override string ToString() { return $"{nameof(color)}({r}, {g}, {b}, {a})"; }
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"{nameof(color)}({r.ToString(format, formatProvider)}, {g.ToString(format, formatProvider)}, {b.ToString(format, formatProvider)}, {a.ToString(format, formatProvider)})";
         }
+
+        internal class DebuggerProxy
+        {
+            public float r, g, b, a;
+            public DebuggerProxy(color value) { r = value.r; g = value.g; b = value.b; a = value.a; }
+        }
         #endregion
 
-        #region GetEnumerator
-        IEnumerator<float> IEnumerable<float>.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        #region Enumerator
+        VectorEnumerator<float, color> GetEnumerator() { return new VectorEnumerator<float, color>(this); }
+        VectorEnumerator<float, color> IEnumerableVector<float, color>.GetEnumerator() { return new VectorEnumerator<float, color>(this); }
+        IEnumerator<float> IEnumerable<float>.GetEnumerator() { return new VectorEnumerator<float, color>(this); }
+        IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<float, color>(this); }
         #endregion
     }
 }

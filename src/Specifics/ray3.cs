@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -90,14 +91,14 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray3 operator -(ray3 a) => new ray3(a.origin, -a.direction);
         [IN(LINE)] public static ray3 operator +(ray3 a) => new ray3(a.origin, +a.direction);
 
-        [IN(LINE)] public static bool operator ==(ray3 a, ray3 b) => a.origin == b.origin && a.direction == b.direction;
-        [IN(LINE)] public static bool operator !=(ray3 a, ray3 b) => a.origin != b.origin && a.direction != b.direction;
+        [IN(LINE)] public static bool3 operator ==(ray3 a, ray3 b) => a.origin == b.origin && a.direction == b.direction;
+        [IN(LINE)] public static bool3 operator !=(ray3 a, ray3 b) => a.origin != b.origin && a.direction != b.direction;
         #endregion
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
         public override bool Equals(object o) => o is ray3 target && Equals(target);
-        [IN(LINE)] public bool Equals(ray3 a) => origin == a.origin && direction == a.direction;
+        [IN(LINE)] public bool Equals(ray3 a) => origin == a.origin && direction == a.direction ;
         public override string ToString() => $"{nameof(ray3)}({origin}, {direction})";
         public string ToString(string format, IFormatProvider formatProvider)
         {

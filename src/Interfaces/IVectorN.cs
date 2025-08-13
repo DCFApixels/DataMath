@@ -1,4 +1,6 @@
-﻿namespace DCFApixels.DataMath
+﻿using System.Collections.Generic;
+
+namespace DCFApixels.DataMath
 {
     public interface IVectorN<T> : IEnumerable<T> where T : unmanaged
     {

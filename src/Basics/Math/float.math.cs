@@ -104,9 +104,9 @@ namespace DCFApixels.DataMath
         }
 
         [IN(LINE)]
-        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v) 
-        { 
-            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v)); 
+        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
         }
 
 
@@ -154,7 +154,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Step(float threshold, float a) { return Select(0.0f, 1.0f, a >= threshold); }
         [IN(LINE)] public static float Reflect(float v, float n) { return v - 2f * n * Dot(v, n); }
         [IN(LINE)] public static float Project(float a, float ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float ProjectSafe(float a, float ontoB, float defaultValue = 0)
         {
             var proj = Project(a, ontoB);

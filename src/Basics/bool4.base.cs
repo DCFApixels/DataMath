@@ -1,10 +1,11 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -12,7 +13,6 @@ namespace DCFApixels.DataMath
 {
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 4)]
     public partial struct bool4 :
         IBoolVector,
         IEquatable<bool4>,

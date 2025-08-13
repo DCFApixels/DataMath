@@ -1,5 +1,12 @@
 ﻿namespace DCFApixels.DataMath
 {
+    public interface IColorHSV
+    {
+        public float h { get; set; }
+        public float s { get; set; }
+        public float v { get; set; }
+        public float a { get; set; }
+    }
     public interface IColor
     {
         public float r { get; set; }

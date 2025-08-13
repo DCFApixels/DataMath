@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -77,8 +78,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray2 operator -(ray2 a) => new ray2(a.origin, -a.direction);
         [IN(LINE)] public static ray2 operator +(ray2 a) => new ray2(a.origin, +a.direction);
 
-        [IN(LINE)] public static bool operator ==(ray2 a, ray2 b) => a.origin == b.origin && a.direction == b.direction;
-        [IN(LINE)] public static bool operator !=(ray2 a, ray2 b) => a.origin != b.origin && a.direction != b.direction;
+        [IN(LINE)] public static bool2 operator ==(ray2 a, ray2 b) => a.origin == b.origin && a.direction == b.direction;
+        [IN(LINE)] public static bool2 operator !=(ray2 a, ray2 b) => a.origin != b.origin && a.direction != b.direction;
         #endregion
 
         #region Other 

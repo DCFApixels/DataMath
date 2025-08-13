@@ -1,7 +1,9 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;

@@ -1,17 +1,53 @@
-﻿using static DCFApixels.DataMath.Consts;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
+    [Serializable]
+    [DebuggerTypeProxy(typeof(DebuggerProxy))]
+    [StructLayout(LayoutKind.Sequential, Pack = sizeof(float), Size = 4 * Count)]
     public struct colorhsv :
-        IVector4<float>,
         IEquatable<colorhsv>,
-        IFormattable
+        IFormattable,
+        IVector4<float>,
+        IColorHSV,
+        IEnumerableVector<float, colorhsv>
     {
-        public const int LENGTH = 4;
+        #region Consts
+        public const int Count = 4;
 
+        /// <summary> rgba(1, 0, 0, 1) </summary>
+        public readonly static colorhsv red = ColorUtility.RGBToHSV(color.red);
+        /// <summary> rgba(0, 1, 0, 1) </summary>
+        public readonly static colorhsv green = ColorUtility.RGBToHSV(color.green);
+        /// <summary> rgba(0, 0, 1, 1) </summary>
+        public readonly static colorhsv blue = ColorUtility.RGBToHSV(color.blue);
+        /// <summary> rgba(0, 0, 0, 0) </summary>
+        public readonly static colorhsv clean = ColorUtility.RGBToHSV(color.clean);
+
+        /// <summary> rgba(1, 1, 1, 1) </summary>
         public readonly static colorhsv white = ColorUtility.RGBToHSV(color.white);
+        /// <summary> rgba(0.5, 0.5, 0.5, 1) </summary>
+        public readonly static colorhsv gray = ColorUtility.RGBToHSV(color.gray);
+        /// <summary> rgba(0.5, 0.5, 0.5, 1) </summary>
+        public readonly static colorhsv grey = gray;
+        /// <summary> rgba(0, 0, 0, 1) </summary>
         public readonly static colorhsv black = ColorUtility.RGBToHSV(color.black);
+
+        /// <summary> rgba(1, 1, 0, 1) </summary>
+        public readonly static colorhsv yellow = ColorUtility.RGBToHSV(color.yellow);
+        /// <summary> rgba(1, 0.5, 0, 1) </summary>
+        public readonly static colorhsv orange = ColorUtility.RGBToHSV(color.orange);
+        /// <summary> rgba(0, 1, 1, 1) </summary>
+        public readonly static colorhsv cyan = ColorUtility.RGBToHSV(color.cyan);
+        /// <summary> rgba(1, 0, 1, 1) </summary>
+        public readonly static colorhsv magenta = ColorUtility.RGBToHSV(color.magenta);
+        #endregion
 
         public float h;
         public float s;
@@ -19,25 +55,29 @@ namespace DCFApixels.DataMath
         public float a;
 
         #region Properties
-        public float w { get => h; set => h = value; }
-        public float z { get => s; set => s = value; }
-        public float y { get => v; set => v = value; }
-        public float x { get => a; set => a = value; }
-        public int count => LENGTH;
+        public float w { [IN(LINE)] get { return h; } [IN(LINE)] set { h = value; } }
+        public float z { [IN(LINE)] get { return s; } [IN(LINE)] set { s = value; } }
+        public float y { [IN(LINE)] get { return v; } [IN(LINE)] set { v = value; } }
+        public float x { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        float IColorHSV.h { [IN(LINE)] get { return h; } [IN(LINE)] set { h = value; } }
+        float IColorHSV.s { [IN(LINE)] get { return s; } [IN(LINE)] set { s = value; } }
+        float IColorHSV.v { [IN(LINE)] get { return v; } [IN(LINE)] set { v = value; } }
+        float IColorHSV.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        public int count { [IN(LINE)] get => Count; }
 
         public unsafe float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (colorhsv* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (float* array = &h) { array[index] = value; }
             }
@@ -125,15 +165,27 @@ namespace DCFApixels.DataMath
 
 
         #region Other
-        [IN(LINE)] public override int GetHashCode() => DM.AsInt(h) ^ DM.AsInt(s) ^ DM.AsInt(v) ^ DM.AsInt(a);
-        [IN(LINE)] public override bool Equals(object o) => o is colorhsv target && Equals(target);
-        [IN(LINE)] public bool Equals(colorhsv a) => h == a.h && s == a.s && v == a.v && this.a == a.a;
-        [IN(LINE)] public override string ToString() => $"{nameof(colorhsv)}({h}, {s}, {v}, {a})";
-        [IN(LINE)]
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is colorhsv target && Equals(target); }
+        [IN(LINE)] public bool Equals(colorhsv a) { return h == a.h && s == a.s && v == a.v && this.a == a.a; }
+        public override string ToString() { return $"{nameof(colorhsv)}({h}, {s}, {v}, {a})"; }
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"{nameof(colorhsv)}({h.ToString(format, formatProvider)}, {s.ToString(format, formatProvider)}, {v.ToString(format, formatProvider)}, {a.ToString(format, formatProvider)})";
         }
+
+        internal class DebuggerProxy
+        {
+            public float h, s, v, a;
+            public DebuggerProxy(colorhsv value) { h = value.h; s = value.s; v = value.v; a = value.a; }
+        }
+        #endregion
+
+        #region Enumerator
+        VectorEnumerator<float, colorhsv> GetEnumerator() { return new VectorEnumerator<float, colorhsv>(this); }
+        VectorEnumerator<float, colorhsv> IEnumerableVector<float, colorhsv>.GetEnumerator() { return new VectorEnumerator<float, colorhsv>(this); }
+        IEnumerator<float> IEnumerable<float>.GetEnumerator() { return new VectorEnumerator<float, colorhsv>(this); }
+        IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<float, colorhsv>(this); }
         #endregion
     }
 }
