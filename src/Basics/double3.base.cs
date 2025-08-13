@@ -21,7 +21,7 @@ namespace DCFApixels.DataMath
         IEnumerableVector<double, double3>
     {
         #region Consts
-        public const int LENGTH = 3;
+        public const int Count = 3;
 
         ///<summary>(0, 0, 0)</summary>
         public static readonly double3 zero = new double3(0d, 0d, 0d);
@@ -61,21 +61,21 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)]
         double IVector3<double>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get => LENGTH; }
+        public int count { [IN(LINE)] get => Count; }
 
         public unsafe double this[int index]
         {
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (double3* array = &this) { return ((double*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
 #endif
                 fixed (double* array = &x) { array[index] = value; }
             }
