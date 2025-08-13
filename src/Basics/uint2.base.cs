@@ -139,13 +139,29 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Boolean
-        [IN(LINE)] public static bool operator ==(uint2 a, uint2 b) => a.x == b.x && a.y == b.y;
-        [IN(LINE)] public static bool operator ==(uint2 a, uint b) => a.x == b && a.y == b;
-        [IN(LINE)] public static bool operator ==(uint a, uint2 b) => a == b.x && a == b.y;
+        [IN(LINE)] public static bool2 operator <(uint2 a, uint2 b) { return new bool2(a.x < b.x, a.y < b.y); }
+        [IN(LINE)] public static bool2 operator <(uint2 a, uint b) { return new bool2(a.x < b, a.y < b); }
+        [IN(LINE)] public static bool2 operator <(uint a, uint2 b) { return new bool2(a < b.x, a < b.y); }
 
-        [IN(LINE)] public static bool operator !=(uint2 a, uint2 b) => a.x != b.x || a.y != b.y;
-        [IN(LINE)] public static bool operator !=(uint2 a, uint b) => a.x != b || a.y != b;
-        [IN(LINE)] public static bool operator !=(uint a, uint2 b) => a != b.x || a != b.y;
+        [IN(LINE)] public static bool2 operator <=(uint2 a, uint2 b) { return new bool2(a.x <= b.x, a.y <= b.y); }
+        [IN(LINE)] public static bool2 operator <=(uint2 a, uint b) { return new bool2(a.x <= b, a.y <= b); }
+        [IN(LINE)] public static bool2 operator <=(uint a, uint2 b) { return new bool2(a <= b.x, a <= b.y); }
+
+        [IN(LINE)] public static bool2 operator >(uint2 a, uint2 b) { return new bool2(a.x > b.x, a.y > b.y); }
+        [IN(LINE)] public static bool2 operator >(uint2 a, uint b) { return new bool2(a.x > b, a.y > b); }
+        [IN(LINE)] public static bool2 operator >(uint a, uint2 b) { return new bool2(a > b.x, a > b.y); }
+
+        [IN(LINE)] public static bool2 operator >=(uint2 a, uint2 b) { return new bool2(a.x >= b.x, a.y >= b.y); }
+        [IN(LINE)] public static bool2 operator >=(uint2 a, uint b) { return new bool2(a.x >= b, a.y >= b); }
+        [IN(LINE)] public static bool2 operator >=(uint a, uint2 b) { return new bool2(a >= b.x, a >= b.y); }
+
+        [IN(LINE)] public static bool2 operator ==(uint2 a, uint2 b) { return new bool2(a.x == b.x, a.y == b.y); }
+        [IN(LINE)] public static bool2 operator ==(uint2 a, uint b) { return new bool2(a.x == b, a.y == b); }
+        [IN(LINE)] public static bool2 operator ==(uint a, uint2 b) { return new bool2(a == b.x, a == b.y); }
+
+        [IN(LINE)] public static bool2 operator !=(uint2 a, uint2 b) { return new bool2(a.x != b.x, a.y != b.y); }
+        [IN(LINE)] public static bool2 operator !=(uint2 a, uint b) { return new bool2(a.x != b, a.y != b); }
+        [IN(LINE)] public static bool2 operator !=(uint a, uint2 b) { return new bool2(a != b.x, a != b.y); }
         #endregion
 
         #endregion

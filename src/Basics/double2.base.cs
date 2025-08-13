@@ -121,13 +121,29 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Boolean
-        [IN(LINE)] public static bool operator ==(double2 a, double2 b) => a.x == b.x && a.y == b.y;
-        [IN(LINE)] public static bool operator ==(double2 a, double b) => a.x == b && a.y == b;
-        [IN(LINE)] public static bool operator ==(double a, double2 b) => a == b.x && a == b.y;
+        [IN(LINE)] public static bool2 operator <(double2 a, double2 b) { return new bool2(a.x < b.x, a.y < b.y); }
+        [IN(LINE)] public static bool2 operator <(double2 a, double b) { return new bool2(a.x < b, a.y < b); }
+        [IN(LINE)] public static bool2 operator <(double a, double2 b) { return new bool2(a < b.x, a < b.y); }
 
-        [IN(LINE)] public static bool operator !=(double2 a, double2 b) => a.x != b.x || a.y != b.y;
-        [IN(LINE)] public static bool operator !=(double2 a, double b) => a.x != b || a.y != b;
-        [IN(LINE)] public static bool operator !=(double a, double2 b) => a != b.x || a != b.y;
+        [IN(LINE)] public static bool2 operator <=(double2 a, double2 b) { return new bool2(a.x <= b.x, a.y <= b.y); }
+        [IN(LINE)] public static bool2 operator <=(double2 a, double b) { return new bool2(a.x <= b, a.y <= b); }
+        [IN(LINE)] public static bool2 operator <=(double a, double2 b) { return new bool2(a <= b.x, a <= b.y); }
+
+        [IN(LINE)] public static bool2 operator >(double2 a, double2 b) { return new bool2(a.x > b.x, a.y > b.y); }
+        [IN(LINE)] public static bool2 operator >(double2 a, double b) { return new bool2(a.x > b, a.y > b); }
+        [IN(LINE)] public static bool2 operator >(double a, double2 b) { return new bool2(a > b.x, a > b.y); }
+
+        [IN(LINE)] public static bool2 operator >=(double2 a, double2 b) { return new bool2(a.x >= b.x, a.y >= b.y); }
+        [IN(LINE)] public static bool2 operator >=(double2 a, double b) { return new bool2(a.x >= b, a.y >= b); }
+        [IN(LINE)] public static bool2 operator >=(double a, double2 b) { return new bool2(a >= b.x, a >= b.y); }
+
+        [IN(LINE)] public static bool2 operator ==(double2 a, double2 b) { return new bool2(a.x == b.x, a.y == b.y); }
+        [IN(LINE)] public static bool2 operator ==(double2 a, double b) { return new bool2(a.x == b, a.y == b); }
+        [IN(LINE)] public static bool2 operator ==(double a, double2 b) { return new bool2(a == b.x, a == b.y); }
+
+        [IN(LINE)] public static bool2 operator !=(double2 a, double2 b) { return new bool2(a.x != b.x, a.y != b.y); }
+        [IN(LINE)] public static bool2 operator !=(double2 a, double b) { return new bool2(a.x != b, a.y != b); }
+        [IN(LINE)] public static bool2 operator !=(double a, double2 b) { return new bool2(a != b.x, a != b.y); }
         #endregion
 
         #endregion

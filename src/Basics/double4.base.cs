@@ -195,13 +195,29 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Boolean
-        [IN(LINE)] public static bool operator ==(double4 a, double4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-        [IN(LINE)] public static bool operator ==(double4 a, double b) => a.x == b && a.y == b && a.z == b && a.w == b;
-        [IN(LINE)] public static bool operator ==(double a, double4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+        [IN(LINE)] public static bool4 operator <(double4 a, double4 b) { return new bool4(a.x < b.x, a.y < b.y, a.z < b.z, a.w < b.w); }
+        [IN(LINE)] public static bool4 operator <(double4 a, double b) { return new bool4(a.x < b, a.y < b, a.z < b, a.w < b); }
+        [IN(LINE)] public static bool4 operator <(double a, double4 b) { return new bool4(a < b.x, a < b.y, a < b.z, a < b.w); }
 
-        [IN(LINE)] public static bool operator !=(double4 a, double4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
-        [IN(LINE)] public static bool operator !=(double4 a, double b) => a.x != b || a.y != b || a.z != b || a.w != b;
-        [IN(LINE)] public static bool operator !=(double a, double4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
+        [IN(LINE)] public static bool4 operator <=(double4 a, double4 b) { return new bool4(a.x <= b.x, a.y <= b.y, a.z <= b.z, a.w <= b.w); }
+        [IN(LINE)] public static bool4 operator <=(double4 a, double b) { return new bool4(a.x <= b, a.y <= b, a.z <= b, a.w <= b); }
+        [IN(LINE)] public static bool4 operator <=(double a, double4 b) { return new bool4(a <= b.x, a <= b.y, a <= b.z, a <= b.w); }
+
+        [IN(LINE)] public static bool4 operator >(double4 a, double4 b) { return new bool4(a.x > b.x, a.y > b.y, a.z > b.z, a.w > b.w); }
+        [IN(LINE)] public static bool4 operator >(double4 a, double b) { return new bool4(a.x > b, a.y > b, a.z > b, a.w > b); }
+        [IN(LINE)] public static bool4 operator >(double a, double4 b) { return new bool4(a > b.x, a > b.y, a > b.z, a > b.w); }
+
+        [IN(LINE)] public static bool4 operator >=(double4 a, double4 b) { return new bool4(a.x >= b.x, a.y >= b.y, a.z >= b.z, a.w >= b.w); }
+        [IN(LINE)] public static bool4 operator >=(double4 a, double b) { return new bool4(a.x >= b, a.y >= b, a.z >= b, a.w >= b); }
+        [IN(LINE)] public static bool4 operator >=(double a, double4 b) { return new bool4(a >= b.x, a >= b.y, a >= b.z, a >= b.w); }
+
+        [IN(LINE)] public static bool4 operator ==(double4 a, double4 b) { return new bool4(a.x == b.x, a.y == b.y, a.z == b.z, a.w == b.w); }
+        [IN(LINE)] public static bool4 operator ==(double4 a, double b) { return new bool4(a.x == b, a.y == b, a.z == b, a.w == b); }
+        [IN(LINE)] public static bool4 operator ==(double a, double4 b) { return new bool4(a == b.x, a == b.y, a == b.z, a == b.w); }
+
+        [IN(LINE)] public static bool4 operator !=(double4 a, double4 b) { return new bool4(a.x != b.x, a.y != b.y, a.z != b.z, a.w != b.w); }
+        [IN(LINE)] public static bool4 operator !=(double4 a, double b) { return new bool4(a.x != b, a.y != b, a.z != b, a.w != b); }
+        [IN(LINE)] public static bool4 operator !=(double a, double4 b) { return new bool4(a != b.x, a != b.y, a != b.z, a != b.w); }
         #endregion
 
         #endregion

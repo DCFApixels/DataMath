@@ -146,13 +146,29 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Boolean
-        [IN(LINE)] public static bool operator ==(int3 a, int3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
-        [IN(LINE)] public static bool operator ==(int3 a, int b) => a.x == b && a.y == b && a.z == b;
-        [IN(LINE)] public static bool operator ==(int a, int3 b) => a == b.x && a == b.y && a == b.z;
+        [IN(LINE)] public static bool3 operator <(int3 a, int3 b) { return new bool3(a.x < b.x, a.y < b.y, a.z < b.z); }
+        [IN(LINE)] public static bool3 operator <(int3 a, int b) { return new bool3(a.x < b, a.y < b, a.z < b); }
+        [IN(LINE)] public static bool3 operator <(int a, int3 b) { return new bool3(a < b.x, a < b.y, a < b.z); }
 
-        [IN(LINE)] public static bool operator !=(int3 a, int3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
-        [IN(LINE)] public static bool operator !=(int3 a, int b) => a.x != b || a.y != b || a.z != b;
-        [IN(LINE)] public static bool operator !=(int a, int3 b) => a != b.x || a != b.y || a != b.z;
+        [IN(LINE)] public static bool3 operator <=(int3 a, int3 b) { return new bool3(a.x <= b.x, a.y <= b.y, a.z <= b.z); }
+        [IN(LINE)] public static bool3 operator <=(int3 a, int b) { return new bool3(a.x <= b, a.y <= b, a.z <= b); }
+        [IN(LINE)] public static bool3 operator <=(int a, int3 b) { return new bool3(a <= b.x, a <= b.y, a <= b.z); }
+
+        [IN(LINE)] public static bool3 operator >(int3 a, int3 b) { return new bool3(a.x > b.x, a.y > b.y, a.z > b.z); }
+        [IN(LINE)] public static bool3 operator >(int3 a, int b) { return new bool3(a.x > b, a.y > b, a.z > b); }
+        [IN(LINE)] public static bool3 operator >(int a, int3 b) { return new bool3(a > b.x, a > b.y, a > b.z); }
+
+        [IN(LINE)] public static bool3 operator >=(int3 a, int3 b) { return new bool3(a.x >= b.x, a.y >= b.y, a.z >= b.z); }
+        [IN(LINE)] public static bool3 operator >=(int3 a, int b) { return new bool3(a.x >= b, a.y >= b, a.z >= b); }
+        [IN(LINE)] public static bool3 operator ==(int a, int3 b) { return new bool3(a == b.x, a == b.y, a == b.z); }
+
+        [IN(LINE)] public static bool3 operator ==(int3 a, int3 b) { return new bool3(a.x == b.x, a.y == b.y, a.z == b.z); }
+        [IN(LINE)] public static bool3 operator ==(int3 a, int b) { return new bool3(a.x == b, a.y == b, a.z == b); }
+        [IN(LINE)] public static bool3 operator ==(int a, int3 b) { return new bool3(a == b.x, a == b.y, a == b.z); }
+
+        [IN(LINE)] public static bool3 operator !=(int3 a, int3 b) { return new bool3(a.x != b.x, a.y != b.y, a.z != b.z); }
+        [IN(LINE)] public static bool3 operator !=(int3 a, int b) { return new bool3(a.x != b, a.y != b, a.z != b); }
+        [IN(LINE)] public static bool3 operator !=(int a, int3 b) { return new bool3(a != b.x, a != b.y, a != b.z); }
         #endregion
 
         #endregion

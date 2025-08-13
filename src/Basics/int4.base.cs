@@ -213,13 +213,29 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Boolean
-        [IN(LINE)] public static bool operator ==(int4 a, int4 b) => a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-        [IN(LINE)] public static bool operator ==(int4 a, int b) => a.x == b && a.y == b && a.z == b && a.w == b;
-        [IN(LINE)] public static bool operator ==(int a, int4 b) => a == b.x && a == b.y && a == b.z && a == b.w;
+        [IN(LINE)] public static bool4 operator <(int4 a, int4 b) { return new bool4(a.x < b.x, a.y < b.y, a.z < b.z, a.w < b.w); }
+        [IN(LINE)] public static bool4 operator <(int4 a, int b) { return new bool4(a.x < b, a.y < b, a.z < b, a.w < b); }
+        [IN(LINE)] public static bool4 operator <(int a, int4 b) { return new bool4(a < b.x, a < b.y, a < b.z, a < b.w); }
 
-        [IN(LINE)] public static bool operator !=(int4 a, int4 b) => a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w;
-        [IN(LINE)] public static bool operator !=(int4 a, int b) => a.x != b || a.y != b || a.z != b || a.w != b;
-        [IN(LINE)] public static bool operator !=(int a, int4 b) => a != b.x || a != b.y || a != b.z || a != b.w;
+        [IN(LINE)] public static bool4 operator <=(int4 a, int4 b) { return new bool4(a.x <= b.x, a.y <= b.y, a.z <= b.z, a.w <= b.w); }
+        [IN(LINE)] public static bool4 operator <=(int4 a, int b) { return new bool4(a.x <= b, a.y <= b, a.z <= b, a.w <= b); }
+        [IN(LINE)] public static bool4 operator <=(int a, int4 b) { return new bool4(a <= b.x, a <= b.y, a <= b.z, a <= b.w); }
+
+        [IN(LINE)] public static bool4 operator >(int4 a, int4 b) { return new bool4(a.x > b.x, a.y > b.y, a.z > b.z, a.w > b.w); }
+        [IN(LINE)] public static bool4 operator >(int4 a, int b) { return new bool4(a.x > b, a.y > b, a.z > b, a.w > b); }
+        [IN(LINE)] public static bool4 operator >(int a, int4 b) { return new bool4(a > b.x, a > b.y, a > b.z, a > b.w); }
+
+        [IN(LINE)] public static bool4 operator >=(int4 a, int4 b) { return new bool4(a.x >= b.x, a.y >= b.y, a.z >= b.z, a.w >= b.w); }
+        [IN(LINE)] public static bool4 operator >=(int4 a, int b) { return new bool4(a.x >= b, a.y >= b, a.z >= b, a.w >= b); }
+        [IN(LINE)] public static bool4 operator >=(int a, int4 b) { return new bool4(a >= b.x, a >= b.y, a >= b.z, a >= b.w); }
+
+        [IN(LINE)] public static bool4 operator ==(int4 a, int4 b) { return new bool4(a.x == b.x, a.y == b.y, a.z == b.z, a.w == b.w); }
+        [IN(LINE)] public static bool4 operator ==(int4 a, int b) { return new bool4(a.x == b, a.y == b, a.z == b, a.w == b); }
+        [IN(LINE)] public static bool4 operator ==(int a, int4 b) { return new bool4(a == b.x, a == b.y, a == b.z, a == b.w); }
+
+        [IN(LINE)] public static bool4 operator !=(int4 a, int4 b) { return new bool4(a.x != b.x, a.y != b.y, a.z != b.z, a.w != b.w); }
+        [IN(LINE)] public static bool4 operator !=(int4 a, int b) { return new bool4(a.x != b, a.y != b, a.z != b, a.w != b); }
+        [IN(LINE)] public static bool4 operator !=(int a, int4 b) { return new bool4(a != b.x, a != b.y, a != b.z, a != b.w); }
         #endregion
 
         #endregion
