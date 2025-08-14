@@ -105,29 +105,29 @@ namespace DCFApixels.DataMath
         #region operators
 
         #region Bits
-        [IN(LINE)] public static bool3 operator !(bool3 a) => new bool3(!a.x, !a.y, !a.z);
+        [IN(LINE)] public static bool3 operator !(bool3 a) { return new bool3(!a.x, !a.y, !a.z); }
 
-        [IN(LINE)] public static bool3 operator |(bool3 a, bool3 b) => new bool3(a.x | b.x, a.y | b.y, a.z | b.z);
-        [IN(LINE)] public static bool3 operator |(bool3 a, bool b) => new bool3(a.x | b, a.y | b, a.z | b);
-        [IN(LINE)] public static bool3 operator |(bool a, bool3 b) => new bool3(a | b.x, a | b.y, a | b.z);
+        [IN(LINE)] public static bool3 operator |(bool3 a, bool3 b) { return new bool3(a.x | b.x, a.y | b.y, a.z | b.z); }
+        [IN(LINE)] public static bool3 operator |(bool3 a, bool b) { return new bool3(a.x | b, a.y | b, a.z | b); }
+        [IN(LINE)] public static bool3 operator |(bool a, bool3 b) { return new bool3(a | b.x, a | b.y, a | b.z); }
 
-        [IN(LINE)] public static bool3 operator &(bool3 a, bool3 b) => new bool3(a.x & b.x, a.y & b.y, a.z & b.z);
-        [IN(LINE)] public static bool3 operator &(bool3 a, bool b) => new bool3(a.x & b, a.y & b, a.z & b);
-        [IN(LINE)] public static bool3 operator &(bool a, bool3 b) => new bool3(a & b.x, a & b.y, a & b.z);
+        [IN(LINE)] public static bool3 operator &(bool3 a, bool3 b) { return new bool3(a.x & b.x, a.y & b.y, a.z & b.z); }
+        [IN(LINE)] public static bool3 operator &(bool3 a, bool b) { return new bool3(a.x & b, a.y & b, a.z & b); }
+        [IN(LINE)] public static bool3 operator &(bool a, bool3 b) { return new bool3(a & b.x, a & b.y, a & b.z); }
 
-        [IN(LINE)] public static bool3 operator ^(bool3 a, bool3 b) => new bool3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z);
-        [IN(LINE)] public static bool3 operator ^(bool3 a, bool b) => new bool3(a.x ^ b, a.y ^ b, a.z ^ b);
-        [IN(LINE)] public static bool3 operator ^(bool a, bool3 b) => new bool3(a ^ b.x, a ^ b.y, a ^ b.z);
+        [IN(LINE)] public static bool3 operator ^(bool3 a, bool3 b) { return new bool3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z); }
+        [IN(LINE)] public static bool3 operator ^(bool3 a, bool b) { return new bool3(a.x ^ b, a.y ^ b, a.z ^ b); }
+        [IN(LINE)] public static bool3 operator ^(bool a, bool3 b) { return new bool3(a ^ b.x, a ^ b.y, a ^ b.z); }
         #endregion
 
         #region Boolean
-        [IN(LINE)] public static bool operator ==(bool3 a, bool3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
-        [IN(LINE)] public static bool operator ==(bool3 a, bool b) => a.x == b && a.y == b && a.z == b;
-        [IN(LINE)] public static bool operator ==(bool a, bool3 b) => a == b.x && a == b.y && a == b.z;
+        [IN(LINE)] public static bool3 operator ==(bool3 a, bool3 b) { return new bool3(a.x == b.x, a.y == b.y, a.z == b.z); }
+        [IN(LINE)] public static bool3 operator ==(bool3 a, bool b) { return new bool3(a.x == b, a.y == b, a.z == b); }
+        [IN(LINE)] public static bool3 operator ==(bool a, bool3 b) { return new bool3(a == b.x, a == b.y, a == b.z); }
 
-        [IN(LINE)] public static bool operator !=(bool3 a, bool3 b) => a.x != b.x || a.y != b.y || a.z != b.z;
-        [IN(LINE)] public static bool operator !=(bool3 a, bool b) => a.x != b || a.y != b || a.z != b;
-        [IN(LINE)] public static bool operator !=(bool a, bool3 b) => a != b.x || a != b.y || a != b.z;
+        [IN(LINE)] public static bool3 operator !=(bool3 a, bool3 b) { return new bool3(a.x != b.x, a.y != b.y, a.z != b.z); }
+        [IN(LINE)] public static bool3 operator !=(bool3 a, bool b) { return new bool3(a.x != b, a.y != b, a.z != b); }
+        [IN(LINE)] public static bool3 operator !=(bool a, bool3 b) { return new bool3(a != b.x, a != b.y, a != b.z); }
 
         [IN(LINE)] public static bool operator ==(bool3 a, DM.AllCheckMode b) { return a.all; }
         [IN(LINE)] public static bool operator !=(bool3 a, DM.AllCheckMode b) { return !a.all; }
@@ -138,6 +138,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool operator !=(bool3 a, DM.AnyCheckMode b) { return !a.any; }
         [IN(LINE)] public static bool operator ==(DM.AnyCheckMode b, bool3 a) { return a.any; }
         [IN(LINE)] public static bool operator !=(DM.AnyCheckMode b, bool3 a) { return !a.any; }
+
+        [IN(LINE)] public static bool operator true(bool3 a) { return a.all; }
+        [IN(LINE)] public static bool operator false(bool3 a) { return !a.all; }
         #endregion
 
         #endregion
@@ -823,10 +826,10 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
-        public override bool Equals(object o) => o is bool3 target && Equals(target);
-        [IN(LINE)] public bool Equals(bool3 a) => x == a.x && y == a.y && z == a.z;
-        public override string ToString() => $"bool3({x}, {y}, {z})";
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is bool3 target && Equals(target); }
+        [IN(LINE)] public bool Equals(bool3 a) { return x == a.x && y == a.y && z == a.z; }
+        public override string ToString() { return $"bool3({x}, {y}, {z})"; }
 
         internal class DebuggerProxy
         {

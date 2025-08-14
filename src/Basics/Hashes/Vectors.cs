@@ -62,11 +62,11 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Float
-        [IN(LINE)]
-        public static uint UHash(float v) => unchecked((uint)Hash(v));
+        [IN(LINE)] public static uint UHash(float v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)]
         public static unsafe int Hash(float v)
         {
+            //return v.GetHashCode();
             int bits = *(int*)&v;
             // Optimized check for IsNan() || IsZero()
             if (((bits - 1) & 0x7FFFFFFF) >= 0x7F800000)
@@ -77,91 +77,78 @@ namespace DCFApixels.DataMath
             return bits;
         }
 
-        [IN(LINE)]
-        public static uint UHash(float2 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(float2 v)
-        {
-            throw new NotImplementedException();
-        }
+        [IN(LINE)] public static uint UHash(float2 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(float2 v) { return Hash<float2>(v); }
 
-        [IN(LINE)]
-        public static uint UHash(float3 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(float3 v)
-        {
-            throw new NotImplementedException();
-        }
+        [IN(LINE)] public static uint UHash(float3 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(float3 v) { return Hash<float3>(v); }
 
+        [IN(LINE)] public static uint UHash(float4 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(float4 v) { return Hash<float4>(v); }
+
+        [IN(LINE)] public static uint UHash<TVector>(TVector v, float _ = default) where TVector : IVectorN<float> { return unchecked((uint)Hash<TVector>(v)); }
         [IN(LINE)]
-        public static uint UHash(float4 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(float4 v)
+        public static int Hash<TVector>(TVector v, float _ = default) where TVector : IVectorN<float>
         {
-            throw new NotImplementedException();
+            int bits = 0;
+            for (int i = 0; i < v.count; i++)
+            {
+                bits |= Hash(v[i]);
+            }
+            return bits;
         }
         #endregion
 
         #region Int
-        [IN(LINE)]
-        public static uint UHash(int v) => unchecked((uint)v);
-        [IN(LINE)]
-        public static int Hash(int v) => v;
+        [IN(LINE)] public static uint UHash(int v) { return unchecked((uint)v); }
+        [IN(LINE)] public static int Hash(int v) { return v; }
 
-        [IN(LINE)]
-        public static uint UHash(int2 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(int2 v)
-        {
-            throw new NotImplementedException();
-        }
+        [IN(LINE)] public static uint UHash(int2 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(int2 v) { return Hash<int2>(v); }
 
-        [IN(LINE)]
-        public static uint UHash(int3 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(int3 v)
-        {
-            throw new NotImplementedException();
-        }
+        [IN(LINE)] public static uint UHash(int3 v) => unchecked((uint)Hash(v));
+        [IN(LINE)] public static int Hash(int3 v) { return Hash<int3>(v); }
 
+        [IN(LINE)] public static uint UHash(int4 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(int4 v) { return Hash<int4>(v); }
+
+        [IN(LINE)] public static uint UHash<TVector>(TVector v, int _ = default) where TVector : IVectorN<int> { return unchecked((uint)Hash<TVector>(v)); }
         [IN(LINE)]
-        public static uint UHash(int4 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(int4 v)
+        public static int Hash<TVector>(TVector v, int _ = default) where TVector : IVectorN<int>
         {
-            throw new NotImplementedException();
+            int bits = 0;
+            for (int i = 0; i < v.count; i++)
+            {
+                bits |= Hash(v[i]);
+            }
+            return bits;
         }
         #endregion
 
         #region UInt
-        [IN(LINE)]
-        public static uint UHash(uint v) => v;
-        [IN(LINE)]
-        public static int Hash(uint v) => unchecked((int)v);
+        [IN(LINE)] public static uint UHash(uint v) { return v; }
+        [IN(LINE)] public static int Hash(uint v) { return unchecked((int)v); }
+
+        [IN(LINE)] public static uint UHash(uint2 v) { return UHash<uint2>(v); }
+        [IN(LINE)] public static int Hash(uint2 v) { return unchecked((int)UHash(v)); }
+
+        [IN(LINE)] public static uint UHash(uint3 v) { return UHash<uint3>(v); }
+        [IN(LINE)] public static int Hash(uint3 v) { return unchecked((int)UHash(v)); }
+
+        [IN(LINE)] public static uint UHash(uint4 v) { return UHash<uint4>(v); }
+        [IN(LINE)] public static int Hash(uint4 v) { return unchecked((int)UHash(v)); }
 
         [IN(LINE)]
-        public static uint UHash(uint2 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(uint2 v)
+        public static uint UHash<TVector>(TVector v, uint _ = default) where TVector : IVectorN<uint>
         {
-            throw new NotImplementedException();
+            uint bits = 0;
+            for (int i = 0; i < v.count; i++)
+            {
+                bits |= UHash(v[i]);
+            }
+            return bits;
         }
-
-        [IN(LINE)]
-        public static uint UHash(uint3 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(uint3 v)
-        {
-            throw new NotImplementedException();
-        }
-
-        [IN(LINE)]
-        public static uint UHash(uint4 v) => unchecked((uint)Hash(v));
-        [IN(LINE)]
-        public static int Hash(uint4 v)
-        {
-            throw new NotImplementedException();
-        }
+        [IN(LINE)] public static int Hash<TVector>(TVector v, uint _ = default) where TVector : IVectorN<uint> { return unchecked((int)UHash<TVector>(v)); }
         #endregion
 
 

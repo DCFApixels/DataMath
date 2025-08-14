@@ -100,28 +100,27 @@ namespace DCFApixels.DataMath
         #region Bits
         [IN(LINE)] public static bool2 operator !(bool2 a) => new bool2(!a.x, !a.y);
 
-        [IN(LINE)] public static bool2 operator |(bool2 a, bool2 b) => new bool2(a.x | b.x, a.y | b.y);
-        [IN(LINE)] public static bool2 operator |(bool2 a, bool b) => new bool2(a.x | b, a.y | b);
-        [IN(LINE)] public static bool2 operator |(bool a, bool2 b) => new bool2(a | b.x, a | b.y);
+        [IN(LINE)] public static bool2 operator |(bool2 a, bool2 b) { return new bool2(a.x | b.x, a.y | b.y); }
+        [IN(LINE)] public static bool2 operator |(bool2 a, bool b) { return new bool2(a.x | b, a.y | b); }
+        [IN(LINE)] public static bool2 operator |(bool a, bool2 b) { return new bool2(a | b.x, a | b.y); }
 
-        [IN(LINE)] public static bool2 operator &(bool2 a, bool2 b) => new bool2(a.x & b.x, a.y & b.y);
-        [IN(LINE)] public static bool2 operator &(bool2 a, bool b) => new bool2(a.x & b, a.y & b);
-        [IN(LINE)] public static bool2 operator &(bool a, bool2 b) => new bool2(a & b.x, a & b.y);
+        [IN(LINE)] public static bool2 operator &(bool2 a, bool2 b) { return new bool2(a.x & b.x, a.y & b.y); }
+        [IN(LINE)] public static bool2 operator &(bool2 a, bool b) { return new bool2(a.x & b, a.y & b); }
+        [IN(LINE)] public static bool2 operator &(bool a, bool2 b) { return new bool2(a & b.x, a & b.y); }
 
-        [IN(LINE)] public static bool2 operator ^(bool2 a, bool2 b) => new bool2(a.x ^ b.x, a.y ^ b.y);
-        [IN(LINE)] public static bool2 operator ^(bool2 a, bool b) => new bool2(a.x ^ b, a.y ^ b);
-        [IN(LINE)] public static bool2 operator ^(bool a, bool2 b) => new bool2(a ^ b.x, a ^ b.y);
+        [IN(LINE)] public static bool2 operator ^(bool2 a, bool2 b) { return new bool2(a.x ^ b.x, a.y ^ b.y); }
+        [IN(LINE)] public static bool2 operator ^(bool2 a, bool b) { return new bool2(a.x ^ b, a.y ^ b); }
+        [IN(LINE)] public static bool2 operator ^(bool a, bool2 b) { return new bool2(a ^ b.x, a ^ b.y); }
         #endregion
 
         #region Boolean
+        [IN(LINE)] public static bool2 operator ==(bool2 a, bool2 b) { return new bool2(a.x == b.x, a.y == b.y); }
+        [IN(LINE)] public static bool2 operator ==(bool2 a, bool b) { return new bool2(a.x == b, a.y == b); }
+        [IN(LINE)] public static bool2 operator ==(bool a, bool2 b) { return new bool2(a == b.x, a == b.y); }
 
-        [IN(LINE)] public static bool2 operator ==(bool2 a, bool2 b) => a.x == b.x && a.y == b.y;
-        [IN(LINE)] public static bool2 operator ==(bool2 a, bool b) => a.x == b && a.y == b;
-        [IN(LINE)] public static bool2 operator ==(bool a, bool2 b) => a == b.x && a == b.y;
-
-        [IN(LINE)] public static bool2 operator !=(bool2 a, bool2 b) => a.x != b.x || a.y != b.y;
-        [IN(LINE)] public static bool2 operator !=(bool2 a, bool b) => a.x != b || a.y != b;
-        [IN(LINE)] public static bool2 operator !=(bool a, bool2 b) => a != b.x || a != b.y;
+        [IN(LINE)] public static bool2 operator !=(bool2 a, bool2 b) { return new bool2(a.x != b.x, a.y != b.y); }
+        [IN(LINE)] public static bool2 operator !=(bool2 a, bool b) { return new bool2(a.x != b, a.y != b); }
+        [IN(LINE)] public static bool2 operator !=(bool a, bool2 b) { return new bool2(a != b.x, a != b.y); }
 
         [IN(LINE)] public static bool operator ==(bool2 a, DM.AllCheckMode b) { return a.all; }
         [IN(LINE)] public static bool operator !=(bool2 a, DM.AllCheckMode b) { return !a.all; }
@@ -132,6 +131,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool operator !=(bool2 a, DM.AnyCheckMode b) { return !a.any; }
         [IN(LINE)] public static bool operator ==(DM.AnyCheckMode b, bool2 a) { return a.any; }
         [IN(LINE)] public static bool operator !=(DM.AnyCheckMode b, bool2 a) { return !a.any; }
+
+        [IN(LINE)] public static bool operator true(bool2 a) { return a.all; }
+        [IN(LINE)] public static bool operator false(bool2 a) { return !a.all; }
         #endregion
 
         #endregion

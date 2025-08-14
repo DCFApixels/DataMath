@@ -1,4 +1,6 @@
-﻿namespace DCFApixels.DataMath
+﻿using System.Runtime.InteropServices;
+
+namespace DCFApixels.DataMath
 {
     public static partial class DM //consts
     {
@@ -47,5 +49,7 @@
         //    public const double TODEGREES_DBL = 57.29577951308232;
         //
         //    public const double TORADIANS_DBL = 0.017453292519943296;
+
+
     }
 }

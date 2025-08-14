@@ -91,15 +91,15 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray3 operator -(ray3 a) => new ray3(a.origin, -a.direction);
         [IN(LINE)] public static ray3 operator +(ray3 a) => new ray3(a.origin, +a.direction);
 
-        [IN(LINE)] public static bool3 operator ==(ray3 a, ray3 b) => a.origin == b.origin && a.direction == b.direction;
-        [IN(LINE)] public static bool3 operator !=(ray3 a, ray3 b) => a.origin != b.origin && a.direction != b.direction;
+        [IN(LINE)] public static bool operator ==(ray3 a, ray3 b) { return (a.origin == b.origin) == (a.direction == b.direction) == DM.all; }
+        [IN(LINE)] public static bool operator !=(ray3 a, ray3 b) { return !(a == b); }
         #endregion
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
-        public override bool Equals(object o) => o is ray3 target && Equals(target);
-        [IN(LINE)] public bool Equals(ray3 a) => origin == a.origin && direction == a.direction ;
-        public override string ToString() => $"{nameof(ray3)}({origin}, {direction})";
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is ray3 target && Equals(target); }
+        [IN(LINE)] public bool Equals(ray3 a) { return this == a; }
+        public override string ToString() { return $"{nameof(ray3)}({origin}, {direction})"; }
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"{nameof(ray3)}({origin.ToString(format, formatProvider)}, {direction.ToString(format, formatProvider)})";

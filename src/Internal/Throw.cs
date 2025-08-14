@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace DCFApixels.DataMath.Internal
 {
@@ -17,6 +18,15 @@ namespace DCFApixels.DataMath.Internal
                 argumentName = "value";
             }
             throw new ArgumentException($"{argumentName}.length == 0");
+        }
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void ArgumentOutOfRange(string argumentName = null)
+        {
+            if (string.IsNullOrEmpty(argumentName))
+            {
+                argumentName = "value";
+            }
+            throw new ArgumentOutOfRangeException(argumentName);
         }
     }
 }
