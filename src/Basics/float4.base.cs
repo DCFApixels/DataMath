@@ -1,6 +1,7 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,37 +55,37 @@ namespace DCFApixels.DataMath
         public float w;
 
         #region IColor
-        public float r { [IN(LINE)] get => (float)x; [IN(LINE)] set => x = (float)value; }
-        public float g { [IN(LINE)] get => (float)y; [IN(LINE)] set => y = (float)value; }
-        public float b { [IN(LINE)] get => (float)z; [IN(LINE)] set => z = (float)value; }
-        public float a { [IN(LINE)] get => (float)w; [IN(LINE)] set => w = (float)value; }
+        public float r { [IN(LINE)] get { return (float)x; } [IN(LINE)] set { x = (float)value; } }
+        public float g { [IN(LINE)] get { return (float)y; } [IN(LINE)] set { y = (float)value; } }
+        public float b { [IN(LINE)] get { return (float)z; } [IN(LINE)] set { z = (float)value; } }
+        public float a { [IN(LINE)] get { return (float)w; } [IN(LINE)] set { w = (float)value; } }
         #endregion
 
-        #region IVectorN
+        #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector1<float>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
+        float IVector1<float>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector2<float>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
+        float IVector2<float>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector3<float>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
+        float IVector3<float>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector4<float>.w { [IN(LINE)] get => w; [IN(LINE)] set => w = value; }
+        float IVector4<float>.w { [IN(LINE)] get { return w; } [IN(LINE)] set { w = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get => Count; }
+        public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe float this[int index]
         {
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float4* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float* array = &x) { array[index] = value; }
             }
@@ -170,30 +171,30 @@ namespace DCFApixels.DataMath
         #region operators
 
         #region Arithmetic
-        [IN(LINE)] public static float4 operator *(float4 a, float4 b) => new float4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
-        [IN(LINE)] public static float4 operator *(float4 a, float b) => new float4(a.x * b, a.y * b, a.z * b, a.w * b);
-        [IN(LINE)] public static float4 operator *(float a, float4 b) => new float4(a * b.x, a * b.y, a * b.z, a * b.w);
+        [IN(LINE)] public static float4 operator +(float4 a, float4 b) { return new float4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
+        [IN(LINE)] public static float4 operator +(float4 a, float b) { return new float4(a.x + b, a.y + b, a.z + b, a.w + b); }
+        [IN(LINE)] public static float4 operator +(float a, float4 b) { return new float4(a + b.x, a + b.y, a + b.z, a + b.w); }
 
-        [IN(LINE)] public static float4 operator +(float4 a, float4 b) => new float4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        [IN(LINE)] public static float4 operator +(float4 a, float b) => new float4(a.x + b, a.y + b, a.z + b, a.w + b);
-        [IN(LINE)] public static float4 operator +(float a, float4 b) => new float4(a + b.x, a + b.y, a + b.z, a + b.w);
+        [IN(LINE)] public static float4 operator -(float4 a, float4 b) { return new float4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w); }
+        [IN(LINE)] public static float4 operator -(float4 a, float b) { return new float4(a.x - b, a.y - b, a.z - b, a.w - b); }
+        [IN(LINE)] public static float4 operator -(float a, float4 b) { return new float4(a - b.x, a - b.y, a - b.z, a - b.w); }
 
-        [IN(LINE)] public static float4 operator -(float4 a, float4 b) => new float4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-        [IN(LINE)] public static float4 operator -(float4 a, float b) => new float4(a.x - b, a.y - b, a.z - b, a.w - b);
-        [IN(LINE)] public static float4 operator -(float a, float4 b) => new float4(a - b.x, a - b.y, a - b.z, a - b.w);
+        [IN(LINE)] public static float4 operator *(float4 a, float4 b) { return new float4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w); }
+        [IN(LINE)] public static float4 operator *(float4 a, float b) { return new float4(a.x * b, a.y * b, a.z * b, a.w * b); }
+        [IN(LINE)] public static float4 operator *(float a, float4 b) { return new float4(a * b.x, a * b.y, a * b.z, a * b.w); }
 
-        [IN(LINE)] public static float4 operator /(float4 a, float4 b) => new float4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w);
-        [IN(LINE)] public static float4 operator /(float4 a, float b) => new float4(a.x / b, a.y / b, a.z / b, a.w / b);
-        [IN(LINE)] public static float4 operator /(float a, float4 b) => new float4(a / b.x, a / b.y, a / b.z, a / b.w);
+        [IN(LINE)] public static float4 operator /(float4 a, float4 b) { return new float4(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w); }
+        [IN(LINE)] public static float4 operator /(float4 a, float b) { return new float4(a.x / b, a.y / b, a.z / b, a.w / b); }
+        [IN(LINE)] public static float4 operator /(float a, float4 b) { return new float4(a / b.x, a / b.y, a / b.z, a / b.w); }
 
-        [IN(LINE)] public static float4 operator %(float4 a, float4 b) => new float4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w);
-        [IN(LINE)] public static float4 operator %(float4 a, float b) => new float4(a.x % b, a.y % b, a.z % b, a.w % b);
-        [IN(LINE)] public static float4 operator %(float a, float4 b) => new float4(a % b.x, a % b.y, a % b.z, a % b.w);
+        [IN(LINE)] public static float4 operator %(float4 a, float4 b) { return new float4(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w); }
+        [IN(LINE)] public static float4 operator %(float4 a, float b) { return new float4(a.x % b, a.y % b, a.z % b, a.w % b); }
+        [IN(LINE)] public static float4 operator %(float a, float4 b) { return new float4(a % b.x, a % b.y, a % b.z, a % b.w); }
 
-        [IN(LINE)] public static float4 operator ++(float4 a) => new float4(++a.x, ++a.y, ++a.z, ++a.w);
-        [IN(LINE)] public static float4 operator --(float4 a) => new float4(--a.x, --a.y, --a.z, --a.w);
-        [IN(LINE)] public static float4 operator -(float4 a) => new float4(-a.x, -a.y, -a.z, -a.w);
-        [IN(LINE)] public static float4 operator +(float4 a) => new float4(+a.x, +a.y, +a.z, +a.w);
+        [IN(LINE)] public static float4 operator ++(float4 a) { return new float4(++a.x, ++a.y, ++a.z, ++a.w); }
+        [IN(LINE)] public static float4 operator --(float4 a) { return new float4(--a.x, --a.y, --a.z, --a.w); }
+        [IN(LINE)] public static float4 operator -(float4 a) { return new float4(-a.x, -a.y, -a.z, -a.w); }
+        [IN(LINE)] public static float4 operator +(float4 a) { return new float4(+a.x, +a.y, +a.z, +a.w); }
         #endregion
 
         #region Boolean
@@ -911,10 +912,10 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
-        public override bool Equals(object o) => o is float4 target && Equals(target);
-        [IN(LINE)] public bool Equals(float4 a) => x == a.x && y == a.y && z == a.z && w == a.w;
-        public override string ToString() => $"float4({x}, {y}, {z}, {w})";
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is float4 target && Equals(target); }
+        [IN(LINE)] public bool Equals(float4 a) { return x == a.x && y == a.y && z == a.z && w == a.w; }
+        public override string ToString() { return $"float4({x}, {y}, {z}, {w})"; }
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"float4({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)}, {w.ToString(format, formatProvider)})";

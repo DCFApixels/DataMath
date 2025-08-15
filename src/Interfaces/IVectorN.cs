@@ -23,9 +23,4 @@ namespace DCFApixels.DataMath
     {
         public T w { get; set; }
     }
-    public interface IBoolVector
-    {
-        public bool all { get; }
-        public bool any { get; }
-    }
 }

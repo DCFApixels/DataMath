@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace DCFApixels.DataMath
+﻿namespace DCFApixels.DataMath
 {
     public static partial class DM //consts
     {

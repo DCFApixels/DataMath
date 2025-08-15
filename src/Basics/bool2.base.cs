@@ -14,7 +14,6 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     public partial struct bool2 :
-        IBoolVector,
         IEquatable<bool2>,
         IVector2<bool>,
         IColor,
@@ -48,15 +47,13 @@ namespace DCFApixels.DataMath
         public float a { [IN(LINE)] get => 1f; [IN(LINE)] set { } }
         #endregion
 
-        #region IVectorN
+        #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)]
         bool IVector1<bool>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
         bool IVector2<bool>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
         public int count { [IN(LINE)] get => Count; }
-        public bool all { [IN(LINE)] get => x & y; [IN(LINE)] set { x = value; y = value; } }
-        public bool any { [IN(LINE)] get => x | y; }
 
         public unsafe bool this[int index]
         {
@@ -122,8 +119,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool2 operator !=(bool2 a, bool b) { return new bool2(a.x != b, a.y != b); }
         [IN(LINE)] public static bool2 operator !=(bool a, bool2 b) { return new bool2(a != b.x, a != b.y); }
 
-        [IN(LINE)] public static bool operator |(bool2 a, DM.AllCheckMode b) { return a.all; }
-        [IN(LINE)] public static bool operator |(bool2 a, DM.AnyCheckMode b) { return a.any; }
+        [IN(LINE)] public static bool operator true(bool2 a) { return DM.All(a); }
+        [IN(LINE)] public static bool operator false(bool2 a) { return !DM.All(a); }
+        [IN(LINE)] public static explicit operator bool(bool2 a) { return a.x && a.y; }
         #endregion
 
         #endregion
@@ -389,5 +387,11 @@ namespace DCFApixels.DataMath
         IEnumerator<bool> IEnumerable<bool>.GetEnumerator() { return new VectorEnumerator<bool, bool2>(this); }
         IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<bool, bool2>(this); }
         #endregion
+    }
+
+    public static partial class DM
+    {
+        [IN(LINE)] public static bool All(bool2 a) { return a.x && a.y; }
+        [IN(LINE)] public static bool Any(bool2 a) { return a.x || a.y; }
     }
 }

@@ -9,13 +9,9 @@ using SMathF = DCFApixels.DataMath.Internal.MathDM;
 
 namespace DCFApixels.DataMath
 {
-    public partial struct float2 : IBoolVector
+    public partial struct float2
     {
-        public bool all { [IN(LINE)] get { return x != 0 & y != 0; } }
-        public bool any { [IN(LINE)] get { return x != 0 | y != 0; } }
-
         public const float vectorEpsilon = 0.00001f;
-
 
 
         #region vector

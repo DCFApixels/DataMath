@@ -1,6 +1,7 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,35 +50,35 @@ namespace DCFApixels.DataMath
         public int z;
 
         #region IColor
-        public float r { [IN(LINE)] get => (float)x; [IN(LINE)] set => x = (int)value; }
-        public float g { [IN(LINE)] get => (float)y; [IN(LINE)] set => y = (int)value; }
-        public float b { [IN(LINE)] get => (float)z; [IN(LINE)] set => z = (int)value; }
-        public float a { [IN(LINE)] get => 1f; [IN(LINE)] set { } }
+        public float r { [IN(LINE)] get { return (float)x; } [IN(LINE)] set { x = (int)value; } }
+        public float g { [IN(LINE)] get { return (float)y; } [IN(LINE)] set { y = (int)value; } }
+        public float b { [IN(LINE)] get { return (float)z; } [IN(LINE)] set { z = (int)value; } }
+        public float a { [IN(LINE)] get { return 1f; } [IN(LINE)] set { } }
         #endregion
 
-        #region IVectorN
+        #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector1<int>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
+        int IVector1<int>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector2<int>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
+        int IVector2<int>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector3<int>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
+        int IVector3<int>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get => Count; }
+        public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe int this[int index]
         {
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (int3* array = &this) { return ((int*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (int* array = &x) { array[index] = value; }
             }
@@ -103,48 +104,48 @@ namespace DCFApixels.DataMath
         #region operators
 
         #region Arithmetic
-        [IN(LINE)] public static int3 operator *(int3 a, int3 b) => new int3(a.x * b.x, a.y * b.y, a.z * b.z);
-        [IN(LINE)] public static int3 operator *(int3 a, int b) => new int3(a.x * b, a.y * b, a.z * b);
-        [IN(LINE)] public static int3 operator *(int a, int3 b) => new int3(a * b.x, a * b.y, a * b.z);
+        [IN(LINE)] public static int3 operator +(int3 a, int3 b) { return new int3(a.x + b.x, a.y + b.y, a.z + b.z); }
+        [IN(LINE)] public static int3 operator +(int3 a, int b) { return new int3(a.x + b, a.y + b, a.z + b); }
+        [IN(LINE)] public static int3 operator +(int a, int3 b) { return new int3(a + b.x, a + b.y, a + b.z); }
 
-        [IN(LINE)] public static int3 operator +(int3 a, int3 b) => new int3(a.x + b.x, a.y + b.y, a.z + b.z);
-        [IN(LINE)] public static int3 operator +(int3 a, int b) => new int3(a.x + b, a.y + b, a.z + b);
-        [IN(LINE)] public static int3 operator +(int a, int3 b) => new int3(a + b.x, a + b.y, a + b.z);
+        [IN(LINE)] public static int3 operator -(int3 a, int3 b) { return new int3(a.x - b.x, a.y - b.y, a.z - b.z); }
+        [IN(LINE)] public static int3 operator -(int3 a, int b) { return new int3(a.x - b, a.y - b, a.z - b); }
+        [IN(LINE)] public static int3 operator -(int a, int3 b) { return new int3(a - b.x, a - b.y, a - b.z); }
 
-        [IN(LINE)] public static int3 operator -(int3 a, int3 b) => new int3(a.x - b.x, a.y - b.y, a.z - b.z);
-        [IN(LINE)] public static int3 operator -(int3 a, int b) => new int3(a.x - b, a.y - b, a.z - b);
-        [IN(LINE)] public static int3 operator -(int a, int3 b) => new int3(a - b.x, a - b.y, a - b.z);
+        [IN(LINE)] public static int3 operator *(int3 a, int3 b) { return new int3(a.x * b.x, a.y * b.y, a.z * b.z); }
+        [IN(LINE)] public static int3 operator *(int3 a, int b) { return new int3(a.x * b, a.y * b, a.z * b); }
+        [IN(LINE)] public static int3 operator *(int a, int3 b) { return new int3(a * b.x, a * b.y, a * b.z); }
 
-        [IN(LINE)] public static int3 operator /(int3 a, int3 b) => new int3(a.x / b.x, a.y / b.y, a.z / b.z);
-        [IN(LINE)] public static int3 operator /(int3 a, int b) => new int3(a.x / b, a.y / b, a.z / b);
-        [IN(LINE)] public static int3 operator /(int a, int3 b) => new int3(a / b.x, a / b.y, a / b.z);
+        [IN(LINE)] public static int3 operator /(int3 a, int3 b) { return new int3(a.x / b.x, a.y / b.y, a.z / b.z); }
+        [IN(LINE)] public static int3 operator /(int3 a, int b) { return new int3(a.x / b, a.y / b, a.z / b); }
+        [IN(LINE)] public static int3 operator /(int a, int3 b) { return new int3(a / b.x, a / b.y, a / b.z); }
 
-        [IN(LINE)] public static int3 operator %(int3 a, int3 b) => new int3(a.x % b.x, a.y % b.y, a.z % b.z);
-        [IN(LINE)] public static int3 operator %(int3 a, int b) => new int3(a.x % b, a.y % b, a.z % b);
-        [IN(LINE)] public static int3 operator %(int a, int3 b) => new int3(a % b.x, a % b.y, a % b.z);
+        [IN(LINE)] public static int3 operator %(int3 a, int3 b) { return new int3(a.x % b.x, a.y % b.y, a.z % b.z); }
+        [IN(LINE)] public static int3 operator %(int3 a, int b) { return new int3(a.x % b, a.y % b, a.z % b); }
+        [IN(LINE)] public static int3 operator %(int a, int3 b) { return new int3(a % b.x, a % b.y, a % b.z); }
 
-        [IN(LINE)] public static int3 operator ++(int3 a) => new int3(++a.x, ++a.y, ++a.z);
-        [IN(LINE)] public static int3 operator --(int3 a) => new int3(--a.x, --a.y, --a.z);
-        [IN(LINE)] public static int3 operator -(int3 a) => new int3(-a.x, -a.y, -a.z);
-        [IN(LINE)] public static int3 operator +(int3 a) => new int3(+a.x, +a.y, +a.z);
+        [IN(LINE)] public static int3 operator ++(int3 a) { return new int3(++a.x, ++a.y, ++a.z); }
+        [IN(LINE)] public static int3 operator --(int3 a) { return new int3(--a.x, --a.y, --a.z); }
+        [IN(LINE)] public static int3 operator +(int3 a) { return new int3(+a.x, +a.y, +a.z); }
+        [IN(LINE)] public static int3 operator -(int3 a) { return new int3(-a.x, -a.y, -a.z); }
         #endregion
 
         #region Bits
-        [IN(LINE)] public static int3 operator ~(int3 a) => new int3(~a.x, ~a.y, ~a.z);
-        [IN(LINE)] public static int3 operator <<(int3 a, int n) => new int3(a.x << n, a.y << n, a.z << n);
-        [IN(LINE)] public static int3 operator >>(int3 a, int n) => new int3(a.x >> n, a.y >> n, a.z >> n);
+        [IN(LINE)] public static int3 operator ~(int3 a) { return new int3(~a.x, ~a.y, ~a.z); }
+        [IN(LINE)] public static int3 operator <<(int3 a, int n) { return new int3(a.x << n, a.y << n, a.z << n); }
+        [IN(LINE)] public static int3 operator >>(int3 a, int n) { return new int3(a.x >> n, a.y >> n, a.z >> n); }
 
-        [IN(LINE)] public static int3 operator |(int3 a, int3 b) => new int3(a.x | b.x, a.y | b.y, a.z | b.z);
-        [IN(LINE)] public static int3 operator |(int3 a, int b) => new int3(a.x | b, a.y | b, a.z | b);
-        [IN(LINE)] public static int3 operator |(int a, int3 b) => new int3(a | b.x, a | b.y, a | b.z);
+        [IN(LINE)] public static int3 operator |(int3 a, int3 b) { return new int3(a.x | b.x, a.y | b.y, a.z | b.z); }
+        [IN(LINE)] public static int3 operator |(int3 a, int b) { return new int3(a.x | b, a.y | b, a.z | b); }
+        [IN(LINE)] public static int3 operator |(int a, int3 b) { return new int3(a | b.x, a | b.y, a | b.z); }
 
-        [IN(LINE)] public static int3 operator &(int3 a, int3 b) => new int3(a.x & b.x, a.y & b.y, a.z & b.z);
-        [IN(LINE)] public static int3 operator &(int3 a, int b) => new int3(a.x & b, a.y & b, a.z & b);
-        [IN(LINE)] public static int3 operator &(int a, int3 b) => new int3(a & b.x, a & b.y, a & b.z);
+        [IN(LINE)] public static int3 operator &(int3 a, int3 b) { return new int3(a.x & b.x, a.y & b.y, a.z & b.z); }
+        [IN(LINE)] public static int3 operator &(int3 a, int b) { return new int3(a.x & b, a.y & b, a.z & b); }
+        [IN(LINE)] public static int3 operator &(int a, int3 b) { return new int3(a & b.x, a & b.y, a & b.z); }
 
-        [IN(LINE)] public static int3 operator ^(int3 a, int3 b) => new int3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z);
-        [IN(LINE)] public static int3 operator ^(int3 a, int b) => new int3(a.x ^ b, a.y ^ b, a.z ^ b);
-        [IN(LINE)] public static int3 operator ^(int a, int3 b) => new int3(a ^ b.x, a ^ b.y, a ^ b.z);
+        [IN(LINE)] public static int3 operator ^(int3 a, int3 b) { return new int3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z); }
+        [IN(LINE)] public static int3 operator ^(int3 a, int b) { return new int3(a.x ^ b, a.y ^ b, a.z ^ b); }
+        [IN(LINE)] public static int3 operator ^(int a, int3 b) { return new int3(a ^ b.x, a ^ b.y, a ^ b.z); }
         #endregion
 
         #region Boolean
@@ -856,10 +857,10 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
-        public override bool Equals(object o) => o is int3 target && Equals(target);
-        [IN(LINE)] public bool Equals(int3 a) => x == a.x && y == a.y && z == a.z;
-        public override string ToString() => $"int3({x}, {y}, {z})";
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is int3 target && Equals(target); }
+        [IN(LINE)] public bool Equals(int3 a) { return x == a.x && y == a.y && z == a.z; }
+        public override string ToString() { return $"int3({x}, {y}, {z})"; }
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"int3({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)}, {z.ToString(format, formatProvider)})";

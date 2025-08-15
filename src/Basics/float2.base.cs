@@ -1,6 +1,7 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,33 +45,33 @@ namespace DCFApixels.DataMath
         public float y;
 
         #region IColor
-        public float r { [IN(LINE)] get => (float)x; [IN(LINE)] set => x = (float)value; }
-        public float g { [IN(LINE)] get => (float)y; [IN(LINE)] set => y = (float)value; }
-        public float b { [IN(LINE)] get => 0f; [IN(LINE)] set { } }
-        public float a { [IN(LINE)] get => 1f; [IN(LINE)] set { } }
+        public float r { [IN(LINE)] get { return (float)x; } [IN(LINE)] set { x = (float)value; } }
+        public float g { [IN(LINE)] get { return (float)y; } [IN(LINE)] set { y = (float)value; } }
+        public float b { [IN(LINE)] get { return 0f; } [IN(LINE)] set { } }
+        public float a { [IN(LINE)] get { return 1f; } [IN(LINE)] set { } }
         #endregion
 
-        #region IVectorN
+        #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector1<float>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
+        float IVector1<float>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector2<float>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
+        float IVector2<float>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get => Count; }
+        public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe float this[int index]
         {
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float2* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float* array = &x) { array[index] = value; }
             }
@@ -96,30 +97,30 @@ namespace DCFApixels.DataMath
         #region operators
 
         #region Arithmetic
-        [IN(LINE)] public static float2 operator *(float2 a, float2 b) => new float2(a.x * b.x, a.y * b.y);
-        [IN(LINE)] public static float2 operator *(float2 a, float b) => new float2(a.x * b, a.y * b);
-        [IN(LINE)] public static float2 operator *(float a, float2 b) => new float2(a * b.x, a * b.y);
+        [IN(LINE)] public static float2 operator +(float2 a, float2 b) { return new float2(a.x + b.x, a.y + b.y); }
+        [IN(LINE)] public static float2 operator +(float2 a, float b) { return new float2(a.x + b, a.y + b); }
+        [IN(LINE)] public static float2 operator +(float a, float2 b) { return new float2(a + b.x, a + b.y); }
 
-        [IN(LINE)] public static float2 operator +(float2 a, float2 b) => new float2(a.x + b.x, a.y + b.y);
-        [IN(LINE)] public static float2 operator +(float2 a, float b) => new float2(a.x + b, a.y + b);
-        [IN(LINE)] public static float2 operator +(float a, float2 b) => new float2(a + b.x, a + b.y);
+        [IN(LINE)] public static float2 operator -(float2 a, float2 b) { return new float2(a.x - b.x, a.y - b.y); }
+        [IN(LINE)] public static float2 operator -(float2 a, float b) { return new float2(a.x - b, a.y - b); }
+        [IN(LINE)] public static float2 operator -(float a, float2 b) { return new float2(a - b.x, a - b.y); }
 
-        [IN(LINE)] public static float2 operator -(float2 a, float2 b) => new float2(a.x - b.x, a.y - b.y);
-        [IN(LINE)] public static float2 operator -(float2 a, float b) => new float2(a.x - b, a.y - b);
-        [IN(LINE)] public static float2 operator -(float a, float2 b) => new float2(a - b.x, a - b.y);
+        [IN(LINE)] public static float2 operator *(float2 a, float2 b) { return new float2(a.x * b.x, a.y * b.y); }
+        [IN(LINE)] public static float2 operator *(float2 a, float b) { return new float2(a.x * b, a.y * b); }
+        [IN(LINE)] public static float2 operator *(float a, float2 b) { return new float2(a * b.x, a * b.y); }
 
-        [IN(LINE)] public static float2 operator /(float2 a, float2 b) => new float2(a.x / b.x, a.y / b.y);
-        [IN(LINE)] public static float2 operator /(float2 a, float b) => new float2(a.x / b, a.y / b);
-        [IN(LINE)] public static float2 operator /(float a, float2 b) => new float2(a / b.x, a / b.y);
+        [IN(LINE)] public static float2 operator /(float2 a, float2 b) { return new float2(a.x / b.x, a.y / b.y); }
+        [IN(LINE)] public static float2 operator /(float2 a, float b) { return new float2(a.x / b, a.y / b); }
+        [IN(LINE)] public static float2 operator /(float a, float2 b) { return new float2(a / b.x, a / b.y); }
 
-        [IN(LINE)] public static float2 operator %(float2 a, float2 b) => new float2(a.x % b.x, a.y % b.y);
-        [IN(LINE)] public static float2 operator %(float2 a, float b) => new float2(a.x % b, a.y % b);
-        [IN(LINE)] public static float2 operator %(float a, float2 b) => new float2(a % b.x, a % b.y);
+        [IN(LINE)] public static float2 operator %(float2 a, float2 b) { return new float2(a.x % b.x, a.y % b.y); }
+        [IN(LINE)] public static float2 operator %(float2 a, float b) { return new float2(a.x % b, a.y % b); }
+        [IN(LINE)] public static float2 operator %(float a, float2 b) { return new float2(a % b.x, a % b.y); }
 
-        [IN(LINE)] public static float2 operator ++(float2 a) => new float2(++a.x, ++a.y);
-        [IN(LINE)] public static float2 operator --(float2 a) => new float2(--a.x, --a.y);
-        [IN(LINE)] public static float2 operator -(float2 a) => new float2(-a.x, -a.y);
-        [IN(LINE)] public static float2 operator +(float2 a) => new float2(+a.x, +a.y);
+        [IN(LINE)] public static float2 operator ++(float2 a) { return new float2(++a.x, ++a.y); }
+        [IN(LINE)] public static float2 operator --(float2 a) { return new float2(--a.x, --a.y); }
+        [IN(LINE)] public static float2 operator +(float2 a) { return new float2(+a.x, +a.y); }
+        [IN(LINE)] public static float2 operator -(float2 a) { return new float2(-a.x, -a.y); }
         #endregion
 
         #region Boolean
@@ -393,10 +394,10 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
-        [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
-        public override bool Equals(object o) => o is float2 target && Equals(target);
-        [IN(LINE)] public bool Equals(float2 a) => x == a.x && y == a.y;
-        public override string ToString() => $"float2({x}, {y})";
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is float2 target && Equals(target); }
+        [IN(LINE)] public bool Equals(float2 a) { return x == a.x && y == a.y; }
+        public override string ToString() { return $"float2({x}, {y})"; }
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return $"float2({x.ToString(format, formatProvider)}, {y.ToString(format, formatProvider)})";

@@ -14,7 +14,6 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     public partial struct bool3 :
-        IBoolVector,
         IEquatable<bool3>,
         IVector3<bool>,
         IColor,
@@ -53,7 +52,7 @@ namespace DCFApixels.DataMath
         public float a { [IN(LINE)] get => 1f; [IN(LINE)] set { } }
         #endregion
 
-        #region IVectorN
+        #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)]
         bool IVector1<bool>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -62,8 +61,6 @@ namespace DCFApixels.DataMath
         bool IVector3<bool>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
         public int count { [IN(LINE)] get => Count; }
-        public bool all { [IN(LINE)] get => x & y & z; [IN(LINE)] set { x = value; y = value; z = value; } }
-        public bool any { [IN(LINE)] get => x | y | z; }
 
         public unsafe bool this[int index]
         {
@@ -106,15 +103,15 @@ namespace DCFApixels.DataMath
 
         #region Bits
         [IN(LINE)] public static bool3 operator !(bool3 a) { return new bool3(!a.x, !a.y, !a.z); }
-        
+
         [IN(LINE)] public static bool3 operator |(bool3 a, bool3 b) { return new bool3(a.x | b.x, a.y | b.y, a.z | b.z); }
         //[IN(LINE)] public static bool3 operator |(bool3 a, bool b) { return new bool3(a.x | b, a.y | b, a.z | b); }
         //[IN(LINE)] public static bool3 operator |(bool a, bool3 b) { return new bool3(a | b.x, a | b.y, a | b.z); }
-        
+
         [IN(LINE)] public static bool3 operator &(bool3 a, bool3 b) { return new bool3(a.x & b.x, a.y & b.y, a.z & b.z); }
         //[IN(LINE)] public static bool3 operator &(bool3 a, bool b) { return new bool3(a.x & b, a.y & b, a.z & b); }
         //[IN(LINE)] public static bool3 operator &(bool a, bool3 b) { return new bool3(a & b.x, a & b.y, a & b.z); }
-        
+
         [IN(LINE)] public static bool3 operator ^(bool3 a, bool3 b) { return new bool3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z); }
         [IN(LINE)] public static bool3 operator ^(bool3 a, bool b) { return new bool3(a.x ^ b, a.y ^ b, a.z ^ b); }
         [IN(LINE)] public static bool3 operator ^(bool a, bool3 b) { return new bool3(a ^ b.x, a ^ b.y, a ^ b.z); }
@@ -124,29 +121,14 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool3 operator ==(bool3 a, bool3 b) { return new bool3(a.x == b.x, a.y == b.y, a.z == b.z); }
         [IN(LINE)] public static bool3 operator ==(bool3 a, bool b) { return new bool3(a.x == b, a.y == b, a.z == b); }
         [IN(LINE)] public static bool3 operator ==(bool a, bool3 b) { return new bool3(a == b.x, a == b.y, a == b.z); }
-        
+
         [IN(LINE)] public static bool3 operator !=(bool3 a, bool3 b) { return new bool3(a.x != b.x, a.y != b.y, a.z != b.z); }
         [IN(LINE)] public static bool3 operator !=(bool3 a, bool b) { return new bool3(a.x != b, a.y != b, a.z != b); }
         [IN(LINE)] public static bool3 operator !=(bool a, bool3 b) { return new bool3(a != b.x, a != b.y, a != b.z); }
 
-        [IN(LINE)] public static bool operator true(bool3 a) { return a.all; }
-        [IN(LINE)] public static bool operator false(bool3 a) { return !a.all; }
-        [IN(LINE)] public static implicit operator bool(bool3 a) { return a.x && a.y && a.z; }
-
-        [IN(LINE)] public static bool3 operator &(bool3 a, DM.AllCheckMode b) { return a; }
-        [IN(LINE)] public static Any operator &(bool3 a, DM.AnyCheckMode b) { return new Any(a.x, a.y, a.z); }
-
-        public ref struct Any
-        {
-            public bool x, y, z;
-            [IN(LINE)] public Any(bool x, bool y, bool z) { this.x = x; this.y = y; this.z = z;}
-            [IN(LINE)] public static Any operator !(Any a) { return new Any(!a.x, !a.y, !a.z); }
-            [IN(LINE)] public static Any operator |(Any a, Any b) { return new Any(a.x | b.x, a.y | b.y, a.z | b.z); }
-            [IN(LINE)] public static Any operator &(Any a, Any b) { return new Any(a.x & b.x, a.y & b.y, a.z & b.z); }
-            [IN(LINE)] public static bool operator true(Any a) { return a.x && a.y && a.z; }
-            [IN(LINE)] public static bool operator false(Any a) { return !(a.x && a.y && a.z); }
-            [IN(LINE)] public static implicit operator bool(Any a) { return a.x || a.y || a.z; }
-        }
+        [IN(LINE)] public static bool operator true(bool3 a) { return DM.All(a); }
+        [IN(LINE)] public static bool operator false(bool3 a) { return !DM.All(a); }
+        [IN(LINE)] public static explicit operator bool(bool3 a) { return a.x && a.y && a.z; }
         #endregion
 
         #endregion
@@ -850,5 +832,11 @@ namespace DCFApixels.DataMath
         IEnumerator<bool> IEnumerable<bool>.GetEnumerator() { return new VectorEnumerator<bool, bool3>(this); }
         IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<bool, bool3>(this); }
         #endregion
+    }
+
+    public static partial class DM
+    {
+        [IN(LINE)] public static bool All(bool3 a) { return a.x && a.y && a.z; }
+        [IN(LINE)] public static bool Any(bool3 a) { return a.x || a.y || a.z; }
     }
 }

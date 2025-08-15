@@ -6,8 +6,7 @@ namespace DCFApixels.DataMath
 {
     public partial struct double3
     {
-        public bool all { [IN(LINE)] get { return x != 0 & y != 0 & z != 0; } }
-        public bool any { [IN(LINE)] get { return x != 0 | y != 0 | z != 0; } }
+
     }
     public static partial class DM
     {

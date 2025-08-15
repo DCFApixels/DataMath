@@ -14,7 +14,6 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     public partial struct bool4 :
-        IBoolVector,
         IEquatable<bool4>,
         IVector4<bool>,
         IColor,
@@ -58,7 +57,7 @@ namespace DCFApixels.DataMath
         public float a { [IN(LINE)] get => w ? 1f : 0f; [IN(LINE)] set => w = value > 0f; }
         #endregion
 
-        #region IVectorN
+        #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)]
         bool IVector1<bool>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -69,8 +68,6 @@ namespace DCFApixels.DataMath
         bool IVector4<bool>.w { [IN(LINE)] get => w; [IN(LINE)] set => w = value; }
         [EditorBrowsable(EditorBrowsableState.Never)]
         public int count { [IN(LINE)] get => Count; }
-        public bool all { [IN(LINE)] get => x & y & z & w; [IN(LINE)] set { x = value; y = value; z = value; w = value; } }
-        public bool any { [IN(LINE)] get => x | y | z | w; }
 
         public unsafe bool this[int index]
         {
@@ -211,8 +208,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 operator !=(bool4 a, bool b) { return new bool4(a.x != b, a.y != b, a.z != b, a.w != b); }
         [IN(LINE)] public static bool4 operator !=(bool a, bool4 b) { return new bool4(a != b.x, a != b.y, a != b.z, a != b.w); }
 
-        [IN(LINE)] public static bool operator |(bool4 a, DM.AllCheckMode b) { return a.all; }
-        [IN(LINE)] public static bool operator |(bool4 a, DM.AnyCheckMode b) { return a.any; }
+        [IN(LINE)] public static bool operator true(bool4 a) { return DM.All(a); }
+        [IN(LINE)] public static bool operator false(bool4 a) { return !DM.All(a); }
+        [IN(LINE)] public static explicit operator bool(bool4 a) { return a.x && a.y && a.z && a.w; }
         #endregion
 
         #endregion
@@ -922,5 +920,11 @@ namespace DCFApixels.DataMath
         IEnumerator<bool> IEnumerable<bool>.GetEnumerator() { return new VectorEnumerator<bool, bool4>(this); }
         IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<bool, bool4>(this); }
         #endregion
+    }
+
+    public static partial class DM
+    {
+        [IN(LINE)] public static bool All(bool4 a) { return a.x && a.y && a.z && a.w; }
+        [IN(LINE)] public static bool Any(bool4 a) { return a.x || a.y || a.z || a.w; }
     }
 }

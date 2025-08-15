@@ -78,7 +78,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray2 operator -(ray2 a) => new ray2(a.origin, -a.direction);
         [IN(LINE)] public static ray2 operator +(ray2 a) => new ray2(a.origin, +a.direction);
 
-        [IN(LINE)] public static bool operator ==(ray2 a, ray2 b) { return (a.origin == b.origin) == (a.direction == b.direction) == DM.all; }
+        [IN(LINE)] public static bool operator ==(ray2 a, ray2 b) { return DM.All((a.origin == b.origin) && (a.direction == b.direction)); }
         [IN(LINE)] public static bool operator !=(ray2 a, ray2 b) { return !(a == b); }
         #endregion
 
