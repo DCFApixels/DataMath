@@ -211,18 +211,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 operator !=(bool4 a, bool b) { return new bool4(a.x != b, a.y != b, a.z != b, a.w != b); }
         [IN(LINE)] public static bool4 operator !=(bool a, bool4 b) { return new bool4(a != b.x, a != b.y, a != b.z, a != b.w); }
 
-        [IN(LINE)] public static bool operator ==(bool4 a, DM.AllCheckMode b) { return a.all; }
-        [IN(LINE)] public static bool operator !=(bool4 a, DM.AllCheckMode b) { return !a.all; }
-        [IN(LINE)] public static bool operator ==(DM.AllCheckMode b, bool4 a) { return a.all; }
-        [IN(LINE)] public static bool operator !=(DM.AllCheckMode b, bool4 a) { return !a.all; }
-
-        [IN(LINE)] public static bool operator ==(bool4 a, DM.AnyCheckMode b) { return a.any; }
-        [IN(LINE)] public static bool operator !=(bool4 a, DM.AnyCheckMode b) { return !a.any; }
-        [IN(LINE)] public static bool operator ==(DM.AnyCheckMode b, bool4 a) { return a.any; }
-        [IN(LINE)] public static bool operator !=(DM.AnyCheckMode b, bool4 a) { return !a.any; }
-
-        [IN(LINE)] public static bool operator true(bool4 a) { return a.all; }
-        [IN(LINE)] public static bool operator false(bool4 a) { return !a.all; }
+        [IN(LINE)] public static bool operator |(bool4 a, DM.AllCheckMode b) { return a.all; }
+        [IN(LINE)] public static bool operator |(bool4 a, DM.AnyCheckMode b) { return a.any; }
         #endregion
 
         #endregion

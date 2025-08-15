@@ -106,15 +106,15 @@ namespace DCFApixels.DataMath
 
         #region Bits
         [IN(LINE)] public static bool3 operator !(bool3 a) { return new bool3(!a.x, !a.y, !a.z); }
-
+        
         [IN(LINE)] public static bool3 operator |(bool3 a, bool3 b) { return new bool3(a.x | b.x, a.y | b.y, a.z | b.z); }
-        [IN(LINE)] public static bool3 operator |(bool3 a, bool b) { return new bool3(a.x | b, a.y | b, a.z | b); }
-        [IN(LINE)] public static bool3 operator |(bool a, bool3 b) { return new bool3(a | b.x, a | b.y, a | b.z); }
-
+        //[IN(LINE)] public static bool3 operator |(bool3 a, bool b) { return new bool3(a.x | b, a.y | b, a.z | b); }
+        //[IN(LINE)] public static bool3 operator |(bool a, bool3 b) { return new bool3(a | b.x, a | b.y, a | b.z); }
+        
         [IN(LINE)] public static bool3 operator &(bool3 a, bool3 b) { return new bool3(a.x & b.x, a.y & b.y, a.z & b.z); }
-        [IN(LINE)] public static bool3 operator &(bool3 a, bool b) { return new bool3(a.x & b, a.y & b, a.z & b); }
-        [IN(LINE)] public static bool3 operator &(bool a, bool3 b) { return new bool3(a & b.x, a & b.y, a & b.z); }
-
+        //[IN(LINE)] public static bool3 operator &(bool3 a, bool b) { return new bool3(a.x & b, a.y & b, a.z & b); }
+        //[IN(LINE)] public static bool3 operator &(bool a, bool3 b) { return new bool3(a & b.x, a & b.y, a & b.z); }
+        
         [IN(LINE)] public static bool3 operator ^(bool3 a, bool3 b) { return new bool3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z); }
         [IN(LINE)] public static bool3 operator ^(bool3 a, bool b) { return new bool3(a.x ^ b, a.y ^ b, a.z ^ b); }
         [IN(LINE)] public static bool3 operator ^(bool a, bool3 b) { return new bool3(a ^ b.x, a ^ b.y, a ^ b.z); }
@@ -124,23 +124,29 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool3 operator ==(bool3 a, bool3 b) { return new bool3(a.x == b.x, a.y == b.y, a.z == b.z); }
         [IN(LINE)] public static bool3 operator ==(bool3 a, bool b) { return new bool3(a.x == b, a.y == b, a.z == b); }
         [IN(LINE)] public static bool3 operator ==(bool a, bool3 b) { return new bool3(a == b.x, a == b.y, a == b.z); }
-
+        
         [IN(LINE)] public static bool3 operator !=(bool3 a, bool3 b) { return new bool3(a.x != b.x, a.y != b.y, a.z != b.z); }
         [IN(LINE)] public static bool3 operator !=(bool3 a, bool b) { return new bool3(a.x != b, a.y != b, a.z != b); }
         [IN(LINE)] public static bool3 operator !=(bool a, bool3 b) { return new bool3(a != b.x, a != b.y, a != b.z); }
 
-        [IN(LINE)] public static bool operator ==(bool3 a, DM.AllCheckMode b) { return a.all; }
-        [IN(LINE)] public static bool operator !=(bool3 a, DM.AllCheckMode b) { return !a.all; }
-        [IN(LINE)] public static bool operator ==(DM.AllCheckMode b, bool3 a) { return a.all; }
-        [IN(LINE)] public static bool operator !=(DM.AllCheckMode b, bool3 a) { return !a.all; }
-
-        [IN(LINE)] public static bool operator ==(bool3 a, DM.AnyCheckMode b) { return a.any; }
-        [IN(LINE)] public static bool operator !=(bool3 a, DM.AnyCheckMode b) { return !a.any; }
-        [IN(LINE)] public static bool operator ==(DM.AnyCheckMode b, bool3 a) { return a.any; }
-        [IN(LINE)] public static bool operator !=(DM.AnyCheckMode b, bool3 a) { return !a.any; }
-
         [IN(LINE)] public static bool operator true(bool3 a) { return a.all; }
         [IN(LINE)] public static bool operator false(bool3 a) { return !a.all; }
+        [IN(LINE)] public static implicit operator bool(bool3 a) { return a.x && a.y && a.z; }
+
+        [IN(LINE)] public static bool3 operator &(bool3 a, DM.AllCheckMode b) { return a; }
+        [IN(LINE)] public static Any operator &(bool3 a, DM.AnyCheckMode b) { return new Any(a.x, a.y, a.z); }
+
+        public ref struct Any
+        {
+            public bool x, y, z;
+            [IN(LINE)] public Any(bool x, bool y, bool z) { this.x = x; this.y = y; this.z = z;}
+            [IN(LINE)] public static Any operator !(Any a) { return new Any(!a.x, !a.y, !a.z); }
+            [IN(LINE)] public static Any operator |(Any a, Any b) { return new Any(a.x | b.x, a.y | b.y, a.z | b.z); }
+            [IN(LINE)] public static Any operator &(Any a, Any b) { return new Any(a.x & b.x, a.y & b.y, a.z & b.z); }
+            [IN(LINE)] public static bool operator true(Any a) { return a.x && a.y && a.z; }
+            [IN(LINE)] public static bool operator false(Any a) { return !(a.x && a.y && a.z); }
+            [IN(LINE)] public static implicit operator bool(Any a) { return a.x || a.y || a.z; }
+        }
         #endregion
 
         #endregion

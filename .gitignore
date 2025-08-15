@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 *.meta
 !*.asmdef.meta
+
+
+/[Bb]in/

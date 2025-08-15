@@ -88,11 +88,11 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region operators
-        [IN(LINE)] public static ray3 operator -(ray3 a) => new ray3(a.origin, -a.direction);
-        [IN(LINE)] public static ray3 operator +(ray3 a) => new ray3(a.origin, +a.direction);
+        [IN(LINE)] public static ray3 operator -(ray3 a) { return new ray3(a.origin, -a.direction); }
+        [IN(LINE)] public static ray3 operator +(ray3 a) { return new ray3(a.origin, +a.direction); }
 
-        [IN(LINE)] public static bool operator ==(ray3 a, ray3 b) { return (a.origin == b.origin) == (a.direction == b.direction) == DM.all; }
-        [IN(LINE)] public static bool operator !=(ray3 a, ray3 b) { return !(a == b); }
+        [IN(LINE)] public static bool operator ==(ray3 a, ray3 b) { return (a.origin == b.origin) && (a.direction == b.direction) & DM.all; }
+        [IN(LINE)] public static bool operator !=(ray3 a, ray3 b) { return (a.origin != b.origin) && (a.direction != b.direction) & DM.any; }
         #endregion
 
         #region Other 

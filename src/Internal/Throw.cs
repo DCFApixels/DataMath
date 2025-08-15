@@ -28,5 +28,13 @@ namespace DCFApixels.DataMath.Internal
             }
             throw new ArgumentOutOfRangeException(argumentName);
         }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void IndexOutOfRange(int length) { IndexOutOfRange(0, length); }
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void IndexOutOfRange(int startIndex, int length)
+        {
+            throw new IndexOutOfRangeException($"Index must be between[{startIndex}..{length - 1}].");
+        }
     }
 }

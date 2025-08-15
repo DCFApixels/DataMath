@@ -1,6 +1,7 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -70,14 +71,14 @@ namespace DCFApixels.DataMath
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float3* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float* array = &x) { array[index] = value; }
             }
