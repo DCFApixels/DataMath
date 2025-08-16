@@ -11,42 +11,10 @@ namespace DCFApixels.DataMath
 {
     public partial struct float2
     {
-        public const float vectorEpsilon = 0.00001f;
-
-
-        #region vector
-        public float Magnitude
-        {
-            [IN(LINE)]
-            get => SMathF.Sqrt(x * x + y * y);
-        }
-        public float2 Normalized
-        {
-            [IN(LINE)]
-            get
-            {
-                float mag = Magnitude;
-                return mag > vectorEpsilon ? this / mag : zero;
-            }
-        }
-
-        [IN(LINE)]
-        public void Normalize()
-        {
-            float mag = Magnitude;
-            this = mag > vectorEpsilon ? this / mag : zero;
-        }
-        #endregion
-
-        #region simple
-        [IN(LINE)]
-        public void OneMinus()
-        { x = 1f - x; y = 1f - y; }
-        public void Abs()
-        { x = SMathF.Abs(x); y = SMathF.Abs(y); }
-        [IN(LINE)]
-        public void Sign()
-        { x = SMathF.Sign(x); y = SMathF.Sign(y); }
+        #region Length/Normalized
+        public float Length { [IN(LINE)] get { return DM.Length(this); } }
+        public float LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float3 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
         #endregion
     }
     public static partial class DM // float2

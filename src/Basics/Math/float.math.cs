@@ -10,23 +10,6 @@ namespace DCFApixels.DataMath
     }
     public static partial class DM // float
     {
-        #region Hash
-        [IN(LINE)] public static uint UHash(float v) { return unchecked((uint)Hash(v)); }
-        [IN(LINE)]
-        public static unsafe int Hash(float v)
-        {
-            //return v.GetHashCode();
-            int bits = *(int*)&v;
-            // Optimized check for IsNan() || IsZero()
-            if (((bits - 1) & 0x7FFFFFFF) >= 0x7F800000)
-            {
-                // Ensure that all NaNs and both zeros have the same Hash code
-                bits &= 0x7F800000;
-            }
-            return bits;
-        }
-        #endregion
-
         #region Abs/Sign
         [IN(LINE)] public static float Abs(float a) { return InternalMath.Abs(a); }
         [IN(LINE)] public static float Sign(float a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
@@ -82,7 +65,6 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Min/Max
-        // Base methods (2 args)
         [IN(LINE)] public static float Max(float a, float b) { return a > b ? a : b; }
         [IN(LINE)] public static float AbsMax(float a, float b) { return InternalMath.Abs(a) > InternalMath.Abs(b) ? a : b; }
         [IN(LINE)] public static float Min(float a, float b) { return a < b ? a : b; }
@@ -166,10 +148,53 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool IsPositiveInfinity(float a) { return float.IsPositiveInfinity(a); }
         #endregion
 
+        #region Color
+        [IN(LINE)] public static float GammaToLinearSpace(float value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
+        [IN(LINE)] public static float LinearToGammaSpace(float value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        #endregion
+
+        #region Approximately
+        [IN(LINE)] public static bool Approximately(float a, float b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool Approximately(float a, float b, float tolerance) { return Abs(b - a) < tolerance; }
+        #endregion
+
+        #region Pow2
+        //public static int CeilPow2(int value)
+        //{
+        //    value--;
+        //    value |= value >> 16;
+        //    value |= value >> 8;
+        //    value |= value >> 4;
+        //    value |= value >> 2;
+        //    value |= value >> 1;
+        //    return value + 1;
+        //}
+        //public static int FloorPow2(int value)
+        //{
+        //    var result = CeilPow2(value);
+        //    return result == value ? value : result >> 1;
+        //}
+        //public static int RoundPow2(int value)
+        //{
+        //    value = CeilPow2(value);
+        //    int floor = value >> 1;
+        //    if (value - floor < value - value)
+        //    {
+        //        return floor;
+        //    }
+        //    return value;
+        //}
+        //[IN(LINE)] public static bool IsPow2(int value { return (value & (value - 1)) == 0; }
+        #endregion
+
         #region Other
-        [IN(LINE)] public static float Select(float falseValue, float trueValue, bool test) { return test ? trueValue : falseValue; }
-        [IN(LINE)] public static float Step(float threshold, float a) { return Select(0.0f, 1.0f, a >= threshold); }
-        [IN(LINE)] public static float Reflect(float v, float n) { return v - 2f * n * Dot(v, n); }
+        [IN(LINE)] public static float Length(float a) { return Sqrt(Dot(a, a)); }
+        [IN(LINE)] public static float LengthSqr(float a) { return Dot(a, a); }
+        [IN(LINE)] public static float Distance(float a, float b) { return Length(b - a); }
+        [IN(LINE)] public static float DistanceSqr(float a, float b) { return LengthSqr(b - a); }
+        [IN(LINE)] public static float Normalize(float a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
+
+        [IN(LINE)] public static float Dot(float a, float b) { return a * b; }
         [IN(LINE)] public static float Project(float a, float ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float ProjectSafe(float a, float ontoB, float defaultValue = 0)
@@ -177,7 +202,11 @@ namespace DCFApixels.DataMath
             var proj = Project(a, ontoB);
             return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
         }
-        [IN(LINE)] public static float Dot(float a, float b) { return a * b; }
+        //[IN(LINE)] public static float3 Cross(float3 a, float3 b) { return (a * b.yzx - a.yzx * b).yzx; }
+        [IN(LINE)] public static float Reflect(float v, float n) { return v - 2f * n * Dot(v, n); }
+
+        [IN(LINE)] public static float Select(float falseValue, float trueValue, bool test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static float Step(float threshold, float a) { return Select(0.0f, 1.0f, a >= threshold); }
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
         [IN(LINE)] public static float Degrees(float a) { return a * Rad2Deg; }
@@ -211,18 +240,23 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Truncate(float a) { return InternalMath.Truncate(a); }
         #endregion
 
-        #region Color
-        [IN(LINE)] public static float GammaToLinearSpace(float value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
-        [IN(LINE)] public static float LinearToGammaSpace(float value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
-        #endregion
 
-        #region Approximately
+        #region Hash
+        [IN(LINE)] public static uint UHash(float v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)]
-        public static bool Approximately(float a, float b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
-        [IN(LINE)]
-        public static bool Approximately(float a, float b, float tolerance) { return Abs(b - a) < tolerance; }
+        public static unsafe int Hash(float v)
+        {
+            //return v.GetHashCode();
+            int bits = *(int*)&v;
+            // Optimized check for IsNan() || IsZero()
+            if (((bits - 1) & 0x7FFFFFFF) >= 0x7F800000)
+            {
+                // Ensure that all NaNs and both zeros have the same Hash code
+                bits &= 0x7F800000;
+            }
+            return bits;
+        }
         #endregion
-
 
         #region Component iteration operations
         // Max overloads (3-8 args)
@@ -369,32 +403,5 @@ namespace DCFApixels.DataMath
             return bits;
         }
         #endregion
-
-        //public static int CeilPow2(int value)
-        //{
-        //    value--;
-        //    value |= value >> 16;
-        //    value |= value >> 8;
-        //    value |= value >> 4;
-        //    value |= value >> 2;
-        //    value |= value >> 1;
-        //    return value + 1;
-        //}
-        //public static int FloorPow2(int value)
-        //{
-        //    var result = CeilPow2(value);
-        //    return result == value ? value : result >> 1;
-        //}
-        //public static int RoundPow2(int value)
-        //{
-        //    value = CeilPow2(value);
-        //    int floor = value >> 1;
-        //    if (value - floor < value - value)
-        //    {
-        //        return floor;
-        //    }
-        //    return value;
-        //}
-        //[IN(LINE)] public static bool IsPow2(int value { return (value & (value - 1)) == 0; }
     }
 }
