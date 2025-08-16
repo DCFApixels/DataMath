@@ -31,11 +31,19 @@ namespace DCFApixels.DataMath
         }
         [IN(LINE)] public static bool All<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
         {
-
+            for (int i = 0; i < v.count; i++)
+            {
+                if (!v[i]) { return false; }
+            }
+            return true;
         }
         [IN(LINE)] public static bool Any<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
         {
-
+            for (int i = 0; i < v.count; i++)
+            {
+                if (v[i]) { return true; }
+            }
+            return false;
         }
         #endregion
     }
