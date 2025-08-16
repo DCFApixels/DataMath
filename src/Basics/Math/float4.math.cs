@@ -11,123 +11,221 @@ namespace DCFApixels.DataMath
 {
     public partial struct float4
     {
-        public const float vectorEpsilon = 0.00001f;
-
-
-        #region vector
-        public float Magnitude
-        {
-            [IN(LINE)]
-            get => SMathF.Sqrt(x * x + y * y + z * z + w * w);
-        }
-        [IN(LINE)]
-        public void Normalize()
-        {
-            float mag = Magnitude;
-            if (mag > vectorEpsilon)
-                this = this / mag;
-            else
-                this = zero;
-        }
+        #region Length/Normalized
+        public float Length { [IN(LINE)] get { return DM.Length(this); } }
+        public float LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float4 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
         #endregion
     }
     public static partial class DM // float4
     {
+        #region Abs/Sign
+        [IN(LINE)] public static float4 Abs(float4 a) { return new float4(Abs(a.x), Abs(a.y), Abs(a.z), Abs(a.w)); }
+        [IN(LINE)] public static float4 Sign(float4 a) { return new float4(Sign(a.x), Sign(a.y), Sign(a.z), Sign(a.w)); }
+        [IN(LINE)] public static int4 Sign2Int(float4 a) { return new int4(Sign2Int(a.x), Sign2Int(a.y), Sign2Int(a.z), Sign2Int(a.w)); }
+        #endregion
+
+        #region Round/Floor/Ceil
+        [IN(LINE)] public static float4 Round(float4 a) { return new float4(Round(a.x), Round(a.y), Round(a.z), Round(a.w)); }
+        [IN(LINE)] public static int4 Round2Int(float4 a) { return new int4(Round2Int(a.x), Round2Int(a.y), Round2Int(a.z), Round2Int(a.w)); }
+        [IN(LINE)] public static float4 Floor(float4 a) { return new float4(Floor(a.x), Floor(a.y), Floor(a.z), Floor(a.w)); }
+        [IN(LINE)] public static int4 Floor2Int(float4 a) { return new int4(Floor2Int(a.x), Floor2Int(a.y), Floor2Int(a.z), Floor2Int(a.w)); }
+        [IN(LINE)] public static float4 Ceil(float4 a) { return new float4(Ceil(a.x), Ceil(a.y), Ceil(a.z), Ceil(a.w)); }
+        [IN(LINE)] public static int4 Ceil2Int(float4 a) { return new int4(Ceil2Int(a.x), Ceil2Int(a.y), Ceil2Int(a.z), Ceil2Int(a.w)); }
+        #endregion
+
+        #region Clamp/Repeat/PingPong
+        /// <summary> Clamps the value between min and max. </summary>
+        [IN(LINE)] public static float4 Clamp(float4 a, float4 min, float4 max) { return Max(min, Min(max, a)); }
+        /// <summary> Clamps the value between 0 and 1. </summary>
+        [IN(LINE)] public static float4 Clamp01(float4 a) { return Clamp(a, 0f, 1f); }
+        /// <summary> Clamps the value between -1 and 1. </summary>
+        [IN(LINE)] public static float4 ClampMirror1(float4 a) { return Clamp(a, -1f, 1f); }
+
+        [IN(LINE)] public static float4 Repeat(float4 a, float4 length) { return Clamp(a - Floor(a / length) * length, 0f, length); }
+        [IN(LINE)] public static float4 Repeat(float4 a, float4 min, float4 max) { return Repeat(a, max - min) + min; }
+        [IN(LINE)] public static float4 Repeat01(float4 a) { return Repeat(a, 1f); }
+        [IN(LINE)] public static float4 RepeatMirror1(float4 a) { return Repeat(a, -1f, 1f); }
+
+        [IN(LINE)] public static float4 PingPong(float4 a, float4 length) { return length - Abs(Repeat(a, length * 2f) - length); }
+        [IN(LINE)] public static float4 PingPong(float4 a, float4 min, float4 max) { return PingPong(a, max - min) + min; }
+        [IN(LINE)] public static float4 PingPong01(float4 a) { return PingPong(a, 0f, 1f); }
+        [IN(LINE)] public static float4 PingPongMirror1(float4 a) { return PingPong(a, -1f, 1f); }
+        #endregion
+
+        #region SmoothStep
+        /// <summary> Clamps the value between from and to. </summary>
+        [IN(LINE)]
+        public static float4 SmoothStep(float4 from, float4 to, float4 a)
+        {
+            var t = Clamp01((a - from) / (to - from));
+            return t * t * (3.0f - (2.0f * t));
+        }
+        /// <summary> Clamps the value between 0 and 1. </summary>
+        [IN(LINE)] public static float4 SmoothStep01(float4 a) { return SmoothStep(a, 0f, 1f); }
+        /// <summary> Clamps the value between -1 and 1. </summary>
+        [IN(LINE)] public static float4 SmoothStepMirror1(float4 a) { return SmoothStep(a, -1f, 1f); }
+        #endregion
+
+        #region Min/Max
+        [IN(LINE)] public static float4 Max(float4 a, float4 b) { return new float4(Max(a.x, b.x), Max(a.y, b.y), Max(a.z, b.z), Max(a.w, b.w)); }
+        [IN(LINE)] public static float4 AbsMax(float4 a, float4 b) { return new float4(AbsMax(a.x, b.x), AbsMax(a.y, b.y), AbsMax(a.z, b.z), AbsMax(a.w, b.w)); }
+        [IN(LINE)] public static float4 Min(float4 a, float4 b) { return new float4(Min(a.x, b.x), Min(a.y, b.y), Min(a.z, b.z), Min(a.w, b.w)); }
+        [IN(LINE)] public static float4 AbsMin(float4 a, float4 b) { return new float4(AbsMin(a.x, b.x), AbsMin(a.y, b.y), AbsMin(a.z, b.z), AbsMin(a.w, b.w)); }
+        #endregion
+
+        #region Lerp
+        [IN(LINE)] public static float4 Lerp(float4 start, float4 end, float4 t) { return start + t * (end - start); }
+        [IN(LINE)] public static float4 LerpClamp(float4 start, float4 end, float4 t) { return Lerp(start, end, Clamp01(t)); }
+        [IN(LINE)] public static float4 LerpRepeat(float4 start, float4 end, float4 t) { return Lerp(start, end, Repeat01(t)); }
+
+        [IN(LINE)] public static float4 UnLerp(float4 start, float4 end, float4 a) { return (a - start) / (end - start); }
+        [IN(LINE)] public static float4 UnLerpClamp(float4 start, float4 end, float4 a) { return Clamp01(UnLerp(start, end, a)); }
+        [IN(LINE)] public static float4 UnLerpRepeat(float4 start, float4 end, float4 a) { return Repeat01(UnLerp(start, end, a)); }
+
+
+        [IN(LINE)]
+        public static float4 MoveTowards(float4 from, float4 to, float distance)
+        {
+            float4 dif = to - from;
+            if (Abs(dif) <= distance) { return to; }
+            return from + Sign(dif) * distance;
+        }
+        [IN(LINE)]
+        public static float4 MoveTowards(float4 from, float4 to, float distance, out float excess)
+        {
+            if (distance == 0)
+            {
+                excess = 0;
+                return from;
+            }
+            float4 dif = to - from;
+            float difpowmag = LengthSqr(dif);
+            if (difpowmag == 0f)
+            {
+                excess = distance;
+                return to;
+            }
+            float difmag = Sqrt(difpowmag);
+            excess = distance - difmag;
+            if (excess > -float.Epsilon)
+            {
+                return to;
+            }
+
+            return new float4(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance, from.z + dif.z / difmag * distance, from.w + dif.w / difmag * distance);
+        }
+        [IN(LINE)]
+        public static float4 Remap(float4 oldStart, float4 oldEnd, float4 newStart, float4 newEnd, float4 v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
+        }
+
+
+        [IN(LINE)]
+        public static float4 LerpAngle(float4 start, float4 end, float t)
+        {
+            float4 angle = Repeat(end - start, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return start + angle * Clamp01(t);
+        }
+        [IN(LINE)]
+        public static float4 DeltaAngle(float4 current, float4 target)
+        {
+            float4 angle = Repeat(target - current, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return angle;
+        }
+        [IN(LINE)]
+        public static float4 MoveTowardsAngle(float4 current, float4 target, float maxDelta)
+        {
+            float4 delta = DeltaAngle(current, target);
+            if (0f - maxDelta < delta && delta < maxDelta)
+            {
+                return target;
+            }
+            return MoveTowards(current, current + delta, maxDelta);
+        }
+        #endregion
+
+        #region Float State Checks
+        [IN(LINE)] public static bool4 IsNormalFloat(float4 a) { return new bool4(float.IsNormal(a.x), float.IsNormal(a.y), float.IsNormal(a.z), float.IsNormal(a.w)); }
+        [IN(LINE)] public static bool4 IsFinite(float4 a) { return new bool4(float.IsFinite(a.x), float.IsFinite(a.y), float.IsFinite(a.z), float.IsFinite(a.w)); }
+        [IN(LINE)] public static bool4 IsNaN(float4 a) { return new bool4(float.IsNaN(a.x), float.IsNaN(a.y), float.IsNaN(a.z), float.IsNaN(a.w)); }
+        [IN(LINE)] public static bool4 IsInfinity(float4 a) { return new bool4(float.IsInfinity(a.x), float.IsInfinity(a.y), float.IsInfinity(a.z), float.IsInfinity(a.w)); }
+        [IN(LINE)] public static bool4 IsNegativeInfinity(float4 a) { return new bool4(float.IsNegativeInfinity(a.x), float.IsNegativeInfinity(a.y), float.IsNegativeInfinity(a.z), float.IsNegativeInfinity(a.w)); }
+        [IN(LINE)] public static bool4 IsPositiveInfinity(float4 a) { return new bool4(float.IsPositiveInfinity(a.x), float.IsPositiveInfinity(a.y), float.IsPositiveInfinity(a.z), float.IsPositiveInfinity(a.w)); }
+        #endregion
+
+        #region Color
+        [IN(LINE)] public static float4 GammaToLinearSpace(float4 value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
+        [IN(LINE)] public static float4 LinearToGammaSpace(float4 value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        #endregion
+
+        #region Approximately
+        [IN(LINE)] public static bool4 Approximately(float4 a, float4 b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool4 Approximately(float4 a, float4 b, float4 tolerance) { return Abs(b - a) < tolerance; }
+        #endregion
+
+        #region Other
+        [IN(LINE)] public static float Length(float4 a) { return Sqrt(Dot(a, a)); }
+        [IN(LINE)] public static float LengthSqr(float4 a) { return Dot(a, a); }
+        [IN(LINE)] public static float Distance(float4 a, float4 b) { return Length(b - a); }
+        [IN(LINE)] public static float DistanceSqr(float4 a, float4 b) { return LengthSqr(b - a); }
+        [IN(LINE)] public static float4 Normalize(float4 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
+
+        [IN(LINE)] public static float Dot(float4 a, float4 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
+        [IN(LINE)] public static float4 Project(float4 a, float4 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
+        [IN(LINE)]
+        public static float4 ProjectSafe(float4 a, float4 ontoB, float4 defaultValue = default)
+        {
+            var proj = Project(a, ontoB);
+            return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
+        }
+        //[IN(LINE)] public static float4 Cross(float4 a, float4 b) { return (a * b.yzx - a.yzx * b).yzx; }
+        [IN(LINE)] public static float4 Reflect(float4 v, float4 n) { return v - 2f * n * Dot(v, n); }
+
+        [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static float4 Step(float4 threshold, float4 a) { return Select(0.0f, 1.0f, a >= threshold); }
+
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
+        [IN(LINE)] public static float4 Degrees(float4 a) { return a * Rad2Deg; }
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
+        [IN(LINE)] public static float4 Radians(float4 a) { return a * Deg2Rad; }
+
+        [IN(LINE)] public static float4 Cos(float4 a) { return new float4(Cos(a.x), Cos(a.y), Cos(a.z), Cos(a.w)); }
+        [IN(LINE)] public static float4 Cosh(float4 a) { return new float4(Cosh(a.x), Cosh(a.y), Cosh(a.z), Cosh(a.w)); }
+        [IN(LINE)] public static float4 Acos(float4 a) { return new float4(Acos(a.x), Acos(a.y), Acos(a.z), Acos(a.w)); }
+        [IN(LINE)] public static float4 Sin(float4 a) { return new float4(Sin(a.x), Sin(a.y), Sin(a.z), Sin(a.w)); }
+        [IN(LINE)] public static float4 Sinh(float4 a) { return new float4(Sinh(a.x), Sinh(a.y), Sinh(a.z), Sinh(a.w)); }
+        [IN(LINE)] public static float4 Asin(float4 a) { return new float4(Asin(a.x), Asin(a.y), Asin(a.z), Asin(a.w)); }
+
+        [IN(LINE)] public static float4 Atan(float4 a) { return new float4(Atan(a.x), Atan(a.y), Atan(a.z), Atan(a.w)); }
+        [IN(LINE)] public static float4 Atan2(float4 a, float4 b) { return new float4(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z), Atan2(a.w, b.w)); }
+
+        [IN(LINE)] public static float4 Sqr(float4 a) { return a * a; }
+        [IN(LINE)] public static float4 Pow(float4 a, float4 b) { return new float4(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z), Pow(a.w, a.w)); }
+        [IN(LINE)] public static float4 Exp(float4 pow) { return new float4(Exp(pow.x), Exp(pow.y), Exp(pow.z), Exp(pow.z)); }
+        [IN(LINE)] public static float4 Exp2(float4 pow) { return new float4(Exp2(pow.x), Exp2(pow.y), Exp2(pow.z), Exp2(pow.z)); }
+        [IN(LINE)] public static float4 Exp10(float4 pow) { return new float4(Exp10(pow.x), Exp10(pow.y), Exp10(pow.z), Exp10(pow.z)); }
+        [IN(LINE)] public static float4 Log(float4 f, float4 p) { return new float4(Log(f.x, p.x), Log(f.y, p.y), Log(f.z, p.z), Log(f.w, p.w)); }
+        [IN(LINE)] public static float4 Log(float4 f) { return new float4(Log(f.x), Log(f.y), Log(f.z), Log(f.z)); }
+        [IN(LINE)] public static float4 Log2(float4 f) { return new float4(Log2(f.x), Log2(f.y), Log2(f.z), Log2(f.z)); }
+        [IN(LINE)] public static float4 Log10(float4 f) { return new float4(Log10(f.x), Log10(f.y), Log10(f.z), Log10(f.z)); }
+        [IN(LINE)] public static float4 Sqrt(float4 a) { return new float4(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z), Sqrt(a.w)); }
+
+        [IN(LINE)] public static float4 Tan(float4 a) { return new float4(Tan(a.x), Tan(a.y), Tan(a.z), Tan(a.w)); }
+        [IN(LINE)] public static float4 Tanh(float4 a) { return new float4(Tanh(a.x), Tanh(a.y), Tanh(a.z), Tanh(a.w)); }
+
+        [IN(LINE)] public static float4 Truncate(float4 a) { return new float4(Truncate(a.x), Truncate(a.y), Truncate(a.z), Truncate(a.w)); }
+        #endregion
+
+
         #region Hash
         [IN(LINE)] public static uint UHash(float4 v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)] public static int Hash(float4 v) { return Hash<float4>(v); }
         #endregion
-
-        #region vector
-        [IN(LINE)]
-        public static float4 Normalize(float4 v) { return 1f / Sqrt(Dot(v, v)) * v; }
-        /// <summary>alias for magnitude(a, b)</summary>
-        [IN(LINE)]
-        public static float magn(in float4 v) => v.Magnitude;
-        [IN(LINE)]
-        public static float magnitude(in float4 v) => v.Magnitude;
-        #endregion
-
-        #region Clamp/Clamp01
-        public static float4 Clamp(float4 value, float min, float max) => new float4(
-            Clamp(value.x, min, max),
-            Clamp(value.y, min, max),
-            Clamp(value.z, min, max),
-            Clamp(value.w, min, max));
-        public static float4 Clamp(float4 value, float4 min, float4 max) => new float4(
-            Clamp(value.x, min.x, max.x),
-            Clamp(value.y, min.y, max.y),
-            Clamp(value.z, min.z, max.z),
-            Clamp(value.w, min.w, max.w));
-        public static float4 Clamp01(float4 value) => new float4(
-            Clamp01(value.x),
-            Clamp01(value.y),
-            Clamp01(value.z),
-            Clamp01(value.w));
-        #endregion
-
-        [IN(LINE)]
-        public static float4 one_minus(float4 v) => 1f - v;
-        [IN(LINE)]
-        public static float4 abs(float4 v)
-        {
-            return new float4(SMathF.Abs(v.x), SMathF.Abs(v.y), SMathF.Abs(v.z), SMathF.Abs(v.w));
-        }
-        [IN(LINE)]
-        public static int4 sign(float4 v)
-        {
-            return new int4(SMath.Sign(v.x), SMath.Sign(v.y), SMath.Sign(v.z), SMath.Sign(v.w));
-        }
-
-        [IN(LINE)]
-        public static float4 round(float4 v)
-        {
-            return new float4(SMathF.Round(v.x), SMathF.Round(v.y), SMathF.Round(v.z), SMathF.Round(v.w));
-        }
-        [IN(LINE)]
-        public static int4 round2int(float4 v)
-        {
-            return new int4((int)SMathF.Round(v.x), (int)SMathF.Round(v.y), (int)SMathF.Round(v.z), (int)SMathF.Round(v.w));
-        }
-        [IN(LINE)]
-        public static float4 floor(float4 v)
-        {
-            return new float4(SMathF.Floor(v.x), SMathF.Floor(v.y), SMathF.Floor(v.z), SMathF.Floor(v.w));
-        }
-        [IN(LINE)]
-        public static int4 floor2int(float4 v)
-        {
-            return new int4((int)SMathF.Floor(v.x), (int)SMathF.Floor(v.y), (int)SMathF.Floor(v.z), (int)SMathF.Floor(v.w));
-        }
-        [IN(LINE)]
-        public static float4 ceil(float4 v)
-        {
-            return new float4(SMathF.Ceiling(v.x), SMathF.Ceiling(v.y), SMathF.Ceiling(v.z), SMathF.Ceiling(v.w));
-        }
-        [IN(LINE)]
-        public static int4 ceil2int(float4 v)
-        {
-            return new int4((int)SMathF.Ceiling(v.x), (int)SMathF.Ceiling(v.y), (int)SMathF.Ceiling(v.z), (int)SMathF.Ceiling(v.w));
-        }
-
-
-        [IN(LINE)]
-        public static float4 Max(float4 a, float4 b) => new float4(Max(a.x, b.x), Max(a.y, b.y), Max(a.z, b.z), Max(a.w, b.w));
-        [IN(LINE)]
-        public static float4 Min(float4 a, float4 b) => new float4(Min(a.x, b.x), Min(a.y, b.y), Min(a.z, b.z), Min(a.w, b.w));
-
-        [IN(LINE)]
-        public static float4 Cos(float4 x) => new float4(Cos(x.x), Cos(x.y), Cos(x.z), Cos(x.w));
-        [IN(LINE)]
-        public static float4 Sin(float4 x) => new float4(Sin(x.x), Sin(x.y), Sin(x.z), Sin(x.w));
-
-        [IN(LINE)]
-        public static float CSum(float4 x) => (x.x + x.y) + (x.z + x.w);
-
-        [IN(LINE)]
-        public static float Dot(float4 a, float4 b) => a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
-
-        [IN(LINE)]
-        public static float4 Asin(float4 x) => new float4(Asin(x.x), Asin(x.y), Asin(x.z), Asin(x.w));
     }
 }

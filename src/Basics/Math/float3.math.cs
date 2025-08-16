@@ -94,7 +94,7 @@ namespace DCFApixels.DataMath
                 return from;
             }
             float3 dif = to - from;
-            float difpowmag = dif.MagnitudeSqr;
+            float difpowmag = LengthSqr(dif);
             if (difpowmag == 0f)
             {
                 excess = distance;
