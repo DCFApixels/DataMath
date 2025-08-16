@@ -174,6 +174,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool3 operator !=(int a, int3 b) { return new bool3(a != b.x, a != b.y, a != b.z); }
         #endregion
 
+        #region Other
+        [IN(LINE)] public static int3 operator !(int3 a) { return 1 - a; }
+        #endregion
+
         #endregion
 
         #region Swaps

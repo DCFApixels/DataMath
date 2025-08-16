@@ -193,8 +193,8 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static uint4 operator ++(uint4 a) { return new uint4(++a.x, ++a.y, ++a.z, ++a.w); }
         [IN(LINE)] public static uint4 operator --(uint4 a) { return new uint4(--a.x, --a.y, --a.z, --a.w); }
-        [IN(LINE)] public static uint4 operator -(uint4 a) { return new uint4(-a.x, -a.y, -a.z, -a.w); }
         [IN(LINE)] public static uint4 operator +(uint4 a) { return new uint4(+a.x, +a.y, +a.z, +a.w); }
+        [IN(LINE)] public static uint4 operator -(uint4 a) { return new uint4(-a.x, -a.y, -a.z, -a.w); }
         #endregion
 
         #region Bits
@@ -239,6 +239,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 operator !=(uint4 a, uint4 b) { return new bool4(a.x != b.x, a.y != b.y, a.z != b.z, a.w != b.w); }
         [IN(LINE)] public static bool4 operator !=(uint4 a, uint b) { return new bool4(a.x != b, a.y != b, a.z != b, a.w != b); }
         [IN(LINE)] public static bool4 operator !=(uint a, uint4 b) { return new bool4(a != b.x, a != b.y, a != b.z, a != b.w); }
+        #endregion
+
+        #region Other
+        [IN(LINE)] public static uint4 operator !(uint4 a) { return 1u - a; }
         #endregion
 
         #endregion

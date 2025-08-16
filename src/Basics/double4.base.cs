@@ -193,8 +193,8 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static double4 operator ++(double4 a) { return new double4(++a.x, ++a.y, ++a.z, ++a.w); }
         [IN(LINE)] public static double4 operator --(double4 a) { return new double4(--a.x, --a.y, --a.z, --a.w); }
-        [IN(LINE)] public static double4 operator -(double4 a) { return new double4(-a.x, -a.y, -a.z, -a.w); }
         [IN(LINE)] public static double4 operator +(double4 a) { return new double4(+a.x, +a.y, +a.z, +a.w); }
+        [IN(LINE)] public static double4 operator -(double4 a) { return new double4(-a.x, -a.y, -a.z, -a.w); }
         #endregion
 
         #region Boolean
@@ -221,6 +221,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 operator !=(double4 a, double4 b) { return new bool4(a.x != b.x, a.y != b.y, a.z != b.z, a.w != b.w); }
         [IN(LINE)] public static bool4 operator !=(double4 a, double b) { return new bool4(a.x != b, a.y != b, a.z != b, a.w != b); }
         [IN(LINE)] public static bool4 operator !=(double a, double4 b) { return new bool4(a != b.x, a != b.y, a != b.z, a != b.w); }
+        #endregion
+
+        #region Other
+        [IN(LINE)] public static double4 operator !(double4 a) { return 1d - a; }
         #endregion
 
         #endregion

@@ -167,6 +167,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool2 operator !=(uint a, uint2 b) { return new bool2(a != b.x, a != b.y); }
         #endregion
 
+        #region Other
+        [IN(LINE)] public static uint2 operator !(uint2 a) { return 1u - a; }
+        #endregion
+
         #endregion
 
         #region Swaps
