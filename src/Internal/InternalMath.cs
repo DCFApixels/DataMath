@@ -520,7 +520,32 @@ namespace DCFApixels.DataMath.Internal
 
 
 
+        [IN(LINE)]
+        public static float Ceiling(float x)
+        {
+            return (float)Math.Ceiling(x);
+        }
+        [IN(LINE)]
+        public static float Floor(float x)
+        {
+            return (float)Math.Floor(x);
+        }
 
+        [IN(LINE)]
+        public static double Ceiling(double x)
+        {
+            return Math.Ceiling(x);
+        }
+        [IN(LINE)]
+        public static double Round(double x)
+        {
+            return Math.Round(x);
+        }
+        [IN(LINE)]
+        public static double Floor(double x)
+        {
+            return Math.Floor(x);
+        }
 
 
 
@@ -553,26 +578,36 @@ namespace DCFApixels.DataMath.Internal
             return (a > 0d ? 1 : 0) - (a < 0d ? 1 : 0);
         }
 
-
+        [IN(LINE)]
+        public static int Abs(int x)
+        {
+            return x & 0x7FFFFFFF;
+        }
+        [IN(LINE)]
+        public static long Abs(long x)
+        {
+            return x & 0x7FFFFFFF_FFFFFFFF;
+        }
         [IN(LINE)]
         public static float Abs(float x)
         {
             return DM.AsFloat(DM.AsUInt(x) & 0x7FFFFFFF);
         }
         [IN(LINE)]
-        public static float Ceiling(float x)
+        public static double Abs(double x)
         {
-            return (float)Math.Ceiling(x);
+            return DM.AsDouble(DM.AsULong(x) & 0x7FFFFFFF_FFFFFFFF);
         }
-        [IN(LINE)]
-        public static float Floor(float x)
-        {
-            return (float)Math.Floor(x);
-        }
+
         [IN(LINE)]
         public static float Sqrt(float x)
         {
             return (float)Math.Sqrt(x);
+        }
+        [IN(LINE)]
+        public static double Sqrt(double x)
+        {
+            return Math.Sqrt(x);
         }
         [IN(LINE)]
         public static float Log(float x)
@@ -580,14 +615,34 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Log(x);
         }
         [IN(LINE)]
+        public static double Log(double x)
+        {
+            return Math.Log(x);
+        }
+        [IN(LINE)]
+        public static double Log(double x, double y)
+        {
+            return Math.Log(x, y);
+        }
+        [IN(LINE)]
         public static float Log2(float x)
         {
-            return Log(x, 2f);
+            return (float)Math.Log(x, 2f);
+        }
+        [IN(LINE)]
+        public static double Log2(double x)
+        {
+            return Math.Log(x, 2f);
         }
         [IN(LINE)]
         public static float Log10(float x)
         {
             return (float)Math.Log10(x);
+        }
+        [IN(LINE)]
+        public static double Log10(double x)
+        {
+            return Math.Log10(x);
         }
 
         [IN(LINE)]
@@ -596,9 +651,19 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Cos(x);
         }
         [IN(LINE)]
+        public static double Cos(double x)
+        {
+            return Math.Cos(x);
+        }
+        [IN(LINE)]
         public static float Cosh(float x)
         {
             return (float)Math.Cosh(x);
+        }
+        [IN(LINE)]
+        public static double Cosh(double x)
+        {
+            return Math.Cosh(x);
         }
         [IN(LINE)]
         public static float Acos(float x)
@@ -606,9 +671,19 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Acos(x);
         }
         [IN(LINE)]
+        public static double Acos(double x)
+        {
+            return Math.Acos(x);
+        }
+        [IN(LINE)]
         public static float Sin(float x)
         {
             return (float)Math.Sin(x);
+        }
+        [IN(LINE)]
+        public static double Sin(double x)
+        {
+            return Math.Sin(x);
         }
         [IN(LINE)]
         public static float Sinh(float x)
@@ -616,9 +691,19 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Sinh(x);
         }
         [IN(LINE)]
+        public static double Sinh(double x)
+        {
+            return Math.Sinh(x);
+        }
+        [IN(LINE)]
         public static float Asin(float x)
         {
             return (float)Math.Asin(x);
+        }
+        [IN(LINE)]
+        public static double Asin(double x)
+        {
+            return Math.Asin(x);
         }
         [IN(LINE)]
         public static float Tan(float x)
@@ -626,9 +711,19 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Tan(x);
         }
         [IN(LINE)]
+        public static double Tan(double x)
+        {
+            return Math.Tan(x);
+        }
+        [IN(LINE)]
         public static float Tanh(float x)
         {
             return (float)Math.Tanh(x);
+        }
+        [IN(LINE)]
+        public static double Tanh(double x)
+        {
+            return Math.Tanh(x);
         }
         [IN(LINE)]
         public static float Atan(float x)
@@ -636,9 +731,19 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Atan(x);
         }
         [IN(LINE)]
+        public static double Atan(double x)
+        {
+            return Math.Atan(x);
+        }
+        [IN(LINE)]
         public static float Atan2(float x, float y)
         {
             return (float)Math.Atan2(x, y);
+        }
+        [IN(LINE)]
+        public static double Atan2(double x, double y)
+        {
+            return Math.Atan2(x, y);
         }
 
         [IN(LINE)]
@@ -647,9 +752,19 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Pow(x, y);
         }
         [IN(LINE)]
+        public static double Pow(double x, double y)
+        {
+            return Math.Pow(x, y);
+        }
+        [IN(LINE)]
         public static float Exp(float pow)
         {
             return (float)Math.Exp(pow);
+        }
+        [IN(LINE)]
+        public static double Exp(double pow)
+        {
+            return Math.Exp(pow);
         }
         [IN(LINE)]
         public static float Exp2(float pow)
@@ -662,9 +777,24 @@ namespace DCFApixels.DataMath.Internal
             return (float)Math.Exp(pow) * 2.30258509f;
         }
         [IN(LINE)]
+        public static double Exp2(double pow)
+        {
+            return Math.Exp(pow) * 0.693147180559945309d;
+        }
+        [IN(LINE)]
+        public static double Exp10(double pow)
+        {
+            return Math.Exp(pow) * 2.302585092994045684d;
+        }
+        [IN(LINE)]
         public static float Truncate(float x)
         {
             return (float)Math.Truncate(x);
+        }
+        [IN(LINE)]
+        public static double Truncate(double x)
+        {
+            return Math.Truncate(x);
         }
     }
 }
