@@ -293,7 +293,7 @@ namespace DCFApixels.DataMath
 
         // overloads (vectorN args)
         [IN(LINE)]
-        public static float Max<T>(T a) where T : IVectorN<float>
+        public static float Max<T>(T a, float _ = default) where T : IVectorN<float>
         {
             switch (a.count)
             {
@@ -313,7 +313,7 @@ namespace DCFApixels.DataMath
             return default;
         }
         [IN(LINE)]
-        public static float AbsMax<T>(T a) where T : IVectorN<float>
+        public static float AbsMax<T>(T a, float _ = default) where T : IVectorN<float>
         {
             switch (a.count)
             {
@@ -333,7 +333,7 @@ namespace DCFApixels.DataMath
             return default;
         }
         [IN(LINE)]
-        public static float Min<T>(T a) where T : IVectorN<float>
+        public static float Min<T>(T a, float _ = default) where T : IVectorN<float>
         {
             switch (a.count)
             {
@@ -353,7 +353,7 @@ namespace DCFApixels.DataMath
             return default;
         }
         [IN(LINE)]
-        public static float AbsMin<T>(T a) where T : IVectorN<float>
+        public static float AbsMin<T>(T a, float _ = default) where T : IVectorN<float>
         {
             switch (a.count)
             {
@@ -372,8 +372,12 @@ namespace DCFApixels.DataMath
             }
             return default;
         }
+
+        [IN(LINE)] public static float Sum(float2 a) { return a.x + a.y; }
+        [IN(LINE)] public static float Sum(float3 a) { return a.x + a.y + a.z; }
+        [IN(LINE)] public static float Sum(float4 a) { return a.x + a.y + a.z + a.w; }
         [IN(LINE)]
-        public static float Sum<T>(T a) where T : IVectorN<float>
+        public static float Sum<T>(T a, float _ = default) where T : IVectorN<float>
         {
             switch (a.count)
             {

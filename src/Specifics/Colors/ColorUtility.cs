@@ -1,27 +1,27 @@
-﻿using SharpColor = System.Drawing.Color;
+﻿using DotnetColor = System.Drawing.Color;
 
 namespace DCFApixels.DataMath
 {
     public static class ColorUtility
     {
 
-        public static SharpColor ToSharpColor<T>(T color) where T : IColor
+        public static DotnetColor ToSharpColor<T>(T color) where T : IColor
         {
-            return SharpColor.FromArgb(
+            return DotnetColor.FromArgb(
                 (int)(color.a * 255),
                 (int)(color.r * 255),
                 (int)(color.g * 255),
                 (int)(color.b * 255));
         }
-        public static SharpColor ToSharpColor(color color)
+        public static DotnetColor ToSharpColor(color color)
         {
-            return SharpColor.FromArgb(
+            return DotnetColor.FromArgb(
                 ((int)(color.a * 255)) & int.MaxValue % 256,
                 ((int)(color.r * 255)) & int.MaxValue % 256,
                 ((int)(color.g * 255)) & int.MaxValue % 256,
                 ((int)(color.b * 255)) & int.MaxValue % 256);
         }
-        public static SharpColor ToSharpColor(colorhsv hsvColor)
+        public static DotnetColor ToSharpColor(colorhsv hsvColor)
         {
             return ToSharpColor(HSVToRGB(hsvColor));
         }
@@ -36,11 +36,17 @@ namespace DCFApixels.DataMath
         public static void RGBToHSV(color rgbColor, out float h, out float s, out float v)
         {
             if ((rgbColor.b > rgbColor.g) && (rgbColor.b > rgbColor.r))
+            { 
                 RGBToHSVInternal(4f, rgbColor.b, rgbColor.r, rgbColor.g, out h, out s, out v);
+            }
             else if (rgbColor.g > rgbColor.r)
+            {
                 RGBToHSVInternal(2f, rgbColor.g, rgbColor.b, rgbColor.r, out h, out s, out v);
+            }
             else
+            {
                 RGBToHSVInternal(0f, rgbColor.r, rgbColor.g, rgbColor.b, out h, out s, out v);
+            }
         }
         private static void RGBToHSVInternal(float offset, float dominantcolor, float colorone, float colortwo, out float h, out float s, out float v)
         {
@@ -107,7 +113,7 @@ namespace DCFApixels.DataMath
                 t_V = v;
                 h_to_floor = h * 6.0f;
 
-                int temp = (int)DM.Floor(h_to_floor);
+                int temp = DM.Floor2Int(h_to_floor);
                 float t = h_to_floor - temp;
                 float var_1 = (t_V) * (1 - t_S);
                 float var_2 = t_V * (1 - t_S * t);
@@ -166,9 +172,9 @@ namespace DCFApixels.DataMath
 
                 if (!hdr)
                 {
-                    retval.r = DM.Clamp(retval.r, 0.0f, 1.0f);
-                    retval.g = DM.Clamp(retval.g, 0.0f, 1.0f);
-                    retval.b = DM.Clamp(retval.b, 0.0f, 1.0f);
+                    retval.r = DM.Clamp01(retval.r);
+                    retval.g = DM.Clamp01(retval.g);
+                    retval.b = DM.Clamp01(retval.b);
                 }
             }
             return retval;

@@ -293,7 +293,7 @@ namespace DCFApixels.DataMath
                 y1 = Clamp(y1, -1f, 1f);
                 float4 abcd = Float4(d2.z, d1.y, d2.x, d1.z);
                 float x1 = 2f * (abcd.x * abcd.w + abcd.y * abcd.z); //2 * (ad + bc)
-                float x2 = CSum(abcd * abcd * Float4(-1f, 1f, -1f, 1f));
+                float x2 = Sum(abcd * abcd * Float4(-1f, 1f, -1f, 1f));
                 return Float3(Atan2(x1, x2), -Asin(y1), 0f);
             }
         }

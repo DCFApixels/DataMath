@@ -254,6 +254,142 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Component iteration operations
+        // Max overloads (3-8 args)
+        [IN(LINE)] public static double Max(double a, double b, double c) { return Max(Max(a, b), c); }
+        [IN(LINE)] public static double Max(double a, double b, double c, double d) { return Max(Max(a, b, c), d); }
+        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e) { return Max(Max(a, b, c, d), e); }
+        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e, double f) { return Max(Max(a, b, c, d, e), f); }
+        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e, double f, double g) { return Max(Max(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e, double f, double g, double h) { return Max(Max(a, b, c, d, e, f, g), h); }
+
+        // AbsMax overloads (3-8 args)
+        [IN(LINE)] public static double AbsMax(double a, double b, double c) { return AbsMax(AbsMax(a, b), c); }
+        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d) { return AbsMax(AbsMax(a, b, c), d); }
+        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e) { return AbsMax(AbsMax(a, b, c, d), e); }
+        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e, double f) { return AbsMax(AbsMax(a, b, c, d, e), f); }
+        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e, double f, double g) { return AbsMax(AbsMax(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e, double f, double g, double h) { return AbsMax(AbsMax(a, b, c, d, e, f, g), h); }
+
+        // Min overloads (3-8 args)
+        [IN(LINE)] public static double Min(double a, double b, double c) { return Min(Min(a, b), c); }
+        [IN(LINE)] public static double Min(double a, double b, double c, double d) { return Min(Min(a, b, c), d); }
+        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e) { return Min(Min(a, b, c, d), e); }
+        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e, double f) { return Min(Min(a, b, c, d, e), f); }
+        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e, double f, double g) { return Min(Min(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e, double f, double g, double h) { return Min(Min(a, b, c, d, e, f, g), h); }
+
+        // AbsMin overloads (3-8 args)
+        [IN(LINE)] public static double AbsMin(double a, double b, double c) { return AbsMin(AbsMin(a, b), c); }
+        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d) { return AbsMin(AbsMin(a, b, c), d); }
+        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e) { return AbsMin(AbsMin(a, b, c, d), e); }
+        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e, double f) { return AbsMin(AbsMin(a, b, c, d, e), f); }
+        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e, double f, double g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e, double f, double g, double h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
+
+        // overloads (vectorN args)
+        [IN(LINE)]
+        public static double Max<T>(T a, double _ = default) where T : IVectorN<double>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return Max(a[0], a[1]);
+                case 3: return Max(a[0], a[1], a[2]);
+                case 4: return Max(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = Max(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+        [IN(LINE)]
+        public static double AbsMax<T>(T a, double _ = default) where T : IVectorN<double>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return AbsMax(a[0], a[1]);
+                case 3: return AbsMax(a[0], a[1], a[2]);
+                case 4: return AbsMax(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = AbsMax(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+        [IN(LINE)]
+        public static double Min<T>(T a, double _ = default) where T : IVectorN<double>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return Min(a[0], a[1]);
+                case 3: return Min(a[0], a[1], a[2]);
+                case 4: return Min(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = Min(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+        [IN(LINE)]
+        public static double AbsMin<T>(T a, double _ = default) where T : IVectorN<double>
+        {
+            switch (a.count)
+            {
+                case 0: Throw.ZeroLengthArgument(nameof(a)); break;
+                case 1: return a[0];
+                case 2: return AbsMin(a[0], a[1]);
+                case 3: return AbsMin(a[0], a[1], a[2]);
+                case 4: return AbsMin(a[0], a[1], a[2], a[3]);
+                default:
+                    var result = a[0];
+                    for (int i = 1; i < a.count; i++)
+                    {
+                        result = AbsMin(result, a[i]);
+                    }
+                    return result;
+            }
+            return default;
+        }
+
+        [IN(LINE)] public static double Sum(double2 a) { return a.x + a.y; }
+        [IN(LINE)] public static double Sum(double3 a) { return a.x + a.y + a.z; }
+        [IN(LINE)] public static double Sum(double4 a) { return a.x + a.y + a.z + a.w; }
+        [IN(LINE)]
+        public static double Sum<T>(T a, double _ = default) where T : IVectorN<double>
+        {
+            switch (a.count)
+            {
+                case 0: return 0;
+                case 1: return a[0];
+                case 2: return a[0] + a[1];
+                case 3: return a[0] + a[1] + a[2];
+                case 4: return a[0] + a[1] + a[2] + a[3];
+                default:
+                    var result = a[0] + a[1] + a[2] + a[3];
+                    for (int i = 4; i < a.count; i++)
+                    {
+                        result += a[i];
+                    }
+                    return result;
+            }
+        }
         [IN(LINE)] public static uint UHash<TVector>(TVector v, double _ = default) where TVector : IVectorN<double> { return unchecked((uint)Hash<TVector>(v)); }
         [IN(LINE)]
         public static int Hash<TVector>(TVector v, double _ = default) where TVector : IVectorN<double>
