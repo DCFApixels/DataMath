@@ -1,4 +1,3 @@
-using System;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -29,7 +28,8 @@ namespace DCFApixels.DataMath
             }
             return bits;
         }
-        [IN(LINE)] public static bool All<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
+        [IN(LINE)]
+        public static bool All<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
         {
             for (int i = 0; i < v.count; i++)
             {
@@ -37,7 +37,8 @@ namespace DCFApixels.DataMath
             }
             return true;
         }
-        [IN(LINE)] public static bool Any<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
+        [IN(LINE)]
+        public static bool Any<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
         {
             for (int i = 0; i < v.count; i++)
             {

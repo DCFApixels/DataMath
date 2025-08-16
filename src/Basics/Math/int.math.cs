@@ -4,10 +4,8 @@ using SMathF = System.MathF;
 #else
 using SMathF = DCFApixels.DataMath.Internal.MathDM;
 #endif
-using System;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-using SMath = System.Math;
 
 namespace DCFApixels.DataMath
 {

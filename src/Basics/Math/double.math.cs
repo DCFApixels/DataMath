@@ -1,8 +1,7 @@
 using System.Runtime.CompilerServices;
-using SMath = System.Math;
-using System;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
+using SMath = System.Math;
 
 namespace DCFApixels.DataMath
 {

@@ -178,7 +178,6 @@ namespace DCFApixels.DataMath
             var proj = Project(a, ontoB);
             return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
         }
-        //[IN(LINE)] public static float3 Cross(float3 a, float3 b) { return (a * b.yzx - a.yzx * b).yzx; }
         [IN(LINE)] public static float3 Reflect(float3 v, float3 n) { return v - 2f * n * Dot(v, n); }
 
         [IN(LINE)] public static float3 Select(float3 falseValue, float3 trueValue, bool3 test) { return test ? trueValue : falseValue; }
@@ -220,6 +219,10 @@ namespace DCFApixels.DataMath
         #region Hash
         [IN(LINE)] public static uint UHash(float3 v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)] public static int Hash(float3 v) { return Hash<float3>(v); }
+        #endregion
+
+        #region Specific
+        [IN(LINE)] public static float3 Cross(float3 a, float3 b) { return (a * b.yzx - a.yzx * b).yzx; }
         #endregion
     }
 }

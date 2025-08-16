@@ -1,11 +1,5 @@
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-using SMath = System.Math;
-#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
-using SMathF = System.MathF;
-#else
-using SMathF = DCFApixels.DataMath.Internal.MathDM;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -184,7 +178,6 @@ namespace DCFApixels.DataMath
             var proj = Project(a, ontoB);
             return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
         }
-        //[IN(LINE)] public static float4 Cross(float4 a, float4 b) { return (a * b.yzx - a.yzx * b).yzx; }
         [IN(LINE)] public static float4 Reflect(float4 v, float4 n) { return v - 2f * n * Dot(v, n); }
 
         [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
