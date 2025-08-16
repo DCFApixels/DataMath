@@ -49,8 +49,13 @@ namespace DCFApixels.DataMath
         { x = SMathF.Sign(x); y = SMathF.Sign(y); }
         #endregion
     }
-    public static partial class DM
+    public static partial class DM // float2
     {
+        #region Hash
+        [IN(LINE)] public static uint UHash(float2 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(float2 v) { return Hash<float2>(v); }
+        #endregion
+
         #region simple
         [IN(LINE)]
         public static float2 one_minus(float2 v) => 1f - v;

@@ -1,3 +1,4 @@
+using System;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 using SMath = System.Math;
@@ -8,8 +9,18 @@ namespace DCFApixels.DataMath
     {
 
     }
-    public static partial class DM
+    public static partial class DM // double3
     {
+        #region Hash
+        [IN(LINE)]
+        public static uint UHash(double3 v) => unchecked((uint)Hash(v));
+        [IN(LINE)]
+        public static int Hash(double3 v)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
         [IN(LINE)]
         public static double3 one_minus(double3 v) => 1d - v;
         [IN(LINE)]

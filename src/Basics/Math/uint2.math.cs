@@ -12,8 +12,13 @@ namespace DCFApixels.DataMath
     public partial struct uint2
     {
     }
-    public static partial class DM
+    public static partial class DM // uint2
     {
+        #region Hash
+        [IN(LINE)] public static uint UHash(uint2 v) { return UHash<uint2>(v); }
+        [IN(LINE)] public static int Hash(uint2 v) { return unchecked((int)UHash(v)); }
+        #endregion
+
         [IN(LINE)]
         public static uint2 one_minus(uint2 v) => 1u - v;
         [IN(LINE)]

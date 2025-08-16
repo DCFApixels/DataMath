@@ -31,8 +31,13 @@ namespace DCFApixels.DataMath
         }
         #endregion
     }
-    public static partial class DM
+    public static partial class DM // float4
     {
+        #region Hash
+        [IN(LINE)] public static uint UHash(float4 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(float4 v) { return Hash<float4>(v); }
+        #endregion
+
         #region vector
         [IN(LINE)]
         public static float4 Normalize(float4 v) { return 1f / Sqrt(Dot(v, v)) * v; }

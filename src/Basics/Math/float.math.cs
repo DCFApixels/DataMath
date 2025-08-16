@@ -4,12 +4,29 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public static partial class DM //self
+    public static partial class DM // float self
     {
 
     }
-    public static partial class DM //math float
+    public static partial class DM // float
     {
+        #region Hash
+        [IN(LINE)] public static uint UHash(float v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)]
+        public static unsafe int Hash(float v)
+        {
+            //return v.GetHashCode();
+            int bits = *(int*)&v;
+            // Optimized check for IsNan() || IsZero()
+            if (((bits - 1) & 0x7FFFFFFF) >= 0x7F800000)
+            {
+                // Ensure that all NaNs and both zeros have the same Hash code
+                bits &= 0x7F800000;
+            }
+            return bits;
+        }
+        #endregion
+
         #region Abs/Sign
         [IN(LINE)] public static float Abs(float a) { return InternalMath.Abs(a); }
         [IN(LINE)] public static float Sign(float a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
@@ -207,7 +224,6 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-
         #region Component iteration operations
         // Max overloads (3-8 args)
         [IN(LINE)] public static float Max(float a, float b, float c) { return Max(Max(a, b), c); }
@@ -340,6 +356,17 @@ namespace DCFApixels.DataMath
                     }
                     return result;
             }
+        }
+        [IN(LINE)] public static uint UHash<TVector>(TVector v, float _ = default) where TVector : IVectorN<float> { return unchecked((uint)Hash<TVector>(v)); }
+        [IN(LINE)]
+        public static int Hash<TVector>(TVector v, float _ = default) where TVector : IVectorN<float>
+        {
+            int bits = 0;
+            for (int i = 0; i < v.count; i++)
+            {
+                bits ^= Hash(v[i]);
+            }
+            return bits;
         }
         #endregion
 

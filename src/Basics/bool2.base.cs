@@ -388,10 +388,4 @@ namespace DCFApixels.DataMath
         IEnumerator IEnumerable.GetEnumerator() { return new VectorEnumerator<bool, bool2>(this); }
         #endregion
     }
-
-    public static partial class DM
-    {
-        [IN(LINE)] public static bool All(bool2 a) { return a.x && a.y; }
-        [IN(LINE)] public static bool Any(bool2 a) { return a.x || a.y; }
-    }
 }

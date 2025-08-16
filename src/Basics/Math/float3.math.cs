@@ -30,8 +30,13 @@ namespace DCFApixels.DataMath
         }
         #endregion
     }
-    public static partial class DM
+    public static partial class DM // float3
     {
+        #region Hash
+        [IN(LINE)] public static uint UHash(float3 v) { return unchecked((uint)Hash(v)); }
+        [IN(LINE)] public static int Hash(float3 v) { return Hash<float3>(v); }
+        #endregion
+
         #region Abs/Sign
         [IN(LINE)]
         public static float3 Abs(float3 v)
