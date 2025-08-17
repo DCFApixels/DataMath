@@ -61,6 +61,7 @@ namespace DCFApixels.DataMath
 
         public unsafe double this[int index]
         {
+            [IN(LINE)]
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
@@ -68,6 +69,7 @@ namespace DCFApixels.DataMath
 #endif
                 fixed (double2* array = &this) { return ((double*)array)[index]; }
             }
+            [IN(LINE)]
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS

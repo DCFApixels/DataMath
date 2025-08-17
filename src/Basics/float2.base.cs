@@ -52,15 +52,13 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region IVector
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector1<float>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        float IVector2<float>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IVector1<float>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IVector2<float>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe float this[int index]
         {
+            [IN(LINE)]
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
@@ -68,6 +66,7 @@ namespace DCFApixels.DataMath
 #endif
                 fixed (float2* array = &this) { return ((float*)array)[index]; }
             }
+            [IN(LINE)]
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS

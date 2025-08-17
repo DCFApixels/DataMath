@@ -47,14 +47,10 @@ namespace DCFApixels.DataMath
         public static readonly bool4 after = new bool4(0, 0, 0, 1);
         #endregion
 
-        [MarshalAs(UnmanagedType.U1)]
-        public bool x;
-        [MarshalAs(UnmanagedType.U1)]
-        public bool y;
-        [MarshalAs(UnmanagedType.U1)]
-        public bool z;
-        [MarshalAs(UnmanagedType.U1)]
-        public bool w;
+        [MarshalAs(UnmanagedType.U1)] public bool x;
+        [MarshalAs(UnmanagedType.U1)] public bool y;
+        [MarshalAs(UnmanagedType.U1)] public bool z;
+        [MarshalAs(UnmanagedType.U1)] public bool w;
 
         #region IColor
         public float r { [IN(LINE)] get => x ? 1f : 0f; [IN(LINE)] set => x = value > 0f; }
@@ -64,19 +60,15 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region IVector
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        bool IVector1<bool>.x { [IN(LINE)] get => x; [IN(LINE)] set => x = value; }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        bool IVector2<bool>.y { [IN(LINE)] get => y; [IN(LINE)] set => y = value; }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        bool IVector3<bool>.z { [IN(LINE)] get => z; [IN(LINE)] set => z = value; }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        bool IVector4<bool>.w { [IN(LINE)] get => w; [IN(LINE)] set => w = value; }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get => Count; }
+        [EditorBrowsable(EditorBrowsableState.Never)] bool IVector1<bool>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] bool IVector2<bool>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] bool IVector3<bool>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] bool IVector4<bool>.w { [IN(LINE)] get { return w; } [IN(LINE)] set { w = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe bool this[int index]
         {
+            [IN(LINE)]
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
@@ -84,6 +76,7 @@ namespace DCFApixels.DataMath
 #endif
                 fixed (bool4* array = &this) { return ((bool*)array)[index]; }
             }
+            [IN(LINE)]
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
