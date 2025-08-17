@@ -70,6 +70,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 SmoothStepMirror1(double4 a) { return SmoothStep(a, -1d, 1d); }
         #endregion
 
+        #region All/Any
+        [IN(LINE)] public static bool All(double4 a) { return a.x != default && a.y != default && a.z != default && a.w != default; }
+        [IN(LINE)] public static bool Any(double4 a) { return a.x != default || a.y != default || a.z != default || a.w != default; }
+        #endregion
+
         #region Min/Max/Sum
         [IN(LINE)] public static double4 Max(double4 a, double4 b) { return new double4(Max(a.x, b.x), Max(a.y, b.y), Max(a.z, b.z), Max(a.w, b.w)); }
         [IN(LINE)] public static double4 AbsMax(double4 a, double4 b) { return new double4(AbsMax(a.x, b.x), AbsMax(a.y, b.y), AbsMax(a.z, b.z), AbsMax(a.w, b.w)); }

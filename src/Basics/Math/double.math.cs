@@ -68,6 +68,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double SmoothStepMirror1(double a) { return SmoothStep(a, -1f, 1f); }
         #endregion
 
+        #region All/Any
+        [IN(LINE)] public static bool All(double a) { return a != default; }
+        [IN(LINE)] public static bool Any(double a) { return a != default; }
+        #endregion
+
         #region Min/Max/Sum
         [IN(LINE)] public static double Max(double a, double b) { return a > b ? a : b; }
         [IN(LINE)] public static double AbsMax(double a, double b) { return InternalMath.Abs(a) > InternalMath.Abs(b) ? a : b; }
