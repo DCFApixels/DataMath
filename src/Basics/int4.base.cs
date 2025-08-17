@@ -62,19 +62,15 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region IVector
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector1<int>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector2<int>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector3<int>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        int IVector4<int>.w { [IN(LINE)] get { return w; } [IN(LINE)] set { w = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVector1<int>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVector2<int>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVector3<int>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVector4<int>.w { [IN(LINE)] get { return w; } [IN(LINE)] set { w = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe int this[int index]
         {
+            [IN(LINE)]
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
@@ -82,6 +78,7 @@ namespace DCFApixels.DataMath
 #endif
                 fixed (int4* array = &this) { return ((int*)array)[index]; }
             }
+            [IN(LINE)]
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS

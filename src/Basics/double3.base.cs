@@ -57,17 +57,14 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region IVector
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector1<double>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector2<double>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector3<double>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] double IVector1<double>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] double IVector2<double>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] double IVector3<double>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe double this[int index]
         {
+            [IN(LINE)]
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
@@ -75,6 +72,7 @@ namespace DCFApixels.DataMath
 #endif
                 fixed (double3* array = &this) { return ((double*)array)[index]; }
             }
+            [IN(LINE)]
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS

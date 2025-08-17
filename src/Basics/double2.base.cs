@@ -52,12 +52,9 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region IVector
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector1<double>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        double IVector2<double>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] double IVector1<double>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] double IVector2<double>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
 
         public unsafe double this[int index]
         {
