@@ -10,13 +10,13 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 8)]
-    public struct floatrange :
-        IEquatable<floatrange>,
+    public struct frange :
+        IEquatable<frange>,
         IFormattable,
         IRange<float>
     {
         #region Consts
-        public static readonly floatrange one = new floatrange(0f, 1f);
+        public static readonly frange one = new frange(0f, 1f);
         #endregion
 
         /// <summary>The start of this range</summary>
@@ -59,58 +59,58 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)]
-        public floatrange(float extent)
+        public frange(float extent)
         {
             start = 0;
             this.extent = extent;
         }
         [IN(LINE)]
-        public floatrange(float start, float extent)
+        public frange(float start, float extent)
         {
             this.start = start;
             this.extent = extent;
         }
         [IN(LINE)]
-        public static floatrange MinMax(float min, float max) => new floatrange(min, max - min);
+        public static frange MinMax(float min, float max) => new frange(min, max - min);
         #endregion
 
         #region operators
-        [IN(LINE)] public static implicit operator floatrange((float, float) tuple) => new floatrange(tuple.Item1, tuple.Item2);
-        [IN(LINE)] public static implicit operator floatrange(intrange range) => new floatrange(range.start, range.extent);
+        [IN(LINE)] public static implicit operator frange((float, float) tuple) => new frange(tuple.Item1, tuple.Item2);
+        [IN(LINE)] public static implicit operator frange(irange range) => new frange(range.start, range.extent);
 
-        [IN(LINE)] public static implicit operator floatrange(int a) => new floatrange(0, a);
-        [IN(LINE)] public static implicit operator floatrange(int2 a) => new floatrange(a.x, a.y);
-        [IN(LINE)] public static implicit operator floatrange(uint a) => new floatrange(0, a);
-        [IN(LINE)] public static implicit operator floatrange(uint2 a) => new floatrange(a.x, a.y);
-        [IN(LINE)] public static implicit operator floatrange(float a) => new floatrange(0f, a);
-        [IN(LINE)] public static implicit operator floatrange(float2 a) => new floatrange(a.x, a.y);
-        [IN(LINE)] public static explicit operator floatrange(double a) => new floatrange(0, (float)a);
-        [IN(LINE)] public static explicit operator floatrange(double2 a) => new floatrange((float)a.x, (float)a.y);
+        [IN(LINE)] public static implicit operator frange(int a) => new frange(0, a);
+        [IN(LINE)] public static implicit operator frange(int2 a) => new frange(a.x, a.y);
+        [IN(LINE)] public static implicit operator frange(uint a) => new frange(0, a);
+        [IN(LINE)] public static implicit operator frange(uint2 a) => new frange(a.x, a.y);
+        [IN(LINE)] public static implicit operator frange(float a) => new frange(0f, a);
+        [IN(LINE)] public static implicit operator frange(float2 a) => new frange(a.x, a.y);
+        [IN(LINE)] public static explicit operator frange(double a) => new frange(0, (float)a);
+        [IN(LINE)] public static explicit operator frange(double2 a) => new frange((float)a.x, (float)a.y);
 
-        [IN(LINE)] public static bool operator ==(floatrange a, floatrange b) => a.Equals(b);
-        [IN(LINE)] public static bool operator !=(floatrange a, floatrange b) => !a.Equals(b);
+        [IN(LINE)] public static bool operator ==(frange a, frange b) => a.Equals(b);
+        [IN(LINE)] public static bool operator !=(frange a, frange b) => !a.Equals(b);
 
-        [IN(LINE)] public static floatrange operator -(floatrange range, float v) => new floatrange(range.start - v, range.extent - v);
-        [IN(LINE)] public static floatrange operator +(floatrange range, float v) => new floatrange(range.start + v, range.extent + v);
-        [IN(LINE)] public static floatrange operator /(floatrange range, float v) => new floatrange(range.start / v, range.extent / v);
-        [IN(LINE)] public static floatrange operator *(floatrange range, float v) => new floatrange(range.start * v, range.extent * v);
+        [IN(LINE)] public static frange operator -(frange range, float v) => new frange(range.start - v, range.extent - v);
+        [IN(LINE)] public static frange operator +(frange range, float v) => new frange(range.start + v, range.extent + v);
+        [IN(LINE)] public static frange operator /(frange range, float v) => new frange(range.start / v, range.extent / v);
+        [IN(LINE)] public static frange operator *(frange range, float v) => new frange(range.start * v, range.extent * v);
         #endregion
 
         #region Other
         [IN(LINE)] public override int GetHashCode() => DM.AsInt(start) ^ DM.AsInt(extent);
-        [IN(LINE)] public override bool Equals(object o) => o is floatrange target && Equals(target);
-        [IN(LINE)] public bool Equals(floatrange a) => start == a.start && extent == a.extent;
-        [IN(LINE)] public override string ToString() => $"{nameof(floatrange)}({start}, {extent})";
+        [IN(LINE)] public override bool Equals(object o) => o is frange target && Equals(target);
+        [IN(LINE)] public bool Equals(frange a) => start == a.start && extent == a.extent;
+        [IN(LINE)] public override string ToString() => $"{nameof(frange)}({start}, {extent})";
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            return $"{nameof(floatrange)}({start.ToString(format, formatProvider)}, {extent.ToString(format, formatProvider)})";
+            return $"{nameof(frange)}({start.ToString(format, formatProvider)}, {extent.ToString(format, formatProvider)})";
         }
 
         internal class DebuggerProxy
         {
             public float start, extent;
-            public DebuggerProxy(floatrange v) { start = v.start; extent = v.extent; }
+            public DebuggerProxy(frange v) { start = v.start; extent = v.extent; }
         }
         #endregion
 
@@ -120,11 +120,11 @@ namespace DCFApixels.DataMath
             v -= start;
             return v >= 0 && v <= extent;
         }
-        public bool Contains(floatrange r)
+        public bool Contains(frange r)
         {
             return r.Min >= Min && r.Max <= Max;
         }
-        public bool Overlaps(floatrange other)
+        public bool Overlaps(frange other)
         {
             float separation = MathF.Abs(other.Center - Center);
             float total = (other.extent + extent) / 2;
@@ -137,7 +137,7 @@ namespace DCFApixels.DataMath
     {
         #region clamp/clamp01
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Clamp(floatrange r, float v)
+        public static float Clamp(frange r, float v)
         {
             if (v < r.Min) return r.Min;
             if (v > r.Max) return r.Max;
@@ -147,33 +147,33 @@ namespace DCFApixels.DataMath
 
         #region lerp
         [IN(LINE)]
-        public static float2 Lerp(floatrange range, float t)
+        public static float2 Lerp(frange range, float t)
         {
             return range.start + t * range.extent;
         }
         [IN(LINE)]
-        public static float2 LerpClamp(floatrange range, float t)
+        public static float2 LerpClamp(frange range, float t)
         {
             t = Clamp01(t);
             return range.start + t * range.extent;
         }
         [IN(LINE)]
-        public static float2 LerpLoop(floatrange range, float t)
+        public static float2 LerpLoop(frange range, float t)
         {
             t %= 1f;
             return range.start + t * range.extent;
         }
         [IN(LINE)]
-        public static float2 UnLerp(floatrange range, float2 v)
+        public static float2 UnLerp(frange range, float2 v)
         {
             return (v - range.start) / range.extent;
         }
         #endregion
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static floatrange Reverse(floatrange r)
+        public static frange Reverse(frange r)
         {
-            return floatrange.MinMax(r.Max, r.Min);
+            return frange.MinMax(r.Max, r.Min);
         }
     }
 }

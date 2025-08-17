@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -27,25 +28,32 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int2 Floor2Int(double2 a) { return new int2(Floor2Int(a.x), Floor2Int(a.y)); }
         [IN(LINE)] public static double2 Ceil(double2 a) { return new double2(Ceil(a.x), Ceil(a.y)); }
         [IN(LINE)] public static int2 Ceil2Int(double2 a) { return new int2(Ceil2Int(a.x), Ceil2Int(a.y)); }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint2 Round2UInt(double2 a) { return new uint2(Round2UInt(a.x), Round2UInt(a.y)); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint2 Floor2UInt(double2 a) { return new uint2(Floor2UInt(a.x), Floor2UInt(a.y)); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint2 Ceil2UInt(double2 a) { return new uint2(Ceil2UInt(a.x), Ceil2UInt(a.y)); }
         #endregion
 
         #region Clamp/Repeat/PingPong
         /// <summary> Clamps the value between min and max. </summary>
         [IN(LINE)] public static double2 Clamp(double2 a, double2 min, double2 max) { return Max(min, Min(max, a)); }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static double2 Clamp01(double2 a) { return Clamp(a, 0f, 1f); }
+        [IN(LINE)] public static double2 Clamp01(double2 a) { return Clamp(a, 0d, 1d); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static double2 ClampMirror1(double2 a) { return Clamp(a, -1f, 1f); }
+        [IN(LINE)] public static double2 ClampMirror1(double2 a) { return Clamp(a, -1d, 1d); }
 
-        [IN(LINE)] public static double2 Repeat(double2 a, double2 length) { return Clamp(a - Floor(a / length) * length, 0f, length); }
+        [IN(LINE)] public static double2 Repeat(double2 a, double2 length) { return Clamp(a - Floor(a / length) * length, 0d, length); }
         [IN(LINE)] public static double2 Repeat(double2 a, double2 min, double2 max) { return Repeat(a, max - min) + min; }
-        [IN(LINE)] public static double2 Repeat01(double2 a) { return Repeat(a, 1f); }
-        [IN(LINE)] public static double2 RepeatMirror1(double2 a) { return Repeat(a, -1f, 1f); }
+        [IN(LINE)] public static double2 Repeat01(double2 a) { return Repeat(a, 1d); }
+        [IN(LINE)] public static double2 RepeatMirror1(double2 a) { return Repeat(a, -1d, 1d); }
 
-        [IN(LINE)] public static double2 PingPong(double2 a, double2 length) { return length - Abs(Repeat(a, length * 2f) - length); }
+        [IN(LINE)] public static double2 PingPong(double2 a, double2 length) { return length - Abs(Repeat(a, length * 2d) - length); }
         [IN(LINE)] public static double2 PingPong(double2 a, double2 min, double2 max) { return PingPong(a, max - min) + min; }
-        [IN(LINE)] public static double2 PingPong01(double2 a) { return PingPong(a, 0f, 1f); }
-        [IN(LINE)] public static double2 PingPongMirror1(double2 a) { return PingPong(a, -1f, 1f); }
+        [IN(LINE)] public static double2 PingPong01(double2 a) { return PingPong(a, 0d, 1d); }
+        [IN(LINE)] public static double2 PingPongMirror1(double2 a) { return PingPong(a, -1d, 1d); }
         #endregion
 
         #region SmoothStep
@@ -54,19 +62,24 @@ namespace DCFApixels.DataMath
         public static double2 SmoothStep(double2 from, double2 to, double2 a)
         {
             var t = Clamp01((a - from) / (to - from));
-            return t * t * (3.0f - (2.0f * t));
+            return t * t * (3.0d - (2.0d * t));
         }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static double2 SmoothStep01(double2 a) { return SmoothStep(a, 0f, 1f); }
+        [IN(LINE)] public static double2 SmoothStep01(double2 a) { return SmoothStep(a, 0d, 1d); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static double2 SmoothStepMirror1(double2 a) { return SmoothStep(a, -1f, 1f); }
+        [IN(LINE)] public static double2 SmoothStepMirror1(double2 a) { return SmoothStep(a, -1d, 1d); }
         #endregion
 
-        #region Min/Max
+        #region Min/Max/Sum
         [IN(LINE)] public static double2 Max(double2 a, double2 b) { return new double2(Max(a.x, b.x), Max(a.y, b.y)); }
         [IN(LINE)] public static double2 AbsMax(double2 a, double2 b) { return new double2(AbsMax(a.x, b.x), AbsMax(a.y, b.y)); }
         [IN(LINE)] public static double2 Min(double2 a, double2 b) { return new double2(Min(a.x, b.x), Min(a.y, b.y)); }
         [IN(LINE)] public static double2 AbsMin(double2 a, double2 b) { return new double2(AbsMin(a.x, b.x), AbsMin(a.y, b.y)); }
+        [IN(LINE)] public static double CMax(double2 a) { return CMax(a.x, a.y); }
+        [IN(LINE)] public static double CAbsMax(double2 a) { return CAbsMax(a.x, a.y); }
+        [IN(LINE)] public static double CMin(double2 a) { return CMin(a.x, a.y); }
+        [IN(LINE)] public static double CAbsMin(double2 a) { return CAbsMin(a.x, a.y); }
+        [IN(LINE)] public static double CSum(double2 a) { return a.x + a.y; }
         #endregion
 
         #region Lerp
@@ -96,7 +109,7 @@ namespace DCFApixels.DataMath
             }
             double2 dif = to - from;
             double difpowmag = LengthSqr(dif);
-            if (difpowmag == 0f)
+            if (difpowmag == 0d)
             {
                 excess = distance;
                 return to;
@@ -120,24 +133,24 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static double2 LerpAngle(double2 start, double2 end, double t)
         {
-            double2 angle = Repeat(end - start, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //double angle = Repeat(end - start, -180f, 180f);
+            double2 angle = Repeat(end - start, 360d);
+            if (angle > 180d) { angle -= 360d; }
+            //double angle = Repeat(end - start, -180d, 180d);
             return start + angle * Clamp01(t);
         }
         [IN(LINE)]
         public static double2 DeltaAngle(double2 current, double2 target)
         {
-            double2 angle = Repeat(target - current, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //double angle = Repeat(end - start, -180f, 180f);
+            double2 angle = Repeat(target - current, 360d);
+            if (angle > 180d) { angle -= 360d; }
+            //double angle = Repeat(end - start, -180d, 180d);
             return angle;
         }
         [IN(LINE)]
         public static double2 MoveTowardsAngle(double2 current, double2 target, double maxDelta)
         {
             double2 delta = DeltaAngle(current, target);
-            if (0f - maxDelta < delta && delta < maxDelta)
+            if (0d - maxDelta < delta && delta < maxDelta)
             {
                 return target;
             }
@@ -155,12 +168,12 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Color
-        [IN(LINE)] public static double2 GammaToLinearSpace(double2 value) { const double Gamma = 2.2f; return Pow(value, Gamma); }
-        [IN(LINE)] public static double2 LinearToGammaSpace(double2 value) { const double InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        [IN(LINE)] public static double2 GammaToLinearSpace(double2 value) { const double Gamma = 2.2d; return Pow(value, Gamma); }
+        [IN(LINE)] public static double2 LinearToGammaSpace(double2 value) { const double InverseGamma = 1.0d / 2.2d; return Pow(value, InverseGamma); }
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool2 Approximately(double2 a, double2 b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool2 Approximately(double2 a, double2 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8d)); }
         [IN(LINE)] public static bool2 Approximately(double2 a, double2 b, double2 tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
@@ -169,7 +182,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double LengthSqr(double2 a) { return Dot(a, a); }
         [IN(LINE)] public static double Distance(double2 a, double2 b) { return Length(b - a); }
         [IN(LINE)] public static double DistanceSqr(double2 a, double2 b) { return LengthSqr(b - a); }
-        [IN(LINE)] public static double2 Normalize(double2 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
+        [IN(LINE)] public static double2 Normalize(double2 a) { return 1.0d / Sqrt(Dot(a, a)) * a; }
 
         [IN(LINE)] public static double Dot(double2 a, double2 b) { return a.x * b.x + a.y * b.y; }
         [IN(LINE)] public static double2 Project(double2 a, double2 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
@@ -180,10 +193,10 @@ namespace DCFApixels.DataMath
             return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
         }
         //[IN(LINE)] public static double2 Cross(double2 a, double2 b) { return (a * b.yzx - a.yzx * b).yzx; }
-        [IN(LINE)] public static double2 Reflect(double2 v, double2 n) { return v - 2f * n * Dot(v, n); }
+        [IN(LINE)] public static double2 Reflect(double2 v, double2 n) { return v - 2d * n * Dot(v, n); }
 
         [IN(LINE)] public static double2 Select(double2 falseValue, double2 trueValue, bool2 test) { return test ? trueValue : falseValue; }
-        [IN(LINE)] public static double2 Step(double2 threshold, double2 a) { return Select(0.0f, 1.0f, a >= threshold); }
+        [IN(LINE)] public static double2 Step(double2 threshold, double2 a) { return Select(0.0d, 1.0d, a >= threshold); }
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
         [IN(LINE)] public static double2 Degrees(double2 a) { return a * Rad2Deg; }

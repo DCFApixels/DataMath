@@ -15,4 +15,19 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool Any(bool4 a) { return a.x || a.y || a.z || a.w; }
         #endregion
     }
+    public static partial class DMBits // bool2
+    {
+        #region Bits
+        [IN(LINE)]
+        public static int BitMask(bool4 value)
+        {
+            int mask = 0;
+            if (value.x) { mask |= 0x01; }
+            if (value.y) { mask |= 0x02; }
+            if (value.z) { mask |= 0x04; }
+            if (value.w) { mask |= 0x08; }
+            return mask;
+        }
+        #endregion
+    }
 }

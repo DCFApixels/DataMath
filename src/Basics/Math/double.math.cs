@@ -1,4 +1,5 @@
 using DCFApixels.DataMath.Internal;
+using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -19,6 +20,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int Floor2Int(double a) { return (int)InternalMath.Floor(a); }
         [IN(LINE)] public static double Ceil(double a) { return InternalMath.Ceiling(a); }
         [IN(LINE)] public static int Ceil2Int(double a) { return (int)InternalMath.Ceiling(a); }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint Round2UInt(double a) { return (uint)InternalMath.Round(a); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint Floor2UInt(double a) { return (uint)InternalMath.Floor(a); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint Ceil2UInt(double a) { return (uint)InternalMath.Ceiling(a); }
         #endregion
 
         #region Clamp/Repeat/PingPong
@@ -60,11 +68,16 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double SmoothStepMirror1(double a) { return SmoothStep(a, -1f, 1f); }
         #endregion
 
-        #region Min/Max
+        #region Min/Max/Sum
         [IN(LINE)] public static double Max(double a, double b) { return a > b ? a : b; }
         [IN(LINE)] public static double AbsMax(double a, double b) { return InternalMath.Abs(a) > InternalMath.Abs(b) ? a : b; }
         [IN(LINE)] public static double Min(double a, double b) { return a < b ? a : b; }
         [IN(LINE)] public static double AbsMin(double a, double b) { return InternalMath.Abs(a) < InternalMath.Abs(b) ? a : b; }
+        [IN(LINE)] public static double CMax(double a) { return a; }
+        [IN(LINE)] public static double CAbsMax(double a) { return a; }
+        [IN(LINE)] public static double CMin(double a) { return a; }
+        [IN(LINE)] public static double CAbsMin(double a) { return a; }
+        [IN(LINE)] public static double CSum(double a) { return a; }
         #endregion
 
         #region Lerp
@@ -154,41 +167,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool Approximately(double a, double b, double tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
-        #region Pow2
-        //public static int CeilPow2(int value)
-        //{
-        //    value--;
-        //    value |= value >> 16;
-        //    value |= value >> 8;
-        //    value |= value >> 4;
-        //    value |= value >> 2;
-        //    value |= value >> 1;
-        //    return value + 1;
-        //}
-        //public static int FloorPow2(int value)
-        //{
-        //    var result = CeilPow2(value);
-        //    return result == value ? value : result >> 1;
-        //}
-        //public static int RoundPow2(int value)
-        //{
-        //    value = CeilPow2(value);
-        //    int floor = value >> 1;
-        //    if (value - floor < value - value)
-        //    {
-        //        return floor;
-        //    }
-        //    return value;
-        //}
-        //[IN(LINE)] public static bool IsPow2(int value { return (value & (value - 1)) == 0; }
-        #endregion
-
         #region Other
-        [IN(LINE)] public static double Length(double a) { return Sqrt(Dot(a, a)); }
-        [IN(LINE)] public static double LengthSqr(double a) { return Dot(a, a); }
-        [IN(LINE)] public static double Distance(double a, double b) { return Length(b - a); }
-        [IN(LINE)] public static double DistanceSqr(double a, double b) { return LengthSqr(b - a); }
-        [IN(LINE)] public static double Normalize(double a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
+        [IN(LINE)] public static double Length(double a) { return a; }
+        [IN(LINE)] public static double LengthSqr(double a) { return Sqr(a); }
+        [IN(LINE)] public static double Distance(double a, double b) { return b - a; }
+        [IN(LINE)] public static double DistanceSqr(double a, double b) { return Sqr(b - a); }
+        [IN(LINE)] public static double Normalize(double a) { return a < 0d ? -1d : 1d; }
 
         [IN(LINE)] public static double Dot(double a, double b) { return a * b; }
         [IN(LINE)] public static double Project(double a, double ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
@@ -254,49 +238,49 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Component iteration operations
-        // Max overloads (3-8 args)
-        [IN(LINE)] public static double Max(double a, double b, double c) { return Max(Max(a, b), c); }
-        [IN(LINE)] public static double Max(double a, double b, double c, double d) { return Max(Max(a, b, c), d); }
-        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e) { return Max(Max(a, b, c, d), e); }
-        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e, double f) { return Max(Max(a, b, c, d, e), f); }
-        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e, double f, double g) { return Max(Max(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static double Max(double a, double b, double c, double d, double e, double f, double g, double h) { return Max(Max(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static double CMax(double a, double b) { return Max(a, b); }
+        [IN(LINE)] public static double CMax(double a, double b, double c) { return Max(Max(a, b), c); }
+        [IN(LINE)] public static double CMax(double a, double b, double c, double d) { return Max(CMax(a, b, c), d); }
+        [IN(LINE)] public static double CMax(double a, double b, double c, double d, double e) { return Max(CMax(a, b, c, d), e); }
+        [IN(LINE)] public static double CMax(double a, double b, double c, double d, double e, double f) { return Max(CMax(a, b, c, d, e), f); }
+        [IN(LINE)] public static double CMax(double a, double b, double c, double d, double e, double f, double g) { return Max(CMax(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double CMax(double a, double b, double c, double d, double e, double f, double g, double h) { return Max(CMax(a, b, c, d, e, f, g), h); }
 
-        // AbsMax overloads (3-8 args)
-        [IN(LINE)] public static double AbsMax(double a, double b, double c) { return AbsMax(AbsMax(a, b), c); }
-        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d) { return AbsMax(AbsMax(a, b, c), d); }
-        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e) { return AbsMax(AbsMax(a, b, c, d), e); }
-        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e, double f) { return AbsMax(AbsMax(a, b, c, d, e), f); }
-        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e, double f, double g) { return AbsMax(AbsMax(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static double AbsMax(double a, double b, double c, double d, double e, double f, double g, double h) { return AbsMax(AbsMax(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static double CAbsMax(double a, double b) { return AbsMax(a, b); }
+        [IN(LINE)] public static double CAbsMax(double a, double b, double c) { return AbsMax(AbsMax(a, b), c); }
+        [IN(LINE)] public static double CAbsMax(double a, double b, double c, double d) { return AbsMax(CAbsMax(a, b, c), d); }
+        [IN(LINE)] public static double CAbsMax(double a, double b, double c, double d, double e) { return AbsMax(CAbsMax(a, b, c, d), e); }
+        [IN(LINE)] public static double CAbsMax(double a, double b, double c, double d, double e, double f) { return AbsMax(CAbsMax(a, b, c, d, e), f); }
+        [IN(LINE)] public static double CAbsMax(double a, double b, double c, double d, double e, double f, double g) { return AbsMax(CAbsMax(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double CAbsMax(double a, double b, double c, double d, double e, double f, double g, double h) { return AbsMax(CAbsMax(a, b, c, d, e, f, g), h); }
 
-        // Min overloads (3-8 args)
-        [IN(LINE)] public static double Min(double a, double b, double c) { return Min(Min(a, b), c); }
-        [IN(LINE)] public static double Min(double a, double b, double c, double d) { return Min(Min(a, b, c), d); }
-        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e) { return Min(Min(a, b, c, d), e); }
-        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e, double f) { return Min(Min(a, b, c, d, e), f); }
-        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e, double f, double g) { return Min(Min(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static double Min(double a, double b, double c, double d, double e, double f, double g, double h) { return Min(Min(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static double CMin(double a, double b) { return Min(a, b); }
+        [IN(LINE)] public static double CMin(double a, double b, double c) { return Min(Min(a, b), c); }
+        [IN(LINE)] public static double CMin(double a, double b, double c, double d) { return Min(CMin(a, b, c), d); }
+        [IN(LINE)] public static double CMin(double a, double b, double c, double d, double e) { return Min(CMin(a, b, c, d), e); }
+        [IN(LINE)] public static double CMin(double a, double b, double c, double d, double e, double f) { return Min(CMin(a, b, c, d, e), f); }
+        [IN(LINE)] public static double CMin(double a, double b, double c, double d, double e, double f, double g) { return Min(CMin(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double CMin(double a, double b, double c, double d, double e, double f, double g, double h) { return Min(CMin(a, b, c, d, e, f, g), h); }
 
-        // AbsMin overloads (3-8 args)
-        [IN(LINE)] public static double AbsMin(double a, double b, double c) { return AbsMin(AbsMin(a, b), c); }
-        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d) { return AbsMin(AbsMin(a, b, c), d); }
-        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e) { return AbsMin(AbsMin(a, b, c, d), e); }
-        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e, double f) { return AbsMin(AbsMin(a, b, c, d, e), f); }
-        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e, double f, double g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static double AbsMin(double a, double b, double c, double d, double e, double f, double g, double h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static double CAbsMin(double a, double b) { return AbsMin(a, b); }
+        [IN(LINE)] public static double CAbsMin(double a, double b, double c) { return AbsMin(AbsMin(a, b), c); }
+        [IN(LINE)] public static double CAbsMin(double a, double b, double c, double d) { return AbsMin(CAbsMin(a, b, c), d); }
+        [IN(LINE)] public static double CAbsMin(double a, double b, double c, double d, double e) { return AbsMin(CAbsMin(a, b, c, d), e); }
+        [IN(LINE)] public static double CAbsMin(double a, double b, double c, double d, double e, double f) { return AbsMin(CAbsMin(a, b, c, d, e), f); }
+        [IN(LINE)] public static double CAbsMin(double a, double b, double c, double d, double e, double f, double g) { return AbsMin(CAbsMin(a, b, c, d, e, f), g); }
+        [IN(LINE)] public static double CAbsMin(double a, double b, double c, double d, double e, double f, double g, double h) { return AbsMin(CAbsMin(a, b, c, d, e, f, g), h); }
 
-        // overloads (vectorN args)
+
         [IN(LINE)]
-        public static double Max<T>(T a, double _ = default) where T : IVectorN<double>
+        public static double CMax<T>(T a, double _ = default) where T : IVectorN<double>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
                 case 2: return Max(a[0], a[1]);
-                case 3: return Max(a[0], a[1], a[2]);
-                case 4: return Max(a[0], a[1], a[2], a[3]);
+                case 3: return CMax(a[0], a[1], a[2]);
+                case 4: return CMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
@@ -308,15 +292,15 @@ namespace DCFApixels.DataMath
             return default;
         }
         [IN(LINE)]
-        public static double AbsMax<T>(T a, double _ = default) where T : IVectorN<double>
+        public static double CAbsMax<T>(T a, double _ = default) where T : IVectorN<double>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
                 case 2: return AbsMax(a[0], a[1]);
-                case 3: return AbsMax(a[0], a[1], a[2]);
-                case 4: return AbsMax(a[0], a[1], a[2], a[3]);
+                case 3: return CAbsMax(a[0], a[1], a[2]);
+                case 4: return CAbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
@@ -328,15 +312,15 @@ namespace DCFApixels.DataMath
             return default;
         }
         [IN(LINE)]
-        public static double Min<T>(T a, double _ = default) where T : IVectorN<double>
+        public static double CMin<T>(T a, double _ = default) where T : IVectorN<double>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
                 case 2: return Min(a[0], a[1]);
-                case 3: return Min(a[0], a[1], a[2]);
-                case 4: return Min(a[0], a[1], a[2], a[3]);
+                case 3: return CMin(a[0], a[1], a[2]);
+                case 4: return CMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
@@ -348,15 +332,15 @@ namespace DCFApixels.DataMath
             return default;
         }
         [IN(LINE)]
-        public static double AbsMin<T>(T a, double _ = default) where T : IVectorN<double>
+        public static double CAbsMin<T>(T a, double _ = default) where T : IVectorN<double>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
                 case 2: return AbsMin(a[0], a[1]);
-                case 3: return AbsMin(a[0], a[1], a[2]);
-                case 4: return AbsMin(a[0], a[1], a[2], a[3]);
+                case 3: return CAbsMin(a[0], a[1], a[2]);
+                case 4: return CAbsMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
@@ -368,11 +352,8 @@ namespace DCFApixels.DataMath
             return default;
         }
 
-        [IN(LINE)] public static double Sum(double2 a) { return a.x + a.y; }
-        [IN(LINE)] public static double Sum(double3 a) { return a.x + a.y + a.z; }
-        [IN(LINE)] public static double Sum(double4 a) { return a.x + a.y + a.z + a.w; }
         [IN(LINE)]
-        public static double Sum<T>(T a, double _ = default) where T : IVectorN<double>
+        public static double CSum<T>(T a, double _ = default) where T : IVectorN<double>
         {
             switch (a.count)
             {

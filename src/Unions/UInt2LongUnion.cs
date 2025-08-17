@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 namespace DCFApixels.DataMath
 {
     [StructLayout(LayoutKind.Explicit, Pack = 8, Size = 8)]
-    public readonly struct UInt2LongUnion
+    public struct UInt2LongUnion
     {
         [FieldOffset(0)]
-        public readonly uint2 uint2Value;
+        public uint2 uint2Value;
         [FieldOffset(0)]
-        public readonly long longValue;
+        public long longValue;
 
         #region Constructors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

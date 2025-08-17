@@ -1,4 +1,5 @@
-﻿using static DCFApixels.DataMath.Consts;
+﻿using System.ComponentModel;
+using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -26,6 +27,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int2 Floor2Int(float2 a) { return new int2(Floor2Int(a.x), Floor2Int(a.y)); }
         [IN(LINE)] public static float2 Ceil(float2 a) { return new float2(Ceil(a.x), Ceil(a.y)); }
         [IN(LINE)] public static int2 Ceil2Int(float2 a) { return new int2(Ceil2Int(a.x), Ceil2Int(a.y)); }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint2 Round2UInt(float2 a) { return new uint2(Round2UInt(a.x), Round2UInt(a.y)); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint2 Floor2UInt(float2 a) { return new uint2(Floor2UInt(a.x), Floor2UInt(a.y)); }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [IN(LINE)] public static uint2 Ceil2UInt(float2 a) { return new uint2(Ceil2UInt(a.x), Ceil2UInt(a.y)); }
         #endregion
 
         #region Clamp/Repeat/PingPong
@@ -61,11 +69,16 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float2 SmoothStepMirror1(float2 a) { return SmoothStep(a, -1f, 1f); }
         #endregion
 
-        #region Min/Max
+        #region Min/Max/Sum
         [IN(LINE)] public static float2 Max(float2 a, float2 b) { return new float2(Max(a.x, b.x), Max(a.y, b.y)); }
         [IN(LINE)] public static float2 AbsMax(float2 a, float2 b) { return new float2(AbsMax(a.x, b.x), AbsMax(a.y, b.y)); }
         [IN(LINE)] public static float2 Min(float2 a, float2 b) { return new float2(Min(a.x, b.x), Min(a.y, b.y)); }
         [IN(LINE)] public static float2 AbsMin(float2 a, float2 b) { return new float2(AbsMin(a.x, b.x), AbsMin(a.y, b.y)); }
+        [IN(LINE)] public static float CMax(float2 a) { return CMax(a.x, a.y); }
+        [IN(LINE)] public static float CAbsMax(float2 a) { return CAbsMax(a.x, a.y); }
+        [IN(LINE)] public static float CMin(float2 a) { return CMin(a.x, a.y); }
+        [IN(LINE)] public static float CAbsMin(float2 a) { return CAbsMin(a.x, a.y); }
+        [IN(LINE)] public static float CSum(float2 a) { return a.x + a.y; }
         #endregion
 
         #region Lerp
@@ -159,7 +172,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool2 Approximately(float2 a, float2 b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool2 Approximately(float2 a, float2 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
         [IN(LINE)] public static bool2 Approximately(float2 a, float2 b, float2 tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 

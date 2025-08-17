@@ -19,6 +19,7 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator Vector4(float2 a) => new Vector4(a.x, a.y, 0f, 0f);
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2(Vector2 a) => new float2(a.x, a.y);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -31,11 +32,6 @@ namespace DCFApixels.DataMath
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2(Vector4 a) => new float2(a.x, a.y);
-    }
-
-    public static partial class math
-    {
-
     }
 }
 #endif

@@ -1,6 +1,6 @@
 ﻿namespace DCFApixels.DataMath.TODO
 {
-    internal struct plane
+    internal struct grid
     {
     }
 }

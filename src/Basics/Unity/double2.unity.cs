@@ -33,10 +33,5 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double2(Vector4 a) => new double2(a.x, a.y);
     }
-
-    public static partial class math
-    {
-
-    }
 }
 #endif

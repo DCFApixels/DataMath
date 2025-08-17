@@ -4,19 +4,19 @@ using System.Runtime.InteropServices;
 namespace DCFApixels.DataMath
 {
     [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 4)]
-    public readonly ref struct ColorCodeUnion
+    public ref struct ColorCodeUnion
     {
         [FieldOffset(3)]
-        public readonly byte r8;
+        public byte r8;
         [FieldOffset(2)]
-        public readonly byte g8;
+        public byte g8;
         [FieldOffset(1)]
-        public readonly byte b8;
+        public byte b8;
         [FieldOffset(0)]
-        public readonly byte a8;
+        public byte a8;
 
         [FieldOffset(0)]
-        public readonly uint code;
+        public uint code;
 
         #region Properrties
         public float r

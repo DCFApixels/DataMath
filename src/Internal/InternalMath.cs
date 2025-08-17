@@ -6,6 +6,7 @@
 #endif
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 //#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
@@ -787,14 +788,18 @@ namespace DCFApixels.DataMath.Internal
             return Math.Exp(pow) * 2.302585092994045684d;
         }
         [IN(LINE)]
-        public static float Truncate(float x)
+        public static float Truncate(float a)
         {
-            return (float)Math.Truncate(x);
+            return (float)Math.Truncate(a);
         }
         [IN(LINE)]
-        public static double Truncate(double x)
+        public static double Truncate(double a)
         {
-            return Math.Truncate(x);
+            return Math.Truncate(a);
         }
+
+
+
+
     }
 }

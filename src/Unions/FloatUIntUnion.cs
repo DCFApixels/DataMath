@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 namespace DCFApixels.DataMath
 {
     [StructLayout(LayoutKind.Explicit, Pack = 4, Size = 4)]
-    public readonly struct FloatUIntUnion
+    public struct FloatUIntUnion
     {
         [FieldOffset(0)]
-        public readonly float floatValue;
+        public float floatValue;
         [FieldOffset(0)]
-        public readonly uint uintValue;
+        public uint uintValue;
 
         #region Constructors
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
