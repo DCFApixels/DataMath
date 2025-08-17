@@ -213,6 +213,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float2 Atan2(float2 a, float2 b) { return new float2(Atan2(a.x, b.x), Atan2(a.y, b.y)); }
 
         [IN(LINE)] public static float2 Sqr(float2 a) { return a * a; }
+        [IN(LINE)] public static float2 Sqrt(float2 a) { return new float2(Sqrt(a.x), Sqrt(a.y)); }
         [IN(LINE)] public static float2 Pow(float2 a, float2 b) { return new float2(Pow(a.x, a.y), Pow(a.y, a.y)); }
         [IN(LINE)] public static float2 Exp(float2 pow) { return new float2(Exp(pow.x), Exp(pow.y)); }
         [IN(LINE)] public static float2 Exp2(float2 pow) { return new float2(Exp2(pow.x), Exp2(pow.y)); }
@@ -221,7 +222,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float2 Log(float2 f) { return new float2(Log(f.x), Log(f.y)); }
         [IN(LINE)] public static float2 Log2(float2 f) { return new float2(Log2(f.x), Log2(f.y)); }
         [IN(LINE)] public static float2 Log10(float2 f) { return new float2(Log10(f.x), Log10(f.y)); }
-        [IN(LINE)] public static float2 Sqrt(float2 a) { return new float2(Sqrt(a.x), Sqrt(a.y)); }
 
         [IN(LINE)] public static float2 Tan(float2 a) { return new float2(Tan(a.x), Tan(a.y)); }
         [IN(LINE)] public static float2 Tanh(float2 a) { return new float2(Tanh(a.x), Tanh(a.y)); }

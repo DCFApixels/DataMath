@@ -214,6 +214,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double2 Atan2(double2 a, double2 b) { return new double2(Atan2(a.x, b.x), Atan2(a.y, b.y)); }
 
         [IN(LINE)] public static double2 Sqr(double2 a) { return a * a; }
+        [IN(LINE)] public static double2 Sqrt(double2 a) { return new double2(Sqrt(a.x), Sqrt(a.y)); }
         [IN(LINE)] public static double2 Pow(double2 a, double2 b) { return new double2(Pow(a.x, a.y), Pow(a.y, a.y)); }
         [IN(LINE)] public static double2 Exp(double2 pow) { return new double2(Exp(pow.x), Exp(pow.y)); }
         [IN(LINE)] public static double2 Exp2(double2 pow) { return new double2(Exp2(pow.x), Exp2(pow.y)); }
@@ -222,7 +223,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double2 Log(double2 f) { return new double2(Log(f.x), Log(f.y)); }
         [IN(LINE)] public static double2 Log2(double2 f) { return new double2(Log2(f.x), Log2(f.y)); }
         [IN(LINE)] public static double2 Log10(double2 f) { return new double2(Log10(f.x), Log10(f.y)); }
-        [IN(LINE)] public static double2 Sqrt(double2 a) { return new double2(Sqrt(a.x), Sqrt(a.y)); }
 
         [IN(LINE)] public static double2 Tan(double2 a) { return new double2(Tan(a.x), Tan(a.y)); }
         [IN(LINE)] public static double2 Tanh(double2 a) { return new double2(Tanh(a.x), Tanh(a.y)); }

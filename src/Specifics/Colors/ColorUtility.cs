@@ -36,7 +36,7 @@ namespace DCFApixels.DataMath
         public static void RGBToHSV(color rgbColor, out float h, out float s, out float v)
         {
             if ((rgbColor.b > rgbColor.g) && (rgbColor.b > rgbColor.r))
-            { 
+            {
                 RGBToHSVInternal(4f, rgbColor.b, rgbColor.r, rgbColor.g, out h, out s, out v);
             }
             else if (rgbColor.g > rgbColor.r)

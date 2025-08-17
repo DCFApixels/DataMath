@@ -73,7 +73,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float SmoothStepMirror1(float a) { return SmoothStep(a, -1f, 1f); }
         #endregion
 
-        #region Min/Max
+        #region Min/Max/Sum
         [IN(LINE)] public static float Max(float a, float b) { return a > b ? a : b; }
         [IN(LINE)] public static float AbsMax(float a, float b) { return InternalMath.Abs(a) > InternalMath.Abs(b) ? a : b; }
         [IN(LINE)] public static float Min(float a, float b) { return a < b ? a : b; }
@@ -82,6 +82,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float CAbsMax(float a) { return a; }
         [IN(LINE)] public static float CMin(float a) { return a; }
         [IN(LINE)] public static float CAbsMin(float a) { return a; }
+        [IN(LINE)] public static float CSum(float a) { return a; }
         #endregion
 
         #region Lerp
@@ -208,6 +209,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Atan2(float a, float b) { return InternalMath.Atan2(a, b); }
 
         [IN(LINE)] public static float Sqr(float a) { return a * a; }
+        [IN(LINE)] public static float Sqrt(float a) { return InternalMath.Sqrt(a); }
         [IN(LINE)] public static float Pow(float a, float b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static float Exp(float pow) { return InternalMath.Exp(pow); }
         [IN(LINE)] public static float Exp2(float pow) { return InternalMath.Exp2(pow); }
@@ -216,7 +218,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Log(float f) { return InternalMath.Log(f); }
         [IN(LINE)] public static float Log2(float f) { return InternalMath.Log2(f); }
         [IN(LINE)] public static float Log10(float f) { return InternalMath.Log10(f); }
-        [IN(LINE)] public static float Sqrt(float a) { return InternalMath.Sqrt(a); }
 
         [IN(LINE)] public static float Tan(float a) { return InternalMath.Tan(a); }
         [IN(LINE)] public static float Tanh(float a) { return InternalMath.Tanh(a); }
@@ -245,35 +246,35 @@ namespace DCFApixels.DataMath
         #region Component iteration operations
         [IN(LINE)] public static float CMax(float a, float b) { return Max(a, b); }
         [IN(LINE)] public static float CMax(float a, float b, float c) { return Max(Max(a, b), c); }
-        [IN(LINE)] public static float CMax(float a, float b, float c, float d) { return Max(CMax(a, b, c), d); }
+        [IN(LINE)] public static float CMax(float a, float b, float c, float d) { return Max(Max(a, b), Max(c, d)); }
         [IN(LINE)] public static float CMax(float a, float b, float c, float d, float e) { return Max(CMax(a, b, c, d), e); }
-        [IN(LINE)] public static float CMax(float a, float b, float c, float d, float e, float f) { return Max(CMax(a, b, c, d, e), f); }
-        [IN(LINE)] public static float CMax(float a, float b, float c, float d, float e, float f, float g) { return Max(CMax(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float CMax(float a, float b, float c, float d, float e, float f, float g, float h) { return Max(CMax(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static float CMax(float a, float b, float c, float d, float e, float f) { return Max(CMax(a, b, c, d), Max(e, f)); }
+        [IN(LINE)] public static float CMax(float a, float b, float c, float d, float e, float f, float g) { return Max(CMax(a, b, c, d), Max(Max(a, b), c)); }
+        [IN(LINE)] public static float CMax(float a, float b, float c, float d, float e, float f, float g, float h) { return Max(CMax(a, b, c, d), CMax(e, f, g, h)); }
 
         [IN(LINE)] public static float CAbsMax(float a, float b) { return AbsMax(a, b); }
         [IN(LINE)] public static float CAbsMax(float a, float b, float c) { return AbsMax(AbsMax(a, b), c); }
-        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d) { return AbsMax(CAbsMax(a, b, c), d); }
+        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d) { return AbsMax(AbsMax(a, b), AbsMax(c, d)); }
         [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d, float e) { return AbsMax(CAbsMax(a, b, c, d), e); }
-        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d, float e, float f) { return AbsMax(CAbsMax(a, b, c, d, e), f); }
-        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d, float e, float f, float g) { return AbsMax(CAbsMax(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMax(CAbsMax(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d, float e, float f) { return AbsMax(CAbsMax(a, b, c, d), AbsMax(e, f)); }
+        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d, float e, float f, float g) { return AbsMax(CAbsMax(a, b, c, d), AbsMax(AbsMax(a, b), c)); }
+        [IN(LINE)] public static float CAbsMax(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMax(CAbsMax(a, b, c, d), CAbsMax(e, f, g, h)); }
 
         [IN(LINE)] public static float CMin(float a, float b) { return Min(a, b); }
         [IN(LINE)] public static float CMin(float a, float b, float c) { return Min(Min(a, b), c); }
-        [IN(LINE)] public static float CMin(float a, float b, float c, float d) { return Min(CMin(a, b, c), d); }
+        [IN(LINE)] public static float CMin(float a, float b, float c, float d) { return Min(Min(a, b), Min(c, d)); }
         [IN(LINE)] public static float CMin(float a, float b, float c, float d, float e) { return Min(CMin(a, b, c, d), e); }
-        [IN(LINE)] public static float CMin(float a, float b, float c, float d, float e, float f) { return Min(CMin(a, b, c, d, e), f); }
-        [IN(LINE)] public static float CMin(float a, float b, float c, float d, float e, float f, float g) { return Min(CMin(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float CMin(float a, float b, float c, float d, float e, float f, float g, float h) { return Min(CMin(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static float CMin(float a, float b, float c, float d, float e, float f) { return Min(CMin(a, b, c, d), Min(e, f)); }
+        [IN(LINE)] public static float CMin(float a, float b, float c, float d, float e, float f, float g) { return Min(CMin(a, b, c, d), Min(Min(a, b), c)); }
+        [IN(LINE)] public static float CMin(float a, float b, float c, float d, float e, float f, float g, float h) { return Min(CMin(a, b, c, d), CMin(e, f, g, h)); }
 
         [IN(LINE)] public static float CAbsMin(float a, float b) { return AbsMin(a, b); }
         [IN(LINE)] public static float CAbsMin(float a, float b, float c) { return AbsMin(AbsMin(a, b), c); }
-        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d) { return AbsMin(CAbsMin(a, b, c), d); }
+        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d) { return AbsMin(AbsMin(a, b), AbsMin(c, d)); }
         [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d, float e) { return AbsMin(CAbsMin(a, b, c, d), e); }
-        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d, float e, float f) { return AbsMin(CAbsMin(a, b, c, d, e), f); }
-        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d, float e, float f, float g) { return AbsMin(CAbsMin(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMin(CAbsMin(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d, float e, float f) { return AbsMin(CAbsMin(a, b, c, d), AbsMin(e, f)); }
+        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d, float e, float f, float g) { return AbsMin(CAbsMin(a, b, c, d), AbsMin(AbsMin(a, b), c)); }
+        [IN(LINE)] public static float CAbsMin(float a, float b, float c, float d, float e, float f, float g, float h) { return AbsMin(CAbsMin(a, b, c, d), CAbsMin(e, f, g, h)); }
 
 
         [IN(LINE)]

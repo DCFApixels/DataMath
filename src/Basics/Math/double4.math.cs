@@ -1,4 +1,3 @@
-using DCFApixels.DataMath.Internal;
 using System;
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
@@ -214,6 +213,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 Atan2(double4 a, double4 b) { return new double4(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z), Atan2(a.w, b.w)); }
 
         [IN(LINE)] public static double4 Sqr(double4 a) { return a * a; }
+        [IN(LINE)] public static double4 Sqrt(double4 a) { return new double4(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z), Sqrt(a.w)); }
         [IN(LINE)] public static double4 Pow(double4 a, double4 b) { return new double4(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z), Pow(a.w, a.w)); }
         [IN(LINE)] public static double4 Exp(double4 pow) { return new double4(Exp(pow.x), Exp(pow.y), Exp(pow.z), Exp(pow.z)); }
         [IN(LINE)] public static double4 Exp2(double4 pow) { return new double4(Exp2(pow.x), Exp2(pow.y), Exp2(pow.z), Exp2(pow.z)); }
@@ -222,7 +222,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 Log(double4 f) { return new double4(Log(f.x), Log(f.y), Log(f.z), Log(f.z)); }
         [IN(LINE)] public static double4 Log2(double4 f) { return new double4(Log2(f.x), Log2(f.y), Log2(f.z), Log2(f.z)); }
         [IN(LINE)] public static double4 Log10(double4 f) { return new double4(Log10(f.x), Log10(f.y), Log10(f.z), Log10(f.z)); }
-        [IN(LINE)] public static double4 Sqrt(double4 a) { return new double4(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z), Sqrt(a.w)); }
 
         [IN(LINE)] public static double4 Tan(double4 a) { return new double4(Tan(a.x), Tan(a.y), Tan(a.z), Tan(a.w)); }
         [IN(LINE)] public static double4 Tanh(double4 a) { return new double4(Tanh(a.x), Tanh(a.y), Tanh(a.z), Tanh(a.w)); }

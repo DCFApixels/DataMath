@@ -1,13 +1,9 @@
 using DCFApixels.DataMath.Internal;
-#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
-#else
-#endif
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    //uint
     public static partial class DM // uint self
     {
 
@@ -29,28 +25,23 @@ namespace DCFApixels.DataMath
             return a;
         }
 
-        [IN(LINE)] public static uint Repeat(uint a, uint length) { return Clamp(a - ((uint)Floor(a / (float)length)) * length, 0u, length); }
+        [IN(LINE)] public static uint Repeat(uint a, uint length) { return a % length; }
         [IN(LINE)] public static uint Repeat(uint a, uint min, uint max) { return Repeat(a, max - min) + min; }
 
         [IN(LINE)] public static uint PingPong(uint a, uint length) { return length - Abs(Repeat(a, length * 2) - length); }
         [IN(LINE)] public static uint PingPong(uint a, uint min, uint max) { return PingPong(a, max - min) + min; }
         #endregion
 
-        #region SmoothStep
-        /// <summary> Clamps the value between from and to. </summary>
-        [IN(LINE)]
-        public static uint SmoothStep(uint from, uint to, uint a)
-        {
-            var t = Clamp01(((float)a - from) / (to - from));
-            return ((uint)Floor(t * t * (3 - (2 * t))));
-        }
-        #endregion
-
-        #region Min/Max
+        #region Min/Max/Sum
         [IN(LINE)] public static uint Max(uint a, uint b) { return a > b ? a : b; }
         [IN(LINE)] public static uint AbsMax(uint a, uint b) { return InternalMath.Abs(a) > InternalMath.Abs(b) ? a : b; }
         [IN(LINE)] public static uint Min(uint a, uint b) { return a < b ? a : b; }
         [IN(LINE)] public static uint AbsMin(uint a, uint b) { return InternalMath.Abs(a) < InternalMath.Abs(b) ? a : b; }
+        [IN(LINE)] public static uint CMax(uint a) { return a; }
+        [IN(LINE)] public static uint CAbsMax(uint a) { return a; }
+        [IN(LINE)] public static uint CMin(uint a) { return a; }
+        [IN(LINE)] public static uint CAbsMin(uint a) { return a; }
+        [IN(LINE)] public static uint CSum(uint a) { return a; }
         #endregion
 
         #region Pow2
@@ -86,6 +77,13 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Other
+        //Length - float
+        //Distance - float
+        //Sqrt - float
+        [IN(LINE)] public static uint LengthSqr(uint a) { return Sqr(a); }
+        [IN(LINE)] public static uint DistanceSqr(uint a, uint b) { return Sqr(b - a); }
+        [IN(LINE)] public static uint Sqr(uint a) { return a * a; }
+        [IN(LINE)] public static uint Pow(uint a, uint b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static uint Dot(uint a, uint b) { return a * b; }
         [IN(LINE)] public static uint Select(uint falseValue, uint trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion
@@ -97,7 +95,6 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Component iteration operations
-        // Max overloads (3-8 args)
         [IN(LINE)] public static uint Max(uint a, uint b, uint c) { return Max(Max(a, b), c); }
         [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d) { return Max(Max(a, b, c), d); }
         [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d, uint e) { return Max(Max(a, b, c, d), e); }
@@ -105,7 +102,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return Max(Max(a, b, c, d, e, f), g); }
         [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return Max(Max(a, b, c, d, e, f, g), h); }
 
-        // AbsMax overloads (3-8 args)
         [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c) { return AbsMax(AbsMax(a, b), c); }
         [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d) { return AbsMax(AbsMax(a, b, c), d); }
         [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d, uint e) { return AbsMax(AbsMax(a, b, c, d), e); }
@@ -113,7 +109,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return AbsMax(AbsMax(a, b, c, d, e, f), g); }
         [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return AbsMax(AbsMax(a, b, c, d, e, f, g), h); }
 
-        // Min overloads (3-8 args)
         [IN(LINE)] public static uint Min(uint a, uint b, uint c) { return Min(Min(a, b), c); }
         [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d) { return Min(Min(a, b, c), d); }
         [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d, uint e) { return Min(Min(a, b, c, d), e); }
@@ -121,7 +116,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return Min(Min(a, b, c, d, e, f), g); }
         [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return Min(Min(a, b, c, d, e, f, g), h); }
 
-        // AbsMin overloads (3-8 args)
         [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c) { return AbsMin(AbsMin(a, b), c); }
         [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d) { return AbsMin(AbsMin(a, b, c), d); }
         [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d, uint e) { return AbsMin(AbsMin(a, b, c, d), e); }
@@ -129,7 +123,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
         [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
 
-        // overloads (vectorN args)
+
         [IN(LINE)]
         public static uint Max<T>(T a, uint _ = default) where T : IVectorN<uint>
         {
@@ -249,6 +243,13 @@ namespace DCFApixels.DataMath
 
     public static partial class DMBits // uint
     {
-        [IN(LINE)] public static int CountBits(uint a) { unchecked { return InternalBits.CountBits(a); } }
+        #region Rnd
+        [IN(LINE)] public static uint NextXorShiftState(uint a) { unchecked { return InternalBits.NextXorShiftState(a); } }
+        #endregion
+
+        #region Other
+        [IN(LINE)] public static int Count(uint a) { unchecked { return InternalBits.CountBits(a); } }
+        [IN(LINE)] public static uint Reverse(uint a) { unchecked { return InternalBits.ReverseLookup(a); } }
+        #endregion
     }
 }

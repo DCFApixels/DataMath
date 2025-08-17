@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DCFApixels.DataMath
+﻿namespace DCFApixels.DataMath
 {
     public static partial class DMBits
     {

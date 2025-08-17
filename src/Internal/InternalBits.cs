@@ -67,6 +67,10 @@ namespace DCFApixels.DataMath.Internal
             0x0F, 0x8F, 0x4F, 0xCF, 0x2F, 0xAF, 0x6F, 0xEF, 0x1F, 0x9F, 0x5F, 0xDF, 0x3F, 0xBF, 0x7F, 0xFF
             };
 
+        public static int ReverseLookup(int x)
+        {
+            unchecked { return (int)ReverseLookup((uint)x); }
+        }
         public static uint ReverseLookup(uint x)
         {
             return ((uint)BitReverseTable256[x & 0xff] << 24) |

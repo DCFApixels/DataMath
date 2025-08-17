@@ -1,11 +1,13 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -41,8 +43,11 @@ namespace DCFApixels.DataMath
         public static readonly bool3 forward = new bool3(0, 0, 1);
         #endregion
 
+        [MarshalAs(UnmanagedType.U1)]
         public bool x;
+        [MarshalAs(UnmanagedType.U1)]
         public bool y;
+        [MarshalAs(UnmanagedType.U1)]
         public bool z;
 
         #region IColor
@@ -67,14 +72,14 @@ namespace DCFApixels.DataMath
             get
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (bool3* array = &this) { return ((bool*)array)[index]; }
             }
             set
             {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (bool* array = &x) { array[index] = value; }
             }
@@ -105,12 +110,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool3 operator !(bool3 a) { return new bool3(!a.x, !a.y, !a.z); }
 
         [IN(LINE)] public static bool3 operator |(bool3 a, bool3 b) { return new bool3(a.x | b.x, a.y | b.y, a.z | b.z); }
-        //[IN(LINE)] public static bool3 operator |(bool3 a, bool b) { return new bool3(a.x | b, a.y | b, a.z | b); }
-        //[IN(LINE)] public static bool3 operator |(bool a, bool3 b) { return new bool3(a | b.x, a | b.y, a | b.z); }
+        [IN(LINE)] public static bool3 operator |(bool3 a, bool b) { return new bool3(a.x | b, a.y | b, a.z | b); }
+        [IN(LINE)] public static bool3 operator |(bool a, bool3 b) { return new bool3(a | b.x, a | b.y, a | b.z); }
 
         [IN(LINE)] public static bool3 operator &(bool3 a, bool3 b) { return new bool3(a.x & b.x, a.y & b.y, a.z & b.z); }
-        //[IN(LINE)] public static bool3 operator &(bool3 a, bool b) { return new bool3(a.x & b, a.y & b, a.z & b); }
-        //[IN(LINE)] public static bool3 operator &(bool a, bool3 b) { return new bool3(a & b.x, a & b.y, a & b.z); }
+        [IN(LINE)] public static bool3 operator &(bool3 a, bool b) { return new bool3(a.x & b, a.y & b, a.z & b); }
+        [IN(LINE)] public static bool3 operator &(bool a, bool3 b) { return new bool3(a & b.x, a & b.y, a & b.z); }
 
         [IN(LINE)] public static bool3 operator ^(bool3 a, bool3 b) { return new bool3(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z); }
         [IN(LINE)] public static bool3 operator ^(bool3 a, bool b) { return new bool3(a.x ^ b, a.y ^ b, a.z ^ b); }
@@ -128,7 +133,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static bool operator true(bool3 a) { return DM.All(a); }
         [IN(LINE)] public static bool operator false(bool3 a) { return !DM.All(a); }
-        [IN(LINE)] public static explicit operator bool(bool3 a) { return a.x && a.y && a.z; }
+        [IN(LINE)] public static explicit operator bool(bool3 a) { return DM.All(a); }
         #endregion
 
         #endregion

@@ -48,4 +48,15 @@ namespace DCFApixels.DataMath
         }
         #endregion
     }
+
+    public static partial class DMBits // bool2
+    {
+        #region Bits
+        [IN(LINE)]
+        public static int BitMask(bool value)
+        {
+            return value ? 0x01 : 0;
+        }
+        #endregion
+    }
 }

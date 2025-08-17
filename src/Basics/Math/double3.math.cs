@@ -213,6 +213,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double3 Atan2(double3 a, double3 b) { return new double3(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z)); }
 
         [IN(LINE)] public static double3 Sqr(double3 a) { return a * a; }
+        [IN(LINE)] public static double3 Sqrt(double3 a) { return new double3(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z)); }
         [IN(LINE)] public static double3 Pow(double3 a, double3 b) { return new double3(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z)); }
         [IN(LINE)] public static double3 Exp(double3 pow) { return new double3(Exp(pow.x), Exp(pow.y), Exp(pow.z)); }
         [IN(LINE)] public static double3 Exp2(double3 pow) { return new double3(Exp2(pow.x), Exp2(pow.y), Exp2(pow.z)); }
@@ -221,7 +222,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double3 Log(double3 f) { return new double3(Log(f.x), Log(f.y), Log(f.z)); }
         [IN(LINE)] public static double3 Log2(double3 f) { return new double3(Log2(f.x), Log2(f.y), Log2(f.z)); }
         [IN(LINE)] public static double3 Log10(double3 f) { return new double3(Log10(f.x), Log10(f.y), Log10(f.z)); }
-        [IN(LINE)] public static double3 Sqrt(double3 a) { return new double3(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z)); }
 
         [IN(LINE)] public static double3 Tan(double3 a) { return new double3(Tan(a.x), Tan(a.y), Tan(a.z)); }
         [IN(LINE)] public static double3 Tanh(double3 a) { return new double3(Tanh(a.x), Tanh(a.y), Tanh(a.z)); }
