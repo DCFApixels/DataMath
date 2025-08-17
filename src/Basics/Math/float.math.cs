@@ -357,9 +357,6 @@ namespace DCFApixels.DataMath
             return default;
         }
 
-        [IN(LINE)] public static float CSum(float2 a) { return a.x + a.y; }
-        [IN(LINE)] public static float CSum(float3 a) { return a.x + a.y + a.z; }
-        [IN(LINE)] public static float CSum(float4 a) { return a.x + a.y + a.z + a.w; }
         [IN(LINE)]
         public static float CSum<T>(T a, float _ = default) where T : IVectorN<float>
         {
