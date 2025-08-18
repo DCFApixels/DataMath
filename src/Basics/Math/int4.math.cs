@@ -1,11 +1,5 @@
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-using SMath = System.Math;
-#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
-using SMathF = System.MathF;
-#else
-using SMathF = DCFApixels.DataMath.Internal.MathDM;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -14,23 +8,74 @@ namespace DCFApixels.DataMath
     }
     public static partial class DM // int4
     {
-        #region Hash
-        [IN(LINE)] public static uint UHash(int4 v) { return unchecked((uint)Hash(v)); }
-        [IN(LINE)] public static int Hash(int4 v) { return Hash<int4>(v); }
+        #region Abs/Sign
+        [IN(LINE)] public static int4 Abs(int4 a) { return a; }
+        [IN(LINE)] public static int4 Sign(int4 a) { return new int4(Sign(a.x), Sign(a.y), Sign(a.z), Sign(a.w)); }
         #endregion
 
-        [IN(LINE)]
-        public static int4 one_minus(int4 v) => 1 - v;
-        [IN(LINE)]
-        public static int4 abs(int4 v)
-        {
-            return new int4(SMathF.Abs(v.x), SMathF.Abs(v.y), SMathF.Abs(v.z), SMathF.Abs(v.w));
-        }
-        [IN(LINE)]
-        public static int4 sign(int4 v)
-        {
-            return new int4(SMath.Sign(v.x), SMath.Sign(v.y), SMath.Sign(v.z), SMath.Sign(v.w));
-        }
+        #region Clamp/Repeat/PingPong
+        /// <summary> Clamps the value between min and max. </summary>
+        [IN(LINE)] public static int4 Clamp(int4 a, int4 min, int4 max) { return Max(min, Min(max, a)); }
 
+        [IN(LINE)] public static int4 Repeat(int4 a, int4 length) { return a % length; }
+        [IN(LINE)] public static int4 Repeat(int4 a, int4 min, int4 max) { return Repeat(a, max - min) + min; }
+
+        [IN(LINE)] public static int4 PingPong(int4 a, int4 length) { return length - Abs(Repeat(a, length * 2) - length); }
+        [IN(LINE)] public static int4 PingPong(int4 a, int4 min, int4 max) { return PingPong(a, max - min) + min; }
+        #endregion
+
+        #region All/Any
+        [IN(LINE)] public static bool All(int4 a) { return a.x != default && a.y != default && a.z != default && a.w != default; }
+        [IN(LINE)] public static bool Any(int4 a) { return a.x != default || a.y != default || a.z != default || a.w != default; }
+        #endregion
+
+        #region Min/Max/Sum
+        [IN(LINE)] public static int4 Max(int4 a, int4 b) { return new int4(Max(a.x, b.x), Max(a.y, b.y), Max(a.z, b.z), Max(a.w, b.w)); }
+        [IN(LINE)] public static int4 AbsMax(int4 a, int4 b) { return new int4(AbsMax(a.x, b.x), AbsMax(a.y, b.y), AbsMax(a.z, b.z), AbsMax(a.w, b.w)); }
+        [IN(LINE)] public static int4 Min(int4 a, int4 b) { return new int4(Min(a.x, b.x), Min(a.y, b.y), Min(a.z, b.z), Min(a.w, b.w)); }
+        [IN(LINE)] public static int4 AbsMin(int4 a, int4 b) { return new int4(AbsMin(a.x, b.x), AbsMin(a.y, b.y), AbsMin(a.z, b.z), AbsMin(a.w, b.w)); }
+        [IN(LINE)] public static int CMax(int4 a) { return CMax(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static int CAbsMax(int4 a) { return CAbsMax(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static int CMin(int4 a) { return CMin(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static int CAbsMin(int4 a) { return CAbsMin(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static int CSum(int4 a) { return (a.x + a.y) + (a.z + a.w); }
+        #endregion
+
+        #region Pow2
+        [IN(LINE)] public static int4 CeilPow2(int4 value) { return new int4(CeilPow2(value.x), CeilPow2(value.y), CeilPow2(value.z), CeilPow2(value.w)); }
+        [IN(LINE)] public static int4 FloorPow2(int4 value) { return new int4(FloorPow2(value.x), FloorPow2(value.y), FloorPow2(value.z), FloorPow2(value.w)); }
+        [IN(LINE)] public static int4 RoundPow2(int4 value) { return new int4(RoundPow2(value.x), RoundPow2(value.y), RoundPow2(value.z), RoundPow2(value.w)); }
+        [IN(LINE)] public static bool4 IsPow2(int4 value) { return new bool4(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z), IsPow2(value.w)); }
+        #endregion
+
+        #region Other
+        //Length - float
+        //Distance - float
+        //Sqrt - float
+        [IN(LINE)] public static int4 LengthSqr(int4 a) { return Sqr(a); }
+        [IN(LINE)] public static int4 DistanceSqr(int4 a, int4 b) { return Sqr(b - a); }
+        [IN(LINE)] public static int4 Sqr(int4 a) { return a * a; }
+        [IN(LINE)] public static int4 Pow(int4 a, int4 b) { return new int4(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z), Pow(a.w, b.w)); }
+        [IN(LINE)] public static int4 Dot(int4 a, int4 b) { return a * b; }
+        [IN(LINE)] public static int4 Select(int4 falseValue, int4 trueValue, bool2 test) { return test ? trueValue : falseValue; }
+        #endregion
+
+
+        #region Hash
+        [IN(LINE)] public static uint UHash(int4 v) { return UHash<int4>(v); }
+        [IN(LINE)] public static int Hash(int4 v) { return unchecked((int)UHash(v)); }
+        #endregion
+    }
+
+    public static partial class DMBits // int4
+    {
+        #region Rnd
+        [IN(LINE)] public static int4 NextXorShiftState(int4 a) { unchecked { return new int4(NextXorShiftState(a.x), NextXorShiftState(a.y), NextXorShiftState(a.z), NextXorShiftState(a.w)); } }
+        #endregion
+
+        #region Other
+        [IN(LINE)] public static int4 Count(int4 a) { unchecked { return new int4(Count(a.x), Count(a.y), Count(a.z), Count(a.w)); } }
+        [IN(LINE)] public static int4 Reverse(int4 a) { unchecked { return new int4(Reverse(a.x), Reverse(a.y), Reverse(a.z), Reverse(a.w)); } }
+        #endregion
     }
 }

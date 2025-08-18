@@ -34,11 +34,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint4 AbsMax(uint4 a, uint4 b) { return new uint4(AbsMax(a.x, b.x), AbsMax(a.y, b.y), AbsMax(a.z, b.z), AbsMax(a.w, b.w)); }
         [IN(LINE)] public static uint4 Min(uint4 a, uint4 b) { return new uint4(Min(a.x, b.x), Min(a.y, b.y), Min(a.z, b.z), Min(a.w, b.w)); }
         [IN(LINE)] public static uint4 AbsMin(uint4 a, uint4 b) { return new uint4(AbsMin(a.x, b.x), AbsMin(a.y, b.y), AbsMin(a.z, b.z), AbsMin(a.w, b.w)); }
-        [IN(LINE)] public static uint4 CMax(uint4 a) { return CMax(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint4 CAbsMax(uint4 a) { return CAbsMax(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint4 CMin(uint4 a) { return CMin(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint4 CAbsMin(uint4 a) { return CAbsMin(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint4 CSum(uint4 a) { return a.x + a.y + a.z; }
+        [IN(LINE)] public static uint CMax(uint4 a) { return CMax(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static uint CAbsMax(uint4 a) { return CAbsMax(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static uint CMin(uint4 a) { return CMin(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static uint CAbsMin(uint4 a) { return CAbsMin(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static uint CSum(uint4 a) { return (a.x + a.y) + (a.z + a.w); }
         #endregion
 
         #region Pow2
@@ -53,7 +53,7 @@ namespace DCFApixels.DataMath
         //Distance - float
         //Sqrt - float
         [IN(LINE)] public static uint4 LengthSqr(uint4 a) { return Sqr(a); }
-        [IN(LINE)] public static uint4 DistanceSqr(uint4 a, uint b) { return Sqr(b - a); }
+        [IN(LINE)] public static uint4 DistanceSqr(uint4 a, uint4 b) { return Sqr(b - a); }
         [IN(LINE)] public static uint4 Sqr(uint4 a) { return a * a; }
         [IN(LINE)] public static uint4 Pow(uint4 a, uint4 b) { return new uint4(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z), Pow(a.w, b.w)); }
         [IN(LINE)] public static uint4 Dot(uint4 a, uint4 b) { return a * b; }

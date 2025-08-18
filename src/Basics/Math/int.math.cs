@@ -56,38 +56,20 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Pow2
-        [IN(LINE)]
-        public static int CeilPow2(int value)
-        {
-            value--;
-            value |= value >> 16;
-            value |= value >> 8;
-            value |= value >> 4;
-            value |= value >> 2;
-            value |= value >> 1;
-            return value + 1;
-        }
-        [IN(LINE)]
-        public static int FloorPow2(int value)
-        {
-            var result = CeilPow2(value);
-            return result == value ? value : result >> 1;
-        }
-        [IN(LINE)]
-        public static int RoundPow2(int value)
-        {
-            value = CeilPow2(value);
-            int floor = value >> 1;
-            if (value - floor < value - value)
-            {
-                return floor;
-            }
-            return value;
-        }
+        [IN(LINE)] public static int CeilPow2(int value) { unchecked { return (int)CeilPow2((uint)value); } }
+        [IN(LINE)] public static int FloorPow2(int value) { unchecked { return (int)FloorPow2((uint)value); } }
+        [IN(LINE)] public static int RoundPow2(int value) { unchecked { return (int)RoundPow2((uint)value); } }
         [IN(LINE)] public static bool IsPow2(int value) { return (value & (value - 1)) == 0; }
         #endregion
 
         #region Other
+        //Length - float
+        //Distance - float
+        //Sqrt - float
+        [IN(LINE)] public static int LengthSqr(int a) { return Sqr(a); }
+        [IN(LINE)] public static int DistanceSqr(int a, int b) { return Sqr(b - a); }
+        [IN(LINE)] public static int Sqr(int a) { return a * a; }
+        [IN(LINE)] public static int Pow(int a, int b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static int Dot(int a, int b) { return a * b; }
         [IN(LINE)] public static int Select(int falseValue, int trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion
@@ -99,121 +81,121 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Component iteration operations
-        [IN(LINE)] public static int Max(int a, int b, int c) { return Max(Max(a, b), c); }
-        [IN(LINE)] public static int Max(int a, int b, int c, int d) { return Max(Max(a, b, c), d); }
-        [IN(LINE)] public static int Max(int a, int b, int c, int d, int e) { return Max(Max(a, b, c, d), e); }
-        [IN(LINE)] public static int Max(int a, int b, int c, int d, int e, int f) { return Max(Max(a, b, c, d, e), f); }
-        [IN(LINE)] public static int Max(int a, int b, int c, int d, int e, int f, int g) { return Max(Max(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static int Max(int a, int b, int c, int d, int e, int f, int g, int h) { return Max(Max(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static int CMax(int a, int b) { return Max(a, b); }
+        [IN(LINE)] public static int CMax(int a, int b, int c) { return Max(Max(a, b), c); }
+        [IN(LINE)] public static int CMax(int a, int b, int c, int d) { return Max(Max(a, b), Max(c, d)); }
+        [IN(LINE)] public static int CMax(int a, int b, int c, int d, int e) { return Max(CMax(a, b, c, d), e); }
+        [IN(LINE)] public static int CMax(int a, int b, int c, int d, int e, int f) { return Max(CMax(a, b, c, d), Max(e, f)); }
+        [IN(LINE)] public static int CMax(int a, int b, int c, int d, int e, int f, int g) { return Max(CMax(a, b, c, d), Max(Max(a, b), c)); }
+        [IN(LINE)] public static int CMax(int a, int b, int c, int d, int e, int f, int g, int h) { return Max(CMax(a, b, c, d), CMax(e, f, g, h)); }
 
-        [IN(LINE)] public static int AbsMax(int a, int b, int c) { return AbsMax(AbsMax(a, b), c); }
-        [IN(LINE)] public static int AbsMax(int a, int b, int c, int d) { return AbsMax(AbsMax(a, b, c), d); }
-        [IN(LINE)] public static int AbsMax(int a, int b, int c, int d, int e) { return AbsMax(AbsMax(a, b, c, d), e); }
-        [IN(LINE)] public static int AbsMax(int a, int b, int c, int d, int e, int f) { return AbsMax(AbsMax(a, b, c, d, e), f); }
-        [IN(LINE)] public static int AbsMax(int a, int b, int c, int d, int e, int f, int g) { return AbsMax(AbsMax(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static int AbsMax(int a, int b, int c, int d, int e, int f, int g, int h) { return AbsMax(AbsMax(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static int CAbsMax(int a, int b) { return AbsMax(a, b); }
+        [IN(LINE)] public static int CAbsMax(int a, int b, int c) { return AbsMax(AbsMax(a, b), c); }
+        [IN(LINE)] public static int CAbsMax(int a, int b, int c, int d) { return AbsMax(AbsMax(a, b), AbsMax(c, d)); }
+        [IN(LINE)] public static int CAbsMax(int a, int b, int c, int d, int e) { return AbsMax(CAbsMax(a, b, c, d), e); }
+        [IN(LINE)] public static int CAbsMax(int a, int b, int c, int d, int e, int f) { return AbsMax(CAbsMax(a, b, c, d), AbsMax(e, f)); }
+        [IN(LINE)] public static int CAbsMax(int a, int b, int c, int d, int e, int f, int g) { return AbsMax(CAbsMax(a, b, c, d), AbsMax(AbsMax(a, b), c)); }
+        [IN(LINE)] public static int CAbsMax(int a, int b, int c, int d, int e, int f, int g, int h) { return AbsMax(CAbsMax(a, b, c, d), CAbsMax(e, f, g, h)); }
 
-        [IN(LINE)] public static int Min(int a, int b, int c) { return Min(Min(a, b), c); }
-        [IN(LINE)] public static int Min(int a, int b, int c, int d) { return Min(Min(a, b, c), d); }
-        [IN(LINE)] public static int Min(int a, int b, int c, int d, int e) { return Min(Min(a, b, c, d), e); }
-        [IN(LINE)] public static int Min(int a, int b, int c, int d, int e, int f) { return Min(Min(a, b, c, d, e), f); }
-        [IN(LINE)] public static int Min(int a, int b, int c, int d, int e, int f, int g) { return Min(Min(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static int Min(int a, int b, int c, int d, int e, int f, int g, int h) { return Min(Min(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static int CMin(int a, int b) { return Min(a, b); }
+        [IN(LINE)] public static int CMin(int a, int b, int c) { return Min(Min(a, b), c); }
+        [IN(LINE)] public static int CMin(int a, int b, int c, int d) { return Min(Min(a, b), Min(c, d)); }
+        [IN(LINE)] public static int CMin(int a, int b, int c, int d, int e) { return Min(CMin(a, b, c, d), e); }
+        [IN(LINE)] public static int CMin(int a, int b, int c, int d, int e, int f) { return Min(CMin(a, b, c, d), Min(e, f)); }
+        [IN(LINE)] public static int CMin(int a, int b, int c, int d, int e, int f, int g) { return Min(CMin(a, b, c, d), Min(Min(a, b), c)); }
+        [IN(LINE)] public static int CMin(int a, int b, int c, int d, int e, int f, int g, int h) { return Min(CMin(a, b, c, d), CMin(e, f, g, h)); }
 
-        [IN(LINE)] public static int AbsMin(int a, int b, int c) { return AbsMin(AbsMin(a, b), c); }
-        [IN(LINE)] public static int AbsMin(int a, int b, int c, int d) { return AbsMin(AbsMin(a, b, c), d); }
-        [IN(LINE)] public static int AbsMin(int a, int b, int c, int d, int e) { return AbsMin(AbsMin(a, b, c, d), e); }
-        [IN(LINE)] public static int AbsMin(int a, int b, int c, int d, int e, int f) { return AbsMin(AbsMin(a, b, c, d, e), f); }
-        [IN(LINE)] public static int AbsMin(int a, int b, int c, int d, int e, int f, int g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static int AbsMin(int a, int b, int c, int d, int e, int f, int g, int h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static int CAbsMin(int a, int b) { return AbsMin(a, b); }
+        [IN(LINE)] public static int CAbsMin(int a, int b, int c) { return AbsMin(AbsMin(a, b), c); }
+        [IN(LINE)] public static int CAbsMin(int a, int b, int c, int d) { return AbsMin(AbsMin(a, b), AbsMin(c, d)); }
+        [IN(LINE)] public static int CAbsMin(int a, int b, int c, int d, int e) { return AbsMin(CAbsMin(a, b, c, d), e); }
+        [IN(LINE)] public static int CAbsMin(int a, int b, int c, int d, int e, int f) { return AbsMin(CAbsMin(a, b, c, d), AbsMin(e, f)); }
+        [IN(LINE)] public static int CAbsMin(int a, int b, int c, int d, int e, int f, int g) { return AbsMin(CAbsMin(a, b, c, d), AbsMin(AbsMin(a, b), c)); }
+        [IN(LINE)] public static int CAbsMin(int a, int b, int c, int d, int e, int f, int g, int h) { return AbsMin(CAbsMin(a, b, c, d), CAbsMin(e, f, g, h)); }
 
 
         [IN(LINE)]
-        public static int Max<T>(T a, int _ = default) where T : IVectorN<int>
+        public static int CMax<T>(T a, int _ = default) where T : IVectorN<int>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return Max(a[0], a[1]);
-                case 3: return Max(a[0], a[1], a[2]);
-                case 4: return Max(a[0], a[1], a[2], a[3]);
+                case 2: return CMax(a[0], a[1]);
+                case 3: return CMax(a[0], a[1], a[2]);
+                case 4: return CMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = Max(result, a[i]);
+                        result = CMax(result, a[i]);
                     }
                     return result;
             }
             return default;
         }
         [IN(LINE)]
-        public static int AbsMax<T>(T a, int _ = default) where T : IVectorN<int>
+        public static int CAbsMax<T>(T a, int _ = default) where T : IVectorN<int>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return AbsMax(a[0], a[1]);
-                case 3: return AbsMax(a[0], a[1], a[2]);
-                case 4: return AbsMax(a[0], a[1], a[2], a[3]);
+                case 2: return CAbsMax(a[0], a[1]);
+                case 3: return CAbsMax(a[0], a[1], a[2]);
+                case 4: return CAbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = AbsMax(result, a[i]);
+                        result = CAbsMax(result, a[i]);
                     }
                     return result;
             }
             return default;
         }
         [IN(LINE)]
-        public static int Min<T>(T a, int _ = default) where T : IVectorN<int>
+        public static int CMin<T>(T a, int _ = default) where T : IVectorN<int>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return Min(a[0], a[1]);
-                case 3: return Min(a[0], a[1], a[2]);
-                case 4: return Min(a[0], a[1], a[2], a[3]);
+                case 2: return CMin(a[0], a[1]);
+                case 3: return CMin(a[0], a[1], a[2]);
+                case 4: return CMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = Min(result, a[i]);
+                        result = CMin(result, a[i]);
                     }
                     return result;
             }
             return default;
         }
         [IN(LINE)]
-        public static int AbsMin<T>(T a, int _ = default) where T : IVectorN<int>
+        public static int CAbsMin<T>(T a, int _ = default) where T : IVectorN<int>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return AbsMin(a[0], a[1]);
-                case 3: return AbsMin(a[0], a[1], a[2]);
-                case 4: return AbsMin(a[0], a[1], a[2], a[3]);
+                case 2: return CAbsMin(a[0], a[1]);
+                case 3: return CAbsMin(a[0], a[1], a[2]);
+                case 4: return CAbsMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = AbsMin(result, a[i]);
+                        result = CAbsMin(result, a[i]);
                     }
                     return result;
             }
             return default;
         }
-
-        [IN(LINE)] public static int Sum(int2 a) { return a.x + a.y; }
-        [IN(LINE)] public static int Sum(int3 a) { return a.x + a.y + a.z; }
-        [IN(LINE)] public static int Sum(int4 a) { return a.x + a.y + a.z + a.w; }
         [IN(LINE)]
-        public static int Sum<T>(T a, int _ = default) where T : IVectorN<int>
+        public static int CSum<T>(T a, int _ = default) where T : IVectorN<int>
         {
             switch (a.count)
             {

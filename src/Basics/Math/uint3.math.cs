@@ -34,11 +34,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint3 AbsMax(uint3 a, uint3 b) { return new uint3(AbsMax(a.x, b.x), AbsMax(a.y, b.y), AbsMax(a.z, b.z)); }
         [IN(LINE)] public static uint3 Min(uint3 a, uint3 b) { return new uint3(Min(a.x, b.x), Min(a.y, b.y), Min(a.z, b.z)); }
         [IN(LINE)] public static uint3 AbsMin(uint3 a, uint3 b) { return new uint3(AbsMin(a.x, b.x), AbsMin(a.y, b.y), AbsMin(a.z, b.z)); }
-        [IN(LINE)] public static uint3 CMax(uint3 a) { return CMax(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint3 CAbsMax(uint3 a) { return CAbsMax(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint3 CMin(uint3 a) { return CMin(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint3 CAbsMin(uint3 a) { return CAbsMin(a.x, a.y, a.z); }
-        [IN(LINE)] public static uint3 CSum(uint3 a) { return a.x + a.y + a.z; }
+        [IN(LINE)] public static uint CMax(uint3 a) { return CMax(a.x, a.y, a.z); }
+        [IN(LINE)] public static uint CAbsMax(uint3 a) { return CAbsMax(a.x, a.y, a.z); }
+        [IN(LINE)] public static uint CMin(uint3 a) { return CMin(a.x, a.y, a.z); }
+        [IN(LINE)] public static uint CAbsMin(uint3 a) { return CAbsMin(a.x, a.y, a.z); }
+        [IN(LINE)] public static uint CSum(uint3 a) { return a.x + a.y + a.z; }
         #endregion
 
         #region Pow2
@@ -53,7 +53,7 @@ namespace DCFApixels.DataMath
         //Distance - float
         //Sqrt - float
         [IN(LINE)] public static uint3 LengthSqr(uint3 a) { return Sqr(a); }
-        [IN(LINE)] public static uint3 DistanceSqr(uint3 a, uint b) { return Sqr(b - a); }
+        [IN(LINE)] public static uint3 DistanceSqr(uint3 a, uint3 b) { return Sqr(b - a); }
         [IN(LINE)] public static uint3 Sqr(uint3 a) { return a * a; }
         [IN(LINE)] public static uint3 Pow(uint3 a, uint3 b) { return new uint3(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z)); }
         [IN(LINE)] public static uint3 Dot(uint3 a, uint3 b) { return a * b; }

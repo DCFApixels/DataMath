@@ -34,11 +34,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint2 AbsMax(uint2 a, uint2 b) { return new uint2(AbsMax(a.x, b.x), AbsMax(a.y, b.y)); }
         [IN(LINE)] public static uint2 Min(uint2 a, uint2 b) { return new uint2(Min(a.x, b.x), Min(a.y, b.y)); }
         [IN(LINE)] public static uint2 AbsMin(uint2 a, uint2 b) { return new uint2(AbsMin(a.x, b.x), AbsMin(a.y, b.y)); }
-        [IN(LINE)] public static uint2 CMax(uint2 a) { return CMax(a.x, a.y); }
-        [IN(LINE)] public static uint2 CAbsMax(uint2 a) { return CAbsMax(a.x, a.y); }
-        [IN(LINE)] public static uint2 CMin(uint2 a) { return CMin(a.x, a.y); }
-        [IN(LINE)] public static uint2 CAbsMin(uint2 a) { return CAbsMin(a.x, a.y); }
-        [IN(LINE)] public static uint2 CSum(uint2 a) { return a.x + a.y; }
+        [IN(LINE)] public static uint CMax(uint2 a) { return CMax(a.x, a.y); }
+        [IN(LINE)] public static uint CAbsMax(uint2 a) { return CAbsMax(a.x, a.y); }
+        [IN(LINE)] public static uint CMin(uint2 a) { return CMin(a.x, a.y); }
+        [IN(LINE)] public static uint CAbsMin(uint2 a) { return CAbsMin(a.x, a.y); }
+        [IN(LINE)] public static uint CSum(uint2 a) { return a.x + a.y; }
         #endregion
 
         #region Pow2
@@ -53,7 +53,7 @@ namespace DCFApixels.DataMath
         //Distance - float
         //Sqrt - float
         [IN(LINE)] public static uint2 LengthSqr(uint2 a) { return Sqr(a); }
-        [IN(LINE)] public static uint2 DistanceSqr(uint2 a, uint b) { return Sqr(b - a); }
+        [IN(LINE)] public static uint2 DistanceSqr(uint2 a, uint2 b) { return Sqr(b - a); }
         [IN(LINE)] public static uint2 Sqr(uint2 a) { return a * a; }
         [IN(LINE)] public static uint2 Pow(uint2 a, uint2 b) { return new uint2(Pow(a.x, b.x), Pow(a.y, b.y)); }
         [IN(LINE)] public static uint2 Dot(uint2 a, uint2 b) { return a * b; }

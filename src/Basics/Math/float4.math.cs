@@ -83,7 +83,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float CAbsMax(float4 a) { return CAbsMax(a.x, a.y, a.z, a.w); }
         [IN(LINE)] public static float CMin(float4 a) { return CMin(a.x, a.y, a.z, a.w); }
         [IN(LINE)] public static float CAbsMin(float4 a) { return CAbsMin(a.x, a.y, a.z, a.w); }
-        [IN(LINE)] public static float CSum(float4 a) { return a.x + a.y + a.z + a.w; }
+        [IN(LINE)] public static float CSum(float4 a) { return (a.x + a.y) + (a.z + a.w); }
         #endregion
 
         #region Lerp
