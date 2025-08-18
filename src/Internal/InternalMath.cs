@@ -814,6 +814,69 @@ namespace DCFApixels.DataMath.Internal
             return result;
         }
 
+        [IN(LINE)]
+        public static long Pow(long baseValue, long exponent)
+        {
+            // Обработка отрицательной степени
+            if (exponent < 0)
+            {
+                if (baseValue == 0)
+                    throw new DivideByZeroException("Base is zero and exponent is negative. Result is undefined.");
+                if (baseValue == 1)
+                    return 1;
+                if (baseValue == -1)
+                    return (exponent % 2 == 0) ? 1 : -1;
+                throw new ArgumentException("Negative exponent is not supported for longeger bases other than 1 or -1.", nameof(exponent));
+            }
+
+            // Обработка нулевой степени
+            if (exponent == 0) { return 1; }
+
+
+            // Алгоритм быстрого возведения в степень
+            long result = 1;
+            long currentBase = baseValue;
+            long exp = exponent;
+
+            while (exp > 0)
+            {
+                if ((exp & 1) != 0) // Если степень нечётная
+                {
+                    result *= currentBase;
+                }
+
+                currentBase *= currentBase; // Возведение в квадрат
+                exp >>= 1; // Уменьшение степени вдвое
+            }
+
+            return result;
+        }
+        [IN(LINE)]
+        public static ulong Pow(ulong baseValue, ulong exponent)
+        {
+            // Обработка нулевой степени
+            if (exponent == 0) { return 1; }
+
+
+            // Алгоритм быстрого возведения в степень
+            ulong result = 1;
+            ulong currentBase = baseValue;
+            ulong exp = exponent;
+
+            while (exp > 0)
+            {
+                if ((exp & 1) != 0) // Если степень нечётная
+                {
+                    result *= currentBase;
+                }
+
+                currentBase *= currentBase; // Возведение в квадрат
+                exp >>= 1; // Уменьшение степени вдвое
+            }
+
+            return result;
+        }
+
 
         [IN(LINE)]
         public static double Pow(double x, double y)

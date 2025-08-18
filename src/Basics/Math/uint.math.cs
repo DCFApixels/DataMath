@@ -214,9 +214,6 @@ namespace DCFApixels.DataMath
             return default;
         }
 
-        [IN(LINE)] public static uint Sum(uint2 a) { return a.x + a.y; }
-        [IN(LINE)] public static uint Sum(uint3 a) { return a.x + a.y + a.z; }
-        [IN(LINE)] public static uint Sum(uint4 a) { return a.x + a.y + a.z + a.w; }
         [IN(LINE)]
         public static uint Sum<T>(T a, uint _ = default) where T : IVectorN<uint>
         {
@@ -258,7 +255,7 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)] public static int Count(uint a) { unchecked { return InternalBits.CountBits(a); } }
-        [IN(LINE)] public static uint Reverse(uint a) { unchecked { return InternalBits.ReverseLookup(a); } }
+        [IN(LINE)] public static uint Reverse(uint a) { unchecked { return InternalBits.Reverse(a); } }
         #endregion
     }
 }

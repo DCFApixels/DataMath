@@ -1,6 +1,7 @@
 ﻿#if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -67,16 +68,34 @@ namespace DCFApixels.DataMath.Internal
             0x0F, 0x8F, 0x4F, 0xCF, 0x2F, 0xAF, 0x6F, 0xEF, 0x1F, 0x9F, 0x5F, 0xDF, 0x3F, 0xBF, 0x7F, 0xFF
             };
 
-        public static int ReverseLookup(int x)
+        [IN(LINE)]
+        public static int Reverse(int a)
         {
-            unchecked { return (int)ReverseLookup((uint)x); }
+            unchecked { return (int)Reverse((uint)a); }
         }
-        public static uint ReverseLookup(uint x)
+        [IN(LINE)]
+        public static uint Reverse(uint a)
         {
-            return ((uint)BitReverseTable256[x & 0xff] << 24) |
-                   ((uint)BitReverseTable256[(x >> 8) & 0xff] << 16) |
-                   ((uint)BitReverseTable256[(x >> 16) & 0xff] << 8) |
-                   (BitReverseTable256[(x >> 24) & 0xff]);
+            return ((uint)BitReverseTable256[a & 0xff] << 24) |
+                   ((uint)BitReverseTable256[(a >> 8) & 0xff] << 16) |
+                   ((uint)BitReverseTable256[(a >> 16) & 0xff] << 8) |
+                   (BitReverseTable256[(a >> 24) & 0xff]);
+        }
+
+        [IN(LINE)]
+        public static long Reverse(long a)
+        {
+            unchecked { return (long)Reverse((ulong)a); }
+        }
+        [IN(LINE)]
+        public static ulong Reverse(ulong a)
+        {
+            a = ((a >> 1) & 0x5555555555555555ul) | ((a & 0x5555555555555555ul) << 1);
+            a = ((a >> 2) & 0x3333333333333333ul) | ((a & 0x3333333333333333ul) << 2);
+            a = ((a >> 4) & 0x0F0F0F0F0F0F0F0Ful) | ((a & 0x0F0F0F0F0F0F0F0Ful) << 4);
+            a = ((a >> 8) & 0x00FF00FF00FF00FFul) | ((a & 0x00FF00FF00FF00FFul) << 8);
+            a = ((a >> 16) & 0x0000FFFF0000FFFFul) | ((a & 0x0000FFFF0000FFFFul) << 16);
+            return (a >> 32) | (a << 32);
         }
 
         #region XorShift

@@ -235,7 +235,7 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)] public static int Count(int a) { unchecked { return InternalBits.CountBits((uint)a); } }
-        [IN(LINE)] public static int Reverse(int a) { unchecked { return InternalBits.ReverseLookup(a); } }
+        [IN(LINE)] public static int Reverse(int a) { unchecked { return InternalBits.Reverse(a); } }
         #endregion
     }
 }
