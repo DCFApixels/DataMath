@@ -187,6 +187,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Distance(float2 a, float2 b) { return Length(b - a); }
         [IN(LINE)] public static float DistanceSqr(float2 a, float2 b) { return LengthSqr(b - a); }
         [IN(LINE)] public static float2 Normalize(float2 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
+        [IN(LINE)]
+        public static float2 NormalizeSafe(float2 a, float2 defaultvalue = default)
+        {
+            var len = Dot(a, a);
+            return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
+        }
 
         [IN(LINE)] public static float2 Project(float2 a, float2 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]

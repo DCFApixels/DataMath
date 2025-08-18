@@ -192,7 +192,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] 
         public static float3 NormalizeSafe(float3 a, float3 defaultvalue = default)
         {
-            float len = Dot(a, a);
+            var len = Dot(a, a);
             return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
         }
 
