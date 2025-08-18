@@ -1,4 +1,4 @@
-#if DISABLE_DEBUG#if DISABLE_DEBUG
+#if DISABLE_DEBUG
 #undef DEBUG
 #endif
 using static DCFApixels.DataMath.Consts;
