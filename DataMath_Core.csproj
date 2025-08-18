@@ -7,7 +7,7 @@
     <Nullable>disable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup> <!--Скрываем файлы *.meta-->
     <None Include="**/*.meta" Visible="false" />
   </ItemGroup>
 </Project>
