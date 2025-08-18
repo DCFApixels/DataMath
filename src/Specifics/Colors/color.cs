@@ -47,6 +47,8 @@ namespace DCFApixels.DataMath
         public readonly static color cyan = new color(0f, 1f, 1f);
         /// <summary> rgba(1, 0, 1, 1) </summary>
         public readonly static color magenta = new color(1f, 0f, 1f);
+
+        private const float ByteToFloatMult = 1f / byte.MaxValue;
         #endregion
 
         public float r;
@@ -85,15 +87,37 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
+        [IN(LINE)]
         public color(float r, float g, float b)
         {
             this.r = r; this.g = g;
             this.b = b; a = 1;
         }
+        [IN(LINE)]
         public color(float r, float g, float b, float a)
         {
             this.r = r; this.g = g;
             this.b = b; this.a = a;
+        }
+        [IN(LINE)]
+        public color(color32 color32)
+        {
+            r = color32.r8 * ByteToFloatMult; g = color32.g8 * ByteToFloatMult;
+            b = color32.b8 * ByteToFloatMult; a = color32.a8 * ByteToFloatMult;
+        }
+        [IN(LINE)]
+        public color(int colorCode)
+        {
+            ColorCodeUnion u = colorCode;
+            r = u.r8 * ByteToFloatMult; g = u.g8 * ByteToFloatMult;
+            b = u.b8 * ByteToFloatMult; a = u.a8 * ByteToFloatMult;
+        }
+        [IN(LINE)]
+        public color(uint colorCode)
+        {
+            ColorCodeUnion u = colorCode;
+            r = u.r8 * ByteToFloatMult; g = u.g8 * ByteToFloatMult;
+            b = u.b8 * ByteToFloatMult; a = u.a8 * ByteToFloatMult;
         }
         #endregion
 
@@ -134,6 +158,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static color operator +(color a) => new color(+a.r, +a.g, +a.b, +a.a);
         #endregion
 
+        #region Converts
+        public static explicit operator color(int colorcode) { return new color(colorcode); }
+        public static explicit operator color(uint colorcode) { return new color(colorcode); }
+        public static implicit operator color(color32 a) { return new color(a); }
+        #endregion
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }

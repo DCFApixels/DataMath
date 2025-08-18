@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -54,27 +55,6 @@ namespace DCFApixels.DataMath
         public byte b8;
         public byte a8;
 
-        #region Constructors
-        public color32(byte r, byte g, byte b)
-        {
-            r8 = r; g8 = g;
-            b8 = b; a8 = 1;
-        }
-        public color32(byte r, byte g, byte b, byte a)
-        {
-            r8 = r; g8 = g;
-            b8 = b; a8 = a;
-        }
-        /// <summary>accepting color code constructor</summary>
-        public color32(ColorCodeUnion colorcode)
-        {
-            r8 = colorcode.r8;
-            g8 = colorcode.g8;
-            b8 = colorcode.b8;
-            a8 = colorcode.a8;
-        }
-        #endregion
-
         #region Properties
         public byte x { [IN(LINE)] get => r8; [IN(LINE)] set => r8 = value; }
         public byte y { [IN(LINE)] get => g8; [IN(LINE)] set => g8 = value; }
@@ -105,8 +85,47 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
+        #region Constructors
+        [IN(LINE)]
+        public color32(byte r, byte g, byte b)
+        {
+            r8 = r; g8 = g;
+            b8 = b; a8 = 1;
+        }
+        [IN(LINE)]
+        public color32(byte r, byte g, byte b, byte a)
+        {
+            r8 = r; g8 = g;
+            b8 = b; a8 = a;
+        }
+        [IN(LINE)]
+        public color32(color color)
+        {
+            byte To(float a) { return (byte)(a * byte.MaxValue); }
+            r8 = To(color.r); g8 = To(color.g);
+            b8 = To(color.b); a8 = To(color.a);
+        }
+        [IN(LINE)]
+        public color32(int colorCode)
+        {
+            ColorCodeUnion u = colorCode;
+            r8 = u.r8; g8 = u.g8;
+            b8 = u.b8; a8 = u.a8;
+        }
+        [IN(LINE)]
+        public color32(uint colorCode)
+        {
+            ColorCodeUnion u = colorCode;
+            r8 = u.r8; g8 = u.g8;
+            b8 = u.b8; a8 = u.a8;
+        }
+        #endregion
+
+        #region Converts
         public static implicit operator color32(int colorcode) { return new color32(colorcode); }
         public static implicit operator color32(uint colorcode) { return new color32(colorcode); }
+        public static explicit operator color32(color a) { return new color32(a); }
+        #endregion
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
