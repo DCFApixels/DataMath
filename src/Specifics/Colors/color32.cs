@@ -24,7 +24,7 @@ namespace DCFApixels.DataMath
     [StructLayout(LayoutKind.Sequential, Pack = sizeof(byte), Size = 4 * Count)]
     public partial struct color32 :
         IEquatable<color32>,
-        //IFormattable,
+        IFormattable,
         IVector4<byte>,
         IColor32,
         IEnumerableVector<byte, color32>
@@ -144,6 +144,10 @@ namespace DCFApixels.DataMath
         public override bool Equals(object o) { return o is color32 target && Equals(target); }
         [IN(LINE)] public bool Equals(color32 a) { return r8 == a.r8 && g8 == a.g8 && b8 == a.b8 && a8 == a.a8; }
         public override string ToString() { return $"{nameof(color32)}({r8}, {g8}, {b8}, {a8})"; }
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return $"{nameof(color32)}({r8.ToString(format, formatProvider)}, {g8.ToString(format, formatProvider)}, {b8.ToString(format, formatProvider)}, {a8.ToString(format, formatProvider)})";
+        }
 
         internal class DebuggerProxy
         {
