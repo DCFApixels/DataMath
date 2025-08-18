@@ -65,6 +65,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint UHash(int3 v) { return UHash<int3>(v); }
         [IN(LINE)] public static int Hash(int3 v) { return unchecked((int)UHash(v)); }
         #endregion
+
+        #region Specific
+        [IN(LINE)] public static int3 Cross(int3 a, int3 b) { return (a * b.yzx - a.yzx * b).yzx; }
+        #endregion
     }
 
     public static partial class DMBits // int3
