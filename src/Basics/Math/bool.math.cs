@@ -1,4 +1,6 @@
-using DCFApixels.DataMath.Internal;
+#if DISABLE_DEBUG
+#undef DEBUG
+#endif
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -112,7 +114,7 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
-    public static partial class DMBits // bool2
+    public static partial class DMBits // bool
     {
         #region Bits
         [IN(LINE)]

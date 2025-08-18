@@ -1,5 +1,6 @@
-﻿
-
+﻿#if DISABLE_DEBUG
+#undef DEBUG
+#endif
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -189,7 +190,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Distance(float3 a, float3 b) { return Length(b - a); }
         [IN(LINE)] public static float DistanceSqr(float3 a, float3 b) { return LengthSqr(b - a); }
         [IN(LINE)] public static float3 Normalize(float3 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float3 NormalizeSafe(float3 a, float3 defaultvalue = default)
         {
             var len = Dot(a, a);

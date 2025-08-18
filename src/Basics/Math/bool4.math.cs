@@ -1,3 +1,6 @@
+#if DIS#if DISABLE_DEBUG
+#undef DEBUG
+#endif
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -27,7 +30,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int CSum(bool4 a) { return CSum(a.x) + CSum(a.y) + CSum(a.z) + CSum(a.w); }
         #endregion
     }
-    public static partial class DMBits // bool2
+    public static partial class DMBits // bool4
     {
         #region Bits
         [IN(LINE)]

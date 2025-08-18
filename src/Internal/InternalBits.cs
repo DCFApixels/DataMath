@@ -1,7 +1,6 @@
 ﻿#if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 

@@ -1,3 +1,6 @@
+#if DISABLE_DEBUG
+#undef DEBUG
+#endif
 using System;
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
