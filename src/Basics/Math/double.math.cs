@@ -34,8 +34,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static double Clamp(double a, double min, double max)
         {
-            if (a < min) return min;
-            if (a > max) return max;
+            if (a < min) { return min; }
+            if (a > max) { return max; }
             return a;
         }
         /// <summary> Clamps the value between 0 and 1. </summary>

@@ -20,8 +20,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static uint Clamp(uint a, uint min, uint max)
         {
-            if (a < min) return min;
-            if (a > max) return max;
+            if (a < min) { return min; }
+            if (a > max) { return max; }
             return a;
         }
 
@@ -32,11 +32,16 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint PingPong(uint a, uint min, uint max) { return PingPong(a, max - min) + min; }
         #endregion
 
+        #region All/Any
+        [IN(LINE)] public static bool All(uint a) { return a != default; }
+        [IN(LINE)] public static bool Any(uint a) { return a != default; }
+        #endregion
+
         #region Min/Max/Sum
         [IN(LINE)] public static uint Max(uint a, uint b) { return a > b ? a : b; }
-        [IN(LINE)] public static uint AbsMax(uint a, uint b) { return InternalMath.Abs(a) > InternalMath.Abs(b) ? a : b; }
+        [IN(LINE)] public static uint AbsMax(uint a, uint b) { return a > b ? a : b; }
         [IN(LINE)] public static uint Min(uint a, uint b) { return a < b ? a : b; }
-        [IN(LINE)] public static uint AbsMin(uint a, uint b) { return InternalMath.Abs(a) < InternalMath.Abs(b) ? a : b; }
+        [IN(LINE)] public static uint AbsMin(uint a, uint b) { return a < b ? a : b; }
         [IN(LINE)] public static uint CMax(uint a) { return a; }
         [IN(LINE)] public static uint CAbsMax(uint a) { return a; }
         [IN(LINE)] public static uint CMin(uint a) { return a; }
@@ -95,110 +100,114 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Component iteration operations
-        [IN(LINE)] public static uint Max(uint a, uint b, uint c) { return Max(Max(a, b), c); }
-        [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d) { return Max(Max(a, b, c), d); }
-        [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d, uint e) { return Max(Max(a, b, c, d), e); }
-        [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d, uint e, uint f) { return Max(Max(a, b, c, d, e), f); }
-        [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return Max(Max(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static uint Max(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return Max(Max(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static uint CMax(uint a, uint b) { return Max(a, b); }
+        [IN(LINE)] public static uint CMax(uint a, uint b, uint c) { return Max(Max(a, b), c); }
+        [IN(LINE)] public static uint CMax(uint a, uint b, uint c, uint d) { return Max(Max(a, b), Max(c, d)); }
+        [IN(LINE)] public static uint CMax(uint a, uint b, uint c, uint d, uint e) { return Max(CMax(a, b, c, d), e); }
+        [IN(LINE)] public static uint CMax(uint a, uint b, uint c, uint d, uint e, uint f) { return Max(CMax(a, b, c, d), Max(e, f)); }
+        [IN(LINE)] public static uint CMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return Max(CMax(a, b, c, d), Max(Max(a, b), c)); }
+        [IN(LINE)] public static uint CMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return Max(CMax(a, b, c, d), CMax(e, f, g, h)); }
 
-        [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c) { return AbsMax(AbsMax(a, b), c); }
-        [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d) { return AbsMax(AbsMax(a, b, c), d); }
-        [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d, uint e) { return AbsMax(AbsMax(a, b, c, d), e); }
-        [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d, uint e, uint f) { return AbsMax(AbsMax(a, b, c, d, e), f); }
-        [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return AbsMax(AbsMax(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static uint AbsMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return AbsMax(AbsMax(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static uint CAbsMax(uint a, uint b) { return AbsMax(a, b); }
+        [IN(LINE)] public static uint CAbsMax(uint a, uint b, uint c) { return AbsMax(AbsMax(a, b), c); }
+        [IN(LINE)] public static uint CAbsMax(uint a, uint b, uint c, uint d) { return AbsMax(AbsMax(a, b), AbsMax(c, d)); }
+        [IN(LINE)] public static uint CAbsMax(uint a, uint b, uint c, uint d, uint e) { return AbsMax(CAbsMax(a, b, c, d), e); }
+        [IN(LINE)] public static uint CAbsMax(uint a, uint b, uint c, uint d, uint e, uint f) { return AbsMax(CAbsMax(a, b, c, d), AbsMax(e, f)); }
+        [IN(LINE)] public static uint CAbsMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return AbsMax(CAbsMax(a, b, c, d), AbsMax(AbsMax(a, b), c)); }
+        [IN(LINE)] public static uint CAbsMax(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return AbsMax(CAbsMax(a, b, c, d), CAbsMax(e, f, g, h)); }
 
-        [IN(LINE)] public static uint Min(uint a, uint b, uint c) { return Min(Min(a, b), c); }
-        [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d) { return Min(Min(a, b, c), d); }
-        [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d, uint e) { return Min(Min(a, b, c, d), e); }
-        [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d, uint e, uint f) { return Min(Min(a, b, c, d, e), f); }
-        [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return Min(Min(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static uint Min(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return Min(Min(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static uint CMin(uint a, uint b) { return Min(a, b); }
+        [IN(LINE)] public static uint CMin(uint a, uint b, uint c) { return Min(Min(a, b), c); }
+        [IN(LINE)] public static uint CMin(uint a, uint b, uint c, uint d) { return Min(Min(a, b), Min(c, d)); }
+        [IN(LINE)] public static uint CMin(uint a, uint b, uint c, uint d, uint e) { return Min(CMin(a, b, c, d), e); }
+        [IN(LINE)] public static uint CMin(uint a, uint b, uint c, uint d, uint e, uint f) { return Min(CMin(a, b, c, d), Min(e, f)); }
+        [IN(LINE)] public static uint CMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return Min(CMin(a, b, c, d), Min(Min(a, b), c)); }
+        [IN(LINE)] public static uint CMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return Min(CMin(a, b, c, d), CMin(e, f, g, h)); }
 
-        [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c) { return AbsMin(AbsMin(a, b), c); }
-        [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d) { return AbsMin(AbsMin(a, b, c), d); }
-        [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d, uint e) { return AbsMin(AbsMin(a, b, c, d), e); }
-        [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d, uint e, uint f) { return AbsMin(AbsMin(a, b, c, d, e), f); }
-        [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return AbsMin(AbsMin(a, b, c, d, e, f), g); }
-        [IN(LINE)] public static uint AbsMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return AbsMin(AbsMin(a, b, c, d, e, f, g), h); }
+        [IN(LINE)] public static uint CAbsMin(uint a, uint b) { return AbsMin(a, b); }
+        [IN(LINE)] public static uint CAbsMin(uint a, uint b, uint c) { return AbsMin(AbsMin(a, b), c); }
+        [IN(LINE)] public static uint CAbsMin(uint a, uint b, uint c, uint d) { return AbsMin(AbsMin(a, b), AbsMin(c, d)); }
+        [IN(LINE)] public static uint CAbsMin(uint a, uint b, uint c, uint d, uint e) { return AbsMin(CAbsMin(a, b, c, d), e); }
+        [IN(LINE)] public static uint CAbsMin(uint a, uint b, uint c, uint d, uint e, uint f) { return AbsMin(CAbsMin(a, b, c, d), AbsMin(e, f)); }
+        [IN(LINE)] public static uint CAbsMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g) { return AbsMin(CAbsMin(a, b, c, d), AbsMin(AbsMin(a, b), c)); }
+        [IN(LINE)] public static uint CAbsMin(uint a, uint b, uint c, uint d, uint e, uint f, uint g, uint h) { return AbsMin(CAbsMin(a, b, c, d), CAbsMin(e, f, g, h)); }
 
 
         [IN(LINE)]
-        public static uint Max<T>(T a, uint _ = default) where T : IVectorN<uint>
+        public static uint CMax<T>(T a, uint _ = default) where T : IVectorN<uint>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return Max(a[0], a[1]);
-                case 3: return Max(a[0], a[1], a[2]);
-                case 4: return Max(a[0], a[1], a[2], a[3]);
+                case 2: return CMax(a[0], a[1]);
+                case 3: return CMax(a[0], a[1], a[2]);
+                case 4: return CMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = Max(result, a[i]);
+                        result = CMax(result, a[i]);
                     }
                     return result;
             }
             return default;
         }
         [IN(LINE)]
-        public static uint AbsMax<T>(T a, uint _ = default) where T : IVectorN<uint>
+        public static uint CAbsMax<T>(T a, uint _ = default) where T : IVectorN<uint>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return AbsMax(a[0], a[1]);
-                case 3: return AbsMax(a[0], a[1], a[2]);
-                case 4: return AbsMax(a[0], a[1], a[2], a[3]);
+                case 2: return CAbsMax(a[0], a[1]);
+                case 3: return CAbsMax(a[0], a[1], a[2]);
+                case 4: return CAbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = AbsMax(result, a[i]);
+                        result = CAbsMax(result, a[i]);
                     }
                     return result;
             }
             return default;
         }
         [IN(LINE)]
-        public static uint Min<T>(T a, uint _ = default) where T : IVectorN<uint>
+        public static uint CMin<T>(T a, uint _ = default) where T : IVectorN<uint>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return Min(a[0], a[1]);
-                case 3: return Min(a[0], a[1], a[2]);
-                case 4: return Min(a[0], a[1], a[2], a[3]);
+                case 2: return CMin(a[0], a[1]);
+                case 3: return CMin(a[0], a[1], a[2]);
+                case 4: return CMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = Min(result, a[i]);
+                        result = CMin(result, a[i]);
                     }
                     return result;
             }
             return default;
         }
         [IN(LINE)]
-        public static uint AbsMin<T>(T a, uint _ = default) where T : IVectorN<uint>
+        public static uint CAbsMin<T>(T a, uint _ = default) where T : IVectorN<uint>
         {
             switch (a.count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
-                case 2: return AbsMin(a[0], a[1]);
-                case 3: return AbsMin(a[0], a[1], a[2]);
-                case 4: return AbsMin(a[0], a[1], a[2], a[3]);
+                case 2: return CAbsMin(a[0], a[1]);
+                case 3: return CAbsMin(a[0], a[1], a[2]);
+                case 4: return CAbsMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
                     for (int i = 1; i < a.count; i++)
                     {
-                        result = AbsMin(result, a[i]);
+                        result = CAbsMin(result, a[i]);
                     }
                     return result;
             }

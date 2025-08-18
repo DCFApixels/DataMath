@@ -209,7 +209,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static bool operator true(bool4 a) { return DM.All(a); }
         [IN(LINE)] public static bool operator false(bool4 a) { return !DM.All(a); }
-        [IN(LINE)] public static explicit operator bool(bool4 a) { return DM.All(a); }
+        //[IN(LINE)] public static explicit operator bool(bool4 a) { return DM.All(a); }
         #endregion
 
         #endregion

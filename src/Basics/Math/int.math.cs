@@ -20,8 +20,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static int Clamp(int a, int min, int max)
         {
-            if (a < min) return min;
-            if (a > max) return max;
+            if (a < min) { return min; }
+            if (a > max) { return max; }
             return a;
         }
 
@@ -36,6 +36,11 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static int PingPong(int a, int length) { return length - Abs(Repeat(a, length * 2) - length); }
         [IN(LINE)] public static int PingPong(int a, int min, int max) { return PingPong(a, max - min) + min; }
+        #endregion
+
+        #region All/Any
+        [IN(LINE)] public static bool All(int a) { return a != default; }
+        [IN(LINE)] public static bool Any(int a) { return a != default; }
         #endregion
 
         #region Min/Max/Sum

@@ -767,8 +767,8 @@ namespace DCFApixels.DataMath.Internal
             }
 
             // Обработка нулевой степени
-            if (exponent == 0)
-                return 1;
+            if (exponent == 0) { return 1; }
+
 
             // Алгоритм быстрого возведения в степень
             int result = 1;
@@ -778,7 +778,9 @@ namespace DCFApixels.DataMath.Internal
             while (exp > 0)
             {
                 if ((exp & 1) != 0) // Если степень нечётная
+                {
                     result *= currentBase;
+                }
 
                 currentBase *= currentBase; // Возведение в квадрат
                 exp >>= 1; // Уменьшение степени вдвое
@@ -786,6 +788,33 @@ namespace DCFApixels.DataMath.Internal
 
             return result;
         }
+        [IN(LINE)]
+        public static uint Pow(uint baseValue, uint exponent)
+        {
+            // Обработка нулевой степени
+            if (exponent == 0) { return 1; }
+
+
+            // Алгоритм быстрого возведения в степень
+            uint result = 1;
+            uint currentBase = baseValue;
+            uint exp = exponent;
+
+            while (exp > 0)
+            {
+                if ((exp & 1) != 0) // Если степень нечётная
+                {
+                    result *= currentBase;
+                }
+
+                currentBase *= currentBase; // Возведение в квадрат
+                exp >>= 1; // Уменьшение степени вдвое
+            }
+
+            return result;
+        }
+
+
         [IN(LINE)]
         public static double Pow(double x, double y)
         {
