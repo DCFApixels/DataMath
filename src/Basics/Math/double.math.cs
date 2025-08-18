@@ -212,6 +212,8 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static double Dot(double a, double b) { return a * b; }
         [IN(LINE)] public static double Sqr(double a) { return a * a; }
+        [IN(LINE)] public static double Sqrt(double a) { return InternalMath.Sqrt(a); }
+        [IN(LINE)] public static double RSqrt(double a) { return 1f / InternalMath.Sqrt(a); }
         [IN(LINE)] public static double Pow(double a, double b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static double Exp(double pow) { return InternalMath.Exp(pow); }
         [IN(LINE)] public static double Exp2(double pow) { return InternalMath.Exp2(pow); }
@@ -220,7 +222,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double Log(double f) { return InternalMath.Log(f); }
         [IN(LINE)] public static double Log2(double f) { return InternalMath.Log2(f); }
         [IN(LINE)] public static double Log10(double f) { return InternalMath.Log10(f); }
-        [IN(LINE)] public static double Sqrt(double a) { return InternalMath.Sqrt(a); }
 
         [IN(LINE)] public static double Tan(double a) { return InternalMath.Tan(a); }
         [IN(LINE)] public static double Tanh(double a) { return InternalMath.Tanh(a); }

@@ -50,10 +50,22 @@
         public enum AllCheckMode { }
         public enum AnyCheckMode { }
 
+
+        
+
+
         //    public const double TODEGREES_DBL = 57.29577951308232;
         //
         //    public const double TORADIANS_DBL = 0.017453292519943296;
 
 
     }
+}
+
+namespace DCFApixels.DataMath.Internal
+{
+    public enum _1_ : byte { Define }
+    public enum _2_ : byte { Define }
+    public enum _3_ : byte { Define }
+    public enum _4_ : byte { Define }
 }

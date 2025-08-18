@@ -1,6 +1,7 @@
 ﻿#if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -194,7 +195,7 @@ namespace DCFApixels.DataMath
         public static float2 NormalizeSafe(float2 a, float2 defaultvalue = default)
         {
             var len = Dot(a, a);
-            return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
+            return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
 
         [IN(LINE)] public static float2 Project(float2 a, float2 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
@@ -204,16 +205,15 @@ namespace DCFApixels.DataMath
             var proj = Project(a, ontoB);
             return Select(defaultValue, proj, All(IsInfinity(proj)));
         }
-        //[IN(LINE)] public static float2 Cross(float2 a, float2 b) { return (a * b.yzx - a.yzx * b).yzx; }
         [IN(LINE)] public static float2 Reflect(float2 v, float2 n) { return v - 2f * n * Dot(v, n); }
 
         [IN(LINE)] public static float2 Select(float2 falseValue, float2 trueValue, bool2 test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static float2 Step(float2 threshold, float2 a) { return Select(0.0f, 1.0f, a >= threshold); }
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static float2 Degrees(float2 a) { return a * Rad2Deg; }
+        [IN(LINE)] public static float2 Degrees(float2 radians) { return radians * Rad2Deg; }
         /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static float2 Radians(float2 a) { return a * Deg2Rad; }
+        [IN(LINE)] public static float2 Radians(float2 degrees) { return degrees * Deg2Rad; }
 
         [IN(LINE)] public static float2 Cos(float2 a) { return new float2(Cos(a.x), Cos(a.y)); }
         [IN(LINE)] public static float2 Cosh(float2 a) { return new float2(Cosh(a.x), Cosh(a.y)); }
@@ -228,6 +228,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Dot(float2 a, float2 b) { return a.x * b.x + a.y * b.y; }
         [IN(LINE)] public static float2 Sqr(float2 a) { return a * a; }
         [IN(LINE)] public static float2 Sqrt(float2 a) { return new float2(Sqrt(a.x), Sqrt(a.y)); }
+        [IN(LINE)] public static float2 RSqrt(float2 a) { return 1f / Sqrt(a); }
         [IN(LINE)] public static float2 Pow(float2 a, float2 b) { return new float2(Pow(a.x, a.y), Pow(a.y, a.y)); }
         [IN(LINE)] public static float2 Exp(float2 pow) { return new float2(Exp(pow.x), Exp(pow.y)); }
         [IN(LINE)] public static float2 Exp2(float2 pow) { return new float2(Exp2(pow.x), Exp2(pow.y)); }
@@ -248,5 +249,23 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint UHash(float2 v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)] public static int Hash(float2 v) { return Hash<float2>(v); }
         #endregion
+    }
+
+    public static partial class DMBasic // IVector2<float>
+    {
+        [IN(LINE)] public static T New<T>(float a, _2_ _ = default) where T : unmanaged, IVector2<float> { return New<T>(a, a); }
+        [IN(LINE)] public static T New<T>(float2 a) where T : unmanaged, IVector2<float> { return New<T>(a.x, a.y); }
+        [IN(LINE)] public static T New<T>(float x, float y) where T : unmanaged, IVector2<float> { T r = default; r.x = x; r.y = y; return r; }
+        [IN(LINE)] public static float2 ToBasic<T>(this T a, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new float2(a.x, a.y); }
+        [IN(LINE)] public static T Add<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x + b.x, a.y + b.y); }
+        [IN(LINE)] public static T Sub<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x - b.x, a.y - b.y); }
+        [IN(LINE)] public static T Mul<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x * b.x, a.y * b.y); }
+        [IN(LINE)] public static T Div<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x / b.x, a.y / b.y); }
+        [IN(LINE)] public static T Mod<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x % b.x, a.y % b.y); }
+        [IN(LINE)] public static bool2 Equals<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new bool2(a.x == b.x, a.y == b.y); }
+        [IN(LINE)] public static bool2 Greater<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new bool2(a.x > b.x, a.y > b.y); }
+        [IN(LINE)] public static bool2 Less<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new bool2(a.x < b.x, a.y < b.y); }
+        [IN(LINE)] public static bool2 GreaterOrEquals<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new bool2(a.x >= b.x, a.y >= b.y); }
+        [IN(LINE)] public static bool2 LessOrEquals<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new bool2(a.x <= b.x, a.y <= b.y); }
     }
 }

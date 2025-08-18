@@ -195,7 +195,7 @@ namespace DCFApixels.DataMath
         public static double4 NormalizeSafe(double4 a, double4 defaultvalue = default)
         {
             var len = Dot(a, a);
-            return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
+            return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
 
         [IN(LINE)] public static double4 Project(double4 a, double4 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
@@ -211,9 +211,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 Step(double4 threshold, double4 a) { return Select(0.0d, 1.0d, a >= threshold); }
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static double4 Degrees(double4 a) { return a * Rad2Deg; }
+        [IN(LINE)] public static double4 Degrees(double4 radians) { return radians * Rad2Deg; }
         /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static double4 Radians(double4 a) { return a * Deg2Rad; }
+        [IN(LINE)] public static double4 Radians(double4 degrees) { return degrees * Deg2Rad; }
 
         [IN(LINE)] public static double4 Cos(double4 a) { return new double4(Cos(a.x), Cos(a.y), Cos(a.z), Cos(a.w)); }
         [IN(LINE)] public static double4 Cosh(double4 a) { return new double4(Cosh(a.x), Cosh(a.y), Cosh(a.z), Cosh(a.w)); }
@@ -228,6 +228,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double Dot(double4 a, double4 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static double4 Sqr(double4 a) { return a * a; }
         [IN(LINE)] public static double4 Sqrt(double4 a) { return new double4(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z), Sqrt(a.w)); }
+        [IN(LINE)] public static double4 RSqrt(double4 a) { return 1f / Sqrt(a); }
         [IN(LINE)] public static double4 Pow(double4 a, double4 b) { return new double4(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z), Pow(a.w, a.w)); }
         [IN(LINE)] public static double4 Exp(double4 pow) { return new double4(Exp(pow.x), Exp(pow.y), Exp(pow.z), Exp(pow.z)); }
         [IN(LINE)] public static double4 Exp2(double4 pow) { return new double4(Exp2(pow.x), Exp2(pow.y), Exp2(pow.z), Exp2(pow.z)); }

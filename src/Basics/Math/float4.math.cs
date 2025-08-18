@@ -1,8 +1,10 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.DMBasic;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -194,7 +196,7 @@ namespace DCFApixels.DataMath
         public static float4 NormalizeSafe(float4 a, float4 defaultvalue = default)
         {
             var len = Dot(a, a);
-            return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
+            return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
 
         [IN(LINE)] public static float4 Project(float4 a, float4 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
@@ -210,9 +212,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float4 Step(float4 threshold, float4 a) { return Select(0.0f, 1.0f, a >= threshold); }
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static float4 Degrees(float4 a) { return a * Rad2Deg; }
+        [IN(LINE)] public static float4 Degrees(float4 radians) { return radians * Rad2Deg; }
         /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static float4 Radians(float4 a) { return a * Deg2Rad; }
+        [IN(LINE)] public static float4 Radians(float4 degrees) { return degrees * Deg2Rad; }
 
         [IN(LINE)] public static float4 Cos(float4 a) { return new float4(Cos(a.x), Cos(a.y), Cos(a.z), Cos(a.w)); }
         [IN(LINE)] public static float4 Cosh(float4 a) { return new float4(Cosh(a.x), Cosh(a.y), Cosh(a.z), Cosh(a.w)); }
@@ -227,6 +229,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Dot(float4 a, float4 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static float4 Sqr(float4 a) { return a * a; }
         [IN(LINE)] public static float4 Sqrt(float4 a) { return new float4(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z), Sqrt(a.w)); }
+        [IN(LINE)] public static float4 RSqrt(float4 a) { return 1f / Sqrt(a); }
         [IN(LINE)] public static float4 Pow(float4 a, float4 b) { return new float4(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z), Pow(a.w, a.w)); }
         [IN(LINE)] public static float4 Exp(float4 pow) { return new float4(Exp(pow.x), Exp(pow.y), Exp(pow.z), Exp(pow.z)); }
         [IN(LINE)] public static float4 Exp2(float4 pow) { return new float4(Exp2(pow.x), Exp2(pow.y), Exp2(pow.z), Exp2(pow.z)); }
@@ -247,5 +250,23 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint UHash(float4 v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)] public static int Hash(float4 v) { return Hash<float4>(v); }
         #endregion
+    }
+
+    public static partial class DMBasic // IVector4<float>
+    {
+        [IN(LINE)] public static T New<T>(float a, _4_ _ = default) where T : unmanaged, IVector4<float> { return New<T>(a, a, a, a); }
+        [IN(LINE)] public static T New<T>(float4 a) where T : unmanaged, IVector4<float> { return New<T>(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static T New<T>(float x, float y, float z, float w) where T : unmanaged, IVector4<float> { T r = default; r.x = x; r.y = y; r.z = z; r.w = w; return r; }
+        [IN(LINE)] public static float4 ToBasic<T>(this T a, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return new float4(a.x, a.y, a.z, a.w); }
+        [IN(LINE)] public static T Add<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return New<T>(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
+        [IN(LINE)] public static T Sub<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return New<T>(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w); }
+        [IN(LINE)] public static T Mul<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return New<T>(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w); }
+        [IN(LINE)] public static T Div<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return New<T>(a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w); }
+        [IN(LINE)] public static T Mod<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return New<T>(a.x % b.x, a.y % b.y, a.z % b.z, a.w % b.w); }
+        [IN(LINE)] public static bool4 Equals<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return new bool4(a.x == b.x, a.y == b.y, a.z == b.z, a.w == b.w); }
+        [IN(LINE)] public static bool4 Greater<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return new bool4(a.x > b.x, a.y > b.y, a.z > b.z, a.w > b.w); }
+        [IN(LINE)] public static bool4 Less<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return new bool4(a.x < b.x, a.y < b.y, a.z < b.z, a.w < b.w); }
+        [IN(LINE)] public static bool4 GreaterOrEquals<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return new bool4(a.x >= b.x, a.y >= b.y, a.z >= b.z, a.w >= b.w); }
+        [IN(LINE)] public static bool4 LessOrEquals<T>(T a, T b, _4_ _ = default) where T : unmanaged, IVector4Impl<float> { return new bool4(a.x <= b.x, a.y <= b.y, a.z <= b.z, a.w <= b.w); }
     }
 }

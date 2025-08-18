@@ -232,7 +232,7 @@ namespace DCFApixels.DataMath
             if (dt < 0.9995f)
             {
                 float angle = Acos(dt);
-                float s = 1f / Sqrt(1.0f - dt * dt);    // 1.0f / Sin(angle)
+                float s = RSqrt(1.0f - dt * dt);    // 1.0f / Sin(angle)
                 float w1 = Sin(angle * (1.0f - t)) * s;
                 float w2 = Sin(angle * t) * s;
                 return new quat(a.value * w1 + b.value * w2);

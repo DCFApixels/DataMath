@@ -25,7 +25,7 @@ namespace DCFApixels.DataMath
     public struct color :
         IEquatable<color>,
         IFormattable,
-        IVector4<float>,
+        IVector4Impl<float>,
         IColor,
         IEnumerableVector<float, color>
     {

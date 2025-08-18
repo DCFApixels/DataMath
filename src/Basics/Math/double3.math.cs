@@ -195,7 +195,7 @@ namespace DCFApixels.DataMath
         public static double3 NormalizeSafe(double3 a, double3 defaultvalue = default)
         {
             var len = Dot(a, a);
-            return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
+            return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
 
         [IN(LINE)] public static double3 Project(double3 a, double3 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
@@ -211,9 +211,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double3 Step(double3 threshold, double3 a) { return Select(0.0d, 1.0d, a >= threshold); }
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static double3 Degrees(double3 a) { return a * Rad2Deg; }
+        [IN(LINE)] public static double3 Degrees(double3 radians) { return radians * Rad2Deg; }
         /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static double3 Radians(double3 a) { return a * Deg2Rad; }
+        [IN(LINE)] public static double3 Radians(double3 degrees) { return degrees * Deg2Rad; }
 
         [IN(LINE)] public static double3 Cos(double3 a) { return new double3(Cos(a.x), Cos(a.y), Cos(a.z)); }
         [IN(LINE)] public static double3 Cosh(double3 a) { return new double3(Cosh(a.x), Cosh(a.y), Cosh(a.z)); }
@@ -228,6 +228,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double Dot(double3 a, double3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static double3 Sqr(double3 a) { return a * a; }
         [IN(LINE)] public static double3 Sqrt(double3 a) { return new double3(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z)); }
+        [IN(LINE)] public static double3 RSqrt(double3 a) { return 1f / Sqrt(a); }
         [IN(LINE)] public static double3 Pow(double3 a, double3 b) { return new double3(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z)); }
         [IN(LINE)] public static double3 Exp(double3 pow) { return new double3(Exp(pow.x), Exp(pow.y), Exp(pow.z)); }
         [IN(LINE)] public static double3 Exp2(double3 pow) { return new double3(Exp2(pow.x), Exp2(pow.y), Exp2(pow.z)); }

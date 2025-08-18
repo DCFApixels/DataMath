@@ -1,6 +1,7 @@
 ﻿#if DISABLE_DEBUG
 #undef DEBUG
 #endif
+using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -194,7 +195,7 @@ namespace DCFApixels.DataMath
         public static float3 NormalizeSafe(float3 a, float3 defaultvalue = default)
         {
             var len = Dot(a, a);
-            return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
+            return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
 
         [IN(LINE)] public static float3 Project(float3 a, float3 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
@@ -210,9 +211,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float3 Step(float3 threshold, float3 a) { return Select(0.0f, 1.0f, a >= threshold); }
 
         /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static float3 Degrees(float3 a) { return a * Rad2Deg; }
+        [IN(LINE)] public static float3 Degrees(float3 radians) { return radians * Rad2Deg; }
         /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static float3 Radians(float3 a) { return a * Deg2Rad; }
+        [IN(LINE)] public static float3 Radians(float3 degrees) { return degrees * Deg2Rad; }
 
         [IN(LINE)] public static float3 Cos(float3 a) { return new float3(Cos(a.x), Cos(a.y), Cos(a.z)); }
         [IN(LINE)] public static float3 Cosh(float3 a) { return new float3(Cosh(a.x), Cosh(a.y), Cosh(a.z)); }
@@ -227,6 +228,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Dot(float3 a, float3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static float3 Sqr(float3 a) { return a * a; }
         [IN(LINE)] public static float3 Sqrt(float3 a) { return new float3(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z)); }
+        [IN(LINE)] public static float3 RSqrt(float3 a) { return 1f / Sqrt(a); }
         [IN(LINE)] public static float3 Pow(float3 a, float3 b) { return new float3(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z)); }
         [IN(LINE)] public static float3 Exp(float3 pow) { return new float3(Exp(pow.x), Exp(pow.y), Exp(pow.z)); }
         [IN(LINE)] public static float3 Exp2(float3 pow) { return new float3(Exp2(pow.x), Exp2(pow.y), Exp2(pow.z)); }
@@ -251,5 +253,23 @@ namespace DCFApixels.DataMath
         #region Specific
         [IN(LINE)] public static float3 Cross(float3 a, float3 b) { return (a * b.yzx - a.yzx * b).yzx; }
         #endregion
+    }
+
+    public static partial class DMBasic // IVector3<float>
+    {
+        [IN(LINE)] public static T New<T>(float a, _3_ _ = default) where T : unmanaged, IVector3<float> { return New<T>(a, a, a); }
+        [IN(LINE)] public static T New<T>(float3 a) where T : unmanaged, IVector3<float> { return New<T>(a.x, a.y, a.z); }
+        [IN(LINE)] public static T New<T>(float x, float y, float z) where T : unmanaged, IVector3<float> { T r = default; r.x = x; r.y = y; r.z = z;return r; }
+        [IN(LINE)] public static float3 ToBasic<T>(this T a, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new float3(a.x, a.y, a.z); }
+        [IN(LINE)] public static T Add<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x + b.x, a.y + b.y, a.z + b.z); }
+        [IN(LINE)] public static T Sub<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x - b.x, a.y - b.y, a.z - b.z); }
+        [IN(LINE)] public static T Mul<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x * b.x, a.y * b.y, a.z * b.z); }
+        [IN(LINE)] public static T Div<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x / b.x, a.y / b.y, a.z / b.z); }
+        [IN(LINE)] public static T Mod<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x % b.x, a.y % b.y, a.z % b.z); }
+        [IN(LINE)] public static bool3 Equals<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new bool3(a.x == b.x, a.y == b.y, a.z == b.z); }
+        [IN(LINE)] public static bool3 Greater<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new bool3(a.x > b.x, a.y > b.y, a.z > b.z); }
+        [IN(LINE)] public static bool3 Less<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new bool3(a.x < b.x, a.y < b.y, a.z < b.z); }
+        [IN(LINE)] public static bool3 GreaterOrEquals<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new bool3(a.x >= b.x, a.y >= b.y, a.z >= b.z); }
+        [IN(LINE)] public static bool3 LessOrEquals<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new bool3(a.x <= b.x, a.y <= b.y, a.z <= b.z); }
     }
 }
