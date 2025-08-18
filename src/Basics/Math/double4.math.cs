@@ -178,7 +178,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool4 Approximately(double4 a, double4 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8d)); }
+        [IN(LINE)] public static bool4 Approximately(double4 a, double4 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8d)); }
         [IN(LINE)] public static bool4 Approximately(double4 a, double4 b, double4 tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
@@ -189,13 +189,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double DistanceSqr(double4 a, double4 b) { return LengthSqr(b - a); }
         [IN(LINE)] public static double4 Normalize(double4 a) { return 1d / Sqrt(Dot(a, a)) * a; }
 
-        [IN(LINE)] public static double Dot(double4 a, double4 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static double4 Project(double4 a, double4 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static double4 ProjectSafe(double4 a, double4 ontoB, double4 defaultValue = default)
         {
             var proj = Project(a, ontoB);
-            return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
+            return Select(defaultValue, proj, All(IsInfinity(proj)));
         }
         [IN(LINE)] public static double4 Reflect(double4 v, double4 n) { return v - 2d * n * Dot(v, n); }
 
@@ -217,6 +216,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 Atan(double4 a) { return new double4(Atan(a.x), Atan(a.y), Atan(a.z), Atan(a.w)); }
         [IN(LINE)] public static double4 Atan2(double4 a, double4 b) { return new double4(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z), Atan2(a.w, b.w)); }
 
+        [IN(LINE)] public static double Dot(double4 a, double4 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static double4 Sqr(double4 a) { return a * a; }
         [IN(LINE)] public static double4 Sqrt(double4 a) { return new double4(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z), Sqrt(a.w)); }
         [IN(LINE)] public static double4 Pow(double4 a, double4 b) { return new double4(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z), Pow(a.w, a.w)); }

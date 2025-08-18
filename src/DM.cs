@@ -32,11 +32,17 @@
         /// <summary> Multiply an angle in radians by this, to convert it to degrees. </summary>
         public const double Rad2Deg_D = 360d / TAU_D;
 
-        private const float FloatMinNormal = 1.17549435E-38f;
-        private const float FloatMinDenormal = float.Epsilon;
-        private const bool IsFlushToZeroEnabled = FloatMinDenormal == 0f;
 
-        public const float Epsilon = (IsFlushToZeroEnabled ? FloatMinNormal : FloatMinDenormal);
+        public const float FloatMinNormal = 1.17549435E-38f;
+        private const float FloatMinDenormal = float.Epsilon;
+        private const bool IsFloatFlushToZeroEnabled = FloatMinDenormal == 0f;
+
+        public const double DoubleMinNormal = 2.2250738585072014e-308;
+        private const double DoubleMinDenormal = float.Epsilon;
+        private const bool IsDoubleFlushToZeroEnabled = FloatMinDenormal == 0f;
+
+        public const float FloatEpsilon = IsFloatFlushToZeroEnabled ? FloatMinNormal : FloatMinDenormal;
+        public const double DoubleEpsilon = IsDoubleFlushToZeroEnabled ? DoubleMinNormal : DoubleMinDenormal;
         #endregion
 
         public const AllCheckMode all = (AllCheckMode)1;

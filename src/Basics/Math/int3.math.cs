@@ -54,9 +54,9 @@ namespace DCFApixels.DataMath
         //Sqrt - float
         [IN(LINE)] public static int3 LengthSqr(int3 a) { return Sqr(a); }
         [IN(LINE)] public static int3 DistanceSqr(int3 a, int3 b) { return Sqr(b - a); }
+        [IN(LINE)] public static int3 Dot(int3 a, int3 b) { return a * b; }
         [IN(LINE)] public static int3 Sqr(int3 a) { return a * a; }
         [IN(LINE)] public static int3 Pow(int3 a, int3 b) { return new int3(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z)); }
-        [IN(LINE)] public static int3 Dot(int3 a, int3 b) { return a * b; }
         [IN(LINE)] public static int3 Select(int3 falseValue, int3 trueValue, bool2 test) { return test ? trueValue : falseValue; }
         #endregion
 

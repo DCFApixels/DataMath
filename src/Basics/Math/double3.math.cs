@@ -178,7 +178,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool3 Approximately(double3 a, double3 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8d)); }
+        [IN(LINE)] public static bool3 Approximately(double3 a, double3 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8d)); }
         [IN(LINE)] public static bool3 Approximately(double3 a, double3 b, double3 tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
@@ -189,13 +189,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double DistanceSqr(double3 a, double3 b) { return LengthSqr(b - a); }
         [IN(LINE)] public static double3 Normalize(double3 a) { return 1.0d / Sqrt(Dot(a, a)) * a; }
 
-        [IN(LINE)] public static double Dot(double3 a, double3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static double3 Project(double3 a, double3 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static double3 ProjectSafe(double3 a, double3 ontoB, double3 defaultValue = default)
         {
             var proj = Project(a, ontoB);
-            return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
+            return Select(defaultValue, proj, All(IsInfinity(proj)));
         }
         [IN(LINE)] public static double3 Reflect(double3 v, double3 n) { return v - 2d * n * Dot(v, n); }
 
@@ -217,6 +216,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double3 Atan(double3 a) { return new double3(Atan(a.x), Atan(a.y), Atan(a.z)); }
         [IN(LINE)] public static double3 Atan2(double3 a, double3 b) { return new double3(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z)); }
 
+        [IN(LINE)] public static double Dot(double3 a, double3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static double3 Sqr(double3 a) { return a * a; }
         [IN(LINE)] public static double3 Sqrt(double3 a) { return new double3(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z)); }
         [IN(LINE)] public static double3 Pow(double3 a, double3 b) { return new double3(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z)); }

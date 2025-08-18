@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿
+
+using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -177,7 +179,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool3 Approximately(float3 a, float3 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool3 Approximately(float3 a, float3 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8f)); }
         [IN(LINE)] public static bool3 Approximately(float3 a, float3 b, float3 tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
@@ -187,14 +189,19 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Distance(float3 a, float3 b) { return Length(b - a); }
         [IN(LINE)] public static float DistanceSqr(float3 a, float3 b) { return LengthSqr(b - a); }
         [IN(LINE)] public static float3 Normalize(float3 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
+        [IN(LINE)] 
+        public static float3 NormalizeSafe(float3 a, float3 defaultvalue = default)
+        {
+            float len = Dot(a, a);
+            return Select(defaultvalue, 1f / Sqrt(len) * a, len > FloatMinNormal);
+        }
 
-        [IN(LINE)] public static float Dot(float3 a, float3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static float3 Project(float3 a, float3 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float3 ProjectSafe(float3 a, float3 ontoB, float3 defaultValue = default)
         {
             var proj = Project(a, ontoB);
-            return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
+            return Select(defaultValue, proj, All(IsInfinity(proj)));
         }
         [IN(LINE)] public static float3 Reflect(float3 v, float3 n) { return v - 2f * n * Dot(v, n); }
 
@@ -216,6 +223,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float3 Atan(float3 a) { return new float3(Atan(a.x), Atan(a.y), Atan(a.z)); }
         [IN(LINE)] public static float3 Atan2(float3 a, float3 b) { return new float3(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z)); }
 
+        [IN(LINE)] public static float Dot(float3 a, float3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static float3 Sqr(float3 a) { return a * a; }
         [IN(LINE)] public static float3 Sqrt(float3 a) { return new float3(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z)); }
         [IN(LINE)] public static float3 Pow(float3 a, float3 b) { return new float3(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z)); }

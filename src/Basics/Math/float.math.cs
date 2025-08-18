@@ -173,7 +173,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool Approximately(float a, float b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool Approximately(float a, float b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8f)); }
         [IN(LINE)] public static bool Approximately(float a, float b, float tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
@@ -184,7 +184,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float DistanceSqr(float a, float b) { return Sqr(b - a); }
         [IN(LINE)] public static float Normalize(float a) { return a < 0f ? -1f : 1f; }
 
-        [IN(LINE)] public static float Dot(float a, float b) { return a * b; }
         [IN(LINE)] public static float Project(float a, float ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float ProjectSafe(float a, float ontoB, float defaultValue = 0)
@@ -213,6 +212,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Atan(float a) { return InternalMath.Atan(a); }
         [IN(LINE)] public static float Atan2(float a, float b) { return InternalMath.Atan2(a, b); }
 
+        [IN(LINE)] public static float Dot(float a, float b) { return a * b; }
         [IN(LINE)] public static float Sqr(float a) { return a * a; }
         [IN(LINE)] public static float Sqrt(float a) { return InternalMath.Sqrt(a); }
         [IN(LINE)] public static float Pow(float a, float b) { return InternalMath.Pow(a, b); }

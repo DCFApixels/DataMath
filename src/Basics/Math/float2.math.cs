@@ -177,7 +177,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool2 Approximately(float2 a, float2 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool2 Approximately(float2 a, float2 b) { return Approximately(a, b, CMax(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8f)); }
         [IN(LINE)] public static bool2 Approximately(float2 a, float2 b, float2 tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
@@ -188,13 +188,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float DistanceSqr(float2 a, float2 b) { return LengthSqr(b - a); }
         [IN(LINE)] public static float2 Normalize(float2 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
 
-        [IN(LINE)] public static float Dot(float2 a, float2 b) { return a.x * b.x + a.y * b.y; }
         [IN(LINE)] public static float2 Project(float2 a, float2 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float2 ProjectSafe(float2 a, float2 ontoB, float2 defaultValue = default)
         {
             var proj = Project(a, ontoB);
-            return Select(defaultValue, proj, IsInfinity(proj)/*all*/);
+            return Select(defaultValue, proj, All(IsInfinity(proj)));
         }
         //[IN(LINE)] public static float2 Cross(float2 a, float2 b) { return (a * b.yzx - a.yzx * b).yzx; }
         [IN(LINE)] public static float2 Reflect(float2 v, float2 n) { return v - 2f * n * Dot(v, n); }
@@ -217,6 +216,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float2 Atan(float2 a) { return new float2(Atan(a.x), Atan(a.y)); }
         [IN(LINE)] public static float2 Atan2(float2 a, float2 b) { return new float2(Atan2(a.x, b.x), Atan2(a.y, b.y)); }
 
+        [IN(LINE)] public static float Dot(float2 a, float2 b) { return a.x * b.x + a.y * b.y; }
         [IN(LINE)] public static float2 Sqr(float2 a) { return a * a; }
         [IN(LINE)] public static float2 Sqrt(float2 a) { return new float2(Sqrt(a.x), Sqrt(a.y)); }
         [IN(LINE)] public static float2 Pow(float2 a, float2 b) { return new float2(Pow(a.x, a.y), Pow(a.y, a.y)); }

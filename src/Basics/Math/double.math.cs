@@ -168,7 +168,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Approximately
-        [IN(LINE)] public static bool Approximately(double a, double b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), Epsilon * 8f)); }
+        [IN(LINE)] public static bool Approximately(double a, double b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8f)); }
         [IN(LINE)] public static bool Approximately(double a, double b, double tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
@@ -179,7 +179,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double DistanceSqr(double a, double b) { return Sqr(b - a); }
         [IN(LINE)] public static double Normalize(double a) { return a < 0d ? -1d : 1d; }
 
-        [IN(LINE)] public static double Dot(double a, double b) { return a * b; }
         [IN(LINE)] public static double Project(double a, double ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static double ProjectSafe(double a, double ontoB, double defaultValue = 0)
@@ -208,6 +207,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double Atan(double a) { return InternalMath.Atan(a); }
         [IN(LINE)] public static double Atan2(double a, double b) { return InternalMath.Atan2(a, b); }
 
+        [IN(LINE)] public static double Dot(double a, double b) { return a * b; }
         [IN(LINE)] public static double Sqr(double a) { return a * a; }
         [IN(LINE)] public static double Pow(double a, double b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static double Exp(double pow) { return InternalMath.Exp(pow); }

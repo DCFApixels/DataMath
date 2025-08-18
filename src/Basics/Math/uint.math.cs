@@ -87,9 +87,9 @@ namespace DCFApixels.DataMath
         //Sqrt - float
         [IN(LINE)] public static uint LengthSqr(uint a) { return Sqr(a); }
         [IN(LINE)] public static uint DistanceSqr(uint a, uint b) { return Sqr(b - a); }
+        [IN(LINE)] public static uint Dot(uint a, uint b) { return a * b; }
         [IN(LINE)] public static uint Sqr(uint a) { return a * a; }
         [IN(LINE)] public static uint Pow(uint a, uint b) { return InternalMath.Pow(a, b); }
-        [IN(LINE)] public static uint Dot(uint a, uint b) { return a * b; }
         [IN(LINE)] public static uint Select(uint falseValue, uint trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion
 
