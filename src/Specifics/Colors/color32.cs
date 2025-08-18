@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
@@ -98,6 +97,8 @@ namespace DCFApixels.DataMath
             r8 = r; g8 = g;
             b8 = b; a8 = a;
         }
+        [IN(LINE)] public color32((byte r, byte g, byte b) v) { r8 = v.r; g8 = v.g; b8 = v.b; a8 = 1; }
+        [IN(LINE)] public color32((byte r, byte g, byte b, byte a) v) { r8 = v.r; g8 = v.g; b8 = v.b; a8 = v.a; }
         [IN(LINE)]
         public color32(color color)
         {

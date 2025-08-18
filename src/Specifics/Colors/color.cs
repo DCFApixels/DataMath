@@ -99,25 +99,31 @@ namespace DCFApixels.DataMath
             this.r = r; this.g = g;
             this.b = b; this.a = a;
         }
+        [IN(LINE)] public color((float r, float g, float b) v) { r = v.r; g = v.g; b = v.b; a = 1f; }
+        [IN(LINE)] public color((float r, float g, float b, float a) v) { r = v.r; g = v.g; b = v.b; a = v.a; }
+        [IN(LINE)] public color(float3 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
+        [IN(LINE)] public color(float4 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
+        [IN(LINE)] public color(double3 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
+        [IN(LINE)] public color(double4 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
         [IN(LINE)]
-        public color(color32 color32)
+        public color(color32 v)
         {
-            r = color32.r8 * ByteToFloatMult; g = color32.g8 * ByteToFloatMult;
-            b = color32.b8 * ByteToFloatMult; a = color32.a8 * ByteToFloatMult;
+            r = v.r8 * ByteToFloatMult; g = v.g8 * ByteToFloatMult;
+            b = v.b8 * ByteToFloatMult; a = v.a8 * ByteToFloatMult;
         }
         [IN(LINE)]
         public color(int colorCode)
         {
-            ColorCodeUnion u = colorCode;
-            r = u.r8 * ByteToFloatMult; g = u.g8 * ByteToFloatMult;
-            b = u.b8 * ByteToFloatMult; a = u.a8 * ByteToFloatMult;
+            ColorCodeUnion v = colorCode;
+            r = v.r8 * ByteToFloatMult; g = v.g8 * ByteToFloatMult;
+            b = v.b8 * ByteToFloatMult; a = v.a8 * ByteToFloatMult;
         }
         [IN(LINE)]
         public color(uint colorCode)
         {
-            ColorCodeUnion u = colorCode;
-            r = u.r8 * ByteToFloatMult; g = u.g8 * ByteToFloatMult;
-            b = u.b8 * ByteToFloatMult; a = u.a8 * ByteToFloatMult;
+            ColorCodeUnion v = colorCode;
+            r = v.r8 * ByteToFloatMult; g = v.g8 * ByteToFloatMult;
+            b = v.b8 * ByteToFloatMult; a = v.a8 * ByteToFloatMult;
         }
         #endregion
 
@@ -162,6 +168,8 @@ namespace DCFApixels.DataMath
         public static explicit operator color(int colorcode) { return new color(colorcode); }
         public static explicit operator color(uint colorcode) { return new color(colorcode); }
         public static implicit operator color(color32 a) { return new color(a); }
+        public static implicit operator color(float3 a) { return new color(a); }
+        public static implicit operator color(float4 a) { return new color(a); }
         #endregion
 
         #region Other
