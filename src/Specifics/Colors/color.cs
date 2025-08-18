@@ -98,6 +98,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
+        [IN(LINE)] public color(color v) { this = v; }
         [IN(LINE)]
         public color(float r, float g, float b)
         {
@@ -110,18 +111,10 @@ namespace DCFApixels.DataMath
             this.r = r; this.g = g;
             this.b = b; this.a = a;
         }
-        [IN(LINE)] public color((float r, float g, float b) v) { r = v.r; g = v.g; b = v.b; a = 1f; }
-        [IN(LINE)] public color((float r, float g, float b, float a) v) { r = v.r; g = v.g; b = v.b; a = v.a; }
         [IN(LINE)] public color(float3 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
         [IN(LINE)] public color(float4 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
         [IN(LINE)] public color(double3 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
         [IN(LINE)] public color(double4 v) { r = v.r; g = v.g; b = v.b; a = v.a; }
-        [IN(LINE)]
-        public color(color32 v)
-        {
-            r = v.r8 * ByteToFloatMult; g = v.g8 * ByteToFloatMult;
-            b = v.b8 * ByteToFloatMult; a = v.a8 * ByteToFloatMult;
-        }
         [IN(LINE)]
         public color(int colorCode)
         {
@@ -136,6 +129,13 @@ namespace DCFApixels.DataMath
             r = v.r8 * ByteToFloatMult; g = v.g8 * ByteToFloatMult;
             b = v.b8 * ByteToFloatMult; a = v.a8 * ByteToFloatMult;
         }
+        [IN(LINE)]
+        public color(color32 v)
+        {
+            r = v.r8 * ByteToFloatMult; g = v.g8 * ByteToFloatMult;
+            b = v.b8 * ByteToFloatMult; a = v.a8 * ByteToFloatMult;
+        }
+        [IN(LINE)] public color(colorhsv v) { this = ColorUtility.HSVToRGB(v); }
         #endregion
 
         #region Arithmetic operators
@@ -176,12 +176,16 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Converts
+        public static implicit operator color(float3 a) { return new color(a); }
+        public static implicit operator color(float4 a) { return new color(a); }
+        public static explicit operator color(double3 a) { return new color(a); }
+        public static explicit operator color(double4 a) { return new color(a); }
         public static explicit operator color(int colorcode) { return new color(colorcode); }
         public static explicit operator color(uint colorcode) { return new color(colorcode); }
         public static implicit operator color(color32 a) { return new color(a); }
-        public static implicit operator color(float3 a) { return new color(a); }
-        public static implicit operator color(float4 a) { return new color(a); }
+        public static explicit operator color(colorhsv a) { return new color(a); }
         #endregion
+
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
