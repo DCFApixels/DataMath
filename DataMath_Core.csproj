@@ -7,5 +7,7 @@
     <Nullable>disable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="**/*.meta" Visible="false" />
+  </ItemGroup>
 </Project>
