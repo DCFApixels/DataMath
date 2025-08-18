@@ -14,6 +14,18 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool All(bool3 a) { return a.x && a.y && a.z; }
         [IN(LINE)] public static bool Any(bool3 a) { return a.x || a.y || a.z; }
         #endregion
+
+        #region Min/Max/Sum
+        [IN(LINE)] public static bool3 Max(bool3 a, bool3 b) { return a | b; }
+        [IN(LINE)] public static bool3 AbsMax(bool3 a, bool3 b) { return a | b; }
+        [IN(LINE)] public static bool3 Min(bool3 a, bool3 b) { return a & b; }
+        [IN(LINE)] public static bool3 AbsMin(bool3 a, bool3 b) { return a & b; }
+        [IN(LINE)] public static bool CMax(bool3 a) { return Any(a); }
+        [IN(LINE)] public static bool CAbsMax(bool3 a) { return Any(a); }
+        [IN(LINE)] public static bool CMin(bool3 a) { return All(a); }
+        [IN(LINE)] public static bool CAbsMin(bool3 a) { return All(a); }
+        [IN(LINE)] public static int CSum(bool3 a) { return CSum(a.x) + CSum(a.y) + CSum(a.z); }
+        #endregion
     }
     public static partial class DMBits // bool2
     {
