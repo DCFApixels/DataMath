@@ -133,7 +133,7 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
-    public static partial class DM // floatrange
+    public static partial class DM // frange
     {
         #region clamp/clamp01
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -207,8 +207,8 @@ namespace DCFApixels.DataMath.Unity.Editors
 
     [CustomPropertyDrawer(typeof(ClampedRangeAttribute), true)]
     [CustomPropertyDrawer(typeof(MinMaxRangeAttribute), true)]
-    [CustomPropertyDrawer(typeof(floatrange), true)]
-    [CustomPropertyDrawer(typeof(intrange), true)]
+    [CustomPropertyDrawer(typeof(frange), true)]
+    [CustomPropertyDrawer(typeof(irange), true)]
     public class RangedValueDrawer : PropertyDrawer
     {
         private const float SPACING = 4f;
@@ -216,8 +216,8 @@ namespace DCFApixels.DataMath.Unity.Editors
         {
             float defaultlabelWidth = EditorGUIUtility.labelWidth;
 
-            SerializedProperty xProp = property.FindPropertyRelative(nameof(floatrange.start));
-            SerializedProperty lengthProp = property.FindPropertyRelative(nameof(floatrange.extent));
+            SerializedProperty xProp = property.FindPropertyRelative(nameof(frange.start));
+            SerializedProperty lengthProp = property.FindPropertyRelative(nameof(frange.extent));
 
             Rect labelRect = position;
             labelRect.width = defaultlabelWidth;
@@ -231,10 +231,10 @@ namespace DCFApixels.DataMath.Unity.Editors
                 switch (xProp.propertyType)
                 {
                     case SerializedPropertyType.Integer:
-                        minmaxTooltip = new intrange(xProp.intValue, lengthProp.intValue).ToString();
+                        minmaxTooltip = new irange(xProp.intValue, lengthProp.intValue).ToString();
                         break;
                     case SerializedPropertyType.Float:
-                        minmaxTooltip = new floatrange(xProp.floatValue, lengthProp.floatValue).ToString();
+                        minmaxTooltip = new frange(xProp.floatValue, lengthProp.floatValue).ToString();
                         break;
                     default:
                         minmaxTooltip = "error";
@@ -278,9 +278,9 @@ namespace DCFApixels.DataMath.Unity.Editors
                 maxRect.x = minRect.xMax + SPACING;
 
                 EditorGUIUtility.labelWidth = 12f;
-                EditorGUI.PropertyField(minRect, xProp, new GUIContent("S", nameof(floatrange.start)));
+                EditorGUI.PropertyField(minRect, xProp, new GUIContent("S", nameof(frange.start)));
                 EditorGUIUtility.labelWidth = 12f;
-                EditorGUI.PropertyField(maxRect, lengthProp, new GUIContent("E", nameof(floatrange.extent)));
+                EditorGUI.PropertyField(maxRect, lengthProp, new GUIContent("E", nameof(frange.extent)));
             }
         }
         private void DrawClampedRangeField(Rect fieldRect, SerializedProperty property, ClampedRangeAttribute attribute, SerializedProperty xProp, SerializedProperty lengthProp)
