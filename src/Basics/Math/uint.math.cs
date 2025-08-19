@@ -73,13 +73,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static uint RoundPow2(uint value)
         {
-            value = CeilPow2(value);
+            uint ceil = CeilPow2(value);
             uint floor = value >> 1;
-            if (value - floor < value - value)
+            if (value - floor < ceil - value)
             {
                 return floor;
             }
-            return value;
+            return ceil;
         }
         [IN(LINE)] public static bool IsPow2(uint value) { return (value & (value - 1)) == 0; }
         #endregion

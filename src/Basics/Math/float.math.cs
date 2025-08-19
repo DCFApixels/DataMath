@@ -12,7 +12,7 @@ namespace DCFApixels.DataMath
     {
 
     }
-    public static partial class DM // float
+    public static unsafe partial class DM // float
     {
         #region Abs/Sign
         [IN(LINE)] public static float Abs(float a) { return InternalMath.Abs(a); }
@@ -178,6 +178,53 @@ namespace DCFApixels.DataMath
         #region Approximately
         [IN(LINE)] public static bool Approximately(float a, float b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8f)); }
         [IN(LINE)] public static bool Approximately(float a, float b, float tolerance) { return Abs(b - a) < tolerance; }
+        #endregion
+
+        #region Pow2
+        [IN(LINE)] 
+        public static float CeilPow2(float value)
+        {
+            uint bits = *(uint*)&value;
+            bits = bits & ~DMBits.FloatMantissaMask;
+            return *(float*)&bits;
+        }
+        [IN(LINE)] 
+        public static float FloorPow2(float value)
+        {
+            const uint EXP_ONE = DMBits.FloatMantissaMask + 1;
+            uint bits = *(uint*)&value;
+            uint mantissa = bits & DMBits.FloatMantissaMask;
+            bits = bits & ~DMBits.FloatMantissaMask;
+
+            bits = mantissa == 0 ? bits : bits + EXP_ONE;
+            return *(float*)&bits;
+        }
+        [IN(LINE)] 
+        public static float RoundPow2(float value)
+        {
+            const uint EXP_ONE = DMBits.FloatMantissaMask + 1;
+            uint bits = *(uint*)&value;
+            bits = bits & ~DMBits.FloatMantissaMask;
+            uint floorbits = bits - EXP_ONE;
+
+            float ceil = *(float*)&bits;
+            float floor = *(float*)&floorbits;
+            if (value - floor < ceil - value)
+            {
+                return floor;
+            }
+            return ceil;
+        }
+        [IN(LINE)]
+        public static bool IsPow2(float value)
+        {
+            uint bits = *(uint*)&value;
+            uint exponent = bits & DMBits.FloatExponentMask;
+            uint mantissa = bits & DMBits.FloatMantissaMask;
+
+            return mantissa == 0 && exponent != 0 // степень двойки
+                && exponent != DMBits.FloatExponentMask; // не IsNan и не IsInfinity
+        }
         #endregion
 
         #region Other

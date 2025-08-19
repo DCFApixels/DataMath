@@ -186,6 +186,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool3 Approximately(double3 a, double3 b, double3 tolerance) { return Abs(b - a) < tolerance; }
         #endregion
 
+        #region Pow2
+        [IN(LINE)] public static double3 CeilPow2(double3 value) { return new double3(CeilPow2(value.x), CeilPow2(value.y), CeilPow2(value.z)); }
+        [IN(LINE)] public static double3 FloorPow2(double3 value) { return new double3(FloorPow2(value.x), FloorPow2(value.y), FloorPow2(value.z)); }
+        [IN(LINE)] public static double3 RoundPow2(double3 value) { return new double3(RoundPow2(value.x), RoundPow2(value.y), RoundPow2(value.z)); }
+        [IN(LINE)] public static bool3 IsPow2(double3 value) { return new bool3(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z)); }
+        #endregion
+
         #region Other
         [IN(LINE)] public static double Length(double3 a) { return Sqrt(Dot(a, a)); }
         [IN(LINE)] public static double LengthSqr(double3 a) { return Dot(a, a); }
