@@ -1,5 +1,13 @@
 using System;
+#if UNITY_5_3_OR_NEWER
 using UnityEngine;
+#else
+using DCFApixels.DataMath.Internal;
+namespace DCFApixels.DataMath.Internal
+{
+    public abstract class PropertyAttribute : Attribute { }
+}
+#endif
 
 namespace DCFApixels.DataMath
 {
@@ -13,7 +21,7 @@ namespace DCFApixels.DataMath
         }
     }
     [AttributeUsage(AttributeTargets.Field)]
-    public sealed class EulerFieldAttribute : PropertyAttribute 
+    public sealed class EulerFieldAttribute : PropertyAttribute
     {
         public bool IsShowDefaultDraw;
         public EulerFieldAttribute(bool isShowDefaultDraw = false)

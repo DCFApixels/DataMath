@@ -95,7 +95,7 @@ namespace DCFApixels.DataMath
                 fixed (double* array = &x) { array[index] = value; }
             }
         }
-        
+
         object IVectorN.GetComponentRaw(int index) { return this[index]; }
         void IVectorN.SetComponentRaw(int index, object raw) { if (raw is double cmp) { this[index] = cmp; } }
         [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(double); }

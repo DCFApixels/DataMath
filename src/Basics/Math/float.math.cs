@@ -181,14 +181,14 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Pow2
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float CeilPow2(float value)
         {
             uint bits = *(uint*)&value;
             bits = bits & ~DMBits.FloatMantissaMask;
             return *(float*)&bits;
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float FloorPow2(float value)
         {
             const uint EXP_ONE = DMBits.FloatMantissaMask + 1;
@@ -199,7 +199,7 @@ namespace DCFApixels.DataMath
             bits = mantissa == 0 ? bits : bits + EXP_ONE;
             return *(float*)&bits;
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float RoundPow2(float value)
         {
             const uint EXP_ONE = DMBits.FloatMantissaMask + 1;

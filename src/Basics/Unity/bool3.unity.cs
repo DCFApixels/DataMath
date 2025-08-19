@@ -1,4 +1,3 @@
-
 #if UNITY_5_3_OR_NEWER
 #if DISABLE_DEBUG
 #undef DEBUG

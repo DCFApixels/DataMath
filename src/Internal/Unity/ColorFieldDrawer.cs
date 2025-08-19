@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+﻿#if UNITY_5_3_OR_NEWER && UNITY_EDITOR
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
