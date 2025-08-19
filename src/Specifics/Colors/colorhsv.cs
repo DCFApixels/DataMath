@@ -85,16 +85,23 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
+        [IN(LINE)] public colorhsv(colorhsv v) { this = v; }
+        [IN(LINE)]
         public colorhsv(float h, float s, float v)
         {
             this.h = h; this.s = s;
             this.v = v; a = 1;
         }
+        [IN(LINE)]
         public colorhsv(float h, float s, float v, float a)
         {
             this.h = h; this.s = s;
             this.v = v; this.a = a;
         }
+        [IN(LINE)] public colorhsv(int colorCode) : this(new color(colorCode)) { }
+        [IN(LINE)] public colorhsv(uint colorCode) : this(new color(colorCode)) { }
+        [IN(LINE)] public colorhsv(color v) { this = ColorUtility.RGBToHSV(v); }
+        [IN(LINE)] public colorhsv(color32 v) : this(new color(v)) { }
         #endregion
 
         #region Arithmetic operators
@@ -161,6 +168,13 @@ namespace DCFApixels.DataMath
         public static colorhsv operator -(colorhsv a) => new colorhsv(-a.h, -a.s, -a.v, -a.a);
         [IN(LINE)]
         public static colorhsv operator +(colorhsv a) => new colorhsv(+a.h, +a.s, +a.v, +a.a);
+        #endregion
+
+        #region Converts
+        public static explicit operator colorhsv(int colorcode) { return new colorhsv(colorcode); }
+        public static explicit operator colorhsv(uint colorcode) { return new colorhsv(colorcode); }
+        public static explicit operator colorhsv(color a) { return new colorhsv(a); }
+        public static implicit operator colorhsv(color32 a) { return new colorhsv(a); }
         #endregion
 
 

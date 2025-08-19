@@ -4,7 +4,6 @@
 using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
-using static DCFApixels.DataMath.DMBasic;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -56,7 +55,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float4 PingPong(float4 a, float4 length) { return length - Abs(Repeat(a, length * 2f) - length); }
         [IN(LINE)] public static float4 PingPong(float4 a, float4 min, float4 max) { return PingPong(a, max - min) + min; }
-        [IN(LINE)] public static float4 PingPong01(float4 a) { return PingPong(a, 0f, 1f); }
+        [IN(LINE)] public static float4 PingPong01(float4 a) { return PingPong(a, 1f); }
         [IN(LINE)] public static float4 PingPongMirror1(float4 a) { return PingPong(a, -1f, 1f); }
         #endregion
 
@@ -69,9 +68,9 @@ namespace DCFApixels.DataMath
             return t * t * (3.0f - (2.0f * t));
         }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static float4 SmoothStep01(float4 a) { return SmoothStep(a, 0f, 1f); }
+        [IN(LINE)] public static float4 SmoothStep01(float4 a) { return SmoothStep(0f, 1f, a); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static float4 SmoothStepMirror1(float4 a) { return SmoothStep(a, -1f, 1f); }
+        [IN(LINE)] public static float4 SmoothStepMirror1(float4 a) { return SmoothStep(-1f, 1f, a); }
         #endregion
 
         #region All/Any
@@ -105,8 +104,9 @@ namespace DCFApixels.DataMath
         public static float4 MoveTowards(float4 from, float4 to, float distance)
         {
             float4 dif = to - from;
-            if (Abs(dif) <= distance) { return to; }
-            return from + Sign(dif) * distance;
+            float len = dif.Length;
+            if (len <= distance) { return to; }
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float4 MoveTowards(float4 from, float4 to, float distance, out float excess)
@@ -117,20 +117,20 @@ namespace DCFApixels.DataMath
                 return from;
             }
             float4 dif = to - from;
-            float difpowmag = LengthSqr(dif);
-            if (difpowmag == 0f)
+            float lensqr = LengthSqr(dif);
+            if (lensqr == 0f)
             {
                 excess = distance;
                 return to;
             }
-            float difmag = Sqrt(difpowmag);
-            excess = distance - difmag;
+            float len = Sqrt(lensqr);
+            excess = distance - len;
             if (excess > -float.Epsilon)
             {
                 return to;
             }
 
-            return new float4(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance, from.z + dif.z / difmag * distance, from.w + dif.w / difmag * distance);
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float4 Remap(float4 oldStart, float4 oldEnd, float4 newStart, float4 newEnd, float4 v)

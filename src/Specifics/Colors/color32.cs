@@ -96,6 +96,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
+        [IN(LINE)] public color32(color32 v) { this = v; }
         [IN(LINE)]
         public color32(byte r, byte g, byte b)
         {
@@ -111,13 +112,6 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public color32((byte r, byte g, byte b) v) { r8 = v.r; g8 = v.g; b8 = v.b; a8 = 1; }
         [IN(LINE)] public color32((byte r, byte g, byte b, byte a) v) { r8 = v.r; g8 = v.g; b8 = v.b; a8 = v.a; }
         [IN(LINE)]
-        public color32(color color)
-        {
-            byte To(float a) { return (byte)(a * byte.MaxValue); }
-            r8 = To(color.r); g8 = To(color.g);
-            b8 = To(color.b); a8 = To(color.a);
-        }
-        [IN(LINE)]
         public color32(int colorCode)
         {
             ColorCodeUnion u = colorCode;
@@ -131,13 +125,24 @@ namespace DCFApixels.DataMath
             r8 = u.r8; g8 = u.g8;
             b8 = u.b8; a8 = u.a8;
         }
+        [IN(LINE)]
+        public color32(color color)
+        {
+            byte To(float a) { return (byte)(a * byte.MaxValue); }
+            r8 = To(color.r); g8 = To(color.g);
+            b8 = To(color.b); a8 = To(color.a);
+        }
+        [IN(LINE)]
+        public color32(colorhsv v) : this(new color(v)) { }
         #endregion
 
         #region Converts
         public static implicit operator color32(int colorcode) { return new color32(colorcode); }
         public static implicit operator color32(uint colorcode) { return new color32(colorcode); }
         public static explicit operator color32(color a) { return new color32(a); }
+        public static explicit operator color32(colorhsv a) { return new color32(a); }
         #endregion
+
 
         #region Other 
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }

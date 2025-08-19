@@ -55,7 +55,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float2 PingPong(float2 a, float2 length) { return length - Abs(Repeat(a, length * 2f) - length); }
         [IN(LINE)] public static float2 PingPong(float2 a, float2 min, float2 max) { return PingPong(a, max - min) + min; }
-        [IN(LINE)] public static float2 PingPong01(float2 a) { return PingPong(a, 0f, 1f); }
+        [IN(LINE)] public static float2 PingPong01(float2 a) { return PingPong(a, 1f); }
         [IN(LINE)] public static float2 PingPongMirror1(float2 a) { return PingPong(a, -1f, 1f); }
         #endregion
 
@@ -68,9 +68,9 @@ namespace DCFApixels.DataMath
             return t * t * (3.0f - (2.0f * t));
         }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static float2 SmoothStep01(float2 a) { return SmoothStep(a, 0f, 1f); }
+        [IN(LINE)] public static float2 SmoothStep01(float2 a) { return SmoothStep(0f, 1f, a); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static float2 SmoothStepMirror1(float2 a) { return SmoothStep(a, -1f, 1f); }
+        [IN(LINE)] public static float2 SmoothStepMirror1(float2 a) { return SmoothStep(-1f, 1f, a); }
         #endregion
 
         #region All/Any
@@ -104,8 +104,9 @@ namespace DCFApixels.DataMath
         public static float2 MoveTowards(float2 from, float2 to, float distance)
         {
             float2 dif = to - from;
-            if (Abs(dif) <= distance) { return to; }
-            return from + Sign(dif) * distance;
+            float len = dif.Length;
+            if (len <= distance) { return to; }
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float2 MoveTowards(float2 from, float2 to, float distance, out float excess)
@@ -116,20 +117,20 @@ namespace DCFApixels.DataMath
                 return from;
             }
             float2 dif = to - from;
-            float difpowmag = LengthSqr(dif);
-            if (difpowmag == 0f)
+            float lensqr = LengthSqr(dif);
+            if (lensqr == 0f)
             {
                 excess = distance;
                 return to;
             }
-            float difmag = Sqrt(difpowmag);
-            excess = distance - difmag;
+            float len = Sqrt(lensqr);
+            excess = distance - len;
             if (excess > -float.Epsilon)
             {
                 return to;
             }
 
-            return new float2(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance);
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float2 Remap(float2 oldStart, float2 oldEnd, float2 newStart, float2 newEnd, float2 v)
@@ -248,6 +249,10 @@ namespace DCFApixels.DataMath
         #region Hash
         [IN(LINE)] public static uint UHash(float2 v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)] public static int Hash(float2 v) { return Hash<float2>(v); }
+        #endregion
+
+        #region Specific
+        [IN(LINE)] public static float Cross(float2 a, float2 b) { return a.x * b.y - a.y * b.x; }
         #endregion
     }
 

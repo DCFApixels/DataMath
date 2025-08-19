@@ -55,7 +55,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float3 PingPong(float3 a, float3 length) { return length - Abs(Repeat(a, length * 2f) - length); }
         [IN(LINE)] public static float3 PingPong(float3 a, float3 min, float3 max) { return PingPong(a, max - min) + min; }
-        [IN(LINE)] public static float3 PingPong01(float3 a) { return PingPong(a, 0f, 1f); }
+        [IN(LINE)] public static float3 PingPong01(float3 a) { return PingPong(a, 1f); }
         [IN(LINE)] public static float3 PingPongMirror1(float3 a) { return PingPong(a, -1f, 1f); }
         #endregion
 
@@ -68,9 +68,9 @@ namespace DCFApixels.DataMath
             return t * t * (3.0f - (2.0f * t));
         }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static float3 SmoothStep01(float3 a) { return SmoothStep(a, 0f, 1f); }
+        [IN(LINE)] public static float3 SmoothStep01(float3 a) { return SmoothStep(0f, 1f, a); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static float3 SmoothStepMirror1(float3 a) { return SmoothStep(a, -1f, 1f); }
+        [IN(LINE)] public static float3 SmoothStepMirror1(float3 a) { return SmoothStep(-1f, 1f, a); }
         #endregion
 
         #region All/Any
@@ -104,8 +104,9 @@ namespace DCFApixels.DataMath
         public static float3 MoveTowards(float3 from, float3 to, float distance)
         {
             float3 dif = to - from;
-            if (Abs(dif) <= distance) { return to; }
-            return from + Sign(dif) * distance;
+            float len = dif.Length;
+            if (len <= distance) { return to; }
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float3 MoveTowards(float3 from, float3 to, float distance, out float excess)
@@ -116,20 +117,20 @@ namespace DCFApixels.DataMath
                 return from;
             }
             float3 dif = to - from;
-            float difpowmag = LengthSqr(dif);
-            if (difpowmag == 0f)
+            float lensqr = LengthSqr(dif);
+            if (lensqr == 0f)
             {
                 excess = distance;
                 return to;
             }
-            float difmag = Sqrt(difpowmag);
-            excess = distance - difmag;
+            float len = Sqrt(lensqr);
+            excess = distance - len;
             if (excess > -float.Epsilon)
             {
                 return to;
             }
 
-            return new float3(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance, from.z + dif.z / difmag * distance);
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float3 Remap(float3 oldStart, float3 oldEnd, float3 newStart, float3 newEnd, float3 v)
@@ -259,7 +260,7 @@ namespace DCFApixels.DataMath
     {
         [IN(LINE)] public static T New<T>(float a, _3_ _ = default) where T : unmanaged, IVector3<float> { return New<T>(a, a, a); }
         [IN(LINE)] public static T New<T>(float3 a) where T : unmanaged, IVector3<float> { return New<T>(a.x, a.y, a.z); }
-        [IN(LINE)] public static T New<T>(float x, float y, float z) where T : unmanaged, IVector3<float> { T r = default; r.x = x; r.y = y; r.z = z;return r; }
+        [IN(LINE)] public static T New<T>(float x, float y, float z) where T : unmanaged, IVector3<float> { T r = default; r.x = x; r.y = y; r.z = z; return r; }
         [IN(LINE)] public static float3 ToBasic<T>(this T a, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new float3(a.x, a.y, a.z); }
         [IN(LINE)] public static T Add<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x + b.x, a.y + b.y, a.z + b.z); }
         [IN(LINE)] public static T Sub<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x - b.x, a.y - b.y, a.z - b.z); }
