@@ -17,7 +17,7 @@ namespace DCFApixels.DataMath
     [Serializable]
     public partial struct bool4 :
         IEquatable<bool4>,
-        IVector4<bool>,
+        IVector4Impl<bool>,
         IColor,
         IEnumerableVector<bool, bool4>
     {
@@ -85,6 +85,10 @@ namespace DCFApixels.DataMath
                 fixed (bool* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is bool cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(bool); }
         #endregion
 
         #region Constructors

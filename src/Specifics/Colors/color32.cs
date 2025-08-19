@@ -93,6 +93,10 @@ namespace DCFApixels.DataMath
                 fixed (byte* array = &r8) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is byte cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(byte); }
         #endregion
 
         #region Constructors

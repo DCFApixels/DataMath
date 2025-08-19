@@ -61,7 +61,7 @@ namespace DCFApixels.DataMath
             value = Normalize(value);
         }
 
-        #region IVectorN
+        #region IVector
         public float x { [IN(LINE)] get => value.x; [IN(LINE)] set => this.value.x = value; }
         public float y { [IN(LINE)] get => value.y; [IN(LINE)] set => this.value.y = value; }
         public float z { [IN(LINE)] get => value.z; [IN(LINE)] set => this.value.z = value; }
@@ -85,6 +85,10 @@ namespace DCFApixels.DataMath
                 fixed (float* array = &this.value.x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is float cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(float); }
         #endregion
 
         #region IVectorEnumerable

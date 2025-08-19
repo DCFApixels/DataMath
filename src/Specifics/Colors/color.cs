@@ -22,7 +22,7 @@ namespace DCFApixels.DataMath
     [Serializable]
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [StructLayout(LayoutKind.Sequential, Pack = sizeof(float), Size = 4 * Count)]
-    public struct color :
+    public partial struct color :
         IEquatable<color>,
         IFormattable,
         IVector4Impl<float>,
@@ -68,10 +68,10 @@ namespace DCFApixels.DataMath
         public float a;
 
         #region Properties
-        public float w { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
-        public float z { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
-        public float y { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
-        public float x { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        public float x { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
+        public float y { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
+        public float z { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
+        public float w { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
         float IColor.r { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
         float IColor.g { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
         float IColor.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
@@ -95,6 +95,10 @@ namespace DCFApixels.DataMath
                 fixed (float* array = &r) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is float cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(float); }
         #endregion
 
         #region Constructors

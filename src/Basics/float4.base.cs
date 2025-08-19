@@ -27,7 +27,7 @@ namespace DCFApixels.DataMath
     public partial struct float4 :
         IEquatable<float4>,
         IFormattable,
-        IVector4<float>,
+        IVector4Impl<float>,
         IColor,
         IEnumerableVector<float, float4>
     {
@@ -95,6 +95,10 @@ namespace DCFApixels.DataMath
                 fixed (float* array = &x) { array[index] = value; }
             }
         }
+        
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is float cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(float); }
         #endregion
 
         #region Constructors

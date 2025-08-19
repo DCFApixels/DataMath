@@ -27,7 +27,7 @@ namespace DCFApixels.DataMath
     public partial struct int3 :
         IEquatable<int3>,
         IFormattable,
-        IVector3<int>,
+        IVector3Impl<int>,
         IColor,
         IEnumerableVector<int, int3>
     {
@@ -89,6 +89,10 @@ namespace DCFApixels.DataMath
                 fixed (int* array = &x) { array[index] = value; }
             }
         }
+        
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is int cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(int); }
         #endregion
 
         #region Constructors
