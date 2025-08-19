@@ -4,7 +4,6 @@
 using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
 using static DCFApixels.DataMath.Consts;
-using static DCFApixels.DataMath.DMBasic;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath

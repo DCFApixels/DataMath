@@ -10,7 +10,6 @@ using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 #if ENABLE_IL2CPP
 using Unity.IL2CPP.CompilerServices;
-using System.Drawing;
 #endif
 
 namespace DCFApixels.DataMath

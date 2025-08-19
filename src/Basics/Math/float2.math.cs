@@ -250,6 +250,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint UHash(float2 v) { return unchecked((uint)Hash(v)); }
         [IN(LINE)] public static int Hash(float2 v) { return Hash<float2>(v); }
         #endregion
+
+        #region Specific
+        [IN(LINE)] public static float Cross(float2 a, float2 b) { return a.x * b.y - a.y * b.x; }
+        #endregion
     }
 
     public static partial class DMBasic // IVector2<float>

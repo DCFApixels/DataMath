@@ -51,7 +51,7 @@
         public enum AnyCheckMode { }
 
 
-        
+
 
 
         //    public const double TODEGREES_DBL = 57.29577951308232;

@@ -255,5 +255,9 @@ namespace DCFApixels.DataMath
             throw new NotImplementedException();
         }
         #endregion
+
+        #region Specific
+        [IN(LINE)] public static double Cross(double2 a, double2 b) { return a.x * b.y - a.y * b.x; }
+        #endregion
     }
 }

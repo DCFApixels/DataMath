@@ -260,7 +260,7 @@ namespace DCFApixels.DataMath
     {
         [IN(LINE)] public static T New<T>(float a, _3_ _ = default) where T : unmanaged, IVector3<float> { return New<T>(a, a, a); }
         [IN(LINE)] public static T New<T>(float3 a) where T : unmanaged, IVector3<float> { return New<T>(a.x, a.y, a.z); }
-        [IN(LINE)] public static T New<T>(float x, float y, float z) where T : unmanaged, IVector3<float> { T r = default; r.x = x; r.y = y; r.z = z;return r; }
+        [IN(LINE)] public static T New<T>(float x, float y, float z) where T : unmanaged, IVector3<float> { T r = default; r.x = x; r.y = y; r.z = z; return r; }
         [IN(LINE)] public static float3 ToBasic<T>(this T a, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return new float3(a.x, a.y, a.z); }
         [IN(LINE)] public static T Add<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x + b.x, a.y + b.y, a.z + b.z); }
         [IN(LINE)] public static T Sub<T>(T a, T b, _3_ _ = default) where T : unmanaged, IVector3Impl<float> { return New<T>(a.x - b.x, a.y - b.y, a.z - b.z); }
