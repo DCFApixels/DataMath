@@ -56,7 +56,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float4 PingPong(float4 a, float4 length) { return length - Abs(Repeat(a, length * 2f) - length); }
         [IN(LINE)] public static float4 PingPong(float4 a, float4 min, float4 max) { return PingPong(a, max - min) + min; }
-        [IN(LINE)] public static float4 PingPong01(float4 a) { return PingPong(a, 0f, 1f); }
+        [IN(LINE)] public static float4 PingPong01(float4 a) { return PingPong(a, 1f); }
         [IN(LINE)] public static float4 PingPongMirror1(float4 a) { return PingPong(a, -1f, 1f); }
         #endregion
 
@@ -69,9 +69,9 @@ namespace DCFApixels.DataMath
             return t * t * (3.0f - (2.0f * t));
         }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static float4 SmoothStep01(float4 a) { return SmoothStep(a, 0f, 1f); }
+        [IN(LINE)] public static float4 SmoothStep01(float4 a) { return SmoothStep(0f, 1f, a); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static float4 SmoothStepMirror1(float4 a) { return SmoothStep(a, -1f, 1f); }
+        [IN(LINE)] public static float4 SmoothStepMirror1(float4 a) { return SmoothStep(-1f, 1f, a); }
         #endregion
 
         #region All/Any

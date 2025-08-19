@@ -55,7 +55,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static double2 PingPong(double2 a, double2 length) { return length - Abs(Repeat(a, length * 2d) - length); }
         [IN(LINE)] public static double2 PingPong(double2 a, double2 min, double2 max) { return PingPong(a, max - min) + min; }
-        [IN(LINE)] public static double2 PingPong01(double2 a) { return PingPong(a, 0d, 1d); }
+        [IN(LINE)] public static double2 PingPong01(double2 a) { return PingPong(a, 1d); }
         [IN(LINE)] public static double2 PingPongMirror1(double2 a) { return PingPong(a, -1d, 1d); }
         #endregion
 
@@ -68,9 +68,9 @@ namespace DCFApixels.DataMath
             return t * t * (3.0d - (2.0d * t));
         }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static double2 SmoothStep01(double2 a) { return SmoothStep(a, 0d, 1d); }
+        [IN(LINE)] public static double2 SmoothStep01(double2 a) { return SmoothStep(0d, 1d, a); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static double2 SmoothStepMirror1(double2 a) { return SmoothStep(a, -1d, 1d); }
+        [IN(LINE)] public static double2 SmoothStepMirror1(double2 a) { return SmoothStep(-1d, 1d, a); }
         #endregion
 
         #region All/Any

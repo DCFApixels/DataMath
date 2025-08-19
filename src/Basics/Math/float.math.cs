@@ -71,9 +71,9 @@ namespace DCFApixels.DataMath
             return t * t * (3.0f - (2.0f * t));
         }
         /// <summary> Clamps the value between 0 and 1. </summary>
-        [IN(LINE)] public static float SmoothStep01(float a) { return SmoothStep(a, 0f, 1f); }
+        [IN(LINE)] public static float SmoothStep01(float a) { return SmoothStep(0f, 1f, a); }
         /// <summary> Clamps the value between -1 and 1. </summary>
-        [IN(LINE)] public static float SmoothStepMirror1(float a) { return SmoothStep(a, -1f, 1f); }
+        [IN(LINE)] public static float SmoothStepMirror1(float a) { return SmoothStep(-1f, 1f, a); }
         #endregion
 
         #region All/Any
