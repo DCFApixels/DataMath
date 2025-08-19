@@ -16,7 +16,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath.Internal
 {
-    internal static partial class InternalMath
+    internal static unsafe partial class InternalMath
     {
         public const float E = 2.71828183f;
 
@@ -523,12 +523,12 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Ceiling(float x)
         {
-            return (float)Math.Ceiling(x);
+            return (float)MathF.Ceiling(x);
         }
         [IN(LINE)]
         public static float Floor(float x)
         {
-            return (float)Math.Floor(x);
+            return (float)MathF.Floor(x);
         }
 
         [IN(LINE)]
@@ -602,7 +602,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Sqrt(float x)
         {
-            return (float)Math.Sqrt(x);
+            return (float)MathF.Sqrt(x);
         }
         [IN(LINE)]
         public static double Sqrt(double x)
@@ -612,7 +612,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Log(float x)
         {
-            return (float)Math.Log(x);
+            return (float)MathF.Log(x);
         }
         [IN(LINE)]
         public static double Log(double x)
@@ -627,7 +627,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Log2(float x)
         {
-            return (float)Math.Log(x, 2f);
+            return (float)MathF.Log(x, 2f);
         }
         [IN(LINE)]
         public static double Log2(double x)
@@ -637,7 +637,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Log10(float x)
         {
-            return (float)Math.Log10(x);
+            return (float)MathF.Log10(x);
         }
         [IN(LINE)]
         public static double Log10(double x)
@@ -648,7 +648,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Cos(float x)
         {
-            return (float)Math.Cos(x);
+            return (float)MathF.Cos(x);
         }
         [IN(LINE)]
         public static double Cos(double x)
@@ -658,7 +658,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Cosh(float x)
         {
-            return (float)Math.Cosh(x);
+            return (float)MathF.Cosh(x);
         }
         [IN(LINE)]
         public static double Cosh(double x)
@@ -668,7 +668,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Acos(float x)
         {
-            return (float)Math.Acos(x);
+            return (float)MathF.Acos(x);
         }
         [IN(LINE)]
         public static double Acos(double x)
@@ -678,7 +678,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Sin(float x)
         {
-            return (float)Math.Sin(x);
+            return (float)MathF.Sin(x);
         }
         [IN(LINE)]
         public static double Sin(double x)
@@ -688,7 +688,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Sinh(float x)
         {
-            return (float)Math.Sinh(x);
+            return (float)MathF.Sinh(x);
         }
         [IN(LINE)]
         public static double Sinh(double x)
@@ -698,7 +698,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Asin(float x)
         {
-            return (float)Math.Asin(x);
+            return (float)MathF.Asin(x);
         }
         [IN(LINE)]
         public static double Asin(double x)
@@ -708,7 +708,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Tan(float x)
         {
-            return (float)Math.Tan(x);
+            return (float)MathF.Tan(x);
         }
         [IN(LINE)]
         public static double Tan(double x)
@@ -718,7 +718,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Tanh(float x)
         {
-            return (float)Math.Tanh(x);
+            return (float)MathF.Tanh(x);
         }
         [IN(LINE)]
         public static double Tanh(double x)
@@ -728,7 +728,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Atan(float x)
         {
-            return (float)Math.Atan(x);
+            return (float)MathF.Atan(x);
         }
         [IN(LINE)]
         public static double Atan(double x)
@@ -738,7 +738,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Atan2(float x, float y)
         {
-            return (float)Math.Atan2(x, y);
+            return (float)MathF.Atan2(x, y);
         }
         [IN(LINE)]
         public static double Atan2(double x, double y)
@@ -749,7 +749,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Pow(float x, float y)
         {
-            return (float)Math.Pow(x, y);
+            return (float)MathF.Pow(x, y);
         }
         [IN(LINE)]
         public static int Pow(int baseValue, int exponent)
@@ -886,7 +886,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Exp(float pow)
         {
-            return (float)Math.Exp(pow);
+            return (float)MathF.Exp(pow);
         }
         [IN(LINE)]
         public static double Exp(double pow)
@@ -896,12 +896,12 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Exp2(float pow)
         {
-            return (float)Math.Exp(pow) * 0.69314718f;
+            return (float)MathF.Exp(pow) * 0.69314718f;
         }
         [IN(LINE)]
         public static float Exp10(float pow)
         {
-            return (float)Math.Exp(pow) * 2.30258509f;
+            return (float)MathF.Exp(pow) * 2.30258509f;
         }
         [IN(LINE)]
         public static double Exp2(double pow)
@@ -916,7 +916,7 @@ namespace DCFApixels.DataMath.Internal
         [IN(LINE)]
         public static float Truncate(float a)
         {
-            return (float)Math.Truncate(a);
+            return (float)MathF.Truncate(a);
         }
         [IN(LINE)]
         public static double Truncate(double a)

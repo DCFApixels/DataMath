@@ -8,7 +8,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    public static partial class DM //double
+    public static unsafe partial class DM //double
     {
         #region Abs/Sign
         [IN(LINE)] public static double Abs(double a) { return InternalMath.Abs(a); }
@@ -173,6 +173,53 @@ namespace DCFApixels.DataMath
         #region Approximately
         [IN(LINE)] public static bool Approximately(double a, double b) { return Approximately(a, b, Max(1E-06f * Max(Abs(a), Abs(b)), FloatEpsilon * 8f)); }
         [IN(LINE)] public static bool Approximately(double a, double b, double tolerance) { return Abs(b - a) < tolerance; }
+        #endregion
+
+        #region Pow2
+        [IN(LINE)]
+        public static double CeilPow2(double value)
+        {
+            ulong bits = *(ulong*)&value;
+            bits = bits & ~DMBits.DoubleMantissaMask;
+            return *(double*)&bits;
+        }
+        [IN(LINE)]
+        public static double FloorPow2(double value)
+        {
+            const ulong EXP_ONE = DMBits.DoubleMantissaMask + 1;
+            ulong bits = *(ulong*)&value;
+            ulong mantissa = bits & DMBits.DoubleMantissaMask;
+            bits = bits & ~DMBits.DoubleMantissaMask;
+
+            bits = mantissa == 0 ? bits : bits + EXP_ONE;
+            return *(double*)&bits;
+        }
+        [IN(LINE)]
+        public static double RoundPow2(double value)
+        {
+            const ulong EXP_ONE = DMBits.DoubleMantissaMask + 1;
+            ulong bits = *(ulong*)&value;
+            bits = bits & ~DMBits.DoubleMantissaMask;
+            ulong floorbits = bits - EXP_ONE;
+
+            double ceil = *(double*)&bits;
+            double floor = *(double*)&floorbits;
+            if (value - floor < ceil - value)
+            {
+                return floor;
+            }
+            return ceil;
+        }
+        [IN(LINE)]
+        public static bool IsPow2(double value)
+        {
+            ulong bits = *(ulong*)&value;
+            ulong exponent = bits & DMBits.DoubleExponentMask;
+            ulong mantissa = bits & DMBits.DoubleMantissaMask;
+
+            return mantissa == 0 && exponent != 0 // степень двойки
+                && exponent != DMBits.DoubleExponentMask; // не IsNan и не IsInfinity
+        }
         #endregion
 
         #region Other
