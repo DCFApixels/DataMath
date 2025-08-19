@@ -38,6 +38,12 @@ namespace DCFApixels.DataMath.Unity.Editors
 
                 label.text = property.displayName;
                 label.tooltip = property.tooltip;
+                if (property.propertyType == SerializedPropertyType.Boolean)
+                {
+                    Color c = property.boolValue ? Color.white : Color.black;
+                    c.a = 0.1f;
+                    EditorGUI.DrawRect(position, c);
+                }
                 EditorGUI.PropertyField(position, property, label);
                 position.x += width;
                 x = false;
