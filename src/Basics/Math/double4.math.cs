@@ -104,8 +104,9 @@ namespace DCFApixels.DataMath
         public static double4 MoveTowards(double4 from, double4 to, double distance)
         {
             double4 dif = to - from;
-            if (Abs(dif) <= distance) { return to; }
-            return from + Sign(dif) * distance;
+            double len = dif.Length;
+            if (len <= distance) { return to; }
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static double4 MoveTowards(double4 from, double4 to, double distance, out double excess)
@@ -116,20 +117,20 @@ namespace DCFApixels.DataMath
                 return from;
             }
             double4 dif = to - from;
-            double difpowmag = LengthSqr(dif);
-            if (difpowmag == 0d)
+            double lensqr = LengthSqr(dif);
+            if (lensqr == 0f)
             {
                 excess = distance;
                 return to;
             }
-            double difmag = Sqrt(difpowmag);
-            excess = distance - difmag;
+            double len = Sqrt(lensqr);
+            excess = distance - len;
             if (excess > -double.Epsilon)
             {
                 return to;
             }
 
-            return new double4(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance, from.z + dif.z / difmag * distance, from.w + dif.w / difmag * distance);
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static double4 Remap(double4 oldStart, double4 oldEnd, double4 newStart, double4 newEnd, double4 v)

@@ -104,8 +104,9 @@ namespace DCFApixels.DataMath
         public static float2 MoveTowards(float2 from, float2 to, float distance)
         {
             float2 dif = to - from;
-            if (Abs(dif) <= distance) { return to; }
-            return from + Sign(dif) * distance;
+            float len = dif.Length;
+            if (len <= distance) { return to; }
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float2 MoveTowards(float2 from, float2 to, float distance, out float excess)
@@ -116,20 +117,20 @@ namespace DCFApixels.DataMath
                 return from;
             }
             float2 dif = to - from;
-            float difpowmag = LengthSqr(dif);
-            if (difpowmag == 0f)
+            float lensqr = LengthSqr(dif);
+            if (lensqr == 0f)
             {
                 excess = distance;
                 return to;
             }
-            float difmag = Sqrt(difpowmag);
-            excess = distance - difmag;
+            float len = Sqrt(lensqr);
+            excess = distance - len;
             if (excess > -float.Epsilon)
             {
                 return to;
             }
 
-            return new float2(from.x + dif.x / difmag * distance, from.y + dif.y / difmag * distance);
+            return from + dif / len * distance;
         }
         [IN(LINE)]
         public static float2 Remap(float2 oldStart, float2 oldEnd, float2 newStart, float2 newEnd, float2 v)
