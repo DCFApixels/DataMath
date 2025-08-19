@@ -256,12 +256,16 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
+    public static partial class DMBasicExt // IVector2<float>
+    {
+        [IN(LINE)] public static float2 ToBasic<T>(this T a, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new float2(a.x, a.y); }
+    }
     public static partial class DMBasic // IVector2<float>
     {
         [IN(LINE)] public static T New<T>(float a, _2_ _ = default) where T : unmanaged, IVector2<float> { return New<T>(a, a); }
         [IN(LINE)] public static T New<T>(float2 a) where T : unmanaged, IVector2<float> { return New<T>(a.x, a.y); }
         [IN(LINE)] public static T New<T>(float x, float y) where T : unmanaged, IVector2<float> { T r = default; r.x = x; r.y = y; return r; }
-        [IN(LINE)] public static float2 ToBasic<T>(this T a, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new float2(a.x, a.y); }
+        [IN(LINE)] public static float2 ToBasic<T>(T a, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return new float2(a.x, a.y); }
         [IN(LINE)] public static T Add<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x + b.x, a.y + b.y); }
         [IN(LINE)] public static T Sub<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x - b.x, a.y - b.y); }
         [IN(LINE)] public static T Mul<T>(T a, T b, _2_ _ = default) where T : unmanaged, IVector2Impl<float> { return New<T>(a.x * b.x, a.y * b.y); }

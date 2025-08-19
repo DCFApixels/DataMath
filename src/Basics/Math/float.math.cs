@@ -398,10 +398,14 @@ namespace DCFApixels.DataMath
         #endregion
     }
 
+    public static partial class DMBasicExt // IVector3<float>
+    {
+        [IN(LINE)] public static float ToBasic<T>(this T a, _1_ _ = default) where T : unmanaged, IVector1Impl<float> { return a.x; }
+    }
     public static partial class DMBasic // IVector1<float>
     {
         [IN(LINE)] public static T New<T>(float x) where T : unmanaged, IVector1<float> { T r = default; r.x = x; return r; }
-        [IN(LINE)] public static float ToBasic<T>(this T a, _1_ _ = default) where T : unmanaged, IVector1Impl<float> { return a.x; }
+        [IN(LINE)] public static float ToBasic<T>(T a, _1_ _ = default) where T : unmanaged, IVector1Impl<float> { return a.x; }
         [IN(LINE)] public static T Add<T>(T a, T b, _1_ _ = default) where T : unmanaged, IVector1Impl<float> { return New<T>(a.x + b.x); }
         [IN(LINE)] public static T Sub<T>(T a, T b, _1_ _ = default) where T : unmanaged, IVector1Impl<float> { return New<T>(a.x - b.x); }
         [IN(LINE)] public static T Mul<T>(T a, T b, _1_ _ = default) where T : unmanaged, IVector1Impl<float> { return New<T>(a.x * b.x); }
