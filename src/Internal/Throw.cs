@@ -6,6 +6,11 @@ namespace DCFApixels.DataMath.Internal
     internal static class Throw
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void UndefinedException()
+        {
+            throw new Exception();
+        }
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static void Exception(string message)
         {
             throw new Exception(message);
@@ -28,6 +33,16 @@ namespace DCFApixels.DataMath.Internal
             }
             throw new ArgumentOutOfRangeException(argumentName);
         }
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void ArgumentDestinationTooShort(string argumentName = null)
+        {
+            if (string.IsNullOrEmpty(argumentName))
+            {
+                argumentName = "value";
+            }
+            throw new ArgumentOutOfRangeException("Destination Too Short");
+        }
+
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void IndexOutOfRange(int length) { IndexOutOfRange(0, length); }
