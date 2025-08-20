@@ -41,11 +41,11 @@ namespace DCFApixels.DataMath
         public static readonly int2 one = new int2(1, 1);
 
         ///<summary>(-1, 0)</summary>
-        public static readonly int2 left = new int2(-1, 0);
+        public static readonly int2 left = new int2(unchecked((int)-1), 0);
         ///<summary>(1, 0)</summary>
         public static readonly int2 right = new int2(1, 0);
         ///<summary>(0, -1)</summary>
-        public static readonly int2 down = new int2(0, -1);
+        public static readonly int2 down = new int2(0, unchecked((int)-1));
         ///<summary>(0, 1)</summary>
         public static readonly int2 up = new int2(0, 1);
         #endregion
@@ -91,16 +91,14 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)] public int2(float x, float y) { this.x = (int)x; this.y = (int)y; }
+        [IN(LINE)] public int2(int x, int y) { this.x = x; this.y = y; }
+
         [IN(LINE)] public int2(float v) { x = (int)v; y = (int)v; }
         [IN(LINE)] public int2(float2 v) { x = (int)v.x; y = (int)v.y; }
-        [IN(LINE)] public int2(double x, double y) { this.x = (int)x; this.y = (int)y; }
         [IN(LINE)] public int2(double v) { x = (int)v; y = (int)v; }
         [IN(LINE)] public int2(double2 v) { x = (int)v.x; y = (int)v.y; }
-        [IN(LINE)] public int2(int x, int y) { this.x = x; this.y = y; }
         [IN(LINE)] public int2(int v) { x = v; y = v; }
         [IN(LINE)] public int2(int2 v) { x = v.x; y = v.y; }
-        [IN(LINE)] public int2(uint x, uint y) { this.x = (int)x; this.y = (int)y; }
         [IN(LINE)] public int2(uint v) { x = (int)v; y = (int)v; }
         [IN(LINE)] public int2(uint2 v) { x = (int)v.x; y = (int)v.y; }
 
@@ -116,6 +114,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<int2>(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
+        [IN(LINE)] public void Deconstruct(out int x, out int y) { x = this.x; y = this.y; }
         #endregion
 
         #region operators
@@ -144,7 +143,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int2 operator ++(int2 a) { return new int2(++a.x, ++a.y); }
         [IN(LINE)] public static int2 operator --(int2 a) { return new int2(--a.x, --a.y); }
         [IN(LINE)] public static int2 operator +(int2 a) { return new int2(+a.x, +a.y); }
-        [IN(LINE)] public static int2 operator -(int2 a) { return new int2(-a.x, -a.y); }
+        [IN(LINE)] public static int2 operator -(int2 a) { return new int2((int)-a.x, (int)-a.y); }
         #endregion
 
         #region Bits
@@ -441,14 +440,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<int> destination)
+        public /*readonly*/ void CopyTo(Span<int> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif

@@ -93,11 +93,91 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)]
+        public bool4((bool x, bool y, bool z, bool w) a)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = a.w;
+        }
+        [IN(LINE)]
+        public bool4((bool x, bool y, bool z) a, bool w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, (bool x, bool y, bool z) a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public bool4((bool x, bool y) a, bool z, bool w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, (bool x, bool y) a, bool w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, bool y, (bool x, bool y) a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public bool4((bool x, bool y) a, (bool x, bool y) b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
+        [IN(LINE)]
         public bool4(bool x, bool y, bool z, bool w)
         {
             this.x = x; this.y = y;
             this.z = z; this.w = w;
         }
+        [IN(LINE)]
+        public bool4(bool3 a, bool w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, bool3 a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public bool4(bool2 a, bool z, bool w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, bool2 a, bool w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, bool y, bool2 a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public bool4(bool2 a, bool2 b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
         [IN(LINE)]
         public bool4(bool v)
         {
@@ -111,77 +191,70 @@ namespace DCFApixels.DataMath
             z = v.z; w = v.w;
         }
         [IN(LINE)]
-        public bool4(float x, float y, float z, float w)
-        {
-            this.x = x > 0f; this.y = y > 0f;
-            this.z = z > 0f; this.w = w > 0f;
-        }
-        [IN(LINE)]
         public bool4(float v)
         {
-            x = v > 0f; y = v > 0f;
-            z = v > 0f; w = v > 0f;
+            x = v != 0f; y = v != 0f;
+            z = v != 0f; w = v != 0f;
         }
         [IN(LINE)]
         public bool4(float4 v)
         {
-            x = v.x > 0f; y = v.y > 0f;
-            z = v.z > 0f; w = v.w > 0f;
-        }
-        [IN(LINE)]
-        public bool4(double x, double y, double z, double w)
-        {
-            this.x = x > 0d; this.y = y > 0d;
-            this.z = z > 0d; this.w = w > 0d;
+            x = v.x != 0f; y = v.y != 0f;
+            z = v.z != 0f; w = v.w != 0f;
         }
         [IN(LINE)]
         public bool4(double v)
         {
-            x = v > 0d; y = v > 0d;
-            z = v > 0d; w = v > 0d;
+            x = v != 0d; y = v != 0d;
+            z = v != 0d; w = v != 0d;
         }
         [IN(LINE)]
         public bool4(double4 v)
         {
-            x = v.x > 0d; y = v.y > 0d;
-            z = v.z > 0d; w = v.w > 0d;
-        }
-        [IN(LINE)]
-        public bool4(int x, int y, int z, int w)
-        {
-            this.x = x > 0; this.y = y > 0;
-            this.z = z > 0; this.w = w > 0;
+            x = v.x != 0d; y = v.y != 0d;
+            z = v.z != 0d; w = v.w != 0d;
         }
         [IN(LINE)]
         public bool4(int v)
         {
-            x = v > 0; y = v > 0;
-            z = v > 0; w = v > 0;
+            x = v != 0; y = v != 0;
+            z = v != 0; w = v != 0;
         }
         [IN(LINE)]
         public bool4(int4 v)
         {
-            x = v.x > 0; y = v.y > 0;
-            z = v.z > 0; w = v.w > 0;
-        }
-        [IN(LINE)]
-        public bool4(uint x, uint y, uint z, uint w)
-        {
-            this.x = x > 0; this.y = y > 0;
-            this.z = z > 0; this.w = w > 0;
+            x = v.x != 0; y = v.y != 0;
+            z = v.z != 0; w = v.w != 0;
         }
         [IN(LINE)]
         public bool4(uint v)
         {
-            x = v > 0; y = v > 0;
-            z = v > 0; w = v > 0;
+            x = v != 0; y = v != 0;
+            z = v != 0; w = v != 0;
         }
         [IN(LINE)]
         public bool4(uint4 v)
         {
-            x = v.x > 0; y = v.y > 0;
-            z = v.z > 0; w = v.w > 0;
+            x = v.x != 0; y = v.y != 0;
+            z = v.z != 0; w = v.w != 0;
         }
+
+        [IN(LINE)]
+        public bool4(int x, int y, int z, int w)
+        {
+            this.x = x != 0; this.y = y != 0;
+            this.z = z != 0; this.w = w != 0;
+        }
+
+        [IN(LINE)]
+        public bool4(ReadOnlySpan<bool> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+            x = values[0]; y = values[1]; z = values[2]; w = values[3];
+        }
+        [IN(LINE)] public void Deconstruct(out bool x, out bool y, out bool z, out bool w) { x = this.x; y = this.y; z = this.z; w = this.w; }
         #endregion
 
         #region operators
@@ -904,7 +977,15 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public void CopyTo(Span<bool> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+            destination[0] = x; destination[1] = y; destination[2] = z; destination[3] = w;
+        }
         [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
         public override bool Equals(object o) => o is bool4 target && Equals(target);
         [IN(LINE)] public bool Equals(bool4 a) => x == a.x && y == a.y && z == a.z && w == a.w;

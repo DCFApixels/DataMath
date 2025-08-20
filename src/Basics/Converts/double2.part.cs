@@ -6,7 +6,7 @@ namespace DCFApixels.DataMath
     public partial struct double2
     {
         #region Convert operators
-        [IN(LINE)] public static implicit operator double2((double, double) v) => new double2(v.Item1, v.Item2);
+        [IN(LINE)] public static implicit operator double2((double, double) v) => new double2(v);
 
         [IN(LINE)] public static explicit operator double2(bool v) => new double2(v);
         [IN(LINE)] public static explicit operator double2(bool2 v) => new double2(v);

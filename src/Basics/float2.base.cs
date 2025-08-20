@@ -41,11 +41,11 @@ namespace DCFApixels.DataMath
         public static readonly float2 one = new float2(1f, 1f);
 
         ///<summary>(-1, 0)</summary>
-        public static readonly float2 left = new float2(-1f, 0f);
+        public static readonly float2 left = new float2(unchecked((float)-1f), 0f);
         ///<summary>(1, 0)</summary>
         public static readonly float2 right = new float2(1f, 0f);
         ///<summary>(0, -1)</summary>
-        public static readonly float2 down = new float2(0f, -1f);
+        public static readonly float2 down = new float2(0f, unchecked((float)-1f));
         ///<summary>(0, 1)</summary>
         public static readonly float2 up = new float2(0f, 1f);
         #endregion
@@ -92,15 +92,13 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public float2(float x, float y) { this.x = x; this.y = y; }
+
         [IN(LINE)] public float2(float v) { x = v; y = v; }
         [IN(LINE)] public float2(float2 v) { x = v.x; y = v.y; }
-        [IN(LINE)] public float2(double x, double y) { this.x = (float)x; this.y = (float)y; }
         [IN(LINE)] public float2(double v) { x = (float)v; y = (float)v; }
         [IN(LINE)] public float2(double2 v) { x = (float)v.x; y = (float)v.y; }
-        [IN(LINE)] public float2(int x, int y) { this.x = (float)x; this.y = (float)y; }
         [IN(LINE)] public float2(int v) { x = (float)v; y = (float)v; }
         [IN(LINE)] public float2(int2 v) { x = (float)v.x; y = (float)v.y; }
-        [IN(LINE)] public float2(uint x, uint y) { this.x = (float)x; this.y = (float)y; }
         [IN(LINE)] public float2(uint v) { x = (float)v; y = (float)v; }
         [IN(LINE)] public float2(uint2 v) { x = (float)v.x; y = (float)v.y; }
 
@@ -116,6 +114,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<float2>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
+        [IN(LINE)] public void Deconstruct(out float x, out float y) { x = this.x; y = this.y; }
         #endregion
 
         #region operators
@@ -144,7 +143,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float2 operator ++(float2 a) { return new float2(++a.x, ++a.y); }
         [IN(LINE)] public static float2 operator --(float2 a) { return new float2(--a.x, --a.y); }
         [IN(LINE)] public static float2 operator +(float2 a) { return new float2(+a.x, +a.y); }
-        [IN(LINE)] public static float2 operator -(float2 a) { return new float2(-a.x, -a.y); }
+        [IN(LINE)] public static float2 operator -(float2 a) { return new float2((float)-a.x, (float)-a.y); }
         #endregion
 
         #region Boolean
@@ -423,14 +422,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<float> destination)
+        public /*readonly*/ void CopyTo(Span<float> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif

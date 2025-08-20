@@ -41,19 +41,19 @@ namespace DCFApixels.DataMath
         public static readonly uint4 one = new uint4(1u, 1u, 1u, 1u);
 
         ///<summary>(-1, 0, 0, 0)</summary>
-        public static readonly uint4 left = new uint4(-1u, 0u, 0u, 0u);
+        public static readonly uint4 left = new uint4(unchecked((uint)-1u), 0u, 0u, 0u);
         ///<summary>(1, 0, 0, 0)</summary>
         public static readonly uint4 right = new uint4(1u, 0u, 0u, 0u);
         ///<summary>(0, -1, 0, 0)</summary>
-        public static readonly uint4 down = new uint4(0u, -1u, 0u, 0u);
+        public static readonly uint4 down = new uint4(0u, unchecked((uint)-1u), 0u, 0u);
         ///<summary>(0, 1, 0, 0)</summary>
         public static readonly uint4 up = new uint4(0u, 1u, 0u, 0u);
         ///<summary>(0, 0, -1, 0)</summary>
-        public static readonly uint4 back = new uint4(0u, 0u, -1u, 0u);
+        public static readonly uint4 back = new uint4(0u, 0u, unchecked((uint)-1u), 0u);
         ///<summary>(0, 0, 1, 0)</summary>
         public static readonly uint4 forward = new uint4(0u, 0u, 1u, 0u);
         ///<summary>(0, 0, 0, -1)</summary>
-        public static readonly uint4 before = new uint4(0u, 0u, 0u, -1u);
+        public static readonly uint4 before = new uint4(0u, 0u, 0u, unchecked((uint)-1u));
         ///<summary>(0, 0, 0, 1)</summary>
         public static readonly uint4 after = new uint4(0u, 0u, 0u, 1u);
         #endregion
@@ -104,11 +104,91 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)]
-        public uint4(float x, float y, float z, float w)
+        public uint4((uint x, uint y, uint z, uint w) a)
         {
-            this.x = (uint)x; this.y = (uint)y;
-            this.z = (uint)z; this.w = (uint)w;
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = a.w;
         }
+        [IN(LINE)]
+        public uint4((uint x, uint y, uint z) a, uint w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public uint4(uint x, (uint x, uint y, uint z) a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public uint4((uint x, uint y) a, uint z, uint w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public uint4(uint x, (uint x, uint y) a, uint w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public uint4(uint x, uint y, (uint x, uint y) a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public uint4((uint x, uint y) a, (uint x, uint y) b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
+        [IN(LINE)]
+        public uint4(uint x, uint y, uint z, uint w)
+        {
+            this.x = x; this.y = y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public uint4(uint3 a, uint w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public uint4(uint x, uint3 a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public uint4(uint2 a, uint z, uint w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public uint4(uint x, uint2 a, uint w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public uint4(uint x, uint y, uint2 a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public uint4(uint2 a, uint2 b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
         [IN(LINE)]
         public uint4(float v)
         {
@@ -120,12 +200,6 @@ namespace DCFApixels.DataMath
         {
             x = (uint)v.x; y = (uint)v.y;
             z = (uint)v.z; w = (uint)v.w;
-        }
-        [IN(LINE)]
-        public uint4(double x, double y, double z, double w)
-        {
-            this.x = (uint)x; this.y = (uint)y;
-            this.z = (uint)z; this.w = (uint)w;
         }
         [IN(LINE)]
         public uint4(double v)
@@ -140,12 +214,6 @@ namespace DCFApixels.DataMath
             z = (uint)v.z; w = (uint)v.w;
         }
         [IN(LINE)]
-        public uint4(int x, int y, int z, int w)
-        {
-            this.x = (uint)x; this.y = (uint)y;
-            this.z = (uint)z; this.w = (uint)w;
-        }
-        [IN(LINE)]
         public uint4(int v)
         {
             x = (uint)v; y = (uint)v;
@@ -156,12 +224,6 @@ namespace DCFApixels.DataMath
         {
             x = (uint)v.x; y = (uint)v.y;
             z = (uint)v.z; w = (uint)v.w;
-        }
-        [IN(LINE)]
-        public uint4(uint x, uint y, uint z, uint w)
-        {
-            this.x = x; this.y = y;
-            this.z = z; this.w = w;
         }
         [IN(LINE)]
         public uint4(uint v)
@@ -188,6 +250,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<uint4>(ref Unsafe.As<uint, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
+        [IN(LINE)] public void Deconstruct(out uint x, out uint y, out uint z, out uint w) { x = this.x; y = this.y; z = this.z; w = this.w; }
         #endregion
 
         #region operators
@@ -216,7 +279,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint4 operator ++(uint4 a) { return new uint4(++a.x, ++a.y, ++a.z, ++a.w); }
         [IN(LINE)] public static uint4 operator --(uint4 a) { return new uint4(--a.x, --a.y, --a.z, --a.w); }
         [IN(LINE)] public static uint4 operator +(uint4 a) { return new uint4(+a.x, +a.y, +a.z, +a.w); }
-        [IN(LINE)] public static uint4 operator -(uint4 a) { return new uint4(-a.x, -a.y, -a.z, -a.w); }
+        [IN(LINE)] public static uint4 operator -(uint4 a) { return new uint4((uint)-a.x, (uint)-a.y, (uint)-a.z, (uint)-a.w); }
         #endregion
 
         #region Bits
@@ -957,14 +1020,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<uint> destination)
+        public /*readonly*/ void CopyTo(Span<uint> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y; destination[2] = z; destination[3] = w;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<uint, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif
