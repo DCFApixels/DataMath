@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.Consts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 #if ENABLE_IL2CPP
@@ -103,6 +104,18 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public int2(uint v) { x = (int)v; y = (int)v; }
         [IN(LINE)] public int2(uint2 v) { x = (int)v.x; y = (int)v.y; }
 
+        [IN(LINE)]
+        public int2(ReadOnlySpan<int> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+#if UNITY_5_3_OR_NEWER
+            x = values[0]; y = values[1];
+#else
+            this = Unsafe.ReadUnaligned<int2>(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(values)));
+#endif
+        }
         #endregion
 
         #region operators
@@ -426,7 +439,20 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public readonly void CopyTo(Span<int> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+
+#if UNITY_5_3_OR_NEWER
+            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+#else
+            Unsafe.WriteUnaligned(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(destination)), this);
+#endif
+        }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
         public override bool Equals(object o) { return o is int2 target && Equals(target); }
         [IN(LINE)] public bool Equals(int2 a) { return x == a.x && y == a.y; }
