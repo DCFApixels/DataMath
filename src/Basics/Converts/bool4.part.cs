@@ -35,4 +35,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 Bool4(double v) => new bool4(v);
         [IN(LINE)] public static bool4 Bool4(double4 v) => new bool4(v);
     }
+
+    public static partial class DMBasic
+    {
+
+    }
 }
