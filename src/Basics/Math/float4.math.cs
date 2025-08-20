@@ -33,11 +33,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int4 Ceil2Int(float4 a) { return new int4(Ceil2Int(a.x), Ceil2Int(a.y), Ceil2Int(a.z), Ceil2Int(a.w)); }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static int4 Round2UInt(float4 a) { return new int4(Round2UInt(a.x), Round2UInt(a.y), Round2UInt(a.z), Round2UInt(a.w)); }
+        [IN(LINE)] public static uint4 Round2UInt(float4 a) { return new uint4(Round2UInt(a.x), Round2UInt(a.y), Round2UInt(a.z), Round2UInt(a.w)); }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static int4 Floor2UInt(float4 a) { return new int4(Floor2UInt(a.x), Floor2UInt(a.y), Floor2UInt(a.z), Floor2UInt(a.w)); }
+        [IN(LINE)] public static uint4 Floor2UInt(float4 a) { return new uint4(Floor2UInt(a.x), Floor2UInt(a.y), Floor2UInt(a.z), Floor2UInt(a.w)); }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static int4 Ceil2UInt(float4 a) { return new int4(Ceil2UInt(a.x), Ceil2UInt(a.y), Ceil2UInt(a.z), Ceil2UInt(a.w)); }
+        [IN(LINE)] public static uint4 Ceil2UInt(float4 a) { return new uint4(Ceil2UInt(a.x), Ceil2UInt(a.y), Ceil2UInt(a.z), Ceil2UInt(a.w)); }
         #endregion
 
         #region Clamp/Repeat/PingPong

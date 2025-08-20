@@ -41,15 +41,15 @@ namespace DCFApixels.DataMath
         public static readonly uint3 one = new uint3(1u, 1u, 1u);
 
         ///<summary>(-1, 0, 0)</summary>
-        public static readonly uint3 left = new uint3(-1u, 0u, 0u);
+        public static readonly uint3 left = new uint3(unchecked((uint)-1u), 0u, 0u);
         ///<summary>(1, 0, 0)</summary>
         public static readonly uint3 right = new uint3(1u, 0u, 0u);
         ///<summary>(0, -1, 0)</summary>
-        public static readonly uint3 down = new uint3(0u, -1u, 0u);
+        public static readonly uint3 down = new uint3(0u, unchecked((uint)-1u), 0u);
         ///<summary>(0, 1, 0)</summary>
         public static readonly uint3 up = new uint3(0u, 1u, 0u);
         ///<summary>(0, 0, -1)</summary>
-        public static readonly uint3 back = new uint3(0u, 0u, -1u);
+        public static readonly uint3 back = new uint3(0u, 0u, unchecked((uint)-1u));
         ///<summary>(0, 0, 1)</summary>
         public static readonly uint3 forward = new uint3(0u, 0u, 1u);
         #endregion
@@ -100,6 +100,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public uint3(uint x, uint y, uint z) { this.x = x; this.y = y; this.z = z; }
         [IN(LINE)] public uint3(uint2 a, uint z) { this.x = a.x; this.y = a.y; this.z = z; }
         [IN(LINE)] public uint3(uint x, uint2 a) { this.x = x; this.y = a.x; this.z = a.y; }
+
+        [IN(LINE)] public uint3((uint x, uint y, uint z) a) { this.x = a.x; this.y = a.y; this.z = a.z; }
+        [IN(LINE)] public uint3((uint x, uint y) a, uint z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public uint3(uint x, (uint x, uint y) a) { this.x = x; this.y = a.x; this.z = a.y; }
+
         [IN(LINE)] public uint3(float v) { x = (uint)v; y = (uint)v; z = (uint)v; }
         [IN(LINE)] public uint3(float3 v) { x = (uint)v.x; y = (uint)v.y; z = (uint)v.z; }
         [IN(LINE)] public uint3(double v) { x = (uint)v; y = (uint)v; z = (uint)v; }
@@ -121,7 +126,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<uint3>(ref Unsafe.As<uint, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
-        [IN(LINE)] public void Deconstruct(out float x, out float y, out float z) { x = this.x; y = this.y; z = this.z; }
+        [IN(LINE)] public void Deconstruct(out uint x, out uint y, out uint z) { x = this.x; y = this.y; z = this.z; }
         #endregion
 
         #region operators
@@ -150,7 +155,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint3 operator ++(uint3 a) { return new uint3(++a.x, ++a.y, ++a.z); }
         [IN(LINE)] public static uint3 operator --(uint3 a) { return new uint3(--a.x, --a.y, --a.z); }
         [IN(LINE)] public static uint3 operator +(uint3 a) { return new uint3(+a.x, +a.y, +a.z); }
-        [IN(LINE)] public static uint3 operator -(uint3 a) { return new uint3(-a.x, -a.y, -a.z); }
+        [IN(LINE)] public static uint3 operator -(uint3 a) { return new uint3((uint)-a.x, (uint)-a.y, (uint)-a.z); }
         #endregion
 
         #region Bits
@@ -885,14 +890,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<uint> destination)
+        public /*readonly*/ void CopyTo(Span<uint> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y; destination[2] = z;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<uint, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif

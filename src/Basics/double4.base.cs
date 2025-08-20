@@ -41,19 +41,19 @@ namespace DCFApixels.DataMath
         public static readonly double4 one = new double4(1d, 1d, 1d, 1d);
 
         ///<summary>(-1, 0, 0, 0)</summary>
-        public static readonly double4 left = new double4(-1d, 0d, 0d, 0d);
+        public static readonly double4 left = new double4(unchecked((double)-1d), 0d, 0d, 0d);
         ///<summary>(1, 0, 0, 0)</summary>
         public static readonly double4 right = new double4(1d, 0d, 0d, 0d);
         ///<summary>(0, -1, 0, 0)</summary>
-        public static readonly double4 down = new double4(0d, -1d, 0d, 0d);
+        public static readonly double4 down = new double4(0d, unchecked((double)-1d), 0d, 0d);
         ///<summary>(0, 1, 0, 0)</summary>
         public static readonly double4 up = new double4(0d, 1d, 0d, 0d);
         ///<summary>(0, 0, -1, 0)</summary>
-        public static readonly double4 back = new double4(0d, 0d, -1d, 0d);
+        public static readonly double4 back = new double4(0d, 0d, unchecked((double)-1d), 0d);
         ///<summary>(0, 0, 1, 0)</summary>
         public static readonly double4 forward = new double4(0d, 0d, 1d, 0d);
         ///<summary>(0, 0, 0, -1)</summary>
-        public static readonly double4 before = new double4(0d, 0d, 0d, -1d);
+        public static readonly double4 before = new double4(0d, 0d, 0d, unchecked((double)-1d));
         ///<summary>(0, 0, 0, 1)</summary>
         public static readonly double4 after = new double4(0d, 0d, 0d, 1d);
         #endregion
@@ -104,6 +104,49 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)]
+        public double4((double x, double y, double z, double w) a)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = a.w;
+        }
+        [IN(LINE)]
+        public double4((double x, double y, double z) a, double w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, (double x, double y, double z) a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public double4((double x, double y) a, double z, double w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, (double x, double y) a, double w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, double y, (double x, double y) a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public double4((double x, double y) a, (double x, double y) b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
+        [IN(LINE)]
         public double4(double x, double y, double z, double w)
         {
             this.x = x; this.y = y;
@@ -145,6 +188,7 @@ namespace DCFApixels.DataMath
             this.x = a.x; this.y = a.y;
             this.z = b.x; this.w = b.y;
         }
+
         [IN(LINE)]
         public double4(float v)
         {
@@ -206,7 +250,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<double4>(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
-        [IN(LINE)] public void Deconstruct(out float x, out float y, out float z, out float w) { x = this.x; y = this.y; z = this.z; w = this.w; }
+        [IN(LINE)] public void Deconstruct(out double x, out double y, out double z, out double w) { x = this.x; y = this.y; z = this.z; w = this.w; }
         #endregion
 
         #region operators
@@ -235,7 +279,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 operator ++(double4 a) { return new double4(++a.x, ++a.y, ++a.z, ++a.w); }
         [IN(LINE)] public static double4 operator --(double4 a) { return new double4(--a.x, --a.y, --a.z, --a.w); }
         [IN(LINE)] public static double4 operator +(double4 a) { return new double4(+a.x, +a.y, +a.z, +a.w); }
-        [IN(LINE)] public static double4 operator -(double4 a) { return new double4(-a.x, -a.y, -a.z, -a.w); }
+        [IN(LINE)] public static double4 operator -(double4 a) { return new double4((double)-a.x, (double)-a.y, (double)-a.z, (double)-a.w); }
         #endregion
 
         #region Boolean
@@ -958,14 +1002,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<double> destination)
+        public /*readonly*/ void CopyTo(Span<double> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y; destination[2] = z; destination[3] = w;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif

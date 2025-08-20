@@ -14,7 +14,7 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
-    public partial struct quat : IVector4<float>, IEnumerableVector<float, quat>
+    public partial struct quat : IVector4Impl<float>, IEnumerableVector<float, quat>
     {
         public const int LENGTH = 4;
 
@@ -278,9 +278,9 @@ namespace DCFApixels.DataMath
             const float EPSILON = 1e-6f;
             const float CUT_OFF = (1f - 2f * EPSILON) * (1f - 2f * EPSILON);
 
-            float4 qv = Float4(q);
-            float4 d1 = qv * qv.wwww * Float4(2f); //xw, yw, zw, ww
-            float4 d2 = qv * qv.yzxw * Float4(2f); //xy, yz, zx, ww
+            float4 qv = DMBasic.ToBasic(q);
+            float4 d1 = qv * qv.wwww * new float4(2f); //xw, yw, zw, ww
+            float4 d2 = qv * qv.yzxw * new float4(2f); //xy, yz, zx, ww
             float4 d3 = qv * qv;
 
             float y1 = d2.z - d1.y;
@@ -290,20 +290,20 @@ namespace DCFApixels.DataMath
                 float x2 = d3.z + d3.w - d3.y - d3.x;
                 float z1 = d2.x + d1.z;
                 float z2 = d3.x + d3.w - d3.y - d3.z;
-                return Float3(Atan2(x1, x2), -Asin(y1), Atan2(z1, z2));
+                return new float3(Atan2(x1, x2), -Asin(y1), Atan2(z1, z2));
             }
             else
             {
                 y1 = Clamp(y1, -1f, 1f);
-                float4 abcd = Float4(d2.z, d1.y, d2.x, d1.z);
+                float4 abcd = new float4(d2.z, d1.y, d2.x, d1.z);
                 float x1 = 2f * (abcd.x * abcd.w + abcd.y * abcd.z); //2 * (ad + bc)
-                float x2 = CSum(abcd * abcd * Float4(-1f, 1f, -1f, 1f));
-                return Float3(Atan2(x1, x2), -Asin(y1), 0f);
+                float x2 = CSum(abcd * abcd * new float4(-1f, 1f, -1f, 1f));
+                return new float3(Atan2(x1, x2), -Asin(y1), 0f);
             }
         }
 
         [IN(LINE)]
-        public static quat FromEuler(float x, float y, float z) => FromEuler(Float3(x, y, z));
+        public static quat FromEuler(float x, float y, float z) => FromEuler(new float3(x, y, z));
         [IN(LINE)]
         public static quat FromEuler(float3 xyz)
         {

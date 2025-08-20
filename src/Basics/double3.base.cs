@@ -41,15 +41,15 @@ namespace DCFApixels.DataMath
         public static readonly double3 one = new double3(1d, 1d, 1d);
 
         ///<summary>(-1, 0, 0)</summary>
-        public static readonly double3 left = new double3(-1d, 0d, 0d);
+        public static readonly double3 left = new double3(unchecked((double)-1d), 0d, 0d);
         ///<summary>(1, 0, 0)</summary>
         public static readonly double3 right = new double3(1d, 0d, 0d);
         ///<summary>(0, -1, 0)</summary>
-        public static readonly double3 down = new double3(0d, -1d, 0d);
+        public static readonly double3 down = new double3(0d, unchecked((double)-1d), 0d);
         ///<summary>(0, 1, 0)</summary>
         public static readonly double3 up = new double3(0d, 1d, 0d);
         ///<summary>(0, 0, -1)</summary>
-        public static readonly double3 back = new double3(0d, 0d, -1d);
+        public static readonly double3 back = new double3(0d, 0d, unchecked((double)-1d));
         ///<summary>(0, 0, 1)</summary>
         public static readonly double3 forward = new double3(0d, 0d, 1d);
         #endregion
@@ -100,6 +100,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public double3(double x, double y, double z) { this.x = x; this.y = y; this.z = z; }
         [IN(LINE)] public double3(double2 a, double z) { this.x = a.x; this.y = a.y; this.z = z; }
         [IN(LINE)] public double3(double x, double2 a) { this.x = x; this.y = a.x; this.z = a.y; }
+
+        [IN(LINE)] public double3((double x, double y, double z) a) { this.x = a.x; this.y = a.y; this.z = a.z; }
+        [IN(LINE)] public double3((double x, double y) a, double z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public double3(double x, (double x, double y) a) { this.x = x; this.y = a.x; this.z = a.y; }
+
         [IN(LINE)] public double3(float v) { x = (double)v; y = (double)v; z = (double)v; }
         [IN(LINE)] public double3(float3 v) { x = (double)v.x; y = (double)v.y; z = (double)v.z; }
         [IN(LINE)] public double3(double v) { x = v; y = v; z = v; }
@@ -121,7 +126,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<double3>(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
-        [IN(LINE)] public void Deconstruct(out float x, out float y, out float z) { x = this.x; y = this.y; z = this.z; }
+        [IN(LINE)] public void Deconstruct(out double x, out double y, out double z) { x = this.x; y = this.y; z = this.z; }
         #endregion
 
         #region operators
@@ -150,7 +155,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double3 operator ++(double3 a) { return new double3(++a.x, ++a.y, ++a.z); }
         [IN(LINE)] public static double3 operator --(double3 a) { return new double3(--a.x, --a.y, --a.z); }
         [IN(LINE)] public static double3 operator +(double3 a) { return new double3(+a.x, +a.y, +a.z); }
-        [IN(LINE)] public static double3 operator -(double3 a) { return new double3(-a.x, -a.y, -a.z); }
+        [IN(LINE)] public static double3 operator -(double3 a) { return new double3((double)-a.x, (double)-a.y, (double)-a.z); }
         #endregion
 
         #region Boolean
@@ -867,14 +872,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<double> destination)
+        public /*readonly*/ void CopyTo(Span<double> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y; destination[2] = z;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif

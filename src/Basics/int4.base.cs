@@ -41,19 +41,19 @@ namespace DCFApixels.DataMath
         public static readonly int4 one = new int4(1, 1, 1, 1);
 
         ///<summary>(-1, 0, 0, 0)</summary>
-        public static readonly int4 left = new int4(-1, 0, 0, 0);
+        public static readonly int4 left = new int4(unchecked((int)-1), 0, 0, 0);
         ///<summary>(1, 0, 0, 0)</summary>
         public static readonly int4 right = new int4(1, 0, 0, 0);
         ///<summary>(0, -1, 0, 0)</summary>
-        public static readonly int4 down = new int4(0, -1, 0, 0);
+        public static readonly int4 down = new int4(0, unchecked((int)-1), 0, 0);
         ///<summary>(0, 1, 0, 0)</summary>
         public static readonly int4 up = new int4(0, 1, 0, 0);
         ///<summary>(0, 0, -1, 0)</summary>
-        public static readonly int4 back = new int4(0, 0, -1, 0);
+        public static readonly int4 back = new int4(0, 0, unchecked((int)-1), 0);
         ///<summary>(0, 0, 1, 0)</summary>
         public static readonly int4 forward = new int4(0, 0, 1, 0);
         ///<summary>(0, 0, 0, -1)</summary>
-        public static readonly int4 before = new int4(0, 0, 0, -1);
+        public static readonly int4 before = new int4(0, 0, 0, unchecked((int)-1));
         ///<summary>(0, 0, 0, 1)</summary>
         public static readonly int4 after = new int4(0, 0, 0, 1);
         #endregion
@@ -104,6 +104,49 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)]
+        public int4((int x, int y, int z, int w) a)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = a.w;
+        }
+        [IN(LINE)]
+        public int4((int x, int y, int z) a, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, (int x, int y, int z) a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public int4((int x, int y) a, int z, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, (int x, int y) a, int w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int y, (int x, int y) a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public int4((int x, int y) a, (int x, int y) b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
+        [IN(LINE)]
         public int4(int x, int y, int z, int w)
         {
             this.x = x; this.y = y;
@@ -145,6 +188,7 @@ namespace DCFApixels.DataMath
             this.x = a.x; this.y = a.y;
             this.z = b.x; this.w = b.y;
         }
+
         [IN(LINE)]
         public int4(float v)
         {
@@ -206,7 +250,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<int4>(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
-        [IN(LINE)] public void Deconstruct(out float x, out float y, out float z, out float w) { x = this.x; y = this.y; z = this.z; w = this.w; }
+        [IN(LINE)] public void Deconstruct(out int x, out int y, out int z, out int w) { x = this.x; y = this.y; z = this.z; w = this.w; }
         #endregion
 
         #region operators
@@ -235,7 +279,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int4 operator ++(int4 a) { return new int4(++a.x, ++a.y, ++a.z, ++a.w); }
         [IN(LINE)] public static int4 operator --(int4 a) { return new int4(--a.x, --a.y, --a.z, --a.w); }
         [IN(LINE)] public static int4 operator +(int4 a) { return new int4(+a.x, +a.y, +a.z, +a.w); }
-        [IN(LINE)] public static int4 operator -(int4 a) { return new int4(-a.x, -a.y, -a.z, -a.w); }
+        [IN(LINE)] public static int4 operator -(int4 a) { return new int4((int)-a.x, (int)-a.y, (int)-a.z, (int)-a.w); }
         #endregion
 
         #region Bits
@@ -976,14 +1020,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<int> destination)
+        public /*readonly*/ void CopyTo(Span<int> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y; destination[2] = z; destination[3] = w;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif

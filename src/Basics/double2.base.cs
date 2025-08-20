@@ -41,11 +41,11 @@ namespace DCFApixels.DataMath
         public static readonly double2 one = new double2(1d, 1d);
 
         ///<summary>(-1, 0)</summary>
-        public static readonly double2 left = new double2(-1d, 0d);
+        public static readonly double2 left = new double2(unchecked((double)-1d), 0d);
         ///<summary>(1, 0)</summary>
         public static readonly double2 right = new double2(1d, 0d);
         ///<summary>(0, -1)</summary>
-        public static readonly double2 down = new double2(0d, -1d);
+        public static readonly double2 down = new double2(0d, unchecked((double)-1d));
         ///<summary>(0, 1)</summary>
         public static readonly double2 up = new double2(0d, 1d);
         #endregion
@@ -92,6 +92,7 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public double2(double x, double y) { this.x = x; this.y = y; }
+
         [IN(LINE)] public double2(float v) { x = (double)v; y = (double)v; }
         [IN(LINE)] public double2(float2 v) { x = (double)v.x; y = (double)v.y; }
         [IN(LINE)] public double2(double v) { x = v; y = v; }
@@ -113,7 +114,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<double2>(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
-        [IN(LINE)] public void Deconstruct(out float x, out float y) { x = this.x; y = this.y; }
+        [IN(LINE)] public void Deconstruct(out double x, out double y) { x = this.x; y = this.y; }
         #endregion
 
         #region operators
@@ -142,7 +143,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double2 operator ++(double2 a) { return new double2(++a.x, ++a.y); }
         [IN(LINE)] public static double2 operator --(double2 a) { return new double2(--a.x, --a.y); }
         [IN(LINE)] public static double2 operator +(double2 a) { return new double2(+a.x, +a.y); }
-        [IN(LINE)] public static double2 operator -(double2 a) { return new double2(-a.x, -a.y); }
+        [IN(LINE)] public static double2 operator -(double2 a) { return new double2((double)-a.x, (double)-a.y); }
         #endregion
 
         #region Boolean
@@ -421,14 +422,14 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)]
-        public readonly void CopyTo(Span<double> destination)
+        public /*readonly*/ void CopyTo(Span<double> destination)
         {
 #if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
             if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
 #endif
 
 #if UNITY_5_3_OR_NEWER
-            for (int i = 0; i < Count; i++) { destination[i] = this[i]; }
+            destination[0] = x; destination[1] = y;
 #else
             Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
 #endif
