@@ -100,19 +100,14 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public double3(double x, double y, double z) { this.x = x; this.y = y; this.z = z; }
         [IN(LINE)] public double3(double2 a, double z) { this.x = a.x; this.y = a.y; this.z = z; }
         [IN(LINE)] public double3(double x, double2 a) { this.x = x; this.y = a.x; this.z = a.y; }
-
         [IN(LINE)] public double3(float v) { x = (double)v; y = (double)v; z = (double)v; }
         [IN(LINE)] public double3(float3 v) { x = (double)v.x; y = (double)v.y; z = (double)v.z; }
-
         [IN(LINE)] public double3(double v) { x = v; y = v; z = v; }
         [IN(LINE)] public double3(double3 v) { x = v.x; y = v.y; z = v.z; }
-
         [IN(LINE)] public double3(int v) { x = (double)v; y = (double)v; z = (double)v; }
         [IN(LINE)] public double3(int3 v) { x = (double)v.x; y = (double)v.y; z = (double)v.z; }
-
         [IN(LINE)] public double3(uint v) { x = (double)v; y = (double)v; z = (double)v; }
         [IN(LINE)] public double3(uint3 v) { x = (double)v.x; y = (double)v.y; z = (double)v.z; }
-
 
         [IN(LINE)]
         public double3(ReadOnlySpan<double> values)

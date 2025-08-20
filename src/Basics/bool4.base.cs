@@ -99,6 +99,48 @@ namespace DCFApixels.DataMath
             this.z = z; this.w = w;
         }
         [IN(LINE)]
+        public bool4(int x, int y, int z, int w)
+        {
+            this.x = x != 0; this.y = y != 0;
+            this.z = z != 0; this.w = w != 0;
+        }
+        [IN(LINE)]
+        public bool4(bool3 a, bool w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, bool3 a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public bool4(bool2 a, bool z, bool w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, bool2 a, bool w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public bool4(bool x, bool y, bool2 a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public bool4(bool2 a, bool2 b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+        [IN(LINE)]
         public bool4(bool v)
         {
             x = v; y = v;
@@ -111,76 +153,52 @@ namespace DCFApixels.DataMath
             z = v.z; w = v.w;
         }
         [IN(LINE)]
-        public bool4(float x, float y, float z, float w)
-        {
-            this.x = x > 0f; this.y = y > 0f;
-            this.z = z > 0f; this.w = w > 0f;
-        }
-        [IN(LINE)]
         public bool4(float v)
         {
-            x = v > 0f; y = v > 0f;
-            z = v > 0f; w = v > 0f;
+            x = v != 0f; y = v != 0f;
+            z = v != 0f; w = v != 0f;
         }
         [IN(LINE)]
         public bool4(float4 v)
         {
-            x = v.x > 0f; y = v.y > 0f;
-            z = v.z > 0f; w = v.w > 0f;
-        }
-        [IN(LINE)]
-        public bool4(double x, double y, double z, double w)
-        {
-            this.x = x > 0d; this.y = y > 0d;
-            this.z = z > 0d; this.w = w > 0d;
+            x = v.x != 0f; y = v.y != 0f;
+            z = v.z != 0f; w = v.w != 0f;
         }
         [IN(LINE)]
         public bool4(double v)
         {
-            x = v > 0d; y = v > 0d;
-            z = v > 0d; w = v > 0d;
+            x = v != 0d; y = v != 0d;
+            z = v != 0d; w = v != 0d;
         }
         [IN(LINE)]
         public bool4(double4 v)
         {
-            x = v.x > 0d; y = v.y > 0d;
-            z = v.z > 0d; w = v.w > 0d;
-        }
-        [IN(LINE)]
-        public bool4(int x, int y, int z, int w)
-        {
-            this.x = x > 0; this.y = y > 0;
-            this.z = z > 0; this.w = w > 0;
+            x = v.x != 0d; y = v.y != 0d;
+            z = v.z != 0d; w = v.w != 0d;
         }
         [IN(LINE)]
         public bool4(int v)
         {
-            x = v > 0; y = v > 0;
-            z = v > 0; w = v > 0;
+            x = v != 0; y = v != 0;
+            z = v != 0; w = v != 0;
         }
         [IN(LINE)]
         public bool4(int4 v)
         {
-            x = v.x > 0; y = v.y > 0;
-            z = v.z > 0; w = v.w > 0;
-        }
-        [IN(LINE)]
-        public bool4(uint x, uint y, uint z, uint w)
-        {
-            this.x = x > 0; this.y = y > 0;
-            this.z = z > 0; this.w = w > 0;
+            x = v.x != 0; y = v.y != 0;
+            z = v.z != 0; w = v.w != 0;
         }
         [IN(LINE)]
         public bool4(uint v)
         {
-            x = v > 0; y = v > 0;
-            z = v > 0; w = v > 0;
+            x = v != 0; y = v != 0;
+            z = v != 0; w = v != 0;
         }
         [IN(LINE)]
         public bool4(uint4 v)
         {
-            x = v.x > 0; y = v.y > 0;
-            z = v.z > 0; w = v.w > 0;
+            x = v.x != 0; y = v.y != 0;
+            z = v.z != 0; w = v.w != 0;
         }
         #endregion
 

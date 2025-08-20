@@ -87,20 +87,19 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public bool3(bool x, bool y, bool z) { this.x = x; this.y = y; this.z = z; }
+        [IN(LINE)] public bool3(int x, int y, int z) { this.x = x != 0; this.y = y != 0; this.z = z != 0; }
+        [IN(LINE)] public bool3(bool2 a, bool z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public bool3(bool x, bool2 a) { this.x = x; this.y = a.x; this.z = a.y; }
         [IN(LINE)] public bool3(bool v) { x = v; y = v; z = v; }
         [IN(LINE)] public bool3(bool3 v) { x = v.x; y = v.y; z = v.z; }
-        [IN(LINE)] public bool3(float x, float y, float z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(float v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(float3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
-        [IN(LINE)] public bool3(double x, double y, double z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(double v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(double3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
-        [IN(LINE)] public bool3(int x, int y, int z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(int v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(int3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
-        [IN(LINE)] public bool3(uint x, uint y, uint z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(uint v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(uint3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
+        [IN(LINE)] public bool3(float v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(float3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
+        [IN(LINE)] public bool3(double v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(double3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
+        [IN(LINE)] public bool3(int v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(int3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
+        [IN(LINE)] public bool3(uint v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(uint3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
         #endregion
 
         #region operators

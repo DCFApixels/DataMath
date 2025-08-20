@@ -92,19 +92,14 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public float2(float x, float y) { this.x = x; this.y = y; }
-
         [IN(LINE)] public float2(float v) { x = v; y = v; }
         [IN(LINE)] public float2(float2 v) { x = v.x; y = v.y; }
-
         [IN(LINE)] public float2(double v) { x = (float)v; y = (float)v; }
         [IN(LINE)] public float2(double2 v) { x = (float)v.x; y = (float)v.y; }
-
         [IN(LINE)] public float2(int v) { x = (float)v; y = (float)v; }
         [IN(LINE)] public float2(int2 v) { x = (float)v.x; y = (float)v.y; }
-
         [IN(LINE)] public float2(uint v) { x = (float)v; y = (float)v; }
         [IN(LINE)] public float2(uint2 v) { x = (float)v.x; y = (float)v.y; }
-
 
         [IN(LINE)]
         public float2(ReadOnlySpan<float> values)

@@ -145,7 +145,6 @@ namespace DCFApixels.DataMath
             this.x = a.x; this.y = a.y;
             this.z = b.x; this.w = b.y;
         }
-
         [IN(LINE)]
         public float4(float v)
         {
@@ -158,7 +157,6 @@ namespace DCFApixels.DataMath
             x = v.x; y = v.y;
             z = v.z; w = v.w;
         }
-
         [IN(LINE)]
         public float4(double v)
         {
@@ -171,7 +169,6 @@ namespace DCFApixels.DataMath
             x = (float)v.x; y = (float)v.y;
             z = (float)v.z; w = (float)v.w;
         }
-
         [IN(LINE)]
         public float4(int v)
         {
@@ -184,7 +181,6 @@ namespace DCFApixels.DataMath
             x = (float)v.x; y = (float)v.y;
             z = (float)v.z; w = (float)v.w;
         }
-
         [IN(LINE)]
         public float4(uint v)
         {
@@ -197,7 +193,6 @@ namespace DCFApixels.DataMath
             x = (float)v.x; y = (float)v.y;
             z = (float)v.z; w = (float)v.w;
         }
-
 
         [IN(LINE)]
         public float4(ReadOnlySpan<float> values)

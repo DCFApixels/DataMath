@@ -81,20 +81,17 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public bool2(bool x, bool y) { this.x = x; this.y = y; }
+        [IN(LINE)] public bool2(int x, int y) { this.x = x != 0; this.y = y != 0; }
         [IN(LINE)] public bool2(bool v) { x = v; y = v; }
         [IN(LINE)] public bool2(bool2 v) { x = v.x; y = v.y; }
-        [IN(LINE)] public bool2(float x, float y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(float v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(float2 v) { x = v.x > 0; y = v.y > 0; }
-        [IN(LINE)] public bool2(double x, double y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(double v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(double2 v) { x = v.x > 0; y = v.y > 0; }
-        [IN(LINE)] public bool2(int x, int y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(int v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(int2 v) { x = v.x > 0; y = v.y > 0; }
-        [IN(LINE)] public bool2(uint x, uint y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(uint v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(uint2 v) { x = v.x > 0; y = v.y > 0; }
+        [IN(LINE)] public bool2(float v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(float2 v) { x = v.x != 0; y = v.y != 0; }
+        [IN(LINE)] public bool2(double v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(double2 v) { x = v.x != 0; y = v.y != 0; }
+        [IN(LINE)] public bool2(int v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(int2 v) { x = v.x != 0; y = v.y != 0; }
+        [IN(LINE)] public bool2(uint v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(uint2 v) { x = v.x != 0; y = v.y != 0; }
         #endregion
 
         #region operators
