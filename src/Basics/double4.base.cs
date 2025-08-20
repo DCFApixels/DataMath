@@ -188,6 +188,7 @@ namespace DCFApixels.DataMath
             this = Unsafe.ReadUnaligned<double4>(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
         }
+        [IN(LINE)] public void Deconstruct(out float x, out float y, out float z, out float w) { x = this.x; y = this.y; z = this.z; w = this.w; }
         #endregion
 
         #region operators
