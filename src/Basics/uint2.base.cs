@@ -91,18 +91,20 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)] public uint2(float x, float y) { this.x = (uint)x; this.y = (uint)y; }
+        [IN(LINE)] public uint2(uint x, uint y) { this.x = x; this.y = y; }
+
         [IN(LINE)] public uint2(float v) { x = (uint)v; y = (uint)v; }
         [IN(LINE)] public uint2(float2 v) { x = (uint)v.x; y = (uint)v.y; }
-        [IN(LINE)] public uint2(double x, double y) { this.x = (uint)x; this.y = (uint)y; }
+
         [IN(LINE)] public uint2(double v) { x = (uint)v; y = (uint)v; }
         [IN(LINE)] public uint2(double2 v) { x = (uint)v.x; y = (uint)v.y; }
-        [IN(LINE)] public uint2(int x, int y) { this.x = (uint)x; this.y = (uint)y; }
+
         [IN(LINE)] public uint2(int v) { x = (uint)v; y = (uint)v; }
         [IN(LINE)] public uint2(int2 v) { x = (uint)v.x; y = (uint)v.y; }
-        [IN(LINE)] public uint2(uint x, uint y) { this.x = x; this.y = y; }
+
         [IN(LINE)] public uint2(uint v) { x = v; y = v; }
         [IN(LINE)] public uint2(uint2 v) { x = v.x; y = v.y; }
+
 
         [IN(LINE)]
         public uint2(ReadOnlySpan<uint> values)

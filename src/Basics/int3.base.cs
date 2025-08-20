@@ -97,18 +97,22 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
-        [IN(LINE)] public int3(float x, float y, float z) { this.x = (int)x; this.y = (int)y; this.z = (int)z; }
+        [IN(LINE)] public int3(int x, int y, int z) { this.x = x; this.y = y; this.z = z; }
+        [IN(LINE)] public int3(int2 a, int z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public int3(int x, int2 a) { this.x = x; this.y = a.x; this.z = a.y; }
+
         [IN(LINE)] public int3(float v) { x = (int)v; y = (int)v; z = (int)v; }
         [IN(LINE)] public int3(float3 v) { x = (int)v.x; y = (int)v.y; z = (int)v.z; }
-        [IN(LINE)] public int3(double x, double y, double z) { this.x = (int)x; this.y = (int)y; this.z = (int)z; }
+
         [IN(LINE)] public int3(double v) { x = (int)v; y = (int)v; z = (int)v; }
         [IN(LINE)] public int3(double3 v) { x = (int)v.x; y = (int)v.y; z = (int)v.z; }
-        [IN(LINE)] public int3(int x, int y, int z) { this.x = x; this.y = y; this.z = z; }
+
         [IN(LINE)] public int3(int v) { x = v; y = v; z = v; }
         [IN(LINE)] public int3(int3 v) { x = v.x; y = v.y; z = v.z; }
-        [IN(LINE)] public int3(uint x, uint y, uint z) { this.x = (int)x; this.y = (int)y; this.z = (int)z; }
+
         [IN(LINE)] public int3(uint v) { x = (int)v; y = (int)v; z = (int)v; }
         [IN(LINE)] public int3(uint3 v) { x = (int)v.x; y = (int)v.y; z = (int)v.z; }
+
 
         [IN(LINE)]
         public int3(ReadOnlySpan<int> values)

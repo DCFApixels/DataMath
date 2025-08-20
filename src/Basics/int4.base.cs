@@ -104,11 +104,48 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)]
-        public int4(float x, float y, float z, float w)
+        public int4(int x, int y, int z, int w)
         {
-            this.x = (int)x; this.y = (int)y;
-            this.z = (int)z; this.w = (int)w;
+            this.x = x; this.y = y;
+            this.z = z; this.w = w;
         }
+        [IN(LINE)]
+        public int4(int3 a, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int3 a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public int4(int2 a, int z, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int2 a, int w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int y, int2 a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public int4(int2 a, int2 b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
         [IN(LINE)]
         public int4(float v)
         {
@@ -121,12 +158,7 @@ namespace DCFApixels.DataMath
             x = (int)v.x; y = (int)v.y;
             z = (int)v.z; w = (int)v.w;
         }
-        [IN(LINE)]
-        public int4(double x, double y, double z, double w)
-        {
-            this.x = (int)x; this.y = (int)y;
-            this.z = (int)z; this.w = (int)w;
-        }
+
         [IN(LINE)]
         public int4(double v)
         {
@@ -139,12 +171,7 @@ namespace DCFApixels.DataMath
             x = (int)v.x; y = (int)v.y;
             z = (int)v.z; w = (int)v.w;
         }
-        [IN(LINE)]
-        public int4(int x, int y, int z, int w)
-        {
-            this.x = x; this.y = y;
-            this.z = z; this.w = w;
-        }
+
         [IN(LINE)]
         public int4(int v)
         {
@@ -157,12 +184,7 @@ namespace DCFApixels.DataMath
             x = v.x; y = v.y;
             z = v.z; w = v.w;
         }
-        [IN(LINE)]
-        public int4(uint x, uint y, uint z, uint w)
-        {
-            this.x = (int)x; this.y = (int)y;
-            this.z = (int)z; this.w = (int)w;
-        }
+
         [IN(LINE)]
         public int4(uint v)
         {
@@ -175,6 +197,7 @@ namespace DCFApixels.DataMath
             x = (int)v.x; y = (int)v.y;
             z = (int)v.z; w = (int)v.w;
         }
+
 
         [IN(LINE)]
         public int4(ReadOnlySpan<int> values)
