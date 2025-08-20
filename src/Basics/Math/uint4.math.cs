@@ -60,7 +60,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint4 Dot(uint4 a, uint4 b) { return a * b; }
         [IN(LINE)] public static uint4 Sqr(uint4 a) { return a * a; }
         [IN(LINE)] public static uint4 Pow(uint4 a, uint4 b) { return new uint4(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z), Pow(a.w, b.w)); }
-        [IN(LINE)] public static uint4 Select(uint4 falseValue, uint4 trueValue, bool2 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static uint4 Select(uint4 falseValue, uint4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
         #endregion
 
 
