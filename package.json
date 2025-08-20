@@ -1,0 +1,25 @@
+{
+    "name": "com.dcfa_pixels.datamath",
+    "author": 
+    {
+        "name": "DCFApixels",
+        "url": "https://github.com/DCFApixels"
+    },
+    "displayName": "DataMath",
+    "description": "New vector types, mathematics, and a new API",
+    "unity": "2021.3",
+    "version": "0.3.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DCFApixels/DataMath.git"
+    },
+    "dependencies": { },
+    "keywords":
+    [
+        "csharp",
+        "math",
+        "mathematics",
+        "vector",
+        "no-dependencies"
+    ]
+}
