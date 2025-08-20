@@ -25,6 +25,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int CSum(bool2 a) { return CSum(a.x) + CSum(a.y); }
         #endregion
 
+        #region Other
+        [IN(LINE)] public static bool2 Select(bool2 falseValue, bool2 trueValue, bool2 test) { return test ? trueValue : falseValue; }
+        #endregion
+
 
         #region Hash
         [IN(LINE)] public unsafe static uint UHash(bool2 v) { return *(uint*)&v & 0x0000_FFFF; }
