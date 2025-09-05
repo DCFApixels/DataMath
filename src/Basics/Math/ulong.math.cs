@@ -2,7 +2,7 @@
 #undef DEBUG
 #endif
 using DCFApixels.DataMath.Internal;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -139,7 +139,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static ulong CMax<T>(T a, ulong _ = default) where T : IVectorN<ulong>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -148,7 +148,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CMax(result, a[i]);
                     }
@@ -159,7 +159,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static ulong CAbsMax<T>(T a, ulong _ = default) where T : IVectorN<ulong>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -168,7 +168,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CAbsMax(result, a[i]);
                     }
@@ -179,7 +179,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static ulong CMin<T>(T a, ulong _ = default) where T : IVectorN<ulong>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -188,7 +188,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CMin(result, a[i]);
                     }
@@ -199,7 +199,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static ulong CAbsMin<T>(T a, ulong _ = default) where T : IVectorN<ulong>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -208,7 +208,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CAbsMin(result, a[i]);
                     }
@@ -220,7 +220,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static ulong Sum<T>(T a, ulong _ = default) where T : IVectorN<ulong>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: return 0;
                 case 1: return a[0];
@@ -229,7 +229,7 @@ namespace DCFApixels.DataMath
                 case 4: return a[0] + a[1] + a[2] + a[3];
                 default:
                     var result = a[0] + a[1] + a[2] + a[3];
-                    for (int i = 4; i < a.count; i++)
+                    for (int i = 4; i < a.Count; i++)
                     {
                         result += a[i];
                     }
@@ -240,7 +240,7 @@ namespace DCFApixels.DataMath
         public static ulong UHash<TVector>(TVector v, ulong _ = default) where TVector : IVectorN<ulong>
         {
             ulong bits = 0;
-            for (int i = 0; i < v.count; i++)
+            for (int i = 0; i < v.Count; i++)
             {
                 bits ^= UHash(v[i]);
             }
@@ -259,6 +259,17 @@ namespace DCFApixels.DataMath
         #region Other
         [IN(LINE)] public static int Count(ulong a) { unchecked { return InternalBits.CountBits(a); } }
         [IN(LINE)] public static ulong Reverse(ulong a) { unchecked { return InternalBits.Reverse(a); } }
+        [IN(LINE)]
+        public static float AsFloatFraction(ulong a)
+        {
+            unchecked
+            {
+                UInt2ULongUnion u = default;
+                u.ulongValue = a;
+                return InternalBits.Q32ToFloat(u.uint2Value.x);
+            }
+        }
+        [IN(LINE)] public static double AsDoubleFraction(ulong a) { unchecked { return InternalBits.Q64ToDouble(a); } }
         #endregion
     }
 }

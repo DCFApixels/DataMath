@@ -6,7 +6,7 @@
 #endif
 using System;
 using System.Diagnostics;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 //#if !DOTNET_FRAMEWORK || UNITY_5_3_OR_NEWER
 //using SMathF = System.MathF;

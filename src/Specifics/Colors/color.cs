@@ -6,10 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 #if ENABLE_IL2CPP
 using Unity.IL2CPP.CompilerServices;
+using System.ComponentModel;
+using DCFApixels.DataMath.Internal;
 #endif
 
 namespace DCFApixels.DataMath
@@ -72,25 +74,25 @@ namespace DCFApixels.DataMath
         public float y { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
         public float z { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
         public float w { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
-        float IColor.r { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
-        float IColor.g { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
-        float IColor.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
-        float IColor.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
-        public int count { [IN(LINE)] get => Count; }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.r { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.g { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
         public unsafe float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (color* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float* array = &r) { array[index] = value; }
             }

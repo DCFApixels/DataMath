@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -21,7 +21,7 @@ namespace DCFApixels.DataMath
         public T Current { [IN(LINE)] get => _value[_index]; }
         object IEnumerator.Current { [IN(LINE)] get => _value[_index]; }
         [IN(LINE)] public void Dispose() { }
-        [IN(LINE)] public bool MoveNext() => ++_index < _value.count;
+        [IN(LINE)] public bool MoveNext() => ++_index < _value.Count;
         [IN(LINE)] public void Reset() { }
     }
 }

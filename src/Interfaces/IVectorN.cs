@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
     public interface IVectorN : IEnumerable
     {
-        int count { [IN(LINE)] get; }
+        int Count { [IN(LINE)] get; }
         object GetComponentRaw(int index);
         void SetComponentRaw(int index, object raw);
-        Type GetComponentType();
+        [IN(LINE)] Type GetComponentType();
     }
     public interface IVectorN<T> : IVectorN, IEnumerable<T> where T : unmanaged
     {

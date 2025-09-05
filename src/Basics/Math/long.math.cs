@@ -2,7 +2,7 @@
 #undef DEBUG
 #endif
 using DCFApixels.DataMath.Internal;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -120,7 +120,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static long CMax<T>(T a, long _ = default) where T : IVectorN<long>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -129,7 +129,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CMax(result, a[i]);
                     }
@@ -140,7 +140,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static long CAbsMax<T>(T a, long _ = default) where T : IVectorN<long>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -149,7 +149,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CAbsMax(result, a[i]);
                     }
@@ -160,7 +160,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static long CMin<T>(T a, long _ = default) where T : IVectorN<long>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -169,7 +169,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CMin(result, a[i]);
                     }
@@ -180,7 +180,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static long CAbsMin<T>(T a, long _ = default) where T : IVectorN<long>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -189,7 +189,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = CAbsMin(result, a[i]);
                     }
@@ -200,7 +200,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static long CSum<T>(T a, long _ = default) where T : IVectorN<long>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: return 0;
                 case 1: return a[0];
@@ -209,7 +209,7 @@ namespace DCFApixels.DataMath
                 case 4: return a[0] + a[1] + a[2] + a[3];
                 default:
                     var result = a[0] + a[1] + a[2] + a[3];
-                    for (int i = 4; i < a.count; i++)
+                    for (int i = 4; i < a.Count; i++)
                     {
                         result += a[i];
                     }
@@ -221,7 +221,7 @@ namespace DCFApixels.DataMath
         public static long Hash<TVector>(TVector v, long _ = default) where TVector : IVectorN<long>
         {
             long bits = 0;
-            for (int i = 0; i < v.count; i++)
+            for (int i = 0; i < v.Count; i++)
             {
                 bits ^= Hash(v[i]);
             }
@@ -239,6 +239,8 @@ namespace DCFApixels.DataMath
         #region Other
         [IN(LINE)] public static long Count(long a) { unchecked { return InternalBits.CountBits((ulong)a); } }
         [IN(LINE)] public static long Reverse(long a) { unchecked { return InternalBits.Reverse(a); } }
+        [IN(LINE)] public static float AsFloatFraction(long a) { unchecked { return AsFloatFraction((ulong)a); } }
+        [IN(LINE)] public static double AsDoubleFraction(long a) { unchecked { return AsDoubleFraction((ulong)a); } }
         #endregion
     }
 }

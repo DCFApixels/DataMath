@@ -3,7 +3,7 @@
 #endif
 using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -334,7 +334,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CMax<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -343,7 +343,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = Max(result, a[i]);
                     }
@@ -354,7 +354,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CAbsMax<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -363,7 +363,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = AbsMax(result, a[i]);
                     }
@@ -374,7 +374,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CMin<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -383,7 +383,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = Min(result, a[i]);
                     }
@@ -394,7 +394,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CAbsMin<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -403,7 +403,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = AbsMin(result, a[i]);
                     }
@@ -415,7 +415,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CSum<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: return 0;
                 case 1: return a[0];
@@ -424,7 +424,7 @@ namespace DCFApixels.DataMath
                 case 4: return a[0] + a[1] + a[2] + a[3];
                 default:
                     var result = a[0] + a[1] + a[2] + a[3];
-                    for (int i = 4; i < a.count; i++)
+                    for (int i = 4; i < a.Count; i++)
                     {
                         result += a[i];
                     }
@@ -436,7 +436,7 @@ namespace DCFApixels.DataMath
         public static int Hash<TVector>(TVector v, float _ = default) where TVector : IVectorN<float>
         {
             int bits = 0;
-            for (int i = 0; i < v.count; i++)
+            for (int i = 0; i < v.Count; i++)
             {
                 bits ^= Hash(v[i]);
             }

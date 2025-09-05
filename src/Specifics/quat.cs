@@ -1,11 +1,13 @@
-﻿using System;
+﻿using DCFApixels.DataMath.Internal;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
 using static DCFApixels.DataMath.DM;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -16,7 +18,7 @@ namespace DCFApixels.DataMath
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
     public partial struct quat : IVector4Impl<float>, IEnumerableVector<float, quat>
     {
-        public const int LENGTH = 4;
+        public const int Count = 4;
 
         public float4 value;
 
@@ -62,25 +64,25 @@ namespace DCFApixels.DataMath
         }
 
         #region IVector
-        public float x { [IN(LINE)] get => value.x; [IN(LINE)] set => this.value.x = value; }
-        public float y { [IN(LINE)] get => value.y; [IN(LINE)] set => this.value.y = value; }
-        public float z { [IN(LINE)] get => value.z; [IN(LINE)] set => this.value.z = value; }
-        public float w { [IN(LINE)] get => value.w; [IN(LINE)] set => this.value.w = value; }
-        public int count { [IN(LINE)] get => LENGTH; }
+        [EditorBrowsable(EditorBrowsableState.Never)] public float x { [IN(LINE)] get => value.x; [IN(LINE)] set => this.value.x = value; }
+        [EditorBrowsable(EditorBrowsableState.Never)] public float y { [IN(LINE)] get => value.y; [IN(LINE)] set => this.value.y = value; }
+        [EditorBrowsable(EditorBrowsableState.Never)] public float z { [IN(LINE)] get => value.z; [IN(LINE)] set => this.value.z = value; }
+        [EditorBrowsable(EditorBrowsableState.Never)] public float w { [IN(LINE)] get => value.w; [IN(LINE)] set => this.value.w = value; }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
         public unsafe float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (quat* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > LENGTH) throw new IndexOutOfRangeException($"Index must be between[0..{(LENGTH - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float* array = &this.value.x) { array[index] = value; }
             }

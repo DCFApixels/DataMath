@@ -2,7 +2,7 @@
 
 namespace DataMath.src.Utils
 {
-    public unsafe static class BitsUtility
+    internal unsafe static class BitsUtility
     {
         private const char DEFAULT_SEPARATOR = '_';
         private const int BYTE_BITS = 8;

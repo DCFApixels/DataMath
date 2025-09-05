@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using static DCFApixels.DataMath.DM;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
