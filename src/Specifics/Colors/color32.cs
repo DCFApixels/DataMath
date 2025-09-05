@@ -1,18 +1,18 @@
 ﻿#if DISABLE_DEBUG
 #undef DEBUG
 #endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
+#endif
+using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-using System.ComponentModel;
-using DCFApixels.DataMath.Internal;
-#endif
 
 namespace DCFApixels.DataMath
 {
