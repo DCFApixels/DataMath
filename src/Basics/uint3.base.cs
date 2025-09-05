@@ -1,6 +1,9 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
+#endif
 using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
@@ -11,9 +14,6 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -25,7 +25,7 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 12)]
-    public partial struct uint3 :
+    public unsafe partial struct uint3 :
         IEquatable<uint3>,
         IFormattable,
         IVector3Impl<uint>,
@@ -71,7 +71,7 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)] uint IVector3<uint>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
-        public unsafe uint this[int index]
+        public uint this[int index]
         {
             [IN(LINE)]
             get

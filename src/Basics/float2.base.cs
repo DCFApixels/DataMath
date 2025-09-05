@@ -1,6 +1,9 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
+#endif
 using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
@@ -11,9 +14,6 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -25,7 +25,7 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 8)]
-    public partial struct float2 :
+    public unsafe partial struct float2 :
         IEquatable<float2>,
         IFormattable,
         IVector2Impl<float>,
@@ -39,7 +39,7 @@ namespace DCFApixels.DataMath
         public static readonly float2 zero = new float2(0f, 0f);
         ///<summary>(1, 1)</summary>
         public static readonly float2 one = new float2(1f, 1f);
-
+        
         ///<summary>(-1, 0)</summary>
         public static readonly float2 left = new float2(unchecked((float)-1f), 0f);
         ///<summary>(1, 0)</summary>
@@ -65,7 +65,7 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)] float IVector2<float>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
-        public unsafe float this[int index]
+        public float this[int index]
         {
             [IN(LINE)]
             get
