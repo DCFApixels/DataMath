@@ -21,6 +21,7 @@ namespace DCFApixels.DataMath
         #region Abs/Sign
         [IN(LINE)] public static double4 Abs(double4 a) { return new double4(Abs(a.x), Abs(a.y), Abs(a.z), Abs(a.w)); }
         [IN(LINE)] public static double4 Sign(double4 a) { return new double4(Sign(a.x), Sign(a.y), Sign(a.z), Sign(a.w)); }
+        [IN(LINE)] public static double4 SoftSign(double4 a) { return new double4(SoftSign(a.x), SoftSign(a.y), SoftSign(a.z), SoftSign(a.w)); }
         [IN(LINE)] public static int4 Sign2Int(double4 a) { return new int4(Sign2Int(a.x), Sign2Int(a.y), Sign2Int(a.z), Sign2Int(a.w)); }
         #endregion
 

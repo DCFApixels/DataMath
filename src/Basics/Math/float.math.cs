@@ -17,6 +17,7 @@ namespace DCFApixels.DataMath
         #region Abs/Sign
         [IN(LINE)] public static float Abs(float a) { return InternalMath.Abs(a); }
         [IN(LINE)] public static float Sign(float a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
+        [IN(LINE)] public static float SoftSign(float a) { return a / (1f + InternalMath.Abs(a)); }
         [IN(LINE)] public static int Sign2Int(float a) { return (a > 0f ? 1 : 0) - (a < 0f ? 1 : 0); }
         #endregion
 

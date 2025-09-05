@@ -12,8 +12,9 @@ namespace DCFApixels.DataMath
     {
         #region Abs/Sign
         [IN(LINE)] public static double Abs(double a) { return InternalMath.Abs(a); }
-        [IN(LINE)] public static double Sign(double a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
-        [IN(LINE)] public static int Sign2Int(double a) { return (a > 0f ? 1 : 0) - (a < 0f ? 1 : 0); }
+        [IN(LINE)] public static double Sign(double a) { return (a > 0d ? 1d : 0d) - (a < 0d ? 1d : 0d); }
+        [IN(LINE)] public static double SoftSign(double a) { return a / (1d + InternalMath.Abs(a)); }
+        [IN(LINE)] public static int Sign2Int(double a) { return (a > 0d ? 1 : 0) - (a < 0d ? 1 : 0); }
         #endregion
 
         #region Round/Floor/Ceil
