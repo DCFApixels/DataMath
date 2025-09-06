@@ -94,7 +94,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float CSum(float a) { return a; }
         #endregion
 
-        #region Lerp
+        #region Lerp/MoveTowards
         [IN(LINE)] public static float Lerp(float start, float end, float t) { return start + t * (end - start); }
         [IN(LINE)] public static float LerpClamp(float start, float end, float t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static float LerpRepeat(float start, float end, float t) { return Lerp(start, end, Repeat01(t)); }
@@ -103,6 +103,31 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float UnLerpClamp(float start, float end, float a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static float UnLerpRepeat(float start, float end, float a) { return Repeat01(UnLerp(start, end, a)); }
 
+        [IN(LINE)]
+        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
+        }
+
+        [IN(LINE)]
+        public static float LerpAngle(float start, float end, float t)
+        {
+            float angle = Repeat(end - start, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return start + angle * t;
+        }
+        [IN(LINE)] public static float LerpAngleClamp(float start, float end, float t) { return LerpAngle(start, end, Clamp01(t)); }
+        [IN(LINE)] public static float LerpAngleRepeat(float start, float end, float t) { return LerpAngle(start, end, Repeat01(t)); }
+
+        [IN(LINE)]
+        public static float DeltaAngle(float current, float target)
+        {
+            float angle = Repeat(target - current, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return angle;
+        }
 
         [IN(LINE)]
         public static float MoveTowards(float from, float to, float distance)
@@ -123,32 +148,6 @@ namespace DCFApixels.DataMath
             }
             excess = 0f;
             return from + Sign(dif) * distance;
-        }
-
-        [IN(LINE)]
-        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v)
-        {
-            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
-        }
-
-
-
-
-        [IN(LINE)]
-        public static float LerpAngle(float start, float end, float t)
-        {
-            float angle = Repeat(end - start, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return start + angle * Clamp01(t);
-        }
-        [IN(LINE)]
-        public static float DeltaAngle(float current, float target)
-        {
-            float angle = Repeat(target - current, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return angle;
         }
         [IN(LINE)]
         public static float MoveTowardsAngle(float current, float target, float maxDelta)
@@ -173,9 +172,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool IsPositiveInfinity(float a) { return float.IsPositiveInfinity(a); }
         #endregion
 
-        #region Color
-        [IN(LINE)] public static float GammaToLinearSpace(float value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
-        [IN(LINE)] public static float LinearToGammaSpace(float value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        #region Space Converts
+        [IN(LINE)] public static float GammaToLinearSpace(float a) { const float Gamma = 2.2f; return Pow(a, Gamma); }
+        [IN(LINE)] public static float LinearToGammaSpace(float a) { const float InverseGamma = 1.0f / 2.2f; return Pow(a, InverseGamma); }
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
+        [IN(LINE)] public static float Degrees(float radians) { return radians * Rad2Deg; }
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
+        [IN(LINE)] public static float Radians(float degrees) { return degrees * Deg2Rad; }
         #endregion
 
         #region Approximately
@@ -253,9 +256,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float Select(float falseValue, float trueValue, bool test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static float Step(float threshold, float a) { return Select(0.0f, 1.0f, a >= threshold); }
-
-        [IN(LINE)] public static float Degrees(float radians) { return radians * Rad2Deg; }
-        [IN(LINE)] public static float Radians(float degrees) { return degrees * Deg2Rad; }
+        [IN(LINE)] public static int Step2Int(float threshold, float a) { return Select(0, 1, a >= threshold); }
 
         [IN(LINE)] public static float Cos(float a) { return InternalMath.Cos(a); }
         [IN(LINE)] public static float Cosh(float a) { return InternalMath.Cosh(a); }

@@ -91,7 +91,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double CSum(double2 a) { return a.x + a.y; }
         #endregion
 
-        #region Lerp
+        #region Lerp/MoveTowards
         [IN(LINE)] public static double2 Lerp(double2 start, double2 end, double2 t) { return start + t * (end - start); }
         [IN(LINE)] public static double2 LerpClamp(double2 start, double2 end, double2 t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static double2 LerpRepeat(double2 start, double2 end, double2 t) { return Lerp(start, end, Repeat01(t)); }
@@ -100,6 +100,31 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double2 UnLerpClamp(double2 start, double2 end, double2 a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static double2 UnLerpRepeat(double2 start, double2 end, double2 a) { return Repeat01(UnLerp(start, end, a)); }
 
+        [IN(LINE)]
+        public static double2 Remap(double2 oldStart, double2 oldEnd, double2 newStart, double2 newEnd, double2 v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
+        }
+
+        [IN(LINE)]
+        public static double2 LerpAngle(double2 start, double2 end, double t)
+        {
+            double2 angle = Repeat(end - start, 360d);
+            if (angle > 180d) { angle -= 360d; }
+            //double angle = Repeat(end - start, -180d, 180d);
+            return start + angle * t;
+        }
+        [IN(LINE)] public static double2 LerpAngleClamp(double2 start, double2 end, double t) { return LerpAngle(start, end, Clamp01(t)); }
+        [IN(LINE)] public static double2 LerpAngleRepeat(double2 start, double2 end, double t) { return LerpAngle(start, end, Repeat01(t)); }
+
+        [IN(LINE)]
+        public static double2 DeltaAngle(double2 current, double2 target)
+        {
+            double2 angle = Repeat(target - current, 360d);
+            if (angle > 180d) { angle -= 360d; }
+            //double angle = Repeat(end - start, -180d, 180d);
+            return angle;
+        }
 
         [IN(LINE)]
         public static double2 MoveTowards(double2 from, double2 to, double distance)
@@ -134,29 +159,6 @@ namespace DCFApixels.DataMath
             return from + dif / len * distance;
         }
         [IN(LINE)]
-        public static double2 Remap(double2 oldStart, double2 oldEnd, double2 newStart, double2 newEnd, double2 v)
-        {
-            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
-        }
-
-
-        [IN(LINE)]
-        public static double2 LerpAngle(double2 start, double2 end, double t)
-        {
-            double2 angle = Repeat(end - start, 360d);
-            if (angle > 180d) { angle -= 360d; }
-            //double angle = Repeat(end - start, -180d, 180d);
-            return start + angle * Clamp01(t);
-        }
-        [IN(LINE)]
-        public static double2 DeltaAngle(double2 current, double2 target)
-        {
-            double2 angle = Repeat(target - current, 360d);
-            if (angle > 180d) { angle -= 360d; }
-            //double angle = Repeat(end - start, -180d, 180d);
-            return angle;
-        }
-        [IN(LINE)]
         public static double2 MoveTowardsAngle(double2 current, double2 target, double maxDelta)
         {
             double2 delta = DeltaAngle(current, target);
@@ -179,9 +181,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool2 IsPositiveInfinity(double2 a) { return new bool2(IsPositiveInfinity(a.x), IsPositiveInfinity(a.y)); }
         #endregion
 
-        #region Color
-        [IN(LINE)] public static double2 GammaToLinearSpace(double2 value) { const double Gamma = 2.2d; return Pow(value, Gamma); }
-        [IN(LINE)] public static double2 LinearToGammaSpace(double2 value) { const double InverseGamma = 1.0d / 2.2d; return Pow(value, InverseGamma); }
+        #region Space Converts
+        [IN(LINE)] public static double2 GammaToLinearSpace(double2 a) { const double Gamma = 2.2d; return Pow(a, Gamma); }
+        [IN(LINE)] public static double2 LinearToGammaSpace(double2 a) { const double InverseGamma = 1.0d / 2.2d; return Pow(a, InverseGamma); }
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
+        [IN(LINE)] public static double2 Degrees(double2 radians) { return radians * Rad2Deg; }
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
+        [IN(LINE)] public static double2 Radians(double2 degrees) { return degrees * Deg2Rad; }
         #endregion
 
         #region Approximately
@@ -223,11 +229,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static double2 Select(double2 falseValue, double2 trueValue, bool2 test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static double2 Step(double2 threshold, double2 a) { return Select(0.0d, 1.0d, a >= threshold); }
-
-        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static double2 Degrees(double2 radians) { return radians * Rad2Deg; }
-        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static double2 Radians(double2 degrees) { return degrees * Deg2Rad; }
+        [IN(LINE)] public static int2 Step2Int(double2 threshold, double2 a) { return Select((int2)0, 1, a >= threshold); }
 
         [IN(LINE)] public static double2 Cos(double2 a) { return new double2(Cos(a.x), Cos(a.y)); }
         [IN(LINE)] public static double2 Cosh(double2 a) { return new double2(Cosh(a.x), Cosh(a.y)); }

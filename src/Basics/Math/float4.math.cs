@@ -91,7 +91,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float CSum(float4 a) { return (a.x + a.y) + (a.z + a.w); }
         #endregion
 
-        #region Lerp
+        #region Lerp/MoveTowards
         [IN(LINE)] public static float4 Lerp(float4 start, float4 end, float4 t) { return start + t * (end - start); }
         [IN(LINE)] public static float4 LerpClamp(float4 start, float4 end, float4 t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static float4 LerpRepeat(float4 start, float4 end, float4 t) { return Lerp(start, end, Repeat01(t)); }
@@ -100,6 +100,31 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float4 UnLerpClamp(float4 start, float4 end, float4 a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static float4 UnLerpRepeat(float4 start, float4 end, float4 a) { return Repeat01(UnLerp(start, end, a)); }
 
+        [IN(LINE)]
+        public static float4 Remap(float4 oldStart, float4 oldEnd, float4 newStart, float4 newEnd, float4 v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
+        }
+
+        [IN(LINE)]
+        public static float4 LerpAngle(float4 start, float4 end, float t)
+        {
+            float4 angle = Repeat(end - start, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return start + angle * t;
+        }
+        [IN(LINE)] public static float4 LerpAngleClamp(float4 start, float4 end, float t) { return LerpAngle(start, end, Clamp01(t)); }
+        [IN(LINE)] public static float4 LerpAngleRepeat(float4 start, float4 end, float t) { return LerpAngle(start, end, Repeat01(t)); }
+
+        [IN(LINE)]
+        public static float4 DeltaAngle(float4 current, float4 target)
+        {
+            float4 angle = Repeat(target - current, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return angle;
+        }
 
         [IN(LINE)]
         public static float4 MoveTowards(float4 from, float4 to, float distance)
@@ -134,29 +159,6 @@ namespace DCFApixels.DataMath
             return from + dif / len * distance;
         }
         [IN(LINE)]
-        public static float4 Remap(float4 oldStart, float4 oldEnd, float4 newStart, float4 newEnd, float4 v)
-        {
-            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
-        }
-
-
-        [IN(LINE)]
-        public static float4 LerpAngle(float4 start, float4 end, float t)
-        {
-            float4 angle = Repeat(end - start, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return start + angle * Clamp01(t);
-        }
-        [IN(LINE)]
-        public static float4 DeltaAngle(float4 current, float4 target)
-        {
-            float4 angle = Repeat(target - current, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return angle;
-        }
-        [IN(LINE)]
         public static float4 MoveTowardsAngle(float4 current, float4 target, float maxDelta)
         {
             float4 delta = DeltaAngle(current, target);
@@ -179,9 +181,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 IsPositiveInfinity(float4 a) { return new bool4(IsPositiveInfinity(a.x), IsPositiveInfinity(a.y), IsPositiveInfinity(a.z), IsPositiveInfinity(a.w)); }
         #endregion
 
-        #region Color
-        [IN(LINE)] public static float4 GammaToLinearSpace(float4 value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
-        [IN(LINE)] public static float4 LinearToGammaSpace(float4 value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        #region Space Converts
+        [IN(LINE)] public static float4 GammaToLinearSpace(float4 a) { const float Gamma = 2.2f; return Pow(a, Gamma); }
+        [IN(LINE)] public static float4 LinearToGammaSpace(float4 a) { const float InverseGamma = 1.0f / 2.2f; return Pow(a, InverseGamma); }
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
+        [IN(LINE)] public static float4 Degrees(float4 radians) { return radians * Rad2Deg; }
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
+        [IN(LINE)] public static float4 Radians(float4 degrees) { return degrees * Deg2Rad; }
         #endregion
 
         #region Approximately
@@ -223,11 +229,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static float4 Step(float4 threshold, float4 a) { return Select(0.0f, 1.0f, a >= threshold); }
-
-        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static float4 Degrees(float4 radians) { return radians * Rad2Deg; }
-        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static float4 Radians(float4 degrees) { return degrees * Deg2Rad; }
+        [IN(LINE)] public static int4 Step2Int(float4 threshold, float4 a) { return Select((int4)0, 1, a >= threshold); }
 
         [IN(LINE)] public static float4 Cos(float4 a) { return new float4(Cos(a.x), Cos(a.y), Cos(a.z), Cos(a.w)); }
         [IN(LINE)] public static float4 Cosh(float4 a) { return new float4(Cosh(a.x), Cosh(a.y), Cosh(a.z), Cosh(a.w)); }
