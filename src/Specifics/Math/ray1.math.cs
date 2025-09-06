@@ -94,3 +94,266 @@ namespace DCFApixels.DataMath
         #endregion
     }
 }
+
+
+#region Unity
+#if UNITY_5_3_OR_NEWER
+namespace DCFApixels.DataMath
+{
+    using UnityEngine;
+    public class ClampedRangeAttribute : PropertyAttribute
+    {
+        public readonly float min;
+        public readonly float max;
+        public ClampedRangeAttribute(float min, float max)
+        {
+            this.min = min;
+            this.max = max;
+        }
+        public ClampedRangeAttribute() : this(0f, 1f) { }
+    }
+
+    public class MinMaxRangeAttribute : PropertyAttribute
+    {
+    }
+}
+#if UNITY_EDITOR
+namespace DCFApixels.DataMath.Unity.Editors
+{
+    using System;
+    using UnityEditor;
+    using UnityEngine;
+
+    [CustomPropertyDrawer(typeof(ClampedRangeAttribute), true)]
+    [CustomPropertyDrawer(typeof(MinMaxRangeAttribute), true)]
+    [CustomPropertyDrawer(typeof(ray1), true)]
+    public class RangedValueDrawer : PropertyDrawer
+    {
+        private const float SPACING = 4f;
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            float defaultlabelWidth = EditorGUIUtility.labelWidth;
+
+            SerializedProperty xProp = property.FindPropertyRelative(nameof(ray1.src));
+            SerializedProperty lengthProp = property.FindPropertyRelative(nameof(ray1.dir));
+
+            Rect labelRect = position;
+            labelRect.width = defaultlabelWidth;
+
+            Rect fieldRect = position;
+            fieldRect.xMin = labelRect.xMax;
+
+            if (string.IsNullOrEmpty(label.tooltip))
+            {
+                string minmaxTooltip;
+                switch (xProp.propertyType)
+                {
+                    //case SerializedPropertyType.Integer:
+                    //    minmaxTooltip = new irange(xProp.intValue, lengthProp.intValue).ToString();
+                    //    break;
+                    case SerializedPropertyType.Float:
+                        minmaxTooltip = new ray1(xProp.floatValue, lengthProp.floatValue).ToString();
+                        break;
+                    default:
+                        minmaxTooltip = "error";
+                        break;
+                }
+                label.tooltip = minmaxTooltip;
+            }
+
+            EditorGUI.LabelField(labelRect, label);
+
+            if (attribute is MinMaxRangeAttribute minMaxRangeAttribute)
+            {
+                DrawMinMaxField(fieldRect, property, minMaxRangeAttribute, xProp, lengthProp);
+                goto exit;
+            }
+
+            if (attribute is ClampedRangeAttribute clampedRangeAttribute)
+            {
+                DrawClampedRangeField(fieldRect, property, clampedRangeAttribute, xProp, lengthProp);
+                goto exit;
+            }
+
+            DrawDefaultField(fieldRect, xProp, lengthProp);
+
+            exit:;
+            EditorGUIUtility.labelWidth = defaultlabelWidth;
+        }
+
+        private void DrawDefaultField(Rect fieldRect, SerializedProperty xProp, SerializedProperty lengthProp)
+        {
+            using (new FixIndentLevel(0))
+            {
+                float width = fieldRect.width / 2f - SPACING / 2f;
+
+                Rect minRect = fieldRect;
+                minRect.width = width;
+                minRect.x = fieldRect.xMin;
+
+                Rect maxRect = fieldRect;
+                maxRect.width = width;
+                maxRect.x = minRect.xMax + SPACING;
+
+                EditorGUIUtility.labelWidth = 12f;
+                EditorGUI.PropertyField(minRect, xProp, new GUIContent("S", nameof(ray1.src)));
+                EditorGUIUtility.labelWidth = 12f;
+                EditorGUI.PropertyField(maxRect, lengthProp, new GUIContent("E", nameof(ray1.dir)));
+            }
+        }
+        private void DrawClampedRangeField(Rect fieldRect, SerializedProperty property, ClampedRangeAttribute attribute, SerializedProperty xProp, SerializedProperty lengthProp)
+        {
+            using (new FixIndentLevel(0))
+            {
+                float rightFieldWidth = 24;
+                float verticalSpacing = EditorGUIUtility.standardVerticalSpacing;
+
+                if (fieldRect.width <= rightFieldWidth * 4.5f)
+                {
+                    rightFieldWidth = 0;
+                    verticalSpacing = 0;
+                }
+
+                Rect leftFieldRect = fieldRect;
+                leftFieldRect.xMax -= rightFieldWidth * 2f + verticalSpacing * 2f;
+
+                Rect rightFieldRect1 = fieldRect;
+                rightFieldRect1.x = leftFieldRect.xMax + verticalSpacing;
+                rightFieldRect1.width = rightFieldWidth;
+
+                Rect rightFieldRect2 = rightFieldRect1;
+                rightFieldRect2.x = rightFieldRect1.xMax + verticalSpacing;
+
+                switch (xProp.propertyType)
+                {
+                    case SerializedPropertyType.Integer:
+                        {
+                            int min = xProp.intValue;
+                            int max = lengthProp.intValue + min;
+
+                            MinMaxSlider(leftFieldRect, ref min, ref max, (int)attribute.min, (int)attribute.max);
+
+                            min = EditorGUI.IntField(rightFieldRect1, min);
+                            max = EditorGUI.IntField(rightFieldRect2, max);
+                            max = Mathf.Max(min, max);
+
+                            xProp.intValue = min;
+                            lengthProp.intValue = Mathf.Abs(max) - min;
+
+                            property.serializedObject.ApplyModifiedProperties();
+                        }
+                        break;
+                    case SerializedPropertyType.Float:
+                        {
+                            float min = xProp.floatValue;
+                            float max = lengthProp.floatValue + min;
+
+                            EditorGUI.MinMaxSlider(leftFieldRect, ref min, ref max, attribute.min, attribute.max);
+
+                            min = EditorGUI.FloatField(rightFieldRect1, min);
+                            max = EditorGUI.FloatField(rightFieldRect2, max);
+                            max = Mathf.Max(min, max);
+
+                            xProp.floatValue = min;
+                            lengthProp.floatValue = Mathf.Abs(max) - min;
+
+                            property.serializedObject.ApplyModifiedProperties();
+                        }
+                        break;
+                    default:
+                        GUI.Label(fieldRect, "error");
+                        break;
+                }
+                ;
+            }
+        }
+        private void DrawMinMaxField(Rect fieldRect, SerializedProperty property, MinMaxRangeAttribute attribute, SerializedProperty xProp, SerializedProperty lengthProp)
+        {
+            using (new FixIndentLevel(0))
+            {
+                float width = fieldRect.width / 2f - SPACING / 2f;
+
+                Rect minRect = fieldRect;
+                minRect.width = width;
+                minRect.x = fieldRect.xMin;
+
+                Rect maxRect = fieldRect;
+                maxRect.width = width;
+                maxRect.x = minRect.xMax + SPACING;
+
+                EditorGUIUtility.labelWidth = 24f;
+                EditorGUI.indentLevel = 0;
+
+                switch (xProp.propertyType)
+                {
+                    case SerializedPropertyType.Integer:
+                        {
+                            int min = xProp.intValue;
+                            int max = lengthProp.intValue + min;
+
+                            min = EditorGUI.IntField(minRect, min < max ? "Min" : "Max", min);
+                            max = EditorGUI.IntField(maxRect, min < max ? "Max" : "Min", max);
+
+                            xProp.intValue = min;
+                            lengthProp.intValue = Mathf.Abs(max) - min;
+
+                            property.serializedObject.ApplyModifiedProperties();
+                        }
+                        break;
+                    case SerializedPropertyType.Float:
+                        {
+                            float min = xProp.floatValue;
+                            float max = lengthProp.floatValue + min;
+
+                            min = EditorGUI.FloatField(minRect, min < max ? "min" : "max", min);
+                            max = EditorGUI.FloatField(maxRect, min < max ? "max" : "min", max);
+
+                            xProp.floatValue = min;
+                            lengthProp.floatValue = Mathf.Abs(max) - min;
+
+                            property.serializedObject.ApplyModifiedProperties();
+                        }
+                        break;
+                    default:
+                        GUI.Label(fieldRect, "error");
+                        break;
+                }
+            }
+        }
+
+        private void MinMaxSlider(Rect position, ref int minValue, ref int maxValue, float minLimit, float maxLimit)
+        {
+            float minValueFloat = minValue;
+            float maxValueFloat = maxValue;
+            EditorGUI.MinMaxSlider(position, ref minValueFloat, ref maxValueFloat, minLimit, maxLimit);
+            minValue = Mathf.RoundToInt(minValueFloat);
+            maxValue = Mathf.RoundToInt(maxValueFloat);
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUIUtility.singleLineHeight;
+        }
+
+        private struct FixIndentLevel : IDisposable
+        {
+            private int lastValue;
+            public FixIndentLevel(int indentLevel)
+            {
+                lastValue = EditorGUI.indentLevel;
+                EditorGUI.indentLevel = indentLevel;
+            }
+            public void End()
+            {
+                EditorGUI.indentLevel = lastValue;
+            }
+            void IDisposable.Dispose()
+            {
+                End();
+            }
+        }
+    }
+}
+#endif
+#endif
+#endregion
