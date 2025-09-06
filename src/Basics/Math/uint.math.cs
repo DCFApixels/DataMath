@@ -263,7 +263,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int Count(uint a) { unchecked { return InternalBits.CountBits(a); } }
         [IN(LINE)] public static uint Reverse(uint a) { unchecked { return InternalBits.Reverse(a); } }
         [IN(LINE)] public static float AsFloatFraction(uint a) { unchecked { return InternalBits.Q32ToFloat(a); } }
-        [IN(LINE)] public static double AsDoubleFraction(uint a)
+        [IN(LINE)]
+        public static double AsDoubleFraction(uint a)
         {
             unchecked
             {

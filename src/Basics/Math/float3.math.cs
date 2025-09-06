@@ -168,13 +168,15 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Float State Checks
-        [IN(LINE)] public static bool3 IsNormalFloat(float3 a) { return new bool3(float.IsNormal(a.x), float.IsNormal(a.y), float.IsNormal(a.z)); }
-        [IN(LINE)] public static bool3 IsFinite(float3 a) { return new bool3(float.IsFinite(a.x), float.IsFinite(a.y), float.IsFinite(a.z)); }
-        [IN(LINE)] public static bool3 IsNaN(float3 a) { return new bool3(float.IsNaN(a.x), float.IsNaN(a.y), float.IsNaN(a.z)); }
-        [IN(LINE)] public static bool3 IsInfinity(float3 a) { return new bool3(float.IsInfinity(a.x), float.IsInfinity(a.y), float.IsInfinity(a.z)); }
-        [IN(LINE)] public static bool3 IsNegativeInfinity(float3 a) { return new bool3(float.IsNegativeInfinity(a.x), float.IsNegativeInfinity(a.y), float.IsNegativeInfinity(a.z)); }
-        [IN(LINE)] public static bool3 IsPositiveInfinity(float3 a) { return new bool3(float.IsPositiveInfinity(a.x), float.IsPositiveInfinity(a.y), float.IsPositiveInfinity(a.z)); }
+        #region Real Value State Checks
+        [IN(LINE)] public static bool3 IsNegative(float3 a) { return new bool3(IsNegative(a.x), IsNegative(a.y), IsNegative(a.z)); }
+        [IN(LINE)] public static bool3 IsPositive(float3 a) { return new bool3(IsPositive(a.x), IsPositive(a.y), IsPositive(a.z)); }
+        [IN(LINE)] public static bool3 IsNormalReal(float3 a) { return new bool3(IsNormalReal(a.x), IsNormalReal(a.y), IsNormalReal(a.z)); }
+        [IN(LINE)] public static bool3 IsFinite(float3 a) { return new bool3(IsFinite(a.x), IsFinite(a.y), IsFinite(a.z)); }
+        [IN(LINE)] public static bool3 IsNaN(float3 a) { return new bool3(IsNaN(a.x), IsNaN(a.y), IsNaN(a.z)); }
+        [IN(LINE)] public static bool3 IsInfinity(float3 a) { return new bool3(IsInfinity(a.x), IsInfinity(a.y), IsInfinity(a.z)); }
+        [IN(LINE)] public static bool3 IsNegativeInfinity(float3 a) { return new bool3(IsNegativeInfinity(a.x), IsNegativeInfinity(a.y), IsNegativeInfinity(a.z)); }
+        [IN(LINE)] public static bool3 IsPositiveInfinity(float3 a) { return new bool3(IsPositiveInfinity(a.x), IsPositiveInfinity(a.y), IsPositiveInfinity(a.z)); }
         #endregion
 
         #region Color

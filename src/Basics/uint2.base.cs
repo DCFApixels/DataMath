@@ -39,7 +39,7 @@ namespace DCFApixels.DataMath
         public static readonly uint2 zero = new uint2(0u, 0u);
         ///<summary>(1, 1)</summary>
         public static readonly uint2 one = new uint2(1u, 1u);
-        
+
         ///<summary>(-1, 0)</summary>
         public static readonly uint2 left = new uint2(unchecked((uint)-1u), 0u);
         ///<summary>(1, 0)</summary>

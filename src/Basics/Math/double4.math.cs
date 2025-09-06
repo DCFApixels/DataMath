@@ -168,13 +168,15 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region double State Checks
-        [IN(LINE)] public static bool4 IsNormaldouble(double4 a) { return new bool4(double.IsNormal(a.x), double.IsNormal(a.y), double.IsNormal(a.z), double.IsNormal(a.w)); }
-        [IN(LINE)] public static bool4 IsFinite(double4 a) { return new bool4(double.IsFinite(a.x), double.IsFinite(a.y), double.IsFinite(a.z), double.IsFinite(a.w)); }
-        [IN(LINE)] public static bool4 IsNaN(double4 a) { return new bool4(double.IsNaN(a.x), double.IsNaN(a.y), double.IsNaN(a.z), double.IsNaN(a.w)); }
-        [IN(LINE)] public static bool4 IsInfinity(double4 a) { return new bool4(double.IsInfinity(a.x), double.IsInfinity(a.y), double.IsInfinity(a.z), double.IsInfinity(a.w)); }
-        [IN(LINE)] public static bool4 IsNegativeInfinity(double4 a) { return new bool4(double.IsNegativeInfinity(a.x), double.IsNegativeInfinity(a.y), double.IsNegativeInfinity(a.z), double.IsNegativeInfinity(a.w)); }
-        [IN(LINE)] public static bool4 IsPositiveInfinity(double4 a) { return new bool4(double.IsPositiveInfinity(a.x), double.IsPositiveInfinity(a.y), double.IsPositiveInfinity(a.z), double.IsPositiveInfinity(a.w)); }
+        #region Real Value State Checks
+        [IN(LINE)] public static bool4 IsNegative(double4 a) { return new bool4(IsNegative(a.x), IsNegative(a.y), IsNegative(a.z), IsNegative(a.w)); }
+        [IN(LINE)] public static bool4 IsPositive(double4 a) { return new bool4(IsPositive(a.x), IsPositive(a.y), IsPositive(a.z), IsPositive(a.w)); }
+        [IN(LINE)] public static bool4 IsNormalReal(double4 a) { return new bool4(IsNormalReal(a.x), IsNormalReal(a.y), IsNormalReal(a.z), IsNormalReal(a.w)); }
+        [IN(LINE)] public static bool4 IsFinite(double4 a) { return new bool4(IsFinite(a.x), IsFinite(a.y), IsFinite(a.z), IsFinite(a.w)); }
+        [IN(LINE)] public static bool4 IsNaN(double4 a) { return new bool4(IsNaN(a.x), IsNaN(a.y), IsNaN(a.z), IsNaN(a.w)); }
+        [IN(LINE)] public static bool4 IsInfinity(double4 a) { return new bool4(IsInfinity(a.x), IsInfinity(a.y), IsInfinity(a.z), IsInfinity(a.w)); }
+        [IN(LINE)] public static bool4 IsNegativeInfinity(double4 a) { return new bool4(IsNegativeInfinity(a.x), IsNegativeInfinity(a.y), IsNegativeInfinity(a.z), IsNegativeInfinity(a.w)); }
+        [IN(LINE)] public static bool4 IsPositiveInfinity(double4 a) { return new bool4(IsPositiveInfinity(a.x), IsPositiveInfinity(a.y), IsPositiveInfinity(a.z), IsPositiveInfinity(a.w)); }
         #endregion
 
         #region Color

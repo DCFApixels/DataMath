@@ -39,7 +39,7 @@ namespace DCFApixels.DataMath
         public static readonly float2 zero = new float2(0f, 0f);
         ///<summary>(1, 1)</summary>
         public static readonly float2 one = new float2(1f, 1f);
-        
+
         ///<summary>(-1, 0)</summary>
         public static readonly float2 left = new float2(unchecked((float)-1f), 0f);
         ///<summary>(1, 0)</summary>

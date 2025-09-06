@@ -168,13 +168,15 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Float State Checks
-        [IN(LINE)] public static bool2 IsNormalFloat(float2 a) { return new bool2(float.IsNormal(a.x), float.IsNormal(a.y)); }
-        [IN(LINE)] public static bool2 IsFinite(float2 a) { return new bool2(float.IsFinite(a.x), float.IsFinite(a.y)); }
-        [IN(LINE)] public static bool2 IsNaN(float2 a) { return new bool2(float.IsNaN(a.x), float.IsNaN(a.y)); }
-        [IN(LINE)] public static bool2 IsInfinity(float2 a) { return new bool2(float.IsInfinity(a.x), float.IsInfinity(a.y)); }
-        [IN(LINE)] public static bool2 IsNegativeInfinity(float2 a) { return new bool2(float.IsNegativeInfinity(a.x), float.IsNegativeInfinity(a.y)); }
-        [IN(LINE)] public static bool2 IsPositiveInfinity(float2 a) { return new bool2(float.IsPositiveInfinity(a.x), float.IsPositiveInfinity(a.y)); }
+        #region Real Value State Checks
+        [IN(LINE)] public static bool2 IsNegative(float2 a) { return new bool2(IsNegative(a.x), IsNegative(a.y)); }
+        [IN(LINE)] public static bool2 IsPositive(float2 a) { return new bool2(IsPositive(a.x), IsPositive(a.y)); }
+        [IN(LINE)] public static bool2 IsNormalReal(float2 a) { return new bool2(IsNormalReal(a.x), IsNormalReal(a.y)); }
+        [IN(LINE)] public static bool2 IsFinite(float2 a) { return new bool2(IsFinite(a.x), IsFinite(a.y)); }
+        [IN(LINE)] public static bool2 IsNaN(float2 a) { return new bool2(IsNaN(a.x), IsNaN(a.y)); }
+        [IN(LINE)] public static bool2 IsInfinity(float2 a) { return new bool2(IsInfinity(a.x), IsInfinity(a.y)); }
+        [IN(LINE)] public static bool2 IsNegativeInfinity(float2 a) { return new bool2(IsNegativeInfinity(a.x), IsNegativeInfinity(a.y)); }
+        [IN(LINE)] public static bool2 IsPositiveInfinity(float2 a) { return new bool2(IsPositiveInfinity(a.x), IsPositiveInfinity(a.y)); }
         #endregion
 
         #region Color
