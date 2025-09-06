@@ -163,7 +163,7 @@ namespace DCFApixels.DataMath
 
         #region Real Value State Checks
         [IN(LINE)] public static bool IsNegative(float a) { return float.IsNegative(a); }
-        [IN(LINE)] public static bool IsPositive(float a) { return float.IsPositive(a); }
+        [IN(LINE)] public static bool IsPositive(float a) { return !float.IsNegative(a); }
         [IN(LINE)] public static bool IsNormalReal(float a) { return float.IsNormal(a); }
         [IN(LINE)] public static bool IsFinite(float a) { return float.IsFinite(a); }
         [IN(LINE)] public static bool IsNaN(float a) { return float.IsNaN(a); }
