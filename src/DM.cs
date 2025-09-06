@@ -32,6 +32,8 @@
         /// <summary> Multiply an angle in radians by this, to convert it to degrees. </summary>
         public const double Rad2Deg_D = 360d / TAU_D;
 
+        public const float FloatZeroTolerance = 1e-06f;
+        public const double DoubleZeroTolerance = 1e-08;
 
         public const float FloatMinNormal = 1.17549435E-38f;
         private const float FloatMinDenormal = float.Epsilon;

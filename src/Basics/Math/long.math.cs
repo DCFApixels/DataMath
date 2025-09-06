@@ -65,12 +65,15 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool IsPow2(long value) { return (value & (value - 1)) == 0; }
         #endregion
 
-        #region Other
+        #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        //Sqrt - float
         [IN(LINE)] public static long LengthSqr(long a) { return Sqr(a); }
         [IN(LINE)] public static long DistanceSqr(long a, long b) { return Sqr(b - a); }
+        #endregion
+
+        #region Other
+        //Sqrt - float
         [IN(LINE)] public static long Dot(long a, long b) { return a * b; }
         [IN(LINE)] public static long Sqr(long a) { return a * a; }
         [IN(LINE)] public static long Pow(long a, long b) { return InternalMath.Pow(a, b); }

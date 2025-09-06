@@ -228,13 +228,17 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Other
+        #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(float a) { return a; }
         [IN(LINE)] public static float LengthSqr(float a) { return Sqr(a); }
         [IN(LINE)] public static float Distance(float a, float b) { return b - a; }
         [IN(LINE)] public static float DistanceSqr(float a, float b) { return Sqr(b - a); }
         [IN(LINE)] public static float Normalize(float a) { return a < 0f ? -1f : 1f; }
+        [IN(LINE)] public static float NormalizeSafe(float a) { return Normalize(a); }
+        [IN(LINE)] public static bool IsNormalized(float a) { return Approximately(a - 1f, 0f, FloatZeroTolerance); }
+        #endregion
 
+        #region Other
         [IN(LINE)] public static float Project(float a, float ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float ProjectSafe(float a, float ontoB, float defaultValue = 0)

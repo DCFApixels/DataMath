@@ -194,7 +194,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 IsPow2(float4 value) { return new bool4(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z), IsPow2(value.w)); }
         #endregion
 
-        #region Other
+        #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(float4 a) { return Sqrt(Dot(a, a)); }
         [IN(LINE)] public static float LengthSqr(float4 a) { return Dot(a, a); }
         [IN(LINE)] public static float Distance(float4 a, float4 b) { return Length(b - a); }
@@ -206,7 +206,10 @@ namespace DCFApixels.DataMath
             var len = Dot(a, a);
             return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
+        [IN(LINE)] public static bool IsNormalized(float4 a) { return Approximately(CSum(a) - 1f, 0f, FloatZeroTolerance); }
+        #endregion
 
+        #region Other
         [IN(LINE)] public static float4 Project(float4 a, float4 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float4 ProjectSafe(float4 a, float4 ontoB, float4 defaultValue = default)

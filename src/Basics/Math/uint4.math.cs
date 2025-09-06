@@ -51,12 +51,15 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 IsPow2(uint4 value) { return new bool4(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z), IsPow2(value.w)); }
         #endregion
 
-        #region Other
+        #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        //Sqrt - float
         [IN(LINE)] public static uint4 LengthSqr(uint4 a) { return Sqr(a); }
         [IN(LINE)] public static uint4 DistanceSqr(uint4 a, uint4 b) { return Sqr(b - a); }
+        #endregion
+
+        #region Other
+        //Sqrt - float
         [IN(LINE)] public static uint4 Dot(uint4 a, uint4 b) { return a * b; }
         [IN(LINE)] public static uint4 Sqr(uint4 a) { return a * a; }
         [IN(LINE)] public static uint4 Pow(uint4 a, uint4 b) { return new uint4(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z), Pow(a.w, b.w)); }

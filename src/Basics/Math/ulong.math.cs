@@ -84,12 +84,15 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool IsPow2(ulong value) { return (value & (value - 1)) == 0; }
         #endregion
 
-        #region Other
+        #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        //Sqrt - float
         [IN(LINE)] public static ulong LengthSqr(ulong a) { return Sqr(a); }
         [IN(LINE)] public static ulong DistanceSqr(ulong a, ulong b) { return Sqr(b - a); }
+        #endregion
+
+        #region Other
+        //Sqrt - float
         [IN(LINE)] public static ulong Dot(ulong a, ulong b) { return a * b; }
         [IN(LINE)] public static ulong Sqr(ulong a) { return a * a; }
         [IN(LINE)] public static ulong Pow(ulong a, ulong b) { return InternalMath.Pow(a, b); }
