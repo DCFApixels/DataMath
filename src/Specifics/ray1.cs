@@ -54,10 +54,10 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Other
-        [IN(LINE)] public override int GetHashCode() => DM.AsInt(src) ^ DM.AsInt(dir);
-        [IN(LINE)] public override bool Equals(object o) => o is ray1 target && Equals(target);
-        [IN(LINE)] public bool Equals(ray1 a) => src == a.src && dir == a.dir;
-        [IN(LINE)] public override string ToString() => $"{nameof(ray1)}({src}, {dir})";
+        [IN(LINE)] public override int GetHashCode() { return DM.AsInt(src) ^ DM.AsInt(dir); }
+        [IN(LINE)] public override bool Equals(object o) { return o is ray1 target && Equals(target); }
+        [IN(LINE)] public bool Equals(ray1 a) { return src == a.src && dir == a.dir; }
+        [IN(LINE)] public override string ToString() { return $"{nameof(ray1)}({src}, {dir})"; }
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
