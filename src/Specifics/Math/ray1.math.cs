@@ -90,9 +90,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray1 Reverse(ray1 a) { return new ray1(a.src + a.dir, -a.dir); }
         [IN(LINE)] public static float GetPoint(ray1 ray, float distance) { return ray.src + ray.dir * distance; }
         [IN(LINE)] public static bool Contains(ray1 range, float a) { return a >= range.Min && a <= range.Max; }
-        //[IN(LINE)] public static float ProjectPointToLineTValue(float2 src, float2 dir, float2 point) { return Dot(point - src, dir) / Dot(dir, dir); }
-        //[IN(LINE)] public static float2 ProjectPointToLine(float2 src, float2 dir, float2 point) { return src + dir * ProjectPointToLineTValue(src, dir, point); }
-        [IN(LINE)] public static float2 ClosestPoint(float2 src, float2 dir, float2 point) { return src + Project(point - src, dir); }
+        //[IN(LINE)] public static float ProjectDistance(float2 src, float2 dir, float2 point) { return Dot(point - src, dir) / Dot(dir, dir); }
+        [IN(LINE)] public static float2 ProjectPoint(float2 src, float2 dir, float2 point) { return src + Project(point - src, dir); }
         #endregion
     }
 }
