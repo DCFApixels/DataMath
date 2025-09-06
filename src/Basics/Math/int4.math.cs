@@ -63,7 +63,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int4 Dot(int4 a, int4 b) { return a * b; }
         [IN(LINE)] public static int4 Sqr(int4 a) { return a * a; }
         [IN(LINE)] public static int4 Pow(int4 a, int4 b) { return new int4(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z), Pow(a.w, b.w)); }
-        [IN(LINE)] public static int4 Select(int4 falseValue, int4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static int4 Select(int4 falseValue, int4 trueValue, bool4 test) { return new int4(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y, test.z ? trueValue.z : falseValue.z, test.w ? trueValue.w : falseValue.w); }
+        [IN(LINE)] public static int4 Select(int4 falseValue, int4 trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion
 
 

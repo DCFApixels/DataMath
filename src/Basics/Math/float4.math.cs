@@ -227,7 +227,8 @@ namespace DCFApixels.DataMath
         }
         [IN(LINE)] public static float4 Reflect(float4 v, float4 n) { return v - 2f * n * Dot(v, n); }
 
-        [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool4 test) { return new float4(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y, test.z ? trueValue.z : falseValue.z, test.w ? trueValue.w : falseValue.w); }
+        [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static float4 Step(float4 threshold, float4 a) { return Select(0.0f, 1.0f, a >= threshold); }
         [IN(LINE)] public static int4 Step2Int(float4 threshold, float4 a) { return Select((int4)0, 1, a >= threshold); }
 
