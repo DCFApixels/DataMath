@@ -229,7 +229,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double Distance(double a, double b) { return b - a; }
         [IN(LINE)] public static double DistanceSqr(double a, double b) { return Sqr(b - a); }
         [IN(LINE)] public static double Normalize(double a) { return a < 0d ? -1d : 1d; }
-        [IN(LINE)] public static double NormalizeSafe(double a) { return Normalize(a); }
+        [IN(LINE)] public static double NormalizeSafe(double a, double defaultvalue = 0f) { return a == 0d ? defaultvalue : Normalize(a); }
         [IN(LINE)] public static bool IsNormalized(double a) { return Approximately(a - 1d, 0d, DoubleZeroTolerance); }
         #endregion
 
