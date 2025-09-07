@@ -19,7 +19,6 @@ namespace DCFApixels.DataMath
 #endif
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 8, Size = 16)]
     public partial struct ray2 :
         IEquatable<ray2>,
         IFormattable,
