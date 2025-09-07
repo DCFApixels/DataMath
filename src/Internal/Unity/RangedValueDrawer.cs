@@ -42,6 +42,13 @@ namespace DCFApixels.DataMath.Unity.Editors
                 return _tmpLabel;
             }
         }
+        private GUIContent GetTempLabel(string text, string tooltip = "")
+        {
+            var result = TmpLabel;
+            result.text = text;
+            result.tooltip = tooltip;
+            return result;
+        }
 
         protected float Line => EditorGUIUtility.singleLineHeight;
         protected float Space => EditorGUIUtility.standardVerticalSpacing;
@@ -61,7 +68,7 @@ namespace DCFApixels.DataMath.Unity.Editors
             Rect fieldRect = position;
             fieldRect.xMin = labelRect.xMax;
 
-            if (string.IsNullOrEmpty(label.tooltip))
+            if (string.IsNullOrEmpty(label.tooltip) && position.Contains(Event.current.mousePosition))
             {
                 string minmaxTooltip;
                 switch (SrcProp.propertyType)
@@ -120,9 +127,9 @@ namespace DCFApixels.DataMath.Unity.Editors
                 maxRect.x = minRect.xMax + SPACING;
 
                 EditorGUIUtility.labelWidth = 24f;
-                EditorGUI.PropertyField(minRect, xProp, new GUIContent("src", nameof(ray1.src)));
+                EditorGUI.PropertyField(minRect, xProp, GetTempLabel("src", nameof(ray1.src)));
                 EditorGUIUtility.labelWidth = 24f;
-                EditorGUI.PropertyField(maxRect, lengthProp, new GUIContent("dir", nameof(ray1.dir)));
+                EditorGUI.PropertyField(maxRect, lengthProp, GetTempLabel("dir", nameof(ray1.dir)));
             }
         }
         private void DrawClampedRangeField(Rect fieldRect, SerializedProperty property, ClampedRangeAttribute attribute, SerializedProperty srcProp, SerializedProperty dirProp)
