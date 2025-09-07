@@ -40,6 +40,7 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public ray2(float2 src, float2 dir) { this.src = src; this.dir = dir; }
+        [IN(LINE)] public ray2(intray2 ray) { src = ray.src; dir = ray.dir; }
         #endregion
 
         #region operators

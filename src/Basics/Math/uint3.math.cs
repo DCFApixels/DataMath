@@ -8,6 +8,11 @@ namespace DCFApixels.DataMath
 {
     public partial struct uint3
     {
+        #region Length/Normalized
+        public float Length { [IN(LINE)] get { return DM.Length(this); } }
+        public uint LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float3 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
+        #endregion
     }
     public static partial class DM // uint3
     {
@@ -54,13 +59,13 @@ namespace DCFApixels.DataMath
         #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        [IN(LINE)] public static uint3 LengthSqr(uint3 a) { return Sqr(a); }
+        [IN(LINE)] public static uint LengthSqr(uint3 a) { return Dot(a, a); }
         [IN(LINE)] public static uint3 DistanceSqr(uint3 a, uint3 b) { return Sqr(b - a); }
         #endregion
 
         #region Other
         //Sqrt - float
-        [IN(LINE)] public static uint3 Dot(uint3 a, uint3 b) { return a * b; }
+        [IN(LINE)] public static uint Dot(uint3 a, uint3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static uint3 Sqr(uint3 a) { return a * a; }
         [IN(LINE)] public static uint3 Pow(uint3 a, uint3 b) { return new uint3(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z)); }
         [IN(LINE)] public static uint3 Select(uint3 falseValue, uint3 trueValue, bool3 test) { return new uint3(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y, test.z ? trueValue.z : falseValue.z); }

@@ -89,7 +89,7 @@ namespace DCFApixels.DataMath
         #region Other
         [IN(LINE)] public static ray1 Reverse(ray1 a) { return new ray1(a.src + a.dir, -a.dir); }
         [IN(LINE)] public static float GetPoint(ray1 ray, float distance) { return ray.src + ray.dir * distance; }
-        [IN(LINE)] public static bool Contains(ray1 range, float a) { return a >= range.Min && a <= range.Max; }
+        [IN(LINE)] public static bool Contains(ray1 range, float a, float tolerance = 0.0001f) { return a >= range.Min && a <= range.Max; }
         [IN(LINE)] public static float ProjectPoint(ray1 ray, float point) { return point; }
         #endregion
     }
