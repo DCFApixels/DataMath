@@ -19,7 +19,7 @@ namespace DCFApixels.DataMath
 #endif
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
-    public partial struct ray2 :
+    public unsafe partial struct ray2 :
         IEquatable<ray2>,
         IFormattable,
         IRay2Impl<float, float2>
