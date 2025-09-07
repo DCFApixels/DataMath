@@ -1,4 +1,5 @@
 ﻿#if UNITY_5_3_OR_NEWER && UNITY_EDITOR
+using DCFApixels.DataMath.DisplayAttributes;
 using PlasticPipe;
 using System.Reflection;
 using Unity.Collections.LowLevel.Unsafe;
@@ -83,11 +84,11 @@ namespace DCFApixels.DataMath.Unity.Editors
                     case SerializedPropertyType.LayerMask:
                     case SerializedPropertyType.Enum:
                     case SerializedPropertyType.Gradient:
-                    case SerializedPropertyType.Quaternion:
                     case SerializedPropertyType.AnimationCurve:
                         result.error |= false;
                         break;
 
+                    case SerializedPropertyType.Quaternion:
                     case SerializedPropertyType.Bounds:
                     case SerializedPropertyType.ExposedReference:
                     case SerializedPropertyType.FixedBufferSize:

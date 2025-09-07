@@ -1,4 +1,5 @@
 ﻿#if UNITY_5_3_OR_NEWER && UNITY_EDITOR
+using DCFApixels.DataMath.DisplayAttributes;
 using UnityEditor;
 using UnityEngine;
 

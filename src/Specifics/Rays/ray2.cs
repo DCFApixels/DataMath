@@ -36,6 +36,11 @@ namespace DCFApixels.DataMath
         float2 IRayN<float, float2>.src { [IN(LINE)] get { return src; } [IN(LINE)] set { src = value; } }
         float2 IRayN<float, float2>.dir { [IN(LINE)] get { return dir; } [IN(LINE)] set { dir = value; } }
         bool IRayN.IsVectorN { [IN(LINE)] get { return true; } }
+        object IRayN.GetSrcRaw() { return src; }
+        object IRayN.GetDirRaw() { return dir; }
+        void IRayN.SetSrcRaw(object raw) { src = (float2)raw; }
+        void IRayN.SetDirRaw(object raw) { dir = (float2)raw; }
+        [IN(LINE)] Type IRayN.GetComponentType() { return typeof(float2); }
         #endregion
 
         #region Constructors

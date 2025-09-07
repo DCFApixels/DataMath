@@ -1,16 +1,25 @@
-﻿namespace DCFApixels.DataMath
+﻿using System;
+using static DCFApixels.DataMath.InlineConsts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
+
+namespace DCFApixels.DataMath
 {
     /// <summary>Not Implemented</summary>
     public interface IRayN
     {
-        bool IsVectorN { get; }
+        bool IsVectorN { [IN(LINE)] get; }
+        object GetSrcRaw();
+        object GetDirRaw();
+        void SetSrcRaw(object raw);
+        void SetDirRaw(object raw);
+        [IN(LINE)] Type GetComponentType();
     }
     public interface IRayN<T, TVector> : IRayN
         where T : unmanaged
         where TVector : unmanaged
     {
-        TVector src { get; set; }
-        TVector dir { get; set; }
+        TVector src { [IN(LINE)] get; [IN(LINE)] set; }
+        TVector dir { [IN(LINE)] get; [IN(LINE)] set; }
     }
     public interface IRay1Impl<T> : IRayN<T, T>
         where T : unmanaged
