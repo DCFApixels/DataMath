@@ -27,6 +27,8 @@ namespace DCFApixels.DataMath
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
     public unsafe partial struct quat :
+        IEquatable<quat>,
+        IFormattable,
         IVector4Impl<float>, 
         IEnumerableVector<float, quat>
     {
@@ -217,8 +219,8 @@ namespace DCFApixels.DataMath
 #endif
         }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
-        public override bool Equals(object o) { return o is float4 target && Equals(target); }
-        [IN(LINE)] public bool Equals(float4 a) { return x == a.x && y == a.y && z == a.z && w == a.w; }
+        public override bool Equals(object o) { return o is quat target && Equals(target); }
+        [IN(LINE)] public bool Equals(quat a) { return x == a.x && y == a.y && z == a.z && w == a.w; }
         public override string ToString() { return $"quat({value}({DM.ToEuler(this)}))"; }
         public string ToString(string format, IFormatProvider formatProvider)
         {
