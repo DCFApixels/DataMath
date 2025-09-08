@@ -1,4 +1,5 @@
-﻿#if DISABLE_DEBUG
+﻿#pragma warning disable CS8981
+#if DISABLE_DEBUG
 #undef DEBUG
 #endif
 using DCFApixels.DataMath.Internal;

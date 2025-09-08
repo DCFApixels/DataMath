@@ -1,4 +1,5 @@
 #if UNITY_5_3_OR_NEWER
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif

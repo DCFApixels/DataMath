@@ -1,4 +1,11 @@
-﻿using System;
+﻿#pragma warning disable CS8981
+#if DISABLE_DEBUG
+#undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
+#endif
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,11 +14,6 @@ using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 using System.ComponentModel;
 using DCFApixels.DataMath.Internal;
-
-
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {

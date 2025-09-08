@@ -1,4 +1,5 @@
-﻿#if DISABLE_DEBUG
+﻿#pragma warning disable CS8981
+#if DISABLE_DEBUG
 #undef DEBUG
 #endif
 #if ENABLE_IL2CPP
@@ -25,7 +26,7 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
-    public unsafe partial struct quat : 
+    public unsafe partial struct quat :
         IVector4Impl<float>, 
         IEnumerableVector<float, quat>
     {

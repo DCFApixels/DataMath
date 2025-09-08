@@ -1,3 +1,4 @@
+#pragma warning disable CS8981 // Имя типа содержит только строчные символы ASCII. Такие имена могут резервироваться для языка.
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif

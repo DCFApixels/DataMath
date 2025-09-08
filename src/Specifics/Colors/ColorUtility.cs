@@ -1,4 +1,5 @@
-﻿using DotnetColor = System.Drawing.Color;
+﻿#pragma warning disable CS8981
+using DotnetColor = System.Drawing.Color;
 
 namespace DCFApixels.DataMath
 {
