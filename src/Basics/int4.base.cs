@@ -1,5 +1,9 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
 #endif
 using DCFApixels.DataMath.Internal;
 using System;
@@ -8,11 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using System.Runtime.CompilerServices;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -24,10 +26,10 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
-    public partial struct int4 :
+    public unsafe partial struct int4 :
         IEquatable<int4>,
         IFormattable,
-        IVector4<int>,
+        IVector4Impl<int>,
         IColor,
         IEnumerableVector<int, int4>
     {
@@ -40,19 +42,19 @@ namespace DCFApixels.DataMath
         public static readonly int4 one = new int4(1, 1, 1, 1);
 
         ///<summary>(-1, 0, 0, 0)</summary>
-        public static readonly int4 left = new int4(-1, 0, 0, 0);
+        public static readonly int4 left = new int4(unchecked((int)-1), 0, 0, 0);
         ///<summary>(1, 0, 0, 0)</summary>
         public static readonly int4 right = new int4(1, 0, 0, 0);
         ///<summary>(0, -1, 0, 0)</summary>
-        public static readonly int4 down = new int4(0, -1, 0, 0);
+        public static readonly int4 down = new int4(0, unchecked((int)-1), 0, 0);
         ///<summary>(0, 1, 0, 0)</summary>
         public static readonly int4 up = new int4(0, 1, 0, 0);
         ///<summary>(0, 0, -1, 0)</summary>
-        public static readonly int4 back = new int4(0, 0, -1, 0);
+        public static readonly int4 back = new int4(0, 0, unchecked((int)-1), 0);
         ///<summary>(0, 0, 1, 0)</summary>
         public static readonly int4 forward = new int4(0, 0, 1, 0);
         ///<summary>(0, 0, 0, -1)</summary>
-        public static readonly int4 before = new int4(0, 0, 0, -1);
+        public static readonly int4 before = new int4(0, 0, 0, unchecked((int)-1));
         ///<summary>(0, 0, 0, 1)</summary>
         public static readonly int4 after = new int4(0, 0, 0, 1);
         #endregion
@@ -74,9 +76,9 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)] int IVector2<int>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] int IVector3<int>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] int IVector4<int>.w { [IN(LINE)] get { return w; } [IN(LINE)] set { w = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
-        public unsafe int this[int index]
+        public int this[int index]
         {
             [IN(LINE)]
             get
@@ -95,15 +97,99 @@ namespace DCFApixels.DataMath
                 fixed (int* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is int cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(int); }
         #endregion
 
         #region Constructors
         [IN(LINE)]
-        public int4(float x, float y, float z, float w)
+        public int4((int x, int y, int z, int w) a)
         {
-            this.x = (int)x; this.y = (int)y;
-            this.z = (int)z; this.w = (int)w;
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = a.w;
         }
+        [IN(LINE)]
+        public int4((int x, int y, int z) a, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, (int x, int y, int z) a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public int4((int x, int y) a, int z, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, (int x, int y) a, int w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int y, (int x, int y) a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public int4((int x, int y) a, (int x, int y) b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
+        [IN(LINE)]
+        public int4(int x, int y, int z, int w)
+        {
+            this.x = x; this.y = y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int3 a, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int3 a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public int4(int2 a, int z, int w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int2 a, int w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public int4(int x, int y, int2 a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public int4(int2 a, int2 b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
         [IN(LINE)]
         public int4(float v)
         {
@@ -115,12 +201,6 @@ namespace DCFApixels.DataMath
         {
             x = (int)v.x; y = (int)v.y;
             z = (int)v.z; w = (int)v.w;
-        }
-        [IN(LINE)]
-        public int4(double x, double y, double z, double w)
-        {
-            this.x = (int)x; this.y = (int)y;
-            this.z = (int)z; this.w = (int)w;
         }
         [IN(LINE)]
         public int4(double v)
@@ -135,12 +215,6 @@ namespace DCFApixels.DataMath
             z = (int)v.z; w = (int)v.w;
         }
         [IN(LINE)]
-        public int4(int x, int y, int z, int w)
-        {
-            this.x = x; this.y = y;
-            this.z = z; this.w = w;
-        }
-        [IN(LINE)]
         public int4(int v)
         {
             x = v; y = v;
@@ -151,12 +225,6 @@ namespace DCFApixels.DataMath
         {
             x = v.x; y = v.y;
             z = v.z; w = v.w;
-        }
-        [IN(LINE)]
-        public int4(uint x, uint y, uint z, uint w)
-        {
-            this.x = (int)x; this.y = (int)y;
-            this.z = (int)z; this.w = (int)w;
         }
         [IN(LINE)]
         public int4(uint v)
@@ -171,6 +239,19 @@ namespace DCFApixels.DataMath
             z = (int)v.z; w = (int)v.w;
         }
 
+        [IN(LINE)]
+        public int4(ReadOnlySpan<int> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+#if UNITY_5_3_OR_NEWER
+            x = values[0]; y = values[1]; z = values[2]; w = values[3];
+#else
+            this = Unsafe.ReadUnaligned<int4>(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(values)));
+#endif
+        }
+        [IN(LINE)] public void Deconstruct(out int x, out int y, out int z, out int w) { x = this.x; y = this.y; z = this.z; w = this.w; }
         #endregion
 
         #region operators
@@ -199,7 +280,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int4 operator ++(int4 a) { return new int4(++a.x, ++a.y, ++a.z, ++a.w); }
         [IN(LINE)] public static int4 operator --(int4 a) { return new int4(--a.x, --a.y, --a.z, --a.w); }
         [IN(LINE)] public static int4 operator +(int4 a) { return new int4(+a.x, +a.y, +a.z, +a.w); }
-        [IN(LINE)] public static int4 operator -(int4 a) { return new int4(-a.x, -a.y, -a.z, -a.w); }
+        [IN(LINE)] public static int4 operator -(int4 a) { return new int4((int)-a.x, (int)-a.y, (int)-a.z, (int)-a.w); }
         #endregion
 
         #region Bits
@@ -938,7 +1019,20 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public /*readonly*/ void CopyTo(Span<int> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+
+#if UNITY_5_3_OR_NEWER
+            destination[0] = x; destination[1] = y; destination[2] = z; destination[3] = w;
+#else
+            Unsafe.WriteUnaligned(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(destination)), this);
+#endif
+        }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
         public override bool Equals(object o) { return o is int4 target && Equals(target); }
         [IN(LINE)] public bool Equals(int4 a) { return x == a.x && y == a.y && z == a.z && w == a.w; }

@@ -1,3 +1,4 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -17,7 +18,7 @@ namespace DCFApixels.DataMath
     [Serializable]
     public partial struct bool3 :
         IEquatable<bool3>,
-        IVector3<bool>,
+        IVector3Impl<bool>,
         IColor,
         IEnumerableVector<bool, bool3>
     {
@@ -58,7 +59,7 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)] bool IVector1<bool>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] bool IVector2<bool>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] bool IVector3<bool>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
         public unsafe bool this[int index]
         {
@@ -79,24 +80,42 @@ namespace DCFApixels.DataMath
                 fixed (bool* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is bool cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(bool); }
         #endregion
 
         #region Constructors
+        [IN(LINE)] public bool3((bool x, bool y, bool z) a) { x = a.x; y = a.y; z = a.z; }
+        [IN(LINE)] public bool3((bool x, bool y) a, bool z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public bool3(bool x, (bool x, bool y) a) { this.x = x; this.y = a.x; this.z = a.y; }
+
         [IN(LINE)] public bool3(bool x, bool y, bool z) { this.x = x; this.y = y; this.z = z; }
+        [IN(LINE)] public bool3(bool2 a, bool z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public bool3(bool x, bool2 a) { this.x = x; this.y = a.x; this.z = a.y; }
+
         [IN(LINE)] public bool3(bool v) { x = v; y = v; z = v; }
         [IN(LINE)] public bool3(bool3 v) { x = v.x; y = v.y; z = v.z; }
-        [IN(LINE)] public bool3(float x, float y, float z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(float v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(float3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
-        [IN(LINE)] public bool3(double x, double y, double z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(double v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(double3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
-        [IN(LINE)] public bool3(int x, int y, int z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(int v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(int3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
-        [IN(LINE)] public bool3(uint x, uint y, uint z) { this.x = x > 0; this.y = y > 0; this.z = z > 0; }
-        [IN(LINE)] public bool3(uint v) { x = v > 0; y = v > 0; z = v > 0; }
-        [IN(LINE)] public bool3(uint3 v) { x = v.x > 0; y = v.y > 0; z = v.z > 0; }
+        [IN(LINE)] public bool3(float v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(float3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
+        [IN(LINE)] public bool3(double v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(double3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
+        [IN(LINE)] public bool3(int v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(int3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
+        [IN(LINE)] public bool3(uint v) { x = v != 0; y = v != 0; z = v != 0; }
+        [IN(LINE)] public bool3(uint3 v) { x = v.x != 0; y = v.y != 0; z = v.z != 0; }
+        [IN(LINE)] public bool3(int x, int y, int z) { this.x = x != 0; this.y = y != 0; this.z = z != 0; }
+
+        [IN(LINE)]
+        public bool3(ReadOnlySpan<bool> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+            x = values[0]; y = values[1]; z = values[2];
+        }
+        [IN(LINE)] public void Deconstruct(out bool x, out bool y, out bool z) { x = this.x; y = this.y; z = this.z; }
         #endregion
 
         #region operators
@@ -813,7 +832,15 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public void CopyTo(Span<bool> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+            destination[0] = x; destination[1] = y; destination[2] = z;
+        }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
         public override bool Equals(object o) { return o is bool3 target && Equals(target); }
         [IN(LINE)] public bool Equals(bool3 a) { return x == a.x && y == a.y && z == a.z; }

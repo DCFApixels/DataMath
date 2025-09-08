@@ -1,13 +1,19 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
     public partial struct uint2
     {
+        #region Length/Normalized
+        public float Length { [IN(LINE)] get { return DM.Length(this); } }
+        public uint LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float2 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
+        #endregion
     }
     public static partial class DM // uint2
     {
@@ -51,16 +57,20 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool2 IsPow2(uint2 value) { return new bool2(IsPow2(value.x), IsPow2(value.y)); }
         #endregion
 
-        #region Other
+        #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        //Sqrt - float
-        [IN(LINE)] public static uint2 LengthSqr(uint2 a) { return Sqr(a); }
+        [IN(LINE)] public static uint LengthSqr(uint2 a) { return Dot(a, a); }
         [IN(LINE)] public static uint2 DistanceSqr(uint2 a, uint2 b) { return Sqr(b - a); }
-        [IN(LINE)] public static uint2 Dot(uint2 a, uint2 b) { return a * b; }
+        #endregion
+
+        #region Other
+        //Sqrt - float
+        [IN(LINE)] public static uint Dot(uint2 a, uint2 b) { return a.x * b.x + a.y * b.y; }
         [IN(LINE)] public static uint2 Sqr(uint2 a) { return a * a; }
         [IN(LINE)] public static uint2 Pow(uint2 a, uint2 b) { return new uint2(Pow(a.x, b.x), Pow(a.y, b.y)); }
-        [IN(LINE)] public static uint2 Select(uint2 falseValue, uint2 trueValue, bool2 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static uint2 Select(uint2 falseValue, uint2 trueValue, bool2 test) { return new uint2(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y); }
+        [IN(LINE)] public static uint2 Select(uint2 falseValue, uint2 trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion
 
 

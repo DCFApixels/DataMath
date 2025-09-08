@@ -1,5 +1,5 @@
 ﻿using System;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath

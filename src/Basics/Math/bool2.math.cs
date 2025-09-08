@@ -1,7 +1,8 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -23,6 +24,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool CMin(bool2 a) { return All(a); }
         [IN(LINE)] public static bool CAbsMin(bool2 a) { return All(a); }
         [IN(LINE)] public static int CSum(bool2 a) { return CSum(a.x) + CSum(a.y); }
+        #endregion
+
+        #region Other
+        [IN(LINE)] public static bool2 Select(bool2 falseValue, bool2 trueValue, bool2 test) { return test ? trueValue : falseValue; }
         #endregion
 
 

@@ -1,13 +1,19 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
     public partial struct uint4
     {
+        #region Length/Normalized
+        public float Length { [IN(LINE)] get { return DM.Length(this); } }
+        public uint LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float4 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
+        #endregion
     }
     public static partial class DM // uint4
     {
@@ -51,16 +57,20 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 IsPow2(uint4 value) { return new bool4(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z), IsPow2(value.w)); }
         #endregion
 
-        #region Other
+        #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        //Sqrt - float
-        [IN(LINE)] public static uint4 LengthSqr(uint4 a) { return Sqr(a); }
+        [IN(LINE)] public static uint LengthSqr(uint4 a) { return Dot(a, a); }
         [IN(LINE)] public static uint4 DistanceSqr(uint4 a, uint4 b) { return Sqr(b - a); }
-        [IN(LINE)] public static uint4 Dot(uint4 a, uint4 b) { return a * b; }
+        #endregion
+
+        #region Other
+        //Sqrt - float
+        [IN(LINE)] public static uint Dot(uint4 a, uint4 b) { return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w; }
         [IN(LINE)] public static uint4 Sqr(uint4 a) { return a * a; }
         [IN(LINE)] public static uint4 Pow(uint4 a, uint4 b) { return new uint4(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z), Pow(a.w, b.w)); }
-        [IN(LINE)] public static uint4 Select(uint4 falseValue, uint4 trueValue, bool2 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static uint4 Select(uint4 falseValue, uint4 trueValue, bool4 test) { return new uint4(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y, test.z ? trueValue.z : falseValue.z, test.w ? trueValue.w : falseValue.w); }
+        [IN(LINE)] public static uint4 Select(uint4 falseValue, uint4 trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion
 
 

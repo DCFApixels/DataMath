@@ -1,5 +1,9 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
 #endif
 using DCFApixels.DataMath.Internal;
 using System;
@@ -8,11 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using System.Runtime.CompilerServices;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -24,10 +26,10 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 8, Size = 32)]
-    public partial struct double4 :
+    public unsafe partial struct double4 :
         IEquatable<double4>,
         IFormattable,
-        IVector4<double>,
+        IVector4Impl<double>,
         IColor,
         IEnumerableVector<double, double4>
     {
@@ -40,19 +42,19 @@ namespace DCFApixels.DataMath
         public static readonly double4 one = new double4(1d, 1d, 1d, 1d);
 
         ///<summary>(-1, 0, 0, 0)</summary>
-        public static readonly double4 left = new double4(-1d, 0d, 0d, 0d);
+        public static readonly double4 left = new double4(unchecked((double)-1d), 0d, 0d, 0d);
         ///<summary>(1, 0, 0, 0)</summary>
         public static readonly double4 right = new double4(1d, 0d, 0d, 0d);
         ///<summary>(0, -1, 0, 0)</summary>
-        public static readonly double4 down = new double4(0d, -1d, 0d, 0d);
+        public static readonly double4 down = new double4(0d, unchecked((double)-1d), 0d, 0d);
         ///<summary>(0, 1, 0, 0)</summary>
         public static readonly double4 up = new double4(0d, 1d, 0d, 0d);
         ///<summary>(0, 0, -1, 0)</summary>
-        public static readonly double4 back = new double4(0d, 0d, -1d, 0d);
+        public static readonly double4 back = new double4(0d, 0d, unchecked((double)-1d), 0d);
         ///<summary>(0, 0, 1, 0)</summary>
         public static readonly double4 forward = new double4(0d, 0d, 1d, 0d);
         ///<summary>(0, 0, 0, -1)</summary>
-        public static readonly double4 before = new double4(0d, 0d, 0d, -1d);
+        public static readonly double4 before = new double4(0d, 0d, 0d, unchecked((double)-1d));
         ///<summary>(0, 0, 0, 1)</summary>
         public static readonly double4 after = new double4(0d, 0d, 0d, 1d);
         #endregion
@@ -74,9 +76,9 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)] double IVector2<double>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] double IVector3<double>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] double IVector4<double>.w { [IN(LINE)] get { return w; } [IN(LINE)] set { w = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
-        public unsafe double this[int index]
+        public double this[int index]
         {
             [IN(LINE)]
             get
@@ -95,15 +97,99 @@ namespace DCFApixels.DataMath
                 fixed (double* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is double cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(double); }
         #endregion
 
         #region Constructors
         [IN(LINE)]
-        public double4(float x, float y, float z, float w)
+        public double4((double x, double y, double z, double w) a)
         {
-            this.x = (double)x; this.y = (double)y;
-            this.z = (double)z; this.w = (double)w;
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = a.w;
         }
+        [IN(LINE)]
+        public double4((double x, double y, double z) a, double w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, (double x, double y, double z) a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public double4((double x, double y) a, double z, double w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, (double x, double y) a, double w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, double y, (double x, double y) a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public double4((double x, double y) a, (double x, double y) b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
+        [IN(LINE)]
+        public double4(double x, double y, double z, double w)
+        {
+            this.x = x; this.y = y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double3 a, double w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = a.z; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, double3 a)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = a.z;
+        }
+        [IN(LINE)]
+        public double4(double2 a, double z, double w)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = z; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, double2 a, double w)
+        {
+            this.x = x; this.y = a.x;
+            this.z = a.y; this.w = w;
+        }
+        [IN(LINE)]
+        public double4(double x, double y, double2 a)
+        {
+            this.x = x; this.y = y;
+            this.z = a.x; this.w = a.y;
+        }
+        [IN(LINE)]
+        public double4(double2 a, double2 b)
+        {
+            this.x = a.x; this.y = a.y;
+            this.z = b.x; this.w = b.y;
+        }
+
         [IN(LINE)]
         public double4(float v)
         {
@@ -115,12 +201,6 @@ namespace DCFApixels.DataMath
         {
             x = (double)v.x; y = (double)v.y;
             z = (double)v.z; w = (double)v.w;
-        }
-        [IN(LINE)]
-        public double4(double x, double y, double z, double w)
-        {
-            this.x = x; this.y = y;
-            this.z = z; this.w = w;
         }
         [IN(LINE)]
         public double4(double v)
@@ -135,12 +215,6 @@ namespace DCFApixels.DataMath
             z = v.z; w = v.w;
         }
         [IN(LINE)]
-        public double4(int x, int y, int z, int w)
-        {
-            this.x = (double)x; this.y = (double)y;
-            this.z = (double)z; this.w = (double)w;
-        }
-        [IN(LINE)]
         public double4(int v)
         {
             x = (double)v; y = (double)v;
@@ -151,12 +225,6 @@ namespace DCFApixels.DataMath
         {
             x = (double)v.x; y = (double)v.y;
             z = (double)v.z; w = (double)v.w;
-        }
-        [IN(LINE)]
-        public double4(uint x, uint y, uint z, uint w)
-        {
-            this.x = (double)x; this.y = (double)y;
-            this.z = (double)z; this.w = (double)w;
         }
         [IN(LINE)]
         public double4(uint v)
@@ -171,6 +239,19 @@ namespace DCFApixels.DataMath
             z = (double)v.z; w = (double)v.w;
         }
 
+        [IN(LINE)]
+        public double4(ReadOnlySpan<double> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+#if UNITY_5_3_OR_NEWER
+            x = values[0]; y = values[1]; z = values[2]; w = values[3];
+#else
+            this = Unsafe.ReadUnaligned<double4>(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(values)));
+#endif
+        }
+        [IN(LINE)] public void Deconstruct(out double x, out double y, out double z, out double w) { x = this.x; y = this.y; z = this.z; w = this.w; }
         #endregion
 
         #region operators
@@ -199,7 +280,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 operator ++(double4 a) { return new double4(++a.x, ++a.y, ++a.z, ++a.w); }
         [IN(LINE)] public static double4 operator --(double4 a) { return new double4(--a.x, --a.y, --a.z, --a.w); }
         [IN(LINE)] public static double4 operator +(double4 a) { return new double4(+a.x, +a.y, +a.z, +a.w); }
-        [IN(LINE)] public static double4 operator -(double4 a) { return new double4(-a.x, -a.y, -a.z, -a.w); }
+        [IN(LINE)] public static double4 operator -(double4 a) { return new double4((double)-a.x, (double)-a.y, (double)-a.z, (double)-a.w); }
         #endregion
 
         #region Boolean
@@ -920,7 +1001,20 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public /*readonly*/ void CopyTo(Span<double> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+
+#if UNITY_5_3_OR_NEWER
+            destination[0] = x; destination[1] = y; destination[2] = z; destination[3] = w;
+#else
+            Unsafe.WriteUnaligned(ref Unsafe.As<double, byte>(ref MemoryMarshal.GetReference(destination)), this);
+#endif
+        }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
         public override bool Equals(object o) { return o is double4 target && Equals(target); }
         [IN(LINE)] public bool Equals(double4 a) { return x == a.x && y == a.y && z == a.z && w == a.w; }

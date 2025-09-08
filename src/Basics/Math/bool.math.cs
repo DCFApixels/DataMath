@@ -1,7 +1,8 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -24,6 +25,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool CAbsMin(bool a) { return a; }
         [IN(LINE)] public static int CSum(bool a) { return a ? 1 : 0; }
         #endregion
+
+        #region Other
+        [IN(LINE)] public static bool Select(bool falseValue, bool trueValue, bool test) { return test ? trueValue : falseValue; }
+        #endregion
+
 
 
         #region Hash
@@ -74,7 +80,7 @@ namespace DCFApixels.DataMath
         public static int CSum<T>(T a, bool _ = default) where T : IVectorN<bool>
         {
             var result = 0;
-            for (int i = 0; i < a.count; i++)
+            for (int i = 0; i < a.Count; i++)
             {
                 result += a[i] ? 1 : 0;
             }
@@ -87,7 +93,7 @@ namespace DCFApixels.DataMath
         public static int Hash<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
         {
             int bits = 0;
-            for (int i = 0; i < v.count; i++)
+            for (int i = 0; i < v.Count; i++)
             {
                 bits ^= Hash(v[i]);
             }
@@ -96,7 +102,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static bool All<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
         {
-            for (int i = 0; i < v.count; i++)
+            for (int i = 0; i < v.Count; i++)
             {
                 if (!v[i]) { return false; }
             }
@@ -105,7 +111,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static bool Any<TVector>(TVector v, bool _ = default) where TVector : IVectorN<bool>
         {
-            for (int i = 0; i < v.count; i++)
+            for (int i = 0; i < v.Count; i++)
             {
                 if (v[i]) { return true; }
             }

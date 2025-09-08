@@ -1,5 +1,9 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
 #endif
 using DCFApixels.DataMath.Internal;
 using System;
@@ -8,11 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using System.Runtime.CompilerServices;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -24,10 +26,10 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 12)]
-    public partial struct uint3 :
+    public unsafe partial struct uint3 :
         IEquatable<uint3>,
         IFormattable,
-        IVector3<uint>,
+        IVector3Impl<uint>,
         IColor,
         IEnumerableVector<uint, uint3>
     {
@@ -40,15 +42,15 @@ namespace DCFApixels.DataMath
         public static readonly uint3 one = new uint3(1u, 1u, 1u);
 
         ///<summary>(-1, 0, 0)</summary>
-        public static readonly uint3 left = new uint3(-1u, 0u, 0u);
+        public static readonly uint3 left = new uint3(unchecked((uint)-1u), 0u, 0u);
         ///<summary>(1, 0, 0)</summary>
         public static readonly uint3 right = new uint3(1u, 0u, 0u);
         ///<summary>(0, -1, 0)</summary>
-        public static readonly uint3 down = new uint3(0u, -1u, 0u);
+        public static readonly uint3 down = new uint3(0u, unchecked((uint)-1u), 0u);
         ///<summary>(0, 1, 0)</summary>
         public static readonly uint3 up = new uint3(0u, 1u, 0u);
         ///<summary>(0, 0, -1)</summary>
-        public static readonly uint3 back = new uint3(0u, 0u, -1u);
+        public static readonly uint3 back = new uint3(0u, 0u, unchecked((uint)-1u));
         ///<summary>(0, 0, 1)</summary>
         public static readonly uint3 forward = new uint3(0u, 0u, 1u);
         #endregion
@@ -68,9 +70,9 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)] uint IVector1<uint>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] uint IVector2<uint>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] uint IVector3<uint>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
-        public unsafe uint this[int index]
+        public uint this[int index]
         {
             [IN(LINE)]
             get
@@ -89,22 +91,43 @@ namespace DCFApixels.DataMath
                 fixed (uint* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is uint cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(uint); }
         #endregion
 
         #region Constructors
-        [IN(LINE)] public uint3(float x, float y, float z) { this.x = (uint)x; this.y = (uint)y; this.z = (uint)z; }
+        [IN(LINE)] public uint3(uint x, uint y, uint z) { this.x = x; this.y = y; this.z = z; }
+        [IN(LINE)] public uint3(uint2 a, uint z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public uint3(uint x, uint2 a) { this.x = x; this.y = a.x; this.z = a.y; }
+
+        [IN(LINE)] public uint3((uint x, uint y, uint z) a) { this.x = a.x; this.y = a.y; this.z = a.z; }
+        [IN(LINE)] public uint3((uint x, uint y) a, uint z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public uint3(uint x, (uint x, uint y) a) { this.x = x; this.y = a.x; this.z = a.y; }
+
         [IN(LINE)] public uint3(float v) { x = (uint)v; y = (uint)v; z = (uint)v; }
         [IN(LINE)] public uint3(float3 v) { x = (uint)v.x; y = (uint)v.y; z = (uint)v.z; }
-        [IN(LINE)] public uint3(double x, double y, double z) { this.x = (uint)x; this.y = (uint)y; this.z = (uint)z; }
         [IN(LINE)] public uint3(double v) { x = (uint)v; y = (uint)v; z = (uint)v; }
         [IN(LINE)] public uint3(double3 v) { x = (uint)v.x; y = (uint)v.y; z = (uint)v.z; }
-        [IN(LINE)] public uint3(int x, int y, int z) { this.x = (uint)x; this.y = (uint)y; this.z = (uint)z; }
         [IN(LINE)] public uint3(int v) { x = (uint)v; y = (uint)v; z = (uint)v; }
         [IN(LINE)] public uint3(int3 v) { x = (uint)v.x; y = (uint)v.y; z = (uint)v.z; }
-        [IN(LINE)] public uint3(uint x, uint y, uint z) { this.x = x; this.y = y; this.z = z; }
         [IN(LINE)] public uint3(uint v) { x = v; y = v; z = v; }
         [IN(LINE)] public uint3(uint3 v) { x = v.x; y = v.y; z = v.z; }
 
+        [IN(LINE)]
+        public uint3(ReadOnlySpan<uint> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+#if UNITY_5_3_OR_NEWER
+            x = values[0]; y = values[1]; z = values[2];
+#else
+            this = Unsafe.ReadUnaligned<uint3>(ref Unsafe.As<uint, byte>(ref MemoryMarshal.GetReference(values)));
+#endif
+        }
+        [IN(LINE)] public void Deconstruct(out uint x, out uint y, out uint z) { x = this.x; y = this.y; z = this.z; }
         #endregion
 
         #region operators
@@ -133,7 +156,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint3 operator ++(uint3 a) { return new uint3(++a.x, ++a.y, ++a.z); }
         [IN(LINE)] public static uint3 operator --(uint3 a) { return new uint3(--a.x, --a.y, --a.z); }
         [IN(LINE)] public static uint3 operator +(uint3 a) { return new uint3(+a.x, +a.y, +a.z); }
-        [IN(LINE)] public static uint3 operator -(uint3 a) { return new uint3(-a.x, -a.y, -a.z); }
+        [IN(LINE)] public static uint3 operator -(uint3 a) { return new uint3((uint)-a.x, (uint)-a.y, (uint)-a.z); }
         #endregion
 
         #region Bits
@@ -866,7 +889,20 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public /*readonly*/ void CopyTo(Span<uint> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+
+#if UNITY_5_3_OR_NEWER
+            destination[0] = x; destination[1] = y; destination[2] = z;
+#else
+            Unsafe.WriteUnaligned(ref Unsafe.As<uint, byte>(ref MemoryMarshal.GetReference(destination)), this);
+#endif
+        }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
         public override bool Equals(object o) { return o is uint3 target && Equals(target); }
         [IN(LINE)] public bool Equals(uint3 a) { return x == a.x && y == a.y && z == a.z; }

@@ -1,9 +1,10 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
 using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using static DCFApixels.DataMath.DMBasic;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -22,6 +23,7 @@ namespace DCFApixels.DataMath
         #region Abs/Sign
         [IN(LINE)] public static float4 Abs(float4 a) { return new float4(Abs(a.x), Abs(a.y), Abs(a.z), Abs(a.w)); }
         [IN(LINE)] public static float4 Sign(float4 a) { return new float4(Sign(a.x), Sign(a.y), Sign(a.z), Sign(a.w)); }
+        [IN(LINE)] public static float4 SoftSign(float4 a) { return new float4(SoftSign(a.x), SoftSign(a.y), SoftSign(a.z), SoftSign(a.w)); }
         [IN(LINE)] public static int4 Sign2Int(float4 a) { return new int4(Sign2Int(a.x), Sign2Int(a.y), Sign2Int(a.z), Sign2Int(a.w)); }
         #endregion
 
@@ -34,11 +36,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int4 Ceil2Int(float4 a) { return new int4(Ceil2Int(a.x), Ceil2Int(a.y), Ceil2Int(a.z), Ceil2Int(a.w)); }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static int4 Round2UInt(float4 a) { return new int4(Round2UInt(a.x), Round2UInt(a.y), Round2UInt(a.z), Round2UInt(a.w)); }
+        [IN(LINE)] public static uint4 Round2UInt(float4 a) { return new uint4(Round2UInt(a.x), Round2UInt(a.y), Round2UInt(a.z), Round2UInt(a.w)); }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static int4 Floor2UInt(float4 a) { return new int4(Floor2UInt(a.x), Floor2UInt(a.y), Floor2UInt(a.z), Floor2UInt(a.w)); }
+        [IN(LINE)] public static uint4 Floor2UInt(float4 a) { return new uint4(Floor2UInt(a.x), Floor2UInt(a.y), Floor2UInt(a.z), Floor2UInt(a.w)); }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static int4 Ceil2UInt(float4 a) { return new int4(Ceil2UInt(a.x), Ceil2UInt(a.y), Ceil2UInt(a.z), Ceil2UInt(a.w)); }
+        [IN(LINE)] public static uint4 Ceil2UInt(float4 a) { return new uint4(Ceil2UInt(a.x), Ceil2UInt(a.y), Ceil2UInt(a.z), Ceil2UInt(a.w)); }
         #endregion
 
         #region Clamp/Repeat/PingPong
@@ -91,7 +93,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float CSum(float4 a) { return (a.x + a.y) + (a.z + a.w); }
         #endregion
 
-        #region Lerp
+        #region Lerp/MoveTowards
         [IN(LINE)] public static float4 Lerp(float4 start, float4 end, float4 t) { return start + t * (end - start); }
         [IN(LINE)] public static float4 LerpClamp(float4 start, float4 end, float4 t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static float4 LerpRepeat(float4 start, float4 end, float4 t) { return Lerp(start, end, Repeat01(t)); }
@@ -100,6 +102,31 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float4 UnLerpClamp(float4 start, float4 end, float4 a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static float4 UnLerpRepeat(float4 start, float4 end, float4 a) { return Repeat01(UnLerp(start, end, a)); }
 
+        [IN(LINE)]
+        public static float4 Remap(float4 oldStart, float4 oldEnd, float4 newStart, float4 newEnd, float4 v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
+        }
+
+        [IN(LINE)]
+        public static float4 LerpAngle(float4 start, float4 end, float t)
+        {
+            float4 angle = Repeat(end - start, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return start + angle * t;
+        }
+        [IN(LINE)] public static float4 LerpAngleClamp(float4 start, float4 end, float t) { return LerpAngle(start, end, Clamp01(t)); }
+        [IN(LINE)] public static float4 LerpAngleRepeat(float4 start, float4 end, float t) { return LerpAngle(start, end, Repeat01(t)); }
+
+        [IN(LINE)]
+        public static float4 DeltaAngle(float4 current, float4 target)
+        {
+            float4 angle = Repeat(target - current, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return angle;
+        }
 
         [IN(LINE)]
         public static float4 MoveTowards(float4 from, float4 to, float distance)
@@ -134,29 +161,6 @@ namespace DCFApixels.DataMath
             return from + dif / len * distance;
         }
         [IN(LINE)]
-        public static float4 Remap(float4 oldStart, float4 oldEnd, float4 newStart, float4 newEnd, float4 v)
-        {
-            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
-        }
-
-
-        [IN(LINE)]
-        public static float4 LerpAngle(float4 start, float4 end, float t)
-        {
-            float4 angle = Repeat(end - start, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return start + angle * Clamp01(t);
-        }
-        [IN(LINE)]
-        public static float4 DeltaAngle(float4 current, float4 target)
-        {
-            float4 angle = Repeat(target - current, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return angle;
-        }
-        [IN(LINE)]
         public static float4 MoveTowardsAngle(float4 current, float4 target, float maxDelta)
         {
             float4 delta = DeltaAngle(current, target);
@@ -168,18 +172,24 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Float State Checks
-        [IN(LINE)] public static bool4 IsNormalFloat(float4 a) { return new bool4(float.IsNormal(a.x), float.IsNormal(a.y), float.IsNormal(a.z), float.IsNormal(a.w)); }
-        [IN(LINE)] public static bool4 IsFinite(float4 a) { return new bool4(float.IsFinite(a.x), float.IsFinite(a.y), float.IsFinite(a.z), float.IsFinite(a.w)); }
-        [IN(LINE)] public static bool4 IsNaN(float4 a) { return new bool4(float.IsNaN(a.x), float.IsNaN(a.y), float.IsNaN(a.z), float.IsNaN(a.w)); }
-        [IN(LINE)] public static bool4 IsInfinity(float4 a) { return new bool4(float.IsInfinity(a.x), float.IsInfinity(a.y), float.IsInfinity(a.z), float.IsInfinity(a.w)); }
-        [IN(LINE)] public static bool4 IsNegativeInfinity(float4 a) { return new bool4(float.IsNegativeInfinity(a.x), float.IsNegativeInfinity(a.y), float.IsNegativeInfinity(a.z), float.IsNegativeInfinity(a.w)); }
-        [IN(LINE)] public static bool4 IsPositiveInfinity(float4 a) { return new bool4(float.IsPositiveInfinity(a.x), float.IsPositiveInfinity(a.y), float.IsPositiveInfinity(a.z), float.IsPositiveInfinity(a.w)); }
+        #region Real Value State Checks
+        [IN(LINE)] public static bool4 IsNegative(float4 a) { return new bool4(IsNegative(a.x), IsNegative(a.y), IsNegative(a.z), IsNegative(a.w)); }
+        [IN(LINE)] public static bool4 IsPositive(float4 a) { return new bool4(IsPositive(a.x), IsPositive(a.y), IsPositive(a.z), IsPositive(a.w)); }
+        [IN(LINE)] public static bool4 IsNormalReal(float4 a) { return new bool4(IsNormalReal(a.x), IsNormalReal(a.y), IsNormalReal(a.z), IsNormalReal(a.w)); }
+        [IN(LINE)] public static bool4 IsFinite(float4 a) { return new bool4(IsFinite(a.x), IsFinite(a.y), IsFinite(a.z), IsFinite(a.w)); }
+        [IN(LINE)] public static bool4 IsNaN(float4 a) { return new bool4(IsNaN(a.x), IsNaN(a.y), IsNaN(a.z), IsNaN(a.w)); }
+        [IN(LINE)] public static bool4 IsInfinity(float4 a) { return new bool4(IsInfinity(a.x), IsInfinity(a.y), IsInfinity(a.z), IsInfinity(a.w)); }
+        [IN(LINE)] public static bool4 IsNegativeInfinity(float4 a) { return new bool4(IsNegativeInfinity(a.x), IsNegativeInfinity(a.y), IsNegativeInfinity(a.z), IsNegativeInfinity(a.w)); }
+        [IN(LINE)] public static bool4 IsPositiveInfinity(float4 a) { return new bool4(IsPositiveInfinity(a.x), IsPositiveInfinity(a.y), IsPositiveInfinity(a.z), IsPositiveInfinity(a.w)); }
         #endregion
 
-        #region Color
-        [IN(LINE)] public static float4 GammaToLinearSpace(float4 value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
-        [IN(LINE)] public static float4 LinearToGammaSpace(float4 value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        #region Space Converts
+        [IN(LINE)] public static float4 GammaToLinearSpace(float4 a) { const float Gamma = 2.2f; return Pow(a, Gamma); }
+        [IN(LINE)] public static float4 LinearToGammaSpace(float4 a) { const float InverseGamma = 1.0f / 2.2f; return Pow(a, InverseGamma); }
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
+        [IN(LINE)] public static float4 Degrees(float4 radians) { return radians * Rad2Deg; }
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
+        [IN(LINE)] public static float4 Radians(float4 degrees) { return degrees * Deg2Rad; }
         #endregion
 
         #region Approximately
@@ -194,7 +204,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 IsPow2(float4 value) { return new bool4(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z), IsPow2(value.w)); }
         #endregion
 
-        #region Other
+        #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(float4 a) { return Sqrt(Dot(a, a)); }
         [IN(LINE)] public static float LengthSqr(float4 a) { return Dot(a, a); }
         [IN(LINE)] public static float Distance(float4 a, float4 b) { return Length(b - a); }
@@ -206,7 +216,10 @@ namespace DCFApixels.DataMath
             var len = Dot(a, a);
             return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
+        [IN(LINE)] public static bool IsNormalized(float4 a) { return Approximately(CSum(a) - 1f, 0f, FloatZeroTolerance); }
+        #endregion
 
+        #region Other
         [IN(LINE)] public static float4 Project(float4 a, float4 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float4 ProjectSafe(float4 a, float4 ontoB, float4 defaultValue = default)
@@ -216,13 +229,10 @@ namespace DCFApixels.DataMath
         }
         [IN(LINE)] public static float4 Reflect(float4 v, float4 n) { return v - 2f * n * Dot(v, n); }
 
-        [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool4 test) { return new float4(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y, test.z ? trueValue.z : falseValue.z, test.w ? trueValue.w : falseValue.w); }
+        [IN(LINE)] public static float4 Select(float4 falseValue, float4 trueValue, bool test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static float4 Step(float4 threshold, float4 a) { return Select(0.0f, 1.0f, a >= threshold); }
-
-        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static float4 Degrees(float4 radians) { return radians * Rad2Deg; }
-        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static float4 Radians(float4 degrees) { return degrees * Deg2Rad; }
+        [IN(LINE)] public static int4 Step2Int(float4 threshold, float4 a) { return Select((int4)0, 1, a >= threshold); }
 
         [IN(LINE)] public static float4 Cos(float4 a) { return new float4(Cos(a.x), Cos(a.y), Cos(a.z), Cos(a.w)); }
         [IN(LINE)] public static float4 Cosh(float4 a) { return new float4(Cosh(a.x), Cosh(a.y), Cosh(a.z), Cosh(a.w)); }

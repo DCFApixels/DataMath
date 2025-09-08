@@ -1,17 +1,31 @@
-﻿using System;
+﻿#pragma warning disable CS8981
+#if DISABLE_DEBUG
+#undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
+#endif
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
+using System.ComponentModel;
+using DCFApixels.DataMath.Internal;
 
 namespace DCFApixels.DataMath
 {
+#if ENABLE_IL2CPP
+    [Il2CppSetOption(Option.NullChecks, false)]
+    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
+    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
+#endif
     [Serializable]
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [StructLayout(LayoutKind.Sequential, Pack = sizeof(float), Size = 4 * Count)]
-    public struct colorhsv :
+    public partial struct colorhsv :
         IEquatable<colorhsv>,
         IFormattable,
         IVector4<float>,
@@ -59,29 +73,33 @@ namespace DCFApixels.DataMath
         public float z { [IN(LINE)] get { return s; } [IN(LINE)] set { s = value; } }
         public float y { [IN(LINE)] get { return v; } [IN(LINE)] set { v = value; } }
         public float x { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
-        float IColorHSV.h { [IN(LINE)] get { return h; } [IN(LINE)] set { h = value; } }
-        float IColorHSV.s { [IN(LINE)] get { return s; } [IN(LINE)] set { s = value; } }
-        float IColorHSV.v { [IN(LINE)] get { return v; } [IN(LINE)] set { v = value; } }
-        float IColorHSV.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
-        public int count { [IN(LINE)] get => Count; }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColorHSV.h { [IN(LINE)] get { return h; } [IN(LINE)] set { h = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColorHSV.s { [IN(LINE)] get { return s; } [IN(LINE)] set { s = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColorHSV.v { [IN(LINE)] get { return v; } [IN(LINE)] set { v = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColorHSV.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
         public unsafe float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (colorhsv* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float* array = &h) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is float cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(float); }
         #endregion
 
         #region Constructors

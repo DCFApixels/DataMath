@@ -1,4 +1,5 @@
-using static DCFApixels.DataMath.Consts;
+#pragma warning disable CS8981
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -6,7 +7,7 @@ namespace DCFApixels.DataMath
     public partial struct bool4
     {
         #region Convert operators
-        [IN(LINE)] public static implicit operator bool4((bool, bool, bool, bool) v) => new bool4(v.Item1, v.Item2, v.Item3, v.Item4);
+        [IN(LINE)] public static implicit operator bool4((bool, bool, bool, bool) v) => new bool4(v);
 
         [IN(LINE)] public static implicit operator bool4(bool v) => new bool4(v);
         //[IN(LINE)] public static implicit operator bool4(bool4 v) => new bool4(v);
@@ -34,5 +35,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool4 Bool4(float4 v) => new bool4(v);
         [IN(LINE)] public static bool4 Bool4(double v) => new bool4(v);
         [IN(LINE)] public static bool4 Bool4(double4 v) => new bool4(v);
+    }
+
+    public static partial class DMBasic
+    {
+
     }
 }

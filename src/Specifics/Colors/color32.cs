@@ -1,16 +1,19 @@
-﻿#if DISABLE_DEBUG
+﻿#pragma warning disable CS8981
+#if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
-using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 #if ENABLE_IL2CPP
 using Unity.IL2CPP.CompilerServices;
 #endif
+using DCFApixels.DataMath.Internal;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.InlineConsts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
@@ -66,33 +69,37 @@ namespace DCFApixels.DataMath
         public byte a8;
 
         #region Properties
-        public byte x { [IN(LINE)] get => r8; [IN(LINE)] set => r8 = value; }
-        public byte y { [IN(LINE)] get => g8; [IN(LINE)] set => g8 = value; }
-        public byte z { [IN(LINE)] get => b8; [IN(LINE)] set => b8 = value; }
-        public byte w { [IN(LINE)] get => a8; [IN(LINE)] set => a8 = value; }
-        byte IColor32.r8 { [IN(LINE)] get => r8; [IN(LINE)] set => r8 = value; }
-        byte IColor32.g8 { [IN(LINE)] get => g8; [IN(LINE)] set => g8 = value; }
-        byte IColor32.b8 { [IN(LINE)] get => b8; [IN(LINE)] set => b8 = value; }
-        byte IColor32.a8 { [IN(LINE)] get => a8; [IN(LINE)] set => a8 = value; }
-        public int count { [IN(LINE)] get => Count; }
+        public byte x { [IN(LINE)] get { return r8; } [IN(LINE)] set { r8 = value; } }
+        public byte y { [IN(LINE)] get { return g8; } [IN(LINE)] set { g8 = value; } }
+        public byte z { [IN(LINE)] get { return b8; } [IN(LINE)] set { b8 = value; } }
+        public byte w { [IN(LINE)] get { return a8; } [IN(LINE)] set { a8 = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] byte IColor32.r8 { [IN(LINE)] get { return r8; } [IN(LINE)] set { r8 = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] byte IColor32.g8 { [IN(LINE)] get { return g8; } [IN(LINE)] set { g8 = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] byte IColor32.b8 { [IN(LINE)] get { return b8; } [IN(LINE)] set { b8 = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] byte IColor32.a8 { [IN(LINE)] get { return a8; } [IN(LINE)] set { a8 = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
         public unsafe byte this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (color32* array = &this) { return ((byte*)array)[index]; }
             }
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (byte* array = &r8) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is byte cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(byte); }
         #endregion
 
         #region Constructors

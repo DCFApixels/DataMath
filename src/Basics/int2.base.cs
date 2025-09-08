@@ -1,5 +1,9 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
 #endif
 using DCFApixels.DataMath.Internal;
 using System;
@@ -8,11 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using System.Runtime.CompilerServices;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -24,10 +26,10 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 8)]
-    public partial struct int2 :
+    public unsafe partial struct int2 :
         IEquatable<int2>,
         IFormattable,
-        IVector2<int>,
+        IVector2Impl<int>,
         IColor,
         IEnumerableVector<int, int2>
     {
@@ -40,11 +42,11 @@ namespace DCFApixels.DataMath
         public static readonly int2 one = new int2(1, 1);
 
         ///<summary>(-1, 0)</summary>
-        public static readonly int2 left = new int2(-1, 0);
+        public static readonly int2 left = new int2(unchecked((int)-1), 0);
         ///<summary>(1, 0)</summary>
         public static readonly int2 right = new int2(1, 0);
         ///<summary>(0, -1)</summary>
-        public static readonly int2 down = new int2(0, -1);
+        public static readonly int2 down = new int2(0, unchecked((int)-1));
         ///<summary>(0, 1)</summary>
         public static readonly int2 up = new int2(0, 1);
         #endregion
@@ -62,9 +64,9 @@ namespace DCFApixels.DataMath
         #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)] int IVector1<int>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] int IVector2<int>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
-        public unsafe int this[int index]
+        public int this[int index]
         {
             [IN(LINE)]
             get
@@ -83,22 +85,37 @@ namespace DCFApixels.DataMath
                 fixed (int* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is int cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(int); }
         #endregion
 
         #region Constructors
-        [IN(LINE)] public int2(float x, float y) { this.x = (int)x; this.y = (int)y; }
+        [IN(LINE)] public int2(int x, int y) { this.x = x; this.y = y; }
+
         [IN(LINE)] public int2(float v) { x = (int)v; y = (int)v; }
         [IN(LINE)] public int2(float2 v) { x = (int)v.x; y = (int)v.y; }
-        [IN(LINE)] public int2(double x, double y) { this.x = (int)x; this.y = (int)y; }
         [IN(LINE)] public int2(double v) { x = (int)v; y = (int)v; }
         [IN(LINE)] public int2(double2 v) { x = (int)v.x; y = (int)v.y; }
-        [IN(LINE)] public int2(int x, int y) { this.x = x; this.y = y; }
         [IN(LINE)] public int2(int v) { x = v; y = v; }
         [IN(LINE)] public int2(int2 v) { x = v.x; y = v.y; }
-        [IN(LINE)] public int2(uint x, uint y) { this.x = (int)x; this.y = (int)y; }
         [IN(LINE)] public int2(uint v) { x = (int)v; y = (int)v; }
         [IN(LINE)] public int2(uint2 v) { x = (int)v.x; y = (int)v.y; }
 
+        [IN(LINE)]
+        public int2(ReadOnlySpan<int> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+#if UNITY_5_3_OR_NEWER
+            x = values[0]; y = values[1];
+#else
+            this = Unsafe.ReadUnaligned<int2>(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(values)));
+#endif
+        }
+        [IN(LINE)] public void Deconstruct(out int x, out int y) { x = this.x; y = this.y; }
         #endregion
 
         #region operators
@@ -127,7 +144,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int2 operator ++(int2 a) { return new int2(++a.x, ++a.y); }
         [IN(LINE)] public static int2 operator --(int2 a) { return new int2(--a.x, --a.y); }
         [IN(LINE)] public static int2 operator +(int2 a) { return new int2(+a.x, +a.y); }
-        [IN(LINE)] public static int2 operator -(int2 a) { return new int2(-a.x, -a.y); }
+        [IN(LINE)] public static int2 operator -(int2 a) { return new int2((int)-a.x, (int)-a.y); }
         #endregion
 
         #region Bits
@@ -422,7 +439,20 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public /*readonly*/ void CopyTo(Span<int> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+
+#if UNITY_5_3_OR_NEWER
+            destination[0] = x; destination[1] = y;
+#else
+            Unsafe.WriteUnaligned(ref Unsafe.As<int, byte>(ref MemoryMarshal.GetReference(destination)), this);
+#endif
+        }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
         public override bool Equals(object o) { return o is int2 target && Equals(target); }
         [IN(LINE)] public bool Equals(int2 a) { return x == a.x && y == a.y; }

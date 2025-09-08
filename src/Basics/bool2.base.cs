@@ -1,3 +1,4 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -17,7 +18,7 @@ namespace DCFApixels.DataMath
     [Serializable]
     public partial struct bool2 :
         IEquatable<bool2>,
-        IVector2<bool>,
+        IVector2Impl<bool>,
         IColor,
         IEnumerableVector<bool, bool2>
     {
@@ -52,7 +53,7 @@ namespace DCFApixels.DataMath
         #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)] bool IVector1<bool>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] bool IVector2<bool>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
         public unsafe bool this[int index]
         {
@@ -73,24 +74,36 @@ namespace DCFApixels.DataMath
                 fixed (bool* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is bool cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(bool); }
         #endregion
 
         #region Constructors
         [IN(LINE)] public bool2(bool x, bool y) { this.x = x; this.y = y; }
+
         [IN(LINE)] public bool2(bool v) { x = v; y = v; }
         [IN(LINE)] public bool2(bool2 v) { x = v.x; y = v.y; }
-        [IN(LINE)] public bool2(float x, float y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(float v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(float2 v) { x = v.x > 0; y = v.y > 0; }
-        [IN(LINE)] public bool2(double x, double y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(double v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(double2 v) { x = v.x > 0; y = v.y > 0; }
-        [IN(LINE)] public bool2(int x, int y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(int v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(int2 v) { x = v.x > 0; y = v.y > 0; }
-        [IN(LINE)] public bool2(uint x, uint y) { this.x = x > 0; this.y = y > 0; }
-        [IN(LINE)] public bool2(uint v) { x = v > 0; y = v > 0; }
-        [IN(LINE)] public bool2(uint2 v) { x = v.x > 0; y = v.y > 0; }
+        [IN(LINE)] public bool2(float v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(float2 v) { x = v.x != 0; y = v.y != 0; }
+        [IN(LINE)] public bool2(double v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(double2 v) { x = v.x != 0; y = v.y != 0; }
+        [IN(LINE)] public bool2(int v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(int2 v) { x = v.x != 0; y = v.y != 0; }
+        [IN(LINE)] public bool2(uint v) { x = v != 0; y = v != 0; }
+        [IN(LINE)] public bool2(uint2 v) { x = v.x != 0; y = v.y != 0; }
+        [IN(LINE)] public bool2(int x, int y) { this.x = x != 0; this.y = y != 0; }
+
+        [IN(LINE)]
+        public bool2(ReadOnlySpan<bool> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+            x = values[0]; y = values[1];
+        }
+        [IN(LINE)] public void Deconstruct(out bool x, out bool y) { x = this.x; y = this.y; }
         #endregion
 
         #region operators
@@ -370,6 +383,14 @@ namespace DCFApixels.DataMath
 
 
         #region Other 
+        [IN(LINE)]
+        public void CopyTo(Span<bool> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+            destination[0] = x; destination[1] = y;
+        }
         [IN(LINE)] public override int GetHashCode() => DM.Hash(this);
         public override bool Equals(object o) => o is bool2 target && Equals(target);
         [IN(LINE)] public bool Equals(bool2 a) => x == a.x && y == a.y;

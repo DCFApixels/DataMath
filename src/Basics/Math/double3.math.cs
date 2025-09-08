@@ -1,9 +1,10 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
 using System;
 using System.ComponentModel;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -21,6 +22,7 @@ namespace DCFApixels.DataMath
         #region Abs/Sign
         [IN(LINE)] public static double3 Abs(double3 a) { return new double3(Abs(a.x), Abs(a.y), Abs(a.z)); }
         [IN(LINE)] public static double3 Sign(double3 a) { return new double3(Sign(a.x), Sign(a.y), Sign(a.z)); }
+        [IN(LINE)] public static double3 SoftSign(double3 a) { return new double3(SoftSign(a.x), SoftSign(a.y), SoftSign(a.z)); }
         [IN(LINE)] public static int3 Sign2Int(double3 a) { return new int3(Sign2Int(a.x), Sign2Int(a.y), Sign2Int(a.z)); }
         #endregion
 
@@ -90,7 +92,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double CSum(double3 a) { return a.x + a.y + a.z; }
         #endregion
 
-        #region Lerp
+        #region Lerp/MoveTowards
         [IN(LINE)] public static double3 Lerp(double3 start, double3 end, double3 t) { return start + t * (end - start); }
         [IN(LINE)] public static double3 LerpClamp(double3 start, double3 end, double3 t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static double3 LerpRepeat(double3 start, double3 end, double3 t) { return Lerp(start, end, Repeat01(t)); }
@@ -99,6 +101,31 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double3 UnLerpClamp(double3 start, double3 end, double3 a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static double3 UnLerpRepeat(double3 start, double3 end, double3 a) { return Repeat01(UnLerp(start, end, a)); }
 
+        [IN(LINE)]
+        public static double3 Remap(double3 oldStart, double3 oldEnd, double3 newStart, double3 newEnd, double3 v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
+        }
+
+        [IN(LINE)]
+        public static double3 LerpAngle(double3 start, double3 end, double t)
+        {
+            double3 angle = Repeat(end - start, 360d);
+            if (angle > 180d) { angle -= 360d; }
+            //double angle = Repeat(end - start, -180d, 180d);
+            return start + angle * t;
+        }
+        [IN(LINE)] public static double3 LerpAngleClamp(double3 start, double3 end, double t) { return LerpAngle(start, end, Clamp01(t)); }
+        [IN(LINE)] public static double3 LerpAngleRepeat(double3 start, double3 end, double t) { return LerpAngle(start, end, Repeat01(t)); }
+
+        [IN(LINE)]
+        public static double3 DeltaAngle(double3 current, double3 target)
+        {
+            double3 angle = Repeat(target - current, 360d);
+            if (angle > 180d) { angle -= 360d; }
+            //double angle = Repeat(end - start, -180d, 180d);
+            return angle;
+        }
 
         [IN(LINE)]
         public static double3 MoveTowards(double3 from, double3 to, double distance)
@@ -133,29 +160,6 @@ namespace DCFApixels.DataMath
             return from + dif / len * distance;
         }
         [IN(LINE)]
-        public static double3 Remap(double3 oldStart, double3 oldEnd, double3 newStart, double3 newEnd, double3 v)
-        {
-            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
-        }
-
-
-        [IN(LINE)]
-        public static double3 LerpAngle(double3 start, double3 end, double t)
-        {
-            double3 angle = Repeat(end - start, 360d);
-            if (angle > 180d) { angle -= 360d; }
-            //double angle = Repeat(end - start, -180d, 180d);
-            return start + angle * Clamp01(t);
-        }
-        [IN(LINE)]
-        public static double3 DeltaAngle(double3 current, double3 target)
-        {
-            double3 angle = Repeat(target - current, 360d);
-            if (angle > 180d) { angle -= 360d; }
-            //double angle = Repeat(end - start, -180d, 180d);
-            return angle;
-        }
-        [IN(LINE)]
         public static double3 MoveTowardsAngle(double3 current, double3 target, double maxDelta)
         {
             double3 delta = DeltaAngle(current, target);
@@ -167,18 +171,24 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region double State Checks
-        [IN(LINE)] public static bool3 IsNormaldouble(double3 a) { return new bool3(double.IsNormal(a.x), double.IsNormal(a.y), double.IsNormal(a.z)); }
-        [IN(LINE)] public static bool3 IsFinite(double3 a) { return new bool3(double.IsFinite(a.x), double.IsFinite(a.y), double.IsFinite(a.z)); }
-        [IN(LINE)] public static bool3 IsNaN(double3 a) { return new bool3(double.IsNaN(a.x), double.IsNaN(a.y), double.IsNaN(a.z)); }
-        [IN(LINE)] public static bool3 IsInfinity(double3 a) { return new bool3(double.IsInfinity(a.x), double.IsInfinity(a.y), double.IsInfinity(a.z)); }
-        [IN(LINE)] public static bool3 IsNegativeInfinity(double3 a) { return new bool3(double.IsNegativeInfinity(a.x), double.IsNegativeInfinity(a.y), double.IsNegativeInfinity(a.z)); }
-        [IN(LINE)] public static bool3 IsPositiveInfinity(double3 a) { return new bool3(double.IsPositiveInfinity(a.x), double.IsPositiveInfinity(a.y), double.IsPositiveInfinity(a.z)); }
+        #region Real Value State Checks
+        [IN(LINE)] public static bool3 IsNegative(double3 a) { return new bool3(IsNegative(a.x), IsNegative(a.y), IsNegative(a.z)); }
+        [IN(LINE)] public static bool3 IsPositive(double3 a) { return new bool3(IsPositive(a.x), IsPositive(a.y), IsPositive(a.z)); }
+        [IN(LINE)] public static bool3 IsNormalReal(double3 a) { return new bool3(IsNormalReal(a.x), IsNormalReal(a.y), IsNormalReal(a.z)); }
+        [IN(LINE)] public static bool3 IsFinite(double3 a) { return new bool3(IsFinite(a.x), IsFinite(a.y), IsFinite(a.z)); }
+        [IN(LINE)] public static bool3 IsNaN(double3 a) { return new bool3(IsNaN(a.x), IsNaN(a.y), IsNaN(a.z)); }
+        [IN(LINE)] public static bool3 IsInfinity(double3 a) { return new bool3(IsInfinity(a.x), IsInfinity(a.y), IsInfinity(a.z)); }
+        [IN(LINE)] public static bool3 IsNegativeInfinity(double3 a) { return new bool3(IsNegativeInfinity(a.x), IsNegativeInfinity(a.y), IsNegativeInfinity(a.z)); }
+        [IN(LINE)] public static bool3 IsPositiveInfinity(double3 a) { return new bool3(IsPositiveInfinity(a.x), IsPositiveInfinity(a.y), IsPositiveInfinity(a.z)); }
         #endregion
 
-        #region Color
-        [IN(LINE)] public static double3 GammaToLinearSpace(double3 value) { const double Gamma = 2.2d; return Pow(value, Gamma); }
-        [IN(LINE)] public static double3 LinearToGammaSpace(double3 value) { const double InverseGamma = 1.0d / 2.2d; return Pow(value, InverseGamma); }
+        #region Space Converts
+        [IN(LINE)] public static double3 GammaToLinearSpace(double3 a) { const double Gamma = 2.2d; return Pow(a, Gamma); }
+        [IN(LINE)] public static double3 LinearToGammaSpace(double3 a) { const double InverseGamma = 1.0d / 2.2d; return Pow(a, InverseGamma); }
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
+        [IN(LINE)] public static double3 Degrees(double3 radians) { return radians * Rad2Deg; }
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
+        [IN(LINE)] public static double3 Radians(double3 degrees) { return degrees * Deg2Rad; }
         #endregion
 
         #region Approximately
@@ -193,7 +203,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool3 IsPow2(double3 value) { return new bool3(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z)); }
         #endregion
 
-        #region Other
+        #region Length/Distance/Normalize
         [IN(LINE)] public static double Length(double3 a) { return Sqrt(Dot(a, a)); }
         [IN(LINE)] public static double LengthSqr(double3 a) { return Dot(a, a); }
         [IN(LINE)] public static double Distance(double3 a, double3 b) { return Length(b - a); }
@@ -205,7 +215,10 @@ namespace DCFApixels.DataMath
             var len = Dot(a, a);
             return Select(defaultvalue, RSqrt(len) * a, len > FloatMinNormal);
         }
+        [IN(LINE)] public static bool IsNormalized(double3 a) { return Approximately(CSum(a) - 1d, 0d, DoubleZeroTolerance); }
+        #endregion
 
+        #region Other
         [IN(LINE)] public static double3 Project(double3 a, double3 ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static double3 ProjectSafe(double3 a, double3 ontoB, double3 defaultValue = default)
@@ -215,13 +228,10 @@ namespace DCFApixels.DataMath
         }
         [IN(LINE)] public static double3 Reflect(double3 v, double3 n) { return v - 2d * n * Dot(v, n); }
 
-        [IN(LINE)] public static double3 Select(double3 falseValue, double3 trueValue, bool3 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static double3 Select(double3 falseValue, double3 trueValue, bool3 test) { return new double3(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y, test.z ? trueValue.z : falseValue.z); }
+        [IN(LINE)] public static double3 Select(double3 falseValue, double3 trueValue, bool test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static double3 Step(double3 threshold, double3 a) { return Select(0.0d, 1.0d, a >= threshold); }
-
-        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
-        [IN(LINE)] public static double3 Degrees(double3 radians) { return radians * Rad2Deg; }
-        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
-        [IN(LINE)] public static double3 Radians(double3 degrees) { return degrees * Deg2Rad; }
+        [IN(LINE)] public static int3 Step2Int(double3 threshold, double3 a) { return Select((int3)0, 1, a >= threshold); }
 
         [IN(LINE)] public static double3 Cos(double3 a) { return new double3(Cos(a.x), Cos(a.y), Cos(a.z)); }
         [IN(LINE)] public static double3 Cosh(double3 a) { return new double3(Cosh(a.x), Cosh(a.y), Cosh(a.z)); }

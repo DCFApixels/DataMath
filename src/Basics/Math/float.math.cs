@@ -1,9 +1,10 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
 using DCFApixels.DataMath.Internal;
 using System.ComponentModel;
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -17,6 +18,7 @@ namespace DCFApixels.DataMath
         #region Abs/Sign
         [IN(LINE)] public static float Abs(float a) { return InternalMath.Abs(a); }
         [IN(LINE)] public static float Sign(float a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
+        [IN(LINE)] public static float SoftSign(float a) { return a / (1f + InternalMath.Abs(a)); }
         [IN(LINE)] public static int Sign2Int(float a) { return (a > 0f ? 1 : 0) - (a < 0f ? 1 : 0); }
         #endregion
 
@@ -93,7 +95,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float CSum(float a) { return a; }
         #endregion
 
-        #region Lerp
+        #region Lerp/MoveTowards
         [IN(LINE)] public static float Lerp(float start, float end, float t) { return start + t * (end - start); }
         [IN(LINE)] public static float LerpClamp(float start, float end, float t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static float LerpRepeat(float start, float end, float t) { return Lerp(start, end, Repeat01(t)); }
@@ -102,6 +104,31 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float UnLerpClamp(float start, float end, float a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static float UnLerpRepeat(float start, float end, float a) { return Repeat01(UnLerp(start, end, a)); }
 
+        [IN(LINE)]
+        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v)
+        {
+            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
+        }
+
+        [IN(LINE)]
+        public static float LerpAngle(float start, float end, float t)
+        {
+            float angle = Repeat(end - start, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return start + angle * t;
+        }
+        [IN(LINE)] public static float LerpAngleClamp(float start, float end, float t) { return LerpAngle(start, end, Clamp01(t)); }
+        [IN(LINE)] public static float LerpAngleRepeat(float start, float end, float t) { return LerpAngle(start, end, Repeat01(t)); }
+
+        [IN(LINE)]
+        public static float DeltaAngle(float current, float target)
+        {
+            float angle = Repeat(target - current, 360f);
+            if (angle > 180f) { angle -= 360f; }
+            //float angle = Repeat(end - start, -180f, 180f);
+            return angle;
+        }
 
         [IN(LINE)]
         public static float MoveTowards(float from, float to, float distance)
@@ -123,32 +150,6 @@ namespace DCFApixels.DataMath
             excess = 0f;
             return from + Sign(dif) * distance;
         }
-
-        [IN(LINE)]
-        public static float Remap(float oldStart, float oldEnd, float newStart, float newEnd, float v)
-        {
-            return Lerp(newStart, newEnd, UnLerp(oldStart, oldEnd, v));
-        }
-
-
-
-
-        [IN(LINE)]
-        public static float LerpAngle(float start, float end, float t)
-        {
-            float angle = Repeat(end - start, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return start + angle * Clamp01(t);
-        }
-        [IN(LINE)]
-        public static float DeltaAngle(float current, float target)
-        {
-            float angle = Repeat(target - current, 360f);
-            if (angle > 180f) { angle -= 360f; }
-            //float angle = Repeat(end - start, -180f, 180f);
-            return angle;
-        }
         [IN(LINE)]
         public static float MoveTowardsAngle(float current, float target, float maxDelta)
         {
@@ -161,8 +162,10 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Float State Checks
-        [IN(LINE)] public static bool IsNormalFloat(float a) { return float.IsNormal(a); }
+        #region Real Value State Checks
+        [IN(LINE)] public static bool IsNegative(float a) { return float.IsNegative(a); }
+        [IN(LINE)] public static bool IsPositive(float a) { return !float.IsNegative(a); }
+        [IN(LINE)] public static bool IsNormalReal(float a) { return float.IsNormal(a); }
         [IN(LINE)] public static bool IsFinite(float a) { return float.IsFinite(a); }
         [IN(LINE)] public static bool IsNaN(float a) { return float.IsNaN(a); }
         [IN(LINE)] public static bool IsInfinity(float a) { return float.IsInfinity(a); }
@@ -170,9 +173,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool IsPositiveInfinity(float a) { return float.IsPositiveInfinity(a); }
         #endregion
 
-        #region Color
-        [IN(LINE)] public static float GammaToLinearSpace(float value) { const float Gamma = 2.2f; return Pow(value, Gamma); }
-        [IN(LINE)] public static float LinearToGammaSpace(float value) { const float InverseGamma = 1.0f / 2.2f; return Pow(value, InverseGamma); }
+        #region Space Converts
+        [IN(LINE)] public static float GammaToLinearSpace(float a) { const float Gamma = 2.2f; return Pow(a, Gamma); }
+        [IN(LINE)] public static float LinearToGammaSpace(float a) { const float InverseGamma = 1.0f / 2.2f; return Pow(a, InverseGamma); }
+        /// <summary> Convert Radians to Degrees. x * 57.296~ </summary>
+        [IN(LINE)] public static float Degrees(float radians) { return radians * Rad2Deg; }
+        /// <summary> Convert Degrees to Radians. x * 0.0175~ </summary>
+        [IN(LINE)] public static float Radians(float degrees) { return degrees * Deg2Rad; }
         #endregion
 
         #region Approximately
@@ -181,14 +188,14 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Pow2
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float CeilPow2(float value)
         {
             uint bits = *(uint*)&value;
             bits = bits & ~DMBits.FloatMantissaMask;
             return *(float*)&bits;
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float FloorPow2(float value)
         {
             const uint EXP_ONE = DMBits.FloatMantissaMask + 1;
@@ -199,7 +206,7 @@ namespace DCFApixels.DataMath
             bits = mantissa == 0 ? bits : bits + EXP_ONE;
             return *(float*)&bits;
         }
-        [IN(LINE)] 
+        [IN(LINE)]
         public static float RoundPow2(float value)
         {
             const uint EXP_ONE = DMBits.FloatMantissaMask + 1;
@@ -227,13 +234,17 @@ namespace DCFApixels.DataMath
         }
         #endregion
 
-        #region Other
+        #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(float a) { return a; }
         [IN(LINE)] public static float LengthSqr(float a) { return Sqr(a); }
         [IN(LINE)] public static float Distance(float a, float b) { return b - a; }
         [IN(LINE)] public static float DistanceSqr(float a, float b) { return Sqr(b - a); }
         [IN(LINE)] public static float Normalize(float a) { return a < 0f ? -1f : 1f; }
+        [IN(LINE)] public static float NormalizeSafe(float a, float defaultvalue = 0f) { return a == 0f ? defaultvalue : Normalize(a); }
+        [IN(LINE)] public static bool IsNormalized(float a) { return Approximately(a - 1f, 0f, FloatZeroTolerance); }
+        #endregion
 
+        #region Other
         [IN(LINE)] public static float Project(float a, float ontoB) { return (Dot(a, ontoB) / Dot(ontoB, ontoB)) * ontoB; }
         [IN(LINE)]
         public static float ProjectSafe(float a, float ontoB, float defaultValue = 0)
@@ -246,9 +257,7 @@ namespace DCFApixels.DataMath
 
         [IN(LINE)] public static float Select(float falseValue, float trueValue, bool test) { return test ? trueValue : falseValue; }
         [IN(LINE)] public static float Step(float threshold, float a) { return Select(0.0f, 1.0f, a >= threshold); }
-
-        [IN(LINE)] public static float Degrees(float radians) { return radians * Rad2Deg; }
-        [IN(LINE)] public static float Radians(float degrees) { return degrees * Deg2Rad; }
+        [IN(LINE)] public static int Step2Int(float threshold, float a) { return Select(0, 1, a >= threshold); }
 
         [IN(LINE)] public static float Cos(float a) { return InternalMath.Cos(a); }
         [IN(LINE)] public static float Cosh(float a) { return InternalMath.Cosh(a); }
@@ -334,7 +343,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CMax<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -343,7 +352,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = Max(result, a[i]);
                     }
@@ -354,7 +363,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CAbsMax<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -363,7 +372,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMax(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = AbsMax(result, a[i]);
                     }
@@ -374,7 +383,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CMin<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -383,7 +392,7 @@ namespace DCFApixels.DataMath
                 case 4: return CMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = Min(result, a[i]);
                     }
@@ -394,7 +403,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CAbsMin<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: Throw.ZeroLengthArgument(nameof(a)); break;
                 case 1: return a[0];
@@ -403,7 +412,7 @@ namespace DCFApixels.DataMath
                 case 4: return CAbsMin(a[0], a[1], a[2], a[3]);
                 default:
                     var result = a[0];
-                    for (int i = 1; i < a.count; i++)
+                    for (int i = 1; i < a.Count; i++)
                     {
                         result = AbsMin(result, a[i]);
                     }
@@ -415,7 +424,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public static float CSum<T>(T a, float _ = default) where T : IVectorN<float>
         {
-            switch (a.count)
+            switch (a.Count)
             {
                 case 0: return 0;
                 case 1: return a[0];
@@ -424,7 +433,7 @@ namespace DCFApixels.DataMath
                 case 4: return a[0] + a[1] + a[2] + a[3];
                 default:
                     var result = a[0] + a[1] + a[2] + a[3];
-                    for (int i = 4; i < a.count; i++)
+                    for (int i = 4; i < a.Count; i++)
                     {
                         result += a[i];
                     }
@@ -436,7 +445,7 @@ namespace DCFApixels.DataMath
         public static int Hash<TVector>(TVector v, float _ = default) where TVector : IVectorN<float>
         {
             int bits = 0;
-            for (int i = 0; i < v.count; i++)
+            for (int i = 0; i < v.Count; i++)
             {
                 bits ^= Hash(v[i]);
             }

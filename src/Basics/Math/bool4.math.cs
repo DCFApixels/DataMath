@@ -1,7 +1,8 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -25,6 +26,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int CSum(bool4 a) { return CSum(a.x) + CSum(a.y) + CSum(a.z) + CSum(a.w); }
         #endregion
 
+        #region Other
+        [IN(LINE)] public static bool4 Select(bool4 falseValue, bool4 trueValue, bool4 test) { return test ? trueValue : falseValue; }
+        #endregion
 
         #region Hash
         [IN(LINE)] public unsafe static uint UHash(bool4 v) { return *(uint*)&v; }

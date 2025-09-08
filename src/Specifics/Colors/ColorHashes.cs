@@ -1,4 +1,5 @@
-﻿using static DCFApixels.DataMath.Consts;
+﻿#pragma warning disable CS8981
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath

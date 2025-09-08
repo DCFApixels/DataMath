@@ -1,5 +1,9 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
 #endif
 using DCFApixels.DataMath.Internal;
 using System;
@@ -8,11 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
+using System.Runtime.CompilerServices;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
-#if ENABLE_IL2CPP
-using Unity.IL2CPP.CompilerServices;
-#endif
 
 namespace DCFApixels.DataMath
 {
@@ -24,10 +26,10 @@ namespace DCFApixels.DataMath
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 12)]
-    public partial struct float3 :
+    public unsafe partial struct float3 :
         IEquatable<float3>,
         IFormattable,
-        IVector3<float>,
+        IVector3Impl<float>,
         IColor,
         IEnumerableVector<float, float3>
     {
@@ -40,15 +42,15 @@ namespace DCFApixels.DataMath
         public static readonly float3 one = new float3(1f, 1f, 1f);
 
         ///<summary>(-1, 0, 0)</summary>
-        public static readonly float3 left = new float3(-1f, 0f, 0f);
+        public static readonly float3 left = new float3(unchecked((float)-1f), 0f, 0f);
         ///<summary>(1, 0, 0)</summary>
         public static readonly float3 right = new float3(1f, 0f, 0f);
         ///<summary>(0, -1, 0)</summary>
-        public static readonly float3 down = new float3(0f, -1f, 0f);
+        public static readonly float3 down = new float3(0f, unchecked((float)-1f), 0f);
         ///<summary>(0, 1, 0)</summary>
         public static readonly float3 up = new float3(0f, 1f, 0f);
         ///<summary>(0, 0, -1)</summary>
-        public static readonly float3 back = new float3(0f, 0f, -1f);
+        public static readonly float3 back = new float3(0f, 0f, unchecked((float)-1f));
         ///<summary>(0, 0, 1)</summary>
         public static readonly float3 forward = new float3(0f, 0f, 1f);
         #endregion
@@ -68,9 +70,9 @@ namespace DCFApixels.DataMath
         [EditorBrowsable(EditorBrowsableState.Never)] float IVector1<float>.x { [IN(LINE)] get { return x; } [IN(LINE)] set { x = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] float IVector2<float>.y { [IN(LINE)] get { return y; } [IN(LINE)] set { y = value; } }
         [EditorBrowsable(EditorBrowsableState.Never)] float IVector3<float>.z { [IN(LINE)] get { return z; } [IN(LINE)] set { z = value; } }
-        [EditorBrowsable(EditorBrowsableState.Never)] public int count { [IN(LINE)] get { return Count; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
-        public unsafe float this[int index]
+        public float this[int index]
         {
             [IN(LINE)]
             get
@@ -89,22 +91,43 @@ namespace DCFApixels.DataMath
                 fixed (float* array = &x) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is float cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(float); }
         #endregion
 
         #region Constructors
         [IN(LINE)] public float3(float x, float y, float z) { this.x = x; this.y = y; this.z = z; }
+        [IN(LINE)] public float3(float2 a, float z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public float3(float x, float2 a) { this.x = x; this.y = a.x; this.z = a.y; }
+
+        [IN(LINE)] public float3((float x, float y, float z) a) { this.x = a.x; this.y = a.y; this.z = a.z; }
+        [IN(LINE)] public float3((float x, float y) a, float z) { this.x = a.x; this.y = a.y; this.z = z; }
+        [IN(LINE)] public float3(float x, (float x, float y) a) { this.x = x; this.y = a.x; this.z = a.y; }
+
         [IN(LINE)] public float3(float v) { x = v; y = v; z = v; }
         [IN(LINE)] public float3(float3 v) { x = v.x; y = v.y; z = v.z; }
-        [IN(LINE)] public float3(double x, double y, double z) { this.x = (float)x; this.y = (float)y; this.z = (float)z; }
         [IN(LINE)] public float3(double v) { x = (float)v; y = (float)v; z = (float)v; }
         [IN(LINE)] public float3(double3 v) { x = (float)v.x; y = (float)v.y; z = (float)v.z; }
-        [IN(LINE)] public float3(int x, int y, int z) { this.x = (float)x; this.y = (float)y; this.z = (float)z; }
         [IN(LINE)] public float3(int v) { x = (float)v; y = (float)v; z = (float)v; }
         [IN(LINE)] public float3(int3 v) { x = (float)v.x; y = (float)v.y; z = (float)v.z; }
-        [IN(LINE)] public float3(uint x, uint y, uint z) { this.x = (float)x; this.y = (float)y; this.z = (float)z; }
         [IN(LINE)] public float3(uint v) { x = (float)v; y = (float)v; z = (float)v; }
         [IN(LINE)] public float3(uint3 v) { x = (float)v.x; y = (float)v.y; z = (float)v.z; }
 
+        [IN(LINE)]
+        public float3(ReadOnlySpan<float> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+#if UNITY_5_3_OR_NEWER
+            x = values[0]; y = values[1]; z = values[2];
+#else
+            this = Unsafe.ReadUnaligned<float3>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
+#endif
+        }
+        [IN(LINE)] public void Deconstruct(out float x, out float y, out float z) { x = this.x; y = this.y; z = this.z; }
         #endregion
 
         #region operators
@@ -133,7 +156,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float3 operator ++(float3 a) { return new float3(++a.x, ++a.y, ++a.z); }
         [IN(LINE)] public static float3 operator --(float3 a) { return new float3(--a.x, --a.y, --a.z); }
         [IN(LINE)] public static float3 operator +(float3 a) { return new float3(+a.x, +a.y, +a.z); }
-        [IN(LINE)] public static float3 operator -(float3 a) { return new float3(-a.x, -a.y, -a.z); }
+        [IN(LINE)] public static float3 operator -(float3 a) { return new float3((float)-a.x, (float)-a.y, (float)-a.z); }
         #endregion
 
         #region Boolean
@@ -848,7 +871,20 @@ namespace DCFApixels.DataMath
         #endregion
 
 
-        #region Other 
+        #region Other
+        [IN(LINE)]
+        public /*readonly*/ void CopyTo(Span<float> destination)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+
+#if UNITY_5_3_OR_NEWER
+            destination[0] = x; destination[1] = y; destination[2] = z;
+#else
+            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+#endif
+        }
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
         public override bool Equals(object o) { return o is float3 target && Equals(target); }
         [IN(LINE)] public bool Equals(float3 a) { return x == a.x && y == a.y && z == a.z; }

@@ -1,16 +1,19 @@
-﻿#if DISABLE_DEBUG
+﻿#pragma warning disable CS8981
+#if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.Consts;
-using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 #if ENABLE_IL2CPP
 using Unity.IL2CPP.CompilerServices;
 #endif
+using DCFApixels.DataMath.Internal;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using static DCFApixels.DataMath.InlineConsts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
@@ -22,7 +25,7 @@ namespace DCFApixels.DataMath
     [Serializable]
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [StructLayout(LayoutKind.Sequential, Pack = sizeof(float), Size = 4 * Count)]
-    public struct color :
+    public partial struct color :
         IEquatable<color>,
         IFormattable,
         IVector4Impl<float>,
@@ -68,33 +71,37 @@ namespace DCFApixels.DataMath
         public float a;
 
         #region Properties
-        public float w { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
-        public float z { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
-        public float y { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
-        public float x { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
-        float IColor.r { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
-        float IColor.g { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
-        float IColor.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
-        float IColor.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
-        public int count { [IN(LINE)] get => Count; }
+        public float x { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
+        public float y { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
+        public float z { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
+        public float w { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.r { [IN(LINE)] get { return r; } [IN(LINE)] set { r = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.g { [IN(LINE)] get { return g; } [IN(LINE)] set { g = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] float IColor.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        [EditorBrowsable(EditorBrowsableState.Never)] int IVectorN.Count { [IN(LINE)] get { return Count; } }
 
         public unsafe float this[int index]
         {
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (color* array = &this) { return ((float*)array)[index]; }
             }
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
-                if (index > Count) throw new IndexOutOfRangeException($"Index must be between[0..{(Count - 1)}].");
+                if (index > Count) { Throw.IndexOutOfRange(Count); }
 #endif
                 fixed (float* array = &r) { array[index] = value; }
             }
         }
+
+        object IVectorN.GetComponentRaw(int index) { return this[index]; }
+        void IVectorN.SetComponentRaw(int index, object raw) { if (raw is float cmp) { this[index] = cmp; } }
+        [IN(LINE)] Type IVectorN.GetComponentType() { return typeof(float); }
         #endregion
 
         #region Constructors

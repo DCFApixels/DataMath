@@ -1,4 +1,7 @@
-﻿namespace DCFApixels.DataMath.TODO
+﻿using static DCFApixels.DataMath.InlineConsts;
+using IN = System.Runtime.CompilerServices.MethodImplAttribute;
+
+namespace DCFApixels.DataMath.TODO
 {
     //Columns c0, c1, c2, c3
     //Fields mRC: m00, m21
@@ -7,36 +10,36 @@
     public interface IMatrix<T> : IVectorN<T> where T : unmanaged
     {
         /// <summary>rows count / y length</summary>
-        public int rows { get; }
+        int Rows { [IN(LINE)] get; }
         /// <summary>columns count / x length</summary>
-        public int columns { get; }
-        public T this[int r, int c] { get; }
+        int Columns { [IN(LINE)] get; }
+        T this[int x, int y] { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
     /// <summary>Not Implemented</summary>
-    public interface IMatrix1x1Cells<T> : IMatrix<T>, IVector1<T> where T : unmanaged
+    public interface IMatrix1x1Cells<T> : IMatrix<T> where T : unmanaged
     {
         /// <summary>m[0, 0] c0.x</summary>
-        public T m00 { get; set; }
+        T m00 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
-    public interface IMatrix1x2Cells<T> : IMatrix1x1Cells<T>, IVector2<T> where T : unmanaged
+    public interface IMatrix1x2Cells<T> : IMatrix1x1Cells<T> where T : unmanaged
     {
         /// <summary>m[0, 1] c1.x</summary>
-        public T m01 { get; set; }
+        T m01 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
-    public interface IMatrix1x3Cells<T> : IMatrix1x2Cells<T>, IVector3<T> where T : unmanaged
+    public interface IMatrix1x3Cells<T> : IMatrix1x2Cells<T> where T : unmanaged
     {
         /// <summary>m[0, 2] c2.x</summary>
-        public T m02 { get; set; }
+        T m02 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
-    public interface IMatrix1x4Cells<T> : IMatrix1x3Cells<T>, IVector4<T> where T : unmanaged
+    public interface IMatrix1x4Cells<T> : IMatrix1x3Cells<T> where T : unmanaged
     {
         /// <summary>m[0, 3] c3.x</summary>
-        public T m03 { get; set; }
+        T m03 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
@@ -44,25 +47,25 @@
     public interface IMatrix2x1Cells<T> : IMatrix1x1Cells<T> where T : unmanaged
     {
         /// <summary>m[1, 0] c0.y</summary>
-        public T m10 { get; set; }
+        T m10 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix2x2Cells<T> : IMatrix1x2Cells<T>, IMatrix2x1Cells<T> where T : unmanaged
     {
         /// <summary>m[1, 1] c1.y</summary>
-        public T m11 { get; set; }
+        T m11 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix2x3Cells<T> : IMatrix1x3Cells<T>, IMatrix2x2Cells<T> where T : unmanaged
     {
         /// <summary>m[1, 2] c2.y</summary>
-        public T m12 { get; set; }
+        T m12 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix2x4Cells<T> : IMatrix1x4Cells<T>, IMatrix2x3Cells<T> where T : unmanaged
     {
         /// <summary>m[1, 3] c3.y</summary>
-        public T m13 { get; set; }
+        T m13 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
@@ -70,25 +73,25 @@
     public interface IMatrix3x1Cells<T> : IMatrix2x1Cells<T> where T : unmanaged
     {
         /// <summary>m[2, 0] c0.z</summary>
-        public T m20 { get; set; }
+        T m20 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix3x2Cells<T> : IMatrix2x2Cells<T>, IMatrix3x1Cells<T> where T : unmanaged
     {
         /// <summary>m[2, 1] c1.z</summary>
-        public T m21 { get; set; }
+        T m21 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix3x3Cells<T> : IMatrix2x3Cells<T>, IMatrix3x2Cells<T> where T : unmanaged
     {
         /// <summary>m[2, 2] c2.z</summary>
-        public T m22 { get; set; }
+        T m22 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix3x4Cells<T> : IMatrix2x4Cells<T>, IMatrix3x3Cells<T> where T : unmanaged
     {
         /// <summary>m[2, 3] c3.z</summary>
-        public T m23 { get; set; }
+        T m23 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
@@ -96,25 +99,25 @@
     public interface IMatrix4x1Cells<T> : IMatrix3x1Cells<T> where T : unmanaged
     {
         /// <summary>m[3, 0] c0.w</summary>
-        public T m30 { get; set; }
+        T m30 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix4x2Cells<T> : IMatrix3x2Cells<T>, IMatrix4x1Cells<T> where T : unmanaged
     {
         /// <summary>m[3, 1] c1.w</summary>
-        public T m31 { get; set; }
+        T m31 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix4x3Cells<T> : IMatrix3x3Cells<T>, IMatrix4x2Cells<T> where T : unmanaged
     {
         /// <summary>m[3, 2] c2.w</summary>
-        public T m32 { get; set; }
+        T m32 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix4x4Cells<T> : IMatrix3x4Cells<T>, IMatrix4x3Cells<T> where T : unmanaged
     {
         /// <summary>m[3, 3] c3.w</summary>
-        public T m33 { get; set; }
+        T m33 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
@@ -127,7 +130,8 @@
         where TVector1 : unmanaged, IVector1<T>
     {
         /// <summary>m[n < 2, 0]</summary>
-        public TVector1 c0 { get; set; }
+        TVector1 c0 { [IN(LINE)] get; [IN(LINE)] set; }
+        [IN(LINE)] TVector1 GetColumn(int index);
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix1x2<T, TVector1> : IMatrix1x1<T, TVector1>, IMatrix2x2Cells<T>
@@ -135,7 +139,7 @@
         where TVector1 : unmanaged, IVector1<T>
     {
         /// <summary>m[n < 2, 1]</summary>
-        public TVector1 c1 { get; set; }
+        TVector1 c1 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix1x3<T, TVector1> : IMatrix1x2<T, TVector1>, IMatrix2x3Cells<T>
@@ -143,7 +147,7 @@
         where TVector1 : unmanaged, IVector1<T>
     {
         /// <summary>m[n < 2, 2]</summary>
-        public TVector1 c2 { get; set; }
+        TVector1 c2 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix1x4<T, TVector1> : IMatrix1x3<T, TVector1>, IMatrix2x4Cells<T>
@@ -151,7 +155,7 @@
         where TVector1 : unmanaged, IVector1<T>
     {
         /// <summary>m[n < 2, 3]</summary>
-        public TVector1 c3 { get; set; }
+        TVector1 c3 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
@@ -161,7 +165,8 @@
         where TVector2 : unmanaged, IVector2<T>
     {
         /// <summary>m[n < 2, 0]</summary>
-        public TVector2 c0 { get; set; }
+        TVector2 c0 { [IN(LINE)] get; [IN(LINE)] set; }
+        [IN(LINE)] TVector2 GetColumn(int index);
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix2x2<T, TVector2> : IMatrix2x1<T, TVector2>, IMatrix2x2Cells<T>
@@ -169,7 +174,7 @@
         where TVector2 : unmanaged, IVector2<T>
     {
         /// <summary>m[n < 2, 1]</summary>
-        public TVector2 c1 { get; set; }
+        TVector2 c1 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix2x3<T, TVector2> : IMatrix2x2<T, TVector2>, IMatrix2x3Cells<T>
@@ -177,7 +182,7 @@
         where TVector2 : unmanaged, IVector2<T>
     {
         /// <summary>m[n < 2, 2]</summary>
-        public TVector2 c2 { get; set; }
+        TVector2 c2 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix2x4<T, TVector2> : IMatrix2x3<T, TVector2>, IMatrix2x4Cells<T>
@@ -185,7 +190,7 @@
         where TVector2 : unmanaged, IVector2<T>
     {
         /// <summary>m[n < 2, 3]</summary>
-        public TVector2 c3 { get; set; }
+        TVector2 c3 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
@@ -195,7 +200,8 @@
         where TVector3 : unmanaged, IVector3<T>
     {
         /// <summary>m[n < 3, 0]</summary>
-        public TVector3 c0 { get; set; }
+        TVector3 c0 { [IN(LINE)] get; [IN(LINE)] set; }
+        [IN(LINE)] TVector3 GetColumn(int index);
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix3x2<T, TVector3> : IMatrix3x1<T, TVector3>, IMatrix3x2Cells<T>
@@ -203,7 +209,7 @@
         where TVector3 : unmanaged, IVector3<T>
     {
         /// <summary>m[n < 3, 1]</summary>
-        public TVector3 c1 { get; set; }
+        TVector3 c1 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix3x3<T, TVector3> : IMatrix3x2<T, TVector3>, IMatrix3x3Cells<T>
@@ -211,7 +217,7 @@
         where TVector3 : unmanaged, IVector3<T>
     {
         /// <summary>m[n < 3, 2]</summary>
-        public TVector3 c2 { get; set; }
+        TVector3 c2 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix3x4<T, TVector3> : IMatrix3x3<T, TVector3>, IMatrix3x4Cells<T>
@@ -219,7 +225,7 @@
         where TVector3 : unmanaged, IVector3<T>
     {
         /// <summary>m[n < 3, 3]</summary>
-        public TVector3 c3 { get; set; }
+        TVector3 c3 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 
 
@@ -229,7 +235,8 @@
         where TVector4 : unmanaged, IVector4<T>
     {
         /// <summary>m[n < 4, 0]</summary>
-        public TVector4 c0 { get; set; }
+        TVector4 c0 { [IN(LINE)] get; [IN(LINE)] set; }
+        [IN(LINE)] TVector4 GetColumn(int index);
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix4x2<T, TVector4> : IMatrix4x1<T, TVector4>, IMatrix4x2Cells<T>
@@ -237,7 +244,7 @@
         where TVector4 : unmanaged, IVector4<T>
     {
         /// <summary>m[n < 4, 1]</summary>
-        public TVector4 c1 { get; set; }
+        TVector4 c1 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix4x3<T, TVector4> : IMatrix4x2<T, TVector4>, IMatrix4x3Cells<T>
@@ -245,7 +252,7 @@
         where TVector4 : unmanaged, IVector4<T>
     {
         /// <summary>m[n < 4, 2]</summary>
-        public TVector4 c2 { get; set; }
+        TVector4 c2 { [IN(LINE)] get; [IN(LINE)] set; }
     }
     /// <summary>Not Implemented</summary>
     public interface IMatrix4x4<T, TVector4> : IMatrix4x3<T, TVector4>, IMatrix4x4Cells<T>
@@ -253,6 +260,6 @@
         where TVector4 : unmanaged, IVector4<T>
     {
         /// <summary>m[n < 4, 3]</summary>
-        public TVector4 c3 { get; set; }
+        TVector4 c3 { [IN(LINE)] get; [IN(LINE)] set; }
     }
 }

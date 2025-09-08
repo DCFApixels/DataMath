@@ -1,4 +1,5 @@
-using static DCFApixels.DataMath.Consts;
+#pragma warning disable CS8981
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -6,7 +7,7 @@ namespace DCFApixels.DataMath
     public partial struct double3
     {
         #region Convert operators
-        [IN(LINE)] public static implicit operator double3((double, double, double) v) => new double3(v.Item1, v.Item2, v.Item3);
+        [IN(LINE)] public static implicit operator double3((double, double, double) v) => new double3(v);
 
         [IN(LINE)] public static explicit operator double3(bool v) => new double3(v);
         [IN(LINE)] public static explicit operator double3(bool3 v) => new double3(v);

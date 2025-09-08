@@ -1,13 +1,19 @@
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using static DCFApixels.DataMath.Consts;
+using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
     public partial struct int3
     {
+        #region Length/Normalized
+        public float Length { [IN(LINE)] get { return DM.Length(this); } }
+        public int LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float3 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
+        #endregion
     }
     public static partial class DM // int3
     {
@@ -51,16 +57,20 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool3 IsPow2(int3 value) { return new bool3(IsPow2(value.x), IsPow2(value.y), IsPow2(value.z)); }
         #endregion
 
-        #region Other
+        #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        //Sqrt - float
-        [IN(LINE)] public static int3 LengthSqr(int3 a) { return Sqr(a); }
+        [IN(LINE)] public static int LengthSqr(int3 a) { return Dot(a, a); }
         [IN(LINE)] public static int3 DistanceSqr(int3 a, int3 b) { return Sqr(b - a); }
-        [IN(LINE)] public static int3 Dot(int3 a, int3 b) { return a * b; }
+        #endregion
+
+        #region Other
+        //Sqrt - float
+        [IN(LINE)] public static int Dot(int3 a, int3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
         [IN(LINE)] public static int3 Sqr(int3 a) { return a * a; }
         [IN(LINE)] public static int3 Pow(int3 a, int3 b) { return new int3(Pow(a.x, b.x), Pow(a.y, b.y), Pow(a.z, b.z)); }
-        [IN(LINE)] public static int3 Select(int3 falseValue, int3 trueValue, bool2 test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static int3 Select(int3 falseValue, int3 trueValue, bool3 test) { return new int3(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y, test.z ? trueValue.z : falseValue.z); }
+        [IN(LINE)] public static int3 Select(int3 falseValue, int3 trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion
 
 
