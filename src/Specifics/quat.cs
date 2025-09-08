@@ -1,31 +1,42 @@
-﻿using DCFApixels.DataMath.Internal;
+﻿#if DISABLE_DEBUG
+#undef DEBUG
+#endif
+#if ENABLE_IL2CPP
+using Unity.IL2CPP.CompilerServices;
+#endif
+using DCFApixels.DataMath.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static DCFApixels.DataMath.DM;
+using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
-    /// <summary>Not Implemented</summary>
+#if ENABLE_IL2CPP
+    [Il2CppSetOption(Option.NullChecks, false)]
+    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
+    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
+#endif
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4, Size = 16)]
-    public partial struct quat : IVector4Impl<float>, IEnumerableVector<float, quat>
+    public unsafe partial struct quat : 
+        IVector4Impl<float>, 
+        IEnumerableVector<float, quat>
     {
+        #region Consts
         public const int Count = 4;
+        public static readonly quat Identity = new quat(0f, 0f, 0f, 1f);
+        #endregion
 
         public float4 value;
 
-
-        public static readonly quat Identity = new quat(0f, 0f, 0f, 1f);
-
-
+        #region Constructors
         [IN(LINE)]
         public quat(float x, float y, float z, float w)
         {
@@ -36,32 +47,45 @@ namespace DCFApixels.DataMath
         {
             value = new float4(a.x, a.y, a.z, a.w);
         }
-
         public quat(float3 c0, float3 c1, float3 c2)
         {
             float3 u = c0;
             float3 v = c1;
             float3 w = c2;
 
-            uint u_sign = (AsUInt(u.x) & 0x80000000);
-            float t = v.y + AsFloat(AsUInt(w.z) ^ u_sign);
+            uint u_sign = (DM.AsUInt(u.x) & 0x80000000);
+            float t = v.y + DM.AsFloat(DM.AsUInt(w.z) ^ u_sign);
             uint4 u_mask = new uint4((int)u_sign >> 31);
-            uint4 t_mask = new uint4(AsInt(t) >> 31);
+            uint4 t_mask = new uint4(DM.AsInt(t) >> 31);
 
-            float tr = 1.0f + Abs(u.x);
+            float tr = 1.0f + DM.Abs(u.x);
 
             uint4 sign_flips = new uint4(
                 0x00000000, 0x80000000, 0x80000000, 0x80000000) ^
                 (u_mask & new uint4(0x00000000, 0x80000000, 0x00000000, 0x80000000)) ^
                 (t_mask & new uint4(0x80000000, 0x80000000, 0x80000000, 0x00000000));
 
-            value = new float4(tr, u.y, w.x, v.z) +
-                AsFloat4(AsUInt4(new float4(t, v.x, u.z, w.y)) ^ sign_flips);   // +---, +++-, ++-+, +-++
+            value = new float4(tr, u.y, w.x, v.z) + DM.AsFloat4(DM.AsUInt4(new float4(t, v.x, u.z, w.y)) ^ sign_flips);
 
-            value = AsFloat4((AsUInt4(value) & ~u_mask) | (AsUInt4(value.zwxy) & u_mask));
-            value = AsFloat4((AsUInt4(value.wzyx) & ~t_mask) | (AsUInt4(value) & t_mask));
-            value = Normalize(value);
+            value = DM.AsFloat4((DM.AsUInt4(value) & ~u_mask) | (DM.AsUInt4(value.zwxy) & u_mask));
+            value = DM.AsFloat4((DM.AsUInt4(value.wzyx) & ~t_mask) | (DM.AsUInt4(value) & t_mask));
+            value = DM.Normalize(value);
         }
+
+        [IN(LINE)]
+        public quat(ReadOnlySpan<float> values)
+        {
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
+#endif
+#if UNITY_5_3_OR_NEWER
+            x = values[0]; y = values[1]; z = values[2]; w = values[3];
+#else
+            this = Unsafe.ReadUnaligned<quat>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
+#endif
+        }
+        [IN(LINE)] public void Deconstruct(out float x, out float y, out float z, out float w) { x = this.x; y = this.y; z = this.z; w = this.w; }
+        #endregion
 
         #region IVector
         [EditorBrowsable(EditorBrowsableState.Never)] public float x { [IN(LINE)] get => value.x; [IN(LINE)] set => this.value.x = value; }
@@ -72,6 +96,7 @@ namespace DCFApixels.DataMath
 
         public unsafe float this[int index]
         {
+            [IN(LINE)]
             get
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
@@ -79,6 +104,7 @@ namespace DCFApixels.DataMath
 #endif
                 fixed (quat* array = &this) { return ((float*)array)[index]; }
             }
+            [IN(LINE)]
             set
             {
 #if (DEBUG && !DISABLE_DEBUG) || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
@@ -99,24 +125,7 @@ namespace DCFApixels.DataMath
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         #endregion
 
-        #region Utils
-        internal class DebuggerProxy
-        {
-            public float x;
-            public float y;
-            public float z;
-            public float w;
-            public DebuggerProxy(quat v)
-            {
-                x = v.x;
-                y = v.y;
-                z = v.z;
-                w = v.w;
-            }
-        }
-        #endregion
-
-
+        #region operators
         [IN(LINE)] public static quat operator -(quat a) => new quat(-a.x, -a.y, -a.z, -a.w);
         [IN(LINE)] public static quat operator +(quat a, quat b) => new quat(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
         [IN(LINE)] public static quat operator -(quat a, quat b) => new quat(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
@@ -150,8 +159,8 @@ namespace DCFApixels.DataMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator *(quat q, float3 v)
         {
-            float3 t = 2 * Cross(new float3(q.x, q.y, q.z), v);
-            return v + q.w * t + Cross(new float3(q.x, q.y, q.z), t);
+            float3 t = 2 * DM.Cross(new float3(q.x, q.y, q.z), v);
+            return v + q.w * t + DM.Cross(new float3(q.x, q.y, q.z), t);
         }
 
         public static quat operator /(quat a, quat b)
@@ -190,140 +199,41 @@ namespace DCFApixels.DataMath
         }
 
         //[IN(LINE)] public static quat operator *(quat a, float b) => new quat(a.x * b, a.y * b, a.z * b, a.w * b);
-    }
+        #endregion
 
-    public static partial class DM // quat
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static quat LookRotation(float3 forward)
-        {
-            return LookRotation(forward, float3.up);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static quat LookRotation(float3 forward, float3 up)
-        {
-            float3 t = Normalize(Cross(up, forward));
-            return new quat(t, Cross(forward, t), forward);
-        }
-
-
-        private static float4 ChangeSign(float4 a, float4 b)
-        {
-            const uint SING_MASK = 0x80000000;
-            return AsFloat4(AsUInt4(a) ^ (AsUInt4(b) & SING_MASK));
-        }
+        #region Other
         [IN(LINE)]
-        public static quat Lerp(quat a, quat b, float t)
+        public /*readonly*/ void CopyTo(Span<float> destination)
         {
-            return new quat(
-                Normalize(a.value + t * (ChangeSign(b.value, Dot(a, b)) - a.value))
-                );
+#if DEBUG || !DCFADATAMATH_DISABLE_SANITIZE_CHECKS
+            if (destination.Length < Count) { Throw.ArgumentDestinationTooShort(); }
+#endif
+
+#if UNITY_5_3_OR_NEWER
+            destination[0] = x; destination[1] = y; destination[2] = z; destination[3] = w;
+#else
+            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+#endif
+        }
+        [IN(LINE)] public override int GetHashCode() { return DM.Hash(this); }
+        public override bool Equals(object o) { return o is float4 target && Equals(target); }
+        [IN(LINE)] public bool Equals(float4 a) { return x == a.x && y == a.y && z == a.z && w == a.w; }
+        public override string ToString() { return $"quat({value}({DM.ToEuler(this)}))"; }
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return $"quat({value.ToString(format, formatProvider)}({DM.ToEuler(this).ToString(format, formatProvider)}))";
         }
 
-        [IN(LINE)]
-        public static quat Slerp(quat a, quat b, float t)
+        internal class DebuggerProxy
         {
-            return SlerpUnclamped(a, b, Clamp01(t));
-        }
-        [IN(LINE)]
-        public static quat SlerpUnclamped(quat a, quat b, float t)
-        {
-            float dt = Dot(a, b);
-            if (dt < 0.0f)
+            public float4 quat;
+            public float3 euler;
+            public DebuggerProxy(quat v)
             {
-                dt = -dt;
-                b.value = -b.value;
-            }
-
-            if (dt < 0.9995f)
-            {
-                float angle = Acos(dt);
-                float s = RSqrt(1.0f - dt * dt);    // 1.0f / Sin(angle)
-                float w1 = Sin(angle * (1.0f - t)) * s;
-                float w2 = Sin(angle * t) * s;
-                return new quat(a.value * w1 + b.value * w2);
-            }
-            else
-            {
-                // if the angle is small, use linear interpolation
-                return Lerp(a, b, t);
+                quat = v.value;
+                euler = DM.ToEuler(v);
             }
         }
-
-        [IN(LINE)]
-        public static float Dot(quat a, quat b)
-        {
-            return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
-        }
-
-        [IN(LINE)]
-        public static float Angle(quat a, quat b)
-        {
-            const float DOT_EQUALS_EPSILON = 0.999999f;
-            float num = Min(Abs(Dot(a, b)), 1f);
-            return (num > DOT_EQUALS_EPSILON) ? 0f : (Acos(num) * 2f * 57.29578f);
-        }
-        [IN(LINE)]
-        public static quat RotateTowards(quat from, quat to, float maxDegreesDelta)
-        {
-            float num = Angle(from, to);
-            if (num == 0f)
-            {
-                return to;
-            }
-            return SlerpUnclamped(from, to, Min(1f, maxDegreesDelta / num));
-        }
-
-        [IN(LINE)]
-        public static float3 ToEuler(quat q)
-        {
-            const float EPSILON = 1e-6f;
-            const float CUT_OFF = (1f - 2f * EPSILON) * (1f - 2f * EPSILON);
-
-            float4 qv = DMBasic.ToBasic(q);
-            float4 d1 = qv * qv.wwww * new float4(2f); //xw, yw, zw, ww
-            float4 d2 = qv * qv.yzxw * new float4(2f); //xy, yz, zx, ww
-            float4 d3 = qv * qv;
-
-            float y1 = d2.z - d1.y;
-            if (y1 * y1 < CUT_OFF)
-            {
-                float x1 = d2.y + d1.x;
-                float x2 = d3.z + d3.w - d3.y - d3.x;
-                float z1 = d2.x + d1.z;
-                float z2 = d3.x + d3.w - d3.y - d3.z;
-                return new float3(Atan2(x1, x2), -Asin(y1), Atan2(z1, z2));
-            }
-            else
-            {
-                y1 = Clamp(y1, -1f, 1f);
-                float4 abcd = new float4(d2.z, d1.y, d2.x, d1.z);
-                float x1 = 2f * (abcd.x * abcd.w + abcd.y * abcd.z); //2 * (ad + bc)
-                float x2 = CSum(abcd * abcd * new float4(-1f, 1f, -1f, 1f));
-                return new float3(Atan2(x1, x2), -Asin(y1), 0f);
-            }
-        }
-
-        [IN(LINE)]
-        public static quat FromEuler(float x, float y, float z) => FromEuler(new float3(x, y, z));
-        [IN(LINE)]
-        public static quat FromEuler(float3 xyz)
-        {
-            float3 halfXYZ = 0.5f * xyz;
-            float3 s = Sin(halfXYZ);
-            float3 c = Cos(halfXYZ);
-            //return new quat(float4(s.x, s.y, s.z, c.x) * c.yxxy * c.zzyz + s.yxxy * s.zzyz * float4(s.x, s.y, s.z, s.x) * float4(-1.0f, 1.0f, -1.0f, 1.0f));
-            return new quat(
-                s.x * c.y * c.z - s.y * s.z * c.x,
-                s.y * c.x * c.z + s.x * s.z * c.y,
-                s.z * c.x * c.y - s.x * s.y * c.z,
-                c.x * c.y * c.z + s.y * s.z * s.x);
-        }
-
-        //[IN(LINE)]
-        //public static float Dot(quat a, quat b)
-        //{
-        //    return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
-        //}
+        #endregion
     }
 }
