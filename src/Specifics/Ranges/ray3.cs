@@ -23,7 +23,7 @@ namespace DCFApixels.DataMath
     public unsafe partial struct ray3 :
         IEquatable<ray3>,
         IFormattable,
-        IRay3Impl<float, float3>
+        IRange3Impl<float, float3>
     {
         #region Consts
         public static readonly ray3 zero = new ray3(0, 0);
@@ -33,15 +33,50 @@ namespace DCFApixels.DataMath
         public float3 src;
         public float3 dir;
 
-        #region IRayN
-        float3 IRayN<float, float3>.src { [IN(LINE)] get { return src; } [IN(LINE)] set { src = value; } }
-        float3 IRayN<float, float3>.dir { [IN(LINE)] get { return dir; } [IN(LINE)] set { dir = value; } }
-        bool IRayN.IsVectorN { [IN(LINE)] get { return true; } }
-        object IRayN.GetSrcRaw() { return src; }
-        object IRayN.GetDirRaw() { return dir; }
-        void IRayN.SetSrcRaw(object raw) { src = (float3)raw; }
-        void IRayN.SetDirRaw(object raw) { dir = (float3)raw; }
-        [IN(LINE)] Type IRayN.GetComponentType() { return typeof(float3); }
+        #region IRangeN
+        float3 IRangeN<float, float3>.src { [IN(LINE)] get { return src; } [IN(LINE)] set { src = value; } }
+        float3 IRangeN<float, float3>.dir { [IN(LINE)] get { return dir; } [IN(LINE)] set { dir = value; } }
+        public float3 a
+        {
+            [IN(LINE)]
+            get { return src; }
+            [IN(LINE)]
+            set { float3 endPoint = b; src = value; dir = endPoint - src; }
+        }
+        public float3 b
+        {
+            [IN(LINE)]
+            get { return src + dir; }
+            [IN(LINE)]
+            set { dir = value - src; }
+        }
+        public float3 min
+        {
+            [IN(LINE)]
+            get { return DM.Min(a, b); }
+            [IN(LINE)]
+            set { float3 currentMax = max; src = value; dir = currentMax - value; }
+        }
+        public float3 max
+        {
+            [IN(LINE)]
+            get { return DM.Max(a, b); }
+            [IN(LINE)]
+            set { float3 currentMin = min; dir = value - currentMin; src = currentMin; }
+        }
+        public float3 center
+        {
+            [IN(LINE)]
+            get { return src + dir * 0.5f; }
+            [IN(LINE)]
+            set { src = value - dir * 0.5f; }
+        }
+        bool IRangeN.IsVectorN { [IN(LINE)] get { return true; } }
+        object IRangeN.GetSrcRaw() { return src; }
+        object IRangeN.GetDirRaw() { return dir; }
+        void IRangeN.SetSrcRaw(object raw) { src = (float3)raw; }
+        void IRangeN.SetDirRaw(object raw) { dir = (float3)raw; }
+        [IN(LINE)] Type IRangeN.GetComponentType() { return typeof(float3); }
         #endregion
 
         #region Constructors

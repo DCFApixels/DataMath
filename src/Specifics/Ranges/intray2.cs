@@ -7,7 +7,6 @@ using Unity.IL2CPP.CompilerServices;
 #endif
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -23,7 +22,7 @@ namespace DCFApixels.DataMath
     public unsafe partial struct intray2 :
         IEquatable<intray2>,
         IFormattable,
-        IRay2Impl<int, int2>
+        IRange2Impl<int, int2>
     {
         #region Consts
         public static readonly intray2 zero = new intray2(0, 0);
@@ -34,14 +33,47 @@ namespace DCFApixels.DataMath
         public int2 dir;
 
         #region IRayN
-        int2 IRayN<int, int2>.src { [IN(LINE)] get { return src; } [IN(LINE)] set { src = value; } }
-        int2 IRayN<int, int2>.dir { [IN(LINE)] get { return dir; } [IN(LINE)] set { dir = value; } }
-        bool IRayN.IsVectorN { [IN(LINE)] get { return true; } }
-        object IRayN.GetSrcRaw() { return src; }
-        object IRayN.GetDirRaw() { return dir; }
-        void IRayN.SetSrcRaw(object raw) { src = (int2)raw; }
-        void IRayN.SetDirRaw(object raw) { dir = (int2)raw; }
-        [IN(LINE)] Type IRayN.GetComponentType() { return typeof(int2); }
+        public int2 a
+        {
+            [IN(LINE)]
+            get { return src; }
+            [IN(LINE)]
+            set { int2 endPoint = b; src = value; dir = endPoint - src; }
+        }
+        public int2 b
+        {
+            [IN(LINE)]
+            get { return src + dir; }
+            [IN(LINE)]
+            set { dir = value - src; }
+        }
+        public int2 min
+        {
+            [IN(LINE)]
+            get { return DM.Min(a, b); }
+            [IN(LINE)]
+            set { int2 currentMax = max; src = value; dir = currentMax - value; }
+        }
+        public int2 max
+        {
+            [IN(LINE)]
+            get { return DM.Max(a, b); }
+            [IN(LINE)]
+            set { int2 currentMin = min; dir = value - currentMin; src = currentMin; }
+        }
+        public float2 center
+        {
+            [IN(LINE)]
+            get { return src + (float2)dir * 0.5f; }
+        }
+        int2 IRangeN<int, int2>.src { [IN(LINE)] get { return src; } [IN(LINE)] set { src = value; } }
+        int2 IRangeN<int, int2>.dir { [IN(LINE)] get { return dir; } [IN(LINE)] set { dir = value; } }
+        bool IRangeN.IsVectorN { [IN(LINE)] get { return true; } }
+        object IRangeN.GetSrcRaw() { return src; }
+        object IRangeN.GetDirRaw() { return dir; }
+        void IRangeN.SetSrcRaw(object raw) { src = (int2)raw; }
+        void IRangeN.SetDirRaw(object raw) { dir = (int2)raw; }
+        [IN(LINE)] Type IRangeN.GetComponentType() { return typeof(int2); }
         #endregion
 
         #region Constructors
