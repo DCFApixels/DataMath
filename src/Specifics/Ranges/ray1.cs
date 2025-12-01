@@ -7,7 +7,6 @@ using Unity.IL2CPP.CompilerServices;
 #endif
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -20,7 +19,6 @@ namespace DCFApixels.DataMath
 #endif
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = sizeof(float), Size = sizeof(float) * 2)]
     public unsafe partial struct ray1 :
         IEquatable<ray1>,
         IFormattable,
@@ -97,7 +95,7 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.AsInt(src) ^ DM.AsInt(dir); }
-        [IN(LINE)] public override bool Equals(object o) { return o is ray1 target && Equals(target); }
+        public override bool Equals(object o) { return o is ray1 target && Equals(target); }
         [IN(LINE)] public bool Equals(ray1 a) { return src == a.src && dir == a.dir; }
         [IN(LINE)] public override string ToString() { return $"{nameof(ray1)}({src}, {dir})"; }
         [IN(LINE)]
@@ -107,13 +105,8 @@ namespace DCFApixels.DataMath
         }
         internal class DebuggerProxy
         {
-            public float src;
-            public float dir;
-            public DebuggerProxy(ray1 v)
-            {
-                src = v.src;
-                dir = v.dir;
-            }
+            public float src, dir;
+            public DebuggerProxy(ray1 v) { src = v.src; dir = v.dir; }
         }
         #endregion
     }

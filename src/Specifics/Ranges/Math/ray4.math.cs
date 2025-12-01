@@ -3,7 +3,6 @@
 #undef DEBUG
 #endif
 using System;
-using System.Numerics;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -114,9 +113,6 @@ namespace DCFApixels.DataMath
         }
         //[IN(LINE)] public static float ProjectDistance(float4 src, float4 dir, float4 point) { return Dot(point - src, dir) / Dot(dir, dir); }
         [IN(LINE)] public static float4 ProjectPoint(ray4 ray, float4 point) { return ray.src + Project(point - ray.src, ray.dir); }
-
-
-
         #endregion
     }
 }

@@ -7,7 +7,6 @@ using Unity.IL2CPP.CompilerServices;
 #endif
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -95,7 +94,7 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(src) ^ DM.Hash(dir); }
-        [IN(LINE)] public override bool Equals(object o) { return o is ray4 target && Equals(target); }
+        public override bool Equals(object o) { return o is ray4 target && Equals(target); }
         [IN(LINE)] public bool Equals(ray4 a) { return DM.All(src == a.src && dir == a.dir); }
         [IN(LINE)] public override string ToString() { return $"{nameof(ray4)}({src}, {dir})"; }
         [IN(LINE)]
@@ -105,13 +104,8 @@ namespace DCFApixels.DataMath
         }
         internal class DebuggerProxy
         {
-            public float4 src;
-            public float4 dir;
-            public DebuggerProxy(ray4 v)
-            {
-                src = v.src;
-                dir = v.dir;
-            }
+            public float4 src, dir;
+            public DebuggerProxy(ray4 v) { src = v.src; dir = v.dir; }
         }
         #endregion
     }

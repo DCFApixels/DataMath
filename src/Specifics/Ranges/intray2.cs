@@ -32,7 +32,7 @@ namespace DCFApixels.DataMath
         public int2 src;
         public int2 dir;
 
-        #region IRayN
+        #region IRangeN
         public int2 a
         {
             [IN(LINE)]
@@ -93,7 +93,7 @@ namespace DCFApixels.DataMath
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(src) ^ DM.Hash(dir); }
-        [IN(LINE)] public override bool Equals(object o) { return o is intray2 target && Equals(target); }
+        public override bool Equals(object o) { return o is intray2 target && Equals(target); }
         [IN(LINE)] public bool Equals(intray2 a) { return DM.All(src == a.src && dir == a.dir); }
         [IN(LINE)] public override string ToString() { return $"{nameof(intray2)}({src}, {dir})"; }
         [IN(LINE)]
@@ -103,13 +103,8 @@ namespace DCFApixels.DataMath
         }
         internal class DebuggerProxy
         {
-            public int2 src;
-            public int2 dir;
-            public DebuggerProxy(intray2 v)
-            {
-                src = v.src;
-                dir = v.dir;
-            }
+            public int2 src, dir;
+            public DebuggerProxy(intray2 v) { src = v.src; dir = v.dir; }
         }
         #endregion
     }

@@ -7,7 +7,6 @@ using Unity.IL2CPP.CompilerServices;
 #endif
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -81,6 +80,7 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public ray3(float3 src, float3 dir) { this.src = src; this.dir = dir; }
+        [IN(LINE)] public ray3(line3 a) { src = a.src; dir = a.dir; }
         #endregion
 
         #region operators
@@ -91,11 +91,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray3 operator +(ray3 range, float v) { return new ray3(range.src + v, range.dir + v); }
         [IN(LINE)] public static ray3 operator /(ray3 range, float v) { return new ray3(range.src / v, range.dir / v); }
         [IN(LINE)] public static ray3 operator *(ray3 range, float v) { return new ray3(range.src * v, range.dir * v); }
+
+        [IN(LINE)] public static implicit operator line3(ray3 a) { return new line3(a); }
         #endregion
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(src) ^ DM.Hash(dir); }
-        [IN(LINE)] public override bool Equals(object o) { return o is ray3 target && Equals(target); }
+        public override bool Equals(object o) { return o is ray3 target && Equals(target); }
         [IN(LINE)] public bool Equals(ray3 a) { return DM.All(src == a.src && dir == a.dir); }
         [IN(LINE)] public override string ToString() { return $"{nameof(ray3)}({src}, {dir})"; }
         [IN(LINE)]
@@ -105,13 +107,8 @@ namespace DCFApixels.DataMath
         }
         internal class DebuggerProxy
         {
-            public float3 src;
-            public float3 dir;
-            public DebuggerProxy(ray3 v)
-            {
-                src = v.src;
-                dir = v.dir;
-            }
+            public float3 src, dir;
+            public DebuggerProxy(ray3 v) { src = v.src; dir = v.dir; }
         }
         #endregion
     }

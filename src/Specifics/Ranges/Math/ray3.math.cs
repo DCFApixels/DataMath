@@ -107,9 +107,6 @@ namespace DCFApixels.DataMath
         }
         //[IN(LINE)] public static float ProjectDistance(float3 src, float3 dir, float3 point) { return Dot(point - src, dir) / Dot(dir, dir); }
         [IN(LINE)] public static float3 ProjectPoint(ray3 ray, float3 point) { return ray.src + Project(point - ray.src, ray.dir); }
-
-
-
         #endregion
     }
 }

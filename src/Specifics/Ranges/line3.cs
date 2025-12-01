@@ -94,9 +94,26 @@ namespace DCFApixels.DataMath
         [IN(LINE)] Type IRangeN.GetComponentType() { return typeof(float3); }
         #endregion
 
+        #region Constructors
+        [IN(LINE)] public line3(float3 a, float3 b) { this.a = a; this.b = b; }
+        [IN(LINE)] public line3(ray3 a) { this.a = a.a; this.b = a.b; }
+        #endregion
+
+        #region operators
+        [IN(LINE)] public static bool operator ==(line3 a, line3 b) { return a.Equals(b); }
+        [IN(LINE)] public static bool operator !=(line3 a, line3 b) { return !a.Equals(b); }
+
+        [IN(LINE)] public static line3 operator -(line3 range, float v) { return new line3(range.src - v, range.dir - v); }
+        [IN(LINE)] public static line3 operator +(line3 range, float v) { return new line3(range.src + v, range.dir + v); }
+        [IN(LINE)] public static line3 operator /(line3 range, float v) { return new line3(range.src / v, range.dir / v); }
+        [IN(LINE)] public static line3 operator *(line3 range, float v) { return new line3(range.src * v, range.dir * v); }
+
+        [IN(LINE)] public static implicit operator ray3(line3 a) { return new ray3(a); }
+        #endregion
+
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(a) ^ DM.Hash(b); }
-        [IN(LINE)] public override bool Equals(object o) { return o is ray3 target && Equals(target); }
+        public override bool Equals(object o) { return o is ray3 target && Equals(target); }
         [IN(LINE)] public bool Equals(line3 a) { return DM.All(this.a == a.a && b == a.b); }
         [IN(LINE)] public override string ToString() { return $"{nameof(ray3)}({src}, {dir})"; }
         [IN(LINE)]
@@ -106,13 +123,8 @@ namespace DCFApixels.DataMath
         }
         internal class DebuggerProxy
         {
-            public float3 src;
-            public float3 dir;
-            public DebuggerProxy(ray3 v)
-            {
-                src = v.src;
-                dir = v.dir;
-            }
+            public float3 a, b;
+            public DebuggerProxy(ray3 v) { a = v.a; b = v.b; }
         }
         #endregion
     }
