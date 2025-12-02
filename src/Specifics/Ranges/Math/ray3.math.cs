@@ -16,7 +16,7 @@ namespace DCFApixels.DataMath
         public float3 Max { [IN(LINE)] get { return DM.Max(this); } }
         public float3 Center { [IN(LINE)] get { return src + dir / 2f; } }
         public float Length { [IN(LINE)] get { return DM.Length(this); } }
-        public float LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float LengthSq { [IN(LINE)] get { return DM.LengthSq(this); } }
         public ray3 Normalized { [IN(LINE)] get { return new ray3(src, DM.NormalizeSafe(dir)); } }
         #endregion
     }
@@ -79,7 +79,7 @@ namespace DCFApixels.DataMath
 
         #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(ray3 a) { return Length(a.dir); }
-        [IN(LINE)] public static float LengthSqr(ray3 a) { return LengthSqr(a.dir); }
+        [IN(LINE)] public static float LengthSq(ray3 a) { return LengthSq(a.dir); }
         [IN(LINE)] public static ray3 Normalize(ray3 a) { return new ray3(a.src, Normalize(a.dir)); }
         [IN(LINE)] public static ray3 NormalizeSafe(ray3 a, float defaultvalue = 0f) { return new ray3(a.src, NormalizeSafe(a.dir, defaultvalue)); }
         [IN(LINE)] public static bool IsNormalized(ray3 a) { return IsNormalized(a.dir); }
@@ -94,13 +94,13 @@ namespace DCFApixels.DataMath
 
             // Проверяем коллинеарность
             float3 crossProduct = Cross(line.dir, toPointVector);
-            if (crossProduct.LengthSqr > tolerance) { return false; }
+            if (crossProduct.LengthSq > tolerance) { return false; }
 
             // Проверяем, что точка находится между началом и концом отрезка
             float dotProduct = Dot(line.dir, toPointVector);
             if (dotProduct < -tolerance) { return false; }
 
-            float squaredLength = line.dir.LengthSqr;
+            float squaredLength = line.dir.LengthSq;
             if (dotProduct > squaredLength + tolerance) { return false; }
 
             return true;

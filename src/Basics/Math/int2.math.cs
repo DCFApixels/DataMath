@@ -11,7 +11,7 @@ namespace DCFApixels.DataMath
     {
         #region Length/Normalized
         public float Length { [IN(LINE)] get { return DM.Length(this); } }
-        public int LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public int LengthSq { [IN(LINE)] get { return DM.LengthSq(this); } }
         public float2 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
         #endregion
     }
@@ -60,14 +60,14 @@ namespace DCFApixels.DataMath
         #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        [IN(LINE)] public static int LengthSqr(int2 a) { return Dot(a, a); }
-        [IN(LINE)] public static int2 DistanceSqr(int2 a, int2 b) { return Sqr(b - a); }
+        [IN(LINE)] public static int LengthSq(int2 a) { return Dot(a, a); }
+        [IN(LINE)] public static int2 DistanceSq(int2 a, int2 b) { return Sq(b - a); }
         #endregion
 
         #region Other
         //Sqrt - float
         [IN(LINE)] public static int Dot(int2 a, int2 b) { return a.x * b.x + a.y * b.y; }
-        [IN(LINE)] public static int2 Sqr(int2 a) { return a * a; }
+        [IN(LINE)] public static int2 Sq(int2 a) { return a * a; }
         [IN(LINE)] public static int2 Pow(int2 a, int2 b) { return new int2(Pow(a.x, b.x), Pow(a.y, b.y)); }
         [IN(LINE)] public static int2 Select(int2 falseValue, int2 trueValue, bool2 test) { return new int2(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y); }
         [IN(LINE)] public static int2 Select(int2 falseValue, int2 trueValue, bool test) { return test ? trueValue : falseValue; }

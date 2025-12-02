@@ -13,7 +13,7 @@ namespace DCFApixels.DataMath
     {
         #region Length/Normalized
         public float Length { [IN(LINE)] get { return DM.Length(this); } }
-        public float LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float LengthSq { [IN(LINE)] get { return DM.LengthSq(this); } }
         public float2 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
         #endregion
     }
@@ -92,7 +92,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float CSum(float2 a) { return a.x + a.y; }
         #endregion
 
-        #region Lerp/MoveTowards
+        #region Lerp/Slerp/MoveTowards/Angle
         [IN(LINE)] public static float2 Lerp(float2 start, float2 end, float2 t) { return start + t * (end - start); }
         [IN(LINE)] public static float2 LerpClamp(float2 start, float2 end, float2 t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static float2 LerpRepeat(float2 start, float2 end, float2 t) { return Lerp(start, end, Repeat01(t)); }
@@ -100,6 +100,41 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float2 UnLerp(float2 start, float2 end, float2 a) { return (a - start) / (end - start); }
         [IN(LINE)] public static float2 UnLerpClamp(float2 start, float2 end, float2 a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static float2 UnLerpRepeat(float2 start, float2 end, float2 a) { return Repeat01(UnLerp(start, end, a)); }
+
+        [IN(LINE)]
+        public static float2 Slerp(float2 start, float2 end, float t)
+        {
+            float lengthStart = Length(start);
+            float lengthEnd = Length(end);
+
+            if (lengthStart < 1e-8f || lengthEnd < 1e-8f)
+            {
+                return Lerp(start, end, t);
+            }
+
+            float2 normStart = start / lengthStart;
+            float2 normEnd = end / lengthEnd;
+            float cosTheta = Dot(normStart, normEnd);
+            cosTheta = ClampMirror1(cosTheta);
+
+            float theta = Acos(cosTheta);
+            float sinTheta = Sin(theta);
+
+            if (sinTheta < 1e-8f)
+            {
+                return Lerp(start, end, t);
+            }
+
+            float weightStart = Sin((1f - t) * theta) / sinTheta;
+            float weightEnd = Sin(t * theta) / sinTheta;
+
+            float2 direction = normStart * weightStart + normEnd * weightEnd;
+            float magnitude = Lerp(lengthStart, lengthEnd, t);
+
+            return direction * magnitude;
+        }
+        [IN(LINE)] public static float2 SlerpClamp(float2 start, float2 end, float t) { return Slerp(start, end, Clamp01(t)); }
+        [IN(LINE)] public static float2 SlerpRepeat(float2 start, float2 end, float t) { return Slerp(start, end, Repeat01(t)); }
 
         [IN(LINE)]
         public static float2 Remap(float2 oldStart, float2 oldEnd, float2 newStart, float2 newEnd, float2 v)
@@ -126,12 +161,20 @@ namespace DCFApixels.DataMath
             //float angle = Repeat(end - start, -180f, 180f);
             return angle;
         }
+        [IN(LINE)]
+        public static float Angle(float2 from, float2 to)
+        {
+            float sqrt = Sqrt(LengthSq(from) * LengthSq(to));
+            if (sqrt < 1E-15f) { return 0f; }
+            float dot = ClampMirror1(Dot(from, to) / sqrt);
+            return Degrees(Acos(dot));
+        }
 
         [IN(LINE)]
         public static float2 MoveTowards(float2 from, float2 to, float distance)
         {
             float2 dif = to - from;
-            float len = dif.Length;
+            float len = Length(dif);
             if (len <= distance) { return to; }
             return from + dif / len * distance;
         }
@@ -144,7 +187,7 @@ namespace DCFApixels.DataMath
                 return from;
             }
             float2 dif = to - from;
-            float lensqr = LengthSqr(dif);
+            float lensqr = LengthSq(dif);
             if (lensqr == 0f)
             {
                 excess = distance;
@@ -205,9 +248,9 @@ namespace DCFApixels.DataMath
 
         #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(float2 a) { return Sqrt(Dot(a, a)); }
-        [IN(LINE)] public static float LengthSqr(float2 a) { return Dot(a, a); }
+        [IN(LINE)] public static float LengthSq(float2 a) { return Dot(a, a); }
         [IN(LINE)] public static float Distance(float2 a, float2 b) { return Length(b - a); }
-        [IN(LINE)] public static float DistanceSqr(float2 a, float2 b) { return LengthSqr(b - a); }
+        [IN(LINE)] public static float DistanceSq(float2 a, float2 b) { return LengthSq(b - a); }
         [IN(LINE)] public static float2 Normalize(float2 a) { return 1.0f / Sqrt(Dot(a, a)) * a; }
         [IN(LINE)]
         public static float2 NormalizeSafe(float2 a, float2 defaultvalue = default)
@@ -244,7 +287,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float2 Atan2(float2 a, float2 b) { return new float2(Atan2(a.x, b.x), Atan2(a.y, b.y)); }
 
         [IN(LINE)] public static float Dot(float2 a, float2 b) { return a.x * b.x + a.y * b.y; }
-        [IN(LINE)] public static float2 Sqr(float2 a) { return a * a; }
+        [IN(LINE)] public static float2 Sq(float2 a) { return a * a; }
         [IN(LINE)] public static float2 Sqrt(float2 a) { return new float2(Sqrt(a.x), Sqrt(a.y)); }
         [IN(LINE)] public static float2 RSqrt(float2 a) { return 1f / Sqrt(a); }
         [IN(LINE)] public static float2 Pow(float2 a, float2 b) { return new float2(Pow(a.x, a.y), Pow(a.y, a.y)); }

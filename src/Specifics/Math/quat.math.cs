@@ -39,11 +39,8 @@ namespace DCFApixels.DataMath
         {
             return new quat(Normalize(a.value + t * (ChangeSign(b.value, Dot(a, b)) - a.value)));
         }
-        [IN(LINE)]
-        public static quat LerpClamp(quat a, quat b, float t)
-        {
-            return Lerp(a, b, Clamp01(t));
-        }
+        [IN(LINE)] public static quat LerpClamp(quat a, quat b, float t) { return Lerp(a, b, Clamp01(t)); }
+        [IN(LINE)] public static quat LerpPingPong(quat a, quat b, float t) {return Lerp(a, b, PingPong01(t)); }
 
         [IN(LINE)]
         public static quat Slerp(quat a, quat b, float t)
@@ -69,11 +66,8 @@ namespace DCFApixels.DataMath
                 return Lerp(a, b, t);
             }
         }
-        [IN(LINE)]
-        public static quat SlerpClamp(quat a, quat b, float t)
-        {
-            return Slerp(a, b, Clamp01(t));
-        }
+        [IN(LINE)] public static quat SlerpClamp(quat a, quat b, float t) { return Slerp(a, b, Clamp01(t)); }
+        [IN(LINE)] public static quat SlerpPingPong(quat a, quat b, float t) { return Slerp(a, b, PingPong01(t)); }
 
         [IN(LINE)]
         public static float Dot(quat a, quat b)

@@ -13,7 +13,7 @@ namespace DCFApixels.DataMath
     {
         #region Length/Normalized
         public double Length { [IN(LINE)] get { return DM.Length(this); } }
-        public double LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public double LengthSq { [IN(LINE)] get { return DM.LengthSq(this); } }
         public double4 Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
         #endregion
     }
@@ -92,7 +92,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double CSum(double4 a) { return a.x + a.y + a.z + a.w; }
         #endregion
 
-        #region Lerp/MoveTowards
+        #region Lerp/Slerp/MoveTowards
         [IN(LINE)] public static double4 Lerp(double4 start, double4 end, double4 t) { return start + t * (end - start); }
         [IN(LINE)] public static double4 LerpClamp(double4 start, double4 end, double4 t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static double4 LerpRepeat(double4 start, double4 end, double4 t) { return Lerp(start, end, Repeat01(t)); }
@@ -100,6 +100,41 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 UnLerp(double4 start, double4 end, double4 a) { return (a - start) / (end - start); }
         [IN(LINE)] public static double4 UnLerpClamp(double4 start, double4 end, double4 a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static double4 UnLerpRepeat(double4 start, double4 end, double4 a) { return Repeat01(UnLerp(start, end, a)); }
+
+        [IN(LINE)]
+        public static double4 Slerp(double4 start, double4 end, double t)
+        {
+            double lengthStart = Length(start);
+            double lengthEnd = Length(end);
+
+            if (lengthStart < 1e-8f || lengthEnd < 1e-8f)
+            {
+                return Lerp(start, end, t);
+            }
+
+            double4 normStart = start / lengthStart;
+            double4 normEnd = end / lengthEnd;
+            double cosTheta = Dot(normStart, normEnd);
+            cosTheta = ClampMirror1(cosTheta);
+
+            double theta = Acos(cosTheta);
+            double sinTheta = Sin(theta);
+
+            if (sinTheta < 1e-8f)
+            {
+                return Lerp(start, end, t);
+            }
+
+            double weightStart = Sin((1f - t) * theta) / sinTheta;
+            double weightEnd = Sin(t * theta) / sinTheta;
+
+            double4 direction = normStart * weightStart + normEnd * weightEnd;
+            double magnitude = Lerp(lengthStart, lengthEnd, t);
+
+            return direction * magnitude;
+        }
+        [IN(LINE)] public static double4 SlerpClamp(double4 start, double4 end, double t) { return Slerp(start, end, Clamp01(t)); }
+        [IN(LINE)] public static double4 SlerpRepeat(double4 start, double4 end, double t) { return Slerp(start, end, Repeat01(t)); }
 
         [IN(LINE)]
         public static double4 Remap(double4 oldStart, double4 oldEnd, double4 newStart, double4 newEnd, double4 v)
@@ -126,6 +161,14 @@ namespace DCFApixels.DataMath
             //double angle = Repeat(end - start, -180d, 180d);
             return angle;
         }
+        [IN(LINE)]
+        public static double Angle(double4 from, double4 to)
+        {
+            double sqrt = Sqrt(LengthSq(from) * LengthSq(to));
+            if (sqrt < 1E-15f) { return 0f; }
+            double dot = ClampMirror1(Dot(from, to) / sqrt);
+            return Degrees(Acos(dot));
+        }
 
         [IN(LINE)]
         public static double4 MoveTowards(double4 from, double4 to, double distance)
@@ -144,7 +187,7 @@ namespace DCFApixels.DataMath
                 return from;
             }
             double4 dif = to - from;
-            double lensqr = LengthSqr(dif);
+            double lensqr = LengthSq(dif);
             if (lensqr == 0f)
             {
                 excess = distance;
@@ -205,9 +248,9 @@ namespace DCFApixels.DataMath
 
         #region Length/Distance/Normalize
         [IN(LINE)] public static double Length(double4 a) { return Sqrt(Dot(a, a)); }
-        [IN(LINE)] public static double LengthSqr(double4 a) { return Dot(a, a); }
+        [IN(LINE)] public static double LengthSq(double4 a) { return Dot(a, a); }
         [IN(LINE)] public static double Distance(double4 a, double4 b) { return Length(b - a); }
-        [IN(LINE)] public static double DistanceSqr(double4 a, double4 b) { return LengthSqr(b - a); }
+        [IN(LINE)] public static double DistanceSq(double4 a, double4 b) { return LengthSq(b - a); }
         [IN(LINE)] public static double4 Normalize(double4 a) { return 1d / Sqrt(Dot(a, a)) * a; }
         [IN(LINE)]
         public static double4 NormalizeSafe(double4 a, double4 defaultvalue = default)
@@ -244,7 +287,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double4 Atan2(double4 a, double4 b) { return new double4(Atan2(a.x, b.x), Atan2(a.y, b.y), Atan2(a.z, b.z), Atan2(a.w, b.w)); }
 
         [IN(LINE)] public static double Dot(double4 a, double4 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
-        [IN(LINE)] public static double4 Sqr(double4 a) { return a * a; }
+        [IN(LINE)] public static double4 Sq(double4 a) { return a * a; }
         [IN(LINE)] public static double4 Sqrt(double4 a) { return new double4(Sqrt(a.x), Sqrt(a.y), Sqrt(a.z), Sqrt(a.w)); }
         [IN(LINE)] public static double4 RSqrt(double4 a) { return 1f / Sqrt(a); }
         [IN(LINE)] public static double4 Pow(double4 a, double4 b) { return new double4(Pow(a.x, a.y), Pow(a.y, a.y), Pow(a.z, a.z), Pow(a.w, a.w)); }

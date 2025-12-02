@@ -18,7 +18,7 @@ namespace DCFApixels.DataMath
         public float Max { [IN(LINE)] get { return DM.Max(this); } }
         public float Center { [IN(LINE)] get { return src + dir / 2f; } }
         public float Length { [IN(LINE)] get { return DM.Length(this); } }
-        public float LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float LengthSq { [IN(LINE)] get { return DM.LengthSq(this); } }
         public ray1 Normalized { [IN(LINE)] get { return new ray1(src, DM.NormalizeSafe(dir)); } }
         #endregion
     }
@@ -81,7 +81,7 @@ namespace DCFApixels.DataMath
 
         #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(ray1 a) { return Length(a.dir); }
-        [IN(LINE)] public static float LengthSqr(ray1 a) { return LengthSqr(a.dir); }
+        [IN(LINE)] public static float LengthSq(ray1 a) { return LengthSq(a.dir); }
         [IN(LINE)] public static ray1 Normalize(ray1 a) { return new ray1(a.src, Normalize(a.dir)); }
         [IN(LINE)] public static ray1 NormalizeSafe(ray1 a, float defaultvalue = 0f) { return new ray1(a.src, NormalizeSafe(a.dir, defaultvalue)); }
         [IN(LINE)] public static bool IsNormalized(ray1 a) { return IsNormalized(a.dir); }

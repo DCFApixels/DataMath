@@ -16,7 +16,7 @@ namespace DCFApixels.DataMath
         public float2 Max { [IN(LINE)] get { return DM.Max(this); } }
         public float2 Center { [IN(LINE)] get { return src + dir / 2f; } }
         public float Length { [IN(LINE)] get { return DM.Length(this); } }
-        public float LengthSqr { [IN(LINE)] get { return DM.LengthSqr(this); } }
+        public float LengthSq { [IN(LINE)] get { return DM.LengthSq(this); } }
         public ray2 Normalized { [IN(LINE)] get { return new ray2(src, DM.NormalizeSafe(dir)); } }
         #endregion
     }
@@ -79,7 +79,7 @@ namespace DCFApixels.DataMath
 
         #region Length/Distance/Normalize
         [IN(LINE)] public static float Length(ray2 a) { return Length(a.dir); }
-        [IN(LINE)] public static float LengthSqr(ray2 a) { return LengthSqr(a.dir); }
+        [IN(LINE)] public static float LengthSq(ray2 a) { return LengthSq(a.dir); }
         [IN(LINE)] public static ray2 Normalize(ray2 a) { return new ray2(a.src, Normalize(a.dir)); }
         [IN(LINE)] public static ray2 NormalizeSafe(ray2 a, float defaultvalue = 0f) { return new ray2(a.src, NormalizeSafe(a.dir, defaultvalue)); }
         [IN(LINE)] public static bool IsNormalized(ray2 a) { return IsNormalized(a.dir); }
@@ -100,7 +100,7 @@ namespace DCFApixels.DataMath
             float dotProduct = Dot(line.dir, toPointVector);
             if (dotProduct < -tolerance) { return false; }
 
-            float squaredLength = line.dir.LengthSqr;
+            float squaredLength = line.dir.LengthSq;
             if (dotProduct > squaredLength + tolerance) { return false; }
 
             return true;

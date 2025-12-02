@@ -88,14 +88,14 @@ namespace DCFApixels.DataMath
         #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        [IN(LINE)] public static ulong LengthSqr(ulong a) { return Sqr(a); }
-        [IN(LINE)] public static ulong DistanceSqr(ulong a, ulong b) { return Sqr(b - a); }
+        [IN(LINE)] public static ulong LengthSq(ulong a) { return Sq(a); }
+        [IN(LINE)] public static ulong DistanceSq(ulong a, ulong b) { return Sq(b - a); }
         #endregion
 
         #region Other
         //Sqrt - float
         [IN(LINE)] public static ulong Dot(ulong a, ulong b) { return a * b; }
-        [IN(LINE)] public static ulong Sqr(ulong a) { return a * a; }
+        [IN(LINE)] public static ulong Sq(ulong a) { return a * a; }
         [IN(LINE)] public static ulong Pow(ulong a, ulong b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static ulong Select(ulong falseValue, ulong trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion

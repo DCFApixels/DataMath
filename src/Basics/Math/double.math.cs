@@ -90,7 +90,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double CSum(double a) { return a; }
         #endregion
 
-        #region Lerp/MoveTowards
+        #region Lerp/Slerp/MoveTowards
         [IN(LINE)] public static double Lerp(double start, double end, double t) { return start + t * (end - start); }
         [IN(LINE)] public static double LerpClamp(double start, double end, double t) { return Lerp(start, end, Clamp01(t)); }
         [IN(LINE)] public static double LerpRepeat(double start, double end, double t) { return Lerp(start, end, Repeat01(t)); }
@@ -98,6 +98,41 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double UnLerp(double start, double end, double a) { return (a - start) / (end - start); }
         [IN(LINE)] public static double UnLerpClamp(double start, double end, double a) { return Clamp01(UnLerp(start, end, a)); }
         [IN(LINE)] public static double UnLerpRepeat(double start, double end, double a) { return Repeat01(UnLerp(start, end, a)); }
+
+        [IN(LINE)]
+        public static double Slerp(double start, double end, double t)
+        {
+            double lengthStart = Length(start);
+            double lengthEnd = Length(end);
+
+            if (lengthStart < 1e-8f || lengthEnd < 1e-8f)
+            {
+                return Lerp(start, end, t);
+            }
+
+            double normStart = start / lengthStart;
+            double normEnd = end / lengthEnd;
+            double cosTheta = Dot(normStart, normEnd);
+            cosTheta = ClampMirror1(cosTheta);
+
+            double theta = Acos(cosTheta);
+            double sinTheta = Sin(theta);
+
+            if (sinTheta < 1e-8f)
+            {
+                return Lerp(start, end, t);
+            }
+
+            double weightStart = Sin((1f - t) * theta) / sinTheta;
+            double weightEnd = Sin(t * theta) / sinTheta;
+
+            double direction = normStart * weightStart + normEnd * weightEnd;
+            double magnitude = Lerp(lengthStart, lengthEnd, t);
+
+            return direction * magnitude;
+        }
+        [IN(LINE)] public static double SlerpClamp(double start, double end, double t) { return Slerp(start, end, Clamp01(t)); }
+        [IN(LINE)] public static double SlerpRepeat(double start, double end, double t) { return Slerp(start, end, Repeat01(t)); }
 
         [IN(LINE)]
         public static double Remap(double oldStart, double oldEnd, double newStart, double newEnd, double v)
@@ -123,6 +158,14 @@ namespace DCFApixels.DataMath
             if (angle > 180f) { angle -= 360f; }
             //double angle = Repeat(end - start, -180f, 180f);
             return angle;
+        }
+        [IN(LINE)]
+        public static double Angle(double from, double to)
+        {
+            double sqrt = Sqrt(LengthSq(from) * LengthSq(to));
+            if (sqrt < 1E-15f) { return 0f; }
+            double dot = ClampMirror1(Dot(from, to) / sqrt);
+            return Degrees(Acos(dot));
         }
 
         [IN(LINE)]
@@ -231,9 +274,9 @@ namespace DCFApixels.DataMath
 
         #region Length/Distance/Normalize
         [IN(LINE)] public static double Length(double a) { return a; }
-        [IN(LINE)] public static double LengthSqr(double a) { return Sqr(a); }
+        [IN(LINE)] public static double LengthSq(double a) { return Sq(a); }
         [IN(LINE)] public static double Distance(double a, double b) { return b - a; }
-        [IN(LINE)] public static double DistanceSqr(double a, double b) { return Sqr(b - a); }
+        [IN(LINE)] public static double DistanceSq(double a, double b) { return Sq(b - a); }
         [IN(LINE)] public static double Normalize(double a) { return a < 0d ? -1d : 1d; }
         [IN(LINE)] public static double NormalizeSafe(double a, double defaultvalue = 0f) { return a == 0d ? defaultvalue : Normalize(a); }
         [IN(LINE)] public static bool IsNormalized(double a) { return Approximately(a - 1d, 0d, DoubleZeroTolerance); }
@@ -264,7 +307,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double Atan2(double a, double b) { return InternalMath.Atan2(a, b); }
 
         [IN(LINE)] public static double Dot(double a, double b) { return a * b; }
-        [IN(LINE)] public static double Sqr(double a) { return a * a; }
+        [IN(LINE)] public static double Sq(double a) { return a * a; }
         [IN(LINE)] public static double Sqrt(double a) { return InternalMath.Sqrt(a); }
         [IN(LINE)] public static double RSqrt(double a) { return 1f / InternalMath.Sqrt(a); }
         [IN(LINE)] public static double Pow(double a, double b) { return InternalMath.Pow(a, b); }

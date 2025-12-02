@@ -88,14 +88,14 @@ namespace DCFApixels.DataMath
         #region Length/Normalize/Distance
         //Length - float
         //Distance - float
-        [IN(LINE)] public static uint LengthSqr(uint a) { return Sqr(a); }
-        [IN(LINE)] public static uint DistanceSqr(uint a, uint b) { return Sqr(b - a); }
+        [IN(LINE)] public static uint LengthSq(uint a) { return Sq(a); }
+        [IN(LINE)] public static uint DistanceSq(uint a, uint b) { return Sq(b - a); }
         #endregion
 
         #region Other
         //Sqrt - float
         [IN(LINE)] public static uint Dot(uint a, uint b) { return a * b; }
-        [IN(LINE)] public static uint Sqr(uint a) { return a * a; }
+        [IN(LINE)] public static uint Sq(uint a) { return a * a; }
         [IN(LINE)] public static uint Pow(uint a, uint b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static uint Select(uint falseValue, uint trueValue, bool test) { return test ? trueValue : falseValue; }
         #endregion

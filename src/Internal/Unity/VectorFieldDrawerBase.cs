@@ -98,7 +98,7 @@ namespace DCFApixels.DataMath.Unity.Editors
                     case SerializedPropertyType.BoundsInt:
                     case SerializedPropertyType.ManagedReference:
                     case SerializedPropertyType.Hash128:
-                    case SerializedPropertyType.RenderingLayerMask:
+                    //case SerializedPropertyType.RenderingLayerMask:
                     case SerializedPropertyType.Vector2:
                     case SerializedPropertyType.Vector3:
                     case SerializedPropertyType.Vector4:

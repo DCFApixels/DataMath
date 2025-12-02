@@ -82,7 +82,7 @@ namespace DCFApixels.DataMath
             if (values.Length < Count) { Throw.ArgumentOutOfRange(nameof(values)); }
 #endif
 #if UNITY_5_3_OR_NEWER
-            x = values[0]; y = values[1]; z = values[2]; w = values[3];
+            value.x = values[0]; value.y = values[1]; value.z = values[2]; value.w = values[3];
 #else
             this = Unsafe.ReadUnaligned<quat>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
 #endif
