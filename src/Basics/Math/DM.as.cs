@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS8981
+using DCFApixels.DataMath.Internal;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -40,5 +41,33 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public unsafe static long AsLong(double value) { return *(long*)&value; }
         [IN(LINE)] public unsafe static ulong AsULong(double value) { return *(ulong*)&value; }
         #endregion
+
+
+        [IN(LINE)] public static float AsFloatFraction(int a) { unchecked { return AsFloatFraction((uint)a); } }
+        [IN(LINE)] public static double AsDoubleFraction(int a) { unchecked { return AsDoubleFraction((uint)a); } }
+        [IN(LINE)] public static float AsFloatFraction(uint a) { unchecked { return InternalBits.Q32ToFloat(a); } }
+        [IN(LINE)]
+        public static double AsDoubleFraction(uint a)
+        {
+            unchecked
+            {
+                UInt2ULongUnion u = default;
+                u.uint2Value.x = a;
+                return InternalBits.Q64ToDouble(u.ulongValue);
+            }
+        }
+        [IN(LINE)] public static float AsFloatFraction(long a) { unchecked { return AsFloatFraction((ulong)a); } }
+        [IN(LINE)] public static double AsDoubleFraction(long a) { unchecked { return AsDoubleFraction((ulong)a); } }
+        [IN(LINE)]
+        public static float AsFloatFraction(ulong a)
+        {
+            unchecked
+            {
+                UInt2ULongUnion u = default;
+                u.ulongValue = a;
+                return InternalBits.Q32ToFloat(u.uint2Value.x);
+            }
+        }
+        [IN(LINE)] public static double AsDoubleFraction(ulong a) { unchecked { return InternalBits.Q64ToDouble(a); } }
     }
 }

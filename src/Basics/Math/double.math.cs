@@ -323,6 +323,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static double Tanh(double a) { return InternalMath.Tanh(a); }
 
         [IN(LINE)] public static double Truncate(double a) { return InternalMath.Truncate(a); }
+
+        [IN(LINE)] public static bool Contains<T>(T[] array, double index) { return index >= 0 && index < array.Length; }
+
+        [IN(LINE)] public static bool Contains(double rangePos, double rangeSize, double pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Contains(double rangePos, double rangeSize, double pos, double size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool Overlaps(double rangePos, double rangeSize, double pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Overlaps(double rangePos, double rangeSize, double pos, double size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 

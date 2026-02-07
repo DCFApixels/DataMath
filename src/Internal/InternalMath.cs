@@ -279,59 +279,60 @@ namespace DCFApixels.DataMath.Internal
 
         public static float Round(float x)
         {
-            // Do not change this implementation without also updating MathF.Round(float),
-            // This is based on the 'Berkeley SoftFloat Release 3e' algorithm
-
-            uint bits = new FloatUIntUnion(x).uintValue;// BitConverter.SingleToUInt32Bits(x);
-            byte biasedExponent = ExtractBiasedExponentFromBits(bits);
-
-            if (biasedExponent <= 0x7E)
-            {
-                if ((bits << 1) == 0)
-                {
-                    // Exactly +/- zero should return the original value
-                    return x;
-                }
-                // Any value less than or equal to 0.5 will always round to exactly zero
-                // and any value greater than 0.5 will always round to exactly one. However,
-                // we need to preserve the original sign for IEEE compliance.
-                float result = ((biasedExponent == 0x7E) && (ExtractTrailingSignificandFromBits(bits) != 0)) ? 1.0f : 0.0f;
-                return CopySign(result, x);
-            }
-
-            if (biasedExponent >= 0x96)
-            {
-                // Any value greater than or equal to 2^23 cannot have a fractional part,
-                // So it will always round to exactly itself.
-                return x;
-            }
-
-            // The absolute value should be greater than or equal to 1.0 and less than 2^23
-            Debug.Assert((0x7F <= biasedExponent) && (biasedExponent <= 0x95));
-
-            // Determine the last bit that represents the integral portion of the value
-            // and the bits representing the fractional portion
-            uint lastBitMask = 1U << (0x96 - biasedExponent);
-            uint roundBitsMask = lastBitMask - 1;
-
-            // Increment the first fractional bit, which represents the midpoint between
-            // two integral values in the current window.
-            bits += lastBitMask >> 1;
-
-            if ((bits & roundBitsMask) == 0)
-            {
-                // If that overflowed and the rest of the fractional bits are zero
-                // then we were exactly x.5 and we want to round to the even result
-                bits &= ~lastBitMask;
-            }
-            else
-            {
-                // Otherwise, we just want to strip the fractional bits off, truncating
-                // to the current integer value.
-                bits &= ~roundBitsMask;
-            }
-
-            return new FloatIntUnion(bits).intValue;
+            return (float)Math.Round(x);
+        //    // Do not change this implementation without also updating MathF.Round(float),
+        //    // This is based on the 'Berkeley SoftFloat Release 3e' algorithm
+        //
+        //    uint bits = new FloatUIntUnion(x).uintValue;// BitConverter.SingleToUInt32Bits(x);
+        //    byte biasedExponent = ExtractBiasedExponentFromBits(bits);
+        //
+        //    if (biasedExponent <= 0x7E)
+        //    {
+        //        if ((bits << 1) == 0)
+        //        {
+        //            // Exactly +/- zero should return the original value
+        //            return x;
+        //        }
+        //        // Any value less than or equal to 0.5 will always round to exactly zero
+        //        // and any value greater than 0.5 will always round to exactly one. However,
+        //        // we need to preserve the original sign for IEEE compliance.
+        //        float result = ((biasedExponent == 0x7E) && (ExtractTrailingSignificandFromBits(bits) != 0)) ? 1.0f : 0.0f;
+        //        return CopySign(result, x);
+        //    }
+        //
+        //    if (biasedExponent >= 0x96)
+        //    {
+        //        // Any value greater than or equal to 2^23 cannot have a fractional part,
+        //        // So it will always round to exactly itself.
+        //        return x;
+        //    }
+        //
+        //    // The absolute value should be greater than or equal to 1.0 and less than 2^23
+        //    Debug.Assert((0x7F <= biasedExponent) && (biasedExponent <= 0x95));
+        //
+        //    // Determine the last bit that represents the integral portion of the value
+        //    // and the bits representing the fractional portion
+        //    uint lastBitMask = 1U << (0x96 - biasedExponent);
+        //    uint roundBitsMask = lastBitMask - 1;
+        //
+        //    // Increment the first fractional bit, which represents the midpoint between
+        //    // two integral values in the current window.
+        //    bits += lastBitMask >> 1;
+        //
+        //    if ((bits & roundBitsMask) == 0)
+        //    {
+        //        // If that overflowed and the rest of the fractional bits are zero
+        //        // then we were exactly x.5 and we want to round to the even result
+        //        bits &= ~lastBitMask;
+        //    }
+        //    else
+        //    {
+        //        // Otherwise, we just want to strip the fractional bits off, truncating
+        //        // to the current integer value.
+        //        bits &= ~roundBitsMask;
+        //    }
+        //
+        //    return new FloatIntUnion(bits).intValue;
         }
 
         [IN(LINE)]
@@ -578,16 +579,7 @@ namespace DCFApixels.DataMath.Internal
             return (a > 0d ? 1 : 0) - (a < 0d ? 1 : 0);
         }
 
-        [IN(LINE)]
-        public static int Abs(int x)
-        {
-            return x & 0x7FFFFFFF;
-        }
-        [IN(LINE)]
-        public static long Abs(long x)
-        {
-            return x & 0x7FFFFFFF_FFFFFFFF;
-        }
+
         [IN(LINE)]
         public static float Abs(float x)
         {

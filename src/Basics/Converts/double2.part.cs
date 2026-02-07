@@ -7,6 +7,7 @@ namespace DCFApixels.DataMath
     public partial struct double2
     {
         #region Convert operators
+        [IN(LINE)] public static implicit operator double2(Axis v) => new double2(v);
         [IN(LINE)] public static implicit operator double2((double, double) v) => new double2(v);
 
         [IN(LINE)] public static explicit operator double2(bool v) => new double2(v);
@@ -38,6 +39,29 @@ namespace DCFApixels.DataMath
             x = v.x ? 1d : 0d; y = v.y ? 1d : 0d;
         }
         #endregion
+
+        [IN(LINE)] public double2((double x, double y) v) { x = v.x; y = v.y; }
+        [IN(LINE)]
+        public double2(Axis v)
+        {
+            switch (v)
+            {
+                case Axis.X: x = 1; y = 0; break;
+                case Axis.Y: x = 0; y = 1; break;
+                default: x = 0; y = 0; break;
+            }
+        }
+        public double2(AADirection v)
+        {
+            switch (v)
+            {
+                case AADirection.Left: x = -1; y = 0; break;
+                case AADirection.Right: x = 1; y = 0; break;
+                case AADirection.Down: x = 0; y = -1; break;
+                case AADirection.Up: x = 0; y = 1; break;
+                default: x = 0; y = 0; break;
+            }
+        }
     }
 
     public static partial class DM

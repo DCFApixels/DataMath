@@ -98,6 +98,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint Sq(uint a) { return a * a; }
         [IN(LINE)] public static uint Pow(uint a, uint b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static uint Select(uint falseValue, uint trueValue, bool test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static bool Contains<T>(T[] array, uint index) { return index < array.Length; }
+        [IN(LINE)] public static bool Contains(uint rangePos, uint rangeSize, uint pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Contains(uint rangePos, uint rangeSize, uint pos, uint size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool Overlaps(uint rangePos, uint rangeSize, uint pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Overlaps(uint rangePos, uint rangeSize, uint pos, uint size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 
@@ -263,17 +268,6 @@ namespace DCFApixels.DataMath
         #region Other
         [IN(LINE)] public static int Count(uint a) { unchecked { return InternalBits.CountBits(a); } }
         [IN(LINE)] public static uint Reverse(uint a) { unchecked { return InternalBits.Reverse(a); } }
-        [IN(LINE)] public static float AsFloatFraction(uint a) { unchecked { return InternalBits.Q32ToFloat(a); } }
-        [IN(LINE)]
-        public static double AsDoubleFraction(uint a)
-        {
-            unchecked
-            {
-                UInt2ULongUnion u = default;
-                u.uint2Value.x = a;
-                return InternalBits.Q64ToDouble(u.ulongValue);
-            }
-        }
         #endregion
     }
 }

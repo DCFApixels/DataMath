@@ -71,6 +71,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static uint2 Pow(uint2 a, uint2 b) { return new uint2(Pow(a.x, b.x), Pow(a.y, b.y)); }
         [IN(LINE)] public static uint2 Select(uint2 falseValue, uint2 trueValue, bool2 test) { return new uint2(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y); }
         [IN(LINE)] public static uint2 Select(uint2 falseValue, uint2 trueValue, bool test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static bool2 Contains(uint2 rangePos, uint2 rangeSize, uint2 pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool2 Contains(uint2 rangePos, uint2 rangeSize, uint2 pos, uint2 size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool2 Overlaps(uint2 rangePos, uint2 rangeSize, uint2 pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool2 Overlaps(uint2 rangePos, uint2 rangeSize, uint2 pos, uint2 size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 

@@ -5,6 +5,7 @@ namespace DCFApixels.DataMath.Blends
 {
     public enum BlendMode
     {
+        None,
         Add,
         Subtract,
         Multiply,
@@ -39,6 +40,7 @@ namespace DCFApixels.DataMath.Blends
         {
             switch (mode)
             {
+                case BlendMode.None: return a;
                 case BlendMode.Add: return Add(a, b, t);
                 case BlendMode.Subtract: return Subtract(a, b, t);
                 case BlendMode.Multiply: return Multiply(a, b, t);
@@ -69,6 +71,7 @@ namespace DCFApixels.DataMath.Blends
         {
             switch (mode)
             {
+                case BlendMode.None: return a;
                 case BlendMode.Add: return Add(a, b, t);
                 case BlendMode.Subtract: return Subtract(a, b, t);
                 case BlendMode.Multiply: return Multiply(a, b, t);
@@ -99,6 +102,7 @@ namespace DCFApixels.DataMath.Blends
         {
             switch (mode)
             {
+                case BlendMode.None: return a;
                 case BlendMode.Add: return Add(a, b, t);
                 case BlendMode.Subtract: return Subtract(a, b, t);
                 case BlendMode.Multiply: return Multiply(a, b, t);
@@ -129,6 +133,7 @@ namespace DCFApixels.DataMath.Blends
         {
             switch (mode)
             {
+                case BlendMode.None: return a;
                 case BlendMode.Add: return Add(a, b, t);
                 case BlendMode.Subtract: return Subtract(a, b, t);
                 case BlendMode.Multiply: return Multiply(a, b, t);

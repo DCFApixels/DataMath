@@ -60,9 +60,18 @@ namespace DCFApixels.DataMath.DisplayAttributes
     public sealed class VectorFieldAttribute : PropertyAttribute
     {
         public bool IsShowDefaultDraw;
+        public string Swizzle;
         public VectorFieldAttribute(bool isShowDefaultDraw = false)
         {
             IsShowDefaultDraw = isShowDefaultDraw;
+        }
+        public VectorFieldAttribute(string swizzle)
+        {
+            Swizzle = swizzle;
+        }
+        public VectorFieldAttribute(bool isShowDefaultDraw, string swizzle)
+        {
+            Swizzle = swizzle;
         }
     }
     public sealed class EulerFieldAttribute : PropertyAttribute

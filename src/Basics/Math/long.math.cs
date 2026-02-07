@@ -15,7 +15,7 @@ namespace DCFApixels.DataMath
     public static partial class DM // long
     {
         #region Abs/Sign
-        [IN(LINE)] public static long Abs(long a) { return InternalMath.Abs(a); }
+        [IN(LINE)] public static long Abs(long a) { return Max(-a, a); }
         [IN(LINE)] public static long Sign(long a) { return (a > 0 ? 1 : 0) - (a < 0 ? 1 : 0); }
         #endregion
 
@@ -79,6 +79,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static long Sq(long a) { return a * a; }
         [IN(LINE)] public static long Pow(long a, long b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static long Select(long falseValue, long trueValue, bool test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static bool Contains<T>(T[] array, long index) { return index >= 0 && index < array.LongLength; }
+
+        [IN(LINE)] public static bool Contains(long rangePos, long rangeSize, long pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Contains(long rangePos, long rangeSize, long pos, long size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool Overlaps(long rangePos, long rangeSize, long pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Overlaps(long rangePos, long rangeSize, long pos, long size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 
@@ -243,8 +249,6 @@ namespace DCFApixels.DataMath
         #region Other
         [IN(LINE)] public static long Count(long a) { unchecked { return InternalBits.CountBits((ulong)a); } }
         [IN(LINE)] public static long Reverse(long a) { unchecked { return InternalBits.Reverse(a); } }
-        [IN(LINE)] public static float AsFloatFraction(long a) { unchecked { return AsFloatFraction((ulong)a); } }
-        [IN(LINE)] public static double AsDoubleFraction(long a) { unchecked { return AsDoubleFraction((ulong)a); } }
         #endregion
     }
 }

@@ -7,6 +7,7 @@ namespace DCFApixels.DataMath
     public partial struct double3
     {
         #region Convert operators
+        [IN(LINE)] public static implicit operator double3(Axis v) => new double3(v);
         [IN(LINE)] public static implicit operator double3((double, double, double) v) => new double3(v);
 
         [IN(LINE)] public static explicit operator double3(bool v) => new double3(v);
@@ -41,6 +42,31 @@ namespace DCFApixels.DataMath
             z = v.z ? 1d : 0d;
         }
         #endregion
+
+        [IN(LINE)]
+        public double3(Axis v)
+        {
+            switch (v)
+            {
+                case Axis.X: x = 1; y = 0; z = 0; break;
+                case Axis.Y: x = 0; y = 1; z = 0; break;
+                case Axis.Z: x = 0; y = 0; z = 1; break;
+                default: x = 0; y = 0; z = 0; break;
+            }
+        }
+        public double3(AADirection v)
+        {
+            switch (v)
+            {
+                case AADirection.Left: x = -1; y = 0; z = 0; break;
+                case AADirection.Right: x = 1; y = 0; z = 0; break;
+                case AADirection.Down: x = 0; y = -1; z = 0; break;
+                case AADirection.Up: x = 0; y = 1; z = 0; break;
+                case AADirection.Back: x = 0; y = 0; z = -1; break;
+                case AADirection.Forward: x = 0; y = 0; z = 1; break;
+                default: x = 0; y = 0; z = 0; break;
+            }
+        }
     }
 
     public static partial class DM

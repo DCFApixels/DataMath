@@ -1,12 +1,13 @@
 ﻿#if UNITY_5_3_OR_NEWER && UNITY_EDITOR
 using DCFApixels.DataMath.DisplayAttributes;
+using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace DCFApixels.DataMath.Unity.Editors
 {
     [CustomPropertyDrawer(typeof(VectorFieldAttribute))]
-    internal class VectorFieldDrawer : VectorFieldDrawerBase<VectorFieldAttribute>
+    internal unsafe class VectorFieldDrawer : VectorFieldDrawerBase<VectorFieldAttribute>
     {
         protected override bool IsHideDefaultDraw
         {
@@ -24,30 +25,81 @@ namespace DCFApixels.DataMath.Unity.Editors
                 return;
             }
 
+
             EditorGUIUtility.labelWidth = 12f;
             EditorGUI.indentLevel = 0;
 
-            position.width = position.width / FieldCount;
-            float width = position.width;
-            position.xMin += 3f;
 
-            bool x = true;
-            int depth = property.depth;
-            while (property.Next(x))
+
+            if (Attribute == null || string.IsNullOrEmpty(Attribute.Swizzle))
             {
-                if (property.depth <= depth) { break; }
+                position.width = position.width / FieldCount;
+                position.xMin += 3f;
+                float width = position.width;
 
-                label.text = property.displayName;
-                label.tooltip = property.tooltip;
-                if (property.propertyType == SerializedPropertyType.Boolean)
+                bool x = true;
+                int depth = property.depth;
+                while (property.Next(x))
                 {
-                    Color c = property.boolValue ? Color.white : Color.black;
-                    c.a = 0.1f;
-                    EditorGUI.DrawRect(position, c);
+                    if (property.depth <= depth) { break; }
+
+                    label.text = property.displayName;
+                    label.tooltip = property.tooltip;
+                    if (property.propertyType == SerializedPropertyType.Boolean)
+                    {
+                        Color c = property.boolValue ? Color.white : Color.black;
+                        c.a = 0.1f;
+                        EditorGUI.DrawRect(position, c);
+                    }
+                    EditorGUI.PropertyField(position, property, label);
+                    position.x += width;
+                    x = false;
                 }
-                EditorGUI.PropertyField(position, property, label);
-                position.x += width;
-                x = false;
+            }
+            else
+            {
+                int drawedCount = 0;
+                char* axiss = stackalloc char[4] { 'x', 'y', 'z', 'w' };
+                var axisIndex = -1;
+                var swizzle = Attribute.Swizzle.AsSpan();
+
+                position.width = position.width / swizzle.Length;
+                position.xMin += 3f;
+                float width = position.width;
+                Rect zeroPos = position;
+
+                bool x = true;
+                int depth = property.depth;
+                while (property.Next(x))
+                {
+                    if (property.depth <= depth) { break; }
+                    axisIndex++;
+                    var axis = axiss[axisIndex];
+
+                    for (int i = 0; i < swizzle.Length; i++)
+                    {
+                        if (swizzle[i] != axis) { continue; }
+                        position = zeroPos;
+                        position.x += width * i;
+
+                        label.text = property.displayName;
+                        label.tooltip = property.tooltip;
+                        if (property.propertyType == SerializedPropertyType.Boolean)
+                        {
+                            Color c = property.boolValue ? Color.white : Color.black;
+                            c.a = 0.1f;
+                            EditorGUI.DrawRect(position, c);
+                        }
+                        EditorGUI.PropertyField(position, property, label);
+                        drawedCount++;
+                    }
+
+                    if(drawedCount >= swizzle.Length)
+                    {
+                        break;
+                    }
+                    x = false;
+                }
             }
         }
     }

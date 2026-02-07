@@ -98,6 +98,12 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ulong Sq(ulong a) { return a * a; }
         [IN(LINE)] public static ulong Pow(ulong a, ulong b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static ulong Select(ulong falseValue, ulong trueValue, bool test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static bool Contains<T>(T[] array, ulong index) { return index < (ulong)array.LongLength; }
+
+        [IN(LINE)] public static bool Contains(ulong rangePos, ulong rangeSize, ulong pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Contains(ulong rangePos, ulong rangeSize, ulong pos, ulong size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool Overlaps(ulong rangePos, ulong rangeSize, ulong pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Overlaps(ulong rangePos, ulong rangeSize, ulong pos, ulong size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 
@@ -263,17 +269,6 @@ namespace DCFApixels.DataMath
         #region Other
         [IN(LINE)] public static int Count(ulong a) { unchecked { return InternalBits.CountBits(a); } }
         [IN(LINE)] public static ulong Reverse(ulong a) { unchecked { return InternalBits.Reverse(a); } }
-        [IN(LINE)]
-        public static float AsFloatFraction(ulong a)
-        {
-            unchecked
-            {
-                UInt2ULongUnion u = default;
-                u.ulongValue = a;
-                return InternalBits.Q32ToFloat(u.uint2Value.x);
-            }
-        }
-        [IN(LINE)] public static double AsDoubleFraction(ulong a) { unchecked { return InternalBits.Q64ToDouble(a); } }
         #endregion
     }
 }

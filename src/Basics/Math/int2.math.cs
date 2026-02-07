@@ -18,7 +18,7 @@ namespace DCFApixels.DataMath
     public static partial class DM // int2
     {
         #region Abs/Sign
-        [IN(LINE)] public static int2 Abs(int2 a) { return a; }
+        [IN(LINE)] public static int2 Abs(int2 a) { return new int2(Abs(a.x), Abs(a.y)); }
         [IN(LINE)] public static int2 Sign(int2 a) { return new int2(Sign(a.x), Sign(a.y)); }
         #endregion
 
@@ -71,6 +71,10 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int2 Pow(int2 a, int2 b) { return new int2(Pow(a.x, b.x), Pow(a.y, b.y)); }
         [IN(LINE)] public static int2 Select(int2 falseValue, int2 trueValue, bool2 test) { return new int2(test.x ? trueValue.x : falseValue.x, test.y ? trueValue.y : falseValue.y); }
         [IN(LINE)] public static int2 Select(int2 falseValue, int2 trueValue, bool test) { return test ? trueValue : falseValue; }
+        [IN(LINE)] public static bool2 Contains(int2 rangePos, int2 rangeSize, int2 pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool2 Contains(int2 rangePos, int2 rangeSize, int2 pos, int2 size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool2 Overlaps(int2 rangePos, int2 rangeSize, int2 pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool2 Overlaps(int2 rangePos, int2 rangeSize, int2 pos, int2 size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 

@@ -41,9 +41,9 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Lerp
-        [IN(LINE)] public static float2 Lerp(ray2 range, float t) { return Lerp(range.From, range.To, t); }
-        [IN(LINE)] public static float2 LerpClamp(ray2 range, float t) { return LerpClamp(range.From, range.To, t); }
-        [IN(LINE)] public static float2 LerpRepeat(ray2 range, float t) { return LerpRepeat(range.From, range.To, t); }
+        [IN(LINE)] public static float2 Lerp(ray2 range, float2 t) { return Lerp(range.From, range.To, t); }
+        [IN(LINE)] public static float2 LerpClamp(ray2 range, float2 t) { return LerpClamp(range.From, range.To, t); }
+        [IN(LINE)] public static float2 LerpRepeat(ray2 range, float2 t) { return LerpRepeat(range.From, range.To, t); }
 
         [IN(LINE)] public static float2 UnLerp(ray2 range, float2 a) { return UnLerp(range.From, range.To, a); }
         [IN(LINE)] public static float2 UnLerpClamp(ray2 range, float2 a) { return UnLerpClamp(range.From, range.To, a); }

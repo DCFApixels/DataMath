@@ -1,6 +1,6 @@
 ﻿using System;
 using static DCFApixels.DataMath.InlineConsts;
-using static DCFApixels.DataMath.RandomUtility;
+using static DCFApixels.DataMath.DMRnd;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 using q32 = System.UInt32;
 using q64 = System.UInt64;
@@ -165,9 +165,9 @@ namespace DCFApixels.DataMath
         {
             _state = seed;
         }
-        public static QuasiRandom AutoSeed()
+        public static QuasiRandom AutoSeed(uint offset = 0)
         {
-            return new QuasiRandom(GetAutoSeeed());
+            return new QuasiRandom(NewAutoSeed() + offset);
         }
         #endregion
 

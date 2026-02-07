@@ -50,6 +50,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float3 UnLerpRepeat(ray3 range, float3 a) { return UnLerpRepeat(range.From, range.To, a); }
 
         [IN(LINE)] public static float3 Remap(ray3 oldRange, ray3 newRange, float v) { return Remap(oldRange.From, oldRange.To, newRange.From, newRange.To, v); }
+        [IN(LINE)] public static float3 Remap(ray3 oldRange, ray3 newRange, float3 v) { return Remap(oldRange.From, oldRange.To, newRange.From, newRange.To, v); }
 
         [IN(LINE)] public static float3 LerpAngle(ray3 range, float t) { return LerpAngle(range.From, range.To, t); }
         [IN(LINE)] public static float3 LerpAngleClamp(ray3 range, float t) { return LerpAngleClamp(range.From, range.To, t); }

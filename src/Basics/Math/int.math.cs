@@ -15,7 +15,7 @@ namespace DCFApixels.DataMath
     public static partial class DM // int
     {
         #region Abs/Sign
-        [IN(LINE)] public static int Abs(int a) { return InternalMath.Abs(a); }
+        [IN(LINE)] public static int Abs(int a) { return Max(-a, a); }
         [IN(LINE)] public static int Sign(int a) { return (a > 0 ? 1 : 0) - (a < 0 ? 1 : 0); }
         #endregion
 
@@ -79,6 +79,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static int Sq(int a) { return a * a; }
         [IN(LINE)] public static int Pow(int a, int b) { return InternalMath.Pow(a, b); }
         [IN(LINE)] public static int Select(int falseValue, int trueValue, bool test) { return test ? trueValue : falseValue; }
+        
+        [IN(LINE)] public static bool Contains<T>(T[] array, int index) { return index >= 0 && index < array.Length; }
+
+        [IN(LINE)] public static bool Contains(int rangePos, int rangeSize, int pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Contains(int rangePos, int rangeSize, int pos, int size) { return (pos >= rangePos) && (pos < rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool Overlaps(int rangePos, int rangeSize, int pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Overlaps(int rangePos, int rangeSize, int pos, int size) { return (pos >= rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 
@@ -243,8 +250,6 @@ namespace DCFApixels.DataMath
         #region Other
         [IN(LINE)] public static int Count(int a) { unchecked { return InternalBits.CountBits((uint)a); } }
         [IN(LINE)] public static int Reverse(int a) { unchecked { return InternalBits.Reverse(a); } }
-        [IN(LINE)] public static float AsFloatFraction(int a) { unchecked { return AsFloatFraction((uint)a); } }
-        [IN(LINE)] public static double AsDoubleFraction(int a) { unchecked { return AsDoubleFraction((uint)a); } }
         #endregion
     }
 }

@@ -81,6 +81,7 @@ namespace DCFApixels.DataMath
         #region Constructors
         [IN(LINE)] public ray1(float src, float dir) { this.src = src; this.dir = dir; }
         [IN(LINE)] public ray1(intray1 ray) { src = ray.src; dir = ray.dir; }
+        [IN(LINE)] public ray1(line1 a) { src = a.src; dir = a.dir; }
         #endregion
 
         #region operators
@@ -91,6 +92,7 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray1 operator +(ray1 range, float v) { return new ray1(range.src + v, range.dir + v); }
         [IN(LINE)] public static ray1 operator /(ray1 range, float v) { return new ray1(range.src / v, range.dir / v); }
         [IN(LINE)] public static ray1 operator *(ray1 range, float v) { return new ray1(range.src * v, range.dir * v); }
+        [IN(LINE)] public static implicit operator line1(ray1 a) { return new line1(a); }
         #endregion
 
         #region Other

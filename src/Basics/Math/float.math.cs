@@ -19,24 +19,39 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Abs(float a) { return InternalMath.Abs(a); }
         [IN(LINE)] public static float Sign(float a) { return (a > 0f ? 1f : 0f) - (a < 0f ? 1f : 0f); }
         [IN(LINE)] public static float SoftSign(float a) { return a / (1f + InternalMath.Abs(a)); }
+        [IN(LINE)] public static float SoftSign(float a, float mul) { a *= mul; return a / (1f + InternalMath.Abs(a)); }
+        [IN(LINE)]
+        public static float UnSoftSign(float a)
+        {
+            if (a >= 1f - float.Epsilon) return float.MaxValue;
+            if (a <= -1f + float.Epsilon) return float.MinValue;
+            return a >= 0f ? a / (1f - a) : a / (1f + a);
+        }
+        [IN(LINE)]
+        public static float UnSoftSign(float a, float mul)
+        {
+            if (a >= 1f - float.Epsilon) return float.MaxValue;
+            if (a <= -1f + float.Epsilon) return float.MinValue;
+            return (a / (mul * (a >= 0f ? 1f - a : 1f + a)));
+        }
         [IN(LINE)] public static int Sign2Int(float a) { return (a > 0f ? 1 : 0) - (a < 0f ? 1 : 0); }
         #endregion
 
         #region Round/Floor/Ceil
         [IN(LINE)] public static float Round(float a) { return InternalMath.Round(a); }
-        [IN(LINE)] public static int Round2Int(float a) { return (int)InternalMath.Round(a); }
+        [IN(LINE)] public static int Round2Int(float a) { return (int)(a < 0f ? a - 0.5f : a + 0.5f); }
         [IN(LINE)] public static float Floor(float a) { return InternalMath.Floor(a); }
-        [IN(LINE)] public static int Floor2Int(float a) { return (int)InternalMath.Floor(a); }
+        [IN(LINE)] public static int Floor2Int(float a) { return (int)(a < 0f ? a - 1f : a); }
         [IN(LINE)] public static float Ceil(float a) { return InternalMath.Ceiling(a); }
-        [IN(LINE)] public static int Ceil2Int(float a) { return (int)InternalMath.Ceiling(a); }
+        [IN(LINE)] public static int Ceil2Int(float a) { return (int)(a < 0f ? a : a + 1f); }
 
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static uint Round2UInt(float a) { return (uint)InternalMath.Round(a); }
+        [IN(LINE)] public static uint Round2UInt(float a) { return (uint)(a < 0f ? a - 0.5f : a + 0.5f); }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static uint Floor2UInt(float a) { return (uint)InternalMath.Floor(a); }
+        [IN(LINE)] public static uint Floor2UInt(float a) { return (uint)(a < 0f ? a - 1f : a); }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [IN(LINE)] public static uint Ceil2UInt(float a) { return (uint)InternalMath.Ceiling(a); }
+        [IN(LINE)] public static uint Ceil2UInt(float a) { return (uint)(a < 0f ? a : a + 1f); }
         #endregion
 
         #region Clamp/Repeat/PingPong
@@ -329,6 +344,13 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float Tanh(float a) { return InternalMath.Tanh(a); }
 
         [IN(LINE)] public static float Truncate(float a) { return InternalMath.Truncate(a); }
+
+        [IN(LINE)] public static bool Contains<T>(T[] array, float index) { return index >= 0 && index < array.Length; }
+
+        [IN(LINE)] public static bool Contains(float rangePos, float rangeSize, float pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Contains(float rangePos, float rangeSize, float pos, float size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool Overlaps(float rangePos, float rangeSize, float pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool Overlaps(float rangePos, float rangeSize, float pos, float size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 

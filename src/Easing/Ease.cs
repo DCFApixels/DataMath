@@ -388,7 +388,7 @@ namespace DCFApixels.DataMath.Easing
         [IN(LINE)]
         public static float InElastic(float t)
         {
-            const float c4 = 2 * PI / 3;
+            //const float c4 = 2 * PI / 3;
             if (t == 0) { return 0; }
             if (t == 1) { return 1; }
             return -((Pow(2.0f, (10.0f * (t -= 1))) * Sin((t - 0.075f) * PI * 2.0f * 3.3333f)));

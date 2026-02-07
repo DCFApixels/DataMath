@@ -7,6 +7,7 @@ namespace DCFApixels.DataMath
     public partial struct uint3
     {
         #region Convert operators
+        [IN(LINE)] public static implicit operator uint3(Axis v) => new uint3(v);
         [IN(LINE)] public static implicit operator uint3((uint, uint, uint) v) => new uint3(v);
 
         [IN(LINE)] public static explicit operator uint3(bool v) => new uint3(v);
@@ -40,6 +41,56 @@ namespace DCFApixels.DataMath
             x = v.x ? 1u : 0u; y = v.y ? 1u : 0u;
             z = v.z ? 1u : 0u;
         }
+        #endregion
+
+        public uint3(Axis v)
+        {
+            switch (v)
+            {
+                case Axis.X: x = 1; y = 0; z = 0; break;
+                case Axis.Y: x = 0; y = 1; z = 0; break;
+                case Axis.Z: x = 0; y = 0; z = 1; break;
+                default: x = 0; y = 0; z = 0; break;
+            }
+        }
+        public uint3(AADirection v)
+        {
+            switch (v)
+            {
+                case AADirection.Left: x = unchecked((uint)-1u); y = 0; z = 0; break;
+                case AADirection.Right: x = 1; y = 0; z = 0; break;
+                case AADirection.Down: x = 0; y = unchecked((uint)-1u); z = 0; break;
+                case AADirection.Up: x = 0; y = 1; z = 0; break;
+                case AADirection.Back: x = 0; y = 0; z = unchecked((uint)-1u); break;
+                case AADirection.Forward: x = 0; y = 0; z = 1; break;
+                default: x = 0; y = 0; z = 0; break;
+            }
+        }
+
+        #region Arithmetic float
+        [IN(LINE)] public static float3 operator +(uint3 a, float b) { return new float3(a.x + b, a.y + b, a.z + b); }
+        [IN(LINE)] public static float3 operator +(float a, uint3 b) { return new float3(a + b.x, a + b.y, a + b.z); }
+        [IN(LINE)] public static float3 operator -(uint3 a, float b) { return new float3(a.x - b, a.y - b, a.z - b); }
+        [IN(LINE)] public static float3 operator -(float a, uint3 b) { return new float3(a - b.x, a - b.y, a - b.z); }
+        [IN(LINE)] public static float3 operator *(uint3 a, float b) { return new float3(a.x * b, a.y * b, a.z * b); }
+        [IN(LINE)] public static float3 operator *(float a, uint3 b) { return new float3(a * b.x, a * b.y, a * b.z); }
+        [IN(LINE)] public static float3 operator /(uint3 a, float b) { return new float3(a.x / b, a.y / b, a.z / b); }
+        [IN(LINE)] public static float3 operator /(float a, uint3 b) { return new float3(a / b.x, a / b.y, a / b.z); }
+        [IN(LINE)] public static float3 operator %(uint3 a, float b) { return new float3(a.x % b, a.y % b, a.z % b); }
+        [IN(LINE)] public static float3 operator %(float a, uint3 b) { return new float3(a % b.x, a % b.y, a % b.z); }
+        #endregion
+
+        #region Arithmetic double
+        [IN(LINE)] public static double3 operator +(uint3 a, double b) { return new double3(a.x + b, a.y + b, a.z + b); }
+        [IN(LINE)] public static double3 operator +(double a, uint3 b) { return new double3(a + b.x, a + b.y, a + b.z); }
+        [IN(LINE)] public static double3 operator -(uint3 a, double b) { return new double3(a.x - b, a.y - b, a.z - b); }
+        [IN(LINE)] public static double3 operator -(double a, uint3 b) { return new double3(a - b.x, a - b.y, a - b.z); }
+        [IN(LINE)] public static double3 operator *(uint3 a, double b) { return new double3(a.x * b, a.y * b, a.z * b); }
+        [IN(LINE)] public static double3 operator *(double a, uint3 b) { return new double3(a * b.x, a * b.y, a * b.z); }
+        [IN(LINE)] public static double3 operator /(uint3 a, double b) { return new double3(a.x / b, a.y / b, a.z / b); }
+        [IN(LINE)] public static double3 operator /(double a, uint3 b) { return new double3(a / b.x, a / b.y, a / b.z); }
+        [IN(LINE)] public static double3 operator %(uint3 a, double b) { return new double3(a.x % b, a.y % b, a.z % b); }
+        [IN(LINE)] public static double3 operator %(double a, uint3 b) { return new double3(a % b.x, a % b.y, a % b.z); }
         #endregion
     }
 

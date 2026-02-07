@@ -60,7 +60,10 @@
         //
         //    public const double TORADIANS_DBL = 0.017453292519943296;
 
-
+        public static bool IsEmptyOrNull<T>(this T[] array)
+        {
+            return array == null || array.Length == 0;
+        }
     }
 }
 

@@ -1,6 +1,5 @@
 ﻿#if UNITY_5_3_OR_NEWER && UNITY_EDITOR
 using DCFApixels.DataMath.DisplayAttributes;
-using PlasticPipe;
 using System.Reflection;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor;

@@ -304,6 +304,11 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float3 Tanh(float3 a) { return new float3(Tanh(a.x), Tanh(a.y), Tanh(a.z)); }
 
         [IN(LINE)] public static float3 Truncate(float3 a) { return new float3(Truncate(a.x), Truncate(a.y), Truncate(a.z)); }
+
+        [IN(LINE)] public static bool3 Contains(float3 rangePos, float3 rangeSize, float3 pos) { return Contains(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool3 Contains(float3 rangePos, float3 rangeSize, float3 pos, float3 size) { return (pos >= rangePos) && (pos <= rangeSize + rangePos - size); }
+        [IN(LINE)] public static bool3 Overlaps(float3 rangePos, float3 rangeSize, float3 pos) { return Overlaps(rangePos, rangeSize, pos, 1); }
+        [IN(LINE)] public static bool3 Overlaps(float3 rangePos, float3 rangeSize, float3 pos, float3 size) { return (pos > rangePos - size) && (pos < rangeSize + rangePos); }
         #endregion
 
 

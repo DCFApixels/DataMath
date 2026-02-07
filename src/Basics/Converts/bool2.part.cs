@@ -7,6 +7,7 @@ namespace DCFApixels.DataMath
     public partial struct bool2
     {
         #region Convert operators
+        [IN(LINE)] public static implicit operator bool2(Axis v) => new bool2(v);
         [IN(LINE)] public static implicit operator bool2((bool, bool) v) => new bool2(v);
 
         [IN(LINE)] public static implicit operator bool2(bool v) => new bool2(v);
@@ -20,6 +21,16 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static explicit operator bool2(double v) => new bool2(v);
         [IN(LINE)] public static explicit operator bool2(double2 v) => new bool2(v);
         #endregion
+
+        public bool2(Axis v)
+        {
+            switch (v)
+            {
+                case Axis.X: x = true; y = false; break;
+                case Axis.Y: x = false; y = true; break;
+                default: x = false; y = false; break;
+            }
+        }
     }
 
     public static partial class DM

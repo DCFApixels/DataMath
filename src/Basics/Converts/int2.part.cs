@@ -7,6 +7,7 @@ namespace DCFApixels.DataMath
     public partial struct int2
     {
         #region Convert operators
+        [IN(LINE)] public static implicit operator int2(Axis v) => new int2(v);
         [IN(LINE)] public static implicit operator int2((int, int) v) => new int2(v);
 
         [IN(LINE)] public static explicit operator int2(bool v) => new int2(v);
@@ -37,6 +38,61 @@ namespace DCFApixels.DataMath
         {
             x = v.x ? 1 : 0; y = v.y ? 1 : 0;
         }
+        #endregion
+
+        [IN(LINE)] public int2((int x, int y) v) { x = v.x; y = v.y; }
+        [IN(LINE)]
+        public int2(Axis v)
+        {
+            switch (v)
+            {
+                case Axis.X: x = 1; y = 0; break;
+                case Axis.Y: x = 0; y = 1; break;
+                default: x = 0; y = 0; break;
+            }
+        }
+        public int2(AADirection v)
+        {
+            switch (v)
+            {
+                case AADirection.Left: x = -1; y = 0; break;
+                case AADirection.Right: x = 1; y = 0; break;
+                case AADirection.Down: x = 0; y = -1; break;
+                case AADirection.Up: x = 0; y = 1; break;
+                default: x = 0; y = 0; break;
+            }
+        }
+        public int2(AADirectionFlags v)
+        {
+            int vi = (int)v;
+            x = ((vi & (int)AADirectionFlags.Right) >> 1) - (vi & (int)AADirectionFlags.Left);
+            y = ((vi & (int)AADirectionFlags.Up) >> 3) - ((vi & (int)AADirectionFlags.Down) >> 2);
+        }
+
+        #region Arithmetic float
+        [IN(LINE)] public static float2 operator +(int2 a, float b) { return new float2(a.x + b, a.y + b); }
+        [IN(LINE)] public static float2 operator +(float a, int2 b) { return new float2(a + b.x, a + b.y); }
+        [IN(LINE)] public static float2 operator -(int2 a, float b) { return new float2(a.x - b, a.y - b); }
+        [IN(LINE)] public static float2 operator -(float a, int2 b) { return new float2(a - b.x, a - b.y); }
+        [IN(LINE)] public static float2 operator *(int2 a, float b) { return new float2(a.x * b, a.y * b); }
+        [IN(LINE)] public static float2 operator *(float a, int2 b) { return new float2(a * b.x, a * b.y); }
+        [IN(LINE)] public static float2 operator /(int2 a, float b) { return new float2(a.x / b, a.y / b); }
+        [IN(LINE)] public static float2 operator /(float a, int2 b) { return new float2(a / b.x, a / b.y); }
+        [IN(LINE)] public static float2 operator %(int2 a, float b) { return new float2(a.x % b, a.y % b); }
+        [IN(LINE)] public static float2 operator %(float a, int2 b) { return new float2(a % b.x, a % b.y); }
+        #endregion
+
+        #region Arithmetic double
+        [IN(LINE)] public static double2 operator +(int2 a, double b) { return new double2(a.x + b, a.y + b); }
+        [IN(LINE)] public static double2 operator +(double a, int2 b) { return new double2(a + b.x, a + b.y); }
+        [IN(LINE)] public static double2 operator -(int2 a, double b) { return new double2(a.x - b, a.y - b); }
+        [IN(LINE)] public static double2 operator -(double a, int2 b) { return new double2(a - b.x, a - b.y); }
+        [IN(LINE)] public static double2 operator *(int2 a, double b) { return new double2(a.x * b, a.y * b); }
+        [IN(LINE)] public static double2 operator *(double a, int2 b) { return new double2(a * b.x, a * b.y); }
+        [IN(LINE)] public static double2 operator /(int2 a, double b) { return new double2(a.x / b, a.y / b); }
+        [IN(LINE)] public static double2 operator /(double a, int2 b) { return new double2(a / b.x, a / b.y); }
+        [IN(LINE)] public static double2 operator %(int2 a, double b) { return new double2(a.x % b, a.y % b); }
+        [IN(LINE)] public static double2 operator %(double a, int2 b) { return new double2(a % b.x, a % b.y); }
         #endregion
     }
 

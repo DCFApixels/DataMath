@@ -3,7 +3,7 @@
 #endif
 using System;
 using static DCFApixels.DataMath.InlineConsts;
-using static DCFApixels.DataMath.RandomUtility;
+using static DCFApixels.DataMath.DMRnd;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
@@ -28,7 +28,7 @@ namespace DCFApixels.DataMath
         }
         public static XorRandom AutoSeed()
         {
-            return new XorRandom(GetAutoSeeed());
+            return new XorRandom(NewAutoSeed());
         }
         #endregion
 
