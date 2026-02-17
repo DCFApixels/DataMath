@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace DCFApixels.DataMath
 {
@@ -22,6 +23,9 @@ namespace DCFApixels.DataMath
                 case GridRotationAngleBits._180: return 180f;
                 case GridRotationAngleBits._270: return 270f;
             }
+#if DEBUG
+            Debug.LogWarning("Не корректный угол RotationAngleBits");
+#endif
             return 0f;
         }
     }
@@ -136,7 +140,7 @@ namespace DCFApixels.DataMath
         {
             Bits = bits;
         }
-        public GridRotation(float3 euler) : this()
+        public GridRotation(Vector3 euler) : this()
         {
             XRaw = RoundToNearest90Index(euler.x);
             YRaw = RoundToNearest90Index(euler.y);
@@ -149,15 +153,18 @@ namespace DCFApixels.DataMath
             Z = z;
         }
 
-
+        public override string ToString()
+        {
+            return Bits.ToString();
+        }
         private static byte RoundToNearest90Index(float angle)
         {
-            angle = DM.Repeat(angle, 360);
+            angle = Mathf.Repeat(angle, 360);
             byte closestAngleIndex = 0;
-            float minDifference = DM.Abs(angle - 0);
+            float minDifference = Mathf.Abs(angle - 0);
             for (byte i = 1; i < 4; i++)
             {
-                float difference = DM.Abs(angle - i * 90);
+                float difference = Mathf.Abs(angle - i * 90);
                 if (difference < minDifference)
                 {
                     closestAngleIndex = i;

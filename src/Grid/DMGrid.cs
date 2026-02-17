@@ -501,6 +501,12 @@ namespace DCFApixels.DataMath
         public static int3 Clamp(int3 pos, int3 size, int3 gridSize) { return DM.Clamp(pos, 0, gridSize - size); }
         public static int4 Clamp(int4 pos, int4 size, int4 gridSize) { return DM.Clamp(pos, 0, gridSize - size); }
 
+
+        public static int ClampOverlaps(int pos, int size, int gridSize) { return DM.Clamp(pos, -size + 1, gridSize - 1); }
+        public static int2 ClampOverlaps(int2 pos, int2 size, int2 gridSize) { return DM.Clamp(pos, -size + 1, gridSize - 1); }
+        public static int3 ClampOverlaps(int3 pos, int3 size, int3 gridSize) { return DM.Clamp(pos, -size + 1, gridSize - 1); }
+        public static int4 ClampOverlaps(int4 pos, int4 size, int4 gridSize) { return DM.Clamp(pos, -size + 1, gridSize - 1); }
+
         public static int LineralSize(int gridSize) { return gridSize; }
         public static int LineralSize(int2 gridSize) { return gridSize.x * gridSize.y; }
         public static int LineralSize(int3 gridSize) { return gridSize.x * gridSize.y * gridSize.z; }
