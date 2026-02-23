@@ -81,6 +81,9 @@ namespace DCFApixels.DataMath
         #endregion
 
         #region Constructors
+        [IN(LINE)] public bool2((bool x, bool y) a) { this.x = a.x; this.y = a.y; }
+        [IN(LINE)] public bool2(bool x, int y) { this.x = x; this.y = y != 0; }
+        [IN(LINE)] public bool2(int x, bool y) { this.x = x != 0; this.y = y; }
         [IN(LINE)] public bool2(bool x, bool y) { this.x = x; this.y = y; }
 
         [IN(LINE)] public bool2(bool v) { x = v; y = v; }
@@ -140,243 +143,243 @@ namespace DCFApixels.DataMath
 
         #endregion
 
-        #region Swaps
+        #region Swizzles
 
-        #region Swap2
+        #region Swizzle2
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 xx { [IN(LINE)] get => new bool2(x, x); }
+        public bool2 xx { [IN(LINE)] get => new bool2(x, x); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 xy { [IN(LINE)] get => new bool2(x, y); }
+        public bool2 xy { [IN(LINE)] get => new bool2(x, y); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 x_ { [IN(LINE)] get => new bool2(x, false); }
+        public bool2 x_ { [IN(LINE)] get => new bool2(x, 0); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 yx { [IN(LINE)] get => new bool2(y, x); }
+        public bool2 yx { [IN(LINE)] get => new bool2(y, x); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 yy { [IN(LINE)] get => new bool2(y, y); }
+        public bool2 yy { [IN(LINE)] get => new bool2(y, y); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 y_ { [IN(LINE)] get => new bool2(y, false); }
+        public bool2 y_ { [IN(LINE)] get => new bool2(y, 0); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 _x { [IN(LINE)] get => new bool2(false, x); }
+        public bool2 _x { [IN(LINE)] get => new bool2(0, x); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool2 _y { [IN(LINE)] get => new bool2(false, y); }
+        public bool2 _y { [IN(LINE)] get => new bool2(0, y); [IN(LINE)] set { y = value.y; } }
         #endregion
 
-        #region Swap3
+        #region Swizzle3
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 xxx { [IN(LINE)] get => new bool3(x, x, x); }
+        public bool3 xxx { [IN(LINE)] get => new bool3(x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 xxy { [IN(LINE)] get => new bool3(x, x, y); }
+        public bool3 xxy { [IN(LINE)] get => new bool3(x, x, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 xx_ { [IN(LINE)] get => new bool3(x, x, false); }
+        public bool3 xx_ { [IN(LINE)] get => new bool3(x, x, 0); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 xyx { [IN(LINE)] get => new bool3(x, y, x); }
+        public bool3 xyx { [IN(LINE)] get => new bool3(x, y, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 xyy { [IN(LINE)] get => new bool3(x, y, y); }
+        public bool3 xyy { [IN(LINE)] get => new bool3(x, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 xy_ { [IN(LINE)] get => new bool3(x, y, false); }
+        public bool3 xy_ { [IN(LINE)] get => new bool3(x, y, 0); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 x_x { [IN(LINE)] get => new bool3(x, false, x); }
+        public bool3 x_x { [IN(LINE)] get => new bool3(x, 0, x); [IN(LINE)] set { x = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 x_y { [IN(LINE)] get => new bool3(x, false, y); }
+        public bool3 x_y { [IN(LINE)] get => new bool3(x, 0, y); [IN(LINE)] set { x = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 x__ { [IN(LINE)] get => new bool3(x, false, false); }
+        public bool3 x__ { [IN(LINE)] get => new bool3(x, 0, 0); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 yxx { [IN(LINE)] get => new bool3(y, x, x); }
+        public bool3 yxx { [IN(LINE)] get => new bool3(y, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 yxy { [IN(LINE)] get => new bool3(y, x, y); }
+        public bool3 yxy { [IN(LINE)] get => new bool3(y, x, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 yx_ { [IN(LINE)] get => new bool3(y, x, false); }
+        public bool3 yx_ { [IN(LINE)] get => new bool3(y, x, 0); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 yyx { [IN(LINE)] get => new bool3(y, y, x); }
+        public bool3 yyx { [IN(LINE)] get => new bool3(y, y, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 yyy { [IN(LINE)] get => new bool3(y, y, y); }
+        public bool3 yyy { [IN(LINE)] get => new bool3(y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 yy_ { [IN(LINE)] get => new bool3(y, y, false); }
+        public bool3 yy_ { [IN(LINE)] get => new bool3(y, y, 0); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 y_x { [IN(LINE)] get => new bool3(y, false, x); }
+        public bool3 y_x { [IN(LINE)] get => new bool3(y, 0, x); [IN(LINE)] set { y = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 y_y { [IN(LINE)] get => new bool3(y, false, y); }
+        public bool3 y_y { [IN(LINE)] get => new bool3(y, 0, y); [IN(LINE)] set { y = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 y__ { [IN(LINE)] get => new bool3(y, false, false); }
+        public bool3 y__ { [IN(LINE)] get => new bool3(y, 0, 0); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 _xx { [IN(LINE)] get => new bool3(false, x, x); }
+        public bool3 _xx { [IN(LINE)] get => new bool3(0, x, x); [IN(LINE)] set { x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 _xy { [IN(LINE)] get => new bool3(false, x, y); }
+        public bool3 _xy { [IN(LINE)] get => new bool3(0, x, y); [IN(LINE)] set { x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 _x_ { [IN(LINE)] get => new bool3(false, x, false); }
+        public bool3 _x_ { [IN(LINE)] get => new bool3(0, x, 0); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 _yx { [IN(LINE)] get => new bool3(false, y, x); }
+        public bool3 _yx { [IN(LINE)] get => new bool3(0, y, x); [IN(LINE)] set { y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 _yy { [IN(LINE)] get => new bool3(false, y, y); }
+        public bool3 _yy { [IN(LINE)] get => new bool3(0, y, y); [IN(LINE)] set { y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 _y_ { [IN(LINE)] get => new bool3(false, y, false); }
+        public bool3 _y_ { [IN(LINE)] get => new bool3(0, y, 0); [IN(LINE)] set { y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 __x { [IN(LINE)] get => new bool3(false, false, x); }
+        public bool3 __x { [IN(LINE)] get => new bool3(0, 0, x); [IN(LINE)] set { x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool3 __y { [IN(LINE)] get => new bool3(false, false, y); }
+        public bool3 __y { [IN(LINE)] get => new bool3(0, 0, y); [IN(LINE)] set { y = value.z; } }
         #endregion
 
-        #region Swap4
+        #region Swizzle4
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xxxx { [IN(LINE)] get => new bool4(x, x, x, x); }
+        public bool4 xxxx { [IN(LINE)] get => new bool4(x, x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xxxy { [IN(LINE)] get => new bool4(x, x, x, y); }
+        public bool4 xxxy { [IN(LINE)] get => new bool4(x, x, x, y); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xxx_ { [IN(LINE)] get => new bool4(x, x, x, false); }
+        public bool4 xxx_ { [IN(LINE)] get => new bool4(x, x, x, 0); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xxyx { [IN(LINE)] get => new bool4(x, x, y, x); }
+        public bool4 xxyx { [IN(LINE)] get => new bool4(x, x, y, x); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xxyy { [IN(LINE)] get => new bool4(x, x, y, y); }
+        public bool4 xxyy { [IN(LINE)] get => new bool4(x, x, y, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xxy_ { [IN(LINE)] get => new bool4(x, x, y, false); }
+        public bool4 xxy_ { [IN(LINE)] get => new bool4(x, x, y, 0); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xx_x { [IN(LINE)] get => new bool4(x, x, false, x); }
+        public bool4 xx_x { [IN(LINE)] get => new bool4(x, x, 0, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xx_y { [IN(LINE)] get => new bool4(x, x, false, y); }
+        public bool4 xx_y { [IN(LINE)] get => new bool4(x, x, 0, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xx__ { [IN(LINE)] get => new bool4(x, x, false, false); }
+        public bool4 xx__ { [IN(LINE)] get => new bool4(x, x, 0, 0); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xyxx { [IN(LINE)] get => new bool4(x, y, x, x); }
+        public bool4 xyxx { [IN(LINE)] get => new bool4(x, y, x, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xyxy { [IN(LINE)] get => new bool4(x, y, x, y); }
+        public bool4 xyxy { [IN(LINE)] get => new bool4(x, y, x, y); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xyx_ { [IN(LINE)] get => new bool4(x, y, x, false); }
+        public bool4 xyx_ { [IN(LINE)] get => new bool4(x, y, x, 0); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xyyx { [IN(LINE)] get => new bool4(x, y, y, x); }
+        public bool4 xyyx { [IN(LINE)] get => new bool4(x, y, y, x); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xyyy { [IN(LINE)] get => new bool4(x, y, y, y); }
+        public bool4 xyyy { [IN(LINE)] get => new bool4(x, y, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xyy_ { [IN(LINE)] get => new bool4(x, y, y, false); }
+        public bool4 xyy_ { [IN(LINE)] get => new bool4(x, y, y, 0); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xy_x { [IN(LINE)] get => new bool4(x, y, false, x); }
+        public bool4 xy_x { [IN(LINE)] get => new bool4(x, y, 0, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xy_y { [IN(LINE)] get => new bool4(x, y, false, y); }
+        public bool4 xy_y { [IN(LINE)] get => new bool4(x, y, 0, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 xy__ { [IN(LINE)] get => new bool4(x, y, false, false); }
+        public bool4 xy__ { [IN(LINE)] get => new bool4(x, y, 0, 0); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x_xx { [IN(LINE)] get => new bool4(x, false, x, x); }
+        public bool4 x_xx { [IN(LINE)] get => new bool4(x, 0, x, x); [IN(LINE)] set { x = value.x; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x_xy { [IN(LINE)] get => new bool4(x, false, x, y); }
+        public bool4 x_xy { [IN(LINE)] get => new bool4(x, 0, x, y); [IN(LINE)] set { x = value.x; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x_x_ { [IN(LINE)] get => new bool4(x, false, x, false); }
+        public bool4 x_x_ { [IN(LINE)] get => new bool4(x, 0, x, 0); [IN(LINE)] set { x = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x_yx { [IN(LINE)] get => new bool4(x, false, y, x); }
+        public bool4 x_yx { [IN(LINE)] get => new bool4(x, 0, y, x); [IN(LINE)] set { x = value.x; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x_yy { [IN(LINE)] get => new bool4(x, false, y, y); }
+        public bool4 x_yy { [IN(LINE)] get => new bool4(x, 0, y, y); [IN(LINE)] set { x = value.x; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x_y_ { [IN(LINE)] get => new bool4(x, false, y, false); }
+        public bool4 x_y_ { [IN(LINE)] get => new bool4(x, 0, y, 0); [IN(LINE)] set { x = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x__x { [IN(LINE)] get => new bool4(x, false, false, x); }
+        public bool4 x__x { [IN(LINE)] get => new bool4(x, 0, 0, x); [IN(LINE)] set { x = value.x; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x__y { [IN(LINE)] get => new bool4(x, false, false, y); }
+        public bool4 x__y { [IN(LINE)] get => new bool4(x, 0, 0, y); [IN(LINE)] set { x = value.x; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 x___ { [IN(LINE)] get => new bool4(x, false, false, false); }
+        public bool4 x___ { [IN(LINE)] get => new bool4(x, 0, 0, 0); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yxxx { [IN(LINE)] get => new bool4(y, x, x, x); }
+        public bool4 yxxx { [IN(LINE)] get => new bool4(y, x, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yxxy { [IN(LINE)] get => new bool4(y, x, x, y); }
+        public bool4 yxxy { [IN(LINE)] get => new bool4(y, x, x, y); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yxx_ { [IN(LINE)] get => new bool4(y, x, x, false); }
+        public bool4 yxx_ { [IN(LINE)] get => new bool4(y, x, x, 0); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yxyx { [IN(LINE)] get => new bool4(y, x, y, x); }
+        public bool4 yxyx { [IN(LINE)] get => new bool4(y, x, y, x); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yxyy { [IN(LINE)] get => new bool4(y, x, y, y); }
+        public bool4 yxyy { [IN(LINE)] get => new bool4(y, x, y, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yxy_ { [IN(LINE)] get => new bool4(y, x, y, false); }
+        public bool4 yxy_ { [IN(LINE)] get => new bool4(y, x, y, 0); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yx_x { [IN(LINE)] get => new bool4(y, x, false, x); }
+        public bool4 yx_x { [IN(LINE)] get => new bool4(y, x, 0, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yx_y { [IN(LINE)] get => new bool4(y, x, false, y); }
+        public bool4 yx_y { [IN(LINE)] get => new bool4(y, x, 0, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yx__ { [IN(LINE)] get => new bool4(y, x, false, false); }
+        public bool4 yx__ { [IN(LINE)] get => new bool4(y, x, 0, 0); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yyxx { [IN(LINE)] get => new bool4(y, y, x, x); }
+        public bool4 yyxx { [IN(LINE)] get => new bool4(y, y, x, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yyxy { [IN(LINE)] get => new bool4(y, y, x, y); }
+        public bool4 yyxy { [IN(LINE)] get => new bool4(y, y, x, y); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yyx_ { [IN(LINE)] get => new bool4(y, y, x, false); }
+        public bool4 yyx_ { [IN(LINE)] get => new bool4(y, y, x, 0); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yyyx { [IN(LINE)] get => new bool4(y, y, y, x); }
+        public bool4 yyyx { [IN(LINE)] get => new bool4(y, y, y, x); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yyyy { [IN(LINE)] get => new bool4(y, y, y, y); }
+        public bool4 yyyy { [IN(LINE)] get => new bool4(y, y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yyy_ { [IN(LINE)] get => new bool4(y, y, y, false); }
+        public bool4 yyy_ { [IN(LINE)] get => new bool4(y, y, y, 0); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yy_x { [IN(LINE)] get => new bool4(y, y, false, x); }
+        public bool4 yy_x { [IN(LINE)] get => new bool4(y, y, 0, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yy_y { [IN(LINE)] get => new bool4(y, y, false, y); }
+        public bool4 yy_y { [IN(LINE)] get => new bool4(y, y, 0, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 yy__ { [IN(LINE)] get => new bool4(y, y, false, false); }
+        public bool4 yy__ { [IN(LINE)] get => new bool4(y, y, 0, 0); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y_xx { [IN(LINE)] get => new bool4(y, false, x, x); }
+        public bool4 y_xx { [IN(LINE)] get => new bool4(y, 0, x, x); [IN(LINE)] set { y = value.x; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y_xy { [IN(LINE)] get => new bool4(y, false, x, y); }
+        public bool4 y_xy { [IN(LINE)] get => new bool4(y, 0, x, y); [IN(LINE)] set { y = value.x; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y_x_ { [IN(LINE)] get => new bool4(y, false, x, false); }
+        public bool4 y_x_ { [IN(LINE)] get => new bool4(y, 0, x, 0); [IN(LINE)] set { y = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y_yx { [IN(LINE)] get => new bool4(y, false, y, x); }
+        public bool4 y_yx { [IN(LINE)] get => new bool4(y, 0, y, x); [IN(LINE)] set { y = value.x; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y_yy { [IN(LINE)] get => new bool4(y, false, y, y); }
+        public bool4 y_yy { [IN(LINE)] get => new bool4(y, 0, y, y); [IN(LINE)] set { y = value.x; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y_y_ { [IN(LINE)] get => new bool4(y, false, y, false); }
+        public bool4 y_y_ { [IN(LINE)] get => new bool4(y, 0, y, 0); [IN(LINE)] set { y = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y__x { [IN(LINE)] get => new bool4(y, false, false, x); }
+        public bool4 y__x { [IN(LINE)] get => new bool4(y, 0, 0, x); [IN(LINE)] set { y = value.x; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y__y { [IN(LINE)] get => new bool4(y, false, false, y); }
+        public bool4 y__y { [IN(LINE)] get => new bool4(y, 0, 0, y); [IN(LINE)] set { y = value.x; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 y___ { [IN(LINE)] get => new bool4(y, false, false, false); }
+        public bool4 y___ { [IN(LINE)] get => new bool4(y, 0, 0, 0); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _xxx { [IN(LINE)] get => new bool4(false, x, x, x); }
+        public bool4 _xxx { [IN(LINE)] get => new bool4(0, x, x, x); [IN(LINE)] set { x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _xxy { [IN(LINE)] get => new bool4(false, x, x, y); }
+        public bool4 _xxy { [IN(LINE)] get => new bool4(0, x, x, y); [IN(LINE)] set { x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _xx_ { [IN(LINE)] get => new bool4(false, x, x, false); }
+        public bool4 _xx_ { [IN(LINE)] get => new bool4(0, x, x, 0); [IN(LINE)] set { x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _xyx { [IN(LINE)] get => new bool4(false, x, y, x); }
+        public bool4 _xyx { [IN(LINE)] get => new bool4(0, x, y, x); [IN(LINE)] set { x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _xyy { [IN(LINE)] get => new bool4(false, x, y, y); }
+        public bool4 _xyy { [IN(LINE)] get => new bool4(0, x, y, y); [IN(LINE)] set { x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _xy_ { [IN(LINE)] get => new bool4(false, x, y, false); }
+        public bool4 _xy_ { [IN(LINE)] get => new bool4(0, x, y, 0); [IN(LINE)] set { x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _x_x { [IN(LINE)] get => new bool4(false, x, false, x); }
+        public bool4 _x_x { [IN(LINE)] get => new bool4(0, x, 0, x); [IN(LINE)] set { x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _x_y { [IN(LINE)] get => new bool4(false, x, false, y); }
+        public bool4 _x_y { [IN(LINE)] get => new bool4(0, x, 0, y); [IN(LINE)] set { x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _x__ { [IN(LINE)] get => new bool4(false, x, false, false); }
+        public bool4 _x__ { [IN(LINE)] get => new bool4(0, x, 0, 0); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _yxx { [IN(LINE)] get => new bool4(false, y, x, x); }
+        public bool4 _yxx { [IN(LINE)] get => new bool4(0, y, x, x); [IN(LINE)] set { y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _yxy { [IN(LINE)] get => new bool4(false, y, x, y); }
+        public bool4 _yxy { [IN(LINE)] get => new bool4(0, y, x, y); [IN(LINE)] set { y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _yx_ { [IN(LINE)] get => new bool4(false, y, x, false); }
+        public bool4 _yx_ { [IN(LINE)] get => new bool4(0, y, x, 0); [IN(LINE)] set { y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _yyx { [IN(LINE)] get => new bool4(false, y, y, x); }
+        public bool4 _yyx { [IN(LINE)] get => new bool4(0, y, y, x); [IN(LINE)] set { y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _yyy { [IN(LINE)] get => new bool4(false, y, y, y); }
+        public bool4 _yyy { [IN(LINE)] get => new bool4(0, y, y, y); [IN(LINE)] set { y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _yy_ { [IN(LINE)] get => new bool4(false, y, y, false); }
+        public bool4 _yy_ { [IN(LINE)] get => new bool4(0, y, y, 0); [IN(LINE)] set { y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _y_x { [IN(LINE)] get => new bool4(false, y, false, x); }
+        public bool4 _y_x { [IN(LINE)] get => new bool4(0, y, 0, x); [IN(LINE)] set { y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _y_y { [IN(LINE)] get => new bool4(false, y, false, y); }
+        public bool4 _y_y { [IN(LINE)] get => new bool4(0, y, 0, y); [IN(LINE)] set { y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 _y__ { [IN(LINE)] get => new bool4(false, y, false, false); }
+        public bool4 _y__ { [IN(LINE)] get => new bool4(0, y, 0, 0); [IN(LINE)] set { y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 __xx { [IN(LINE)] get => new bool4(false, false, x, x); }
+        public bool4 __xx { [IN(LINE)] get => new bool4(0, 0, x, x); [IN(LINE)] set { x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 __xy { [IN(LINE)] get => new bool4(false, false, x, y); }
+        public bool4 __xy { [IN(LINE)] get => new bool4(0, 0, x, y); [IN(LINE)] set { x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 __x_ { [IN(LINE)] get => new bool4(false, false, x, false); }
+        public bool4 __x_ { [IN(LINE)] get => new bool4(0, 0, x, 0); [IN(LINE)] set { x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 __yx { [IN(LINE)] get => new bool4(false, false, y, x); }
+        public bool4 __yx { [IN(LINE)] get => new bool4(0, 0, y, x); [IN(LINE)] set { y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 __yy { [IN(LINE)] get => new bool4(false, false, y, y); }
+        public bool4 __yy { [IN(LINE)] get => new bool4(0, 0, y, y); [IN(LINE)] set { y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 __y_ { [IN(LINE)] get => new bool4(false, false, y, false); }
+        public bool4 __y_ { [IN(LINE)] get => new bool4(0, 0, y, 0); [IN(LINE)] set { y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 ___x { [IN(LINE)] get => new bool4(false, false, false, x); }
+        public bool4 ___x { [IN(LINE)] get => new bool4(0, 0, 0, x); [IN(LINE)] set { x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool4 ___y { [IN(LINE)] get => new bool4(false, false, false, y); }
+        public bool4 ___y { [IN(LINE)] get => new bool4(0, 0, 0, y); [IN(LINE)] set { y = value.w; } }
         #endregion
 
         #endregion
