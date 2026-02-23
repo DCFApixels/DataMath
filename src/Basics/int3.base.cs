@@ -209,681 +209,681 @@ namespace DCFApixels.DataMath
 
         #endregion
 
-        #region Swaps
+        #region Swizzles
 
-        #region Swap2
+        #region Swizzle2
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 xx { [IN(LINE)] get => new int2(x, x); }
+        public int2 xx { [IN(LINE)] get => new int2(x, x); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 xy { [IN(LINE)] get => new int2(x, y); }
+        public int2 xy { [IN(LINE)] get => new int2(x, y); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 xz { [IN(LINE)] get => new int2(x, z); }
+        public int2 xz { [IN(LINE)] get => new int2(x, z); [IN(LINE)] set { x = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 x_ { [IN(LINE)] get => new int2(x, 0); }
+        public int2 x_ { [IN(LINE)] get => new int2(x, 0); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 yx { [IN(LINE)] get => new int2(y, x); }
+        public int2 yx { [IN(LINE)] get => new int2(y, x); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 yy { [IN(LINE)] get => new int2(y, y); }
+        public int2 yy { [IN(LINE)] get => new int2(y, y); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 yz { [IN(LINE)] get => new int2(y, z); }
+        public int2 yz { [IN(LINE)] get => new int2(y, z); [IN(LINE)] set { y = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 y_ { [IN(LINE)] get => new int2(y, 0); }
+        public int2 y_ { [IN(LINE)] get => new int2(y, 0); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 zx { [IN(LINE)] get => new int2(z, x); }
+        public int2 zx { [IN(LINE)] get => new int2(z, x); [IN(LINE)] set { z = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 zy { [IN(LINE)] get => new int2(z, y); }
+        public int2 zy { [IN(LINE)] get => new int2(z, y); [IN(LINE)] set { z = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 zz { [IN(LINE)] get => new int2(z, z); }
+        public int2 zz { [IN(LINE)] get => new int2(z, z); [IN(LINE)] set { z = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 z_ { [IN(LINE)] get => new int2(z, 0); }
+        public int2 z_ { [IN(LINE)] get => new int2(z, 0); [IN(LINE)] set { z = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 _x { [IN(LINE)] get => new int2(0, x); }
+        public int2 _x { [IN(LINE)] get => new int2(0, x); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 _y { [IN(LINE)] get => new int2(0, y); }
+        public int2 _y { [IN(LINE)] get => new int2(0, y); [IN(LINE)] set { y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int2 _z { [IN(LINE)] get => new int2(0, z); }
+        public int2 _z { [IN(LINE)] get => new int2(0, z); [IN(LINE)] set { z = value.y; } }
         #endregion
 
-        #region Swap3
+        #region Swizzle3
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xxx { [IN(LINE)] get => new int3(x, x, x); }
+        public int3 xxx { [IN(LINE)] get => new int3(x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xxy { [IN(LINE)] get => new int3(x, x, y); }
+        public int3 xxy { [IN(LINE)] get => new int3(x, x, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xxz { [IN(LINE)] get => new int3(x, x, z); }
+        public int3 xxz { [IN(LINE)] get => new int3(x, x, z); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xx_ { [IN(LINE)] get => new int3(x, x, 0); }
+        public int3 xx_ { [IN(LINE)] get => new int3(x, x, 0); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xyx { [IN(LINE)] get => new int3(x, y, x); }
+        public int3 xyx { [IN(LINE)] get => new int3(x, y, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xyy { [IN(LINE)] get => new int3(x, y, y); }
+        public int3 xyy { [IN(LINE)] get => new int3(x, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xyz { [IN(LINE)] get => new int3(x, y, z); }
+        public int3 xyz { [IN(LINE)] get => new int3(x, y, z); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xy_ { [IN(LINE)] get => new int3(x, y, 0); }
+        public int3 xy_ { [IN(LINE)] get => new int3(x, y, 0); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xzx { [IN(LINE)] get => new int3(x, z, x); }
+        public int3 xzx { [IN(LINE)] get => new int3(x, z, x); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xzy { [IN(LINE)] get => new int3(x, z, y); }
+        public int3 xzy { [IN(LINE)] get => new int3(x, z, y); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xzz { [IN(LINE)] get => new int3(x, z, z); }
+        public int3 xzz { [IN(LINE)] get => new int3(x, z, z); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 xz_ { [IN(LINE)] get => new int3(x, z, 0); }
+        public int3 xz_ { [IN(LINE)] get => new int3(x, z, 0); [IN(LINE)] set { x = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 x_x { [IN(LINE)] get => new int3(x, 0, x); }
+        public int3 x_x { [IN(LINE)] get => new int3(x, 0, x); [IN(LINE)] set { x = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 x_y { [IN(LINE)] get => new int3(x, 0, y); }
+        public int3 x_y { [IN(LINE)] get => new int3(x, 0, y); [IN(LINE)] set { x = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 x_z { [IN(LINE)] get => new int3(x, 0, z); }
+        public int3 x_z { [IN(LINE)] get => new int3(x, 0, z); [IN(LINE)] set { x = value.x; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 x__ { [IN(LINE)] get => new int3(x, 0, 0); }
+        public int3 x__ { [IN(LINE)] get => new int3(x, 0, 0); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yxx { [IN(LINE)] get => new int3(y, x, x); }
+        public int3 yxx { [IN(LINE)] get => new int3(y, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yxy { [IN(LINE)] get => new int3(y, x, y); }
+        public int3 yxy { [IN(LINE)] get => new int3(y, x, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yxz { [IN(LINE)] get => new int3(y, x, z); }
+        public int3 yxz { [IN(LINE)] get => new int3(y, x, z); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yx_ { [IN(LINE)] get => new int3(y, x, 0); }
+        public int3 yx_ { [IN(LINE)] get => new int3(y, x, 0); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yyx { [IN(LINE)] get => new int3(y, y, x); }
+        public int3 yyx { [IN(LINE)] get => new int3(y, y, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yyy { [IN(LINE)] get => new int3(y, y, y); }
+        public int3 yyy { [IN(LINE)] get => new int3(y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yyz { [IN(LINE)] get => new int3(y, y, z); }
+        public int3 yyz { [IN(LINE)] get => new int3(y, y, z); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yy_ { [IN(LINE)] get => new int3(y, y, 0); }
+        public int3 yy_ { [IN(LINE)] get => new int3(y, y, 0); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yzx { [IN(LINE)] get => new int3(y, z, x); }
+        public int3 yzx { [IN(LINE)] get => new int3(y, z, x); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yzy { [IN(LINE)] get => new int3(y, z, y); }
+        public int3 yzy { [IN(LINE)] get => new int3(y, z, y); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yzz { [IN(LINE)] get => new int3(y, z, z); }
+        public int3 yzz { [IN(LINE)] get => new int3(y, z, z); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 yz_ { [IN(LINE)] get => new int3(y, z, 0); }
+        public int3 yz_ { [IN(LINE)] get => new int3(y, z, 0); [IN(LINE)] set { y = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 y_x { [IN(LINE)] get => new int3(y, 0, x); }
+        public int3 y_x { [IN(LINE)] get => new int3(y, 0, x); [IN(LINE)] set { y = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 y_y { [IN(LINE)] get => new int3(y, 0, y); }
+        public int3 y_y { [IN(LINE)] get => new int3(y, 0, y); [IN(LINE)] set { y = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 y_z { [IN(LINE)] get => new int3(y, 0, z); }
+        public int3 y_z { [IN(LINE)] get => new int3(y, 0, z); [IN(LINE)] set { y = value.x; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 y__ { [IN(LINE)] get => new int3(y, 0, 0); }
+        public int3 y__ { [IN(LINE)] get => new int3(y, 0, 0); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zxx { [IN(LINE)] get => new int3(z, x, x); }
+        public int3 zxx { [IN(LINE)] get => new int3(z, x, x); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zxy { [IN(LINE)] get => new int3(z, x, y); }
+        public int3 zxy { [IN(LINE)] get => new int3(z, x, y); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zxz { [IN(LINE)] get => new int3(z, x, z); }
+        public int3 zxz { [IN(LINE)] get => new int3(z, x, z); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zx_ { [IN(LINE)] get => new int3(z, x, 0); }
+        public int3 zx_ { [IN(LINE)] get => new int3(z, x, 0); [IN(LINE)] set { z = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zyx { [IN(LINE)] get => new int3(z, y, x); }
+        public int3 zyx { [IN(LINE)] get => new int3(z, y, x); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zyy { [IN(LINE)] get => new int3(z, y, y); }
+        public int3 zyy { [IN(LINE)] get => new int3(z, y, y); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zyz { [IN(LINE)] get => new int3(z, y, z); }
+        public int3 zyz { [IN(LINE)] get => new int3(z, y, z); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zy_ { [IN(LINE)] get => new int3(z, y, 0); }
+        public int3 zy_ { [IN(LINE)] get => new int3(z, y, 0); [IN(LINE)] set { z = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zzx { [IN(LINE)] get => new int3(z, z, x); }
+        public int3 zzx { [IN(LINE)] get => new int3(z, z, x); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zzy { [IN(LINE)] get => new int3(z, z, y); }
+        public int3 zzy { [IN(LINE)] get => new int3(z, z, y); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zzz { [IN(LINE)] get => new int3(z, z, z); }
+        public int3 zzz { [IN(LINE)] get => new int3(z, z, z); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 zz_ { [IN(LINE)] get => new int3(z, z, 0); }
+        public int3 zz_ { [IN(LINE)] get => new int3(z, z, 0); [IN(LINE)] set { z = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 z_x { [IN(LINE)] get => new int3(z, 0, x); }
+        public int3 z_x { [IN(LINE)] get => new int3(z, 0, x); [IN(LINE)] set { z = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 z_y { [IN(LINE)] get => new int3(z, 0, y); }
+        public int3 z_y { [IN(LINE)] get => new int3(z, 0, y); [IN(LINE)] set { z = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 z_z { [IN(LINE)] get => new int3(z, 0, z); }
+        public int3 z_z { [IN(LINE)] get => new int3(z, 0, z); [IN(LINE)] set { z = value.x; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 z__ { [IN(LINE)] get => new int3(z, 0, 0); }
+        public int3 z__ { [IN(LINE)] get => new int3(z, 0, 0); [IN(LINE)] set { z = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _xx { [IN(LINE)] get => new int3(0, x, x); }
+        public int3 _xx { [IN(LINE)] get => new int3(0, x, x); [IN(LINE)] set { x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _xy { [IN(LINE)] get => new int3(0, x, y); }
+        public int3 _xy { [IN(LINE)] get => new int3(0, x, y); [IN(LINE)] set { x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _xz { [IN(LINE)] get => new int3(0, x, z); }
+        public int3 _xz { [IN(LINE)] get => new int3(0, x, z); [IN(LINE)] set { x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _x_ { [IN(LINE)] get => new int3(0, x, 0); }
+        public int3 _x_ { [IN(LINE)] get => new int3(0, x, 0); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _yx { [IN(LINE)] get => new int3(0, y, x); }
+        public int3 _yx { [IN(LINE)] get => new int3(0, y, x); [IN(LINE)] set { y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _yy { [IN(LINE)] get => new int3(0, y, y); }
+        public int3 _yy { [IN(LINE)] get => new int3(0, y, y); [IN(LINE)] set { y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _yz { [IN(LINE)] get => new int3(0, y, z); }
+        public int3 _yz { [IN(LINE)] get => new int3(0, y, z); [IN(LINE)] set { y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _y_ { [IN(LINE)] get => new int3(0, y, 0); }
+        public int3 _y_ { [IN(LINE)] get => new int3(0, y, 0); [IN(LINE)] set { y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _zx { [IN(LINE)] get => new int3(0, z, x); }
+        public int3 _zx { [IN(LINE)] get => new int3(0, z, x); [IN(LINE)] set { z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _zy { [IN(LINE)] get => new int3(0, z, y); }
+        public int3 _zy { [IN(LINE)] get => new int3(0, z, y); [IN(LINE)] set { z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _zz { [IN(LINE)] get => new int3(0, z, z); }
+        public int3 _zz { [IN(LINE)] get => new int3(0, z, z); [IN(LINE)] set { z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 _z_ { [IN(LINE)] get => new int3(0, z, 0); }
+        public int3 _z_ { [IN(LINE)] get => new int3(0, z, 0); [IN(LINE)] set { z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 __x { [IN(LINE)] get => new int3(0, 0, x); }
+        public int3 __x { [IN(LINE)] get => new int3(0, 0, x); [IN(LINE)] set { x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 __y { [IN(LINE)] get => new int3(0, 0, y); }
+        public int3 __y { [IN(LINE)] get => new int3(0, 0, y); [IN(LINE)] set { y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int3 __z { [IN(LINE)] get => new int3(0, 0, z); }
+        public int3 __z { [IN(LINE)] get => new int3(0, 0, z); [IN(LINE)] set { z = value.z; } }
         #endregion
 
-        #region Swap4
+        #region Swizzle4
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxxx { [IN(LINE)] get => new int4(x, x, x, x); }
+        public int4 xxxx { [IN(LINE)] get => new int4(x, x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxxy { [IN(LINE)] get => new int4(x, x, x, y); }
+        public int4 xxxy { [IN(LINE)] get => new int4(x, x, x, y); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxxz { [IN(LINE)] get => new int4(x, x, x, z); }
+        public int4 xxxz { [IN(LINE)] get => new int4(x, x, x, z); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxx_ { [IN(LINE)] get => new int4(x, x, x, 0); }
+        public int4 xxx_ { [IN(LINE)] get => new int4(x, x, x, 0); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxyx { [IN(LINE)] get => new int4(x, x, y, x); }
+        public int4 xxyx { [IN(LINE)] get => new int4(x, x, y, x); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxyy { [IN(LINE)] get => new int4(x, x, y, y); }
+        public int4 xxyy { [IN(LINE)] get => new int4(x, x, y, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxyz { [IN(LINE)] get => new int4(x, x, y, z); }
+        public int4 xxyz { [IN(LINE)] get => new int4(x, x, y, z); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxy_ { [IN(LINE)] get => new int4(x, x, y, 0); }
+        public int4 xxy_ { [IN(LINE)] get => new int4(x, x, y, 0); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxzx { [IN(LINE)] get => new int4(x, x, z, x); }
+        public int4 xxzx { [IN(LINE)] get => new int4(x, x, z, x); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxzy { [IN(LINE)] get => new int4(x, x, z, y); }
+        public int4 xxzy { [IN(LINE)] get => new int4(x, x, z, y); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxzz { [IN(LINE)] get => new int4(x, x, z, z); }
+        public int4 xxzz { [IN(LINE)] get => new int4(x, x, z, z); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xxz_ { [IN(LINE)] get => new int4(x, x, z, 0); }
+        public int4 xxz_ { [IN(LINE)] get => new int4(x, x, z, 0); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xx_x { [IN(LINE)] get => new int4(x, x, 0, x); }
+        public int4 xx_x { [IN(LINE)] get => new int4(x, x, 0, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xx_y { [IN(LINE)] get => new int4(x, x, 0, y); }
+        public int4 xx_y { [IN(LINE)] get => new int4(x, x, 0, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xx_z { [IN(LINE)] get => new int4(x, x, 0, z); }
+        public int4 xx_z { [IN(LINE)] get => new int4(x, x, 0, z); [IN(LINE)] set { x = value.x; x = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xx__ { [IN(LINE)] get => new int4(x, x, 0, 0); }
+        public int4 xx__ { [IN(LINE)] get => new int4(x, x, 0, 0); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyxx { [IN(LINE)] get => new int4(x, y, x, x); }
+        public int4 xyxx { [IN(LINE)] get => new int4(x, y, x, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyxy { [IN(LINE)] get => new int4(x, y, x, y); }
+        public int4 xyxy { [IN(LINE)] get => new int4(x, y, x, y); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyxz { [IN(LINE)] get => new int4(x, y, x, z); }
+        public int4 xyxz { [IN(LINE)] get => new int4(x, y, x, z); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyx_ { [IN(LINE)] get => new int4(x, y, x, 0); }
+        public int4 xyx_ { [IN(LINE)] get => new int4(x, y, x, 0); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyyx { [IN(LINE)] get => new int4(x, y, y, x); }
+        public int4 xyyx { [IN(LINE)] get => new int4(x, y, y, x); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyyy { [IN(LINE)] get => new int4(x, y, y, y); }
+        public int4 xyyy { [IN(LINE)] get => new int4(x, y, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyyz { [IN(LINE)] get => new int4(x, y, y, z); }
+        public int4 xyyz { [IN(LINE)] get => new int4(x, y, y, z); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyy_ { [IN(LINE)] get => new int4(x, y, y, 0); }
+        public int4 xyy_ { [IN(LINE)] get => new int4(x, y, y, 0); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyzx { [IN(LINE)] get => new int4(x, y, z, x); }
+        public int4 xyzx { [IN(LINE)] get => new int4(x, y, z, x); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyzy { [IN(LINE)] get => new int4(x, y, z, y); }
+        public int4 xyzy { [IN(LINE)] get => new int4(x, y, z, y); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyzz { [IN(LINE)] get => new int4(x, y, z, z); }
+        public int4 xyzz { [IN(LINE)] get => new int4(x, y, z, z); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xyz_ { [IN(LINE)] get => new int4(x, y, z, 0); }
+        public int4 xyz_ { [IN(LINE)] get => new int4(x, y, z, 0); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xy_x { [IN(LINE)] get => new int4(x, y, 0, x); }
+        public int4 xy_x { [IN(LINE)] get => new int4(x, y, 0, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xy_y { [IN(LINE)] get => new int4(x, y, 0, y); }
+        public int4 xy_y { [IN(LINE)] get => new int4(x, y, 0, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xy_z { [IN(LINE)] get => new int4(x, y, 0, z); }
+        public int4 xy_z { [IN(LINE)] get => new int4(x, y, 0, z); [IN(LINE)] set { x = value.x; y = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xy__ { [IN(LINE)] get => new int4(x, y, 0, 0); }
+        public int4 xy__ { [IN(LINE)] get => new int4(x, y, 0, 0); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzxx { [IN(LINE)] get => new int4(x, z, x, x); }
+        public int4 xzxx { [IN(LINE)] get => new int4(x, z, x, x); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzxy { [IN(LINE)] get => new int4(x, z, x, y); }
+        public int4 xzxy { [IN(LINE)] get => new int4(x, z, x, y); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzxz { [IN(LINE)] get => new int4(x, z, x, z); }
+        public int4 xzxz { [IN(LINE)] get => new int4(x, z, x, z); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzx_ { [IN(LINE)] get => new int4(x, z, x, 0); }
+        public int4 xzx_ { [IN(LINE)] get => new int4(x, z, x, 0); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzyx { [IN(LINE)] get => new int4(x, z, y, x); }
+        public int4 xzyx { [IN(LINE)] get => new int4(x, z, y, x); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzyy { [IN(LINE)] get => new int4(x, z, y, y); }
+        public int4 xzyy { [IN(LINE)] get => new int4(x, z, y, y); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzyz { [IN(LINE)] get => new int4(x, z, y, z); }
+        public int4 xzyz { [IN(LINE)] get => new int4(x, z, y, z); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzy_ { [IN(LINE)] get => new int4(x, z, y, 0); }
+        public int4 xzy_ { [IN(LINE)] get => new int4(x, z, y, 0); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzzx { [IN(LINE)] get => new int4(x, z, z, x); }
+        public int4 xzzx { [IN(LINE)] get => new int4(x, z, z, x); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzzy { [IN(LINE)] get => new int4(x, z, z, y); }
+        public int4 xzzy { [IN(LINE)] get => new int4(x, z, z, y); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzzz { [IN(LINE)] get => new int4(x, z, z, z); }
+        public int4 xzzz { [IN(LINE)] get => new int4(x, z, z, z); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xzz_ { [IN(LINE)] get => new int4(x, z, z, 0); }
+        public int4 xzz_ { [IN(LINE)] get => new int4(x, z, z, 0); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xz_x { [IN(LINE)] get => new int4(x, z, 0, x); }
+        public int4 xz_x { [IN(LINE)] get => new int4(x, z, 0, x); [IN(LINE)] set { x = value.x; z = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xz_y { [IN(LINE)] get => new int4(x, z, 0, y); }
+        public int4 xz_y { [IN(LINE)] get => new int4(x, z, 0, y); [IN(LINE)] set { x = value.x; z = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xz_z { [IN(LINE)] get => new int4(x, z, 0, z); }
+        public int4 xz_z { [IN(LINE)] get => new int4(x, z, 0, z); [IN(LINE)] set { x = value.x; z = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 xz__ { [IN(LINE)] get => new int4(x, z, 0, 0); }
+        public int4 xz__ { [IN(LINE)] get => new int4(x, z, 0, 0); [IN(LINE)] set { x = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_xx { [IN(LINE)] get => new int4(x, 0, x, x); }
+        public int4 x_xx { [IN(LINE)] get => new int4(x, 0, x, x); [IN(LINE)] set { x = value.x; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_xy { [IN(LINE)] get => new int4(x, 0, x, y); }
+        public int4 x_xy { [IN(LINE)] get => new int4(x, 0, x, y); [IN(LINE)] set { x = value.x; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_xz { [IN(LINE)] get => new int4(x, 0, x, z); }
+        public int4 x_xz { [IN(LINE)] get => new int4(x, 0, x, z); [IN(LINE)] set { x = value.x; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_x_ { [IN(LINE)] get => new int4(x, 0, x, 0); }
+        public int4 x_x_ { [IN(LINE)] get => new int4(x, 0, x, 0); [IN(LINE)] set { x = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_yx { [IN(LINE)] get => new int4(x, 0, y, x); }
+        public int4 x_yx { [IN(LINE)] get => new int4(x, 0, y, x); [IN(LINE)] set { x = value.x; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_yy { [IN(LINE)] get => new int4(x, 0, y, y); }
+        public int4 x_yy { [IN(LINE)] get => new int4(x, 0, y, y); [IN(LINE)] set { x = value.x; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_yz { [IN(LINE)] get => new int4(x, 0, y, z); }
+        public int4 x_yz { [IN(LINE)] get => new int4(x, 0, y, z); [IN(LINE)] set { x = value.x; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_y_ { [IN(LINE)] get => new int4(x, 0, y, 0); }
+        public int4 x_y_ { [IN(LINE)] get => new int4(x, 0, y, 0); [IN(LINE)] set { x = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_zx { [IN(LINE)] get => new int4(x, 0, z, x); }
+        public int4 x_zx { [IN(LINE)] get => new int4(x, 0, z, x); [IN(LINE)] set { x = value.x; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_zy { [IN(LINE)] get => new int4(x, 0, z, y); }
+        public int4 x_zy { [IN(LINE)] get => new int4(x, 0, z, y); [IN(LINE)] set { x = value.x; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_zz { [IN(LINE)] get => new int4(x, 0, z, z); }
+        public int4 x_zz { [IN(LINE)] get => new int4(x, 0, z, z); [IN(LINE)] set { x = value.x; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x_z_ { [IN(LINE)] get => new int4(x, 0, z, 0); }
+        public int4 x_z_ { [IN(LINE)] get => new int4(x, 0, z, 0); [IN(LINE)] set { x = value.x; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x__x { [IN(LINE)] get => new int4(x, 0, 0, x); }
+        public int4 x__x { [IN(LINE)] get => new int4(x, 0, 0, x); [IN(LINE)] set { x = value.x; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x__y { [IN(LINE)] get => new int4(x, 0, 0, y); }
+        public int4 x__y { [IN(LINE)] get => new int4(x, 0, 0, y); [IN(LINE)] set { x = value.x; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x__z { [IN(LINE)] get => new int4(x, 0, 0, z); }
+        public int4 x__z { [IN(LINE)] get => new int4(x, 0, 0, z); [IN(LINE)] set { x = value.x; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 x___ { [IN(LINE)] get => new int4(x, 0, 0, 0); }
+        public int4 x___ { [IN(LINE)] get => new int4(x, 0, 0, 0); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxxx { [IN(LINE)] get => new int4(y, x, x, x); }
+        public int4 yxxx { [IN(LINE)] get => new int4(y, x, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxxy { [IN(LINE)] get => new int4(y, x, x, y); }
+        public int4 yxxy { [IN(LINE)] get => new int4(y, x, x, y); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxxz { [IN(LINE)] get => new int4(y, x, x, z); }
+        public int4 yxxz { [IN(LINE)] get => new int4(y, x, x, z); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxx_ { [IN(LINE)] get => new int4(y, x, x, 0); }
+        public int4 yxx_ { [IN(LINE)] get => new int4(y, x, x, 0); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxyx { [IN(LINE)] get => new int4(y, x, y, x); }
+        public int4 yxyx { [IN(LINE)] get => new int4(y, x, y, x); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxyy { [IN(LINE)] get => new int4(y, x, y, y); }
+        public int4 yxyy { [IN(LINE)] get => new int4(y, x, y, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxyz { [IN(LINE)] get => new int4(y, x, y, z); }
+        public int4 yxyz { [IN(LINE)] get => new int4(y, x, y, z); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxy_ { [IN(LINE)] get => new int4(y, x, y, 0); }
+        public int4 yxy_ { [IN(LINE)] get => new int4(y, x, y, 0); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxzx { [IN(LINE)] get => new int4(y, x, z, x); }
+        public int4 yxzx { [IN(LINE)] get => new int4(y, x, z, x); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxzy { [IN(LINE)] get => new int4(y, x, z, y); }
+        public int4 yxzy { [IN(LINE)] get => new int4(y, x, z, y); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxzz { [IN(LINE)] get => new int4(y, x, z, z); }
+        public int4 yxzz { [IN(LINE)] get => new int4(y, x, z, z); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yxz_ { [IN(LINE)] get => new int4(y, x, z, 0); }
+        public int4 yxz_ { [IN(LINE)] get => new int4(y, x, z, 0); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yx_x { [IN(LINE)] get => new int4(y, x, 0, x); }
+        public int4 yx_x { [IN(LINE)] get => new int4(y, x, 0, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yx_y { [IN(LINE)] get => new int4(y, x, 0, y); }
+        public int4 yx_y { [IN(LINE)] get => new int4(y, x, 0, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yx_z { [IN(LINE)] get => new int4(y, x, 0, z); }
+        public int4 yx_z { [IN(LINE)] get => new int4(y, x, 0, z); [IN(LINE)] set { y = value.x; x = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yx__ { [IN(LINE)] get => new int4(y, x, 0, 0); }
+        public int4 yx__ { [IN(LINE)] get => new int4(y, x, 0, 0); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyxx { [IN(LINE)] get => new int4(y, y, x, x); }
+        public int4 yyxx { [IN(LINE)] get => new int4(y, y, x, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyxy { [IN(LINE)] get => new int4(y, y, x, y); }
+        public int4 yyxy { [IN(LINE)] get => new int4(y, y, x, y); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyxz { [IN(LINE)] get => new int4(y, y, x, z); }
+        public int4 yyxz { [IN(LINE)] get => new int4(y, y, x, z); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyx_ { [IN(LINE)] get => new int4(y, y, x, 0); }
+        public int4 yyx_ { [IN(LINE)] get => new int4(y, y, x, 0); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyyx { [IN(LINE)] get => new int4(y, y, y, x); }
+        public int4 yyyx { [IN(LINE)] get => new int4(y, y, y, x); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyyy { [IN(LINE)] get => new int4(y, y, y, y); }
+        public int4 yyyy { [IN(LINE)] get => new int4(y, y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyyz { [IN(LINE)] get => new int4(y, y, y, z); }
+        public int4 yyyz { [IN(LINE)] get => new int4(y, y, y, z); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyy_ { [IN(LINE)] get => new int4(y, y, y, 0); }
+        public int4 yyy_ { [IN(LINE)] get => new int4(y, y, y, 0); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyzx { [IN(LINE)] get => new int4(y, y, z, x); }
+        public int4 yyzx { [IN(LINE)] get => new int4(y, y, z, x); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyzy { [IN(LINE)] get => new int4(y, y, z, y); }
+        public int4 yyzy { [IN(LINE)] get => new int4(y, y, z, y); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyzz { [IN(LINE)] get => new int4(y, y, z, z); }
+        public int4 yyzz { [IN(LINE)] get => new int4(y, y, z, z); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yyz_ { [IN(LINE)] get => new int4(y, y, z, 0); }
+        public int4 yyz_ { [IN(LINE)] get => new int4(y, y, z, 0); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yy_x { [IN(LINE)] get => new int4(y, y, 0, x); }
+        public int4 yy_x { [IN(LINE)] get => new int4(y, y, 0, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yy_y { [IN(LINE)] get => new int4(y, y, 0, y); }
+        public int4 yy_y { [IN(LINE)] get => new int4(y, y, 0, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yy_z { [IN(LINE)] get => new int4(y, y, 0, z); }
+        public int4 yy_z { [IN(LINE)] get => new int4(y, y, 0, z); [IN(LINE)] set { y = value.x; y = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yy__ { [IN(LINE)] get => new int4(y, y, 0, 0); }
+        public int4 yy__ { [IN(LINE)] get => new int4(y, y, 0, 0); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzxx { [IN(LINE)] get => new int4(y, z, x, x); }
+        public int4 yzxx { [IN(LINE)] get => new int4(y, z, x, x); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzxy { [IN(LINE)] get => new int4(y, z, x, y); }
+        public int4 yzxy { [IN(LINE)] get => new int4(y, z, x, y); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzxz { [IN(LINE)] get => new int4(y, z, x, z); }
+        public int4 yzxz { [IN(LINE)] get => new int4(y, z, x, z); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzx_ { [IN(LINE)] get => new int4(y, z, x, 0); }
+        public int4 yzx_ { [IN(LINE)] get => new int4(y, z, x, 0); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzyx { [IN(LINE)] get => new int4(y, z, y, x); }
+        public int4 yzyx { [IN(LINE)] get => new int4(y, z, y, x); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzyy { [IN(LINE)] get => new int4(y, z, y, y); }
+        public int4 yzyy { [IN(LINE)] get => new int4(y, z, y, y); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzyz { [IN(LINE)] get => new int4(y, z, y, z); }
+        public int4 yzyz { [IN(LINE)] get => new int4(y, z, y, z); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzy_ { [IN(LINE)] get => new int4(y, z, y, 0); }
+        public int4 yzy_ { [IN(LINE)] get => new int4(y, z, y, 0); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzzx { [IN(LINE)] get => new int4(y, z, z, x); }
+        public int4 yzzx { [IN(LINE)] get => new int4(y, z, z, x); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzzy { [IN(LINE)] get => new int4(y, z, z, y); }
+        public int4 yzzy { [IN(LINE)] get => new int4(y, z, z, y); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzzz { [IN(LINE)] get => new int4(y, z, z, z); }
+        public int4 yzzz { [IN(LINE)] get => new int4(y, z, z, z); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yzz_ { [IN(LINE)] get => new int4(y, z, z, 0); }
+        public int4 yzz_ { [IN(LINE)] get => new int4(y, z, z, 0); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yz_x { [IN(LINE)] get => new int4(y, z, 0, x); }
+        public int4 yz_x { [IN(LINE)] get => new int4(y, z, 0, x); [IN(LINE)] set { y = value.x; z = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yz_y { [IN(LINE)] get => new int4(y, z, 0, y); }
+        public int4 yz_y { [IN(LINE)] get => new int4(y, z, 0, y); [IN(LINE)] set { y = value.x; z = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yz_z { [IN(LINE)] get => new int4(y, z, 0, z); }
+        public int4 yz_z { [IN(LINE)] get => new int4(y, z, 0, z); [IN(LINE)] set { y = value.x; z = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 yz__ { [IN(LINE)] get => new int4(y, z, 0, 0); }
+        public int4 yz__ { [IN(LINE)] get => new int4(y, z, 0, 0); [IN(LINE)] set { y = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_xx { [IN(LINE)] get => new int4(y, 0, x, x); }
+        public int4 y_xx { [IN(LINE)] get => new int4(y, 0, x, x); [IN(LINE)] set { y = value.x; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_xy { [IN(LINE)] get => new int4(y, 0, x, y); }
+        public int4 y_xy { [IN(LINE)] get => new int4(y, 0, x, y); [IN(LINE)] set { y = value.x; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_xz { [IN(LINE)] get => new int4(y, 0, x, z); }
+        public int4 y_xz { [IN(LINE)] get => new int4(y, 0, x, z); [IN(LINE)] set { y = value.x; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_x_ { [IN(LINE)] get => new int4(y, 0, x, 0); }
+        public int4 y_x_ { [IN(LINE)] get => new int4(y, 0, x, 0); [IN(LINE)] set { y = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_yx { [IN(LINE)] get => new int4(y, 0, y, x); }
+        public int4 y_yx { [IN(LINE)] get => new int4(y, 0, y, x); [IN(LINE)] set { y = value.x; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_yy { [IN(LINE)] get => new int4(y, 0, y, y); }
+        public int4 y_yy { [IN(LINE)] get => new int4(y, 0, y, y); [IN(LINE)] set { y = value.x; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_yz { [IN(LINE)] get => new int4(y, 0, y, z); }
+        public int4 y_yz { [IN(LINE)] get => new int4(y, 0, y, z); [IN(LINE)] set { y = value.x; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_y_ { [IN(LINE)] get => new int4(y, 0, y, 0); }
+        public int4 y_y_ { [IN(LINE)] get => new int4(y, 0, y, 0); [IN(LINE)] set { y = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_zx { [IN(LINE)] get => new int4(y, 0, z, x); }
+        public int4 y_zx { [IN(LINE)] get => new int4(y, 0, z, x); [IN(LINE)] set { y = value.x; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_zy { [IN(LINE)] get => new int4(y, 0, z, y); }
+        public int4 y_zy { [IN(LINE)] get => new int4(y, 0, z, y); [IN(LINE)] set { y = value.x; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_zz { [IN(LINE)] get => new int4(y, 0, z, z); }
+        public int4 y_zz { [IN(LINE)] get => new int4(y, 0, z, z); [IN(LINE)] set { y = value.x; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y_z_ { [IN(LINE)] get => new int4(y, 0, z, 0); }
+        public int4 y_z_ { [IN(LINE)] get => new int4(y, 0, z, 0); [IN(LINE)] set { y = value.x; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y__x { [IN(LINE)] get => new int4(y, 0, 0, x); }
+        public int4 y__x { [IN(LINE)] get => new int4(y, 0, 0, x); [IN(LINE)] set { y = value.x; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y__y { [IN(LINE)] get => new int4(y, 0, 0, y); }
+        public int4 y__y { [IN(LINE)] get => new int4(y, 0, 0, y); [IN(LINE)] set { y = value.x; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y__z { [IN(LINE)] get => new int4(y, 0, 0, z); }
+        public int4 y__z { [IN(LINE)] get => new int4(y, 0, 0, z); [IN(LINE)] set { y = value.x; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 y___ { [IN(LINE)] get => new int4(y, 0, 0, 0); }
+        public int4 y___ { [IN(LINE)] get => new int4(y, 0, 0, 0); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxxx { [IN(LINE)] get => new int4(z, x, x, x); }
+        public int4 zxxx { [IN(LINE)] get => new int4(z, x, x, x); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxxy { [IN(LINE)] get => new int4(z, x, x, y); }
+        public int4 zxxy { [IN(LINE)] get => new int4(z, x, x, y); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxxz { [IN(LINE)] get => new int4(z, x, x, z); }
+        public int4 zxxz { [IN(LINE)] get => new int4(z, x, x, z); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxx_ { [IN(LINE)] get => new int4(z, x, x, 0); }
+        public int4 zxx_ { [IN(LINE)] get => new int4(z, x, x, 0); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxyx { [IN(LINE)] get => new int4(z, x, y, x); }
+        public int4 zxyx { [IN(LINE)] get => new int4(z, x, y, x); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxyy { [IN(LINE)] get => new int4(z, x, y, y); }
+        public int4 zxyy { [IN(LINE)] get => new int4(z, x, y, y); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxyz { [IN(LINE)] get => new int4(z, x, y, z); }
+        public int4 zxyz { [IN(LINE)] get => new int4(z, x, y, z); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxy_ { [IN(LINE)] get => new int4(z, x, y, 0); }
+        public int4 zxy_ { [IN(LINE)] get => new int4(z, x, y, 0); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxzx { [IN(LINE)] get => new int4(z, x, z, x); }
+        public int4 zxzx { [IN(LINE)] get => new int4(z, x, z, x); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxzy { [IN(LINE)] get => new int4(z, x, z, y); }
+        public int4 zxzy { [IN(LINE)] get => new int4(z, x, z, y); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxzz { [IN(LINE)] get => new int4(z, x, z, z); }
+        public int4 zxzz { [IN(LINE)] get => new int4(z, x, z, z); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zxz_ { [IN(LINE)] get => new int4(z, x, z, 0); }
+        public int4 zxz_ { [IN(LINE)] get => new int4(z, x, z, 0); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zx_x { [IN(LINE)] get => new int4(z, x, 0, x); }
+        public int4 zx_x { [IN(LINE)] get => new int4(z, x, 0, x); [IN(LINE)] set { z = value.x; x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zx_y { [IN(LINE)] get => new int4(z, x, 0, y); }
+        public int4 zx_y { [IN(LINE)] get => new int4(z, x, 0, y); [IN(LINE)] set { z = value.x; x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zx_z { [IN(LINE)] get => new int4(z, x, 0, z); }
+        public int4 zx_z { [IN(LINE)] get => new int4(z, x, 0, z); [IN(LINE)] set { z = value.x; x = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zx__ { [IN(LINE)] get => new int4(z, x, 0, 0); }
+        public int4 zx__ { [IN(LINE)] get => new int4(z, x, 0, 0); [IN(LINE)] set { z = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyxx { [IN(LINE)] get => new int4(z, y, x, x); }
+        public int4 zyxx { [IN(LINE)] get => new int4(z, y, x, x); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyxy { [IN(LINE)] get => new int4(z, y, x, y); }
+        public int4 zyxy { [IN(LINE)] get => new int4(z, y, x, y); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyxz { [IN(LINE)] get => new int4(z, y, x, z); }
+        public int4 zyxz { [IN(LINE)] get => new int4(z, y, x, z); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyx_ { [IN(LINE)] get => new int4(z, y, x, 0); }
+        public int4 zyx_ { [IN(LINE)] get => new int4(z, y, x, 0); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyyx { [IN(LINE)] get => new int4(z, y, y, x); }
+        public int4 zyyx { [IN(LINE)] get => new int4(z, y, y, x); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyyy { [IN(LINE)] get => new int4(z, y, y, y); }
+        public int4 zyyy { [IN(LINE)] get => new int4(z, y, y, y); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyyz { [IN(LINE)] get => new int4(z, y, y, z); }
+        public int4 zyyz { [IN(LINE)] get => new int4(z, y, y, z); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyy_ { [IN(LINE)] get => new int4(z, y, y, 0); }
+        public int4 zyy_ { [IN(LINE)] get => new int4(z, y, y, 0); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyzx { [IN(LINE)] get => new int4(z, y, z, x); }
+        public int4 zyzx { [IN(LINE)] get => new int4(z, y, z, x); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyzy { [IN(LINE)] get => new int4(z, y, z, y); }
+        public int4 zyzy { [IN(LINE)] get => new int4(z, y, z, y); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyzz { [IN(LINE)] get => new int4(z, y, z, z); }
+        public int4 zyzz { [IN(LINE)] get => new int4(z, y, z, z); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zyz_ { [IN(LINE)] get => new int4(z, y, z, 0); }
+        public int4 zyz_ { [IN(LINE)] get => new int4(z, y, z, 0); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zy_x { [IN(LINE)] get => new int4(z, y, 0, x); }
+        public int4 zy_x { [IN(LINE)] get => new int4(z, y, 0, x); [IN(LINE)] set { z = value.x; y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zy_y { [IN(LINE)] get => new int4(z, y, 0, y); }
+        public int4 zy_y { [IN(LINE)] get => new int4(z, y, 0, y); [IN(LINE)] set { z = value.x; y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zy_z { [IN(LINE)] get => new int4(z, y, 0, z); }
+        public int4 zy_z { [IN(LINE)] get => new int4(z, y, 0, z); [IN(LINE)] set { z = value.x; y = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zy__ { [IN(LINE)] get => new int4(z, y, 0, 0); }
+        public int4 zy__ { [IN(LINE)] get => new int4(z, y, 0, 0); [IN(LINE)] set { z = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzxx { [IN(LINE)] get => new int4(z, z, x, x); }
+        public int4 zzxx { [IN(LINE)] get => new int4(z, z, x, x); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzxy { [IN(LINE)] get => new int4(z, z, x, y); }
+        public int4 zzxy { [IN(LINE)] get => new int4(z, z, x, y); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzxz { [IN(LINE)] get => new int4(z, z, x, z); }
+        public int4 zzxz { [IN(LINE)] get => new int4(z, z, x, z); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzx_ { [IN(LINE)] get => new int4(z, z, x, 0); }
+        public int4 zzx_ { [IN(LINE)] get => new int4(z, z, x, 0); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzyx { [IN(LINE)] get => new int4(z, z, y, x); }
+        public int4 zzyx { [IN(LINE)] get => new int4(z, z, y, x); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzyy { [IN(LINE)] get => new int4(z, z, y, y); }
+        public int4 zzyy { [IN(LINE)] get => new int4(z, z, y, y); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzyz { [IN(LINE)] get => new int4(z, z, y, z); }
+        public int4 zzyz { [IN(LINE)] get => new int4(z, z, y, z); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzy_ { [IN(LINE)] get => new int4(z, z, y, 0); }
+        public int4 zzy_ { [IN(LINE)] get => new int4(z, z, y, 0); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzzx { [IN(LINE)] get => new int4(z, z, z, x); }
+        public int4 zzzx { [IN(LINE)] get => new int4(z, z, z, x); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzzy { [IN(LINE)] get => new int4(z, z, z, y); }
+        public int4 zzzy { [IN(LINE)] get => new int4(z, z, z, y); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzzz { [IN(LINE)] get => new int4(z, z, z, z); }
+        public int4 zzzz { [IN(LINE)] get => new int4(z, z, z, z); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zzz_ { [IN(LINE)] get => new int4(z, z, z, 0); }
+        public int4 zzz_ { [IN(LINE)] get => new int4(z, z, z, 0); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zz_x { [IN(LINE)] get => new int4(z, z, 0, x); }
+        public int4 zz_x { [IN(LINE)] get => new int4(z, z, 0, x); [IN(LINE)] set { z = value.x; z = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zz_y { [IN(LINE)] get => new int4(z, z, 0, y); }
+        public int4 zz_y { [IN(LINE)] get => new int4(z, z, 0, y); [IN(LINE)] set { z = value.x; z = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zz_z { [IN(LINE)] get => new int4(z, z, 0, z); }
+        public int4 zz_z { [IN(LINE)] get => new int4(z, z, 0, z); [IN(LINE)] set { z = value.x; z = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 zz__ { [IN(LINE)] get => new int4(z, z, 0, 0); }
+        public int4 zz__ { [IN(LINE)] get => new int4(z, z, 0, 0); [IN(LINE)] set { z = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_xx { [IN(LINE)] get => new int4(z, 0, x, x); }
+        public int4 z_xx { [IN(LINE)] get => new int4(z, 0, x, x); [IN(LINE)] set { z = value.x; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_xy { [IN(LINE)] get => new int4(z, 0, x, y); }
+        public int4 z_xy { [IN(LINE)] get => new int4(z, 0, x, y); [IN(LINE)] set { z = value.x; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_xz { [IN(LINE)] get => new int4(z, 0, x, z); }
+        public int4 z_xz { [IN(LINE)] get => new int4(z, 0, x, z); [IN(LINE)] set { z = value.x; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_x_ { [IN(LINE)] get => new int4(z, 0, x, 0); }
+        public int4 z_x_ { [IN(LINE)] get => new int4(z, 0, x, 0); [IN(LINE)] set { z = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_yx { [IN(LINE)] get => new int4(z, 0, y, x); }
+        public int4 z_yx { [IN(LINE)] get => new int4(z, 0, y, x); [IN(LINE)] set { z = value.x; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_yy { [IN(LINE)] get => new int4(z, 0, y, y); }
+        public int4 z_yy { [IN(LINE)] get => new int4(z, 0, y, y); [IN(LINE)] set { z = value.x; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_yz { [IN(LINE)] get => new int4(z, 0, y, z); }
+        public int4 z_yz { [IN(LINE)] get => new int4(z, 0, y, z); [IN(LINE)] set { z = value.x; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_y_ { [IN(LINE)] get => new int4(z, 0, y, 0); }
+        public int4 z_y_ { [IN(LINE)] get => new int4(z, 0, y, 0); [IN(LINE)] set { z = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_zx { [IN(LINE)] get => new int4(z, 0, z, x); }
+        public int4 z_zx { [IN(LINE)] get => new int4(z, 0, z, x); [IN(LINE)] set { z = value.x; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_zy { [IN(LINE)] get => new int4(z, 0, z, y); }
+        public int4 z_zy { [IN(LINE)] get => new int4(z, 0, z, y); [IN(LINE)] set { z = value.x; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_zz { [IN(LINE)] get => new int4(z, 0, z, z); }
+        public int4 z_zz { [IN(LINE)] get => new int4(z, 0, z, z); [IN(LINE)] set { z = value.x; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z_z_ { [IN(LINE)] get => new int4(z, 0, z, 0); }
+        public int4 z_z_ { [IN(LINE)] get => new int4(z, 0, z, 0); [IN(LINE)] set { z = value.x; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z__x { [IN(LINE)] get => new int4(z, 0, 0, x); }
+        public int4 z__x { [IN(LINE)] get => new int4(z, 0, 0, x); [IN(LINE)] set { z = value.x; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z__y { [IN(LINE)] get => new int4(z, 0, 0, y); }
+        public int4 z__y { [IN(LINE)] get => new int4(z, 0, 0, y); [IN(LINE)] set { z = value.x; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z__z { [IN(LINE)] get => new int4(z, 0, 0, z); }
+        public int4 z__z { [IN(LINE)] get => new int4(z, 0, 0, z); [IN(LINE)] set { z = value.x; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 z___ { [IN(LINE)] get => new int4(z, 0, 0, 0); }
+        public int4 z___ { [IN(LINE)] get => new int4(z, 0, 0, 0); [IN(LINE)] set { z = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xxx { [IN(LINE)] get => new int4(0, x, x, x); }
+        public int4 _xxx { [IN(LINE)] get => new int4(0, x, x, x); [IN(LINE)] set { x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xxy { [IN(LINE)] get => new int4(0, x, x, y); }
+        public int4 _xxy { [IN(LINE)] get => new int4(0, x, x, y); [IN(LINE)] set { x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xxz { [IN(LINE)] get => new int4(0, x, x, z); }
+        public int4 _xxz { [IN(LINE)] get => new int4(0, x, x, z); [IN(LINE)] set { x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xx_ { [IN(LINE)] get => new int4(0, x, x, 0); }
+        public int4 _xx_ { [IN(LINE)] get => new int4(0, x, x, 0); [IN(LINE)] set { x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xyx { [IN(LINE)] get => new int4(0, x, y, x); }
+        public int4 _xyx { [IN(LINE)] get => new int4(0, x, y, x); [IN(LINE)] set { x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xyy { [IN(LINE)] get => new int4(0, x, y, y); }
+        public int4 _xyy { [IN(LINE)] get => new int4(0, x, y, y); [IN(LINE)] set { x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xyz { [IN(LINE)] get => new int4(0, x, y, z); }
+        public int4 _xyz { [IN(LINE)] get => new int4(0, x, y, z); [IN(LINE)] set { x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xy_ { [IN(LINE)] get => new int4(0, x, y, 0); }
+        public int4 _xy_ { [IN(LINE)] get => new int4(0, x, y, 0); [IN(LINE)] set { x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xzx { [IN(LINE)] get => new int4(0, x, z, x); }
+        public int4 _xzx { [IN(LINE)] get => new int4(0, x, z, x); [IN(LINE)] set { x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xzy { [IN(LINE)] get => new int4(0, x, z, y); }
+        public int4 _xzy { [IN(LINE)] get => new int4(0, x, z, y); [IN(LINE)] set { x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xzz { [IN(LINE)] get => new int4(0, x, z, z); }
+        public int4 _xzz { [IN(LINE)] get => new int4(0, x, z, z); [IN(LINE)] set { x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _xz_ { [IN(LINE)] get => new int4(0, x, z, 0); }
+        public int4 _xz_ { [IN(LINE)] get => new int4(0, x, z, 0); [IN(LINE)] set { x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _x_x { [IN(LINE)] get => new int4(0, x, 0, x); }
+        public int4 _x_x { [IN(LINE)] get => new int4(0, x, 0, x); [IN(LINE)] set { x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _x_y { [IN(LINE)] get => new int4(0, x, 0, y); }
+        public int4 _x_y { [IN(LINE)] get => new int4(0, x, 0, y); [IN(LINE)] set { x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _x_z { [IN(LINE)] get => new int4(0, x, 0, z); }
+        public int4 _x_z { [IN(LINE)] get => new int4(0, x, 0, z); [IN(LINE)] set { x = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _x__ { [IN(LINE)] get => new int4(0, x, 0, 0); }
+        public int4 _x__ { [IN(LINE)] get => new int4(0, x, 0, 0); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yxx { [IN(LINE)] get => new int4(0, y, x, x); }
+        public int4 _yxx { [IN(LINE)] get => new int4(0, y, x, x); [IN(LINE)] set { y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yxy { [IN(LINE)] get => new int4(0, y, x, y); }
+        public int4 _yxy { [IN(LINE)] get => new int4(0, y, x, y); [IN(LINE)] set { y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yxz { [IN(LINE)] get => new int4(0, y, x, z); }
+        public int4 _yxz { [IN(LINE)] get => new int4(0, y, x, z); [IN(LINE)] set { y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yx_ { [IN(LINE)] get => new int4(0, y, x, 0); }
+        public int4 _yx_ { [IN(LINE)] get => new int4(0, y, x, 0); [IN(LINE)] set { y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yyx { [IN(LINE)] get => new int4(0, y, y, x); }
+        public int4 _yyx { [IN(LINE)] get => new int4(0, y, y, x); [IN(LINE)] set { y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yyy { [IN(LINE)] get => new int4(0, y, y, y); }
+        public int4 _yyy { [IN(LINE)] get => new int4(0, y, y, y); [IN(LINE)] set { y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yyz { [IN(LINE)] get => new int4(0, y, y, z); }
+        public int4 _yyz { [IN(LINE)] get => new int4(0, y, y, z); [IN(LINE)] set { y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yy_ { [IN(LINE)] get => new int4(0, y, y, 0); }
+        public int4 _yy_ { [IN(LINE)] get => new int4(0, y, y, 0); [IN(LINE)] set { y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yzx { [IN(LINE)] get => new int4(0, y, z, x); }
+        public int4 _yzx { [IN(LINE)] get => new int4(0, y, z, x); [IN(LINE)] set { y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yzy { [IN(LINE)] get => new int4(0, y, z, y); }
+        public int4 _yzy { [IN(LINE)] get => new int4(0, y, z, y); [IN(LINE)] set { y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yzz { [IN(LINE)] get => new int4(0, y, z, z); }
+        public int4 _yzz { [IN(LINE)] get => new int4(0, y, z, z); [IN(LINE)] set { y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _yz_ { [IN(LINE)] get => new int4(0, y, z, 0); }
+        public int4 _yz_ { [IN(LINE)] get => new int4(0, y, z, 0); [IN(LINE)] set { y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _y_x { [IN(LINE)] get => new int4(0, y, 0, x); }
+        public int4 _y_x { [IN(LINE)] get => new int4(0, y, 0, x); [IN(LINE)] set { y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _y_y { [IN(LINE)] get => new int4(0, y, 0, y); }
+        public int4 _y_y { [IN(LINE)] get => new int4(0, y, 0, y); [IN(LINE)] set { y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _y_z { [IN(LINE)] get => new int4(0, y, 0, z); }
+        public int4 _y_z { [IN(LINE)] get => new int4(0, y, 0, z); [IN(LINE)] set { y = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _y__ { [IN(LINE)] get => new int4(0, y, 0, 0); }
+        public int4 _y__ { [IN(LINE)] get => new int4(0, y, 0, 0); [IN(LINE)] set { y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zxx { [IN(LINE)] get => new int4(0, z, x, x); }
+        public int4 _zxx { [IN(LINE)] get => new int4(0, z, x, x); [IN(LINE)] set { z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zxy { [IN(LINE)] get => new int4(0, z, x, y); }
+        public int4 _zxy { [IN(LINE)] get => new int4(0, z, x, y); [IN(LINE)] set { z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zxz { [IN(LINE)] get => new int4(0, z, x, z); }
+        public int4 _zxz { [IN(LINE)] get => new int4(0, z, x, z); [IN(LINE)] set { z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zx_ { [IN(LINE)] get => new int4(0, z, x, 0); }
+        public int4 _zx_ { [IN(LINE)] get => new int4(0, z, x, 0); [IN(LINE)] set { z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zyx { [IN(LINE)] get => new int4(0, z, y, x); }
+        public int4 _zyx { [IN(LINE)] get => new int4(0, z, y, x); [IN(LINE)] set { z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zyy { [IN(LINE)] get => new int4(0, z, y, y); }
+        public int4 _zyy { [IN(LINE)] get => new int4(0, z, y, y); [IN(LINE)] set { z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zyz { [IN(LINE)] get => new int4(0, z, y, z); }
+        public int4 _zyz { [IN(LINE)] get => new int4(0, z, y, z); [IN(LINE)] set { z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zy_ { [IN(LINE)] get => new int4(0, z, y, 0); }
+        public int4 _zy_ { [IN(LINE)] get => new int4(0, z, y, 0); [IN(LINE)] set { z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zzx { [IN(LINE)] get => new int4(0, z, z, x); }
+        public int4 _zzx { [IN(LINE)] get => new int4(0, z, z, x); [IN(LINE)] set { z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zzy { [IN(LINE)] get => new int4(0, z, z, y); }
+        public int4 _zzy { [IN(LINE)] get => new int4(0, z, z, y); [IN(LINE)] set { z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zzz { [IN(LINE)] get => new int4(0, z, z, z); }
+        public int4 _zzz { [IN(LINE)] get => new int4(0, z, z, z); [IN(LINE)] set { z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _zz_ { [IN(LINE)] get => new int4(0, z, z, 0); }
+        public int4 _zz_ { [IN(LINE)] get => new int4(0, z, z, 0); [IN(LINE)] set { z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _z_x { [IN(LINE)] get => new int4(0, z, 0, x); }
+        public int4 _z_x { [IN(LINE)] get => new int4(0, z, 0, x); [IN(LINE)] set { z = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _z_y { [IN(LINE)] get => new int4(0, z, 0, y); }
+        public int4 _z_y { [IN(LINE)] get => new int4(0, z, 0, y); [IN(LINE)] set { z = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _z_z { [IN(LINE)] get => new int4(0, z, 0, z); }
+        public int4 _z_z { [IN(LINE)] get => new int4(0, z, 0, z); [IN(LINE)] set { z = value.y; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 _z__ { [IN(LINE)] get => new int4(0, z, 0, 0); }
+        public int4 _z__ { [IN(LINE)] get => new int4(0, z, 0, 0); [IN(LINE)] set { z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __xx { [IN(LINE)] get => new int4(0, 0, x, x); }
+        public int4 __xx { [IN(LINE)] get => new int4(0, 0, x, x); [IN(LINE)] set { x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __xy { [IN(LINE)] get => new int4(0, 0, x, y); }
+        public int4 __xy { [IN(LINE)] get => new int4(0, 0, x, y); [IN(LINE)] set { x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __xz { [IN(LINE)] get => new int4(0, 0, x, z); }
+        public int4 __xz { [IN(LINE)] get => new int4(0, 0, x, z); [IN(LINE)] set { x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __x_ { [IN(LINE)] get => new int4(0, 0, x, 0); }
+        public int4 __x_ { [IN(LINE)] get => new int4(0, 0, x, 0); [IN(LINE)] set { x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __yx { [IN(LINE)] get => new int4(0, 0, y, x); }
+        public int4 __yx { [IN(LINE)] get => new int4(0, 0, y, x); [IN(LINE)] set { y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __yy { [IN(LINE)] get => new int4(0, 0, y, y); }
+        public int4 __yy { [IN(LINE)] get => new int4(0, 0, y, y); [IN(LINE)] set { y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __yz { [IN(LINE)] get => new int4(0, 0, y, z); }
+        public int4 __yz { [IN(LINE)] get => new int4(0, 0, y, z); [IN(LINE)] set { y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __y_ { [IN(LINE)] get => new int4(0, 0, y, 0); }
+        public int4 __y_ { [IN(LINE)] get => new int4(0, 0, y, 0); [IN(LINE)] set { y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __zx { [IN(LINE)] get => new int4(0, 0, z, x); }
+        public int4 __zx { [IN(LINE)] get => new int4(0, 0, z, x); [IN(LINE)] set { z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __zy { [IN(LINE)] get => new int4(0, 0, z, y); }
+        public int4 __zy { [IN(LINE)] get => new int4(0, 0, z, y); [IN(LINE)] set { z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __zz { [IN(LINE)] get => new int4(0, 0, z, z); }
+        public int4 __zz { [IN(LINE)] get => new int4(0, 0, z, z); [IN(LINE)] set { z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 __z_ { [IN(LINE)] get => new int4(0, 0, z, 0); }
+        public int4 __z_ { [IN(LINE)] get => new int4(0, 0, z, 0); [IN(LINE)] set { z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 ___x { [IN(LINE)] get => new int4(0, 0, 0, x); }
+        public int4 ___x { [IN(LINE)] get => new int4(0, 0, 0, x); [IN(LINE)] set { x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 ___y { [IN(LINE)] get => new int4(0, 0, 0, y); }
+        public int4 ___y { [IN(LINE)] get => new int4(0, 0, 0, y); [IN(LINE)] set { y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int4 ___z { [IN(LINE)] get => new int4(0, 0, 0, z); }
+        public int4 ___z { [IN(LINE)] get => new int4(0, 0, 0, z); [IN(LINE)] set { z = value.w; } }
         #endregion
 
         #endregion

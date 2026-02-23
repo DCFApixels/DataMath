@@ -179,243 +179,243 @@ namespace DCFApixels.DataMath
 
         #endregion
 
-        #region Swaps
+        #region Swizzles
 
-        #region Swap2
+        #region Swizzle2
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 xx { [IN(LINE)] get => new float2(x, x); }
+        public float2 xx { [IN(LINE)] get => new float2(x, x); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 xy { [IN(LINE)] get => new float2(x, y); }
+        public float2 xy { [IN(LINE)] get => new float2(x, y); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 x_ { [IN(LINE)] get => new float2(x, 0f); }
+        public float2 x_ { [IN(LINE)] get => new float2(x, 0f); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 yx { [IN(LINE)] get => new float2(y, x); }
+        public float2 yx { [IN(LINE)] get => new float2(y, x); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 yy { [IN(LINE)] get => new float2(y, y); }
+        public float2 yy { [IN(LINE)] get => new float2(y, y); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 y_ { [IN(LINE)] get => new float2(y, 0f); }
+        public float2 y_ { [IN(LINE)] get => new float2(y, 0f); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 _x { [IN(LINE)] get => new float2(0f, x); }
+        public float2 _x { [IN(LINE)] get => new float2(0f, x); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float2 _y { [IN(LINE)] get => new float2(0f, y); }
+        public float2 _y { [IN(LINE)] get => new float2(0f, y); [IN(LINE)] set { y = value.y; } }
         #endregion
 
-        #region Swap3
+        #region Swizzle3
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 xxx { [IN(LINE)] get => new float3(x, x, x); }
+        public float3 xxx { [IN(LINE)] get => new float3(x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 xxy { [IN(LINE)] get => new float3(x, x, y); }
+        public float3 xxy { [IN(LINE)] get => new float3(x, x, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 xx_ { [IN(LINE)] get => new float3(x, x, 0f); }
+        public float3 xx_ { [IN(LINE)] get => new float3(x, x, 0f); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 xyx { [IN(LINE)] get => new float3(x, y, x); }
+        public float3 xyx { [IN(LINE)] get => new float3(x, y, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 xyy { [IN(LINE)] get => new float3(x, y, y); }
+        public float3 xyy { [IN(LINE)] get => new float3(x, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 xy_ { [IN(LINE)] get => new float3(x, y, 0f); }
+        public float3 xy_ { [IN(LINE)] get => new float3(x, y, 0f); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 x_x { [IN(LINE)] get => new float3(x, 0f, x); }
+        public float3 x_x { [IN(LINE)] get => new float3(x, 0f, x); [IN(LINE)] set { x = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 x_y { [IN(LINE)] get => new float3(x, 0f, y); }
+        public float3 x_y { [IN(LINE)] get => new float3(x, 0f, y); [IN(LINE)] set { x = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 x__ { [IN(LINE)] get => new float3(x, 0f, 0f); }
+        public float3 x__ { [IN(LINE)] get => new float3(x, 0f, 0f); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 yxx { [IN(LINE)] get => new float3(y, x, x); }
+        public float3 yxx { [IN(LINE)] get => new float3(y, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 yxy { [IN(LINE)] get => new float3(y, x, y); }
+        public float3 yxy { [IN(LINE)] get => new float3(y, x, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 yx_ { [IN(LINE)] get => new float3(y, x, 0f); }
+        public float3 yx_ { [IN(LINE)] get => new float3(y, x, 0f); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 yyx { [IN(LINE)] get => new float3(y, y, x); }
+        public float3 yyx { [IN(LINE)] get => new float3(y, y, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 yyy { [IN(LINE)] get => new float3(y, y, y); }
+        public float3 yyy { [IN(LINE)] get => new float3(y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 yy_ { [IN(LINE)] get => new float3(y, y, 0f); }
+        public float3 yy_ { [IN(LINE)] get => new float3(y, y, 0f); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 y_x { [IN(LINE)] get => new float3(y, 0f, x); }
+        public float3 y_x { [IN(LINE)] get => new float3(y, 0f, x); [IN(LINE)] set { y = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 y_y { [IN(LINE)] get => new float3(y, 0f, y); }
+        public float3 y_y { [IN(LINE)] get => new float3(y, 0f, y); [IN(LINE)] set { y = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 y__ { [IN(LINE)] get => new float3(y, 0f, 0f); }
+        public float3 y__ { [IN(LINE)] get => new float3(y, 0f, 0f); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 _xx { [IN(LINE)] get => new float3(0f, x, x); }
+        public float3 _xx { [IN(LINE)] get => new float3(0f, x, x); [IN(LINE)] set { x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 _xy { [IN(LINE)] get => new float3(0f, x, y); }
+        public float3 _xy { [IN(LINE)] get => new float3(0f, x, y); [IN(LINE)] set { x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 _x_ { [IN(LINE)] get => new float3(0f, x, 0f); }
+        public float3 _x_ { [IN(LINE)] get => new float3(0f, x, 0f); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 _yx { [IN(LINE)] get => new float3(0f, y, x); }
+        public float3 _yx { [IN(LINE)] get => new float3(0f, y, x); [IN(LINE)] set { y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 _yy { [IN(LINE)] get => new float3(0f, y, y); }
+        public float3 _yy { [IN(LINE)] get => new float3(0f, y, y); [IN(LINE)] set { y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 _y_ { [IN(LINE)] get => new float3(0f, y, 0f); }
+        public float3 _y_ { [IN(LINE)] get => new float3(0f, y, 0f); [IN(LINE)] set { y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 __x { [IN(LINE)] get => new float3(0f, 0f, x); }
+        public float3 __x { [IN(LINE)] get => new float3(0f, 0f, x); [IN(LINE)] set { x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float3 __y { [IN(LINE)] get => new float3(0f, 0f, y); }
+        public float3 __y { [IN(LINE)] get => new float3(0f, 0f, y); [IN(LINE)] set { y = value.z; } }
         #endregion
 
-        #region Swap4
+        #region Swizzle4
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xxxx { [IN(LINE)] get => new float4(x, x, x, x); }
+        public float4 xxxx { [IN(LINE)] get => new float4(x, x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xxxy { [IN(LINE)] get => new float4(x, x, x, y); }
+        public float4 xxxy { [IN(LINE)] get => new float4(x, x, x, y); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xxx_ { [IN(LINE)] get => new float4(x, x, x, 0f); }
+        public float4 xxx_ { [IN(LINE)] get => new float4(x, x, x, 0f); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xxyx { [IN(LINE)] get => new float4(x, x, y, x); }
+        public float4 xxyx { [IN(LINE)] get => new float4(x, x, y, x); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xxyy { [IN(LINE)] get => new float4(x, x, y, y); }
+        public float4 xxyy { [IN(LINE)] get => new float4(x, x, y, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xxy_ { [IN(LINE)] get => new float4(x, x, y, 0f); }
+        public float4 xxy_ { [IN(LINE)] get => new float4(x, x, y, 0f); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xx_x { [IN(LINE)] get => new float4(x, x, 0f, x); }
+        public float4 xx_x { [IN(LINE)] get => new float4(x, x, 0f, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xx_y { [IN(LINE)] get => new float4(x, x, 0f, y); }
+        public float4 xx_y { [IN(LINE)] get => new float4(x, x, 0f, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xx__ { [IN(LINE)] get => new float4(x, x, 0f, 0f); }
+        public float4 xx__ { [IN(LINE)] get => new float4(x, x, 0f, 0f); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xyxx { [IN(LINE)] get => new float4(x, y, x, x); }
+        public float4 xyxx { [IN(LINE)] get => new float4(x, y, x, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xyxy { [IN(LINE)] get => new float4(x, y, x, y); }
+        public float4 xyxy { [IN(LINE)] get => new float4(x, y, x, y); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xyx_ { [IN(LINE)] get => new float4(x, y, x, 0f); }
+        public float4 xyx_ { [IN(LINE)] get => new float4(x, y, x, 0f); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xyyx { [IN(LINE)] get => new float4(x, y, y, x); }
+        public float4 xyyx { [IN(LINE)] get => new float4(x, y, y, x); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xyyy { [IN(LINE)] get => new float4(x, y, y, y); }
+        public float4 xyyy { [IN(LINE)] get => new float4(x, y, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xyy_ { [IN(LINE)] get => new float4(x, y, y, 0f); }
+        public float4 xyy_ { [IN(LINE)] get => new float4(x, y, y, 0f); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xy_x { [IN(LINE)] get => new float4(x, y, 0f, x); }
+        public float4 xy_x { [IN(LINE)] get => new float4(x, y, 0f, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xy_y { [IN(LINE)] get => new float4(x, y, 0f, y); }
+        public float4 xy_y { [IN(LINE)] get => new float4(x, y, 0f, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 xy__ { [IN(LINE)] get => new float4(x, y, 0f, 0f); }
+        public float4 xy__ { [IN(LINE)] get => new float4(x, y, 0f, 0f); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x_xx { [IN(LINE)] get => new float4(x, 0f, x, x); }
+        public float4 x_xx { [IN(LINE)] get => new float4(x, 0f, x, x); [IN(LINE)] set { x = value.x; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x_xy { [IN(LINE)] get => new float4(x, 0f, x, y); }
+        public float4 x_xy { [IN(LINE)] get => new float4(x, 0f, x, y); [IN(LINE)] set { x = value.x; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x_x_ { [IN(LINE)] get => new float4(x, 0f, x, 0f); }
+        public float4 x_x_ { [IN(LINE)] get => new float4(x, 0f, x, 0f); [IN(LINE)] set { x = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x_yx { [IN(LINE)] get => new float4(x, 0f, y, x); }
+        public float4 x_yx { [IN(LINE)] get => new float4(x, 0f, y, x); [IN(LINE)] set { x = value.x; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x_yy { [IN(LINE)] get => new float4(x, 0f, y, y); }
+        public float4 x_yy { [IN(LINE)] get => new float4(x, 0f, y, y); [IN(LINE)] set { x = value.x; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x_y_ { [IN(LINE)] get => new float4(x, 0f, y, 0f); }
+        public float4 x_y_ { [IN(LINE)] get => new float4(x, 0f, y, 0f); [IN(LINE)] set { x = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x__x { [IN(LINE)] get => new float4(x, 0f, 0f, x); }
+        public float4 x__x { [IN(LINE)] get => new float4(x, 0f, 0f, x); [IN(LINE)] set { x = value.x; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x__y { [IN(LINE)] get => new float4(x, 0f, 0f, y); }
+        public float4 x__y { [IN(LINE)] get => new float4(x, 0f, 0f, y); [IN(LINE)] set { x = value.x; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 x___ { [IN(LINE)] get => new float4(x, 0f, 0f, 0f); }
+        public float4 x___ { [IN(LINE)] get => new float4(x, 0f, 0f, 0f); [IN(LINE)] set { x = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yxxx { [IN(LINE)] get => new float4(y, x, x, x); }
+        public float4 yxxx { [IN(LINE)] get => new float4(y, x, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yxxy { [IN(LINE)] get => new float4(y, x, x, y); }
+        public float4 yxxy { [IN(LINE)] get => new float4(y, x, x, y); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yxx_ { [IN(LINE)] get => new float4(y, x, x, 0f); }
+        public float4 yxx_ { [IN(LINE)] get => new float4(y, x, x, 0f); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yxyx { [IN(LINE)] get => new float4(y, x, y, x); }
+        public float4 yxyx { [IN(LINE)] get => new float4(y, x, y, x); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yxyy { [IN(LINE)] get => new float4(y, x, y, y); }
+        public float4 yxyy { [IN(LINE)] get => new float4(y, x, y, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yxy_ { [IN(LINE)] get => new float4(y, x, y, 0f); }
+        public float4 yxy_ { [IN(LINE)] get => new float4(y, x, y, 0f); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yx_x { [IN(LINE)] get => new float4(y, x, 0f, x); }
+        public float4 yx_x { [IN(LINE)] get => new float4(y, x, 0f, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yx_y { [IN(LINE)] get => new float4(y, x, 0f, y); }
+        public float4 yx_y { [IN(LINE)] get => new float4(y, x, 0f, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yx__ { [IN(LINE)] get => new float4(y, x, 0f, 0f); }
+        public float4 yx__ { [IN(LINE)] get => new float4(y, x, 0f, 0f); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yyxx { [IN(LINE)] get => new float4(y, y, x, x); }
+        public float4 yyxx { [IN(LINE)] get => new float4(y, y, x, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yyxy { [IN(LINE)] get => new float4(y, y, x, y); }
+        public float4 yyxy { [IN(LINE)] get => new float4(y, y, x, y); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yyx_ { [IN(LINE)] get => new float4(y, y, x, 0f); }
+        public float4 yyx_ { [IN(LINE)] get => new float4(y, y, x, 0f); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yyyx { [IN(LINE)] get => new float4(y, y, y, x); }
+        public float4 yyyx { [IN(LINE)] get => new float4(y, y, y, x); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yyyy { [IN(LINE)] get => new float4(y, y, y, y); }
+        public float4 yyyy { [IN(LINE)] get => new float4(y, y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yyy_ { [IN(LINE)] get => new float4(y, y, y, 0f); }
+        public float4 yyy_ { [IN(LINE)] get => new float4(y, y, y, 0f); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yy_x { [IN(LINE)] get => new float4(y, y, 0f, x); }
+        public float4 yy_x { [IN(LINE)] get => new float4(y, y, 0f, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yy_y { [IN(LINE)] get => new float4(y, y, 0f, y); }
+        public float4 yy_y { [IN(LINE)] get => new float4(y, y, 0f, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 yy__ { [IN(LINE)] get => new float4(y, y, 0f, 0f); }
+        public float4 yy__ { [IN(LINE)] get => new float4(y, y, 0f, 0f); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y_xx { [IN(LINE)] get => new float4(y, 0f, x, x); }
+        public float4 y_xx { [IN(LINE)] get => new float4(y, 0f, x, x); [IN(LINE)] set { y = value.x; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y_xy { [IN(LINE)] get => new float4(y, 0f, x, y); }
+        public float4 y_xy { [IN(LINE)] get => new float4(y, 0f, x, y); [IN(LINE)] set { y = value.x; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y_x_ { [IN(LINE)] get => new float4(y, 0f, x, 0f); }
+        public float4 y_x_ { [IN(LINE)] get => new float4(y, 0f, x, 0f); [IN(LINE)] set { y = value.x; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y_yx { [IN(LINE)] get => new float4(y, 0f, y, x); }
+        public float4 y_yx { [IN(LINE)] get => new float4(y, 0f, y, x); [IN(LINE)] set { y = value.x; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y_yy { [IN(LINE)] get => new float4(y, 0f, y, y); }
+        public float4 y_yy { [IN(LINE)] get => new float4(y, 0f, y, y); [IN(LINE)] set { y = value.x; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y_y_ { [IN(LINE)] get => new float4(y, 0f, y, 0f); }
+        public float4 y_y_ { [IN(LINE)] get => new float4(y, 0f, y, 0f); [IN(LINE)] set { y = value.x; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y__x { [IN(LINE)] get => new float4(y, 0f, 0f, x); }
+        public float4 y__x { [IN(LINE)] get => new float4(y, 0f, 0f, x); [IN(LINE)] set { y = value.x; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y__y { [IN(LINE)] get => new float4(y, 0f, 0f, y); }
+        public float4 y__y { [IN(LINE)] get => new float4(y, 0f, 0f, y); [IN(LINE)] set { y = value.x; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 y___ { [IN(LINE)] get => new float4(y, 0f, 0f, 0f); }
+        public float4 y___ { [IN(LINE)] get => new float4(y, 0f, 0f, 0f); [IN(LINE)] set { y = value.x; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _xxx { [IN(LINE)] get => new float4(0f, x, x, x); }
+        public float4 _xxx { [IN(LINE)] get => new float4(0f, x, x, x); [IN(LINE)] set { x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _xxy { [IN(LINE)] get => new float4(0f, x, x, y); }
+        public float4 _xxy { [IN(LINE)] get => new float4(0f, x, x, y); [IN(LINE)] set { x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _xx_ { [IN(LINE)] get => new float4(0f, x, x, 0f); }
+        public float4 _xx_ { [IN(LINE)] get => new float4(0f, x, x, 0f); [IN(LINE)] set { x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _xyx { [IN(LINE)] get => new float4(0f, x, y, x); }
+        public float4 _xyx { [IN(LINE)] get => new float4(0f, x, y, x); [IN(LINE)] set { x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _xyy { [IN(LINE)] get => new float4(0f, x, y, y); }
+        public float4 _xyy { [IN(LINE)] get => new float4(0f, x, y, y); [IN(LINE)] set { x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _xy_ { [IN(LINE)] get => new float4(0f, x, y, 0f); }
+        public float4 _xy_ { [IN(LINE)] get => new float4(0f, x, y, 0f); [IN(LINE)] set { x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _x_x { [IN(LINE)] get => new float4(0f, x, 0f, x); }
+        public float4 _x_x { [IN(LINE)] get => new float4(0f, x, 0f, x); [IN(LINE)] set { x = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _x_y { [IN(LINE)] get => new float4(0f, x, 0f, y); }
+        public float4 _x_y { [IN(LINE)] get => new float4(0f, x, 0f, y); [IN(LINE)] set { x = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _x__ { [IN(LINE)] get => new float4(0f, x, 0f, 0f); }
+        public float4 _x__ { [IN(LINE)] get => new float4(0f, x, 0f, 0f); [IN(LINE)] set { x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _yxx { [IN(LINE)] get => new float4(0f, y, x, x); }
+        public float4 _yxx { [IN(LINE)] get => new float4(0f, y, x, x); [IN(LINE)] set { y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _yxy { [IN(LINE)] get => new float4(0f, y, x, y); }
+        public float4 _yxy { [IN(LINE)] get => new float4(0f, y, x, y); [IN(LINE)] set { y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _yx_ { [IN(LINE)] get => new float4(0f, y, x, 0f); }
+        public float4 _yx_ { [IN(LINE)] get => new float4(0f, y, x, 0f); [IN(LINE)] set { y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _yyx { [IN(LINE)] get => new float4(0f, y, y, x); }
+        public float4 _yyx { [IN(LINE)] get => new float4(0f, y, y, x); [IN(LINE)] set { y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _yyy { [IN(LINE)] get => new float4(0f, y, y, y); }
+        public float4 _yyy { [IN(LINE)] get => new float4(0f, y, y, y); [IN(LINE)] set { y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _yy_ { [IN(LINE)] get => new float4(0f, y, y, 0f); }
+        public float4 _yy_ { [IN(LINE)] get => new float4(0f, y, y, 0f); [IN(LINE)] set { y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _y_x { [IN(LINE)] get => new float4(0f, y, 0f, x); }
+        public float4 _y_x { [IN(LINE)] get => new float4(0f, y, 0f, x); [IN(LINE)] set { y = value.y; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _y_y { [IN(LINE)] get => new float4(0f, y, 0f, y); }
+        public float4 _y_y { [IN(LINE)] get => new float4(0f, y, 0f, y); [IN(LINE)] set { y = value.y; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 _y__ { [IN(LINE)] get => new float4(0f, y, 0f, 0f); }
+        public float4 _y__ { [IN(LINE)] get => new float4(0f, y, 0f, 0f); [IN(LINE)] set { y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 __xx { [IN(LINE)] get => new float4(0f, 0f, x, x); }
+        public float4 __xx { [IN(LINE)] get => new float4(0f, 0f, x, x); [IN(LINE)] set { x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 __xy { [IN(LINE)] get => new float4(0f, 0f, x, y); }
+        public float4 __xy { [IN(LINE)] get => new float4(0f, 0f, x, y); [IN(LINE)] set { x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 __x_ { [IN(LINE)] get => new float4(0f, 0f, x, 0f); }
+        public float4 __x_ { [IN(LINE)] get => new float4(0f, 0f, x, 0f); [IN(LINE)] set { x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 __yx { [IN(LINE)] get => new float4(0f, 0f, y, x); }
+        public float4 __yx { [IN(LINE)] get => new float4(0f, 0f, y, x); [IN(LINE)] set { y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 __yy { [IN(LINE)] get => new float4(0f, 0f, y, y); }
+        public float4 __yy { [IN(LINE)] get => new float4(0f, 0f, y, y); [IN(LINE)] set { y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 __y_ { [IN(LINE)] get => new float4(0f, 0f, y, 0f); }
+        public float4 __y_ { [IN(LINE)] get => new float4(0f, 0f, y, 0f); [IN(LINE)] set { y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 ___x { [IN(LINE)] get => new float4(0f, 0f, 0f, x); }
+        public float4 ___x { [IN(LINE)] get => new float4(0f, 0f, 0f, x); [IN(LINE)] set { x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float4 ___y { [IN(LINE)] get => new float4(0f, 0f, 0f, y); }
+        public float4 ___y { [IN(LINE)] get => new float4(0f, 0f, 0f, y); [IN(LINE)] set { y = value.w; } }
         #endregion
 
         #endregion

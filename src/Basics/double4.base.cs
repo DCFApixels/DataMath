@@ -315,687 +315,687 @@ namespace DCFApixels.DataMath
 
         #endregion
 
-        #region Swaps
+        #region Swizzles
 
-        #region Swap2
+        #region Swizzle2
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 xx { [IN(LINE)] get => new double2(x, x); }
+        public double2 xx { [IN(LINE)] get => new double2(x, x); [IN(LINE)] set { x = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 xy { [IN(LINE)] get => new double2(x, y); }
+        public double2 xy { [IN(LINE)] get => new double2(x, y); [IN(LINE)] set { x = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 xz { [IN(LINE)] get => new double2(x, z); }
+        public double2 xz { [IN(LINE)] get => new double2(x, z); [IN(LINE)] set { x = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 xw { [IN(LINE)] get => new double2(x, w); }
+        public double2 xw { [IN(LINE)] get => new double2(x, w); [IN(LINE)] set { x = value.x; w = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 yx { [IN(LINE)] get => new double2(y, x); }
+        public double2 yx { [IN(LINE)] get => new double2(y, x); [IN(LINE)] set { y = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 yy { [IN(LINE)] get => new double2(y, y); }
+        public double2 yy { [IN(LINE)] get => new double2(y, y); [IN(LINE)] set { y = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 yz { [IN(LINE)] get => new double2(y, z); }
+        public double2 yz { [IN(LINE)] get => new double2(y, z); [IN(LINE)] set { y = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 yw { [IN(LINE)] get => new double2(y, w); }
+        public double2 yw { [IN(LINE)] get => new double2(y, w); [IN(LINE)] set { y = value.x; w = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 zx { [IN(LINE)] get => new double2(z, x); }
+        public double2 zx { [IN(LINE)] get => new double2(z, x); [IN(LINE)] set { z = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 zy { [IN(LINE)] get => new double2(z, y); }
+        public double2 zy { [IN(LINE)] get => new double2(z, y); [IN(LINE)] set { z = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 zz { [IN(LINE)] get => new double2(z, z); }
+        public double2 zz { [IN(LINE)] get => new double2(z, z); [IN(LINE)] set { z = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 zw { [IN(LINE)] get => new double2(z, w); }
+        public double2 zw { [IN(LINE)] get => new double2(z, w); [IN(LINE)] set { z = value.x; w = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 wx { [IN(LINE)] get => new double2(w, x); }
+        public double2 wx { [IN(LINE)] get => new double2(w, x); [IN(LINE)] set { w = value.x; x = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 wy { [IN(LINE)] get => new double2(w, y); }
+        public double2 wy { [IN(LINE)] get => new double2(w, y); [IN(LINE)] set { w = value.x; y = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 wz { [IN(LINE)] get => new double2(w, z); }
+        public double2 wz { [IN(LINE)] get => new double2(w, z); [IN(LINE)] set { w = value.x; z = value.y; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double2 ww { [IN(LINE)] get => new double2(w, w); }
+        public double2 ww { [IN(LINE)] get => new double2(w, w); [IN(LINE)] set { w = value.x; w = value.y; } }
         #endregion
 
-        #region Swap3
+        #region Swizzle3
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xxx { [IN(LINE)] get => new double3(x, x, x); }
+        public double3 xxx { [IN(LINE)] get => new double3(x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xxy { [IN(LINE)] get => new double3(x, x, y); }
+        public double3 xxy { [IN(LINE)] get => new double3(x, x, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xxz { [IN(LINE)] get => new double3(x, x, z); }
+        public double3 xxz { [IN(LINE)] get => new double3(x, x, z); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xxw { [IN(LINE)] get => new double3(x, x, w); }
+        public double3 xxw { [IN(LINE)] get => new double3(x, x, w); [IN(LINE)] set { x = value.x; x = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xyx { [IN(LINE)] get => new double3(x, y, x); }
+        public double3 xyx { [IN(LINE)] get => new double3(x, y, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xyy { [IN(LINE)] get => new double3(x, y, y); }
+        public double3 xyy { [IN(LINE)] get => new double3(x, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xyz { [IN(LINE)] get => new double3(x, y, z); }
+        public double3 xyz { [IN(LINE)] get => new double3(x, y, z); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xyw { [IN(LINE)] get => new double3(x, y, w); }
+        public double3 xyw { [IN(LINE)] get => new double3(x, y, w); [IN(LINE)] set { x = value.x; y = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xzx { [IN(LINE)] get => new double3(x, z, x); }
+        public double3 xzx { [IN(LINE)] get => new double3(x, z, x); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xzy { [IN(LINE)] get => new double3(x, z, y); }
+        public double3 xzy { [IN(LINE)] get => new double3(x, z, y); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xzz { [IN(LINE)] get => new double3(x, z, z); }
+        public double3 xzz { [IN(LINE)] get => new double3(x, z, z); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xzw { [IN(LINE)] get => new double3(x, z, w); }
+        public double3 xzw { [IN(LINE)] get => new double3(x, z, w); [IN(LINE)] set { x = value.x; z = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xwx { [IN(LINE)] get => new double3(x, w, x); }
+        public double3 xwx { [IN(LINE)] get => new double3(x, w, x); [IN(LINE)] set { x = value.x; w = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xwy { [IN(LINE)] get => new double3(x, w, y); }
+        public double3 xwy { [IN(LINE)] get => new double3(x, w, y); [IN(LINE)] set { x = value.x; w = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xwz { [IN(LINE)] get => new double3(x, w, z); }
+        public double3 xwz { [IN(LINE)] get => new double3(x, w, z); [IN(LINE)] set { x = value.x; w = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 xww { [IN(LINE)] get => new double3(x, w, w); }
+        public double3 xww { [IN(LINE)] get => new double3(x, w, w); [IN(LINE)] set { x = value.x; w = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yxx { [IN(LINE)] get => new double3(y, x, x); }
+        public double3 yxx { [IN(LINE)] get => new double3(y, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yxy { [IN(LINE)] get => new double3(y, x, y); }
+        public double3 yxy { [IN(LINE)] get => new double3(y, x, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yxz { [IN(LINE)] get => new double3(y, x, z); }
+        public double3 yxz { [IN(LINE)] get => new double3(y, x, z); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yxw { [IN(LINE)] get => new double3(y, x, w); }
+        public double3 yxw { [IN(LINE)] get => new double3(y, x, w); [IN(LINE)] set { y = value.x; x = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yyx { [IN(LINE)] get => new double3(y, y, x); }
+        public double3 yyx { [IN(LINE)] get => new double3(y, y, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yyy { [IN(LINE)] get => new double3(y, y, y); }
+        public double3 yyy { [IN(LINE)] get => new double3(y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yyz { [IN(LINE)] get => new double3(y, y, z); }
+        public double3 yyz { [IN(LINE)] get => new double3(y, y, z); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yyw { [IN(LINE)] get => new double3(y, y, w); }
+        public double3 yyw { [IN(LINE)] get => new double3(y, y, w); [IN(LINE)] set { y = value.x; y = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yzx { [IN(LINE)] get => new double3(y, z, x); }
+        public double3 yzx { [IN(LINE)] get => new double3(y, z, x); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yzy { [IN(LINE)] get => new double3(y, z, y); }
+        public double3 yzy { [IN(LINE)] get => new double3(y, z, y); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yzz { [IN(LINE)] get => new double3(y, z, z); }
+        public double3 yzz { [IN(LINE)] get => new double3(y, z, z); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yzw { [IN(LINE)] get => new double3(y, z, w); }
+        public double3 yzw { [IN(LINE)] get => new double3(y, z, w); [IN(LINE)] set { y = value.x; z = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 ywx { [IN(LINE)] get => new double3(y, w, x); }
+        public double3 ywx { [IN(LINE)] get => new double3(y, w, x); [IN(LINE)] set { y = value.x; w = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 ywy { [IN(LINE)] get => new double3(y, w, y); }
+        public double3 ywy { [IN(LINE)] get => new double3(y, w, y); [IN(LINE)] set { y = value.x; w = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 ywz { [IN(LINE)] get => new double3(y, w, z); }
+        public double3 ywz { [IN(LINE)] get => new double3(y, w, z); [IN(LINE)] set { y = value.x; w = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 yww { [IN(LINE)] get => new double3(y, w, w); }
+        public double3 yww { [IN(LINE)] get => new double3(y, w, w); [IN(LINE)] set { y = value.x; w = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zxx { [IN(LINE)] get => new double3(z, x, x); }
+        public double3 zxx { [IN(LINE)] get => new double3(z, x, x); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zxy { [IN(LINE)] get => new double3(z, x, y); }
+        public double3 zxy { [IN(LINE)] get => new double3(z, x, y); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zxz { [IN(LINE)] get => new double3(z, x, z); }
+        public double3 zxz { [IN(LINE)] get => new double3(z, x, z); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zxw { [IN(LINE)] get => new double3(z, x, w); }
+        public double3 zxw { [IN(LINE)] get => new double3(z, x, w); [IN(LINE)] set { z = value.x; x = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zyx { [IN(LINE)] get => new double3(z, y, x); }
+        public double3 zyx { [IN(LINE)] get => new double3(z, y, x); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zyy { [IN(LINE)] get => new double3(z, y, y); }
+        public double3 zyy { [IN(LINE)] get => new double3(z, y, y); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zyz { [IN(LINE)] get => new double3(z, y, z); }
+        public double3 zyz { [IN(LINE)] get => new double3(z, y, z); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zyw { [IN(LINE)] get => new double3(z, y, w); }
+        public double3 zyw { [IN(LINE)] get => new double3(z, y, w); [IN(LINE)] set { z = value.x; y = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zzx { [IN(LINE)] get => new double3(z, z, x); }
+        public double3 zzx { [IN(LINE)] get => new double3(z, z, x); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zzy { [IN(LINE)] get => new double3(z, z, y); }
+        public double3 zzy { [IN(LINE)] get => new double3(z, z, y); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zzz { [IN(LINE)] get => new double3(z, z, z); }
+        public double3 zzz { [IN(LINE)] get => new double3(z, z, z); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zzw { [IN(LINE)] get => new double3(z, z, w); }
+        public double3 zzw { [IN(LINE)] get => new double3(z, z, w); [IN(LINE)] set { z = value.x; z = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zwx { [IN(LINE)] get => new double3(z, w, x); }
+        public double3 zwx { [IN(LINE)] get => new double3(z, w, x); [IN(LINE)] set { z = value.x; w = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zwy { [IN(LINE)] get => new double3(z, w, y); }
+        public double3 zwy { [IN(LINE)] get => new double3(z, w, y); [IN(LINE)] set { z = value.x; w = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zwz { [IN(LINE)] get => new double3(z, w, z); }
+        public double3 zwz { [IN(LINE)] get => new double3(z, w, z); [IN(LINE)] set { z = value.x; w = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 zww { [IN(LINE)] get => new double3(z, w, w); }
+        public double3 zww { [IN(LINE)] get => new double3(z, w, w); [IN(LINE)] set { z = value.x; w = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wxx { [IN(LINE)] get => new double3(w, x, x); }
+        public double3 wxx { [IN(LINE)] get => new double3(w, x, x); [IN(LINE)] set { w = value.x; x = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wxy { [IN(LINE)] get => new double3(w, x, y); }
+        public double3 wxy { [IN(LINE)] get => new double3(w, x, y); [IN(LINE)] set { w = value.x; x = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wxz { [IN(LINE)] get => new double3(w, x, z); }
+        public double3 wxz { [IN(LINE)] get => new double3(w, x, z); [IN(LINE)] set { w = value.x; x = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wxw { [IN(LINE)] get => new double3(w, x, w); }
+        public double3 wxw { [IN(LINE)] get => new double3(w, x, w); [IN(LINE)] set { w = value.x; x = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wyx { [IN(LINE)] get => new double3(w, y, x); }
+        public double3 wyx { [IN(LINE)] get => new double3(w, y, x); [IN(LINE)] set { w = value.x; y = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wyy { [IN(LINE)] get => new double3(w, y, y); }
+        public double3 wyy { [IN(LINE)] get => new double3(w, y, y); [IN(LINE)] set { w = value.x; y = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wyz { [IN(LINE)] get => new double3(w, y, z); }
+        public double3 wyz { [IN(LINE)] get => new double3(w, y, z); [IN(LINE)] set { w = value.x; y = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wyw { [IN(LINE)] get => new double3(w, y, w); }
+        public double3 wyw { [IN(LINE)] get => new double3(w, y, w); [IN(LINE)] set { w = value.x; y = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wzx { [IN(LINE)] get => new double3(w, z, x); }
+        public double3 wzx { [IN(LINE)] get => new double3(w, z, x); [IN(LINE)] set { w = value.x; z = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wzy { [IN(LINE)] get => new double3(w, z, y); }
+        public double3 wzy { [IN(LINE)] get => new double3(w, z, y); [IN(LINE)] set { w = value.x; z = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wzz { [IN(LINE)] get => new double3(w, z, z); }
+        public double3 wzz { [IN(LINE)] get => new double3(w, z, z); [IN(LINE)] set { w = value.x; z = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wzw { [IN(LINE)] get => new double3(w, z, w); }
+        public double3 wzw { [IN(LINE)] get => new double3(w, z, w); [IN(LINE)] set { w = value.x; z = value.y; w = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wwx { [IN(LINE)] get => new double3(w, w, x); }
+        public double3 wwx { [IN(LINE)] get => new double3(w, w, x); [IN(LINE)] set { w = value.x; w = value.y; x = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wwy { [IN(LINE)] get => new double3(w, w, y); }
+        public double3 wwy { [IN(LINE)] get => new double3(w, w, y); [IN(LINE)] set { w = value.x; w = value.y; y = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 wwz { [IN(LINE)] get => new double3(w, w, z); }
+        public double3 wwz { [IN(LINE)] get => new double3(w, w, z); [IN(LINE)] set { w = value.x; w = value.y; z = value.z; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double3 www { [IN(LINE)] get => new double3(w, w, w); }
+        public double3 www { [IN(LINE)] get => new double3(w, w, w); [IN(LINE)] set { w = value.x; w = value.y; w = value.z; } }
         #endregion
 
-        #region Swap4
+        #region Swizzle4
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxxx { [IN(LINE)] get => new double4(x, x, x, x); }
+        public double4 xxxx { [IN(LINE)] get => new double4(x, x, x, x); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxxy { [IN(LINE)] get => new double4(x, x, x, y); }
+        public double4 xxxy { [IN(LINE)] get => new double4(x, x, x, y); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxxz { [IN(LINE)] get => new double4(x, x, x, z); }
+        public double4 xxxz { [IN(LINE)] get => new double4(x, x, x, z); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxxw { [IN(LINE)] get => new double4(x, x, x, w); }
+        public double4 xxxw { [IN(LINE)] get => new double4(x, x, x, w); [IN(LINE)] set { x = value.x; x = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxyx { [IN(LINE)] get => new double4(x, x, y, x); }
+        public double4 xxyx { [IN(LINE)] get => new double4(x, x, y, x); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxyy { [IN(LINE)] get => new double4(x, x, y, y); }
+        public double4 xxyy { [IN(LINE)] get => new double4(x, x, y, y); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxyz { [IN(LINE)] get => new double4(x, x, y, z); }
+        public double4 xxyz { [IN(LINE)] get => new double4(x, x, y, z); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxyw { [IN(LINE)] get => new double4(x, x, y, w); }
+        public double4 xxyw { [IN(LINE)] get => new double4(x, x, y, w); [IN(LINE)] set { x = value.x; x = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxzx { [IN(LINE)] get => new double4(x, x, z, x); }
+        public double4 xxzx { [IN(LINE)] get => new double4(x, x, z, x); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxzy { [IN(LINE)] get => new double4(x, x, z, y); }
+        public double4 xxzy { [IN(LINE)] get => new double4(x, x, z, y); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxzz { [IN(LINE)] get => new double4(x, x, z, z); }
+        public double4 xxzz { [IN(LINE)] get => new double4(x, x, z, z); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxzw { [IN(LINE)] get => new double4(x, x, z, w); }
+        public double4 xxzw { [IN(LINE)] get => new double4(x, x, z, w); [IN(LINE)] set { x = value.x; x = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxwx { [IN(LINE)] get => new double4(x, x, w, x); }
+        public double4 xxwx { [IN(LINE)] get => new double4(x, x, w, x); [IN(LINE)] set { x = value.x; x = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxwy { [IN(LINE)] get => new double4(x, x, w, y); }
+        public double4 xxwy { [IN(LINE)] get => new double4(x, x, w, y); [IN(LINE)] set { x = value.x; x = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxwz { [IN(LINE)] get => new double4(x, x, w, z); }
+        public double4 xxwz { [IN(LINE)] get => new double4(x, x, w, z); [IN(LINE)] set { x = value.x; x = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xxww { [IN(LINE)] get => new double4(x, x, w, w); }
+        public double4 xxww { [IN(LINE)] get => new double4(x, x, w, w); [IN(LINE)] set { x = value.x; x = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyxx { [IN(LINE)] get => new double4(x, y, x, x); }
+        public double4 xyxx { [IN(LINE)] get => new double4(x, y, x, x); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyxy { [IN(LINE)] get => new double4(x, y, x, y); }
+        public double4 xyxy { [IN(LINE)] get => new double4(x, y, x, y); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyxz { [IN(LINE)] get => new double4(x, y, x, z); }
+        public double4 xyxz { [IN(LINE)] get => new double4(x, y, x, z); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyxw { [IN(LINE)] get => new double4(x, y, x, w); }
+        public double4 xyxw { [IN(LINE)] get => new double4(x, y, x, w); [IN(LINE)] set { x = value.x; y = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyyx { [IN(LINE)] get => new double4(x, y, y, x); }
+        public double4 xyyx { [IN(LINE)] get => new double4(x, y, y, x); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyyy { [IN(LINE)] get => new double4(x, y, y, y); }
+        public double4 xyyy { [IN(LINE)] get => new double4(x, y, y, y); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyyz { [IN(LINE)] get => new double4(x, y, y, z); }
+        public double4 xyyz { [IN(LINE)] get => new double4(x, y, y, z); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyyw { [IN(LINE)] get => new double4(x, y, y, w); }
+        public double4 xyyw { [IN(LINE)] get => new double4(x, y, y, w); [IN(LINE)] set { x = value.x; y = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyzx { [IN(LINE)] get => new double4(x, y, z, x); }
+        public double4 xyzx { [IN(LINE)] get => new double4(x, y, z, x); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyzy { [IN(LINE)] get => new double4(x, y, z, y); }
+        public double4 xyzy { [IN(LINE)] get => new double4(x, y, z, y); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyzz { [IN(LINE)] get => new double4(x, y, z, z); }
+        public double4 xyzz { [IN(LINE)] get => new double4(x, y, z, z); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyzw { [IN(LINE)] get => new double4(x, y, z, w); }
+        public double4 xyzw { [IN(LINE)] get => new double4(x, y, z, w); [IN(LINE)] set { x = value.x; y = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xywx { [IN(LINE)] get => new double4(x, y, w, x); }
+        public double4 xywx { [IN(LINE)] get => new double4(x, y, w, x); [IN(LINE)] set { x = value.x; y = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xywy { [IN(LINE)] get => new double4(x, y, w, y); }
+        public double4 xywy { [IN(LINE)] get => new double4(x, y, w, y); [IN(LINE)] set { x = value.x; y = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xywz { [IN(LINE)] get => new double4(x, y, w, z); }
+        public double4 xywz { [IN(LINE)] get => new double4(x, y, w, z); [IN(LINE)] set { x = value.x; y = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xyww { [IN(LINE)] get => new double4(x, y, w, w); }
+        public double4 xyww { [IN(LINE)] get => new double4(x, y, w, w); [IN(LINE)] set { x = value.x; y = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzxx { [IN(LINE)] get => new double4(x, z, x, x); }
+        public double4 xzxx { [IN(LINE)] get => new double4(x, z, x, x); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzxy { [IN(LINE)] get => new double4(x, z, x, y); }
+        public double4 xzxy { [IN(LINE)] get => new double4(x, z, x, y); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzxz { [IN(LINE)] get => new double4(x, z, x, z); }
+        public double4 xzxz { [IN(LINE)] get => new double4(x, z, x, z); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzxw { [IN(LINE)] get => new double4(x, z, x, w); }
+        public double4 xzxw { [IN(LINE)] get => new double4(x, z, x, w); [IN(LINE)] set { x = value.x; z = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzyx { [IN(LINE)] get => new double4(x, z, y, x); }
+        public double4 xzyx { [IN(LINE)] get => new double4(x, z, y, x); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzyy { [IN(LINE)] get => new double4(x, z, y, y); }
+        public double4 xzyy { [IN(LINE)] get => new double4(x, z, y, y); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzyz { [IN(LINE)] get => new double4(x, z, y, z); }
+        public double4 xzyz { [IN(LINE)] get => new double4(x, z, y, z); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzyw { [IN(LINE)] get => new double4(x, z, y, w); }
+        public double4 xzyw { [IN(LINE)] get => new double4(x, z, y, w); [IN(LINE)] set { x = value.x; z = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzzx { [IN(LINE)] get => new double4(x, z, z, x); }
+        public double4 xzzx { [IN(LINE)] get => new double4(x, z, z, x); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzzy { [IN(LINE)] get => new double4(x, z, z, y); }
+        public double4 xzzy { [IN(LINE)] get => new double4(x, z, z, y); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzzz { [IN(LINE)] get => new double4(x, z, z, z); }
+        public double4 xzzz { [IN(LINE)] get => new double4(x, z, z, z); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzzw { [IN(LINE)] get => new double4(x, z, z, w); }
+        public double4 xzzw { [IN(LINE)] get => new double4(x, z, z, w); [IN(LINE)] set { x = value.x; z = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzwx { [IN(LINE)] get => new double4(x, z, w, x); }
+        public double4 xzwx { [IN(LINE)] get => new double4(x, z, w, x); [IN(LINE)] set { x = value.x; z = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzwy { [IN(LINE)] get => new double4(x, z, w, y); }
+        public double4 xzwy { [IN(LINE)] get => new double4(x, z, w, y); [IN(LINE)] set { x = value.x; z = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzwz { [IN(LINE)] get => new double4(x, z, w, z); }
+        public double4 xzwz { [IN(LINE)] get => new double4(x, z, w, z); [IN(LINE)] set { x = value.x; z = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xzww { [IN(LINE)] get => new double4(x, z, w, w); }
+        public double4 xzww { [IN(LINE)] get => new double4(x, z, w, w); [IN(LINE)] set { x = value.x; z = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwxx { [IN(LINE)] get => new double4(x, w, x, x); }
+        public double4 xwxx { [IN(LINE)] get => new double4(x, w, x, x); [IN(LINE)] set { x = value.x; w = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwxy { [IN(LINE)] get => new double4(x, w, x, y); }
+        public double4 xwxy { [IN(LINE)] get => new double4(x, w, x, y); [IN(LINE)] set { x = value.x; w = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwxz { [IN(LINE)] get => new double4(x, w, x, z); }
+        public double4 xwxz { [IN(LINE)] get => new double4(x, w, x, z); [IN(LINE)] set { x = value.x; w = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwxw { [IN(LINE)] get => new double4(x, w, x, w); }
+        public double4 xwxw { [IN(LINE)] get => new double4(x, w, x, w); [IN(LINE)] set { x = value.x; w = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwyx { [IN(LINE)] get => new double4(x, w, y, x); }
+        public double4 xwyx { [IN(LINE)] get => new double4(x, w, y, x); [IN(LINE)] set { x = value.x; w = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwyy { [IN(LINE)] get => new double4(x, w, y, y); }
+        public double4 xwyy { [IN(LINE)] get => new double4(x, w, y, y); [IN(LINE)] set { x = value.x; w = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwyz { [IN(LINE)] get => new double4(x, w, y, z); }
+        public double4 xwyz { [IN(LINE)] get => new double4(x, w, y, z); [IN(LINE)] set { x = value.x; w = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwyw { [IN(LINE)] get => new double4(x, w, y, w); }
+        public double4 xwyw { [IN(LINE)] get => new double4(x, w, y, w); [IN(LINE)] set { x = value.x; w = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwzx { [IN(LINE)] get => new double4(x, w, z, x); }
+        public double4 xwzx { [IN(LINE)] get => new double4(x, w, z, x); [IN(LINE)] set { x = value.x; w = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwzy { [IN(LINE)] get => new double4(x, w, z, y); }
+        public double4 xwzy { [IN(LINE)] get => new double4(x, w, z, y); [IN(LINE)] set { x = value.x; w = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwzz { [IN(LINE)] get => new double4(x, w, z, z); }
+        public double4 xwzz { [IN(LINE)] get => new double4(x, w, z, z); [IN(LINE)] set { x = value.x; w = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwzw { [IN(LINE)] get => new double4(x, w, z, w); }
+        public double4 xwzw { [IN(LINE)] get => new double4(x, w, z, w); [IN(LINE)] set { x = value.x; w = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwwx { [IN(LINE)] get => new double4(x, w, w, x); }
+        public double4 xwwx { [IN(LINE)] get => new double4(x, w, w, x); [IN(LINE)] set { x = value.x; w = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwwy { [IN(LINE)] get => new double4(x, w, w, y); }
+        public double4 xwwy { [IN(LINE)] get => new double4(x, w, w, y); [IN(LINE)] set { x = value.x; w = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwwz { [IN(LINE)] get => new double4(x, w, w, z); }
+        public double4 xwwz { [IN(LINE)] get => new double4(x, w, w, z); [IN(LINE)] set { x = value.x; w = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 xwww { [IN(LINE)] get => new double4(x, w, w, w); }
+        public double4 xwww { [IN(LINE)] get => new double4(x, w, w, w); [IN(LINE)] set { x = value.x; w = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxxx { [IN(LINE)] get => new double4(y, x, x, x); }
+        public double4 yxxx { [IN(LINE)] get => new double4(y, x, x, x); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxxy { [IN(LINE)] get => new double4(y, x, x, y); }
+        public double4 yxxy { [IN(LINE)] get => new double4(y, x, x, y); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxxz { [IN(LINE)] get => new double4(y, x, x, z); }
+        public double4 yxxz { [IN(LINE)] get => new double4(y, x, x, z); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxxw { [IN(LINE)] get => new double4(y, x, x, w); }
+        public double4 yxxw { [IN(LINE)] get => new double4(y, x, x, w); [IN(LINE)] set { y = value.x; x = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxyx { [IN(LINE)] get => new double4(y, x, y, x); }
+        public double4 yxyx { [IN(LINE)] get => new double4(y, x, y, x); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxyy { [IN(LINE)] get => new double4(y, x, y, y); }
+        public double4 yxyy { [IN(LINE)] get => new double4(y, x, y, y); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxyz { [IN(LINE)] get => new double4(y, x, y, z); }
+        public double4 yxyz { [IN(LINE)] get => new double4(y, x, y, z); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxyw { [IN(LINE)] get => new double4(y, x, y, w); }
+        public double4 yxyw { [IN(LINE)] get => new double4(y, x, y, w); [IN(LINE)] set { y = value.x; x = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxzx { [IN(LINE)] get => new double4(y, x, z, x); }
+        public double4 yxzx { [IN(LINE)] get => new double4(y, x, z, x); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxzy { [IN(LINE)] get => new double4(y, x, z, y); }
+        public double4 yxzy { [IN(LINE)] get => new double4(y, x, z, y); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxzz { [IN(LINE)] get => new double4(y, x, z, z); }
+        public double4 yxzz { [IN(LINE)] get => new double4(y, x, z, z); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxzw { [IN(LINE)] get => new double4(y, x, z, w); }
+        public double4 yxzw { [IN(LINE)] get => new double4(y, x, z, w); [IN(LINE)] set { y = value.x; x = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxwx { [IN(LINE)] get => new double4(y, x, w, x); }
+        public double4 yxwx { [IN(LINE)] get => new double4(y, x, w, x); [IN(LINE)] set { y = value.x; x = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxwy { [IN(LINE)] get => new double4(y, x, w, y); }
+        public double4 yxwy { [IN(LINE)] get => new double4(y, x, w, y); [IN(LINE)] set { y = value.x; x = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxwz { [IN(LINE)] get => new double4(y, x, w, z); }
+        public double4 yxwz { [IN(LINE)] get => new double4(y, x, w, z); [IN(LINE)] set { y = value.x; x = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yxww { [IN(LINE)] get => new double4(y, x, w, w); }
+        public double4 yxww { [IN(LINE)] get => new double4(y, x, w, w); [IN(LINE)] set { y = value.x; x = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyxx { [IN(LINE)] get => new double4(y, y, x, x); }
+        public double4 yyxx { [IN(LINE)] get => new double4(y, y, x, x); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyxy { [IN(LINE)] get => new double4(y, y, x, y); }
+        public double4 yyxy { [IN(LINE)] get => new double4(y, y, x, y); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyxz { [IN(LINE)] get => new double4(y, y, x, z); }
+        public double4 yyxz { [IN(LINE)] get => new double4(y, y, x, z); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyxw { [IN(LINE)] get => new double4(y, y, x, w); }
+        public double4 yyxw { [IN(LINE)] get => new double4(y, y, x, w); [IN(LINE)] set { y = value.x; y = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyyx { [IN(LINE)] get => new double4(y, y, y, x); }
+        public double4 yyyx { [IN(LINE)] get => new double4(y, y, y, x); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyyy { [IN(LINE)] get => new double4(y, y, y, y); }
+        public double4 yyyy { [IN(LINE)] get => new double4(y, y, y, y); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyyz { [IN(LINE)] get => new double4(y, y, y, z); }
+        public double4 yyyz { [IN(LINE)] get => new double4(y, y, y, z); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyyw { [IN(LINE)] get => new double4(y, y, y, w); }
+        public double4 yyyw { [IN(LINE)] get => new double4(y, y, y, w); [IN(LINE)] set { y = value.x; y = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyzx { [IN(LINE)] get => new double4(y, y, z, x); }
+        public double4 yyzx { [IN(LINE)] get => new double4(y, y, z, x); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyzy { [IN(LINE)] get => new double4(y, y, z, y); }
+        public double4 yyzy { [IN(LINE)] get => new double4(y, y, z, y); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyzz { [IN(LINE)] get => new double4(y, y, z, z); }
+        public double4 yyzz { [IN(LINE)] get => new double4(y, y, z, z); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyzw { [IN(LINE)] get => new double4(y, y, z, w); }
+        public double4 yyzw { [IN(LINE)] get => new double4(y, y, z, w); [IN(LINE)] set { y = value.x; y = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yywx { [IN(LINE)] get => new double4(y, y, w, x); }
+        public double4 yywx { [IN(LINE)] get => new double4(y, y, w, x); [IN(LINE)] set { y = value.x; y = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yywy { [IN(LINE)] get => new double4(y, y, w, y); }
+        public double4 yywy { [IN(LINE)] get => new double4(y, y, w, y); [IN(LINE)] set { y = value.x; y = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yywz { [IN(LINE)] get => new double4(y, y, w, z); }
+        public double4 yywz { [IN(LINE)] get => new double4(y, y, w, z); [IN(LINE)] set { y = value.x; y = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yyww { [IN(LINE)] get => new double4(y, y, w, w); }
+        public double4 yyww { [IN(LINE)] get => new double4(y, y, w, w); [IN(LINE)] set { y = value.x; y = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzxx { [IN(LINE)] get => new double4(y, z, x, x); }
+        public double4 yzxx { [IN(LINE)] get => new double4(y, z, x, x); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzxy { [IN(LINE)] get => new double4(y, z, x, y); }
+        public double4 yzxy { [IN(LINE)] get => new double4(y, z, x, y); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzxz { [IN(LINE)] get => new double4(y, z, x, z); }
+        public double4 yzxz { [IN(LINE)] get => new double4(y, z, x, z); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzxw { [IN(LINE)] get => new double4(y, z, x, w); }
+        public double4 yzxw { [IN(LINE)] get => new double4(y, z, x, w); [IN(LINE)] set { y = value.x; z = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzyx { [IN(LINE)] get => new double4(y, z, y, x); }
+        public double4 yzyx { [IN(LINE)] get => new double4(y, z, y, x); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzyy { [IN(LINE)] get => new double4(y, z, y, y); }
+        public double4 yzyy { [IN(LINE)] get => new double4(y, z, y, y); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzyz { [IN(LINE)] get => new double4(y, z, y, z); }
+        public double4 yzyz { [IN(LINE)] get => new double4(y, z, y, z); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzyw { [IN(LINE)] get => new double4(y, z, y, w); }
+        public double4 yzyw { [IN(LINE)] get => new double4(y, z, y, w); [IN(LINE)] set { y = value.x; z = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzzx { [IN(LINE)] get => new double4(y, z, z, x); }
+        public double4 yzzx { [IN(LINE)] get => new double4(y, z, z, x); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzzy { [IN(LINE)] get => new double4(y, z, z, y); }
+        public double4 yzzy { [IN(LINE)] get => new double4(y, z, z, y); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzzz { [IN(LINE)] get => new double4(y, z, z, z); }
+        public double4 yzzz { [IN(LINE)] get => new double4(y, z, z, z); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzzw { [IN(LINE)] get => new double4(y, z, z, w); }
+        public double4 yzzw { [IN(LINE)] get => new double4(y, z, z, w); [IN(LINE)] set { y = value.x; z = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzwx { [IN(LINE)] get => new double4(y, z, w, x); }
+        public double4 yzwx { [IN(LINE)] get => new double4(y, z, w, x); [IN(LINE)] set { y = value.x; z = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzwy { [IN(LINE)] get => new double4(y, z, w, y); }
+        public double4 yzwy { [IN(LINE)] get => new double4(y, z, w, y); [IN(LINE)] set { y = value.x; z = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzwz { [IN(LINE)] get => new double4(y, z, w, z); }
+        public double4 yzwz { [IN(LINE)] get => new double4(y, z, w, z); [IN(LINE)] set { y = value.x; z = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 yzww { [IN(LINE)] get => new double4(y, z, w, w); }
+        public double4 yzww { [IN(LINE)] get => new double4(y, z, w, w); [IN(LINE)] set { y = value.x; z = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywxx { [IN(LINE)] get => new double4(y, w, x, x); }
+        public double4 ywxx { [IN(LINE)] get => new double4(y, w, x, x); [IN(LINE)] set { y = value.x; w = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywxy { [IN(LINE)] get => new double4(y, w, x, y); }
+        public double4 ywxy { [IN(LINE)] get => new double4(y, w, x, y); [IN(LINE)] set { y = value.x; w = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywxz { [IN(LINE)] get => new double4(y, w, x, z); }
+        public double4 ywxz { [IN(LINE)] get => new double4(y, w, x, z); [IN(LINE)] set { y = value.x; w = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywxw { [IN(LINE)] get => new double4(y, w, x, w); }
+        public double4 ywxw { [IN(LINE)] get => new double4(y, w, x, w); [IN(LINE)] set { y = value.x; w = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywyx { [IN(LINE)] get => new double4(y, w, y, x); }
+        public double4 ywyx { [IN(LINE)] get => new double4(y, w, y, x); [IN(LINE)] set { y = value.x; w = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywyy { [IN(LINE)] get => new double4(y, w, y, y); }
+        public double4 ywyy { [IN(LINE)] get => new double4(y, w, y, y); [IN(LINE)] set { y = value.x; w = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywyz { [IN(LINE)] get => new double4(y, w, y, z); }
+        public double4 ywyz { [IN(LINE)] get => new double4(y, w, y, z); [IN(LINE)] set { y = value.x; w = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywyw { [IN(LINE)] get => new double4(y, w, y, w); }
+        public double4 ywyw { [IN(LINE)] get => new double4(y, w, y, w); [IN(LINE)] set { y = value.x; w = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywzx { [IN(LINE)] get => new double4(y, w, z, x); }
+        public double4 ywzx { [IN(LINE)] get => new double4(y, w, z, x); [IN(LINE)] set { y = value.x; w = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywzy { [IN(LINE)] get => new double4(y, w, z, y); }
+        public double4 ywzy { [IN(LINE)] get => new double4(y, w, z, y); [IN(LINE)] set { y = value.x; w = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywzz { [IN(LINE)] get => new double4(y, w, z, z); }
+        public double4 ywzz { [IN(LINE)] get => new double4(y, w, z, z); [IN(LINE)] set { y = value.x; w = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywzw { [IN(LINE)] get => new double4(y, w, z, w); }
+        public double4 ywzw { [IN(LINE)] get => new double4(y, w, z, w); [IN(LINE)] set { y = value.x; w = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywwx { [IN(LINE)] get => new double4(y, w, w, x); }
+        public double4 ywwx { [IN(LINE)] get => new double4(y, w, w, x); [IN(LINE)] set { y = value.x; w = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywwy { [IN(LINE)] get => new double4(y, w, w, y); }
+        public double4 ywwy { [IN(LINE)] get => new double4(y, w, w, y); [IN(LINE)] set { y = value.x; w = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywwz { [IN(LINE)] get => new double4(y, w, w, z); }
+        public double4 ywwz { [IN(LINE)] get => new double4(y, w, w, z); [IN(LINE)] set { y = value.x; w = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 ywww { [IN(LINE)] get => new double4(y, w, w, w); }
+        public double4 ywww { [IN(LINE)] get => new double4(y, w, w, w); [IN(LINE)] set { y = value.x; w = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxxx { [IN(LINE)] get => new double4(z, x, x, x); }
+        public double4 zxxx { [IN(LINE)] get => new double4(z, x, x, x); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxxy { [IN(LINE)] get => new double4(z, x, x, y); }
+        public double4 zxxy { [IN(LINE)] get => new double4(z, x, x, y); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxxz { [IN(LINE)] get => new double4(z, x, x, z); }
+        public double4 zxxz { [IN(LINE)] get => new double4(z, x, x, z); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxxw { [IN(LINE)] get => new double4(z, x, x, w); }
+        public double4 zxxw { [IN(LINE)] get => new double4(z, x, x, w); [IN(LINE)] set { z = value.x; x = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxyx { [IN(LINE)] get => new double4(z, x, y, x); }
+        public double4 zxyx { [IN(LINE)] get => new double4(z, x, y, x); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxyy { [IN(LINE)] get => new double4(z, x, y, y); }
+        public double4 zxyy { [IN(LINE)] get => new double4(z, x, y, y); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxyz { [IN(LINE)] get => new double4(z, x, y, z); }
+        public double4 zxyz { [IN(LINE)] get => new double4(z, x, y, z); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxyw { [IN(LINE)] get => new double4(z, x, y, w); }
+        public double4 zxyw { [IN(LINE)] get => new double4(z, x, y, w); [IN(LINE)] set { z = value.x; x = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxzx { [IN(LINE)] get => new double4(z, x, z, x); }
+        public double4 zxzx { [IN(LINE)] get => new double4(z, x, z, x); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxzy { [IN(LINE)] get => new double4(z, x, z, y); }
+        public double4 zxzy { [IN(LINE)] get => new double4(z, x, z, y); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxzz { [IN(LINE)] get => new double4(z, x, z, z); }
+        public double4 zxzz { [IN(LINE)] get => new double4(z, x, z, z); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxzw { [IN(LINE)] get => new double4(z, x, z, w); }
+        public double4 zxzw { [IN(LINE)] get => new double4(z, x, z, w); [IN(LINE)] set { z = value.x; x = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxwx { [IN(LINE)] get => new double4(z, x, w, x); }
+        public double4 zxwx { [IN(LINE)] get => new double4(z, x, w, x); [IN(LINE)] set { z = value.x; x = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxwy { [IN(LINE)] get => new double4(z, x, w, y); }
+        public double4 zxwy { [IN(LINE)] get => new double4(z, x, w, y); [IN(LINE)] set { z = value.x; x = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxwz { [IN(LINE)] get => new double4(z, x, w, z); }
+        public double4 zxwz { [IN(LINE)] get => new double4(z, x, w, z); [IN(LINE)] set { z = value.x; x = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zxww { [IN(LINE)] get => new double4(z, x, w, w); }
+        public double4 zxww { [IN(LINE)] get => new double4(z, x, w, w); [IN(LINE)] set { z = value.x; x = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyxx { [IN(LINE)] get => new double4(z, y, x, x); }
+        public double4 zyxx { [IN(LINE)] get => new double4(z, y, x, x); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyxy { [IN(LINE)] get => new double4(z, y, x, y); }
+        public double4 zyxy { [IN(LINE)] get => new double4(z, y, x, y); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyxz { [IN(LINE)] get => new double4(z, y, x, z); }
+        public double4 zyxz { [IN(LINE)] get => new double4(z, y, x, z); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyxw { [IN(LINE)] get => new double4(z, y, x, w); }
+        public double4 zyxw { [IN(LINE)] get => new double4(z, y, x, w); [IN(LINE)] set { z = value.x; y = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyyx { [IN(LINE)] get => new double4(z, y, y, x); }
+        public double4 zyyx { [IN(LINE)] get => new double4(z, y, y, x); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyyy { [IN(LINE)] get => new double4(z, y, y, y); }
+        public double4 zyyy { [IN(LINE)] get => new double4(z, y, y, y); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyyz { [IN(LINE)] get => new double4(z, y, y, z); }
+        public double4 zyyz { [IN(LINE)] get => new double4(z, y, y, z); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyyw { [IN(LINE)] get => new double4(z, y, y, w); }
+        public double4 zyyw { [IN(LINE)] get => new double4(z, y, y, w); [IN(LINE)] set { z = value.x; y = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyzx { [IN(LINE)] get => new double4(z, y, z, x); }
+        public double4 zyzx { [IN(LINE)] get => new double4(z, y, z, x); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyzy { [IN(LINE)] get => new double4(z, y, z, y); }
+        public double4 zyzy { [IN(LINE)] get => new double4(z, y, z, y); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyzz { [IN(LINE)] get => new double4(z, y, z, z); }
+        public double4 zyzz { [IN(LINE)] get => new double4(z, y, z, z); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyzw { [IN(LINE)] get => new double4(z, y, z, w); }
+        public double4 zyzw { [IN(LINE)] get => new double4(z, y, z, w); [IN(LINE)] set { z = value.x; y = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zywx { [IN(LINE)] get => new double4(z, y, w, x); }
+        public double4 zywx { [IN(LINE)] get => new double4(z, y, w, x); [IN(LINE)] set { z = value.x; y = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zywy { [IN(LINE)] get => new double4(z, y, w, y); }
+        public double4 zywy { [IN(LINE)] get => new double4(z, y, w, y); [IN(LINE)] set { z = value.x; y = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zywz { [IN(LINE)] get => new double4(z, y, w, z); }
+        public double4 zywz { [IN(LINE)] get => new double4(z, y, w, z); [IN(LINE)] set { z = value.x; y = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zyww { [IN(LINE)] get => new double4(z, y, w, w); }
+        public double4 zyww { [IN(LINE)] get => new double4(z, y, w, w); [IN(LINE)] set { z = value.x; y = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzxx { [IN(LINE)] get => new double4(z, z, x, x); }
+        public double4 zzxx { [IN(LINE)] get => new double4(z, z, x, x); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzxy { [IN(LINE)] get => new double4(z, z, x, y); }
+        public double4 zzxy { [IN(LINE)] get => new double4(z, z, x, y); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzxz { [IN(LINE)] get => new double4(z, z, x, z); }
+        public double4 zzxz { [IN(LINE)] get => new double4(z, z, x, z); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzxw { [IN(LINE)] get => new double4(z, z, x, w); }
+        public double4 zzxw { [IN(LINE)] get => new double4(z, z, x, w); [IN(LINE)] set { z = value.x; z = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzyx { [IN(LINE)] get => new double4(z, z, y, x); }
+        public double4 zzyx { [IN(LINE)] get => new double4(z, z, y, x); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzyy { [IN(LINE)] get => new double4(z, z, y, y); }
+        public double4 zzyy { [IN(LINE)] get => new double4(z, z, y, y); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzyz { [IN(LINE)] get => new double4(z, z, y, z); }
+        public double4 zzyz { [IN(LINE)] get => new double4(z, z, y, z); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzyw { [IN(LINE)] get => new double4(z, z, y, w); }
+        public double4 zzyw { [IN(LINE)] get => new double4(z, z, y, w); [IN(LINE)] set { z = value.x; z = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzzx { [IN(LINE)] get => new double4(z, z, z, x); }
+        public double4 zzzx { [IN(LINE)] get => new double4(z, z, z, x); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzzy { [IN(LINE)] get => new double4(z, z, z, y); }
+        public double4 zzzy { [IN(LINE)] get => new double4(z, z, z, y); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzzz { [IN(LINE)] get => new double4(z, z, z, z); }
+        public double4 zzzz { [IN(LINE)] get => new double4(z, z, z, z); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzzw { [IN(LINE)] get => new double4(z, z, z, w); }
+        public double4 zzzw { [IN(LINE)] get => new double4(z, z, z, w); [IN(LINE)] set { z = value.x; z = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzwx { [IN(LINE)] get => new double4(z, z, w, x); }
+        public double4 zzwx { [IN(LINE)] get => new double4(z, z, w, x); [IN(LINE)] set { z = value.x; z = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzwy { [IN(LINE)] get => new double4(z, z, w, y); }
+        public double4 zzwy { [IN(LINE)] get => new double4(z, z, w, y); [IN(LINE)] set { z = value.x; z = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzwz { [IN(LINE)] get => new double4(z, z, w, z); }
+        public double4 zzwz { [IN(LINE)] get => new double4(z, z, w, z); [IN(LINE)] set { z = value.x; z = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zzww { [IN(LINE)] get => new double4(z, z, w, w); }
+        public double4 zzww { [IN(LINE)] get => new double4(z, z, w, w); [IN(LINE)] set { z = value.x; z = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwxx { [IN(LINE)] get => new double4(z, w, x, x); }
+        public double4 zwxx { [IN(LINE)] get => new double4(z, w, x, x); [IN(LINE)] set { z = value.x; w = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwxy { [IN(LINE)] get => new double4(z, w, x, y); }
+        public double4 zwxy { [IN(LINE)] get => new double4(z, w, x, y); [IN(LINE)] set { z = value.x; w = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwxz { [IN(LINE)] get => new double4(z, w, x, z); }
+        public double4 zwxz { [IN(LINE)] get => new double4(z, w, x, z); [IN(LINE)] set { z = value.x; w = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwxw { [IN(LINE)] get => new double4(z, w, x, w); }
+        public double4 zwxw { [IN(LINE)] get => new double4(z, w, x, w); [IN(LINE)] set { z = value.x; w = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwyx { [IN(LINE)] get => new double4(z, w, y, x); }
+        public double4 zwyx { [IN(LINE)] get => new double4(z, w, y, x); [IN(LINE)] set { z = value.x; w = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwyy { [IN(LINE)] get => new double4(z, w, y, y); }
+        public double4 zwyy { [IN(LINE)] get => new double4(z, w, y, y); [IN(LINE)] set { z = value.x; w = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwyz { [IN(LINE)] get => new double4(z, w, y, z); }
+        public double4 zwyz { [IN(LINE)] get => new double4(z, w, y, z); [IN(LINE)] set { z = value.x; w = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwyw { [IN(LINE)] get => new double4(z, w, y, w); }
+        public double4 zwyw { [IN(LINE)] get => new double4(z, w, y, w); [IN(LINE)] set { z = value.x; w = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwzx { [IN(LINE)] get => new double4(z, w, z, x); }
+        public double4 zwzx { [IN(LINE)] get => new double4(z, w, z, x); [IN(LINE)] set { z = value.x; w = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwzy { [IN(LINE)] get => new double4(z, w, z, y); }
+        public double4 zwzy { [IN(LINE)] get => new double4(z, w, z, y); [IN(LINE)] set { z = value.x; w = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwzz { [IN(LINE)] get => new double4(z, w, z, z); }
+        public double4 zwzz { [IN(LINE)] get => new double4(z, w, z, z); [IN(LINE)] set { z = value.x; w = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwzw { [IN(LINE)] get => new double4(z, w, z, w); }
+        public double4 zwzw { [IN(LINE)] get => new double4(z, w, z, w); [IN(LINE)] set { z = value.x; w = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwwx { [IN(LINE)] get => new double4(z, w, w, x); }
+        public double4 zwwx { [IN(LINE)] get => new double4(z, w, w, x); [IN(LINE)] set { z = value.x; w = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwwy { [IN(LINE)] get => new double4(z, w, w, y); }
+        public double4 zwwy { [IN(LINE)] get => new double4(z, w, w, y); [IN(LINE)] set { z = value.x; w = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwwz { [IN(LINE)] get => new double4(z, w, w, z); }
+        public double4 zwwz { [IN(LINE)] get => new double4(z, w, w, z); [IN(LINE)] set { z = value.x; w = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 zwww { [IN(LINE)] get => new double4(z, w, w, w); }
+        public double4 zwww { [IN(LINE)] get => new double4(z, w, w, w); [IN(LINE)] set { z = value.x; w = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxxx { [IN(LINE)] get => new double4(w, x, x, x); }
+        public double4 wxxx { [IN(LINE)] get => new double4(w, x, x, x); [IN(LINE)] set { w = value.x; x = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxxy { [IN(LINE)] get => new double4(w, x, x, y); }
+        public double4 wxxy { [IN(LINE)] get => new double4(w, x, x, y); [IN(LINE)] set { w = value.x; x = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxxz { [IN(LINE)] get => new double4(w, x, x, z); }
+        public double4 wxxz { [IN(LINE)] get => new double4(w, x, x, z); [IN(LINE)] set { w = value.x; x = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxxw { [IN(LINE)] get => new double4(w, x, x, w); }
+        public double4 wxxw { [IN(LINE)] get => new double4(w, x, x, w); [IN(LINE)] set { w = value.x; x = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxyx { [IN(LINE)] get => new double4(w, x, y, x); }
+        public double4 wxyx { [IN(LINE)] get => new double4(w, x, y, x); [IN(LINE)] set { w = value.x; x = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxyy { [IN(LINE)] get => new double4(w, x, y, y); }
+        public double4 wxyy { [IN(LINE)] get => new double4(w, x, y, y); [IN(LINE)] set { w = value.x; x = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxyz { [IN(LINE)] get => new double4(w, x, y, z); }
+        public double4 wxyz { [IN(LINE)] get => new double4(w, x, y, z); [IN(LINE)] set { w = value.x; x = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxyw { [IN(LINE)] get => new double4(w, x, y, w); }
+        public double4 wxyw { [IN(LINE)] get => new double4(w, x, y, w); [IN(LINE)] set { w = value.x; x = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxzx { [IN(LINE)] get => new double4(w, x, z, x); }
+        public double4 wxzx { [IN(LINE)] get => new double4(w, x, z, x); [IN(LINE)] set { w = value.x; x = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxzy { [IN(LINE)] get => new double4(w, x, z, y); }
+        public double4 wxzy { [IN(LINE)] get => new double4(w, x, z, y); [IN(LINE)] set { w = value.x; x = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxzz { [IN(LINE)] get => new double4(w, x, z, z); }
+        public double4 wxzz { [IN(LINE)] get => new double4(w, x, z, z); [IN(LINE)] set { w = value.x; x = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxzw { [IN(LINE)] get => new double4(w, x, z, w); }
+        public double4 wxzw { [IN(LINE)] get => new double4(w, x, z, w); [IN(LINE)] set { w = value.x; x = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxwx { [IN(LINE)] get => new double4(w, x, w, x); }
+        public double4 wxwx { [IN(LINE)] get => new double4(w, x, w, x); [IN(LINE)] set { w = value.x; x = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxwy { [IN(LINE)] get => new double4(w, x, w, y); }
+        public double4 wxwy { [IN(LINE)] get => new double4(w, x, w, y); [IN(LINE)] set { w = value.x; x = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxwz { [IN(LINE)] get => new double4(w, x, w, z); }
+        public double4 wxwz { [IN(LINE)] get => new double4(w, x, w, z); [IN(LINE)] set { w = value.x; x = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wxww { [IN(LINE)] get => new double4(w, x, w, w); }
+        public double4 wxww { [IN(LINE)] get => new double4(w, x, w, w); [IN(LINE)] set { w = value.x; x = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyxx { [IN(LINE)] get => new double4(w, y, x, x); }
+        public double4 wyxx { [IN(LINE)] get => new double4(w, y, x, x); [IN(LINE)] set { w = value.x; y = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyxy { [IN(LINE)] get => new double4(w, y, x, y); }
+        public double4 wyxy { [IN(LINE)] get => new double4(w, y, x, y); [IN(LINE)] set { w = value.x; y = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyxz { [IN(LINE)] get => new double4(w, y, x, z); }
+        public double4 wyxz { [IN(LINE)] get => new double4(w, y, x, z); [IN(LINE)] set { w = value.x; y = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyxw { [IN(LINE)] get => new double4(w, y, x, w); }
+        public double4 wyxw { [IN(LINE)] get => new double4(w, y, x, w); [IN(LINE)] set { w = value.x; y = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyyx { [IN(LINE)] get => new double4(w, y, y, x); }
+        public double4 wyyx { [IN(LINE)] get => new double4(w, y, y, x); [IN(LINE)] set { w = value.x; y = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyyy { [IN(LINE)] get => new double4(w, y, y, y); }
+        public double4 wyyy { [IN(LINE)] get => new double4(w, y, y, y); [IN(LINE)] set { w = value.x; y = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyyz { [IN(LINE)] get => new double4(w, y, y, z); }
+        public double4 wyyz { [IN(LINE)] get => new double4(w, y, y, z); [IN(LINE)] set { w = value.x; y = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyyw { [IN(LINE)] get => new double4(w, y, y, w); }
+        public double4 wyyw { [IN(LINE)] get => new double4(w, y, y, w); [IN(LINE)] set { w = value.x; y = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyzx { [IN(LINE)] get => new double4(w, y, z, x); }
+        public double4 wyzx { [IN(LINE)] get => new double4(w, y, z, x); [IN(LINE)] set { w = value.x; y = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyzy { [IN(LINE)] get => new double4(w, y, z, y); }
+        public double4 wyzy { [IN(LINE)] get => new double4(w, y, z, y); [IN(LINE)] set { w = value.x; y = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyzz { [IN(LINE)] get => new double4(w, y, z, z); }
+        public double4 wyzz { [IN(LINE)] get => new double4(w, y, z, z); [IN(LINE)] set { w = value.x; y = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyzw { [IN(LINE)] get => new double4(w, y, z, w); }
+        public double4 wyzw { [IN(LINE)] get => new double4(w, y, z, w); [IN(LINE)] set { w = value.x; y = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wywx { [IN(LINE)] get => new double4(w, y, w, x); }
+        public double4 wywx { [IN(LINE)] get => new double4(w, y, w, x); [IN(LINE)] set { w = value.x; y = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wywy { [IN(LINE)] get => new double4(w, y, w, y); }
+        public double4 wywy { [IN(LINE)] get => new double4(w, y, w, y); [IN(LINE)] set { w = value.x; y = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wywz { [IN(LINE)] get => new double4(w, y, w, z); }
+        public double4 wywz { [IN(LINE)] get => new double4(w, y, w, z); [IN(LINE)] set { w = value.x; y = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wyww { [IN(LINE)] get => new double4(w, y, w, w); }
+        public double4 wyww { [IN(LINE)] get => new double4(w, y, w, w); [IN(LINE)] set { w = value.x; y = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzxx { [IN(LINE)] get => new double4(w, z, x, x); }
+        public double4 wzxx { [IN(LINE)] get => new double4(w, z, x, x); [IN(LINE)] set { w = value.x; z = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzxy { [IN(LINE)] get => new double4(w, z, x, y); }
+        public double4 wzxy { [IN(LINE)] get => new double4(w, z, x, y); [IN(LINE)] set { w = value.x; z = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzxz { [IN(LINE)] get => new double4(w, z, x, z); }
+        public double4 wzxz { [IN(LINE)] get => new double4(w, z, x, z); [IN(LINE)] set { w = value.x; z = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzxw { [IN(LINE)] get => new double4(w, z, x, w); }
+        public double4 wzxw { [IN(LINE)] get => new double4(w, z, x, w); [IN(LINE)] set { w = value.x; z = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzyx { [IN(LINE)] get => new double4(w, z, y, x); }
+        public double4 wzyx { [IN(LINE)] get => new double4(w, z, y, x); [IN(LINE)] set { w = value.x; z = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzyy { [IN(LINE)] get => new double4(w, z, y, y); }
+        public double4 wzyy { [IN(LINE)] get => new double4(w, z, y, y); [IN(LINE)] set { w = value.x; z = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzyz { [IN(LINE)] get => new double4(w, z, y, z); }
+        public double4 wzyz { [IN(LINE)] get => new double4(w, z, y, z); [IN(LINE)] set { w = value.x; z = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzyw { [IN(LINE)] get => new double4(w, z, y, w); }
+        public double4 wzyw { [IN(LINE)] get => new double4(w, z, y, w); [IN(LINE)] set { w = value.x; z = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzzx { [IN(LINE)] get => new double4(w, z, z, x); }
+        public double4 wzzx { [IN(LINE)] get => new double4(w, z, z, x); [IN(LINE)] set { w = value.x; z = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzzy { [IN(LINE)] get => new double4(w, z, z, y); }
+        public double4 wzzy { [IN(LINE)] get => new double4(w, z, z, y); [IN(LINE)] set { w = value.x; z = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzzz { [IN(LINE)] get => new double4(w, z, z, z); }
+        public double4 wzzz { [IN(LINE)] get => new double4(w, z, z, z); [IN(LINE)] set { w = value.x; z = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzzw { [IN(LINE)] get => new double4(w, z, z, w); }
+        public double4 wzzw { [IN(LINE)] get => new double4(w, z, z, w); [IN(LINE)] set { w = value.x; z = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzwx { [IN(LINE)] get => new double4(w, z, w, x); }
+        public double4 wzwx { [IN(LINE)] get => new double4(w, z, w, x); [IN(LINE)] set { w = value.x; z = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzwy { [IN(LINE)] get => new double4(w, z, w, y); }
+        public double4 wzwy { [IN(LINE)] get => new double4(w, z, w, y); [IN(LINE)] set { w = value.x; z = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzwz { [IN(LINE)] get => new double4(w, z, w, z); }
+        public double4 wzwz { [IN(LINE)] get => new double4(w, z, w, z); [IN(LINE)] set { w = value.x; z = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wzww { [IN(LINE)] get => new double4(w, z, w, w); }
+        public double4 wzww { [IN(LINE)] get => new double4(w, z, w, w); [IN(LINE)] set { w = value.x; z = value.y; w = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwxx { [IN(LINE)] get => new double4(w, w, x, x); }
+        public double4 wwxx { [IN(LINE)] get => new double4(w, w, x, x); [IN(LINE)] set { w = value.x; w = value.y; x = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwxy { [IN(LINE)] get => new double4(w, w, x, y); }
+        public double4 wwxy { [IN(LINE)] get => new double4(w, w, x, y); [IN(LINE)] set { w = value.x; w = value.y; x = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwxz { [IN(LINE)] get => new double4(w, w, x, z); }
+        public double4 wwxz { [IN(LINE)] get => new double4(w, w, x, z); [IN(LINE)] set { w = value.x; w = value.y; x = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwxw { [IN(LINE)] get => new double4(w, w, x, w); }
+        public double4 wwxw { [IN(LINE)] get => new double4(w, w, x, w); [IN(LINE)] set { w = value.x; w = value.y; x = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwyx { [IN(LINE)] get => new double4(w, w, y, x); }
+        public double4 wwyx { [IN(LINE)] get => new double4(w, w, y, x); [IN(LINE)] set { w = value.x; w = value.y; y = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwyy { [IN(LINE)] get => new double4(w, w, y, y); }
+        public double4 wwyy { [IN(LINE)] get => new double4(w, w, y, y); [IN(LINE)] set { w = value.x; w = value.y; y = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwyz { [IN(LINE)] get => new double4(w, w, y, z); }
+        public double4 wwyz { [IN(LINE)] get => new double4(w, w, y, z); [IN(LINE)] set { w = value.x; w = value.y; y = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwyw { [IN(LINE)] get => new double4(w, w, y, w); }
+        public double4 wwyw { [IN(LINE)] get => new double4(w, w, y, w); [IN(LINE)] set { w = value.x; w = value.y; y = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwzx { [IN(LINE)] get => new double4(w, w, z, x); }
+        public double4 wwzx { [IN(LINE)] get => new double4(w, w, z, x); [IN(LINE)] set { w = value.x; w = value.y; z = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwzy { [IN(LINE)] get => new double4(w, w, z, y); }
+        public double4 wwzy { [IN(LINE)] get => new double4(w, w, z, y); [IN(LINE)] set { w = value.x; w = value.y; z = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwzz { [IN(LINE)] get => new double4(w, w, z, z); }
+        public double4 wwzz { [IN(LINE)] get => new double4(w, w, z, z); [IN(LINE)] set { w = value.x; w = value.y; z = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwzw { [IN(LINE)] get => new double4(w, w, z, w); }
+        public double4 wwzw { [IN(LINE)] get => new double4(w, w, z, w); [IN(LINE)] set { w = value.x; w = value.y; z = value.z; w = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwwx { [IN(LINE)] get => new double4(w, w, w, x); }
+        public double4 wwwx { [IN(LINE)] get => new double4(w, w, w, x); [IN(LINE)] set { w = value.x; w = value.y; w = value.z; x = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwwy { [IN(LINE)] get => new double4(w, w, w, y); }
+        public double4 wwwy { [IN(LINE)] get => new double4(w, w, w, y); [IN(LINE)] set { w = value.x; w = value.y; w = value.z; y = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwwz { [IN(LINE)] get => new double4(w, w, w, z); }
+        public double4 wwwz { [IN(LINE)] get => new double4(w, w, w, z); [IN(LINE)] set { w = value.x; w = value.y; w = value.z; z = value.w; } }
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public double4 wwww { [IN(LINE)] get => new double4(w, w, w, w); }
+        public double4 wwww { [IN(LINE)] get => new double4(w, w, w, w); [IN(LINE)] set { w = value.x; w = value.y; w = value.z; w = value.w; } }
         #endregion
 
         #endregion
