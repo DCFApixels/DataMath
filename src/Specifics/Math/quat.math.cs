@@ -4,6 +4,8 @@
 #endif
 #if ENABLE_IL2CPP
 #endif
+using System.Numerics;
+using System.Runtime.CompilerServices;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
@@ -99,26 +101,26 @@ namespace DCFApixels.DataMath
             const float EPSILON = 1e-6f;
             const float CUT_OFF = (1f - 2f * EPSILON) * (1f - 2f * EPSILON);
 
-            float4 qv = DMBasic.ToBasic(q);
-            float4 d1 = qv * qv.wwww * new float4(2f); //xw, yw, zw, ww
-            float4 d2 = qv * qv.yzxw * new float4(2f); //xy, yz, zx, ww
-            float4 d3 = qv * qv;
+            var qv = q.value;
+            var d1 = qv * qv.wwww * 2f; //xw, yw, zw, ww
+            var d2 = qv * qv.yzxw * 2f; //xy, yz, zx, ww
+            var d3 = qv * qv;
 
             float y1 = d2.z - d1.y;
             if (y1 * y1 < CUT_OFF)
             {
-                float x1 = d2.y + d1.x;
-                float x2 = d3.z + d3.w - d3.y - d3.x;
-                float z1 = d2.x + d1.z;
-                float z2 = d3.x + d3.w - d3.y - d3.z;
+                var x1 = d2.y + d1.x;
+                var x2 = d3.z + d3.w - d3.y - d3.x;
+                var z1 = d2.x + d1.z;
+                var z2 = d3.x + d3.w - d3.y - d3.z;
                 return new float3(Atan2(x1, x2), -Asin(y1), Atan2(z1, z2));
             }
-            else
+            else //xzx
             {
                 y1 = Clamp(y1, -1f, 1f);
-                float4 abcd = new float4(d2.z, d1.y, d2.x, d1.z);
-                float x1 = 2f * (abcd.x * abcd.w + abcd.y * abcd.z); //2 * (ad + bc)
-                float x2 = CSum(abcd * abcd * new float4(-1f, 1f, -1f, 1f));
+                var abcd = new float4(d2.z, d1.y, d2.x, d1.z);
+                var x1 = 2f * (abcd.x * abcd.w + abcd.y * abcd.z); //2 * (ad + bc)
+                var x2 = CSum(abcd * abcd * new float4(-1f, 1f, -1f, 1f));
                 return new float3(Atan2(x1, x2), -Asin(y1), 0f);
             }
         }
