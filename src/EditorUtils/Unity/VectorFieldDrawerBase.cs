@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace DCFApixels.DataMath.Unity.Editors
 {
-    internal abstract class VectorFieldDrawerBase<TAttribute> : PropertyDrawer
+    public abstract class VectorFieldDrawerBase<TAttribute> : PropertyDrawer
     {
         private bool _error = false;
         private int _fieldCount = 0;

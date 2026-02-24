@@ -6,7 +6,7 @@ using UnityEngine;
 namespace DCFApixels.DataMath.Unity.Editors
 {
     [CustomPropertyDrawer(typeof(Color32FieldAttribute))]
-    internal class Color32FieldDrawer : VectorFieldDrawerBase<Color32FieldAttribute>
+    public class Color32FieldDrawer : VectorFieldDrawerBase<Color32FieldAttribute>
     {
         protected override bool IsHideDefaultDraw
         {

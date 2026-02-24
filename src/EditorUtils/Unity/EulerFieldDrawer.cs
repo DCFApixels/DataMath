@@ -6,7 +6,7 @@ using UnityEngine;
 namespace DCFApixels.DataMath.Unity.Editors
 {
     [CustomPropertyDrawer(typeof(EulerFieldAttribute))]
-    internal class EulerFieldDrawer : VectorFieldDrawerBase<EulerFieldAttribute>
+    public class EulerFieldDrawer : VectorFieldDrawerBase<EulerFieldAttribute>
     {
         protected override bool IsHideDefaultDraw
         {

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace DCFApixels.DataMath.Unity.Editors
 {
     [CustomPropertyDrawer(typeof(VectorFieldAttribute))]
-    internal unsafe class VectorFieldDrawer : VectorFieldDrawerBase<VectorFieldAttribute>
+    public unsafe class VectorFieldDrawer : VectorFieldDrawerBase<VectorFieldAttribute>
     {
         protected override bool IsHideDefaultDraw
         {
