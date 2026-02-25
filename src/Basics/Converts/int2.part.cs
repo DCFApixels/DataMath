@@ -68,6 +68,30 @@ namespace DCFApixels.DataMath
             x = ((vi & (int)AADirectionFlags.Right) >> 1) - (vi & (int)AADirectionFlags.Left);
             y = ((vi & (int)AADirectionFlags.Up) >> 3) - ((vi & (int)AADirectionFlags.Down) >> 2);
         }
+        public int2(int v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0; swizzleRaw >>= 3;
+            y = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0;
+        }
+        public int2(int2 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1];
+        }
+        public int2(int3 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1];
+        }
+        public int2(int4 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1];
+        }
 
         #region Arithmetic float
         [IN(LINE)] public static float2 operator +(int2 a, float b) { return new float2(a.x + b, a.y + b); }

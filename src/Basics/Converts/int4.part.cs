@@ -77,6 +77,38 @@ namespace DCFApixels.DataMath
             z = ((vi & (int)AADirectionFlags.Forward) >> 5) - ((vi & (int)AADirectionFlags.Back) >> 4);
             w = ((vi & (int)AADirectionFlags.After) >> 7) - ((vi & (int)AADirectionFlags.Before) >> 6);
         }
+        public int4(int v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0; swizzleRaw >>= 3;
+            y = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0; swizzleRaw >>= 3;
+            z = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0; swizzleRaw >>= 3;
+            w = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0;
+        }
+        public int4(int2 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
+        public int4(int3 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
+        public int4(int4 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
 
         #region Arithmetic float
         [IN(LINE)] public static float4 operator +(int4 a, float b) { return new float4(a.x + b, a.y + b, a.z + b, a.w + b); }

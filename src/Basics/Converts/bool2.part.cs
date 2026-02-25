@@ -31,6 +31,30 @@ namespace DCFApixels.DataMath
                 default: x = false; y = false; break;
             }
         }
+        public bool2(bool v, Swizzle swizzle) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = ((swizzleRaw & 7) - 1) == 1 ? true : false; swizzleRaw >>= 3;
+            y = ((swizzleRaw & 7) - 1) == 1 ? true : false;
+        }
+        public bool2(bool2 v, Swizzle swizzle) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1];
+        }
+        public bool2(bool3 v, Swizzle swizzle) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1];
+        }
+        public bool2(bool4 v, Swizzle swizzle) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1];
+        }
     }
 
     public static partial class DM

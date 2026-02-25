@@ -69,6 +69,38 @@ namespace DCFApixels.DataMath
                 default: x = 0; y = 0; z = 0; w = 0; break;
             }
         }
+        public uint4(uint v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = ((swizzleRaw & 7) - 1) == 1 ? 1u : 0; swizzleRaw >>= 3;
+            y = ((swizzleRaw & 7) - 1) == 1 ? 1u : 0; swizzleRaw >>= 3;
+            z = ((swizzleRaw & 7) - 1) == 1 ? 1u : 0; swizzleRaw >>= 3;
+            w = ((swizzleRaw & 7) - 1) == 1 ? 1u : 0;
+        }
+        public uint4(uint2 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
+        public uint4(uint3 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
+        public uint4(uint4 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
 
         #region Arithmetic float
         [IN(LINE)] public static float4 operator +(uint4 a, float b) { return new float4(a.x + b, a.y + b, a.z + b, a.w + b); }

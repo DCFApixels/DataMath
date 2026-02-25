@@ -69,6 +69,38 @@ namespace DCFApixels.DataMath
                 default: x = 0; y = 0; z = 0; w = 0; break;
             }
         }
+        public double4(double v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0; swizzleRaw >>= 3;
+            y = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0; swizzleRaw >>= 3;
+            z = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0; swizzleRaw >>= 3;
+            w = ((swizzleRaw & 7) - 1) == 1 ? 1 : 0;
+        }
+        public double4(double2 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
+        public double4(double3 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
+        public double4(double4 v, Swizzle swizzle, bool _ = false) : this()
+        {
+            int swizzleRaw = (int)swizzle;
+            x = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            y = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            z = v[(swizzleRaw & 7) - 1]; swizzleRaw >>= 3;
+            w = v[(swizzleRaw & 7) - 1];
+        }
     }
 
     public static partial class DM

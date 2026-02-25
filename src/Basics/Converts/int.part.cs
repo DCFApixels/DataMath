@@ -15,7 +15,7 @@ namespace DCFApixels.DataMath
 
     public static partial class DMIntExtensions
     {
-        #region Swaps
+        #region Swizzles
         [IN(LINE)] public static int2 To_X(this int self) => new int2(0, self);
         [IN(LINE)] public static int2 ToX_(this int self) => new int2(self, 0);
         [IN(LINE)] public static int3 To__X(this int self) => new int3(0, 0, self);
