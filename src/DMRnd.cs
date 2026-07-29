@@ -20,24 +20,21 @@ namespace DCFApixels.DataMath
         [IN(LINE)] private static unsafe double AsDouble(ulong value) => *(double*)&value;
 
         [IN(LINE)] public static float Q32ToFloat(uint value) => AsFloat((value >> 9) | 0x3F80_0000) - 1f;
-        [IN(LINE)] public static double Q64ToDouble(ulong value) => AsDouble((value >> 12) | 0x7FF0_0000_0000_0000) - 1d;
+        [IN(LINE)] public static double Q64ToDouble(ulong value) => AsDouble((value >> 12) | 0x3FF0_0000_0000_0000) - 1d;
 
         [IN(LINE)] public static uint CompresseU32(uint value, int range) => (uint)((value * (ulong)range) >> 32);
         [IN(LINE)] public static int Compresse32(uint value, int range) => (int)((value * (ulong)range) >> 32);
         [IN(LINE)] public static uint CompresseU32(uint value, ulong ulrange) => (uint)((value * ulrange) >> 32);
         [IN(LINE)] public static int Compresse32(uint value, ulong range) => (int)((value * range) >> 32);
 
-        [IN(LINE)] public static uint CompresseU32(uint value, int min, ulong ulrange) => (uint)((value * ulrange) >> 32 + min);
+        [IN(LINE)] public static uint CompresseU32(uint value, int min, ulong ulrange) => (uint)((value * ulrange) >> 32) + (uint)min;
         [IN(LINE)] public static int Compresse32(uint value, int min, ulong range) => (int)((value * range) >> 32) + min;
 
         [IN(LINE)] public static uint CompresseU32(uint value, uint min, ulong ulrange) => (uint)((value * ulrange) >> 32) + min;
 
         public static uint NewAutoSeed()
         {
-            AutoSeed ^= AutoSeed << 13;
-            AutoSeed ^= AutoSeed >> 17;
-            AutoSeed ^= AutoSeed << 5;
-            return AutoSeed;
+            return AutoSeed = NextXorShiftState(AutoSeed);
         }
 
         [IN(LINE)]

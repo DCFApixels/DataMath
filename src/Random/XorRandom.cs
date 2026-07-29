@@ -10,10 +10,12 @@ namespace DCFApixels.DataMath
 {
     [Serializable]
     public struct XorRandom :
+        IRandom4,
         IEquatable<XorRandom>,
         IFormattable
     {
         private uint _state;
+        public uint State { [IN(LINE)] get { return _state; } [IN(LINE)] set { _state = value; } }
 
         #region Constructors
         [IN(LINE)]
@@ -154,7 +156,7 @@ namespace DCFApixels.DataMath
                 Compresse32(NextUInt(), min, range),
                 Compresse32(NextUInt(), min, range));
         }
-        public int4 NextInt3(int4 max)
+        public int4 NextInt4(int4 max)
         {
             return new int4(
                 Compresse32(NextUInt(), max.x),
@@ -162,7 +164,7 @@ namespace DCFApixels.DataMath
                 Compresse32(NextUInt(), max.z),
                 Compresse32(NextUInt(), max.w));
         }
-        public int4 NextInt3(int4 min, int4 max)
+        public int4 NextInt4(int4 min, int4 max)
         {
             int4 range = max - min;
             return new int4(
@@ -215,13 +217,13 @@ namespace DCFApixels.DataMath
                 CompresseU32(NextUInt(), min, range),
                 CompresseU32(NextUInt(), min, range));
         }
-        public uint2 NextInt2(uint2 max)
+        public uint2 NextUInt2(uint2 max)
         {
             return new uint2(
                 CompresseU32(NextUInt(), max.x),
                 CompresseU32(NextUInt(), max.y));
         }
-        public uint2 NextInt2(uint2 min, uint2 max)
+        public uint2 NextUInt2(uint2 min, uint2 max)
         {
             uint2 range = max - min;
             return new uint2(
@@ -319,14 +321,14 @@ namespace DCFApixels.DataMath
 
         #region Long
         [IN(LINE)] public long NextLong() => (long)((ulong)NextUInt() << 32) ^ NextUInt();
-        [IN(LINE)] public long NextLong(long max) => (long)NextULong() % max;
-        [IN(LINE)] public long NextLong(long min, long max) => (long)NextULong() % (max - min) + min;
+        [IN(LINE)] public long NextLong(long max) => (long)(NextULong() % (ulong)max);
+        [IN(LINE)] public long NextLong(long min, long max) => (long)(NextULong() % (ulong)(max - min)) + min;
         #endregion
 
         #region ULong
         [IN(LINE)] public ulong NextULong() => ((ulong)NextUInt() << 32) ^ NextUInt();
         [IN(LINE)] public ulong NextULong(ulong max) => NextULong() % max;
-        [IN(LINE)] public ulong NextULong(ulong min, ulong max) => NextULong() % max - min + min;
+        [IN(LINE)] public ulong NextULong(ulong min, ulong max) => NextULong() % (max - min) + min;
         #endregion
 
         #region Float
@@ -350,6 +352,16 @@ namespace DCFApixels.DataMath
             return new float2(NextFloat(), NextFloat());
         }
         [IN(LINE)]
+        public float2 NextFloat2(float max)
+        {
+            return NextFloat2() * max;
+        }
+        [IN(LINE)]
+        public float2 NextFloat2(float min, float max)
+        {
+            return NextFloat2() * (max - min) + min;
+        }
+        [IN(LINE)]
         public float2 NextFloat2(float2 max)
         {
             return NextFloat2() * max;
@@ -365,6 +377,16 @@ namespace DCFApixels.DataMath
                 NextFloat(),
                 NextFloat(),
                 NextFloat());
+        }
+        [IN(LINE)]
+        public float3 NextFloat3(float max)
+        {
+            return NextFloat3() * max;
+        }
+        [IN(LINE)]
+        public float3 NextFloat3(float min, float max)
+        {
+            return NextFloat3() * (max - min) + min;
         }
         [IN(LINE)]
         public float3 NextFloat3(float3 max)
@@ -385,6 +407,16 @@ namespace DCFApixels.DataMath
                 NextFloat());
         }
         [IN(LINE)]
+        public float4 NextFloat4(float max)
+        {
+            return NextFloat4() * max;
+        }
+        [IN(LINE)]
+        public float4 NextFloat4(float min, float max)
+        {
+            return NextFloat4() * (max - min) + min;
+        }
+        [IN(LINE)]
         public float4 NextFloat4(float4 max)
         {
             return NextFloat4() * max;
@@ -400,13 +432,43 @@ namespace DCFApixels.DataMath
         [IN(LINE)]
         public double NextDouble()
         {
-            return (0x3ff0000000000000 | (((ulong)NextUInt() << 20) ^ NextUInt())) - 1d;
+            return Q64ToDouble(NextULong());
+        }
+        [IN(LINE)]
+        public double NextDouble(double max)
+        {
+            return NextDouble() * max;
+        }
+        [IN(LINE)]
+        public double NextDouble(double min, double max)
+        {
+            return NextDouble() * (max - min) + min;
         }
         public double2 NextDouble2()
         {
             return new double2(
                 NextDouble(),
                 NextDouble());
+        }
+        [IN(LINE)]
+        public double2 NextDouble2(double max)
+        {
+            return NextDouble2() * max;
+        }
+        [IN(LINE)]
+        public double2 NextDouble2(double min, double max)
+        {
+            return NextDouble2() * (max - min) + min;
+        }
+        [IN(LINE)]
+        public double2 NextDouble2(double2 max)
+        {
+            return NextDouble2() * max;
+        }
+        [IN(LINE)]
+        public double2 NextDouble2(double2 min, double2 max)
+        {
+            return NextDouble2() * (max - min) + min;
         }
         public double3 NextDouble3()
         {
@@ -415,6 +477,26 @@ namespace DCFApixels.DataMath
                 NextDouble(),
                 NextDouble());
         }
+        [IN(LINE)]
+        public double3 NextDouble3(double max)
+        {
+            return NextDouble3() * max;
+        }
+        [IN(LINE)]
+        public double3 NextDouble3(double min, double max)
+        {
+            return NextDouble3() * (max - min) + min;
+        }
+        [IN(LINE)]
+        public double3 NextDouble3(double3 max)
+        {
+            return NextDouble3() * max;
+        }
+        [IN(LINE)]
+        public double3 NextDouble3(double3 min, double3 max)
+        {
+            return NextDouble3() * (max - min) + min;
+        }
         public double4 NextDouble4()
         {
             return new double4(
@@ -422,6 +504,26 @@ namespace DCFApixels.DataMath
                 NextDouble(),
                 NextDouble(),
                 NextDouble());
+        }
+        [IN(LINE)]
+        public double4 NextDouble4(double max)
+        {
+            return NextDouble4() * max;
+        }
+        [IN(LINE)]
+        public double4 NextDouble4(double min, double max)
+        {
+            return NextDouble4() * (max - min) + min;
+        }
+        [IN(LINE)]
+        public double4 NextDouble4(double4 max)
+        {
+            return NextDouble4() * max;
+        }
+        [IN(LINE)]
+        public double4 NextDouble4(double4 min, double4 max)
+        {
+            return NextDouble4() * (max - min) + min;
         }
         #endregion
 

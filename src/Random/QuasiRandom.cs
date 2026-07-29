@@ -10,6 +10,7 @@ namespace DCFApixels.DataMath
     /// <summary> Quasi Random. Use R sequence </summary>
     [Serializable]
     public struct QuasiRandom :
+        IRandom4,
         IEquatable<QuasiRandom>,
         IFormattable
     {
@@ -19,7 +20,7 @@ namespace DCFApixels.DataMath
 
         private const decimal G1 = 1.6180339887498948482045868383m;
         private const q32 X1_Q32 = (q32)(1m / G1 * Q32_MAX) + 1;
-        private const q64 X1_Q64 = (q64)(1m / G1 * Q32_MAX) + 1;
+        private const q64 X1_Q64 = (q64)(1m / G1 * Q64_MAX) + 1;
 
         private const decimal G2 = 1.3247179572447460259609088563m;
         private const q32 X2_Q32 = (q32)(1m / G2 * Q32_MAX) + 1;
@@ -153,6 +154,7 @@ namespace DCFApixels.DataMath
         #endregion
 
         private uint _state;
+        public uint State { [IN(LINE)] get { return _state; } [IN(LINE)] set { _state = value; } }
 
         #region Constructors
         [IN(LINE)]
@@ -464,7 +466,11 @@ namespace DCFApixels.DataMath
         }
         public long NextLong(long max)
         {
-            return long.MaxValue / (((long)GetX1_Q64(++_state)) / max);
+            return (long)(GetX1_Q64(++_state) % (ulong)max);
+        }
+        public long NextLong(long min, long max)
+        {
+            return (long)(GetX1_Q64(++_state) % (ulong)(max - min)) + min;
         }
         #endregion
 
@@ -473,6 +479,14 @@ namespace DCFApixels.DataMath
         public ulong NextULong()
         {
             return GetX1_Q64(++_state);
+        }
+        public ulong NextULong(ulong max)
+        {
+            return GetX1_Q64(++_state) % max;
+        }
+        public ulong NextULong(ulong min, ulong max)
+        {
+            return GetX1_Q64(++_state) % (max - min) + min;
         }
         #endregion
 
@@ -484,11 +498,11 @@ namespace DCFApixels.DataMath
         {
             return GetX1_F(++_state);
         }
-        public float NextFloat2(float max)
+        public float NextFloat(float max)
         {
             return NextFloat() * max;
         }
-        public float NextFloat2(float min, float max)
+        public float NextFloat(float min, float max)
         {
             return NextFloat() * (max - min) + min;
         }
@@ -500,6 +514,14 @@ namespace DCFApixels.DataMath
             return new float2(
                 GetX2_F(++_state),
                 GetY2_F(_state));
+        }
+        public float2 NextFloat2(float max)
+        {
+            return NextFloat2() * max;
+        }
+        public float2 NextFloat2(float min, float max)
+        {
+            return NextFloat2() * (max - min) + min;
         }
         public float2 NextFloat2(float2 max)
         {
@@ -518,6 +540,14 @@ namespace DCFApixels.DataMath
                 GetX3_F(++_state),
                 GetY3_F(_state),
                 GetZ3_F(_state));
+        }
+        public float3 NextFloat3(float max)
+        {
+            return NextFloat3() * max;
+        }
+        public float3 NextFloat3(float min, float max)
+        {
+            return NextFloat3() * (max - min) + min;
         }
         public float3 NextFloat3(float3 max)
         {
@@ -538,11 +568,19 @@ namespace DCFApixels.DataMath
                 GetZ4_F(_state),
                 GetW4_F(_state));
         }
+        public float4 NextFloat4(float max)
+        {
+            return NextFloat4() * max;
+        }
+        public float4 NextFloat4(float min, float max)
+        {
+            return NextFloat4() * (max - min) + min;
+        }
         public float4 NextFloat4(float4 max)
         {
             return NextFloat4() * max;
         }
-        public float4 NextFloat3(float4 min, float4 max)
+        public float4 NextFloat4(float4 min, float4 max)
         {
             return NextFloat4() * (max - min) + min;
         }
@@ -575,6 +613,14 @@ namespace DCFApixels.DataMath
                 GetX2_D(++_state),
                 GetY2_D(_state));
         }
+        public double2 NextDouble2(double max)
+        {
+            return NextDouble2() * max;
+        }
+        public double2 NextDouble2(double min, double max)
+        {
+            return NextDouble2() * (max - min) + min;
+        }
         public double2 NextDouble2(double2 max)
         {
             return NextDouble2() * max;
@@ -592,6 +638,14 @@ namespace DCFApixels.DataMath
                 GetX3_D(++_state),
                 GetY3_D(_state),
                 GetZ3_D(_state));
+        }
+        public double3 NextDouble3(double max)
+        {
+            return NextDouble3() * max;
+        }
+        public double3 NextDouble3(double min, double max)
+        {
+            return NextDouble3() * (max - min) + min;
         }
         public double3 NextDouble3(double3 max)
         {
@@ -611,6 +665,14 @@ namespace DCFApixels.DataMath
                 GetY4_D(_state),
                 GetZ4_D(_state),
                 GetW4_D(_state));
+        }
+        public double4 NextDouble4(double max)
+        {
+            return NextDouble4() * max;
+        }
+        public double4 NextDouble4(double min, double max)
+        {
+            return NextDouble4() * (max - min) + min;
         }
         public double4 NextDouble4(double4 max)
         {
