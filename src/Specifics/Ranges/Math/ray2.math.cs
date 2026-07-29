@@ -26,39 +26,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray2 Abs(ray2 a) { return new ray2(a.src, Abs(a.dir)); }
         #endregion
 
-        #region Clamp/Repeat/PingPong/SmoothStep
-        /// <summary> Clamps the value between min and max. </summary>
-        [IN(LINE)] public static float2 Clamp(float2 a, ray2 range) { return Clamp(a, range.From, range.To); }
-        [IN(LINE)] public static float2 Repeat(float2 a, ray2 range) { return Repeat(a, range.From, range.To); }
-        [IN(LINE)] public static float2 PingPong(float2 a, ray2 range) { return PingPong(a, range.From, range.To); }
-        /// <summary> Clamps the value between from and to. </summary>
-        [IN(LINE)] public static float2 SmoothStep(ray2 range, float2 a) { return SmoothStep(range.From, range.To, a); }
-        #endregion
-
         #region Min/Max
-        [IN(LINE)] public static float2 Max(ray2 range) { return IsPositive(range.dir) ? range.src + range.dir : range.src; }
-        [IN(LINE)] public static float2 Min(ray2 range) { return IsPositive(range.dir) ? range.src : range.src + range.dir; }
-        #endregion
-
-        #region Lerp
-        [IN(LINE)] public static float2 Lerp(ray2 range, float2 t) { return Lerp(range.From, range.To, t); }
-        [IN(LINE)] public static float2 LerpClamp(ray2 range, float2 t) { return LerpClamp(range.From, range.To, t); }
-        [IN(LINE)] public static float2 LerpRepeat(ray2 range, float2 t) { return LerpRepeat(range.From, range.To, t); }
-
-        [IN(LINE)] public static float2 UnLerp(ray2 range, float2 a) { return UnLerp(range.From, range.To, a); }
-        [IN(LINE)] public static float2 UnLerpClamp(ray2 range, float2 a) { return UnLerpClamp(range.From, range.To, a); }
-        [IN(LINE)] public static float2 UnLerpRepeat(ray2 range, float2 a) { return UnLerpRepeat(range.From, range.To, a); }
-
-        [IN(LINE)] public static float2 Remap(ray2 oldRange, ray2 newRange, float v) { return Remap(oldRange.From, oldRange.To, newRange.From, newRange.To, v); }
-
-        [IN(LINE)] public static float2 LerpAngle(ray2 range, float t) { return LerpAngle(range.From, range.To, t); }
-        [IN(LINE)] public static float2 LerpAngleClamp(ray2 range, float t) { return LerpAngleClamp(range.From, range.To, t); }
-        [IN(LINE)] public static float2 LerpAngleRepeat(ray2 range, float t) { return LerpAngleRepeat(range.From, range.To, t); }
-
-        [IN(LINE)] public static float2 MoveTowards(ray2 range, float distance) { return MoveTowards(range.From, range.To, distance); }
-        [IN(LINE)] public static float2 MoveTowards(ray2 range, float distance, out float excess) { return MoveTowards(range.From, range.To, distance, out excess); }
-
-        [IN(LINE)] public static float2 MoveTowardsAngle(ray2 range, float distance) { return MoveTowardsAngle(range.From, range.To, distance); }
+        [IN(LINE)] public static float2 Max(ray2 range) { return Select(range.src, range.src + range.dir, range.dir >= 0f); }
+        [IN(LINE)] public static float2 Min(ray2 range) { return Select(range.src + range.dir, range.src, range.dir >= 0f); }
         #endregion
 
         #region Real Value State Checks
@@ -105,8 +75,57 @@ namespace DCFApixels.DataMath
 
             return true;
         }
-        //[IN(LINE)] public static float ProjectDistance(float2 src, float2 dir, float2 point) { return Dot(point - src, dir) / Dot(dir, dir); }
         [IN(LINE)] public static float2 ProjectPoint(ray2 ray, float2 point) { return ray.src + Project(point - ray.src, ray.dir); }
+        [IN(LINE)] public static float UnLerpProjected(ray2 ray, float2 point) { return Dot(point - ray.src, ray.dir) / LengthSq(ray.dir); }
+        [IN(LINE)]
+        public static float2 ClosestPoint(ray2 ray, float2 point)
+        {
+            float lengthSq = LengthSq(ray.dir);
+            if (lengthSq <= 0f) { return ray.src; }
+            return ray.src + Project(point - ray.src, ray.dir);
+        }
+        [IN(LINE)]
+        public static float2 ClosestPointClamp(ray2 ray, float2 point)
+        {
+            float lengthSq = LengthSq(ray.dir);
+            if (lengthSq <= 0f) { return ray.src; }
+            float t = Clamp01(Dot(point - ray.src, ray.dir) / lengthSq);
+            return ray.src + ray.dir * t;
+        }
+        [IN(LINE)]
+        public static bool ContainsProjected(ray2 ray, float2 point, float tolerance = 0.0001f)
+        {
+            float lengthSq = LengthSq(ray.dir);
+            if (lengthSq <= 0f) { return LengthSq(point - ray.src) <= tolerance * tolerance; }
+            float dot = Dot(ray.dir, point - ray.src);
+            return dot >= -tolerance && dot <= lengthSq + tolerance;
+        }
+        [IN(LINE)]
+        public static bool ContainsProjected(ray2 a, ray2 b, float tolerance = 0.0001f)
+        {
+            float lengthSq = LengthSq(a.dir);
+            if (lengthSq <= 0f) { return ContainsProjected(a, b.src, tolerance) && ContainsProjected(a, b.src + b.dir, tolerance); }
+            line1 aProjection = new line1(0f, lengthSq);
+            line1 bProjection = new line1(Dot(a.dir, b.src - a.src), Dot(a.dir, b.src + b.dir - a.src));
+            return Contains(aProjection, bProjection, tolerance);
+        }
+        [IN(LINE)]
+        public static bool OverlapsProjected(ray2 a, ray2 b, float tolerance = 0.0001f)
+        {
+            float lengthSq = LengthSq(a.dir);
+            if (lengthSq <= 0f) { return ContainsProjected(b, a.src, tolerance); }
+            line1 aProjection = new line1(0f, lengthSq);
+            line1 bProjection = new line1(Dot(a.dir, b.src - a.src), Dot(a.dir, b.src + b.dir - a.src));
+            return Overlaps(aProjection, bProjection, tolerance);
+        }
+        [IN(LINE)]
+        public static ray2 Expand(ray2 ray, float amount)
+        {
+            float lengthSq = LengthSq(ray.dir);
+            if (lengthSq <= 0f) { return ray; }
+            float2 offset = Normalize(ray.dir) * amount;
+            return new ray2(ray.src - offset, ray.dir + offset * 2f);
+        }
         #endregion
     }
 }

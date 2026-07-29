@@ -12,6 +12,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
+    /// <summary>Three-dimensional float line segment stored as start point plus displacement; use line3 for endpoint/range-value APIs.</summary>
 #if ENABLE_IL2CPP
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -80,6 +81,7 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public ray3(float3 src, float3 dir) { this.src = src; this.dir = dir; }
+        [IN(LINE)] public ray3(intray3 ray) { src = ray.src; dir = ray.dir; }
         [IN(LINE)] public ray3(line3 a) { src = a.src; dir = a.dir; }
         #endregion
 
@@ -87,8 +89,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool operator ==(ray3 a, ray3 b) { return a.Equals(b); }
         [IN(LINE)] public static bool operator !=(ray3 a, ray3 b) { return !a.Equals(b); }
 
-        [IN(LINE)] public static ray3 operator -(ray3 range, float v) { return new ray3(range.src - v, range.dir - v); }
-        [IN(LINE)] public static ray3 operator +(ray3 range, float v) { return new ray3(range.src + v, range.dir + v); }
+        [IN(LINE)] public static ray3 operator -(ray3 range, float v) { return new ray3(range.src - v, range.dir); }
+        [IN(LINE)] public static ray3 operator +(ray3 range, float v) { return new ray3(range.src + v, range.dir); }
         [IN(LINE)] public static ray3 operator /(ray3 range, float v) { return new ray3(range.src / v, range.dir / v); }
         [IN(LINE)] public static ray3 operator *(ray3 range, float v) { return new ray3(range.src * v, range.dir * v); }
 

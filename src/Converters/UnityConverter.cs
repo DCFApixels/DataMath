@@ -19,7 +19,7 @@ namespace UnityEngine
             return new Ray((Vector3)self.src, (Vector3)self.dir);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Ray2D ToUnityRay<T>(this ref T self, Ray2D _ = default) where T : unmanaged, IRange2Impl<float, float3>
+        public static Ray2D ToUnityRay<T>(this ref T self, Ray2D _ = default) where T : unmanaged, IRange2Impl<float, float2>
         {
             return new Ray2D((Vector2)self.src, (Vector2)self.dir);
         }

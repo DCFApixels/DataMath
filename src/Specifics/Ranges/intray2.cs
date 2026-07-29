@@ -12,6 +12,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
+    /// <summary>Two-dimensional integer line segment stored as start point plus displacement; use intline2 for endpoint/range-value APIs.</summary>
 #if ENABLE_IL2CPP
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -79,16 +80,18 @@ namespace DCFApixels.DataMath
         #region Constructors
         [IN(LINE)] public intray2(int2 src, int2 dir) { this.src = src; this.dir = dir; }
         [IN(LINE)] public intray2(ray2 ray) { src = (int2)ray.src; dir = (int2)ray.dir; }
+        [IN(LINE)] public intray2(intline2 a) { src = a.src; dir = a.dir; }
         #endregion
 
         #region operators
         [IN(LINE)] public static bool operator ==(intray2 a, intray2 b) { return a.Equals(b); }
         [IN(LINE)] public static bool operator !=(intray2 a, intray2 b) { return !a.Equals(b); }
 
-        [IN(LINE)] public static intray2 operator -(intray2 range, int v) { return new intray2(range.src - v, range.dir - v); }
-        [IN(LINE)] public static intray2 operator +(intray2 range, int v) { return new intray2(range.src + v, range.dir + v); }
+        [IN(LINE)] public static intray2 operator -(intray2 range, int v) { return new intray2(range.src - v, range.dir); }
+        [IN(LINE)] public static intray2 operator +(intray2 range, int v) { return new intray2(range.src + v, range.dir); }
         [IN(LINE)] public static intray2 operator /(intray2 range, int v) { return new intray2(range.src / v, range.dir / v); }
         [IN(LINE)] public static intray2 operator *(intray2 range, int v) { return new intray2(range.src * v, range.dir * v); }
+        [IN(LINE)] public static implicit operator intline2(intray2 a) { return new intline2(a); }
         #endregion
 
         #region Other

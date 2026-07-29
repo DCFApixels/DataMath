@@ -13,6 +13,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
+    /// <summary>One-dimensional float range stored as two endpoints; preferred type for clamp, lerp, remap, and range-value APIs.</summary>
 #if ENABLE_IL2CPP
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -86,7 +87,7 @@ namespace DCFApixels.DataMath
                 b = value + halfSize;
             }
         }
-        bool IRangeN.IsVectorN { [IN(LINE)] get { return true; } }
+        bool IRangeN.IsVectorN { [IN(LINE)] get { return false; } }
         object IRangeN.GetSrcRaw() { return src; }
         object IRangeN.GetDirRaw() { return dir; }
         void IRangeN.SetSrcRaw(object raw) { src = (float)raw; }
@@ -103,28 +104,28 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool operator ==(line1 a, line1 b) { return a.Equals(b); }
         [IN(LINE)] public static bool operator !=(line1 a, line1 b) { return !a.Equals(b); }
 
-        [IN(LINE)] public static line1 operator -(line1 range, float v) { return new line1(range.src - v, range.dir - v); }
-        [IN(LINE)] public static line1 operator +(line1 range, float v) { return new line1(range.src + v, range.dir + v); }
-        [IN(LINE)] public static line1 operator /(line1 range, float v) { return new line1(range.src / v, range.dir / v); }
-        [IN(LINE)] public static line1 operator *(line1 range, float v) { return new line1(range.src * v, range.dir * v); }
+        [IN(LINE)] public static line1 operator -(line1 range, float v) { return new line1(range.a - v, range.b - v); }
+        [IN(LINE)] public static line1 operator +(line1 range, float v) { return new line1(range.a + v, range.b + v); }
+        [IN(LINE)] public static line1 operator /(line1 range, float v) { return new line1(range.a / v, range.b / v); }
+        [IN(LINE)] public static line1 operator *(line1 range, float v) { return new line1(range.a * v, range.b * v); }
 
         [IN(LINE)] public static implicit operator ray1(line1 a) { return new ray1(a); }
         #endregion
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(a) ^ DM.Hash(b); }
-        public override bool Equals(object o) { return o is ray1 target && Equals(target); }
+        public override bool Equals(object o) { return o is line1 target && Equals(target); }
         [IN(LINE)] public bool Equals(line1 a) { return DM.All(this.a == a.a && b == a.b); }
-        [IN(LINE)] public override string ToString() { return $"{nameof(ray1)}({src}, {dir})"; }
+        [IN(LINE)] public override string ToString() { return $"{nameof(line1)}({a}, {b})"; }
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            return $"{nameof(ray1)}({src.ToString(format, formatProvider)}, {dir.ToString(format, formatProvider)})";
+            return $"{nameof(line1)}({a.ToString(format, formatProvider)}, {b.ToString(format, formatProvider)})";
         }
         internal class DebuggerProxy
         {
             public float a, b;
-            public DebuggerProxy(ray1 v) { a = v.a; b = v.b; }
+            public DebuggerProxy(line1 v) { a = v.a; b = v.b; }
         }
         #endregion
     }

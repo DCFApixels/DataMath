@@ -930,6 +930,10 @@ namespace DCFApixels.DataMath.Easing
         private static AnimationCurve _unityCurveInOutBounce;
         private static AnimationCurve _unityCurveOutInBounce;
 
+        public static AnimationCurve CreateUnityCurve(this Ease ease)
+        {
+            return new AnimationCurve(ease.ToUnityCurve().keys);
+        }
         public static AnimationCurve ToUnityCurve(this Ease ease)
         {
             switch ((EaseInternal)ease)

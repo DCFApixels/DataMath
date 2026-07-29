@@ -13,6 +13,7 @@ namespace DCFApixels.DataMath
 {
     public partial struct quat
     {
+        public quat Normalized { [IN(LINE)] get { return DM.Normalize(this); } }
     }
 
     public static partial class DM // quat
@@ -27,6 +28,34 @@ namespace DCFApixels.DataMath
         {
             float3 t = Normalize(Cross(up, forward));
             return new quat(t, Cross(forward, t), forward);
+        }
+        [IN(LINE)]
+        public static quat LookRotationSafe(float3 forward)
+        {
+            return LookRotationSafe(forward, new float3(0f, 1f, 0f));
+        }
+        [IN(LINE)]
+        public static quat LookRotationSafe(float3 forward, float3 up)
+        {
+            if (!All(IsFinite(forward)) || !All(IsFinite(up))) { return quat.Identity; }
+
+            float forwardLengthSq = LengthSq(forward);
+            if (forwardLengthSq <= FloatMinNormal) { return quat.Identity; }
+
+            float3 f = forward * RSqrt(forwardLengthSq);
+            float3 t = Cross(up, f);
+            float tLengthSq = LengthSq(t);
+
+            if (tLengthSq <= FloatMinNormal)
+            {
+                float3 fallbackUp = Abs(f.y) < 0.999f ? new float3(0f, 1f, 0f) : new float3(1f, 0f, 0f);
+                t = Cross(fallbackUp, f);
+                tLengthSq = LengthSq(t);
+                if (tLengthSq <= FloatMinNormal) { return quat.Identity; }
+            }
+
+            t *= RSqrt(tLengthSq);
+            return new quat(t, Cross(f, t), f);
         }
 
 
@@ -76,7 +105,25 @@ namespace DCFApixels.DataMath
         {
             return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
         }
+        [IN(LINE)] public static quat Normalize(quat q) { return new quat(Normalize(q.value)); }
+        [IN(LINE)] public static quat NormalizeSafe(quat q) { return NormalizeSafe(q, quat.Identity); }
+        [IN(LINE)]
+        public static quat NormalizeSafe(quat q, quat defaultvalue)
+        {
+            float lengthSq = Dot(q, q);
+            return lengthSq > FloatMinNormal ? new quat(q.value * RSqrt(lengthSq)) : defaultvalue;
+        }
+        [IN(LINE)] public static quat Conjugate(quat q) { return new quat(-q.x, -q.y, -q.z, q.w); }
+        [IN(LINE)]
+        public static quat Inverse(quat q)
+        {
+            float invLengthSq = 1f / Dot(q, q);
+            return new quat(-q.x * invLengthSq, -q.y * invLengthSq, -q.z * invLengthSq, q.w * invLengthSq);
+        }
+        [IN(LINE)] public static bool IsNormalized(quat q) { return Approximately(Dot(q, q), 1f, FloatZeroTolerance); }
+        [IN(LINE)] public static bool IsFinite(quat q) { return IsFinite(q.x) && IsFinite(q.y) && IsFinite(q.z) && IsFinite(q.w); }
 
+        /// <summary>Returns the angle between rotations in degrees.</summary>
         [IN(LINE)]
         public static float Angle(quat a, quat b)
         {
@@ -84,6 +131,7 @@ namespace DCFApixels.DataMath
             float num = Min(Abs(Dot(a, b)), 1f);
             return (num > DOT_EQUALS_EPSILON) ? 0f : (Acos(num) * 2f * 57.29578f);
         }
+        /// <summary>Rotates toward the target by at most maxDegreesDelta degrees.</summary>
         [IN(LINE)]
         public static quat RotateTowards(quat from, quat to, float maxDegreesDelta)
         {
@@ -95,6 +143,7 @@ namespace DCFApixels.DataMath
             return Slerp(from, to, Min(1f, maxDegreesDelta / num));
         }
 
+        /// <summary>Returns Euler angles in radians.</summary>
         [IN(LINE)]
         public static float3 ToEuler(quat q)
         {
@@ -125,8 +174,10 @@ namespace DCFApixels.DataMath
             }
         }
 
+        /// <summary>Creates a rotation from Euler angles in radians.</summary>
         [IN(LINE)]
         public static quat FromEuler(float x, float y, float z) { return FromEuler(new float3(x, y, z)); }
+        /// <summary>Creates a rotation from Euler angles in radians.</summary>
         [IN(LINE)]
         public static quat FromEuler(float3 xyz)
         {
@@ -139,6 +190,59 @@ namespace DCFApixels.DataMath
                 s.y * c.x * c.z + s.x * s.z * c.y,
                 s.z * c.x * c.y - s.x * s.y * c.z,
                 c.x * c.y * c.z + s.y * s.z * s.x);
+        }
+        /// <summary>Creates a rotation around axis by angleRad radians.</summary>
+        [IN(LINE)]
+        public static quat FromAxisAngle(float3 axis, float angleRad)
+        {
+            float lengthSq = LengthSq(axis);
+            if (lengthSq <= FloatMinNormal) { return quat.Identity; }
+
+            float halfAngle = angleRad * 0.5f;
+            float s = Sin(halfAngle) * RSqrt(lengthSq);
+            return new quat(axis.x * s, axis.y * s, axis.z * s, Cos(halfAngle));
+        }
+        /// <summary>Extracts axis and angleRad in radians.</summary>
+        [IN(LINE)]
+        public static void ToAxisAngle(quat q, out float3 axis, out float angleRad)
+        {
+            q = NormalizeSafe(q);
+            if (q.w < 0f) { q.value = -q.value; }
+            float w = Clamp(q.w, -1f, 1f);
+            angleRad = Acos(w) * 2f;
+            float axisLength = Sqrt(Max(0f, 1f - w * w));
+
+            if (axisLength <= FloatZeroTolerance)
+            {
+                axis = new float3(1f, 0f, 0f);
+                return;
+            }
+
+            axis = new float3(q.x, q.y, q.z) / axisLength;
+        }
+        [IN(LINE)]
+        public static quat FromToRotation(float3 from, float3 to)
+        {
+            float fromLengthSq = LengthSq(from);
+            float toLengthSq = LengthSq(to);
+            if (fromLengthSq <= FloatMinNormal || toLengthSq <= FloatMinNormal) { return quat.Identity; }
+
+            float3 f = from * RSqrt(fromLengthSq);
+            float3 t = to * RSqrt(toLengthSq);
+            float dot = ClampMirror1(Dot(f, t));
+
+            if (dot > 1f - FloatZeroTolerance) { return quat.Identity; }
+            if (dot < -1f + FloatZeroTolerance)
+            {
+                float3 axis = Cross(new float3(1f, 0f, 0f), f);
+                if (LengthSq(axis) <= FloatMinNormal) { axis = Cross(new float3(0f, 1f, 0f), f); }
+                return FromAxisAngle(axis, PI);
+            }
+
+            float3 cross = Cross(f, t);
+            float s = Sqrt((1f + dot) * 2f);
+            float invS = 1f / s;
+            return Normalize(new quat(cross.x * invS, cross.y * invS, cross.z * invS, s * 0.5f));
         }
 
     }

@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS8981
+#pragma warning disable CS8981
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
@@ -10,10 +10,9 @@ using System.Diagnostics;
 using static DCFApixels.DataMath.InlineConsts;
 using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
-
 namespace DCFApixels.DataMath
 {
-    /// <summary>Three-dimensional float line segment stored as two endpoints; preferred type for clamp, lerp, remap, and range-value APIs.</summary>
+    /// <summary>Two-dimensional float line segment stored as two endpoints; preferred type for clamp, lerp, remap, and range-value APIs.</summary>
 #if ENABLE_IL2CPP
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -21,16 +20,16 @@ namespace DCFApixels.DataMath
 #endif
     [DebuggerTypeProxy(typeof(DebuggerProxy))]
     [Serializable]
-    public unsafe partial struct line3 :
-        IEquatable<line3>,
+    public unsafe partial struct line2 :
+        IEquatable<line2>,
         IFormattable,
-        IRange3Impl<float, float3>
+        IRange2Impl<float, float2>
     {
-        public float3 a;
-        public float3 b;
+        public float2 a;
+        public float2 b;
 
         #region IRangeN
-        public float3 src
+        public float2 src
         {
             [IN(LINE)]
             get { return a; }
@@ -42,16 +41,16 @@ namespace DCFApixels.DataMath
                 b = value + direction;
             }
         }
-        public float3 dir
+        public float2 dir
         {
             [IN(LINE)]
             get { return b - a; }
             [IN(LINE)]
             set { b = a + value; }
         }
-        float3 IRangeN<float, float3>.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
-        float3 IRangeN<float, float3>.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
-        public float3 min
+        float2 IRangeN<float, float2>.a { [IN(LINE)] get { return a; } [IN(LINE)] set { a = value; } }
+        float2 IRangeN<float, float2>.b { [IN(LINE)] get { return b; } [IN(LINE)] set { b = value; } }
+        public float2 min
         {
             [IN(LINE)]
             get { return DM.Min(a, b); }
@@ -63,7 +62,7 @@ namespace DCFApixels.DataMath
                 b = currentMax;
             }
         }
-        public float3 max
+        public float2 max
         {
             [IN(LINE)]
             get { return DM.Max(a, b); }
@@ -75,7 +74,7 @@ namespace DCFApixels.DataMath
                 b = value;
             }
         }
-        public float3 center
+        public float2 center
         {
             [IN(LINE)]
             get { return (a + b) * 0.5f; }
@@ -90,42 +89,42 @@ namespace DCFApixels.DataMath
         bool IRangeN.IsVectorN { [IN(LINE)] get { return true; } }
         object IRangeN.GetSrcRaw() { return src; }
         object IRangeN.GetDirRaw() { return dir; }
-        void IRangeN.SetSrcRaw(object raw) { src = (float3)raw; }
-        void IRangeN.SetDirRaw(object raw) { dir = (float3)raw; }
-        [IN(LINE)] Type IRangeN.GetComponentType() { return typeof(float3); }
+        void IRangeN.SetSrcRaw(object raw) { src = (float2)raw; }
+        void IRangeN.SetDirRaw(object raw) { dir = (float2)raw; }
+        [IN(LINE)] Type IRangeN.GetComponentType() { return typeof(float2); }
         #endregion
 
         #region Constructors
-        [IN(LINE)] public line3(float3 a, float3 b) { this.a = a; this.b = b; }
-        [IN(LINE)] public line3(ray3 a) { this.a = a.a; this.b = a.b; }
+        [IN(LINE)] public line2(float2 a, float2 b) { this.a = a; this.b = b; }
+        [IN(LINE)] public line2(ray2 a) { this.a = a.a; this.b = a.b; }
         #endregion
 
         #region operators
-        [IN(LINE)] public static bool operator ==(line3 a, line3 b) { return a.Equals(b); }
-        [IN(LINE)] public static bool operator !=(line3 a, line3 b) { return !a.Equals(b); }
+        [IN(LINE)] public static bool operator ==(line2 a, line2 b) { return a.Equals(b); }
+        [IN(LINE)] public static bool operator !=(line2 a, line2 b) { return !a.Equals(b); }
 
-        [IN(LINE)] public static line3 operator -(line3 range, float v) { return new line3(range.a - v, range.b - v); }
-        [IN(LINE)] public static line3 operator +(line3 range, float v) { return new line3(range.a + v, range.b + v); }
-        [IN(LINE)] public static line3 operator /(line3 range, float v) { return new line3(range.a / v, range.b / v); }
-        [IN(LINE)] public static line3 operator *(line3 range, float v) { return new line3(range.a * v, range.b * v); }
+        [IN(LINE)] public static line2 operator -(line2 range, float v) { return new line2(range.a - v, range.b - v); }
+        [IN(LINE)] public static line2 operator +(line2 range, float v) { return new line2(range.a + v, range.b + v); }
+        [IN(LINE)] public static line2 operator /(line2 range, float v) { return new line2(range.a / v, range.b / v); }
+        [IN(LINE)] public static line2 operator *(line2 range, float v) { return new line2(range.a * v, range.b * v); }
 
-        [IN(LINE)] public static implicit operator ray3(line3 a) { return new ray3(a); }
+        [IN(LINE)] public static implicit operator ray2(line2 a) { return new ray2(a); }
         #endregion
 
         #region Other
         [IN(LINE)] public override int GetHashCode() { return DM.Hash(a) ^ DM.Hash(b); }
-        public override bool Equals(object o) { return o is line3 target && Equals(target); }
-        [IN(LINE)] public bool Equals(line3 a) { return DM.All(this.a == a.a && b == a.b); }
-        [IN(LINE)] public override string ToString() { return $"{nameof(line3)}({a}, {b})"; }
+        public override bool Equals(object o) { return o is line2 target && Equals(target); }
+        [IN(LINE)] public bool Equals(line2 a) { return DM.All(this.a == a.a && b == a.b); }
+        [IN(LINE)] public override string ToString() { return $"{nameof(line2)}({a}, {b})"; }
         [IN(LINE)]
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            return $"{nameof(line3)}({a.ToString(format, formatProvider)}, {b.ToString(format, formatProvider)})";
+            return $"{nameof(line2)}({a.ToString(format, formatProvider)}, {b.ToString(format, formatProvider)})";
         }
         internal class DebuggerProxy
         {
-            public float3 a, b;
-            public DebuggerProxy(line3 v) { a = v.a; b = v.b; }
+            public float2 a, b;
+            public DebuggerProxy(line2 v) { a = v.a; b = v.b; }
         }
         #endregion
     }

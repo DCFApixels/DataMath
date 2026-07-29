@@ -12,6 +12,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
+    /// <summary>One-dimensional float range stored as start point plus displacement; use line1 for endpoint/range-value APIs.</summary>
 #if ENABLE_IL2CPP
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -88,8 +89,8 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static bool operator ==(ray1 a, ray1 b) { return a.Equals(b); }
         [IN(LINE)] public static bool operator !=(ray1 a, ray1 b) { return !a.Equals(b); }
 
-        [IN(LINE)] public static ray1 operator -(ray1 range, float v) { return new ray1(range.src - v, range.dir - v); }
-        [IN(LINE)] public static ray1 operator +(ray1 range, float v) { return new ray1(range.src + v, range.dir + v); }
+        [IN(LINE)] public static ray1 operator -(ray1 range, float v) { return new ray1(range.src - v, range.dir); }
+        [IN(LINE)] public static ray1 operator +(ray1 range, float v) { return new ray1(range.src + v, range.dir); }
         [IN(LINE)] public static ray1 operator /(ray1 range, float v) { return new ray1(range.src / v, range.dir / v); }
         [IN(LINE)] public static ray1 operator *(ray1 range, float v) { return new ray1(range.src * v, range.dir * v); }
         [IN(LINE)] public static implicit operator line1(ray1 a) { return new line1(a); }

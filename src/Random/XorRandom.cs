@@ -335,11 +335,29 @@ namespace DCFApixels.DataMath
         {
             return Q32ToFloat(NextUInt());
         }
+        [IN(LINE)]
+        public float NextFloat(float max)
+        {
+            return NextFloat() * max;
+        }
+        [IN(LINE)]
+        public float NextFloat(float min, float max)
+        {
+            return DM.Lerp(min, max, NextFloat());
+        }
         public float2 NextFloat2()
         {
-            return new float2(
-                NextFloat(),
-                NextFloat());
+            return new float2(NextFloat(), NextFloat());
+        }
+        [IN(LINE)]
+        public float2 NextFloat2(float2 max)
+        {
+            return NextFloat2() * max;
+        }
+        [IN(LINE)]
+        public float2 NextFloat2(float2 min, float2 max)
+        {
+            return DM.Lerp(min, max, NextFloat2());
         }
         public float3 NextFloat3()
         {
@@ -348,6 +366,16 @@ namespace DCFApixels.DataMath
                 NextFloat(),
                 NextFloat());
         }
+        [IN(LINE)]
+        public float3 NextFloat3(float3 max)
+        {
+            return NextFloat3() * max;
+        }
+        [IN(LINE)]
+        public float3 NextFloat3(float3 min, float3 max)
+        {
+            return DM.Lerp(min, max, NextFloat3());
+        }
         public float4 NextFloat4()
         {
             return new float4(
@@ -355,6 +383,16 @@ namespace DCFApixels.DataMath
                 NextFloat(),
                 NextFloat(),
                 NextFloat());
+        }
+        [IN(LINE)]
+        public float4 NextFloat4(float4 max)
+        {
+            return NextFloat4() * max;
+        }
+        [IN(LINE)]
+        public float4 NextFloat4(float4 min, float4 max)
+        {
+            return DM.Lerp(min, max, NextFloat4());
         }
         #endregion
 

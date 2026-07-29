@@ -1,4 +1,21 @@
+using DCFApixels.DataMath.Core;
 using System;
+using System.Collections.Generic;
+
+namespace DCFApixels.DataMath.Core
+{
+    [System.Serializable]
+    public struct Weighted<T> : IWeighted
+    {
+        public T Value;
+        public float Weight;
+        float IWeighted.Weight => Weight;
+    }
+    public interface IWeighted
+    {
+        public float Weight { get; }
+    }
+}
 
 namespace DCFApixels.DataMath
 {
@@ -260,7 +277,7 @@ namespace DCFApixels.DataMath
             }
             return result;
         }
-        
+
         public static ReadOnlySpan<AADirection> Decompose(AADirectionFlags flags)
         {
             var result = _aaDirectionFlagsDecomposeCache[(byte)flags];
@@ -343,10 +360,118 @@ namespace DCFApixels.DataMath
                 return axiss;
             }
         }
+
+
+
+
+
+
+
+
+
+        #region GetRandom
+        public static T GetRandom<T>(this IList<T> array, float value)
+        {
+            int index = DM.Floor2Int(array.Count * value);
+            return array[index];
+        }
+        public static ref T GetRandom<T>(this T[] array, float value)
+        {
+            int index = DM.Floor2Int(array.Length * value);
+            return ref array[index];
+        }
+        public static ref readonly T GetRandom<T>(this ReadOnlySpan<T> array, float value)
+        {
+            int index = DM.Floor2Int(array.Length * value);
+            return ref array[index];
+        }
+        public static T GetRandomWeighted<T>(this IList<T> array, float value) where T : IWeighted
+        {
+            float totalWeight = 0;
+            int iMax = array.Count;
+            for (int i = 0; i < iMax; i++)
+            {
+                totalWeight += array[i].Weight;
+            }
+            if (totalWeight <= 0) { return GetRandom(array, value); }
+
+            float targetWeight = value * totalWeight;
+            float accumulatedWeight = 0;
+            for (int i = 0; i < iMax; i++)
+            {
+                accumulatedWeight += array[i].Weight;
+                if (targetWeight <= accumulatedWeight)
+                {
+                    return array[i];
+                }
+            }
+            return array[iMax - 1];
+        }
+        public static ref T GetRandomWeighted<T>(this T[] array, float value) where T : IWeighted
+        {
+            float totalWeight = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                totalWeight += array[i].Weight;
+            }
+            if (totalWeight <= 0) { return ref GetRandom(array, value); }
+
+            float targetWeight = value * totalWeight;
+            float accumulatedWeight = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                accumulatedWeight += array[i].Weight;
+                if (targetWeight <= accumulatedWeight)
+                {
+                    return ref array[i];
+                }
+            }
+            return ref array[array.Length - 1];
+        }
+        public static ref readonly T GetRandomWeighted<T>(this ReadOnlySpan<T> array, float value) where T : IWeighted
+        {
+            float totalWeight = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                totalWeight += array[i].Weight;
+            }
+            if (totalWeight <= 0) { return ref GetRandom(array, value); }
+
+            float targetWeight = value * totalWeight;
+            float accumulatedWeight = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                accumulatedWeight += array[i].Weight;
+                if (targetWeight <= accumulatedWeight)
+                {
+                    return ref array[i];
+                }
+            }
+            return ref array[array.Length - 1];
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
-    
-   
+
+
     public static partial class DM
     {
     }

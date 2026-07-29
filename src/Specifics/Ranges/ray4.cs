@@ -12,6 +12,7 @@ using IN = System.Runtime.CompilerServices.MethodImplAttribute;
 
 namespace DCFApixels.DataMath
 {
+    /// <summary>Four-dimensional float line segment stored as start point plus displacement; use line4 for endpoint/range-value APIs.</summary>
 #if ENABLE_IL2CPP
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -80,16 +81,19 @@ namespace DCFApixels.DataMath
 
         #region Constructors
         [IN(LINE)] public ray4(float4 src, float4 dir) { this.src = src; this.dir = dir; }
+        [IN(LINE)] public ray4(intray4 ray) { src = ray.src; dir = ray.dir; }
+        [IN(LINE)] public ray4(line4 a) { src = a.src; dir = a.dir; }
         #endregion
 
         #region operators
         [IN(LINE)] public static bool operator ==(ray4 a, ray4 b) { return a.Equals(b); }
         [IN(LINE)] public static bool operator !=(ray4 a, ray4 b) { return !a.Equals(b); }
 
-        [IN(LINE)] public static ray4 operator -(ray4 range, float v) { return new ray4(range.src - v, range.dir - v); }
-        [IN(LINE)] public static ray4 operator +(ray4 range, float v) { return new ray4(range.src + v, range.dir + v); }
+        [IN(LINE)] public static ray4 operator -(ray4 range, float v) { return new ray4(range.src - v, range.dir); }
+        [IN(LINE)] public static ray4 operator +(ray4 range, float v) { return new ray4(range.src + v, range.dir); }
         [IN(LINE)] public static ray4 operator /(ray4 range, float v) { return new ray4(range.src / v, range.dir / v); }
         [IN(LINE)] public static ray4 operator *(ray4 range, float v) { return new ray4(range.src * v, range.dir * v); }
+        [IN(LINE)] public static implicit operator line4(ray4 a) { return new line4(a); }
         #endregion
 
         #region Other

@@ -28,39 +28,9 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static ray1 Abs(ray1 a) { return new ray1(a.src, Abs(a.dir)); }
         #endregion
 
-        #region Clamp/Repeat/PingPong/SmoothStep
-        /// <summary> Clamps the value between min and max. </summary>
-        [IN(LINE)] public static float Clamp(float a, ray1 range) { return Clamp(a, range.From, range.To); }
-        [IN(LINE)] public static float Repeat(float a, ray1 range) { return Repeat(a, range.From, range.To); }
-        [IN(LINE)] public static float PingPong(float a, ray1 range) { return PingPong(a, range.From, range.To); }
-        /// <summary> Clamps the value between from and to. </summary>
-        [IN(LINE)] public static float SmoothStep(ray1 range, float a) { return SmoothStep(range.From, range.To, a); }
-        #endregion
-
         #region Min/Max
         [IN(LINE)] public static float Max(ray1 range) { return IsPositive(range.dir) ? range.src + range.dir : range.src; }
         [IN(LINE)] public static float Min(ray1 range) { return IsPositive(range.dir) ? range.src : range.src + range.dir; }
-        #endregion
-
-        #region Lerp
-        [IN(LINE)] public static float Lerp(ray1 range, float t) { return Lerp(range.From, range.To, t); }
-        [IN(LINE)] public static float LerpClamp(ray1 range, float t) { return LerpClamp(range.From, range.To, t); }
-        [IN(LINE)] public static float LerpRepeat(ray1 range, float t) { return LerpRepeat(range.From, range.To, t); }
-
-        [IN(LINE)] public static float UnLerp(ray1 range, float a) { return UnLerp(range.From, range.To, a); }
-        [IN(LINE)] public static float UnLerpClamp(ray1 range, float a) { return UnLerpClamp(range.From, range.To, a); }
-        [IN(LINE)] public static float UnLerpRepeat(ray1 range, float a) { return UnLerpRepeat(range.From, range.To, a); }
-
-        [IN(LINE)] public static float Remap(ray1 oldRange, ray1 newRange, float v) { return Remap(oldRange.From, oldRange.To, newRange.From, newRange.To, v); }
-
-        [IN(LINE)] public static float LerpAngle(ray1 range, float t) { return LerpAngle(range.From, range.To, t); }
-        [IN(LINE)] public static float LerpAngleClamp(ray1 range, float t) { return LerpAngleClamp(range.From, range.To, t); }
-        [IN(LINE)] public static float LerpAngleRepeat(ray1 range, float t) { return LerpAngleRepeat(range.From, range.To, t); }
-
-        [IN(LINE)] public static float MoveTowards(ray1 range, float distance) { return MoveTowards(range.From, range.To, distance); }
-        [IN(LINE)] public static float MoveTowards(ray1 range, float distance, out float excess) { return MoveTowards(range.From, range.To, distance, out excess); }
-
-        [IN(LINE)] public static float MoveTowardsAngle(ray1 range, float distance) { return MoveTowardsAngle(range.From, range.To, distance); }
         #endregion
 
         #region Real Value State Checks
@@ -92,6 +62,17 @@ namespace DCFApixels.DataMath
         [IN(LINE)] public static float GetPoint(ray1 ray, float distance) { return ray.src + ray.dir * distance; }
         [IN(LINE)] public static bool Contains(ray1 range, float a, float tolerance = 0.0001f) { return a >= range.Min && a <= range.Max; }
         [IN(LINE)] public static float ProjectPoint(ray1 ray, float point) { return point; }
+        [IN(LINE)] public static float UnLerpProjected(ray1 ray, float point) { return (point - ray.src) / ray.dir; }
+        [IN(LINE)] public static float ClosestPoint(ray1 ray, float point) { return ray.dir == 0f ? ray.src : point; }
+        [IN(LINE)] public static float ClosestPointClamp(ray1 ray, float point) { return Clamp(point, ray.Min, ray.Max); }
+        [IN(LINE)] public static bool ContainsProjected(ray1 ray, float point, float tolerance = 0.0001f) { return point >= ray.Min - tolerance && point <= ray.Max + tolerance; }
+        [IN(LINE)] public static bool ContainsProjected(ray1 a, ray1 b, float tolerance = 0.0001f) { return Contains(new line1(a), new line1(b), tolerance); }
+        [IN(LINE)] public static bool OverlapsProjected(ray1 a, ray1 b, float tolerance = 0.0001f) { return Overlaps(new line1(a), new line1(b), tolerance); }
+        [IN(LINE)] public static ray1 Expand(ray1 ray, float amount)
+        {
+            if (ray.dir < 0f) { return new ray1(ray.src + amount, ray.dir - amount * 2f); }
+            return new ray1(ray.src - amount, ray.dir + amount * 2f);
+        }
         #endregion
     }
 }
